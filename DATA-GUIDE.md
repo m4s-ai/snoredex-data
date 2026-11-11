@@ -10,7 +10,7 @@ before building anything on the data.
 | You want | Read |
 |---|---|
 | A ready-to-use application database | [`snoredex.sqlite`](snoredex.sqlite), starting from its `app_*` views ([DATABASE.md](DATABASE.md)) |
-| A versioned collector-app contract | [`collector_catalogue.json`](collector_catalogue.json) (contract 1.0.0), [schema](collector_catalogue.schema.json), [migration routes](collector_migrations.json), [fixture](collector_catalogue.fixture.json) |
+| A versioned collector-app contract | [`collector_catalogue.json`](collector_catalogue.json) (contract 1.0.0), [schema](collector_catalogue.schema.json), [fixture](collector_catalogue.fixture.json) |
 | A personal have/need tracker | [`snoredex-tracker-template.sqlite`](snoredex-tracker-template.sqlite) and `scripts/collection.py` |
 | The facts themselves, one record per line | the five files in `data/`, below |
 | Final owner decisions | [`verification/owner_adjudications.json`](verification/owner_adjudications.json) |
@@ -57,8 +57,9 @@ before building anything on the data.
 `itemId`. Its collections are `localizations`, `localSets`, `setEditions`, `works`, `items` and
 `assets`, plus `meta` and `qualitySummary`; the JSON schema is
 [`collector_catalogue.schema.json`](collector_catalogue.schema.json). `meta.catalogueFingerprint`
-hashes the whole document; `collector_migrations.json` routes old ids to current ones and ends at
-that fingerprint. An `itemId` never changes; removing or re-keying an item needs a migration route.
+hashes the whole document. An `itemId` is stored verbatim and never recomputed. No migration
+routes are published, so between two catalogue versions an item can be removed or re-keyed, and a
+consumer sees that as an id that is gone and one that is new.
 
 ## The five files in `data/`
 

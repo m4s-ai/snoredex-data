@@ -117,8 +117,8 @@ and report the run. Publishing cannot be undone.
    `collector_catalogue.json`, `index.html`, `gallery.html`, `snoredex.sqlite` and
    `snoredex-tracker-template.sqlite`. Change their sources instead: `data/`, `templates/`,
    `site/`, and the owner files read in place (`verification/owner_adjudications.json`,
-   `verification/specimens.json`, `publication-decisions.json`). `collector_migrations.json` and
-   `collector_catalogue.schema.json` are retained contract files, edited only for a contract change.
+   `verification/specimens.json`, `publication-decisions.json`). `collector_catalogue.schema.json`
+   is a retained contract file, edited only for a contract change.
 8. **Validate at the matching boundary.** Run `python scripts/check.py` while editing `data/`, and
    `python scripts/regen.py` once before delivery. Silent data corruption must fail the gate.
 
@@ -184,9 +184,10 @@ and report the run. Publishing cannot be undone.
   bytes. WebP originals are retained and losslessly converted, never rejected.
 - **Item identity is frozen.** `itemId`, `physicalPrintingId`, `finishGroupId`, `legacyChecklistIds`
   and the other contract ids in `data/printings.json` are stored verbatim and never recomputed; an
-  external app keys user state by `itemId`. Removing or re-keying an item is a contract change that
-  needs a route in `collector_migrations.json`; check.py requires that file to end at the
-  catalogue fingerprint. A new printing gets a new id; it never reuses a neighbour's.
+  external app keys user state by `itemId`. No migration routes are kept: removing or re-keying an
+  item is a deliberate catalogue change that shows in the catalogue diff and is named in the
+  commit, and nothing is re-keyed without a reason in the evidence. A new printing gets a new id;
+  it never reuses a neighbour's.
 - **Reconciliation is order-independent.** Collect every candidate before refining an unknown
   dimension. Refine only when one compatible value remains; ambiguity stays `unknown`. Reordering
   equivalent inputs may not change identity, provenance or the catalogue.

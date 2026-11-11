@@ -49,7 +49,6 @@ FILES = [
     "snoredex-tracker-template.sqlite",
     "collector_catalogue.json",
     "collector_catalogue.schema.json",
-    "collector_migrations.json",
     "collector_catalogue.fixture.json",
     "publication-decisions.json",
     "data/printings.json",

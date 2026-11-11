@@ -49,7 +49,7 @@ Flag these when the diff introduces them; they are bugs here even when the code 
   European Spanish claim read as LATAM, or a recorded set size overruling a distribution rarity.
 - A `--check` path that writes, a script that resolves paths from the working directory instead
   of `Path(__file__)`, a non-stdlib dependency, CRLF or a UTF-8 BOM.
-- A removed or re-keyed `itemId` without a route in `collector_migrations.json`.
+- A removed or re-keyed `itemId` that the commit does not name and justify.
 - A check.py rule without a negative case, a complexity-baseline exception added or raised, an
   edited archive file, or a rule stated more strictly (or loosely) than the check that enforces it.
 - Active instructions left contradicting the change in another live document.

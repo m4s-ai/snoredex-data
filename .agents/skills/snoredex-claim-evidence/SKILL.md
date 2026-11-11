@@ -43,7 +43,7 @@ finish section of METHODOLOGY.md as well.
    rationale but never produces `not-printed` itself; otherwise the claim stays `disputed`.
 7. Run `python scripts/check.py`. A failing rule is a finding to fix, never to silence. Then
    `python scripts/build.py` and review the diff of the outputs; if an item was removed or re-keyed,
-   add a route to `collector_migrations.json` first.
+   name and justify it in the commit.
 8. Report evidence, provider, status transition and remaining uncertainty. Run
    `python scripts/regen.py` once at delivery.
 
