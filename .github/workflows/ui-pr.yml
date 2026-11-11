@@ -26,9 +26,7 @@ jobs:
     # Like the release gate, draft pull requests skip the browser suite until ready for review.
     if: ${{ github.event_name != 'pull_request' || !github.event.pull_request.draft }}
     name: ui-browser (chromium)
-    # Pinned: on 2026-11-11 the ubuntu-26.04 runners behind ubuntu-latest could not resolve the
-    # Ubuntu package hosts, so `playwright install --with-deps` failed before any test ran.
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       # verification/test_site.py reads the checked-out tree only; no Git history is needed.
       - uses: actions/checkout@v5
@@ -49,7 +47,16 @@ jobs:
           key: playwright-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
 
       - name: Install Chromium with Linux dependencies
-        run: python -m playwright install --with-deps chromium
+        # The system packages --with-deps adds on a hosted runner are fonts. On 2026-11-11 the
+        # runners (ubuntu-26.04 and ubuntu-24.04 alike) could not resolve the Ubuntu package hosts
+        # for over an hour, and the job failed before any test ran. Fall back to the browser alone
+        # then: the suite also passes on Windows, which has none of those packages, and the release
+        # gate keeps the strict install before a deploy.
+        run: |
+          python -m playwright install --with-deps chromium || {
+            echo "::warning::system packages could not be installed; running with the runner's own fonts"
+            python -m playwright install chromium
+          }
 
       - name: Browser behavior tests
         run: python verification/test_site.py
