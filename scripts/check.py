@@ -590,6 +590,16 @@ def finish_decisions(model: dict) -> tuple[int, list]:
     return sum(decision is not None for _, decision in pairs), [p for p in problems if p]
 
 
+def gallery_sizes_error(row: dict) -> bool:
+    """Three sizes, 240, 480 and a full size of 600-1200 px, each named by its own SHA-256."""
+    sizes = row["images"]
+    if any(not isinstance(s, dict) or type(s.get("width")) is not int or not isinstance(s.get("sha256"), str)
+           or s.get("path") != f"images/gallery/{s['sha256']}.webp" for s in sizes):
+        return True  # a malformed size rejects its row, as marking_error does
+    widths = [size["width"] for size in sizes]
+    return len(widths) != 3 or widths[:2] != [240, 480] or not 600 <= widths[2] <= 1200
+
+
 def records(name: str, test, subset=None):
     """A rule failing every record of `name` (or `subset(model)`) that `test` rejects."""
     key = COLLECTIONS[name][0]
@@ -626,6 +636,9 @@ DOMAIN = {
         P, markings=[{"kind": "stamp", "role": "invented", "text": "x"}])),
     "not-applicable finish units carry nothing": (not_applicable_units, change(
         FU, lambda u: u["applicabilityStatus"] == "not-applicable", unresolved=["x"])),
+    "gallery sizes are 240, 480 and a full size of 600-1200 px, content-addressed": (
+        records("images.galleryImages", gallery_sizes_error),
+        lambda m: edit(m, "images.galleryImages")["images"][2].update(width=599)),
     "finish printings cite sources, none with absence authority": (records(FP, source_error), change(FP, sources=[])),
     "an unknown finish keeps its finish unit unresolved": (unknown_finishes, change(
         FP, lambda r: "finish" in r, finish="unknown")),

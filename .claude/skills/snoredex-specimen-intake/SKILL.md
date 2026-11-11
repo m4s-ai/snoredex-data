@@ -1,6 +1,6 @@
 ---
 name: snoredex-specimen-intake
-description: File physical Snoredex card or seller-listing photographs as stable specimen records in verification/specimens.json and cite them from data/. Use for local images, issue attachments, scans or listing photos; not for source pages without a card image.
+description: File physical Snoredex card or seller-listing photographs as stable specimen records in verification/specimens.json, cite them from data/, and prepare an item's table preview and gallery images from them. Use for local images, issue attachments, scans or listing photos; not for source pages without a card image.
 ---
 
 <!-- doc: role=Claude Code discovery shim for the snoredex-specimen-intake skill; stage=task -->
