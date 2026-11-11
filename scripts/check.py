@@ -593,9 +593,11 @@ def finish_decisions(model: dict) -> tuple[int, list]:
 def gallery_sizes_error(row: dict) -> bool:
     """Three sizes, 240, 480 and a full size of 600-1200 px, each named by its own SHA-256."""
     sizes = row["images"]
+    if any(not isinstance(s, dict) or type(s.get("width")) is not int or not isinstance(s.get("sha256"), str)
+           or s.get("path") != f"images/gallery/{s['sha256']}.webp" for s in sizes):
+        return True  # a malformed size rejects its row, as marking_error does
     widths = [size["width"] for size in sizes]
-    return (len(widths) != 3 or widths[:2] != [240, 480] or not 600 <= widths[2] <= 1200
-            or any(size["path"] != f"images/gallery/{size['sha256']}.webp" for size in sizes))
+    return len(widths) != 3 or widths[:2] != [240, 480] or not 600 <= widths[2] <= 1200
 
 
 def records(name: str, test, subset=None):
