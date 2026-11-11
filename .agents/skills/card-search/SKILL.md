@@ -46,7 +46,8 @@ inspected URLs, findings and blockers, prioritizing fields a source can actually
 2. Check exact-card publisher pages and reviewed providers for printed identity fields. For
    physical treatment, seek actual card photographs. Web/image results and snippets are leads:
    open and inspect the original source before accepting a claim.
-3. Use seller sources where relevant: eBay including sold/completed listings, regional Shopee,
+3. Use seller sources where relevant: Cardmarket offer photographs (see METHODOLOGY.md's
+   Cardmarket section), eBay including sold/completed listings, regional Shopee,
    Korean Bunjang, Thai local shops/classifieds such as LnwShop/OjamaCard, and comparable local
    marketplaces. These are options, not guaranteed endpoints. Search quoted titles or item IDs
    for alternate pages and expired listings; a seller's location does not establish card language.

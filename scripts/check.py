@@ -590,6 +590,14 @@ def finish_decisions(model: dict) -> tuple[int, list]:
     return sum(decision is not None for _, decision in pairs), [p for p in problems if p]
 
 
+def gallery_sizes_error(row: dict) -> bool:
+    """Three sizes, 240, 480 and a full size of 600-1200 px, each named by its own SHA-256."""
+    sizes = row["images"]
+    widths = [size["width"] for size in sizes]
+    return (len(widths) != 3 or widths[:2] != [240, 480] or not 600 <= widths[2] <= 1200
+            or any(size["path"] != f"images/gallery/{size['sha256']}.webp" for size in sizes))
+
+
 def records(name: str, test, subset=None):
     """A rule failing every record of `name` (or `subset(model)`) that `test` rejects."""
     key = COLLECTIONS[name][0]
@@ -626,6 +634,9 @@ DOMAIN = {
         P, markings=[{"kind": "stamp", "role": "invented", "text": "x"}])),
     "not-applicable finish units carry nothing": (not_applicable_units, change(
         FU, lambda u: u["applicabilityStatus"] == "not-applicable", unresolved=["x"])),
+    "gallery sizes are 240, 480 and a full size of 600-1200 px, content-addressed": (
+        records("images.galleryImages", gallery_sizes_error),
+        lambda m: edit(m, "images.galleryImages")["images"][2].update(width=599)),
     "finish printings cite sources, none with absence authority": (records(FP, source_error), change(FP, sources=[])),
     "an unknown finish keeps its finish unit unresolved": (unknown_finishes, change(
         FP, lambda r: "finish" in r, finish="unknown")),

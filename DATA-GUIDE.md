@@ -85,10 +85,12 @@ hand with a data change) and frozen fields of the previous pipeline.
 product of one locality, with its source references), `setEditions` (a local set released in one
 localization, with its release date where known) and `works` (card text, by `cardKey`).
 
-**`data/images.json`** — `assets` (retained images with path, hash, scope and alt text; a specimen
-original, kept in the photo repository `m4s-ai/snoredex-photos` under its `path`, records the
-`preview` derivative the table shows), `galleryImages` (the prepared gallery
-image of an item: recipe, scope, source and the responsive sizes), `artworkGroups` (which gallery
+**`data/images.json`** — `assets` (retained images with path, hash, scope and alt text, keyed by
+`asset-` plus the UUIDv5 of `https://github.com/m4s-ai/snoredex-data/asset/v1/<path>` in the URL
+namespace; a specimen original, kept in the photo repository `m4s-ai/snoredex-photos` under its
+`path`, records the `preview` derivative the table shows), `galleryImages` (the prepared gallery
+image of an item: recipe, scope, source and the responsive sizes, content-addressed WebP at 240,
+480 and a full size of 600 to 1200 px), `artworkGroups` (which gallery
 group a card release belongs to) and `placeholders` (open gallery research hypotheses beside the
 printing they vary).
 
