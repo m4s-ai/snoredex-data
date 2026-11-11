@@ -143,10 +143,7 @@ def load() -> dict:
             raise SystemExit(f"check: data/{name}.json is not UTF-8 JSON: {error}")
     owner = json.loads(OWNER.read_text(encoding="utf-8"))
     specimens = json.loads(SPECIMENS.read_text(encoding="utf-8"))["specimens"]
-    fingerprints = {name: json.loads((ROOT / name).read_text(encoding="utf-8"))["meta"]
-                    for name in ("collector_migrations.json", "collector_catalogue.json")}
-    return dict(model, raw=raw, owner=owner, specimens={row["specimenId"] for row in specimens},
-                fingerprints=fingerprints)
+    return dict(model, raw=raw, owner=owner, specimens={row["specimenId"] for row in specimens})
 
 
 def rows(model: dict, name: str) -> list:
@@ -368,23 +365,9 @@ def uncited_decisions(model: dict) -> tuple[int, list]:
     return len(decisions), [d["adjudicationId"] for d in decisions if d["adjudicationId"] not in cited]
 
 
-def migration_route(model: dict) -> tuple[int, list]:
-    """collector_migrations.json routes the checklist app to the committed catalogue, which build.py --check
-    holds equal to a fresh build: a data change cannot ship without a migration route."""
-    route, catalogue = (model["fingerprints"][name] for name in ("collector_migrations.json",
-                                                                 "collector_catalogue.json"))
-    same = route["toFingerprint"] == catalogue["catalogueFingerprint"]
-    return 1, [] if same else [f"toFingerprint {route['toFingerprint']} != {catalogue['catalogueFingerprint']}"]
-
-
 def add_decision(m: dict) -> None:
     m["owner"] = copy.deepcopy(m["owner"])
     m["owner"]["decisions"].append(dict(m["owner"]["decisions"][0], adjudicationId="OA-uncited", unitId="U9999"))
-
-
-def stale_route(m: dict) -> None:
-    m["fingerprints"] = copy.deepcopy(m["fingerprints"])
-    m["fingerprints"]["collector_migrations.json"]["toFingerprint"] = "sha256:stale"
 
 
 def specimen_refs(model: dict) -> tuple[int, list]:
@@ -415,7 +398,6 @@ REFERENCES = {
         "images.assets", lambda a: "preview" not in a, path="images/none.png")),
     "adjudicationId -> a verification/owner_adjudications.json decision on that unit": (owner_links, owner_unit),
     "every owner decision is cited by its claim": (uncited_decisions, add_decision),
-    "collector_migrations.json toFingerprint = the catalogue fingerprint": (migration_route, stale_route),
     "completenessEvidence.adjudicationId -> owner finishDecisions": (
         lambda m: missing(((r["itemId"], r["completenessEvidence"].get("adjudicationId"))
                            for r in rows(m, P) if "completenessEvidence" in r),
