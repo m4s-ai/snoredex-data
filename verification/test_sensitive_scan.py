@@ -116,14 +116,14 @@ def verify_endpoint_findings() -> None:
 
 def verify_unportable_paths() -> None:
     """X6: every tracked path must be checkoutable on Windows (#465 shipped `s?-mirror…`)."""
-    import review_findings
+    import publication_audit
     paths = [b"raw/s?-mirror.jpg", b"a/b:c.txt", b"docs/con.txt", b"dir./x", b"ok/name.jpg", b""]
-    assert review_findings.unportable_paths(paths) == [
-        "raw/s?-mirror.jpg", "a/b:c.txt", "docs/con.txt", "dir./x"], review_findings.unportable_paths(paths)
+    assert publication_audit.unportable_paths(paths) == [
+        "raw/s?-mirror.jpg", "a/b:c.txt", "docs/con.txt", "dir./x"], publication_audit.unportable_paths(paths)
 
 def verify_crlf_prone_writers() -> None:
     """X7: a text write without newline= writes CRLF on Windows and dirties every regenerated file."""
-    import review_findings
+    import publication_audit
     nl = 'newline="' + chr(92) + 'n"'
     source = chr(10).join([
         'p.write_text(s, encoding="utf-8")',
@@ -141,7 +141,7 @@ def verify_crlf_prone_writers() -> None:
         'webbrowser.open("http://localhost:8000/")',
         'zipfile.ZipFile(p).open("data.json", "w")',
     ])
-    found = review_findings.crlf_prone_writers({"seed.py": source})
+    found = publication_audit.crlf_prone_writers({"seed.py": source})
     assert found == ["seed.py:1", "seed.py:3", "seed.py:4", "seed.py:8", "seed.py:10"], found
 
 

@@ -1,6 +1,6 @@
 /* Snoredex public site styles.
  *
- * Extracted from scripts/confirmed_releases.py, which embedded ~500 lines of CSS in a Python
+ * Extracted from the page generator, which once embedded ~500 lines of CSS in a Python
  * string literal. Kept as a real stylesheet so it can be edited, diffed and linted.
  *
  * Project-relative paths support locally served checkouts and the GitHub Pages project path.
@@ -188,7 +188,7 @@ tr.yearsep td {
  * which printing they belong to. These five columns stay put instead.
  *
  * They need explicit widths because each `left` is the sum of the widths before it — that is also
- * why they have to be the first five columns, and why scripts/site.py moved "No." up beside "Set".
+ * why they have to be the first five columns, and why the page template moved "No." up beside "Set".
  * The widths are declared once here and consumed by the offsets directly below.
  *
  * From 1024px only: the pane costs 458px, which is affordable on a laptop and absurd on a phone,

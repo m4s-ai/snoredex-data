@@ -3,8 +3,8 @@
 
 These drive the real page in Chromium rather than asserting on the generator's output, because
 the behaviours the epic asks for — filtering, sorting, URL round-trip, year headings, print and
-export — only exist at runtime. Checks that only read the embedded table data live in
-test_collector_catalogue.py, which every pull request runs without a browser.
+export — only exist at runtime. The embedded table data is checked without a browser by
+scripts/check.py and scripts/build.py --check, which every pull request runs.
 
 Run against a temporary local HTTP server, as for a served checkout:
 
@@ -738,8 +738,8 @@ def main() -> int:
         check("correction guidance retains the positive-evidence boundary and domain links",
               "positive evidence" in contribute_text and "not proof of absence" in contribute_text
               and "never unavailable" in contribute_text
-              and {"CONTRIBUTING.md", "verification/FINISH_SOURCES.md",
-                   "verification/open-items.html"} <= set(contribute_links), contribute_text)
+              and {"CONTRIBUTING.md", "METHODOLOGY.md#how-a-claim-becomes-a-fact",
+                   "https://github.com/m4s-ai/snoredex-data/issues"} <= set(contribute_links), contribute_text)
         check("entries outside the confirmed table have a visible general correction route",
               page.locator('#contribute a[href="https://github.com/m4s-ai/snoredex-data/issues/new/choose"]').is_visible()
               and "blank_issues_enabled: true" in (ROOT / ".github/ISSUE_TEMPLATE/config.yml").read_text(encoding="utf-8"))
@@ -1096,8 +1096,6 @@ def main() -> int:
 
         check_gallery(browser, origin)
         print("[ok ] gallery navigation, dialog, binder and mobile")
-        from test_gallery_preparation import check_gallery_preparation
-        check_gallery_preparation(browser)
         browser.close()
         shutil.rmtree(scratch, ignore_errors=True)
 

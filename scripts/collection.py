@@ -136,7 +136,7 @@ def legacy_map(catalogue: Path) -> dict:
 
 
 def old_defaults(source) -> dict:
-    """Each old row's seeded `wanted`, as tracker.py seeded it; empty when the old file cannot say."""
+    """Each old row's seeded `wanted`, as the old tracker seeded it; empty when the old file cannot say."""
     try:
         return {cid: int(progress == "current-known") for cid, progress in source.execute(
             "SELECT checklist_id, collector_progress_class FROM catalog_items")}

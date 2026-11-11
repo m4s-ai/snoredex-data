@@ -25,10 +25,10 @@ SPECIMENS = ROOT / "verification" / "specimens.json"
 
 NONE = type(None)
 S, OS, I, B, OB, L, D, OD = (str,), (str, NONE), (int,), (bool,), (bool, NONE), (list,), (dict,), (dict, NONE)
-RESOLVED = ("confirmed", "contradicted")  # review_integrity.RESOLVED
+RESOLVED = ("confirmed", "contradicted")  # the verdicts that resolve a claim
 GRANULARITIES = frozenset(("specimen-or-card", "product-or-set", "market-or-era", "sibling-derived",
-                           "unclassified"))  # review_integrity.ALLOWED_EVIDENCE_GRANULARITIES
-FINISHES = frozenset(("non-holo", "holo", "reverse-holo", "mirror-holo", "unknown"))  # ALLOWED_FINISHES
+                           "unclassified"))  # how far a claim's evidence reaches
+FINISHES = frozenset(("non-holo", "holo", "reverse-holo", "mirror-holo", "unknown"))  # technical finishes
 COMPLETENESS = frozenset(("owner-adjudicated", "positive-evidence-only", "pending", "not-applicable"))
 MARKING_ROLES = frozenset(("print-identity", "reverse-holo-treatment", "distribution-promo"))
 MAPPED, UNMAPPED = ("mapped", "mapped-by-explicit-equivalence"), ("needs-explicit-equivalence", "unmapped")
@@ -51,17 +51,15 @@ COLLECTIONS = {
         "cardName": S, "localCardName": OS, "collectorNumber": OS, "collectorNumberDenominator": OS,
         "edition": enum("1st Edition", "Unlimited", None),
         "editionAssignmentStatus": enum("assigned", "not-applicable", "unresolved"),
-        # site.py STATUS_RANK is the finish-status vocabulary the table ranks
+        # the finish-status vocabulary the table ranks (build.py STATUS_RANK)
         "finishVerificationStatus": enum("pending", "other-product", "unmapped", "marketplace-claimed",
                                          "owner-attested", "observed", "confirmed"),
         "finish": FINISHES | {None}, "finishGroupId": S, "foilPattern": OS, "markings": L, "distribution": OD,
         "cardSize": S, "errorClass": OS, "rarity": D, "completenessStatus": COMPLETENESS,
         "completenessEvidence?": D, "imageAssetId": OS, "releaseDate?": OS, "releaseDatePrecision?": PRECISION,
         "releaseApproximate?": B, "artist?": S}),
-    "printings.meta": (None, None, {"generatedBy": S, "dataAsOf": S, "siteGenerated": S, "previousFingerprint": OS,
+    "printings.meta": (None, None, {"dataAsOf": S, "siteGenerated": S, "previousFingerprint": OS,
                                     "legacyQuality": D}),
-    "sets.meta": (None, None, {"generatedBy": S}),
-    "images.meta": (None, None, {"generatedBy": S}),
     "sets.localizations": ("localizationId", "localizationId", {
         "localizationId": S, "locality": S, "languageId": S, "language": S, "languageTag": S, "script": OS,
         "displayName": S, "displayOrder": I}),
@@ -84,14 +82,13 @@ COLLECTIONS = {
     "images.placeholders": ("id", "id", {
         "id": S, "baseItemId": S, "finish": FINISHES, "foilPattern": OS, "distribution": OS, "status": S,
         "note": OS, "sources": L}),
-    "evidence.meta": (None, None, {"generatedBy": S, "frozenRegistryCounts": D}),
     "evidence.providers": ("providerId", "providerId", {
         "providerId": S, "displayName": S, "organization": OS, "homepage": OS, "category": S, "authorityTier": I,
         "coverage": S, "usedFor": L, "attribution": S, "notes": S, "hosts": L,
         "supportsAbsence?": B, "absenceScopes?": L}),  # declared so that E9, not the schema, owns them
     "evidence.printings": ("itemId", "itemId", {
         "itemId": S, "sourceLinks": L, "languageEvidence?": D, "dateSource?": OD}),
-    "claims.meta": (None, None, {"generatedBy": S, "legacyDatabase": D}),
+    "claims.meta": (None, None, {"legacyDatabase": D}),
     "claims.legacyProducts": ("productId", "productId", {
         "productId": I, "cardName": S, "setCode": S, "collectorNumber": OS, "setName": S, "rarity": OS,
         "variantToken": S, "variantName": OS, "variantNameSource": OS, "cardKey": OS, "market": S,
@@ -110,7 +107,7 @@ COLLECTIONS = {
         "dateApproximate": B, "sourceProviderId": OS, "sourceUrl": OS, "sourcePage": OS, "sourceField": OS}),
     "claims.finishUnits": ("finishUnitId", "finishUnitId", {
         "finishUnitId": S, "cardName": S, "setCode": S, "collectorNumber": OS, "languageCode": S,
-        "applicabilityStatus": enum("applicable", "not-applicable"),  # review_integrity ALLOWED_*
+        "applicabilityStatus": enum("applicable", "not-applicable"),  # the finish-unit state vocabularies
         "availabilityStatus": enum("confirmed", "owner-attested", "marketplace-claimed", "pending", "not-applicable"),
         "completenessStatus": COMPLETENESS,
         "productMappingStatus": enum("confirmed", "partial", "pending", "not-applicable"),
@@ -146,7 +143,10 @@ def load() -> dict:
             raise SystemExit(f"check: data/{name}.json is not UTF-8 JSON: {error}")
     owner = json.loads(OWNER.read_text(encoding="utf-8"))
     specimens = json.loads(SPECIMENS.read_text(encoding="utf-8"))["specimens"]
-    return dict(model, raw=raw, owner=owner, specimens={row["specimenId"] for row in specimens})
+    fingerprints = {name: json.loads((ROOT / name).read_text(encoding="utf-8"))["meta"]
+                    for name in ("collector_migrations.json", "collector_catalogue.json")}
+    return dict(model, raw=raw, owner=owner, specimens={row["specimenId"] for row in specimens},
+                fingerprints=fingerprints)
 
 
 def rows(model: dict, name: str) -> list:
@@ -265,7 +265,7 @@ def lone_release(m: dict):
 
 
 def foreign_language(m: dict) -> None:
-    unit = edit(m, FU, lambda u: u["products"])
+    unit = edit(m, FU, lambda u: u["products"] and u["completenessStatus"] != "owner-adjudicated")
     spoken = {c["languageCode"] for c in rows(m, C) if c["productId"] == unit["products"][0]["productId"]}
     unit["languageCode"] = min(ids(m, "sets.languages") - spoken)
 
@@ -356,11 +356,35 @@ def repository_files(model: dict) -> tuple[int, list]:
 
 def owner_links(model: dict) -> tuple[int, list]:
     """Each cited adjudication is an owner decision about the citing unit (rule 4)."""
-    # ponytail: one direction only, because main keeps adding decisions to the owner file that data/
-    # snapshots; add "every decision is cited" when migrate_model.py is deleted at the cut.
     decisions = {d["adjudicationId"]: d["unitId"] for d in model["owner"]["decisions"]}
     cited = [(c["unitId"], c["adjudicationId"]) for c in rows(model, C) if c["adjudicationId"]]
     return len(cited), [unit for unit, adjudication in cited if decisions.get(adjudication) != unit]
+
+
+def uncited_decisions(model: dict) -> tuple[int, list]:
+    """Every owner decision is cited by a claim: an owner decision data/ does not carry is not applied."""
+    cited = {c["adjudicationId"] for c in rows(model, C)}
+    decisions = model["owner"]["decisions"]
+    return len(decisions), [d["adjudicationId"] for d in decisions if d["adjudicationId"] not in cited]
+
+
+def migration_route(model: dict) -> tuple[int, list]:
+    """collector_migrations.json routes the checklist app to the committed catalogue, which build.py --check
+    holds equal to a fresh build: a data change cannot ship without a migration route."""
+    route, catalogue = (model["fingerprints"][name] for name in ("collector_migrations.json",
+                                                                 "collector_catalogue.json"))
+    same = route["toFingerprint"] == catalogue["catalogueFingerprint"]
+    return 1, [] if same else [f"toFingerprint {route['toFingerprint']} != {catalogue['catalogueFingerprint']}"]
+
+
+def add_decision(m: dict) -> None:
+    m["owner"] = copy.deepcopy(m["owner"])
+    m["owner"]["decisions"].append(dict(m["owner"]["decisions"][0], adjudicationId="OA-uncited", unitId="U9999"))
+
+
+def stale_route(m: dict) -> None:
+    m["fingerprints"] = copy.deepcopy(m["fingerprints"])
+    m["fingerprints"]["collector_migrations.json"]["toFingerprint"] = "sha256:stale"
 
 
 def specimen_refs(model: dict) -> tuple[int, list]:
@@ -390,6 +414,8 @@ REFERENCES = {
     "image files exist in the repository": (repository_files, change(
         "images.assets", lambda a: "preview" not in a, path="images/none.png")),
     "adjudicationId -> a verification/owner_adjudications.json decision on that unit": (owner_links, owner_unit),
+    "every owner decision is cited by its claim": (uncited_decisions, add_decision),
+    "collector_migrations.json toFingerprint = the catalogue fingerprint": (migration_route, stale_route),
     "completenessEvidence.adjudicationId -> owner finishDecisions": (
         lambda m: missing(((r["itemId"], r["completenessEvidence"].get("adjudicationId"))
                            for r in rows(m, P) if "completenessEvidence" in r),
@@ -414,7 +440,7 @@ def resolved(model: dict) -> list:
 
 
 def expected_status(claim: dict, code_cards: set) -> str:
-    """evidence_semantics.application_status/transition_support, plus database.py's code-card exclusion."""
+    """A confirmation counts only where its evidence reaches the card; code cards are out of scope."""
     if claim["productId"] in code_cards:
         return "out-of-scope"
     grain, inference = claim["evidenceGranularity"], claim["evidenceInference"]
@@ -433,7 +459,7 @@ def application_status(model: dict) -> tuple[int, list]:
 
 
 def incomplete_claim(claim: dict) -> bool:
-    """review_integrity: resolved units have a provider (E2), evidence of 20+ chars, sourceType, granularity."""
+    """A resolved claim has a provider (E2), evidence of 20+ characters, a sourceType and a granularity."""
     evidence, source_type = claim["evidence"], claim["sourceType"]
     return (not claim["providerId"] or not isinstance(evidence, str) or len(evidence) < 20
             or not isinstance(source_type, str) or not source_type.strip()
@@ -441,7 +467,7 @@ def incomplete_claim(claim: dict) -> bool:
 
 
 def unverifiable(model: dict) -> tuple[int, list]:
-    # was E3 (review_findings.py): fails only with no URL AND uncorroborated AND a declared provider below tier 2
+    # E3: fails only with no URL AND uncorroborated AND a declared provider below tier 2
     tiers = {p["providerId"]: p["authorityTier"] for p in rows(model, "evidence.providers")}
     return failing(resolved(model), lambda c: not c["sourceUrl"] and not c["corroborated"]
                    and tiers.get(c["providerId"], 0) > 2, lambda c: c["unitId"])
@@ -454,7 +480,7 @@ def absence_authority(provider: dict) -> bool:
 
 
 def item_kind_error(item: dict) -> bool:
-    """collector_catalogue.validate_catalogue: what an item carries matches its kind."""
+    """What an item carries matches its kind (verified printing, finish candidate, research placeholder)."""
     kind, physical, progress = item["itemKind"], item["physicalPrintingId"], item["progressClass"]
     if kind == "verified-printing":
         return not physical or progress != "current-known"
@@ -471,7 +497,7 @@ def item_kinds(model: dict) -> tuple[int, list]:
 
 
 def work_mapping(model: dict) -> tuple[int, list]:
-    """validate_catalogue and the catalogue schema allOf: mapped -> workId, unmapped -> none, one per release."""
+    """The catalogue schema allOf: mapped -> workId, unmapped -> none, one mapping per card release."""
     items, by_release, errors = rows(model, P), {}, []
     for item in items:
         state = (item["workMappingState"], item["workId"])
@@ -484,7 +510,7 @@ def work_mapping(model: dict) -> tuple[int, list]:
 
 
 def marking_error(marks: list, finish: str | None) -> bool:
-    """normalized_markings (kind/role/text non-empty strings) and review_integrity's stamp roles."""
+    """A marking has non-empty kind, role and text; a reverse-holo treatment sits only on a reverse holo."""
     return any(not isinstance(m, dict) or any(not isinstance(m.get(k), str) or not m[k] for k in ("kind", "text"))
                or m.get("role") not in MARKING_ROLES
                or (m["role"] == "reverse-holo-treatment" and finish != "reverse-holo") for m in marks)
@@ -497,7 +523,7 @@ def markings(model: dict) -> tuple[int, list]:
 
 
 def not_applicable_units(model: dict) -> tuple[int, list]:
-    """review_integrity._check_finish_states: a not-applicable unit has no printings and only contradicted products."""
+    """A not-applicable finish unit has no printings, nothing unresolved and only contradicted products."""
     printed = {r["finishUnitId"] for r in rows(model, P)} | {r.get("finishUnitId") for r in rows(model, FP)}
     units = [u for u in rows(model, FU) if u["applicabilityStatus"] == "not-applicable"]
     return failing(units, lambda u: u["availabilityStatus"] != "not-applicable" or u["unresolved"]
@@ -506,18 +532,46 @@ def not_applicable_units(model: dict) -> tuple[int, list]:
 
 
 def source_error(printing: dict) -> bool:
-    """review_integrity._check_finish_printings: sources exist, none supports absence, scopes are known."""
+    """A finish printing cites sources, none claims absence authority, and every evidence scope is known."""
     sources = [s["source"] for s in printing["sources"]]
     return not sources or any(s.get("supportsAbsence") is True
                               or s.get("evidenceScope") not in (None, "finish-unit", "standard-set") for s in sources)
 
 
 def unknown_finishes(model: dict) -> tuple[int, list]:
-    """review_integrity._check_finish_unknowns: an unknown finish keeps its unit unresolved."""
+    """An unknown finish keeps its finish unit unresolved."""
     open_units = {u["finishUnitId"] for u in rows(model, FU) if u["unresolved"]}
     unknown = [(r["itemId"], r["finishUnitId"]) for r in rows(model, P) if r["finish"] == "unknown"]
     unknown += [(r["printingId"], r["finishUnitId"]) for r in rows(model, FP) if r.get("finish") == "unknown"]
     return len(unknown), [label for label, unit in unknown if unit not in open_units]
+
+
+def decision_problem(unit: dict, decision: dict | None, printed: set) -> str | None:
+    """E13: an owner finish decision names exactly the list the evidence established, rejects nothing
+    still available, and never applies to a finish unit with no printing at all."""
+    label, available = unit["finishUnitId"], sorted(unit["availableFinishes"])
+    named = sorted((decision or {}).get("availableFinishes") or [])
+    if unit["completenessStatus"] == "owner-adjudicated" and (not decision or named != available):
+        return f"{label}: owner-adjudicated, decision names {named if decision else 'nothing'}, unit has {available}"
+    return rejection_problem(label, decision, set(named) | set(available), printed) if decision else None
+
+
+def rejection_problem(label: str, decision: dict, available: set, printed: set) -> str | None:
+    rejected = set(decision.get("rejectedFinishes") or [])
+    if rejected & available:
+        return f"{label}: rejected finish {sorted(rejected)} is still available"
+    return None if label in printed else f"{label}: adjudicated with no printing evidence at all"
+
+
+def finish_decisions(model: dict) -> tuple[int, list]:
+    """Owner finishDecisions, keyed by set code, number and language name, against the finish units."""
+    names = {row["languageCode"]: row["sourceName"] for row in rows(model, "sets.languages")}
+    decisions = {(d["setCode"], d["number"], d["language"]): d for d in model["owner"]["finishDecisions"]}
+    printed = {r["finishUnitId"] for r in rows(model, P)} | {r.get("finishUnitId") for r in rows(model, FP)}
+    pairs = [(u, decisions.get((u["setCode"], u["collectorNumber"], names[u["languageCode"]])))
+             for u in rows(model, FU) if u["languageCode"] in names]  # an unresolved language: its reference
+    problems = [decision_problem(unit, decision, printed) for unit, decision in pairs]
+    return sum(decision is not None for _, decision in pairs), [p for p in problems if p]
 
 
 def records(name: str, test, subset=None):
@@ -559,6 +613,9 @@ DOMAIN = {
     "finish printings cite sources, none with absence authority": (records(FP, source_error), change(FP, sources=[])),
     "an unknown finish keeps its finish unit unresolved": (unknown_finishes, change(
         FP, lambda r: "finish" in r, finish="unknown")),
+    "E13: an owner finish decision closes only the list the evidence established": (finish_decisions, change(
+        FU, lambda u: u["completenessStatus"] == "owner-adjudicated",
+        availableFinishes=["holo", "mirror-holo", "non-holo", "reverse-holo"])),
 }
 RULES = {
     "format: canonical serialization": (file_format, lambda m: m.update(

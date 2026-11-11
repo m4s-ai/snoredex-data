@@ -13,25 +13,24 @@ Commands run from the repository root.
 
 ## Card-search scope
 
-Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md) and the
-[workflow map](../../../WORKFLOW-MAP.md). Before accepting evidence, read the complete
-[verification playbook](../../../verification/RESUME.md); for finishes or markings also read
-[FINISH_SOURCES.md](../../../verification/FINISH_SOURCES.md).
+Read [AGENTS.md](../../../AGENTS.md). Before accepting evidence, read the evidence ladder and the
+source techniques in [METHODOLOGY.md](../../../METHODOLOGY.md); for finishes or markings also read
+its finish section.
 
 - For an issue request, read its current body, comments and relevant linked PRs. Reconcile open
-  rows with canonical stores and retained evidence; historical remaining-work lists may be stale.
+  rows with `data/` and retained evidence; historical remaining-work lists may be stale.
 - For a set-and-number request, resolve language/locality, local set code, full collector number
   including denominator, and requested fields. Preserve leading zeroes and source-native suffixes.
   Ask only for unresolved distinctions that affect identification; continue independent targets.
-- Map existing release, print, unit and SPEC IDs. Separate identity gaps from missing finish,
+- Map existing item, release, claim and SPEC IDs. Separate identity gaps from missing finish,
   date, rarity, image or provenance. An unadmitted target is searchable without inventing an ID.
 - Check retained photographs, hashes, source captures and previous queries first. For “continue”,
   resume unanswered fields instead of requesting already retained images again.
 
 **Boundary:** discovering sets, processing entire PDFs/checklists, mapping market launches,
-general rarity/finish rules and provider-wide refreshes belong to
-[source refresh](../snoredex-source-refresh/SKILL.md) and its domain contracts. Reading an exact
-setlist row to support a target does not authorize harvesting the rest of that set. Applying an
+general rarity/finish rules and provider-wide refreshes are outside this skill and need their own
+explicit task. Reading an exact setlist row to support a
+target does not authorize harvesting the rest of that set. Applying an
 already supplied source belongs to [claim evidence](../snoredex-claim-evidence/SKILL.md); supplied
 photos go to [specimen intake](../snoredex-specimen-intake/SKILL.md).
 
@@ -55,9 +54,8 @@ inspected URLs, findings and blockers, prioritizing fields a source can actually
    and actual image URLs. Shopee CDN, Bunjang media, eBay image and shop-hosted image links may
    remain accessible when a listing fails. Follow exposed or user-supplied URLs; guessed variants
    are unverified until fetched and inspected. A resized preview is not the original resolution.
-5. For blocked pages, try the available browser or the approved
-   [retrieval route](../snoredex-source-refresh/SKILL.md#source-refresh-bot-gated-retrieval), then an
-   independent source. Record login/403/expired-image limits; do not retry indefinitely or bypass
+5. For blocked pages, try the available browser (see the access notes in METHODOLOGY.md's source
+   techniques), then an independent source. Record login/403/expired-image limits; do not retry indefinitely or bypass
    access controls. If images remain inaccessible, give the user both listing and direct-image
    links, target identity and missing field so they can supply the image. Never claim inspection
    of unavailable bytes.
@@ -101,21 +99,21 @@ does not prove non-holo. Preserve explicit owner determinations with field-speci
 Never transfer finish from rarity, another language or a neighbouring card; a sale date is not a
 release date.
 
-Resolve the current reviewed provider/surface capability before accepting a claim. Unregistered
-sources remain leads until reviewed through [source onboarding](../snoredex-source-onboarding/SKILL.md);
-use that route when registration is authorized. Do not borrow another provider's authority. Reposted photos
+Resolve the provider in `data/evidence.json` before accepting a claim. A source not listed there
+stays a lead until a provider record is added with its tier, which needs authorization; never
+grant it absence authority. Do not borrow another provider's authority. Reposted photos
 and multiple URLs for one listing are not independent corroboration.
 
 ## Card-search retention and integration
 
 For research-only requests, deliver evidence and unresolved links without changing verdicts.
-When integration is authorized, use the existing owners rather than a new importer:
+When integration is authorized, use the manual procedures (there is no importer; entry is by hand):
 
 | Finding | Retention and writer |
 |---|---|
 | Exact-card page/assertion | Retain a scoped capture under `verification/evidence/`: source URL, actual retrieval date, capture method, relevant content, SHA-256 and field limits. Distinguish excerpt hashes from full-response hashes. Apply through [claim evidence](../snoredex-claim-evidence/SKILL.md). |
-| Photograph or identity-legible image | Follow [specimen intake](../snoredex-specimen-intake/SKILL.md), its reviewed manifest and `verification/fetch_attachment.py`. Preserve original bytes, SPEC ID, hash, listing/image provenance and only supported observations. |
-| Target not yet admitted | Retain evidence and use [source reconciliation](../snoredex-source-refresh/SKILL.md) for admission. Manual finds do not require a provider-wide refresh. Keep unmapped candidates explicit. |
+| Photograph or identity-legible image | Follow [specimen intake](../snoredex-specimen-intake/SKILL.md). Preserve original bytes, SPEC ID, hash, listing/image provenance and only supported observations. |
+| Target not yet in the catalogue | Retain the evidence and report it as a candidate; admitting a new printing adds a record to `data/printings.json` with a fresh `itemId` and needs explicit authorization. Keep unmapped candidates explicit. |
 
 Derive evidence-directory and manifest names from this task and actual date. Accepted evidence
 belongs outside ignored caches. Keep original bytes separate from OCR, crops or format conversions;
@@ -127,9 +125,8 @@ before allocation and integration. Reuse identical bytes. Multiple positively
 matched views of one physical card use specimen intake's `sameCardAs` contract; do not overwrite
 an original to add an angle or infer same-card identity solely from matching artwork.
 
-Apply the [reference acceptance contract](../../../verification/RESUME.md#specimen-and-reference-acceptance-contract):
-exact direct/reverse references must reach registry, graph, artwork and collector consumers.
-A saved file or bare URL is not completed integration. Do not count one seller photo twice as
+A saved file or bare URL is not completed integration: the claim must cite the specimen or source,
+`python scripts/check.py` must resolve every reference, and the rebuilt outputs must show it. Do not count one seller photo twice as
 independent listing and specimen authority.
 
 ## Card-search validation and commits
@@ -139,16 +136,16 @@ target/evidence record and handoff. Reconcile every accepted target before calli
 Respect session authorization, including “always put accepted findings in the PR” or draft-only
 instructions when applicable; do not copy publication decisions from an unrelated research round.
 
-1. Follow the [batch execution contract](../../../WORKFLOW-MAP.md#batch-execution-contract) for
-   one baseline and related imports on an isolated branch from current `origin/main`.
-2. Checkpoint accumulated findings through the owning intake/claim/discovery lane once. Review
-   stable IDs, photo hashes, supported fields and affected consumer references. Never hand-edit
-   projections or rerun archived passes. Do not close a batch just because one card was found.
-3. Run the full gate once at package delivery; `regen.py` already includes its checks. Stage reviewed captures, images,
-   manifests, canonical changes and resulting artifacts together. Inspect staged paths and diff;
+1. Work on an isolated branch from current `origin/main`, with one `python scripts/regen.py --check`
+   baseline.
+2. Run `python scripts/check.py` after the accumulated edits. Review stable ids, photo hashes,
+   supported fields and the references to them. Never hand-edit build outputs or touch the archive.
+   Do not close a batch just because one card was found.
+3. Run `python scripts/regen.py` once at delivery. Stage reviewed captures, images, data changes
+   and the rebuilt outputs together. Inspect staged paths and diff;
    avoid blanket staging of unrelated research.
 4. When authorized, commit with the repository's required trailer and push/update the scoped PR.
-   After commit and push, run `python verification/review_findings.py --scope publication` for history-sensitive checks.
+   After commit and push, run `python verification/publication_audit.py` for history-sensitive checks.
 5. Report each target's supported fields, source/image links, SPEC/reference IDs, remaining gaps,
    validation and actual commit/PR status. Synchronize relevant issues/PRs when authorized; one
    resolved field does not complete a card's entire research task.

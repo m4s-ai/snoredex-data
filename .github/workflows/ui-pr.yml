@@ -3,19 +3,12 @@ name: UI browser gate
 on:
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
-    # Page behaviour changes only with this code. Regenerated data (index.html, gallery.html,
-    # images, stores) reaches the browser suite at L4 before every deploy, and the embedded table
-    # projection is checked on every pull request by test_collector_catalogue.py.
+    # Page behaviour changes only with this code. Regenerated data reaches the browser suite at L4
+    # before every deploy, and the release gate checks the built pages on every pull request.
     paths:
-      - site/app.css
-      - site/app.js
-      - site/gallery.*
-      - scripts/site.py
-      - scripts/gallery.py
-      - scripts/gallery_image_*.py
-      - verification/prepare_gallery_images.py
-      - verification/gallery_image_renderer.js
-      - verification/test_gallery_preparation.py
+      - templates/index.html
+      - site/**
+      - scripts/build.py
       - verification/test_site.py
       - requirements.txt
       - .github/workflows/ui-pr.yml

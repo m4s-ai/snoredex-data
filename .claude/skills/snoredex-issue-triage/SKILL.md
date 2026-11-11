@@ -8,5 +8,4 @@ description: Reconcile Snoredex issues with current evidence, identify remaining
 # Snoredex issue triage (shim)
 
 Read and follow [the canonical skill](../../../.agents/skills/snoredex-issue-triage/SKILL.md) with the
-arguments given. Keep this file a pointer; the procedure lives only in the canonical skill
-([RUNTIMES.md](../../../RUNTIMES.md#project-skill-discovery)).
+arguments given. Keep this file a pointer; the procedure lives only in the canonical skill.

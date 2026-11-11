@@ -36,8 +36,8 @@ material in the repository licences.
 
 ## Provider inventory
 
-`verification/SOURCES.md` is the generated readable provider inventory.
-`verification/source_registry.json` is the machine-readable inventory. They record stable provider
+`METHODOLOGY.md` describes the provider inventory readably.
+`providers` in `data/evidence.json` is the machine-readable inventory. They record stable provider
 IDs, attribution wording, terms links, coverage limits, and evidence use.
 
 External evidence is positive only; marketplace metadata and internal derivations are separately

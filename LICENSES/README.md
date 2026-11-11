@@ -20,5 +20,5 @@ To refresh them, fetch the exact publisher files; never reconstruct legal text f
 
 Then update the pinned hashes only after comparing the bytes with the publisher source.
 
-`verification/review_findings.py` check `L1` verifies both exact SHA-256 values. Presence or file
+`verification/publication_audit.py` check `L1` verifies both exact SHA-256 values. Presence or file
 length alone is not accepted.

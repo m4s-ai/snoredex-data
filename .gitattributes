@@ -6,14 +6,8 @@
 *.webp binary
 *.sqlite binary
 
-# Captured source pages used as parser fixtures: keep the bytes exactly as the server sent them,
-# so the fixture keeps reproducing the page shape it was captured for.
-verification/fixtures/** -text
-
 # Immutable provider responses are hash-verified byte-for-byte. Some official HTML pages use
 # CRLF while neighbouring pages use LF, so Git must not normalize the retained response bytes.
-verification/runs/card-discovery/**/raw/** -text -whitespace
-verification/research/**/raw/** -text -whitespace
 verification/evidence/**/raw/** -text -whitespace
 
 # Preserve the publisher's exact legalcode bytes, including its intentional final blank line.

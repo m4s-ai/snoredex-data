@@ -18,10 +18,10 @@ import tempfile
 from collections import Counter
 from pathlib import Path
 
-sys.dont_write_bytecode = True  # importing database.py must not leave __pycache__ in the checkout
+sys.dont_write_bytecode = True  # importing build.py must not leave __pycache__ in the checkout
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from database import sqlite_dump  # noqa: E402
+from build import sqlite_dump  # noqa: E402
 
 REFERENCE_TAG = "refactor-reference-20261109"
 DETAIL_LIMIT = 40
@@ -32,8 +32,8 @@ ABSENT = "<absent>"
 # fingerprint in these payloads is derived from committed inputs or code constants, not the wall
 # clock, so they stay compared. The one exception is a hash of the generator source itself:
 VOLATILE = {
-    # database.py:808 `"generator_sha256": file_hash(Path(__file__))` changes with any edit to
-    # database.py, which is exactly what the refactor does; it carries no content.
+    # The reference database recorded `generator_sha256`, a hash of its generator's source: it
+    # changes with any edit to that generator and carries no content.
     "sqlite": ["INSERT INTO \"metadata\" VALUES('generator_sha256',"],
 }
 

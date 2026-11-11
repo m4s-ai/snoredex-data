@@ -13,19 +13,17 @@ public site by omission.
 from __future__ import annotations
 
 import argparse
+import json
 import posixpath
 import re
 import shutil
 import sys
 from pathlib import Path
 
-from malie_export import validate_bundle
-from gallery_image_assets import filter_gallery_outputs
-
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PREFIX = "_site"
 REPO_BLOB = "https://github.com/m4s-ai/snoredex-data/blob/main/"
-MALIE_FILES = tuple("exports/malie/" + name for name in ("cards.json", "report.json", "profile.json"))
+GALLERY_DIR = "images/gallery/"
 
 # Markdown links resolve against the repository, but the artifact is a strict subset of it, so a
 # link to something deliberately left out (a script, the handover notes) silently breaks on the
@@ -36,58 +34,30 @@ MARKDOWN_LINK = re.compile(r'(\]\()([^)\s]+)(\))')
 
 # Exact files. Each is here because the site links to it or a reader needs it.
 FILES = [
-    *MALIE_FILES,
-    "exports/malie/README.md",
     "index.html",
     "gallery.html",
-    "llms.txt",
     "README.md",
     "DATA-GUIDE.md",
     "METHODOLOGY.md",
     "DATABASE.md",
-    "FINDINGS.md",
     "LICENSE.md",
     "THIRD_PARTY_NOTICES.md",
+    "AI-DECLARATION.md",
+    "CONTRIBUTING.md",
     "legacy-cardmarket-baseline.json",
-    "snorlax_cards.json",
     "snoredex.sqlite",
     "snoredex-tracker-template.sqlite",
-    "analysis_checklist.json",
     "collector_catalogue.json",
     "collector_catalogue.schema.json",
     "collector_migrations.json",
     "collector_catalogue.fixture.json",
-    "analysis_confirmed_releases.json",
-    "analysis_confirmed_releases.csv",
-    "analysis_finishes.json",
-    "analysis_artists.json",
-    "analysis_variants.json",
-    "analysis_shared_cards.json",
-    "analysis_language_drift.json",
-    "artists_pokemontcgio.json",
-    "AI-DECLARATION.md",
-    "CONTRIBUTING.md",
     "publication-decisions.json",
-    "verification/confirmed-releases.html",
-    "verification/open-items.html",
-    "verification/FINISH_REVIEW.csv",
-    "verification/source_registry.json",
-    "verification/source_capabilities.json",
-    "verification/source_capability_schema.json",
-    "verification/source_capability_graph.json",
-    "verification/artwork_review_projection.json",
-    "verification/SOURCES.md",
-    "verification/bulbapedia_release_dates.json",
-    "verification/history/BULBAPEDIA-RELEASE-DATE-AUDIT.md",
-    "verification/finish_units.json",
-    "verification/units.json",
+    "data/printings.json",
+    "data/sets.json",
+    "data/images.json",
+    "data/evidence.json",
+    "data/claims.json",
     "verification/owner_adjudications.json",
-    "verification/CONTRADICTED.json",
-    "verification/UNCONFIRMED.json",
-    "verification/RESUME.md",
-    "verification/FINISH_SOURCES.md",
-    "verification/history/PUBLIC-READINESS-AUDIT.md",
-    "verification/DATA-HANDOFF-AUDIT.md",
 ]
 
 # Created only after the containing commit exists. It is deliberately not a
@@ -100,7 +70,7 @@ TREES = [
     # images/ includes the preview and thumbnail derivatives of every specimen photograph.
     ("images", {".jpg", ".jpeg", ".png", ".webp"}),
     # verification/specimens/ is deliberately absent: the originals are ~1 GB, over the GitHub
-    # Pages site limit, so a deployment timed out (run 42534207499). site.py embeds their previews
+    # Pages site limit, so a deployment timed out (run 42534207499). build.py embeds their previews
     # and links each original on GitHub, where the repository keeps it.
     ("LICENSES", {".md", ".txt"}),
 ]
@@ -145,7 +115,14 @@ def collect() -> list[str]:
         for path in sorted(base.rglob("*")):
             if path.is_file() and path.suffix.lower() in extensions:
                 wanted.append(str(path.relative_to(ROOT)).replace("\\", "/"))
-    return filter_gallery_outputs(wanted, ROOT)
+    return filter_gallery_outputs(wanted)
+
+
+def filter_gallery_outputs(paths: list[str]) -> list[str]:
+    """Publish only the prepared gallery derivatives data/images.json selects, not every file on disk."""
+    selected = json.loads((ROOT / "data" / "images.json").read_text(encoding="utf-8"))["galleryImages"]
+    gallery = {image["path"] for record in selected for image in record["images"]}
+    return [path for path in paths if not path.startswith(GALLERY_DIR) or path in gallery]
 
 
 def validate_output(out: Path) -> Path:
@@ -186,8 +163,6 @@ def relink_markdown(text: str, source: str, published: set[str]) -> str:
 
 def build(out: Path) -> list[str]:
     out = validate_output(out)
-    # Reject an incomplete source bundle before replacing any existing staged site.
-    read_malie_bundle(ROOT)
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)
@@ -207,21 +182,6 @@ def build(out: Path) -> list[str]:
     return wanted
 
 
-def read_malie_bundle(root: Path) -> dict[str, bytes]:
-    bundle = {Path(name).name: (root / name).read_bytes() for name in MALIE_FILES}
-    validate_bundle(bundle)
-    return bundle
-
-
-def malie_problems(out: Path) -> list[str]:
-    try:
-        if read_malie_bundle(out) != read_malie_bundle(ROOT):
-            return ["Malie bundle differs from the checked source artifacts"]
-    except (OSError, ValueError, KeyError, TypeError) as error:
-        return [f"Malie bundle: {error}"]
-    return []
-
-
 def size_problems(size: int) -> list[str]:
     if size <= MAX_ARTIFACT_BYTES:
         return []
@@ -236,7 +196,7 @@ def verify(out: Path) -> int:
         return 1
     allowed = set(collect()) | {".nojekyll"}
     allowed.update(name for name in RUNTIME_FILES if (out / name).is_file())
-    problems: list[str] = malie_problems(out)
+    problems: list[str] = []
     present = []
     for path in sorted(out.rglob("*")):
         if not path.is_file():
@@ -258,7 +218,7 @@ def verify(out: Path) -> int:
     # only index.html let the published Markdown accumulate links to files the allowlist
     # deliberately excludes, which read as broken pages to the very reviewers the site invites.
     for page in sorted(out.rglob("*")):
-        markdown = page.suffix == ".md" or page.name == "llms.txt"
+        markdown = page.suffix == ".md"
         if not page.is_file() or (page.suffix != ".html" and not markdown):
             continue
         text = page.read_text(encoding="utf-8", errors="replace")
