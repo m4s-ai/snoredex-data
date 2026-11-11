@@ -45,9 +45,12 @@ jobs:
         run: python -m pip install -r requirements.txt
 
       # Browser behavior is platform independent. Windows verifies path portability.
-      - name: Install Chromium with Linux dependencies
+      # No --with-deps: on a hosted runner it adds only font packages, which the suite does not
+      # need, and fetching them made a deploy depend on the Ubuntu package hosts (unreachable from
+      # the runners for hours on 2026-11-11).
+      - name: Install Chromium
         if: runner.os == 'Linux' && github.event_name != 'pull_request'
-        run: python -m playwright install --with-deps chromium
+        run: python -m playwright install chromium
 
       - name: Parse every Python file
         shell: bash

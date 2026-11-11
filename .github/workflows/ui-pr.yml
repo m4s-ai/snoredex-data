@@ -46,17 +46,11 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
 
-      - name: Install Chromium with Linux dependencies
-        # The system packages --with-deps adds on a hosted runner are fonts. On 2026-11-11 the
-        # runners (ubuntu-26.04 and ubuntu-24.04 alike) could not resolve the Ubuntu package hosts
-        # for over an hour, and the job failed before any test ran. Fall back to the browser alone
-        # then: the suite also passes on Windows, which has none of those packages, and the release
-        # gate keeps the strict install before a deploy.
-        run: |
-          python -m playwright install --with-deps chromium || {
-            echo "::warning::system packages could not be installed; running with the runner's own fonts"
-            python -m playwright install chromium
-          }
+      # No --with-deps: on a hosted runner it adds only font packages, which the suite does not
+      # need, and fetching them made the job depend on the Ubuntu package hosts (unreachable from
+      # the runners for hours on 2026-11-11).
+      - name: Install Chromium
+        run: python -m playwright install chromium
 
       - name: Browser behavior tests
         run: python verification/test_site.py
