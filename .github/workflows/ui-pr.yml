@@ -26,7 +26,9 @@ jobs:
     # Like the release gate, draft pull requests skip the browser suite until ready for review.
     if: ${{ github.event_name != 'pull_request' || !github.event.pull_request.draft }}
     name: ui-browser (chromium)
-    runs-on: ubuntu-latest
+    # Pinned: on 2026-11-11 the ubuntu-26.04 runners behind ubuntu-latest could not resolve the
+    # Ubuntu package hosts, so `playwright install --with-deps` failed before any test ran.
+    runs-on: ubuntu-24.04
     steps:
       # verification/test_site.py reads the checked-out tree only; no Git history is needed.
       - uses: actions/checkout@v5
