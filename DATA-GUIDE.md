@@ -86,7 +86,8 @@ product of one locality, with its source references), `setEditions` (a local set
 localization, with its release date where known) and `works` (card text, by `cardKey`).
 
 **`data/images.json`** — `assets` (retained images with path, hash, scope and alt text; a specimen
-original records the `preview` derivative the table shows), `galleryImages` (the prepared gallery
+original, kept in the photo repository `m4s-ai/snoredex-photos` under its `path`, records the
+`preview` derivative the table shows), `galleryImages` (the prepared gallery
 image of an item: recipe, scope, source and the responsive sizes), `artworkGroups` (which gallery
 group a card release belongs to) and `placeholders` (open gallery research hypotheses beside the
 printing they vary).

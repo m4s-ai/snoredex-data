@@ -17,7 +17,8 @@ No repository licence grant applies to this material.
 
 ## Specimen evidence
 
-Files under `verification/specimens/` include several source categories:
+The specimen files, kept in the photo repository `m4s-ai/snoredex-photos` under
+`verification/specimens/`, include several source categories:
 
 - photographs supplied by the collection owner
 - photographs or scans from third-party collectors

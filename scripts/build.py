@@ -32,8 +32,9 @@ DATA = ROOT / "data"
 
 REPOSITORY = "https://github.com/m4s-ai/snoredex-data"
 ASSET_BASE_URL = "https://m4s-ai.github.io/snoredex-data/"
-SPECIMEN_ASSET_BASE_URL = "https://raw.githubusercontent.com/m4s-ai/snoredex-data/main/"
-REPO_BLOB = REPOSITORY + "/blob/main/"
+# Specimen originals live in the photo repository under the same path (verification/specimens/...).
+SPECIMEN_ASSET_BASE_URL = "https://raw.githubusercontent.com/m4s-ai/snoredex-photos/main/"
+SPECIMEN_BLOB = "https://github.com/m4s-ai/snoredex-photos/blob/main/"
 SPECIMEN_DIR = "verification/specimens/"
 RESOLVED = ("confirmed", "contradicted")
 DATE_FIELDS = ("releaseDate", "releaseDatePrecision", "releaseApproximate")
@@ -114,7 +115,7 @@ def printed_number(item: dict) -> str:
 
 
 def published_link(path):
-    return REPO_BLOB + path if path and path.startswith(SPECIMEN_DIR) else path
+    return SPECIMEN_BLOB + path if path and path.startswith(SPECIMEN_DIR) else path
 
 
 # --- correction link: the producer-owned prefilled issue form (contract 1.0.0) ---

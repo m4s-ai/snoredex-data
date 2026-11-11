@@ -26,26 +26,35 @@ views, GitHub issue attachments) and [DATA-GUIDE.md](../../../DATA-GUIDE.md).
    marks and size cues.
 3. Run the collision check below, then assign the next free `SPEC-nnnn`. Identical bytes reuse their
    existing record; never give identical bytes a second id.
-4. Save the photograph as `verification/specimens/SPEC-nnnn.<png|jpg>` and add its record to
-   `verification/specimens.json`, keeping the fields existing records use: `specimenId`, `setCode`,
-   `number`, `variant`, `language`, `heldBy`, `inspectedFrom`, `observed`, `recordedAt` (the real
-   inspection date), `photograph`, `photographSha256`, `photographSource` (the issue or image URL)
+4. Photograph. Work in a checkout of the photo repository: clone
+   `https://github.com/m4s-ai/snoredex-photos` beside this repository once, and `git pull` there
+   before every intake. Save the original as `verification/specimens/SPEC-nnnn.<png|jpg>`, compute
+   its SHA-256, then commit and push it to that repository's `main` directly: no pull request and no
+   separate permission, it is part of intake. The pushed file is what reserves the id. It is never
+   changed, renamed or deleted afterwards; a wrong photograph gets a new record, not an overwrite.
+5. Record. Add the register entry to `verification/specimens.json` here, keeping the fields existing
+   records use: `specimenId`, `setCode`, `number`, `variant`, `language`, `heldBy`,
+   `inspectedFrom`, `observed`, `recordedAt` (the real inspection date), `photograph` (the file
+   name), `photographSha256` (the hash just computed), `photographSource` (the issue or image URL)
    and `listingUrl` for a seller photo (never invent one), and `citedBy` (the exact `unitId` or
    printing id the image supports). Update the register's `count`. File a seller photograph as a
    third-party-held specimen, never as a bare marketplace link.
-5. Record visible physical properties under `physicalObservation` (`finish`, `foilPattern`,
+6. Record visible physical properties under `physicalObservation` (`finish`, `foilPattern`,
    `markings`, `markingRole`, `cardSize`, `edition`) with a `basis` that quotes what the image
    shows. Leave a property unset when the image does not establish it. An explicit owner
    determination is recorded as `ownerAttestedFields` with `ownerAttestedAt`. For a set printed in
    both editions, a visible 1st Edition mark is 1st Edition and a visibly empty mark position on a
    complete, legible face is Unlimited.
-6. Cite the specimen where it carries a claim: a language claim's `sourceRef: "specimen:SPEC-nnnn"`
+7. Cite the specimen where it carries a claim: a language claim's `sourceRef: "specimen:SPEC-nnnn"`
    with the matching provider (`inspected-specimen`, `cardmarket-listing-photo` or
    `seller-listing-photo`), or the printing's evidence. Follow
    [claim evidence](../snoredex-claim-evidence/SKILL.md) for the claim change.
-7. Run `python scripts/check.py`: every `specimen:SPEC-nnnn` in `data/` must resolve, and specimen
-   authority must cite a specimen. Run `python scripts/regen.py` once at delivery. Report retained,
-   cited and unresolved evidence separately.
+8. Verify. Run `python scripts/check.py`: every `specimen:SPEC-nnnn` in `data/` must resolve, and
+   specimen authority must cite a specimen. Run `python scripts/check.py --photos DIR` against the
+   photo-repository checkout: every photograph the register names must be there with its SHA-256
+   (a photograph no record names yet is only noted: another intake may be in flight). Run
+   `python scripts/regen.py` once at delivery. Report retained, cited and unresolved evidence
+   separately.
 
 ### WebP source photographs
 
@@ -54,7 +63,8 @@ are reachable. Retain the untouched WebP under `verification/evidence/<task>-<da
 without cropping, resizing or enhancement, and require exact pixel equality between the decoded
 source and the reopened PNG in the same mode. Record the original URL, retrieval date, MIME type,
 size, dimensions and SHA-256, plus the PNG's path and SHA-256, the decoder and version and the
-equality result, in that folder's `sources.json`. File the PNG as the specimen.
+equality result, in that folder's `sources.json`. File the PNG as the specimen: it goes to the
+photo repository (step 4), while the untouched WebP stays under `verification/evidence/` here.
 
 ## Specimen-intake image verification
 
@@ -87,6 +97,10 @@ photograph is not evidence of absence.
 ## Specimen-intake collision check
 
 Before assigning ids, fetch `origin/main` and compare its specimen ids and photograph hashes with the
-working branch; inspect known overlapping intake PRs without modifying them. A branch-local next
-number is not a reservation. Repeat the comparison before pushing. Reuse identical bytes; on a
-collision re-key only the unintegrated observation and every reference to it.
+working branch; inspect known overlapping intake PRs without modifying them. Then `git pull` the
+photo repository: an id whose file already exists there is taken even when no record on
+`origin/main` names it yet (another intake in flight). A branch-local next number is not a
+reservation; the pushed photograph is. If the photo push is rejected because another intake pushed
+first, pull and check again, and take the next free id for a file that is not yet pushed. Repeat
+the comparison with `origin/main` before pushing the record. Reuse identical bytes; on a collision
+re-key only the unintegrated observation and every reference to it, never a pushed photograph.

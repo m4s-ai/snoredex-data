@@ -291,8 +291,8 @@ whose own `/series/<set>/<number>/` path matches the set asked for.
   originals) show edition marks; eBay item pages answered 403 and aucfan 503.
 - **GitHub issue attachments** are blocked at `github.com/user-attachments`, but the issue's own HTML
   page contains the resolved `private-user-images.githubusercontent.com` URLs. HTML-unescape them
-  (`&amp;`), strip a trailing `\` and embedded `&`, download, and commit the bytes: a signed URL
-  is perishable.
+  (`&amp;`), strip a trailing `\` and embedded `&`, download, and commit the bytes to the photo
+  repository (specimen intake): a signed URL is perishable.
 - **Dead ends** worth not repeating: `ptcg.cn` (a Magic site), `pokebeach.com` (403 to scripts),
   `namu.wiki` and `pokeos.com` (JavaScript-rendered), `krystalkollectz.com` (a shop),
   `jihuanshe.com` (an app landing page).

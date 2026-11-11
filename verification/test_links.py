@@ -14,8 +14,7 @@ from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
 # PUBLIC-READINESS-AUDIT.md is a dated record kept unchanged for publication check P3.
-EXEMPT = ("verification/archive/", "verification/evidence/", "verification/specimens/",
-          "verification/history/PUBLIC-READINESS-AUDIT.md")
+EXEMPT = ("verification/archive/", "verification/evidence/", "verification/history/PUBLIC-READINESS-AUDIT.md")
 PAGES = ("templates/index.html", "site/gallery.html")
 MARKDOWN_LINK = re.compile(r"\]\(([^)\s]+)\)")
 HTML_LINK = re.compile(r'(?:href|src)="([^"]+)"')
