@@ -186,8 +186,9 @@ and report the run. Publishing cannot be undone.
   bytes to the photo repository `m4s-ai/snoredex-photos` under the path the record names
   (`verification/specimens/SPEC-nnnn.<ext>`) and record their SHA-256 in `photographSha256`. A
   photograph is pushed to the photo repository as part of intake, before the record that names it
-  lands here, and it is never changed or renamed afterwards; `python scripts/check.py --photos DIR`
-  verifies a checkout: every named photograph present with its SHA-256.
+  lands here, and it is never changed or renamed afterwards. check.py proves every specimen path in
+  `data/` is a registered photograph; `python scripts/check.py --photos DIR` proves each registered
+  photograph exists in a checkout with its SHA-256.
   WebP originals are retained and losslessly converted, never rejected.
 - **Item identity is frozen.** `itemId`, `physicalPrintingId`, `finishGroupId`, `legacyChecklistIds`
   and the other contract ids in `data/printings.json` are stored verbatim and never recomputed; an
@@ -211,7 +212,7 @@ python scripts/regen.py                          # build the outputs, then run e
 python scripts/regen.py --check                  # observational: what CI runs
 python scripts/check.py                          # validate data/ (format, schema, references, rules)
 python scripts/check.py --selftest               # each rule fires on exactly its own mutation
-python scripts/check.py --photos DIR             # also verify the originals in a photo-repo checkout
+python scripts/check.py --photos DIR             # also: registered photographs exist with their bytes
 python scripts/build.py                          # write the five outputs into the repository
 python scripts/build.py --check                  # fail if a committed output is stale; writes nothing
 python scripts/build.py --out DIR                # write them elsewhere

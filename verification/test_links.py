@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Every relative link in the documents and page templates resolves to a file in the repository.
 
-Markdown outside verification/archive, evidence and specimens, plus templates/index.html and
-site/gallery.html (both rendered at the repository root). A `#fragment` on a Markdown target must
-name a heading there. Exit 1 lists every broken link.
+Markdown outside verification/archive and evidence and the dated readiness audit, plus
+templates/index.html and site/gallery.html (both rendered at the repository root). A `#fragment` on
+a Markdown target must name a heading there. Exit 1 lists every broken link.
 """
 from __future__ import annotations
 

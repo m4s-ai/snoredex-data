@@ -50,9 +50,11 @@ views, GitHub issue attachments) and [DATA-GUIDE.md](../../../DATA-GUIDE.md).
    `seller-listing-photo`), or the printing's evidence. Follow
    [claim evidence](../snoredex-claim-evidence/SKILL.md) for the claim change.
 8. Verify. Run `python scripts/check.py`: every `specimen:SPEC-nnnn` in `data/` must resolve, and
-   specimen authority must cite a specimen. Run `python scripts/check.py --photos DIR` against the
-   photo-repository checkout: every photograph the register names must be there with its SHA-256
-   (a photograph no record names yet is only noted: another intake may be in flight). Run
+   specimen authority must cite a specimen, and every specimen path in `data/` must be a
+   photograph the register names, with the same SHA-256 on its asset. Run
+   `python scripts/check.py --photos DIR` against the photo-repository checkout: every photograph
+   the register names must be there with its SHA-256 (a photograph no record names yet is only
+   noted: another intake may be in flight). Run
    `python scripts/regen.py` once at delivery. Report retained, cited and unresolved evidence
    separately.
 
