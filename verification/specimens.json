@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 751,
+  "count": 752,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16273,6 +16273,30 @@
         "basis": "The Spanish VIV 131/185 face directly shows holographic vertical rainbow lines in the artwork window and a plain card body without a tiled pattern; no logo or stamp is visible over the artwork."
       },
       "listingUrl": "https://www.todocoleccion.net/trading-cards/carta-pokemon-voltaje-vivido-ano-2020-rara-holo-snorlax-n-131~x239816945"
+    },
+    {
+      "specimenId": "SPEC-0752",
+      "setCode": "VIV",
+      "number": "131",
+      "variant": "base",
+      "language": "English",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller listing photograph (1264x1600 WebP as served), retrieved 2026-11-12; untouched WebP retained, losslessly decoded to PNG",
+      "photograph": "SPEC-0752.png",
+      "photographSource": "https://i.ebayimg.com/images/g/BUEAAeSwqrFqYqTQ/s-l1600.webp",
+      "photographSha256": "sha256:2724651b3e237fd935cfe7d42b517fcd62c69c99f63e249203ecbe0f889f2f88",
+      "observed": "One upright English card face, flat and evenly lit on a black mat: BASIC Snorlax, HP 130, Ability Gormandize, Body Slam 100, weakness x2, retreat 3, Illus. Atsuko Nishida, ©2020 Pokémon/Nintendo/Creatures/GAME FREAK, the Vivid Voltage set symbol, regulation mark D and the number line 131/185 with a star establish identity. The foil is in the artwork window: vertical rainbow lines across the artwork. The card body below the window is plain pale silver with a fine speckled texture and shows no tiled star or chevron pattern. No logo or stamp is printed over the artwork. The face is complete and sharp, about 830 px wide.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0578-P01"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "vertical-line",
+        "cardSize": "standard",
+        "basis": "The English VIV 131/185 face directly shows holographic vertical rainbow lines across the artwork window; the card body shows no tiled pattern; no logo or stamp is visible over the artwork. Same appearance as the German, Italian and Spanish holo photographs."
+      },
+      "listingUrl": "https://www.ebay.com/itm/198519575416"
     }
   ]
 }
