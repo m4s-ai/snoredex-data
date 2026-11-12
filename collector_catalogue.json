@@ -5,7 +5,7 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "sourceRepository": "https://github.com/m4s-ai/snoredex-data",
     "dataAsOf": "2026-11-12",
-    "catalogueFingerprint": "sha256:605f829daceda2388e41c13c8857ac0b08eaa3a961421843c47c548beca0dd5e",
+    "catalogueFingerprint": "sha256:117acac153fa8968fe5af69583f1f669ea996ab8be6b8f55074228fe948f2a51",
     "previousFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
     "assetBaseUrl": "https://m4s-ai.github.io/snoredex-data/",
     "scope": {
@@ -20,6 +20,16 @@
   },
   "localizations": [
     {
+      "localizationId": "LOCALIZATION:JP:ja",
+      "locality": "JP",
+      "languageId": "LANG:Japanese",
+      "language": "Japanese",
+      "languageTag": "ja",
+      "script": "Jpan",
+      "displayName": "Japanese",
+      "displayOrder": 10
+    },
+    {
       "localizationId": "LOCALIZATION:WEST:en",
       "locality": "WEST",
       "languageId": "LANG:English",
@@ -27,7 +37,7 @@
       "languageTag": "en",
       "script": "Latn",
       "displayName": "English",
-      "displayOrder": 10
+      "displayOrder": 20
     },
     {
       "localizationId": "LOCALIZATION:WEST:de",
@@ -37,16 +47,6 @@
       "languageTag": "de",
       "script": "Latn",
       "displayName": "German",
-      "displayOrder": 20
-    },
-    {
-      "localizationId": "LOCALIZATION:WEST:fr",
-      "locality": "WEST",
-      "languageId": "LANG:French",
-      "language": "French",
-      "languageTag": "fr",
-      "script": "Latn",
-      "displayName": "French",
       "displayOrder": 30
     },
     {
@@ -60,6 +60,16 @@
       "displayOrder": 40
     },
     {
+      "localizationId": "LOCALIZATION:WEST:fr",
+      "locality": "WEST",
+      "languageId": "LANG:French",
+      "language": "French",
+      "languageTag": "fr",
+      "script": "Latn",
+      "displayName": "French",
+      "displayOrder": 50
+    },
+    {
       "localizationId": "LOCALIZATION:WEST:es-ES",
       "locality": "WEST",
       "languageId": "LANG:Spanish",
@@ -67,7 +77,7 @@
       "languageTag": "es-ES",
       "script": "Latn",
       "displayName": "Spanish (Europe)",
-      "displayOrder": 50
+      "displayOrder": 60
     },
     {
       "localizationId": "LOCALIZATION:LATAM:es-419",
@@ -77,7 +87,7 @@
       "languageTag": "es-419",
       "script": "Latn",
       "displayName": "Spanish (Latin America)",
-      "displayOrder": 60
+      "displayOrder": 70
     },
     {
       "localizationId": "LOCALIZATION:WEST:pt",
@@ -87,47 +97,7 @@
       "languageTag": "pt",
       "script": "Latn",
       "displayName": "Portuguese",
-      "displayOrder": 70
-    },
-    {
-      "localizationId": "LOCALIZATION:WEST:nl",
-      "locality": "WEST",
-      "languageId": "LANG:Dutch",
-      "language": "Dutch",
-      "languageTag": "nl",
-      "script": "Latn",
-      "displayName": "Dutch",
       "displayOrder": 80
-    },
-    {
-      "localizationId": "LOCALIZATION:WEST:pl",
-      "locality": "WEST",
-      "languageId": "LANG:Polish",
-      "language": "Polish",
-      "languageTag": "pl",
-      "script": "Latn",
-      "displayName": "Polish",
-      "displayOrder": 90
-    },
-    {
-      "localizationId": "LOCALIZATION:WEST:ru",
-      "locality": "WEST",
-      "languageId": "LANG:Russian",
-      "language": "Russian",
-      "languageTag": "ru",
-      "script": "Cyrl",
-      "displayName": "Russian",
-      "displayOrder": 100
-    },
-    {
-      "localizationId": "LOCALIZATION:JP:ja",
-      "locality": "JP",
-      "languageId": "LANG:Japanese",
-      "language": "Japanese",
-      "languageTag": "ja",
-      "script": "Jpan",
-      "displayName": "Japanese",
-      "displayOrder": 110
     },
     {
       "localizationId": "LOCALIZATION:KR:ko",
@@ -137,17 +107,7 @@
       "languageTag": "ko",
       "script": "Hang",
       "displayName": "Korean",
-      "displayOrder": 120
-    },
-    {
-      "localizationId": "LOCALIZATION:CN:zh-Hans",
-      "locality": "CN",
-      "languageId": "LANG:S-Chinese",
-      "language": "S-Chinese",
-      "languageTag": "zh-Hans",
-      "script": "Hans",
-      "displayName": "Chinese (Simplified)",
-      "displayOrder": 130
+      "displayOrder": 90
     },
     {
       "localizationId": "LOCALIZATION:TW:zh-Hant",
@@ -157,17 +117,17 @@
       "languageTag": "zh-Hant",
       "script": "Hant",
       "displayName": "Chinese (Traditional)",
-      "displayOrder": 140
+      "displayOrder": 100
     },
     {
-      "localizationId": "LOCALIZATION:ID:id",
-      "locality": "ID",
-      "languageId": "LANG:Indonesian",
-      "language": "Indonesian",
-      "languageTag": "id",
-      "script": "Latn",
-      "displayName": "Indonesian",
-      "displayOrder": 150
+      "localizationId": "LOCALIZATION:CN:zh-Hans",
+      "locality": "CN",
+      "languageId": "LANG:S-Chinese",
+      "language": "S-Chinese",
+      "languageTag": "zh-Hans",
+      "script": "Hans",
+      "displayName": "Chinese (Simplified)",
+      "displayOrder": 110
     },
     {
       "localizationId": "LOCALIZATION:TH:th",
@@ -177,6 +137,46 @@
       "languageTag": "th",
       "script": "Thai",
       "displayName": "Thai",
+      "displayOrder": 120
+    },
+    {
+      "localizationId": "LOCALIZATION:ID:id",
+      "locality": "ID",
+      "languageId": "LANG:Indonesian",
+      "language": "Indonesian",
+      "languageTag": "id",
+      "script": "Latn",
+      "displayName": "Indonesian",
+      "displayOrder": 130
+    },
+    {
+      "localizationId": "LOCALIZATION:WEST:ru",
+      "locality": "WEST",
+      "languageId": "LANG:Russian",
+      "language": "Russian",
+      "languageTag": "ru",
+      "script": "Cyrl",
+      "displayName": "Russian",
+      "displayOrder": 140
+    },
+    {
+      "localizationId": "LOCALIZATION:WEST:pl",
+      "locality": "WEST",
+      "languageId": "LANG:Polish",
+      "language": "Polish",
+      "languageTag": "pl",
+      "script": "Latn",
+      "displayName": "Polish",
+      "displayOrder": 150
+    },
+    {
+      "localizationId": "LOCALIZATION:WEST:nl",
+      "locality": "WEST",
+      "languageId": "LANG:Dutch",
+      "language": "Dutch",
+      "languageTag": "nl",
+      "script": "Latn",
+      "displayName": "Dutch",
       "displayOrder": 160
     }
   ],

@@ -114,6 +114,42 @@ def printed_number(item: dict) -> str:
     return number + "/" + item["collectorNumberDenominator"] if number and item["collectorNumberDenominator"] else number
 
 
+# Variant rank inside one release (#565); a value outside a tuple sorts after it.
+FINISH_ORDER = ("holo", "non-holo", "reverse-holo", "mirror-holo")
+EDITION_ORDER = (None, "1st Edition", "Unlimited")
+SIZE_ORDER = ("standard", "jumbo")
+KIND_ORDER = ("verified-printing", "finish-candidate", "research-placeholder")
+
+
+def rank(order: tuple, value) -> int:
+    return order.index(value) if value in order else len(order)
+
+
+def variant_order(item: dict) -> tuple:
+    """Unstamped before a distribution-promo stamp, then finish, edition, pattern, size and kind:
+    only what every language of one variant shares, so its languages stay together."""
+    stamped = any(mark["role"] == "distribution-promo" for mark in item["markings"])
+    return (stamped, rank(FINISH_ORDER, item["finish"]), rank(EDITION_ORDER, item["edition"]),
+            natural_key(item["foilPattern"]), rank(SIZE_ORDER, item["cardSize"]),
+            rank(KIND_ORDER, item["itemKind"]))
+
+
+def detail_order(item: dict) -> tuple:
+    """Details recorded for only some languages: distribution, markings, the printed number."""
+    distribution = item["distribution"] or {}
+    return (natural_key(distribution.get("name")), natural_key(distribution.get("kind")),
+            sorted(mark_values(item, "kind")), sorted(mark_values(item, "text")),
+            natural_key(printed_number(item)))
+
+
+def print_order(item: dict, language_order: dict) -> tuple:
+    """The default order of both views: date (undated last), collector number without its
+    denominator, variant, language, the per-language details, and the itemId last."""
+    date = release_sort(item["releaseDate"]) if item["releaseDate"] else UNDATED
+    return (date, natural_key(item["collectorNumber"]), variant_order(item),
+            language_order.get(item["localizationId"], float("inf")), detail_order(item), item["itemId"])
+
+
 def published_link(path):
     return SPECIMEN_BLOB + path if path and path.startswith(SPECIMEN_DIR) else path
 
@@ -319,7 +355,8 @@ def language_evidence(grade: dict, provider: dict) -> dict:
             "corroborated": grade["corroborated"], "checkable": grade["checkable"]}
 
 
-def table_row(item: dict, localization: dict, printing: dict, asset: dict, grades: dict, providers: dict) -> dict:
+def table_row(item: dict, localization: dict, printing: dict, asset: dict, grades: dict, providers: dict,
+              order: int) -> dict:
     language = {"LATAM": "Spanish (Latin America)"}.get(localization["locality"], localization["language"])
     date_sort, display, date_status = date_view(item)
     best, finishes, technical = finish_view(item)
@@ -328,10 +365,11 @@ def table_row(item: dict, localization: dict, printing: dict, asset: dict, grade
     lang_codes = [LANG_CODE[language]] if language in LANG_CODE else []
     grade = grades["languageEvidence"]
     row = {
-        "rowId": item["itemId"], "sourceRowId": item["itemId"],
+        "rowId": item["itemId"], "sourceRowId": item["itemId"], "order": order,
         "printingIds": list(filter(None, [item["physicalPrintingId"]])),
         "splitPhysicalPrinting": False, "itemKind": item["itemKind"], "localizationId": item["localizationId"],
-        "languageLabel": localization["displayName"], "sourceLinks": item["sourceLinks"],
+        "languageLabel": localization["displayName"],
+        "languageOrder": localization["displayOrder"], "sourceLinks": item["sourceLinks"],
         "name": item["cardName"], "setCode": item["localSetCode"] or "Unknown",
         "setName": item["localSetName"] or "Unknown", "number": printed_number(item),
         "variant": item["finish"] or "unresolved", "variantName": f'{localization["locality"]} · {language}',
@@ -363,13 +401,14 @@ def row_search(row: dict) -> str:
     return " ".join(str(value).lower() for value in words)
 
 
-def table_rows(document: dict, printings: dict, images: dict, evidence: dict) -> list[dict]:
+def table_rows(document: dict, printings: dict, images: dict, evidence: dict, ranks: dict) -> list[dict]:
     localizations = {row["localizationId"]: row for row in document["localizations"]}
     assets = {row["assetId"]: row for row in images["assets"]}
     grades = {row["itemId"]: row for row in evidence["printings"]}
     providers = {row["providerId"]: row for row in evidence["providers"]}
     return [table_row(item, localizations[item["localizationId"]], printings[item["itemId"]],
-                      assets.get(item["imageAssetId"]) or {}, grades[item["itemId"]], providers)
+                      assets.get(item["imageAssetId"]) or {}, grades[item["itemId"]], providers,
+                      ranks[item["itemId"]])
             for item in document["items"] if item["active"] and item["itemKind"] == "verified-printing"]
 
 
@@ -415,24 +454,30 @@ def gallery_artists(items: list, printings: dict) -> tuple[dict, dict]:
     return artists, {release: next(iter(names)) for release, names in credits.items() if len(names) == 1}
 
 
-def chronological(cards: list) -> list:
-    """A group sorts by its earliest verified printing, then set code and number."""
+def chronological(cards: list) -> tuple[list, dict]:
+    """A group sorts by its earliest verified printing, then set code and number; inside it the
+    cards follow their `_order`. Also returns the table rank: date, artwork, then the rest of `_order`."""
     unplaced = (UNDATED, "", float("inf"))
     dates = {c["id"]: release_sort(c["date"]) if c["date"] else UNDATED for c in cards}
     group_keys = {}
     for c in filter(lambda c: c["kind"] == "verified-printing", cards):
         key = (dates[c["id"]], (c["setCode"] or "").casefold(), number_key(c["number"]))
         group_keys[c["group"]] = min(group_keys.get(c["group"], unplaced), key)
-    cards.sort(key=lambda c: (group_keys.get(c["group"], unplaced), c["group"], dates[c["id"]], c["id"]))
+    cards.sort(key=lambda c: (group_keys.get(c["group"], unplaced), c["group"], c["_order"]))
     numbers = {group: n for n, group in enumerate(dict.fromkeys(c["group"] for c in cards), start=1)}
     for c in cards:
         c["artworkNumber"] = numbers[c["group"]]
         c.update(c.pop("_prepared", {}))
-    return cards
+    table = sorted(cards, key=lambda c: (c["_order"][0], c["artworkNumber"], c["_order"][1:]))
+    ranks = {c["id"]: n for n, c in enumerate(table)}
+    for c in cards:
+        del c["_order"]
+    return cards, ranks
 
 
-def gallery_cards(document: dict, printings: dict, images: dict) -> list[dict]:
+def gallery_cards(document: dict, printings: dict, images: dict) -> tuple[list[dict], dict]:
     languages = {row["localizationId"]: row["displayName"] for row in document["localizations"]}
+    language_order = {row["localizationId"]: row["displayOrder"] for row in document["localizations"]}
     groups = {row["cardReleaseId"]: row["group"] for row in images["artworkGroups"]}
     prepared = {row["itemId"]: row for row in images["galleryImages"]}
     items = [row for row in document["items"] if row["active"]]
@@ -441,8 +486,10 @@ def gallery_cards(document: dict, printings: dict, images: dict) -> list[dict]:
 
     def card(item, image=None):
         release = item["cardReleaseId"]
-        return gallery_card(item, languages[item["localizationId"]], groups.get(release, release),
+        made = gallery_card(item, languages[item["localizationId"]], groups.get(release, release),
                             artists.get(item["itemId"], fallback.get(release)), image)
+        made["_order"] = print_order(item, language_order)
+        return made
 
     cards = [card(item, prepared.get(item["itemId"])) for item in items]
     cards += [card(placeholder_item(by_id[row["baseItemId"]], row)) for row in images["placeholders"]]
@@ -750,8 +797,8 @@ def write_outputs(out: Path) -> str:
         "printings.json", "sets.json", "images.json", "evidence.json", "claims.json"))
     printings = {row["itemId"]: row for row in printings_doc["printings"]}
     document = catalogue(printings_doc, sets, images, evidence)
-    rows = table_rows(document, printings, images, evidence)
-    cards = gallery_cards(document, printings, images)
+    cards, ranks = gallery_cards(document, printings, images)
+    rows = table_rows(document, printings, images, evidence, ranks)
     # dataAsOf and siteGenerated are stored in data/printings.json meta and bumped by hand with a data change.
     texts = {
         "collector_catalogue.json": json.dumps(document, ensure_ascii=False, indent=2) + "\n",

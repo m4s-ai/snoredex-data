@@ -84,7 +84,7 @@
     size: (r) => (r.sizes || []).join(","),
     distribution: (r) => (r.distributions || []).join(","),
     evidence: (r) => (r.evidence || []).join(","),
-    language: (r) => r.languageLabel.toLowerCase(),
+    language: (r) => r.languageOrder,
   };
 
   let sortKey = "release";
@@ -101,9 +101,9 @@
         const y = get(b);
         cmp = x === y ? 0 : x < y ? -1 : 1;
       }
-      // Stable, deterministic tie-break so equal keys never reorder between renders.
-      if (cmp === 0) cmp = compareNatural(a.rowId, b.rowId);
-      return cmp * sortDir;
+      // Equal keys fall back to the default order (date, artwork, number, variant, language),
+      // always ascending, so a column sort never scrambles the rows it does not separate.
+      return cmp ? cmp * sortDir : a.order - b.order;
     });
     return sorted;
   }
@@ -226,10 +226,13 @@
   }
 
   function buildControls() {
+    const languageOrder = new Map(ROWS.map((r) => [r.languageLabel, r.languageOrder]));
     MULTI.forEach((field) => {
       const select = document.getElementById("f-" + field);
       if (!select) return;
-      distinct(ROW_FIELD[field]).forEach((value) => {
+      const values = distinct(ROW_FIELD[field]);
+      if (field === "language") values.sort((a, b) => languageOrder.get(a) - languageOrder.get(b));
+      values.forEach((value) => {
         const option = document.createElement("option");
         option.value = value;
         option.textContent = field === "finish" ? finishLabel(value)

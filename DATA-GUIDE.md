@@ -81,7 +81,8 @@ item's date differs from its set edition's. `meta` carries the data date (`dataA
 hand with a data change) and frozen fields of the previous pipeline.
 
 **`data/sets.json`** — `localizations` (locality-qualified languages: `WEST/es-ES` and
-`LATAM/es-419` are distinct), `languages` (the legacy claim language codes), `localSets` (a set or
+`LATAM/es-419` are distinct; their `displayOrder` is the language order of the table and
+gallery), `languages` (the legacy claim language codes), `localSets` (a set or
 product of one locality, with its source references), `setEditions` (a local set released in one
 localization, with its release date where known) and `works` (card text, by `cardKey`).
 
