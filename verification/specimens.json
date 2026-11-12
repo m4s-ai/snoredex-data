@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 749,
+  "count": 750,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16225,6 +16225,30 @@
         "basis": "The German VIV 131/185 face directly shows holographic vertical rainbow lines in the artwork window and a plain card body without a tiled pattern; no logo or stamp is visible over the artwork."
       },
       "listingUrl": "https://www.vinted.de/items/10729008792-relaxo-131185-holo"
+    },
+    {
+      "specimenId": "SPEC-0750",
+      "setCode": "VIV",
+      "number": "131",
+      "variant": "base",
+      "language": "Italian",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Vinted seller listing photograph (600x800 WebP as served), retrieved 2026-11-12; untouched WebP retained, losslessly decoded to PNG",
+      "photograph": "SPEC-0750.png",
+      "photographSource": "https://images1.vinted.net/t/06_01a06_Umv4qR1YLszHvLcN8smz6Z7u/f800/be85c1b7.webp?s=ddd10c2ba576c0a81b052cbd574a6041ec36df1c",
+      "photographSha256": "sha256:93b8b628e869638c8a2296b306ed610a8ba750b0b51bf2cf309a522ea8aeab77",
+      "observed": "One upright Italian card face on a small wooden easel against a dark background: BASE Snorlax, PS 130, Abilità Rimpinzarsi, Corposcontro 100, debolezza x2, ritirata 3, Ill. Atsuko Nishida, ©2020 Pokémon/Nintendo/Creatures/GAME FREAK, the Vivid Voltage set symbol, regulation mark D and the number line 131/185 with a star establish identity. The artwork window shows holographic vertical rainbow lines; the card body is plain with no tiled pattern. No logo or stamp is printed over the artwork. The listing title (holo, Vivid Voltage, Italian) agrees. The card face is about 490 px wide.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0581-P01"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "vertical-line",
+        "cardSize": "standard",
+        "basis": "The Italian VIV 131/185 face directly shows holographic vertical rainbow lines in the artwork window and a plain card body without a tiled pattern; no logo or stamp is visible over the artwork."
+      },
+      "listingUrl": "https://www.vinted.de/items/8885490152-snorlax-131185-holo-vivid-voltage-italian-pokemon-card"
     }
   ]
 }
