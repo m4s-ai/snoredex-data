@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 743,
+  "count": 744,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16072,6 +16072,32 @@
         "markingRole": null,
         "cardSize": "standard",
         "basis": "The complete English 111/111 face directly shows reflective sparkle flecks across the silver frame and the artwork."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0744",
+      "setCode": "RR",
+      "number": "111/111",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Photograph supplied by the collection owner as an image address in chat; original 2872x1890 JPEG visually inspected; original holder unknown",
+      "photograph": "SPEC-0744.jpg",
+      "photographSource": "https://i.imgur.com/qGC8ZhS.jpeg",
+      "photographSha256": "sha256:dce39aa99bd5fc216e1d0962190a48c2ea07f98f127cb45d03983b0a841d5a91",
+      "observed": "One scan on a black background showing the front (left) and the back (right) of one card: German Rising Rivals Relaxo LV.X 111/111. Relaxo LV.X, LEVEL-UP Wird auf Relaxo gelegt, KP 130, Poké-POWER Großer Hunger, Leibesübung 80, Illus. Shizurow, ©2009 Pokémon/Nintendo, 111/111 and the Rising Rivals symbol establish identity; the back is the standard Pokémon card back. Small reflective sparkle flecks are scattered across the silver card frame on all four sides and across the artwork. The collection owner supplied the image on 2026-11-12 at the recorded URL; no listing was supplied, so no listing URL is recorded.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0318-P01"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "sparkle",
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete German 111/111 face directly shows reflective sparkle flecks across the silver frame and the artwork."
       },
       "listingUrl": null
     }
