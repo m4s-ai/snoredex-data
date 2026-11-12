@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 753,
+  "count": 754,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16321,6 +16321,30 @@
         "basis": "The English VIV 131/185 face directly shows a flat artwork window and a tiled star and chevron pattern across the card body and header strip; no logo or stamp is visible over the artwork."
       },
       "listingUrl": "https://www.ebay.com/itm/366174407905"
+    },
+    {
+      "specimenId": "SPEC-0754",
+      "setCode": "VIV",
+      "number": "131",
+      "variant": "base",
+      "language": "Italian",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Vinted seller listing photograph (600x800 WebP as served), retrieved 2026-11-12; untouched WebP retained, losslessly decoded to PNG",
+      "photograph": "SPEC-0754.png",
+      "photographSource": "https://images1.vinted.net/t/02_00700_LHTRpiC7taD4TQxqYRy6cEM4/f800/e227f426.webp?s=e3f5a4936397a109679dd3a6712718e23a2a8ffc",
+      "photographSha256": "sha256:d1fb1839e6a89f098b131719abbb7e489fcff764af8813456997988296148182",
+      "observed": "One upright Italian card face on a dark mat: BASE Snorlax, PS 130, Abilità Rimpinzarsi, Corposcontro 100, debolezza x2, ritirata 3, Ill. Atsuko Nishida, ©2020 Pokémon/Nintendo/Creatures/GAME FREAK, the Vivid Voltage set symbol, regulation mark D and /185 with a star establish identity. The number line reads 13?/185: the third digit sits on a dark tile edge of the foil pattern and cannot be read in this photograph (an earlier reading as 134 is not supported: no digit is legible there, and 131/185 is the only Vivid Voltage number that fits this Snorlax text). The artwork is flat with no rainbow lines; a tiled grey pattern of stars and chevrons covers the card body and the header strip beside the name. No logo or stamp is printed over the artwork. The body text is partly obscured by foil glare. The card face is about 470 px wide.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0581-P03"
+      ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "foilPattern": "tiled-type-symbol",
+        "cardSize": "standard",
+        "basis": "The Italian VIV face directly shows a flat artwork window and a tiled star and chevron pattern across the card body and header strip; no logo or stamp is visible over the artwork. The collector number's third digit is not legible."
+      },
+      "listingUrl": "https://www.vinted.de/items/9820857550-carta-pokemon-snorlax-reverse"
     }
   ]
 }
