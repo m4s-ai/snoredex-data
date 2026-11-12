@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 746,
+  "count": 747,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16150,6 +16150,32 @@
         "markingRole": "distribution-promo",
         "cardSize": "standard",
         "basis": "The German SWSH068 face seen through the plastic wrapper directly shows the Schwert & Schild FARBENSCHOCK logo over the lower right of the artwork and holographic vertical rainbow lines across the artwork window."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0747",
+      "setCode": "SWSH",
+      "number": "068",
+      "variant": "base",
+      "language": "Spanish",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Photograph supplied by the collection owner as an image address in chat; original 2061x2796 JPEG visually inspected; original holder unknown",
+      "photograph": "SPEC-0747.jpg",
+      "photographSource": "https://i.imgur.com/pAZAree.jpeg",
+      "photographSha256": "sha256:13dacd90050a490cb8a0b9d2facc601672ef3dd26095896baa65d38eee4755c6",
+      "observed": "One upright, complete card face in a sleeve on a pink patterned background, the card slightly skewed in the frame: Spanish SWSH Black Star Promos Snorlax SWSH068. BÁSICO Snorlax, PS 130, Habilidad Glotonear, Golpe Cuerpo 100, Ilus. Narumi Sato, ©2020 Pokémon/Nintendo/Creatures/GAME FREAK, the black star promo mark and SWSH068 establish identity. The Espada y Escudo VOLTAJE VÍVIDO set logo is printed over the lower right of the artwork. The artwork shows holographic vertical rainbow lines. The collection owner supplied the image on 2026-11-12 at the recorded URL; no listing was supplied, so no listing URL is recorded.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0535-P01"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "vertical-line",
+        "markings": "Voltaje Vívido set logo",
+        "markingRole": "distribution-promo",
+        "cardSize": "standard",
+        "basis": "The complete Spanish SWSH068 face directly shows the Espada y Escudo VOLTAJE VÍVIDO logo over the lower right of the artwork and holographic vertical rainbow lines across the artwork window."
       },
       "listingUrl": null
     }
