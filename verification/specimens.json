@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 767,
+  "count": 768,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16688,6 +16688,31 @@
         "markingRole": "distribution-promo",
         "cardSize": "standard",
         "basis": "The Play! Pokemon stamp is printed over the lower right of the artwork on the complete German 131/185 face and no expansion logo is seen; the artwork looks flat in this lighting, so the foil is neither shown nor excluded and finish and foilPattern stay unset."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0768",
+      "setCode": "VIV",
+      "number": "131",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Shop thumbnail (782x1058 WebP as served; the host path says thumbnail), address supplied by the collection owner in chat and retrieved 2026-11-12; shop and product page not known beyond the host name cardmex.b-cdn.net. The WebP is kept untouched under verification/evidence/ and decoded losslessly to the PNG filed here",
+      "photograph": "SPEC-0768.png",
+      "photographSource": "https://cardmex.b-cdn.net/thumbnail/3a/f9/89/1785582786/pokemon-karte-farbenschock-131-relaxo-reverse-holo_782x1058.webp?ts=1785582822",
+      "photographSha256": "sha256:24a5064cfecc0b90d36771ad26a5a961ec98f573192946fa40952a2faca37b28",
+      "observed": "One upright German card face on a flat scan against white, complete and sharp, no glare: BASIS Relaxo, KP 130, Faehigkeit Schlemmen, Bodyslam 100, Schwaeche x2, Rueckzug 3, Illustr. Atsuko Nishida, (c)2020 Pokemon/Nintendo/Creatures/GAME FREAK, the Vivid Voltage set symbol, regulation mark D and the number line 131/185 with a star establish identity. The artwork window is flat with no foil beams; a tiled grey pattern of stars and chevrons covers the card body and the header strip beside the name. No logo or stamp is printed over the artwork. The collection owner supplied this address; the shop, the product page and the holder are not known.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0580-P03"
+      ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "foilPattern": "tiled-type-symbol",
+        "markings": null,
+        "cardSize": "standard",
+        "basis": "The artwork window is flat and the card body and the header strip beside the name carry a tiled pattern of stars and chevrons; no logo or stamp is printed over the artwork. The finish and pattern were already established for this item; this scan is consistent with them."
       },
       "listingUrl": null
     }
