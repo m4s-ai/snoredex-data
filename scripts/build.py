@@ -138,10 +138,12 @@ def variant_order(item: dict) -> tuple:
 
 
 def print_order(item: dict, language_order: dict) -> tuple:
-    """The default order of both views: date (undated last), number, variant, language, itemId."""
+    """The default order of both views: date (undated last), number, variant, language, then the
+    marking texts so two prints of one variant never fall back to the itemId."""
     date = release_sort(item["releaseDate"]) if item["releaseDate"] else UNDATED
     return (date, natural_key(printed_number(item)), variant_order(item),
-            language_order.get(item["localizationId"], float("inf")), item["itemId"])
+            language_order.get(item["localizationId"], float("inf")), sorted(mark_values(item, "text")),
+            item["itemId"])
 
 
 def published_link(path):
