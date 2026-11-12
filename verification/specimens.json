@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 758,
+  "count": 759,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16445,6 +16445,30 @@
         "basis": "The English SWSH068 card seen through the slab directly shows vertical rainbow lines in the artwork window and the printed 'Sword & Shield Vivid Voltage' logo over the lower right of the artwork; no gold STAFF stamp is visible. The slab label is not evidence from the card."
       },
       "listingUrl": "https://www.ebay.com/itm/127403486615"
+    },
+    {
+      "specimenId": "SPEC-0759",
+      "setCode": "SWSH",
+      "number": "068",
+      "variant": "base",
+      "language": "French",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Vinted seller listing photograph of a graded card in a PCA plastic slab (600x800 WebP as served), retrieved 2026-11-12; untouched WebP retained, losslessly decoded to PNG",
+      "photograph": "SPEC-0759.png",
+      "photographSource": "https://images1.vinted.net/t/01_013bb_A8UfLPmDq15aHEkztzwMhjmo/f800/b7e4acd6.webp?s=2289e63deb0bf30433b9938aeb7d9417580dc42b",
+      "photographSha256": "sha256:35792895205a9b2b37b52411dc271be7ec50810054195c15bdb8e875e7f5d647",
+      "observed": "One upright French card face seen through a PCA slab. The slab label reads Ronflex, SWSH068 Promo E&B 2020, 9,5, Neuf; the label is the seller's and grader's metadata, not evidence from the card. On the card: BASE Ronflex, PV 130, Talent Goinfrerie, Plaquage 100, faiblesse x2, retraite 3, Illus. Narumi Sato, ©2020 Pokémon/Nintendo/Creatures/GAME FREAK, the black star promo mark, regulation mark D and the number SWSH068 establish identity. The 'Épée et Bouclier VOLTAGE ÉCLATANT' logo is printed over the lower right of the artwork. No gold STAFF stamp is seen. Only faint fine vertical striations can be made out in the artwork window and a soft light band crosses the card body without hiding text, so no finish is recorded from this photograph. The card face inside the slab is about 370 px wide.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0532-P01"
+      ],
+      "physicalObservation": {
+        "markings": "Voltage Éclatant set logo",
+        "markingRole": "distribution-promo",
+        "cardSize": "standard",
+        "basis": "The French SWSH068 card seen through the slab directly shows the printed 'Épée et Bouclier VOLTAGE ÉCLATANT' logo over the lower right of the artwork; no gold STAFF stamp is visible. Only faint striations show in the artwork window, so finish and foilPattern stay unset. The slab label is not evidence from the card."
+      },
+      "listingUrl": "https://www.vinted.de/items/4982456725-ronflex-swsh068-promo-stamp-pca-95-voltage-eclatant"
     }
   ]
 }
