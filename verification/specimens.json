@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 765,
+  "count": 766,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16634,6 +16634,36 @@
         },
         "cardSize": "standard",
         "basis": "The Portuguese SWSH068 face directly shows STAFF printed at the lower left of the artwork, the printed 'Espada e Escudo VOLTAGEM VIVIDA' logo over the lower right of the artwork and vertical rainbow lines in the artwork window. No foil pattern is recorded for SWSH068 (owner decision)."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0766",
+      "setCode": "SWSH",
+      "number": "068",
+      "variant": "base",
+      "language": "Spanish",
+      "heldBy": "collection owner",
+      "inspectedFrom": "Photograph the collection owner took of their own PSA slab on 2026-11-12 and uploaded to the chat; the only bytes available are the chat app's downscaled copy (1512x2016 JPEG, no camera EXIF), not the camera original. The owner confirmed on 2026-11-12 that this copy suffices. Visually inspected at full resolution and filed unchanged",
+      "photograph": "SPEC-0766.jpg",
+      "photographSource": "owner photograph taken 2026-11-12, uploaded to chat (downscaled chat copy, not the camera original; no web address)",
+      "photographSha256": "sha256:80bb9654b289431a5ea8eb610ebc6421a26a21333d7e4a429ad67201a8975614",
+      "observed": "A hand holds a PSA slab; the label reads '2020 POKEMON SWSH BSP / SNORLAX - HOLO / PRERELEASE - STAFF / #068 / GEM MT 10' with cert number 61375549 (grader metadata only, not card-face evidence). The slabbed Spanish card face: BÁSICO Snorlax, PS 130, Habilidad Glotonear, Golpe Cuerpo 100, Nº 143 Pokémon Dormir, Debilidad x2, Retirada 3, Ilus. Narumi Sato, the black star promo mark, regulation mark D, SWSH068 and ©2020 Pokémon/Nintendo/Creatures/GAME FREAK establish identity. The word STAFF is printed in gold at the lower left of the artwork and the 'Espada y Escudo VOLTAJE VÍVIDO' logo is printed over the lower right of the artwork. Fine vertical foil lines run through the artwork window, most visible in the sky. All four yellow borders and corners are visible through the slab; the card is slightly tilted, text and edges are sharp, and the slab reflections cover no text or edge. The card face is about 870 px wide. The image is the owner's chat upload, a downscaled copy rather than the camera original, filed with the owner's 2026-11-12 confirmation that the copy suffices; there is no web address and no listing.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0535-P02"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": "Voltaje Vívido set logo and STAFF",
+        "markingRole": "distribution-promo",
+        "distribution": {
+          "kind": "prerelease-staff",
+          "name": "Vivid Voltage Prerelease Staff"
+        },
+        "cardSize": "standard",
+        "basis": "The Spanish SWSH068 face directly shows STAFF printed in gold at the lower left of the artwork, the printed 'Espada y Escudo VOLTAJE VÍVIDO' logo over the lower right of the artwork and fine vertical foil lines in the artwork window. No foil pattern is recorded for SWSH068 (owner decision)."
       },
       "listingUrl": null
     }
