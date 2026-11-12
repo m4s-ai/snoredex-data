@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 754,
+  "count": 755,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16345,6 +16345,30 @@
         "basis": "The Italian VIV face directly shows a flat artwork window and a tiled star and chevron pattern across the card body and header strip; no logo or stamp is visible over the artwork. The collector number's third digit is not legible."
       },
       "listingUrl": "https://www.vinted.de/items/9820857550-carta-pokemon-snorlax-reverse"
+    },
+    {
+      "specimenId": "SPEC-0755",
+      "setCode": "VIV",
+      "number": "131",
+      "variant": "base",
+      "language": "French",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Vinted seller listing photograph (600x800 WebP as served), retrieved 2026-11-12; untouched WebP retained, losslessly decoded to PNG",
+      "photograph": "SPEC-0755.png",
+      "photographSource": "https://images1.vinted.net/t/02_01945_VxiTWawDTbTRPeVRUtumNipH/f800/9ae72d02.webp?s=4598aa84e3ad91de527e461bda017cfbb16314b2",
+      "photographSha256": "sha256:4533072e9c8b309d3aced291ac3ca34cfaf1bcd73621a99e46edeba2f3760c57",
+      "observed": "One upright worn French card face on a white surface (bent corners, whitened edges, low resolution): BASE Ronflex, PV 130, Talent Goinfrerie, Plaquage 100, Faiblesse x2, Retraite 3, Ilus. Atsuko Nishida, ©2020 Pokémon/Nintendo/Creatures/GAME FREAK, the Vivid Voltage set symbol, regulation mark D and the number line 131/185 with a star establish identity. A tiled grey pattern of stars and chevrons covers the card body and the header strip beside the name. The artwork window also shows a vertical-line rainbow sheen in this photograph, which a reverse holo does not usually carry; the photograph alone does not explain it (lighting, wear and the card itself cannot be told apart). Small holographic flashes appear at the top bar and the lower left. No logo or stamp is printed over the artwork. The body text is blurred by the foil pattern and the image scale. The card face is about 480 px wide.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0579-P03"
+      ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "foilPattern": "tiled-type-symbol",
+        "cardSize": "standard",
+        "basis": "The French VIV 131/185 face directly shows a tiled star and chevron pattern across the card body and header strip, which is the reverse-holo pattern; the artwork window also shows a vertical-line rainbow sheen in this photograph that this record does not explain; no logo or stamp is visible over the artwork."
+      },
+      "listingUrl": "https://www.vinted.de/items/9956923534-carte-pokemon-ronflex-131185-fr-holo"
     }
   ]
 }
