@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 756,
+  "count": 757,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16393,6 +16393,32 @@
         "basis": "The 'Sword & Shield VIVID VOLTAGE' logo is printed over the lower right of the artwork on the complete English 131/185 face; the artwork looks flat in this photo, so the foil is neither shown nor excluded and finish and foilPattern stay unset."
       },
       "listingUrl": "https://www.vinted.de/items/10482875366-snorlax-131185-stamped"
+    },
+    {
+      "specimenId": "SPEC-0757",
+      "setCode": "SWSH",
+      "number": "068",
+      "variant": "base",
+      "language": "Italian",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Vinted seller listing photograph (600x800 WebP as served), retrieved 2026-11-12; untouched WebP retained, losslessly decoded to PNG",
+      "photograph": "SPEC-0757.png",
+      "photographSource": "https://images1.vinted.net/t/02_02002_A97fQRSr2UnQYtSeCSpfA1Q5/f800/fe87389c.webp?s=a1013b711d8e47f33ee8a8b860d187db62ff3d8b",
+      "photographSha256": "sha256:6ae445a3978f7d3c7a8f78fb2d454b057091518f437a3c5bebab05f33dd58abf",
+      "observed": "One upright Italian card face, unsleeved, on a black surface: BASE Snorlax, PS 130, Abilità Rimpinzarsi, Corposcontro 100, debolezza x2, ritirata 3, Ill. Narumi Sato, ©2020 Pokémon/Nintendo/Creatures/GAME FREAK, the black star promo mark, regulation mark D and the number SWSH068 establish identity. The artwork window shows holographic vertical rainbow lines; the card body is plain. The 'Spada e Scudo VOLTAGGIO SFOLGORANTE' logo is printed over the lower right of the artwork. No gold STAFF stamp is seen. The face is complete, in focus and about 450 px wide.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0534-P02"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "vertical-line",
+        "markings": "Voltaggio Sfolgorante set logo",
+        "markingRole": "distribution-promo",
+        "cardSize": "standard",
+        "basis": "The Italian SWSH068 face directly shows vertical rainbow lines in the artwork window and the printed 'Spada e Scudo VOLTAGGIO SFOLGORANTE' logo over the lower right of the artwork; no gold STAFF stamp is visible."
+      },
+      "listingUrl": "https://www.vinted.de/items/10600213678-snorlax-swsh068-holo-prerelease-ita-2020-voltaggio-sfolgorante-pokemon"
     }
   ]
 }
