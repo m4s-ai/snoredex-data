@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 759,
+  "count": 760,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16469,6 +16469,32 @@
         "basis": "The French SWSH068 card seen through the slab directly shows the printed 'Épée et Bouclier VOLTAGE ÉCLATANT' logo over the lower right of the artwork; no gold STAFF stamp is visible. Only faint striations show in the artwork window, so finish and foilPattern stay unset. The slab label is not evidence from the card."
       },
       "listingUrl": "https://www.vinted.de/items/4982456725-ronflex-swsh068-promo-stamp-pca-95-voltage-eclatant"
+    },
+    {
+      "specimenId": "SPEC-0760",
+      "setCode": "SWSH",
+      "number": "068",
+      "variant": "base",
+      "language": "Portuguese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "OLX Brasil seller listing photograph (961x1280 JPEG as served), retrieved 2026-11-12; the original JPEG is filed unchanged",
+      "photograph": "SPEC-0760.jpg",
+      "photographSource": "https://img.olx.com.br/images/94/945670823563697.jpg",
+      "photographSha256": "sha256:685e95d1f07152ee467c71c83baef1177ea6605e03260f2945f60fe2cb7c8478",
+      "observed": "One upright Portuguese card face held in a hand, inside a penny sleeve and a toploader: BÁSICO Snorlax, PS 130, Habilidade Gulodice, Pancada Corporal 100, fraqueza x2, recuo 3, Ilust. Narumi Sato, ©2020 Pokémon/Nintendo/Creatures/GAME FREAK, the black star promo mark, regulation mark D and the number SWSH068 establish identity. The artwork window shows holographic vertical rainbow lines, strongest in a bright strip at the upper right. The 'Espada e Escudo VOLTAGEM VIVIDA' logo is printed over the lower right of the artwork. No gold STAFF stamp is seen. The thumb and fingers lie behind and beside the card; all four yellow borders and corners stay visible. The sleeve adds slight haze. The card face is about 645 px wide.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0536-P01"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "vertical-line",
+        "markings": "Voltagem Vívida set logo",
+        "markingRole": "distribution-promo",
+        "cardSize": "standard",
+        "basis": "The Portuguese SWSH068 face directly shows vertical rainbow lines in the artwork window and the printed 'Espada e Escudo VOLTAGEM VIVIDA' logo over the lower right of the artwork; no gold STAFF stamp is visible."
+      },
+      "listingUrl": "https://sp.olx.com.br/sao-paulo-e-regiao/hobbies-e-colecoes/carta-snorlax-pre-release-voltagem-vivida-swsh068-1549862995"
     }
   ]
 }
