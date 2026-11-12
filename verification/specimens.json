@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 768,
+  "count": 769,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16713,6 +16713,31 @@
         "markings": null,
         "cardSize": "standard",
         "basis": "The artwork window is flat and the card body and the header strip beside the name carry a tiled pattern of stars and chevrons; no logo or stamp is printed over the artwork. The finish and pattern were already established for this item; this scan is consistent with them."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0769",
+      "setCode": "VIV",
+      "number": "131",
+      "variant": "base",
+      "language": "Italian",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Image address supplied by the collection owner in chat and retrieved 2026-11-12 (JPEG 1200x1600 as served); it looks like a seller listing photograph, but where it originally came from, the listing and the holder are not known",
+      "photograph": "SPEC-0769.jpg",
+      "photographSource": "https://i.imgur.com/Sf1DteF.jpeg",
+      "photographSha256": "sha256:ea08dac20c454886d40dbcfde6f6495edde58a01e83a4ed88727e4ca738f3c09",
+      "observed": "One Italian card face in a clear sleeve on a light surface, slightly rotated and viewed at a slight angle, complete and sharp: BASE Snorlax, PS 130, Abilità Rimpinzarsi, Corposcontro 100, debolezza x2, ritirata 3, Ill. Atsuko Nishida, ©2020 Pokémon/Nintendo/Creatures/GAME FREAK, the Vivid Voltage set symbol, regulation mark D and the number line 131/185 with a star establish identity; all three digits of the number are legible. The artwork window is flat with no foil beams; a tiled grey pattern of stars and chevrons covers the card body and the header strip beside the name. No logo or stamp is printed over the artwork. This photograph supersedes SPEC-0754 as the item's image and reads the number line (131/185) that SPEC-0754 could not. The collection owner supplied the address; the original listing, shop and holder are not known. The card face is about 1000 px wide.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0581-P03"
+      ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "foilPattern": "tiled-type-symbol",
+        "markings": null,
+        "cardSize": "standard",
+        "basis": "The artwork window is flat and the card body and the header strip beside the name carry a tiled pattern of stars and chevrons; no logo or stamp is printed over the artwork. The finish and pattern were already established for this item; this photograph is consistent with them."
       },
       "listingUrl": null
     }
