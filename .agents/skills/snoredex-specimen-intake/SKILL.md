@@ -19,8 +19,9 @@ views, GitHub issue attachments) and [DATA-GUIDE.md](../../../DATA-GUIDE.md).
 
 ## Specimen-intake delegation
 
-Filing specimens and preparing preview and gallery images runs in a subagent: Sonnet 5.5 at medium
-effort on Claude runtimes, Luna at medium effort on OpenAI runtimes (owner decision, 2026-11-12).
+Filing specimens and preparing preview and gallery images runs in a subagent: Claude Sonnet 5.5
+(`claude-sonnet-5-5`) at medium effort on Claude runtimes, GPT-6 Luna (`gpt-6-luna`) at medium
+reasoning effort on OpenAI runtimes (owner decision, 2026-11-12; model names as of that date).
 The orchestrating session hands over the original paths, their SHA-256, the source addresses and
 the target items, and verifies the result itself: the checks in step 9 and a look at every crop. A
 subagent's report is not proof. Where the runtime cannot start that model, do the work in the
