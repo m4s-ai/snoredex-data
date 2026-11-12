@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 742,
+  "count": 743,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16046,6 +16046,32 @@
         "markingRole": "print-identity",
         "cardSize": "standard",
         "basis": "The scanned Italian 27/64 face visibly carries EDIZIONE 1 and a uniformly printed artwork field; the owner's Jungle number rule of 2026-09-10 fixes 27/64 as Non-Holo."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0743",
+      "setCode": "RR",
+      "number": "111/111",
+      "variant": "base",
+      "language": "English",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Photograph supplied by the collection owner as an image address in chat; original 2419x3226 JPEG visually inspected; original holder unknown",
+      "photograph": "SPEC-0743.jpg",
+      "photographSource": "https://i.imgur.com/GHYI0D6.jpeg",
+      "photographSha256": "sha256:5b200260833491d980bc203f1b11bf2a450415afb496b7cf62323594d8854310",
+      "observed": "One upright, complete card face on a grey surface: English Rising Rivals Snorlax LV.X 111/111. Snorlax LV.X, LEVEL-UP Put onto Snorlax, HP 130, Poké-POWER Big Appetite, Exercise 80, Illus. Shizurow, ©2009 Pokémon/Nintendo, 111/111 and the Rising Rivals symbol establish identity. Small reflective sparkle flecks are scattered across the silver card frame on all four sides and across the artwork. The collection owner supplied the image on 2026-11-12 at the recorded URL; no listing was supplied, so no listing URL is recorded.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0316-P01"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "sparkle",
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete English 111/111 face directly shows reflective sparkle flecks across the silver frame and the artwork."
       },
       "listingUrl": null
     }
