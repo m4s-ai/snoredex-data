@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 752,
+  "count": 753,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16297,6 +16297,30 @@
         "basis": "The English VIV 131/185 face directly shows holographic vertical rainbow lines across the artwork window; the card body shows no tiled pattern; no logo or stamp is visible over the artwork. Same appearance as the German, Italian and Spanish holo photographs."
       },
       "listingUrl": "https://www.ebay.com/itm/198519575416"
+    },
+    {
+      "specimenId": "SPEC-0753",
+      "setCode": "VIV",
+      "number": "131",
+      "variant": "base",
+      "language": "English",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller listing photograph (1199x1599 WebP as served), retrieved 2026-11-12; untouched WebP retained, losslessly decoded to PNG",
+      "photograph": "SPEC-0753.png",
+      "photographSource": "https://i.ebayimg.com/images/g/lBYAAeSwrcVpgt5U/s-l1600.webp",
+      "photographSha256": "sha256:7d4b2cb445c7e4460d3500549575022f142de0b69f2b9260f1a30b411e14f367",
+      "observed": "One upright English card face on a small black stand in front of a lit 'OUR FAMILY COLLECTION' backdrop: BASIC Snorlax, HP 130, Ability Gormandize, Body Slam 100, weakness x2, retreat 3, Illus. Atsuko Nishida, ©2020 Pokémon/Nintendo/Creatures/GAME FREAK, the Vivid Voltage set symbol, regulation mark D and the number line 131/185 with a star establish identity. The artwork is flat with no rainbow lines; a tiled grey pattern of stars and chevrons covers the card body and the header strip beside the name. No logo or stamp is printed over the artwork. The stand holds the card at the lower edge and the backdrop lettering passes behind the left and right edges. The card face is about 470 px wide.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0578-P03"
+      ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "foilPattern": "tiled-type-symbol",
+        "cardSize": "standard",
+        "basis": "The English VIV 131/185 face directly shows a flat artwork window and a tiled star and chevron pattern across the card body and header strip; no logo or stamp is visible over the artwork."
+      },
+      "listingUrl": "https://www.ebay.com/itm/366174407905"
     }
   ]
 }
