@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 764,
+  "count": 765,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16606,6 +16606,36 @@
         "cardSize": "standard",
         "basis": "The scan shows dense gold speckled foil sparkle across the artwork window only; the border and card body show none. The finish and pattern were already decided by the owner; this scan is consistent with them."
       }
+    },
+    {
+      "specimenId": "SPEC-0765",
+      "setCode": "SWSH",
+      "number": "068",
+      "variant": "base",
+      "language": "Portuguese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Photograph supplied by the collection owner as an image address in chat on 2026-11-12 and retrieved the same day; original 1200x1600 JPEG visually inspected at full resolution and filed unchanged; original holder unknown",
+      "photograph": "SPEC-0765.jpg",
+      "photographSource": "https://i.imgur.com/hRHA9ra.jpeg",
+      "photographSha256": "sha256:773528cfb1221792a845c231ed9e36ee24bccefabaaccb6f921967182a5a5412",
+      "observed": "One upright Brazilian-Portuguese card face, unsleeved, standing on a clear acrylic stand in front of a display with round 'CHUCK TCG' badges (shop-style branding; it says nothing about who holds the card). BÁSICO Snorlax, PS 130, Habilidade Gulodice, Pancada Corporal 100, Nº 143 Pokémon Dorminhoco, fraqueza x2, recuo 3, Ilust. Narumi Sato, ©2020 Pokémon/Nintendo/Creatures/GAME FREAK, the black star promo mark, regulation mark D and the number SWSH068 establish identity. The word STAFF is printed at the lower left of the artwork (it reads near-black rather than gold in this light), and the 'Espada e Escudo VOLTAGEM VIVIDA' logo is printed over the lower right of the artwork. Vertical rainbow lines run through the artwork window, strongest as blue and violet bands across the sky. All four yellow borders and corners are visible; the card is slightly tilted away from the camera, text and edges are sharp. The card face is about 740 px wide. The collection owner supplied the image at the recorded URL; no listing was supplied, so no listing URL is recorded.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0536-P02"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": "Voltagem Vívida set logo and STAFF",
+        "markingRole": "distribution-promo",
+        "distribution": {
+          "kind": "prerelease-staff",
+          "name": "Vivid Voltage Prerelease Staff"
+        },
+        "cardSize": "standard",
+        "basis": "The Portuguese SWSH068 face directly shows STAFF printed at the lower left of the artwork, the printed 'Espada e Escudo VOLTAGEM VIVIDA' logo over the lower right of the artwork and vertical rainbow lines in the artwork window. No foil pattern is recorded for SWSH068 (owner decision)."
+      },
+      "listingUrl": null
     }
   ]
 }
