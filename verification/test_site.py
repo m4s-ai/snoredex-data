@@ -129,6 +129,68 @@ def check(name: str, ok: bool, detail: str = "") -> None:
     results.append((name, ok, detail))
 
 
+# The owner's language order (#565), kept here as an independent oracle for sets.json displayOrder.
+OWNER_LANGUAGES = ["Japanese", "English", "German", "Italian", "French", "Spanish (Europe)",
+                   "Spanish (Latin America)", "Portuguese", "Korean", "Chinese (Traditional)",
+                   "Chinese (Simplified)", "Thai", "Indonesian", "Russian", "Polish", "Dutch"]
+SHOWN_ROWS = """(key) => {
+  const rows = new Map(JSON.parse(document.querySelector('#data-rows').textContent).map(r => [r.rowId, r]));
+  return [...document.querySelectorAll('#rows .rowmore')].map(b => rows.get(b.dataset.rowId))
+    .map(r => [r[key], r.order]);
+}"""
+
+
+def in_owner_order(labels) -> bool:
+    ranks = [OWNER_LANGUAGES.index(label) for label in labels]
+    return ranks == sorted(ranks)
+
+
+def ties_keep_default_order(shown) -> bool:
+    """Rows equal in the sorted column stay in ascending default order."""
+    return all(a[1] < b[1] for a, b in zip(shown, shown[1:]) if a[0] == b[0])
+
+
+def check_default_order(page):
+    shown = page.evaluate(SHOWN_ROWS, "setCode")
+    orders = [order for _, order in shown]
+    check("default view follows the row order", len(orders) == EXPECTED_ROWS and orders == sorted(orders))
+    options = page.eval_on_selector_all("#f-language option", "els => els.map(e => e.value).filter(Boolean)")
+    check("language filter options follow the owner order", in_owner_order(options), str(options))
+    for direction in ("ascending", "descending"):
+        page.click('th[data-key="setCode"] button.sort')
+        shown = page.evaluate(SHOWN_ROWS, "setCode")
+        check(f"set code {direction} keeps the default order among equal values",
+              page.get_attribute('th[data-key="setCode"]', "aria-sort") == direction
+              and ties_keep_default_order(shown))
+
+
+def gallery_date(card) -> str:
+    return (card["date"] + "-01-01"[len(card["date"]) - 4:])[:10] if card["date"] else "9999-99-99"
+
+
+def check_gallery_order(page):
+    """Inside an artwork the date never falls, and one variant's languages follow the owner order."""
+    cards = page.locator("#gallery-data").evaluate("(node) => JSON.parse(node.textContent)")
+    pairs = list(zip(cards, cards[1:]))
+    falling = [b["id"] for a, b in pairs
+               if a["artworkNumber"] == b["artworkNumber"] and gallery_date(a) > gallery_date(b)]
+    check("gallery dates never fall inside an artwork", not falling, str(falling[:3]))
+    variants = {}
+    for card in cards:
+        signature = tuple(card[key] for key in ("artworkNumber", "date", "setCode", "number", "finish", "edition",
+                                                 "foilPattern", "distribution", "cardSize", "kind"))
+        signature += tuple(card["markings"])
+        variants.setdefault(signature, []).append(card["language"])
+    scrambled = [key for key, labels in variants.items() if not in_owner_order(labels)]
+    check("gallery languages of one variant follow the owner order", not scrambled, str(scrambled[:3]))
+    viv = [n for n, card in enumerate(cards)
+           if card["number"] == "131/185" and card["finish"] == "holo" and not card["markings"]]
+    languages = [cards[n]["language"] for n in viv]
+    check("VIV 131/185 holo languages stay together, English first (#565)",
+          languages == ["English", "German", "Italian", "French", "Spanish (Europe)", "Portuguese"]
+          and viv == list(range(viv[0], viv[0] + 6)), str(languages))
+
+
 def check_desktop_sources(page):
     for width in (1280, 2560):
         page.set_viewport_size({"width": width, "height": 900})
@@ -200,6 +262,7 @@ def check_gallery(browser, origin):
     assert page.get_by_text("Representative card image", exact=True).count() == int(representative)
     page.keyboard.press("Escape")
     page.wait_for_function("document.activeElement === document.querySelector('.gallery-card')")
+    check_gallery_order(page)
 
     page.locator("#binder-toggle").click()
     assert cards.count() == 18
@@ -651,6 +714,7 @@ def main() -> int:
         page.wait_for_timeout(120)
 
         # --- sorting ---
+        check_default_order(page)
         page.click('th[data-key="number"] button.sort')
         page.wait_for_timeout(150)
         aria = page.get_attribute('th[data-key="number"]', "aria-sort")
@@ -670,7 +734,7 @@ def main() -> int:
 
         page.click('th[data-key="language"] button.sort')
         language_values = page.locator("#rows .col-language").all_text_contents()
-        check("language sorts", language_values == sorted(language_values, key=str.lower))
+        check("language sorts in the owner order", in_owner_order(language_values))
 
         page.click('th[data-key="release"] button.sort')
         page.wait_for_timeout(150)
