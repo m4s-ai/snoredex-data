@@ -93,7 +93,9 @@ is an optional positive description of a distinctive treatment: a null value nei
 unidentified pattern nor proves a plain surface, and no pattern is invented to fill it. A holo
 carries a pattern only when a specific one is recognisable, such as `sparkle` or `cosmos`, exactly
 as a reverse holo does. "Full art" is a layout term the hobby defines inconsistently; it is not a
-foil pattern and is not recorded as one (owner decision, 2026-11-12).
+foil pattern and is not recorded as one. `rainbow` and `gold` are recorded although the rarity
+names them too, because they describe the foil itself and not only the rarity (owner decisions,
+2026-11-12).
 
 **Stamps and finishes are separate fields.** An EX-era set-name stamp intrinsic to the reverse
 design (`DF 10`) is `markings.role = reverse-holo-treatment` on a `reverse-holo`. Later prerelease,
