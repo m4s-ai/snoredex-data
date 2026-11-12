@@ -156,10 +156,17 @@ request without a new lead or access method.
 
 - Product pages, language filters, offers and counts are routing metadata, never localized-card
   evidence. There is no open API; a rolling quota of about 55 requests answers HTTP 429. Use the
-  in-app browser and recover by navigating to re-solve the challenge.
+  in-app browser. An agent never solves a bot check (HTTP 403 with a Cloudflare interstitial, which
+  waiting does not clear): navigate once more, and if it still stands, ask the owner to clear it in
+  the browser pane or to send the image address.
 - A retained exact product image (`product-images.s3.cardmarket.com`) or seller photograph supports
   only what is visible on the pictured card face, filed as a `SPEC-nnnn` record. A selected language
   filter is never projected onto an image printed in another language.
+- Seller photographs hang on the individual offers of a product page and show real cards
+  (SPEC-0648 to SPEC-0652). Fetch them whenever the browser reaches the product page without a bot
+  check: filter the offers by language and, where the set has both, by edition, and retain the
+  article-scan URL (`marketplace-article-scans.s3.cardmarket.com/<article>/<article>.jpg`) as the
+  record's `photographSource`.
 - Cardmarket codes: `x<SET>` is a special treatment of a card from `<SET>` (patterned reverse,
   retail stamp) whose printed number belongs to `<SET>`; `PPS<n> <SET>` is Play! Pokémon Prize Pack
   Series `<n>`, a stamped reprint. Prize Packs and `x` printings are separate cards and need their

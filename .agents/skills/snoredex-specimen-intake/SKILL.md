@@ -1,6 +1,6 @@
 ---
 name: snoredex-specimen-intake
-description: File physical Snoredex card or seller-listing photographs as stable specimen records in verification/specimens.json and cite them from data/. Use for local images, issue attachments, scans or listing photos; not for source pages without a card image.
+description: File physical Snoredex card or seller-listing photographs as stable specimen records in verification/specimens.json, cite them from data/, and prepare an item's table preview and gallery images from them. Use for local images, issue attachments, scans or listing photos; not for source pages without a card image.
 ---
 
 <!-- doc: role=specimen-intake workflow skill; stage=task -->
@@ -20,7 +20,11 @@ views, GitHub issue attachments) and [DATA-GUIDE.md](../../../DATA-GUIDE.md).
 ## Specimen-intake workflow
 
 1. Obtain the original bytes. For an issue attachment, fetch the issue's HTML page and download the
-   resolved image URL as METHODOLOGY.md describes. Determine the format from the bytes, not the URL.
+   resolved image URL as METHODOLOGY.md describes. An image pasted into the chat is not the
+   original: on 2026-11-11 two pasted images arrived in the session as WebP although neither was
+   pasted as WebP. Ask for the image address or a local file path and take the bytes from there;
+   file a pasted copy only when the owner confirms the original cannot be reached, and say so in
+   `inspectedFrom`. Determine the format from the bytes, not the URL.
 2. Inspect the original at sufficient resolution. Identify only visible facts: card identity,
    printed language and locality markers, finish or foil pattern, stamps or markings, distribution
    marks and size cues.
@@ -49,7 +53,9 @@ views, GitHub issue attachments) and [DATA-GUIDE.md](../../../DATA-GUIDE.md).
    with the matching provider (`inspected-specimen`, `cardmarket-listing-photo` or
    `seller-listing-photo`), or the printing's evidence. Follow
    [claim evidence](../snoredex-claim-evidence/SKILL.md) for the claim change.
-8. Verify. Run `python scripts/check.py`: every `specimen:SPEC-nnnn` in `data/` must resolve, and
+8. Images. Where the item needs them, prepare its table preview and gallery images as
+   [the image section](#specimen-intake-table-and-gallery-images) describes.
+9. Verify. Run `python scripts/check.py`: every `specimen:SPEC-nnnn` in `data/` must resolve, and
    specimen authority must cite a specimen, and every specimen path in `data/` must be a
    photograph the register names, with the same SHA-256 on its asset. Run
    `python scripts/check.py --photos DIR` against the photo-repository checkout: every photograph
@@ -60,13 +66,39 @@ views, GitHub issue attachments) and [DATA-GUIDE.md](../../../DATA-GUIDE.md).
 
 ### WebP source photographs
 
-Keep the original WebP and convert losslessly; never ask for another format when the original bytes
+When the source itself serves WebP (a chat-pasted copy is not such a source; see step 1), keep the
+original WebP and convert losslessly; never ask for another format when the original bytes
 are reachable. Retain the untouched WebP under `verification/evidence/<task>-<date>/`, decode to PNG
 without cropping, resizing or enhancement, and require exact pixel equality between the decoded
 source and the reopened PNG in the same mode. Record the original URL, retrieval date, MIME type,
 size, dimensions and SHA-256, plus the PNG's path and SHA-256, the decoder and version and the
 equality result, in that folder's `sources.json`. File the PNG as the specimen: it goes to the
 photo repository (step 4), while the untouched WebP stays under `verification/evidence/` here.
+
+## Specimen-intake table and gallery images
+
+There is no importer: Pillow does all of it and is deliberately not a repository dependency, since
+nothing that builds or checks needs it. SPEC-0742 is the worked example.
+
+- **When:** the item has no gallery image, or only a render, a representative image or a clearly
+  worse photograph. A new photograph replaces an existing gallery photograph only when it is clearly
+  better (sharper, flatter, less worn); name why in the commit.
+- **Crop:** the individual card face, upright, with its edges, text and on-card marks; record the
+  pixel box in the original. Perspective-correct a visibly skewed card to the face's own
+  proportions. Never retouch or remove marks. Glare, blur, a watermark over the card or an
+  incomplete face means no gallery image; the specimen is still evidence.
+- **Size:** a cropped face narrower than 600 px gets no gallery image, only the table preview. Never
+  enlarge. The full size is the crop width, downscaled to 1200 px when wider.
+- **Outputs:** `images/previews/SPEC-nnnn.png`, the crop at 360 px width (narrower when the crop is
+  narrower) as a palette PNG; and `images/gallery/<sha256>.webp` at 240 px, 480 px and the full
+  size, WebP quality 90 with a Lanczos downscale, each named by the SHA-256 of its own bytes.
+- **Data:** one `images.assets` row (`assetId` = `asset-` + the UUIDv5 in the URL namespace of
+  `https://github.com/m4s-ai/snoredex-data/asset/v1/` + its `path`; `sha256` = the register's
+  `photographSha256`; `imageScope`; `altTextBasis` as existing rows write it; `preview`), one
+  `images.galleryImages` row (`itemId`, `recipe` `intake-spec-nnnn`, `mediaKind`, `scope`, `source`,
+  `images` with each size's `width`, `height`, `path` and `sha256`), and the item's `imageAssetId`
+  in `data/printings.json`. Both lists stay sorted by their id. Bump `dataAsOf` and `siteGenerated`
+  in `data/printings.json`. Put the pixel box and parameters in the commit message.
 
 ## Specimen-intake image verification
 
