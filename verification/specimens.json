@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 755,
+  "count": 756,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16369,6 +16369,30 @@
         "basis": "The French VIV 131/185 face directly shows a tiled star and chevron pattern across the card body and header strip, which is the reverse-holo pattern; the artwork window also shows a vertical-line rainbow sheen in this photograph that this record does not explain; no logo or stamp is visible over the artwork."
       },
       "listingUrl": "https://www.vinted.de/items/9956923534-carte-pokemon-ronflex-131185-fr-holo"
+    },
+    {
+      "specimenId": "SPEC-0756",
+      "setCode": "VIV",
+      "number": "131",
+      "variant": "V2",
+      "language": "English",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Vinted seller listing photograph (600x800 WebP as served), retrieved 2026-11-12; untouched WebP retained, losslessly decoded to PNG",
+      "photograph": "SPEC-0756.png",
+      "photographSource": "https://images1.vinted.net/t/06_010e3_ZP8MfUGuoU5k94zBA2jcoove/f800/c0eb5ff1.webp?s=dfc15c1dd6db74f85ce097e2505f31751cb4dcb6",
+      "photographSha256": "sha256:a47c14396fd344ca778208a7eb16de633068da7e9fd873a7d7cbfd37ff8d9553",
+      "observed": "One upright English card face lying on a printed cloth (red, blue and black artwork): BASIC Snorlax, HP 130, Ability Gormandize, Body Slam 100, weakness x2, retreat 3, Illus. Atsuko Nishida, ©2020 Pokémon/Nintendo/Creatures/GAME FREAK, the Vivid Voltage set symbol, regulation mark D and the number line 131/185 with a star establish identity. The 'Sword & Shield VIVID VOLTAGE' logo is printed over the lower right of the artwork. In this photo the artwork and the card body look flat: no rainbow lines, no cosmos sparkle and no tiled pattern can be told apart from the printed artwork, so the photograph neither shows nor excludes the foil and no finish is recorded from it. No gold STAFF stamp is seen. The face is complete, evenly lit and about 300 px wide.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0578-P02"
+      ],
+      "physicalObservation": {
+        "markings": "Vivid Voltage set logo",
+        "markingRole": "distribution-promo",
+        "cardSize": "standard",
+        "basis": "The 'Sword & Shield VIVID VOLTAGE' logo is printed over the lower right of the artwork on the complete English 131/185 face; the artwork looks flat in this photo, so the foil is neither shown nor excluded and finish and foilPattern stay unset."
+      },
+      "listingUrl": "https://www.vinted.de/items/10482875366-snorlax-131185-stamped"
     }
   ]
 }
