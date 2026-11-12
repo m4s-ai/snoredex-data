@@ -126,24 +126,28 @@ def rank(order: tuple, value) -> int:
 
 
 def variant_order(item: dict) -> tuple:
-    """Regular release before special distribution, then finish, edition, pattern, markings, size, kind.
-    Markings compare by kind, not by their localized text, and an edition stamp is already the edition,
-    so the languages of one variant stay together."""
+    """Unstamped before a distribution-promo stamp, then finish, edition, pattern, size and kind:
+    only what every language of one variant shares, so its languages stay together."""
+    stamped = any(mark["role"] == "distribution-promo" for mark in item["markings"])
+    return (stamped, rank(FINISH_ORDER, item["finish"]), rank(EDITION_ORDER, item["edition"]),
+            natural_key(item["foilPattern"]), rank(SIZE_ORDER, item["cardSize"]),
+            rank(KIND_ORDER, item["itemKind"]))
+
+
+def detail_order(item: dict) -> tuple:
+    """Details recorded for only some languages: distribution, markings, the printed number."""
     distribution = item["distribution"] or {}
-    marks = sorted(kind for kind in mark_values(item, "kind") if kind != "edition-stamp")
-    return (bool(distribution), rank(FINISH_ORDER, item["finish"]), rank(EDITION_ORDER, item["edition"]),
-            natural_key(item["foilPattern"]), marks,
-            rank(SIZE_ORDER, item["cardSize"]), natural_key(distribution.get("name")),
-            natural_key(distribution.get("kind")), rank(KIND_ORDER, item["itemKind"]))
+    return (natural_key(distribution.get("name")), natural_key(distribution.get("kind")),
+            sorted(mark_values(item, "kind")), sorted(mark_values(item, "text")),
+            natural_key(printed_number(item)))
 
 
 def print_order(item: dict, language_order: dict) -> tuple:
-    """The default order of both views: date (undated last), number, variant, language, then the
-    marking texts so two prints of one variant never fall back to the itemId."""
+    """The default order of both views: date (undated last), collector number without its
+    denominator, variant, language, the per-language details, and the itemId last."""
     date = release_sort(item["releaseDate"]) if item["releaseDate"] else UNDATED
-    return (date, natural_key(printed_number(item)), variant_order(item),
-            language_order.get(item["localizationId"], float("inf")), sorted(mark_values(item, "text")),
-            item["itemId"])
+    return (date, natural_key(item["collectorNumber"]), variant_order(item),
+            language_order.get(item["localizationId"], float("inf")), detail_order(item), item["itemId"])
 
 
 def published_link(path):

@@ -183,6 +183,12 @@ def check_gallery_order(page):
         variants.setdefault(signature, []).append(card["language"])
     scrambled = [key for key, labels in variants.items() if not in_owner_order(labels)]
     check("gallery languages of one variant follow the owner order", not scrambled, str(scrambled[:3]))
+    viv = [n for n, card in enumerate(cards)
+           if card["number"] == "131/185" and card["finish"] == "holo" and not card["markings"]]
+    languages = [cards[n]["language"] for n in viv]
+    check("VIV 131/185 holo languages stay together, English first (#565)",
+          languages == ["English", "German", "Italian", "French", "Spanish (Europe)", "Portuguese"]
+          and viv == list(range(viv[0], viv[0] + 6)), str(languages))
 
 
 def check_desktop_sources(page):
