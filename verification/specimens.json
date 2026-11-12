@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 744,
+  "count": 745,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16098,6 +16098,32 @@
         "markingRole": null,
         "cardSize": "standard",
         "basis": "The complete German 111/111 face directly shows reflective sparkle flecks across the silver frame and the artwork."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0745",
+      "setCode": "RR",
+      "number": "111/111",
+      "variant": "base",
+      "language": "French",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Photograph supplied by the collection owner as an image address in chat; original 3226x2419 JPEG visually inspected; original holder unknown",
+      "photograph": "SPEC-0745.jpg",
+      "photographSource": "https://i.imgur.com/qtCUnPF.jpeg",
+      "photographSha256": "sha256:1f1e6a59ba8c99ac4f1f2a5f44fa06a02f89214bf13cc874c5e8103619202122",
+      "observed": "One photograph on a black surface showing the front of one card, rotated by 90 degrees in the frame: French Rising Rivals Ronflex NIV.X 111/111. Ronflex NIV.X, NIVEAU SUP Placez sur Ronflex, PV 130, Poké-POWER Gros appétit, Exercice 80, Illus. Shizurow, ©2009 Pokémon/Nintendo, 111/111 and the Rising Rivals symbol establish identity. Small reflective sparkle flecks are scattered across the silver card frame and across the artwork; the card is worn with light whitening at the edges. The collection owner supplied the image on 2026-11-12 at the recorded URL; no listing was supplied, so no listing URL is recorded.",
+      "recordedAt": "2026-11-12",
+      "citedBy": [
+        "F0317-P01"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "sparkle",
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete French 111/111 face directly shows reflective sparkle flecks across the silver frame and the artwork."
       },
       "listingUrl": null
     }
