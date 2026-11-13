@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 771,
+  "count": 772,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16792,6 +16792,39 @@
         "markings": null,
         "cardSize": "standard",
         "basis": "The glitter-like specks across the artwork window show a holo pattern that the collection owner identifies as the cosmos holo; the frame is compressed video, so the pattern rests on the owner's determination (SPEC-0770 shows the same card from a second source).",
+        "ownerAttestedFields": [
+          "foilPattern"
+        ],
+        "ownerAttestedAt": "2026-11-13"
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0772",
+      "setCode": "PGO",
+      "number": "055",
+      "variant": "V2",
+      "language": "Italian",
+      "heldBy": "not established; frame from a third-party video, supplied by the collection owner",
+      "inspectedFrom": "Screenshot supplied by the collection owner as an image address in chat on 2026-11-13 (https://i.imgur.com/5qwoEpp.jpeg, 3880x1120 JPEG, SHA-256 d3d2c70dec8d63aae9c5db25e4da4cc30678536df9001983434037e73996ef53), showing the video of https://www.youtube.com/watch?v=gUmWpvTZwMw at about 2:28 on the left and the owner's unrelated desktop windows on the right. Only the video region (columns 0-1939 of the screenshot, 1940x1120) is retained, decoded to PNG without resampling; the rest of the screenshot is not filed because it shows the owner's private windows. The video itself was not opened; holder unknown",
+      "photograph": "SPEC-0772.png",
+      "photographSource": "https://i.imgur.com/5qwoEpp.jpeg",
+      "photographSha256": "sha256:0f4ecda14b5a491ce946b75b187d4a195f4883ff45e0291fbc36e6404bae8f9a",
+      "observed": "One complete Italian Pokémon GO card face held up to the camera in a video frame, upright, fingers behind the lower left and right borders, mild video compression. BASE Snorlax, PS 150, Abilità Blocco, attack Collassare 150 (addormentato), N. 143 Pokémon Sonno, Altezza 2,1 m, Peso 460,0 kg, debolezza x2, ritirata 4, Illus. N-DESIGN Inc., 055/078 with the star mark, ©2022 Niantic and the Pokémon GO logo on the artwork establish the exact Italian card. Fine glitter-like specks catch the light across the artwork window, strongest on the path and lawn below the Snorlax and as white and golden dots on the house and hedge. The card face is about 743 px wide. The streamer's logo, facecam and stickers are outside the card.",
+      "recordedAt": "2026-11-13",
+      "citedBy": [
+        "F0252-P03"
+      ],
+      "sameCardAs": {
+        "specimenId": "SPEC-0771",
+        "basis": "Same video, same moment and same framing: the card pose, the fingers at the lower borders and the artwork are identical to the smaller capture SPEC-0771; this is its higher-resolution counterpart."
+      },
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "cosmos",
+        "markings": null,
+        "cardSize": "standard",
+        "basis": "The glitter-like specks across the artwork window show a holo pattern that the collection owner identifies as the cosmos holo; the frame is compressed video, so the pattern rests on the owner's determination. This view adds no independent corroboration of SPEC-0771.",
         "ownerAttestedFields": [
           "foilPattern"
         ],
