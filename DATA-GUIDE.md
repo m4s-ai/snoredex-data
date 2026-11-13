@@ -86,8 +86,18 @@ gallery), `languages` (the legacy claim language codes), `localSets` (a set or
 product of one locality, with its source references), `setEditions` (a local set released in one
 localization, with its release date where known) and `works` (card text, by `cardKey`).
 
-Four further collections describe sets rather than cards; `scripts/build.py` does not read them yet,
+Five further collections describe sets rather than cards; `scripts/build.py` does not read them yet,
 so they change no output.
+
+- `releaseEvents` — the dated release of a set edition and its source. A `setEditions` record with
+  a date names its `releaseEventId` and repeats the event's `releaseDate`, `releaseDatePrecision`
+  and `releaseApproximate` (rule RE2); an edition without an event has no date established, and a
+  date is never derived from the cards of a set. Each event records `providerId`, `sourceUrl`,
+  `sourceRef` (a retained file under `verification/evidence/` or null), `evidence` (the page and
+  field or the quoted wording) and `checkedAt` (the retrieval date, null where none was recorded).
+  RE1 holds the source checkable or strong, as E3 does for claims: without a URL the provider is
+  tier 1 or 2. RE3 keeps no event without an edition. The ids are opaque and never parsed; an id
+  that contains a date is not the release date, and an id is not renamed after a date correction.
 
 - `cardmarketVariantSets` — Cardmarket bookkeeping. Cardmarket files alternative versions of a card
   under an `x`-prefixed copy of the set (`xm2a` beside `m2a`). Each record names such a
