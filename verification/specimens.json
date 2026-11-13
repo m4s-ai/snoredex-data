@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 769,
+  "count": 770,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16738,6 +16738,35 @@
         "markings": null,
         "cardSize": "standard",
         "basis": "The artwork window is flat and the card body and the header strip beside the name carry a tiled pattern of stars and chevrons; no logo or stamp is printed over the artwork. The finish and pattern were already established for this item; this photograph is consistent with them."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0770",
+      "setCode": "PGO",
+      "number": "055",
+      "variant": "V2",
+      "language": "Italian",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Photograph supplied by the collection owner as an image address in chat on 2026-11-13 and retrieved the same day; original 1080x1680 JPEG visually inspected and filed unchanged; the owner drew the red circle on it; original holder unknown",
+      "photograph": "SPEC-0770.jpg",
+      "photographSource": "https://i.imgur.com/DQFgacB.jpeg",
+      "photographSha256": "sha256:8f8afcd45514ad0d88d2fb809178b40ae08495e4d0a5c7035517515f4ab34d43",
+      "observed": "One Italian Pokémon GO card face photographed at an angle, slightly out of focus, with the left and right borders partly cropped. Snorlax, PS 150, Abilità Blocco, attack Collassare 150 (addormentato), N. 143 Pokémon Sonno, Altezza 2,1 m, Peso 460,0 kg, Illus. N-DESIGN Inc., 055/078 with the star mark and the Pokémon GO logo on the artwork establish the exact Italian card. The owner circled the upper part of the artwork window in red: inside the circle a blue-green swirl glints as a holo highlight, and fine glitter-like specks catch the light across the artwork (green dots lower left, golden specks lower right). The red circle is the owner's annotation drawn on the image and covers part of the card face.",
+      "recordedAt": "2026-11-13",
+      "citedBy": [
+        "F0252-P03"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "cosmos",
+        "markings": null,
+        "cardSize": "standard",
+        "basis": "The glitter-like specks and the swirl highlight inside the owner's circle show a holo pattern in the artwork window; the owner identifies it as the cosmos holo, which the French, German and English Pokémon GO cosmos holos share. The photograph is out of focus and annotated, so the pattern rests on the owner's determination.",
+        "ownerAttestedFields": [
+          "foilPattern"
+        ],
+        "ownerAttestedAt": "2026-11-13"
       },
       "listingUrl": null
     }
