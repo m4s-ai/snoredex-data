@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 773,
+  "count": 780,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16854,6 +16854,189 @@
         "markings": null,
         "cardSize": "standard",
         "basis": "Rainbow-coloured foil across the whole card face; the printed rarity reads HR, which the owner states is the Rainbow Rare of this card (ownerAttestedFields foilPattern).",
+        "ownerAttestedFields": [
+          "foilPattern"
+        ],
+        "ownerAttestedAt": "2026-11-13"
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0774",
+      "setCode": "S-P/CS",
+      "number": "061",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "collection owner",
+      "inspectedFrom": "Owner photograph supplied in chat on 2026-11-13 and retained byte-identical in issue 166 inbox commit 59c04b0d (verification/evidence/issue-166-inbox-zh-cn-20261113/01-cn-S-P-061-promo.jpg); original 1920x2560 JPEG visually inspected at full resolution and filed unchanged",
+      "photograph": "SPEC-0774.jpg",
+      "photographSource": "https://raw.githubusercontent.com/M4S-ai/snoredex-data/59c04b0db8b1110ed6beda3b8abf774251276281/verification/evidence/issue-166-inbox-zh-cn-20261113/01-cn-S-P-061-promo.jpg",
+      "photographSha256": "sha256:4c1565815d30451f62aedb4c470ac1e64410c0d9d5ee75ca2c58a046087acbbd",
+      "observed": "One complete Simplified Chinese card face lying on a dark mat, slightly tilted, sharp. 基础 卡比兽 HP 150, attacks 滚动冲撞 80 and 重磅冲击 130, Illus. chibi, PROMO mark, regulation D, 061/S-P, ©2023 establish the exact Simplified Chinese promo card. Matte card face without foil; no rarity symbol. The card face is about 1245 px wide.",
+      "recordedAt": "2026-11-13",
+      "citedBy": [
+        "F0323-P01"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": null,
+        "cardSize": "standard",
+        "basis": "Matte card face, no foil visible on the complete face."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0775",
+      "setCode": "CS1DC",
+      "number": "152/207",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "collection owner",
+      "inspectedFrom": "Owner photograph supplied in chat on 2026-11-13 and retained byte-identical in issue 166 inbox commit 59c04b0d (verification/evidence/issue-166-inbox-zh-cn-20261113/02-cn-CS1DC-152-207.jpg); original 1920x2560 JPEG visually inspected at full resolution and filed unchanged",
+      "photograph": "SPEC-0775.jpg",
+      "photographSource": "https://raw.githubusercontent.com/M4S-ai/snoredex-data/59c04b0db8b1110ed6beda3b8abf774251276281/verification/evidence/issue-166-inbox-zh-cn-20261113/02-cn-CS1DC-152-207.jpg",
+      "photographSha256": "sha256:939e57c802bb54946b4fa88c546823534bd3153bd80b853d8a8f9cc1153794b5",
+      "observed": "One complete Simplified Chinese card face lying on a dark mat, slightly tilted, sharp. 基础 卡比兽 HP 150, attacks 招来 (draw 2) and 瘫倒 120 (Asleep), Illus. Eri Yamaki, cs1DC, regulation D, 152/207, ©2023 establish the exact Simplified Chinese starter-deck card. Matte card face without foil; no rarity symbol. The card face is about 1245 px wide.",
+      "recordedAt": "2026-11-13",
+      "citedBy": [
+        "F0056-P01"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": null,
+        "cardSize": "standard",
+        "basis": "Matte card face, no foil visible on the complete face."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0776",
+      "setCode": "CS1aC",
+      "number": "110/135",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "collection owner",
+      "inspectedFrom": "Owner photograph supplied in chat on 2026-11-13 and retained byte-identical in issue 166 inbox commit 59c04b0d (verification/evidence/issue-166-inbox-zh-cn-20261113/03-cn-CS1aC-110-135.jpg); original 1920x2560 JPEG visually inspected at full resolution and filed unchanged",
+      "photograph": "SPEC-0776.jpg",
+      "photographSource": "https://raw.githubusercontent.com/M4S-ai/snoredex-data/59c04b0db8b1110ed6beda3b8abf774251276281/verification/evidence/issue-166-inbox-zh-cn-20261113/03-cn-CS1aC-110-135.jpg",
+      "photographSha256": "sha256:c2ed41e83080f70b4b5fef09ade535ce87b1b2850d8b4702c2c094fef577887f",
+      "observed": "One complete Simplified Chinese card face lying on a dark mat, slightly tilted, sharp. 基础 卡比兽 HP 150, attacks 招来 and 瘫倒 120, Illus. Eri Yamaki, cs1aC, regulation D, 110/135 U, ©2023 establish the exact Simplified Chinese card. Mirror foil across the card body outside the illustration with a pattern of large star shapes; the illustration window is not foiled. The card face is about 1176 px wide.",
+      "recordedAt": "2026-11-13",
+      "citedBy": [
+        "F0051-P02"
+      ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "foilPattern": "star",
+        "markings": null,
+        "cardSize": "standard",
+        "basis": "Mirror foil with large star shapes outside the illustration."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0777",
+      "setCode": "CSVE2C",
+      "number": "122/207",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "collection owner",
+      "inspectedFrom": "Owner photograph supplied in chat on 2026-11-13 and retained byte-identical in issue 166 inbox commit 59c04b0d (verification/evidence/issue-166-inbox-zh-cn-20261113/04-cn-CSVE2C-122-207.jpg); original 1920x2560 JPEG visually inspected at full resolution and filed unchanged",
+      "photograph": "SPEC-0777.jpg",
+      "photographSource": "https://raw.githubusercontent.com/M4S-ai/snoredex-data/59c04b0db8b1110ed6beda3b8abf774251276281/verification/evidence/issue-166-inbox-zh-cn-20261113/04-cn-CSVE2C-122-207.jpg",
+      "photographSha256": "sha256:31a844d3cca3ff40813d22355c131d1178d1d40e3b239842f5f50c9f803bdd21",
+      "observed": "One complete Simplified Chinese card face lying on a dark mat, slightly tilted, sharp. 基础 卡比兽 HP 150, ability 无畏脂肪, attack 轰隆鼾声 180, Illus. 0313, regulation F, 122/207, ©2025 establish the exact Simplified Chinese deck card. Matte card face without foil; no rarity symbol. The card face is about 1225 px wide.",
+      "recordedAt": "2026-11-13",
+      "citedBy": [
+        "F0078-P01"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": null,
+        "cardSize": "standard",
+        "basis": "Matte card face, no foil visible on the complete face."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0778",
+      "setCode": "CS2DaC",
+      "number": "038/053",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "collection owner",
+      "inspectedFrom": "Owner photograph supplied in chat on 2026-11-13 and retained byte-identical in issue 166 inbox commit 59c04b0d (verification/evidence/issue-166-inbox-zh-cn-20261113/05-cn-CS2DaC-038-053.jpg); original 1920x2560 JPEG visually inspected at full resolution and filed unchanged",
+      "photograph": "SPEC-0778.jpg",
+      "photographSource": "https://raw.githubusercontent.com/M4S-ai/snoredex-data/59c04b0db8b1110ed6beda3b8abf774251276281/verification/evidence/issue-166-inbox-zh-cn-20261113/05-cn-CS2DaC-038-053.jpg",
+      "photographSha256": "sha256:8b2512a414949c2320cb90e47b3ae955df512eb984c24fcd2576ddfb003f4bf3",
+      "observed": "One complete Simplified Chinese card face lying on a dark mat, slightly tilted, sharp. 基础 卡比兽 HP 160, attack 重磅冲击 80, Illus. Oswaldo KATO, cs2DaC, regulation E, 038/053, ©2023 and the Pikachu mark at the lower right of the text box establish the exact Simplified Chinese Family Combo card. Matte card face without foil. The card face is about 1169 px wide.",
+      "recordedAt": "2026-11-13",
+      "citedBy": [
+        "F0374-P01"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": null,
+        "cardSize": "standard",
+        "basis": "Matte card face, no foil visible on the complete face."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0779",
+      "setCode": "CSV7C",
+      "number": "158/204",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "collection owner",
+      "inspectedFrom": "Owner photograph supplied in chat on 2026-11-13 and retained byte-identical in issue 166 inbox commit 59c04b0d (verification/evidence/issue-166-inbox-zh-cn-20261113/06-cn-CSV7C-158-204-plain.jpg); original 1920x2560 JPEG visually inspected at full resolution and filed unchanged",
+      "photograph": "SPEC-0779.jpg",
+      "photographSource": "https://raw.githubusercontent.com/M4S-ai/snoredex-data/59c04b0db8b1110ed6beda3b8abf774251276281/verification/evidence/issue-166-inbox-zh-cn-20261113/06-cn-CSV7C-158-204-plain.jpg",
+      "photographSha256": "sha256:3fc9f139c1d5323febaecbd8451e9c3fb3a5212e2962277d2a5350065d8f4222",
+      "observed": "One complete Simplified Chinese card face lying on a dark mat, slightly tilted, sharp. 基础 卡比兽 HP 160, attacks 填饱肚子 and 重磅冲击 160, Illus. Souichirou Gunjima, regulation H, csv7C, 158/204 U, ©2026 establish the exact Simplified Chinese card. Mirror foil outside the illustration with a large ball motif over the lower half of the card body; in this light the ball shows no letter. The card face is about 1217 px wide.",
+      "recordedAt": "2026-11-13",
+      "citedBy": [
+        "F0076-P03"
+      ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "foilPattern": "poke-ball",
+        "markings": null,
+        "cardSize": "standard",
+        "basis": "Mirror foil with a large ball motif outside the illustration; the collection owner identifies it as the Poké Ball version.",
+        "ownerAttestedFields": [
+          "foilPattern"
+        ],
+        "ownerAttestedAt": "2026-11-13"
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0780",
+      "setCode": "CSV7C",
+      "number": "158/204",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "collection owner",
+      "inspectedFrom": "Owner photograph supplied in chat on 2026-11-13 and retained byte-identical in issue 166 inbox commit 59c04b0d (verification/evidence/issue-166-inbox-zh-cn-20261113/07-cn-CSV7C-158-204-foilpattern.jpg); original 1920x2560 JPEG visually inspected at full resolution and filed unchanged",
+      "photograph": "SPEC-0780.jpg",
+      "photographSource": "https://raw.githubusercontent.com/M4S-ai/snoredex-data/59c04b0db8b1110ed6beda3b8abf774251276281/verification/evidence/issue-166-inbox-zh-cn-20261113/07-cn-CSV7C-158-204-foilpattern.jpg",
+      "photographSha256": "sha256:54d642e681b745087b3daed010fba5bcd46486576e541c8788ce569192a7225a",
+      "observed": "One complete Simplified Chinese card face lying on a dark mat, slightly tilted, sharp. 基础 卡比兽 HP 160, attacks 填饱肚子 and 重磅冲击 160, Illus. Souichirou Gunjima, regulation H, csv7C, 158/204 U, ©2026 establish the exact Simplified Chinese card. Mirror foil outside the illustration with a large ball motif over the lower half of the card body; an M is visible on the upper half of the ball. The card face is about 1220 px wide.",
+      "recordedAt": "2026-11-13",
+      "citedBy": [
+        "F0076-P02"
+      ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "foilPattern": "master-ball",
+        "markings": null,
+        "cardSize": "standard",
+        "basis": "Mirror foil with a large ball motif outside the illustration; the collection owner identifies it as the Master Ball version.",
         "ownerAttestedFields": [
           "foilPattern"
         ],
