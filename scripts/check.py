@@ -84,7 +84,7 @@ COLLECTIONS = {
         "releaseDatePrecision": PRECISION, "releaseApproximate": B, "releaseEventId": OS}),
     "sets.releaseEvents": ("releaseEventId", "releaseEventId", {  # an edition's date and its source
         "releaseEventId": S, "releaseDate": S, "releaseDatePrecision": PRECISION - {None}, "releaseApproximate": B,
-        "providerId": S, "sourceUrl": OS, "sourceRef": OS, "evidence": OS, "checkedAt": OS}),
+        "providerId": S, "sourceUrl": OS, "sourceRef": OS, "evidence": S, "checkedAt": OS}),
     "sets.works": ("workId", "workId", {"workId": S, "cardKey": S}),
     # Cardmarket bookkeeping: an x-prefixed set is a variant of its base set, never a set code of its own
     "sets.cardmarketVariantSets": ("localSetId", "localSetId", {
