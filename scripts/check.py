@@ -82,6 +82,9 @@ COLLECTIONS = {
     "sets.setEditions": ("setEditionId", "setEditionId", {
         "setEditionId": S, "localSetId": S, "localizationId": S, "identityState": S, "releaseDate": OS,
         "releaseDatePrecision": PRECISION, "releaseApproximate": B, "releaseEventId": OS}),
+    "sets.releaseEvents": ("releaseEventId", "releaseEventId", {  # an edition's date and its source
+        "releaseEventId": S, "releaseDate": S, "releaseDatePrecision": PRECISION - {None}, "releaseApproximate": B,
+        "providerId": S, "sourceUrl": OS, "sourceRef": OS, "evidence": S, "checkedAt": OS}),
     "sets.works": ("workId", "workId", {"workId": S, "cardKey": S}),
     # Cardmarket bookkeeping: an x-prefixed set is a variant of its base set, never a set code of its own
     "sets.cardmarketVariantSets": ("localSetId", "localSetId", {
@@ -309,7 +312,7 @@ def replace(file: str, **collections):
 
 
 REL, VAR, MARK = "sets.setRelations", "sets.cardmarketVariantSets", "sets.localityMarkers"
-RTYPE, LS = "sets.setRelationTypes", "sets.localSets"
+RTYPE, LS, ED, EV = "sets.setRelationTypes", "sets.localSets", "sets.setEditions", "sets.releaseEvents"
 DIFFERENCES = frozenset(("finish", "card-list", "features"))  # what a relation may name as differing
 
 
@@ -353,6 +356,11 @@ def merging_pair(m: dict) -> list:
                      fromLocalSetId=plain[0]) for n, to in ((8, second), (9, third))]
 
 
+def dated_edition(m: dict, **values) -> list:
+    """A copy of the first dated edition under an id that sorts last."""
+    return [dict(next(e for e in rows(m, ED) if e["releaseEventId"]), setEditionId="EDITION:~", **values)]
+
+
 def foreign_marker(m: dict) -> None:
     """Cite, for the first marker, the specimen another localization's marker cites in another language."""
     language = {loc["localizationId"]: loc["language"] for loc in rows(m, "sets.localizations")}
@@ -389,6 +397,7 @@ SIMPLE_REFS = (
     (REL, "fromLocalSetId", LS, None, lambda: add_row(REL, lambda m: [relation(m, fromLocalSetId="LOCALSET:~none")])),
     (REL, "toLocalSetId", LS, None, lambda: add_row(REL, lambda m: [relation(m, toLocalSetId="LOCALSET:~none")])),
     (REL, "relationType", RTYPE, None, lambda: add_row(REL, lambda m: [relation(m, relationType="~none")])),
+    (ED, "releaseEventId", EV, None, lambda: add_row(ED, lambda m: dated_edition(m, releaseEventId="EVENT:~none"))),
     (VAR, "localSetId", LS, None, None),
     (VAR, "variantOfLocalSetId", LS, None, None),
     (MARK, "localizationId", "sets.localizations", None, lambda: add_row(
@@ -404,7 +413,7 @@ def provider_refs(model: dict) -> tuple[int, list]:
     found = [(r["itemId"], r["languageEvidence"]["providerId"])
              for r in rows(model, "evidence.printings") if "languageEvidence" in r]
     found += [*pairs(model, C, "providerId"), *pairs(model, "claims.releaseRows", "sourceProviderId")]
-    found += pairs(model, REL, "providerId")
+    found += [*pairs(model, REL, "providerId"), *pairs(model, EV, "providerId")]
     found += [(r["printingId"], s["providerId"]) for r in rows(model, FP) for s in r["sources"]]
     return missing(found, ids(model, "evidence.providers"))
 
@@ -785,6 +794,47 @@ def locality_markers(model: dict) -> tuple[int, list]:
                    lambda r: r["localizationId"])
 
 
+def release_source_error(event: dict, tiers: dict) -> bool:
+    """RE1, as E3: no URL fails only below tier 2; a URL is a URL; a sourceRef is a retained file."""
+    url = str(event["sourceUrl"] or "")
+    weak = not url and tiers[event["providerId"]] > 2
+    return weak or bool(url and not url.startswith("http")) or not retained_evidence(event["sourceRef"])
+
+
+def release_sources(model: dict) -> tuple[int, list]:
+    tiers = {p["providerId"]: p["authorityTier"] for p in rows(model, "evidence.providers")}
+    found = [e for e in rows(model, EV) if e["providerId"] in tiers]  # an unknown provider: its reference
+    return failing(found, lambda e: release_source_error(e, tiers), lambda e: e["releaseEventId"])
+
+
+RELEASE_FIELDS = ("releaseDate", "releaseDatePrecision", "releaseApproximate")
+
+
+def edition_date_error(edition: dict, events: dict) -> bool:
+    """RE2: no event, no date; with an event the edition repeats the event's date exactly."""
+    event_id = edition["releaseEventId"]
+    if event_id is None:
+        return edition["releaseDate"] is not None
+    event = events.get(event_id)
+    return event is not None and any(edition[f] != event[f] for f in RELEASE_FIELDS)
+
+
+def edition_dates(model: dict) -> tuple[int, list]:
+    events = {e["releaseEventId"]: e for e in rows(model, EV)}
+    return failing(rows(model, ED), lambda e: edition_date_error(e, events), lambda e: e["setEditionId"])
+
+
+def unused_events(model: dict) -> tuple[int, list]:
+    """RE3: every release event dates a set edition."""
+    used = {e["releaseEventId"] for e in rows(model, ED)}
+    return failing(rows(model, EV), lambda e: e["releaseEventId"] not in used, lambda e: e["releaseEventId"])
+
+
+def weak_release(m: dict) -> None:
+    tier3 = first_provider(m, 3)
+    edit(m, EV, lambda e: e["sourceRef"] is None).update(providerId=tier3, sourceUrl=None)
+
+
 def records(name: str, test, subset=None):
     """A rule failing every record of `name` (or `subset(model)`) that `test` rejects."""
     key = COLLECTIONS[name][0]
@@ -845,6 +895,11 @@ DOMAIN = {
     "V1: a Cardmarket variant set is its base set's code plus the prefix, in the same locality": (
         variant_sets, change(VAR, variantPrefix="y")),
     "LM1: a locality marker cites a specimen of its language that shows it": (locality_markers, foreign_marker),
+    "RE1: a release event's source is checkable or strong": (release_sources, weak_release),
+    "RE2: a set edition's release date is its event's": (edition_dates, change(
+        ED, lambda e: e["releaseEventId"], releaseDate="1999-01-01")),
+    "RE3: every release event dates a set edition": (unused_events, add_row(
+        EV, lambda m: [dict(rows(m, EV)[0], releaseEventId="EVENT:~")])),
 }
 RULES = {
     "format: canonical serialization": (file_format, lambda m: m.update(
