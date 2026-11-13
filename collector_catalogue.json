@@ -4,8 +4,8 @@
     "schemaVersion": "1.0.0",
     "datasetId": "snoredex-data/snorlax-current-known",
     "sourceRepository": "https://github.com/m4s-ai/snoredex-data",
-    "dataAsOf": "2026-11-12",
-    "catalogueFingerprint": "sha256:4d6a39aacc14308da01d177f9d6c6e9ed3b3b1448b84011ab8deba23e591a050",
+    "dataAsOf": "2026-11-13",
+    "catalogueFingerprint": "sha256:f3fb8a0dcede8a30d3c32232b07069dab3d251866662cbb39e1cb8f4bd29d57c",
     "previousFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
     "assetBaseUrl": "https://m4s-ai.github.io/snoredex-data/",
     "scope": {
@@ -51490,7 +51490,8 @@
       "sourceClaimRefs": [
         "CLAIM:finish:PRINTING:20c1c207d82440c07f2fe4e8",
         "CLAIM:legacy:U0159",
-        "CLAIM:specimen:SPEC-0770"
+        "CLAIM:specimen:SPEC-0770",
+        "CLAIM:specimen:SPEC-0771"
       ],
       "localizationId": "LOCALIZATION:WEST:it",
       "cardName": "Snorlax",
@@ -51524,16 +51525,18 @@
       "releaseDatePrecision": "day",
       "releaseApproximate": false,
       "releaseSortKey": "2022-07-01|LOCALIZATION:WEST:it|pgo|000000000055|claim:CLAIM:finish:PRINTING:20c1c207d82440c07f2fe4e8",
-      "imageAssetId": "asset-1c68c055-e931-53b1-8af3-47abaac37b7d",
-      "imageScope": "legacy-product",
+      "imageAssetId": "asset-1b3c7e2c-9fa5-5dc6-aa4b-63df80234812",
+      "imageScope": "exact-printing",
       "sourceLinks": [
         "https://api.tcgdex.net/v2/it/cards/swsh10.5-055",
         "https://i.imgur.com/DQFgacB.jpeg",
+        "https://i.imgur.com/EZtZ3DM.png",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V2-PGO055"
       ],
       "evidenceLinks": [
         "https://api.tcgdex.net/v2/it/cards/swsh10.5-055",
         "https://i.imgur.com/DQFgacB.jpeg",
+        "https://i.imgur.com/EZtZ3DM.png",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V2-PGO055"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+PGO+%E2%80%94+Pok%C3%A9mon+GO+055+%28verified-printing%29&row-id=item-f81123df-e607-5b0d-9923-e28cedaa14ac&card-name=Snorlax&set-code=PGO+%E2%80%94+Pok%C3%A9mon+GO&card-number=055&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+cosmos+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
@@ -80620,6 +80623,20 @@
       }
     },
     {
+      "assetId": "asset-1b3c7e2c-9fa5-5dc6-aa4b-63df80234812",
+      "path": "verification/specimens/SPEC-0771.png",
+      "url": "https://raw.githubusercontent.com/m4s-ai/snoredex-photos/main/verification/specimens/SPEC-0771.png",
+      "sha256": "sha256:2b762ec8a1ac4430df3b74273d38c88b4a10be4548e291a557169df886690bfe",
+      "mimeType": "image/png",
+      "imageScope": "exact-printing",
+      "altTextBasis": "Snorlax — Pokémon GO; exact-printing",
+      "attribution": {
+        "rightsStatus": "third-party-rights-excluded-from-project-grants",
+        "licenceRef": "LICENSE.md",
+        "noticeRef": "THIRD_PARTY_NOTICES.md"
+      }
+    },
+    {
       "assetId": "asset-1bbd86a8-f364-5dbf-853e-2c5a87364107",
       "path": "verification/specimens/SPEC-0513.png",
       "url": "https://raw.githubusercontent.com/m4s-ai/snoredex-photos/main/verification/specimens/SPEC-0513.png",
@@ -87987,7 +88004,7 @@
       "researchPlaceholders": 0,
       "currentKnown": 940,
       "research": 36,
-      "assets": 574
+      "assets": 575
     },
     "predecessor": {
       "schema": "snoredex-checklist",
