@@ -5,7 +5,7 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "sourceRepository": "https://github.com/m4s-ai/snoredex-data",
     "dataAsOf": "2026-11-13",
-    "catalogueFingerprint": "sha256:a31e423c475f27d0f85bbe43175ca8c452a5f66e156d4826534a654db4c70c4b",
+    "catalogueFingerprint": "sha256:39c65546c8b185e8b00c74452f99d7440115c070a0ba595172988bad95a80981",
     "previousFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
     "assetBaseUrl": "https://m4s-ai.github.io/snoredex-data/",
     "scope": {
@@ -4255,6 +4255,18 @@
         "SET-SRC-CM-AC0209653658"
       ],
       "sortKey": "WEST|lor|lost origin|LOCALSET:WEST:LOR"
+    },
+    {
+      "localSetId": "LOCALSET:WEST:M26%20EN",
+      "locality": "WEST",
+      "localSetCode": "M26 EN",
+      "localSetName": "McDonald's Collection 2026",
+      "productKind": "physical-card-set-or-product",
+      "identityState": "identified",
+      "sourceRefs": [
+        "SET-SRC-SF-DAEBFEEAED2A"
+      ],
+      "sortKey": "WEST|m000000000026 en|mcdonald's collection 000000002026|LOCALSET:WEST:M26%20EN"
     },
     {
       "localSetId": "LOCALSET:WEST:MEW",
@@ -9948,6 +9960,19 @@
       "releaseApproximate": false,
       "releaseEventId": null,
       "sortKey": "9999|WEST|lor|EDITION:WEST:Spanish:LOR"
+    },
+    {
+      "setEditionId": "EDITION:WEST:English:M26 EN",
+      "localSetId": "LOCALSET:WEST:M26%20EN",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "M26 EN",
+      "localSetName": "McDonald's Collection 2026",
+      "identityState": "identified",
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "releaseApproximate": false,
+      "releaseEventId": null,
+      "sortKey": "9999|WEST|m000000000026 en|EDITION:WEST:English:M26 EN"
     },
     {
       "setEditionId": "EDITION:WEST:English:MEW",
@@ -80015,6 +80040,71 @@
         "https://tcg.pokemon.com/pt-br/galleries/30th-celebration/"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+30C+PT+%E2%80%94+Celebra%C3%A7%C3%A3o+de+30+Anos+119+%28verified-printing%29&row-id=item-e4672ee4-b28d-5b2b-833a-bd14b05127ac&card-name=Snorlax&set-code=30C+PT+%E2%80%94+Celebra%C3%A7%C3%A3o+de+30+Anos&card-number=119&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
+    },
+    {
+      "itemId": "item-1b3d77a2-838f-5ce3-b6d2-0cbc5c754832",
+      "legacyChecklistIds": [],
+      "active": true,
+      "itemKind": "verified-printing",
+      "progressClass": "current-known",
+      "workId": "WORK:Snorlax-But-First-Food-Heavy-Impact",
+      "workMappingState": "mapped",
+      "setEditionId": "EDITION:WEST:English:M26 EN",
+      "localSetId": "LOCALSET:WEST:M26%20EN",
+      "cardReleaseId": "RELEASE:WEST:English:M26 EN:014/015:Snorlax-But-First-Food-Heavy-Impact",
+      "physicalPrintingId": "PHYSICAL:specimen:SPEC-0781",
+      "sourcePrintingId": null,
+      "finishUnitId": null,
+      "sourceClaimRefs": [
+        "CLAIM:source-first:WEST:M26 EN:014/015:base",
+        "CLAIM:specimen:SPEC-0781"
+      ],
+      "localizationId": "LOCALIZATION:WEST:en",
+      "cardName": "Snorlax",
+      "localCardName": "Snorlax",
+      "localSetCode": "M26 EN",
+      "localSetName": "McDonald's Collection 2026",
+      "collectorNumber": "014",
+      "collectorNumberDenominator": "015",
+      "collectorNumberSortKey": "000000000014",
+      "edition": null,
+      "editionAssignmentStatus": "not-applicable",
+      "finishVerificationStatus": "owner-attested",
+      "finish": "non-holo",
+      "finishFamily": "non-holo",
+      "finishGroupId": "finish-group-7fe0370f-93be-5d4d-853b-a6bc87ad6443",
+      "foilPattern": null,
+      "markings": [],
+      "distribution": {
+        "kind": "purchase-promo",
+        "name": "McDonald's Happy Meal 2026"
+      },
+      "cardSize": "standard",
+      "errorClass": null,
+      "rarity": {
+        "display": "no printed rarity symbol",
+        "normalizedId": null,
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:specimen:WEST:M26 EN:014/015:SPEC-0781"
+        ]
+      },
+      "completenessStatus": "positive-evidence-only",
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "releaseApproximate": false,
+      "releaseSortKey": "9999|LOCALIZATION:WEST:en|m000000000026 en|000000000014|claim:CLAIM:specimen:SPEC-0781",
+      "imageAssetId": "asset-6220d82a-03c2-5b9d-9493-e58f6ca1d759",
+      "imageScope": "exact-printing",
+      "sourceLinks": [
+        "https://mcdn.pokemon.com/image/upload/c_limit,w_2000/f_auto/q_auto:best/v1/live/pcom-cms/static-assets/cms3/us/img/merchandise/tiles/2026/mcdonalds/cards/M26_EN_14.png",
+        "https://www.pokemon.com/us/news/pokemon-happy-meals-are-coming-to-mcdonalds-in-an-exciting-new-way-"
+      ],
+      "evidenceLinks": [
+        "https://mcdn.pokemon.com/image/upload/c_limit,w_2000/f_auto/q_auto:best/v1/live/pcom-cms/static-assets/cms3/us/img/merchandise/tiles/2026/mcdonalds/cards/M26_EN_14.png",
+        "https://www.pokemon.com/us/news/pokemon-happy-meals-are-coming-to-mcdonalds-in-an-exciting-new-way-"
+      ],
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+M26+EN+%E2%80%94+McDonald%27s+Collection+2026+014+%28verified-printing%29&row-id=item-1b3d77a2-838f-5ce3-b6d2-0cbc5c754832&card-name=Snorlax&set-code=M26+EN+%E2%80%94+McDonald%27s+Collection+2026&card-number=014&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+owner-attested+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+kind%3Dpurchase-promo%2C+name%3DMcDonald%27s+Happy+Meal+2026+Card+size%3A+standard"
     }
   ],
   "assets": [
@@ -82952,6 +83042,20 @@
       "mimeType": "image/png",
       "imageScope": "exact-printing",
       "altTextBasis": "Snorlax — 소드&실드 강화 확장팩 「다크판타스마」; exact-printing",
+      "attribution": {
+        "rightsStatus": "third-party-rights-excluded-from-project-grants",
+        "licenceRef": "LICENSE.md",
+        "noticeRef": "THIRD_PARTY_NOTICES.md"
+      }
+    },
+    {
+      "assetId": "asset-6220d82a-03c2-5b9d-9493-e58f6ca1d759",
+      "path": "verification/specimens/SPEC-0781.png",
+      "url": "https://raw.githubusercontent.com/m4s-ai/snoredex-photos/main/verification/specimens/SPEC-0781.png",
+      "sha256": "sha256:13666e76066f767f578abb13dc32c78a4a5ce0cd949cb3d090968fd6b84e4f4a",
+      "mimeType": "image/png",
+      "imageScope": "exact-printing",
+      "altTextBasis": "Snorlax — McDonald's Collection 2026; exact-printing",
       "attribution": {
         "rightsStatus": "third-party-rights-excluded-from-project-grants",
         "licenceRef": "LICENSE.md",
@@ -87979,16 +88083,16 @@
     "cardDiscoveryRun": "20261102T084220Z",
     "counts": {
       "localizations": 16,
-      "localSets": 356,
-      "setEditions": 561,
+      "localSets": 357,
+      "setEditions": 562,
       "works": 42,
-      "items": 977,
-      "verifiedPrintings": 941,
+      "items": 978,
+      "verifiedPrintings": 942,
       "finishCandidates": 36,
       "researchPlaceholders": 0,
-      "currentKnown": 941,
+      "currentKnown": 942,
       "research": 36,
-      "assets": 568
+      "assets": 569
     },
     "predecessor": {
       "schema": "snoredex-checklist",
@@ -87996,8 +88100,8 @@
       "rows": 888
     },
     "graphAccounting": {
-      "cardReleases": 629,
-      "physicalPrintings": 941
+      "cardReleases": 630,
+      "physicalPrintings": 942
     },
     "candidateProgressPolicy": {
       "progressClass": "research",
