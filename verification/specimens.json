@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 780,
+  "count": 781,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -17043,6 +17043,32 @@
         "ownerAttestedAt": "2026-11-13"
       },
       "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0781",
+      "setCode": "M26 EN",
+      "number": "014/015",
+      "variant": "base",
+      "language": "English",
+      "heldBy": "official publisher",
+      "inspectedFrom": "Official pokemon.com news-article card render (660x920 PNG); not an owner-held physical specimen",
+      "photograph": "SPEC-0781.png",
+      "photographSource": "https://mcdn.pokemon.com/image/upload/c_limit,w_2000/f_auto/q_auto:best/v1/live/pcom-cms/static-assets/cms3/us/img/merchandise/tiles/2026/mcdonalds/cards/M26_EN_14.png",
+      "photographSha256": "sha256:13666e76066f767f578abb13dc32c78a4a5ce0cd949cb3d090968fd6b84e4f4a",
+      "observed": "Official publisher render, retrieved 2026-11-13 from the 2026-10-29 pokemon.com Happy Meal announcement (card 14 of 15), identifies Snorlax, M26EN 014/015, HP 160, But First, Food and Heavy Impact 160, illustrator Souichirou Gunjima, regulation mark H, (c)2026. No rarity symbol is printed. The render shows no finish. Finish: collection-owner determination 2026-11-13 (non-holo). No locality beyond the English edition and no release date is inferred; the page schedules US, Canada, Australia and others for November 2026.",
+      "recordedAt": "2026-11-13",
+      "citedBy": [
+        "WEST:M26 EN:014/015:base"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "basis": "Collection-owner determination 2026-11-13: finish is non-holo. The publisher render shows no finish; see verification/evidence/mcdonalds-2026-en-20261113/owner-determination.json.",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-11-13"
+      },
+      "listingUrl": "https://www.pokemon.com/us/news/pokemon-happy-meals-are-coming-to-mcdonalds-in-an-exciting-new-way-"
     }
   ]
 }
