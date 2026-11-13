@@ -722,7 +722,7 @@ def retained_evidence(ref: str | None) -> bool:
 
 def relation_source_error(relation: dict, tiers: dict) -> bool:
     """R2: a stated source with a URL (tier 1-3, never tier 5) or the owner; evidence and the decision recorded."""
-    kept = retained_evidence(relation["sourceRef"])
+    kept = retained_evidence(relation["sourceRef"]) and str(relation["sourceUrl"] or "http").startswith("http")
     described = len(relation["evidence"]) >= 20 and bool(relation["decidedBy"].strip())
     return not (relation_sourced(relation, tiers) and kept and described)
 

@@ -105,13 +105,14 @@ so they change no output.
   stays valid for existing relations) and `addedAt`. A new type is a new record, not a code change;
   the rules read these properties, never a type's name, and a type is never removed while a
   relation uses it.
-- `setRelations` — relations between local sets of different localities, each decided by the owner
+- `setRelations` — relations between local sets, mostly across localities, each decided by the owner
   case by case (`decidedBy`). `relationId` is `SETREL-` plus four digits, assigned by hand, never
   renumbered or reused. A relation names `fromLocalSetId`, `toLocalSetId` and its `relationType`
   (for a directed type `from` is the derived set, a catch-up or combined set, and `to` its source),
   `coverage` (`full`, `partial` or null), `cardRange` and `note` for a partial one, `differences`
   (`finish`, `card-list`, `features`) and its evidence: `basis` (`source-stated` with a tier 1-3
-  `providerId` and a `sourceUrl`, or `owner-attested` with `owner-attestation`), `sourceRef` (a
+  `providerId` and a `sourceUrl`, or `owner-attested` with `owner-attestation`; a `sourceUrl` is
+  always a URL or null), `sourceRef` (a
   retained file under `verification/evidence/` or null), `evidence` (what the source says about both
   lists) and `checkedAt`. Rules R1 to R4 hold the shape: two different sets once per type, a source
   that is never tier 5, at most one availability-merging partner per locality, and coverage where
