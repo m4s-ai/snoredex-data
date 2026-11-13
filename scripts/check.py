@@ -692,7 +692,7 @@ def relation_key(relation: dict, kind: dict) -> tuple:
 def relation_shape_error(relation: dict, kind: dict) -> bool:
     """An id of the SETREL form, two different sets, and a symmetric relation in canonical order."""
     first, second = relation["fromLocalSetId"], relation["toLocalSetId"]
-    return not RELATION_ID.fullmatch(relation["relationId"]) or first == second or (kind["symmetric"] and first > second)
+    return not RELATION_ID.fullmatch(str(relation["relationId"])) or first == second or (kind["symmetric"] and first > second)
 
 
 def relation_identity(model: dict) -> tuple[int, list]:
@@ -723,7 +723,7 @@ def retained_evidence(ref: str | None) -> bool:
 def relation_source_error(relation: dict, tiers: dict) -> bool:
     """R2: a stated source with a URL (tier 1-3, never tier 5) or the owner; evidence and the decision recorded."""
     kept = retained_evidence(relation["sourceRef"]) and str(relation["sourceUrl"] or "http").startswith("http")
-    described = len(relation["evidence"]) >= 20 and bool(relation["decidedBy"].strip())
+    described = len(str(relation["evidence"] or "")) >= 20 and bool(str(relation["decidedBy"] or "").strip())
     return not (relation_sourced(relation, tiers) and kept and described)
 
 
@@ -750,14 +750,14 @@ def coverage_error(relation: dict, kind: dict) -> bool:
         return True
     if relation["coverage"] == "partial" and not (relation["note"] or relation["cardRange"]):
         return True
-    return any(not isinstance(d, str) or d not in DIFFERENCES for d in relation["differences"])
+    return any(not isinstance(d, str) or d not in DIFFERENCES for d in relation["differences"] or [])
 
 
 def variant_error(row: dict, sets: dict, variants: set) -> bool:
     """V1: same locality, the base is no variant itself, and the code is the prefix plus the base code."""
     variant, base = sets[row["localSetId"]], sets[row["variantOfLocalSetId"]]
     return (variant["locality"] != base["locality"] or base["localSetId"] in variants
-            or variant["localSetCode"] != row["variantPrefix"] + str(base["localSetCode"]))
+            or variant["localSetCode"] != f"{row['variantPrefix']}{base['localSetCode']}")
 
 
 def variant_sets(model: dict) -> tuple[int, list]:
@@ -768,12 +768,13 @@ def variant_sets(model: dict) -> tuple[int, list]:
 
 def marker_error(row: dict, language: str, specimens: dict) -> bool:
     """LM1: the marker cites a specimen of its language whose observation shows the marker as a word."""
-    if not row["sourceRef"].startswith("specimen:"):
+    ref = str(row["sourceRef"] or "")
+    if not ref.startswith("specimen:"):
         return True
-    specimen = specimens.get(row["sourceRef"].removeprefix("specimen:"))
+    specimen = specimens.get(ref.removeprefix("specimen:"))
     if specimen is None:  # an unknown specimen: its reference rule
         return False
-    shown = re.search(rf"\s{re.escape(row['marker'])}\b", specimen.get("observed") or "")
+    shown = re.search(rf"\s{re.escape(str(row['marker']))}\b", specimen.get("observed") or "")
     return specimen["language"] != language or not shown
 
 
