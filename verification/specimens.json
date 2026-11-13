@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 772,
+  "count": 773,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16825,6 +16825,35 @@
         "markings": null,
         "cardSize": "standard",
         "basis": "The glitter-like specks across the artwork window show a holo pattern that the collection owner identifies as the cosmos holo; the frame is compressed video, so the pattern rests on the owner's determination. This view adds no independent corroboration of SPEC-0771.",
+        "ownerAttestedFields": [
+          "foilPattern"
+        ],
+        "ownerAttestedAt": "2026-11-13"
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0773",
+      "setCode": "sm9",
+      "number": "115/095",
+      "variant": "V3",
+      "language": "Japanese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Photograph supplied by the collection owner as an image address in chat on 2026-11-13 (https://i.imgur.com/0rgoffE.png) and retrieved the same day; original 810x1080 PNG visually inspected and filed unchanged; original holder unknown",
+      "photograph": "SPEC-0773.png",
+      "photographSource": "https://i.imgur.com/0rgoffE.png",
+      "photographSha256": "sha256:14548cbb6fa495612563fa367a044b552b2656a04a0615678a6f991ab72341f0",
+      "observed": "One complete Japanese card face lying slightly tilted on a dark patterned mat, sharp and evenly lit. たね イーブイ&カビゴンGX HP 270, TAG TEAM, おうえん, ダンププレス 120+, メガトンフレンズGX 210, 弱点 ×2, にげる 3, Illus. Sbon Graphics, SM9, C, 115/095 HR and ©2018 Pokémon/Nintendo/Creatures/GAME FREAK establish the exact card. Rainbow-coloured foil with a gold border covers the whole card face (orange, yellow, green and blue bands across the Snorlax and Eevee artwork) with reflective texture; the artwork window shows a tiled pattern of rounded squares in the upper right. The card face is about 430 px wide.",
+      "recordedAt": "2026-11-13",
+      "citedBy": [
+        "F0411-P01"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "rainbow",
+        "markings": null,
+        "cardSize": "standard",
+        "basis": "Rainbow-coloured foil across the whole card face; the printed rarity reads HR, which the owner states is the Rainbow Rare of this card (ownerAttestedFields foilPattern).",
         "ownerAttestedFields": [
           "foilPattern"
         ],
