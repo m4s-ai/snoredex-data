@@ -1002,5 +1002,33 @@
 {"workId": "WORK:Snorlax-VMAX-G-Max-Fall", "cardKey": "Snorlax-VMAX-G-Max-Fall"},
 {"workId": "WORK:Snorlax-Voraciousness-Thudding-Press", "cardKey": "Snorlax-Voraciousness-Thudding-Press"},
 {"workId": "WORK:Snorlax-ex-Strength-Toss-and-Turn-Press", "cardKey": "Snorlax-ex-Strength-Toss-and-Turn-Press"}
-]
+],
+"cardmarketVariantSets": [
+{"localSetId": "LOCALSET:JP:xm2a", "variantOfLocalSetId": "LOCALSET:JP:m2a", "variantPrefix": "x", "checkedAt": "2026-11-13"},
+{"localSetId": "LOCALSET:JP:xsv2a", "variantOfLocalSetId": "LOCALSET:JP:sv2a", "variantPrefix": "x", "checkedAt": "2026-11-13"},
+{"localSetId": "LOCALSET:KR:xm2a", "variantOfLocalSetId": "LOCALSET:KR:m2a", "variantPrefix": "x", "checkedAt": "2026-11-13"},
+{"localSetId": "LOCALSET:KR:xsv2a", "variantOfLocalSetId": "LOCALSET:KR:sv2a", "variantPrefix": "x", "checkedAt": "2026-11-13"},
+{"localSetId": "LOCALSET:WEST:xJTG", "variantOfLocalSetId": "LOCALSET:WEST:JTG", "variantPrefix": "x", "checkedAt": "2026-11-13"},
+{"localSetId": "LOCALSET:WEST:xPRE", "variantOfLocalSetId": "LOCALSET:WEST:PRE", "variantPrefix": "x", "checkedAt": "2026-11-13"}
+],
+"localityMarkers": [
+{"localizationId": "LOCALIZATION:ID:id", "marker": "I", "status": "active", "sourceRef": "specimen:SPEC-0184"},
+{"localizationId": "LOCALIZATION:LATAM:es-419", "marker": "LA", "status": "active", "sourceRef": "specimen:SPEC-0512"},
+{"localizationId": "LOCALIZATION:TH:th", "marker": "T", "status": "active", "sourceRef": "specimen:SPEC-0516"},
+{"localizationId": "LOCALIZATION:TW:zh-Hant", "marker": "F", "status": "active", "sourceRef": "specimen:SPEC-0310"},
+{"localizationId": "LOCALIZATION:WEST:de", "marker": "DE", "status": "active", "sourceRef": "specimen:SPEC-0508"},
+{"localizationId": "LOCALIZATION:WEST:en", "marker": "EN", "status": "active", "sourceRef": "specimen:SPEC-0507"},
+{"localizationId": "LOCALIZATION:WEST:es-ES", "marker": "ES", "status": "active", "sourceRef": "specimen:SPEC-0511"},
+{"localizationId": "LOCALIZATION:WEST:fr", "marker": "FR", "status": "active", "sourceRef": "specimen:SPEC-0509"},
+{"localizationId": "LOCALIZATION:WEST:it", "marker": "IT", "status": "active", "sourceRef": "specimen:SPEC-0510"},
+{"localizationId": "LOCALIZATION:WEST:pt", "marker": "PT", "status": "active", "sourceRef": "specimen:SPEC-0513"}
+],
+"setRelationTypes": [
+{"relationTypeId": "combines", "label": "Combines", "description": "The from set combines the to set's list with other sets in one product; each combined set is its own relation.", "symmetric": false, "mergesAvailability": false, "requiresCoverage": true, "status": "active", "addedAt": "2026-11-13"},
+{"relationTypeId": "counterpart-other-list", "label": "Counterpart with another list", "description": "Related products of two localities whose card lists differ, for example a localized counterpart assembled from different sets.", "symmetric": true, "mergesAvailability": false, "requiresCoverage": false, "status": "active", "addedAt": "2026-11-13"},
+{"relationTypeId": "identical-list", "label": "Identical card list", "description": "Both sets print the same card list with the same numbering; only the language and locality differ.", "symmetric": true, "mergesAvailability": true, "requiresCoverage": false, "status": "active", "addedAt": "2026-11-13"},
+{"relationTypeId": "partial-overlap", "label": "Partial overlap", "description": "The from set reprints part of the to set's list, for example a catch-up set; coverage and cardRange say how much.", "symmetric": false, "mergesAvailability": false, "requiresCoverage": true, "status": "active", "addedAt": "2026-11-13"},
+{"relationTypeId": "same-list-different-finish", "label": "Same list, different finishes", "description": "Both sets print the same card list, but finishes or foil treatments differ between them.", "symmetric": true, "mergesAvailability": true, "requiresCoverage": false, "status": "active", "addedAt": "2026-11-13"}
+],
+"setRelations": []
 }

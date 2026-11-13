@@ -86,6 +86,38 @@ gallery), `languages` (the legacy claim language codes), `localSets` (a set or
 product of one locality, with its source references), `setEditions` (a local set released in one
 localization, with its release date where known) and `works` (card text, by `cardKey`).
 
+Four further collections describe sets rather than cards; `scripts/build.py` does not read them yet,
+so they change no output.
+
+- `cardmarketVariantSets` — Cardmarket bookkeeping. Cardmarket files alternative versions of a card
+  under an `x`-prefixed copy of the set (`xm2a` beside `m2a`). Each record names such a
+  `localSetId`, the `variantOfLocalSetId` it belongs to and the `variantPrefix`. The prefix is never
+  part of a set code and no id changes because of it. Rule V1 holds the variant in its base set's
+  locality, its code equal to the prefix plus the base code; R5 keeps set relations off variant sets.
+- `localityMarkers` — the marker a localization prints after the set code (`F` Traditional Chinese,
+  `I` Indonesian, `T` Thai, `LA` Latin American Spanish, `EN`, `DE`, `FR`, `IT`, `ES`, `PT` in the
+  West), one per localization. A marker enters only with its proof: `sourceRef` cites a specimen of
+  that language whose observation shows the marker (rule LM1). A localization without a record has
+  no marker established, which does not mean it prints none.
+- `setRelationTypes` — the registry of relation types: `symmetric` (no direction; the pair is stored
+  in id order), `mergesAvailability` (the two sets count as one for language availability),
+  `requiresCoverage` (the relation must state `coverage`), `status` (`active` or `retired`, which
+  stays valid for existing relations) and `addedAt`. A new type is a new record, not a code change;
+  the rules read these properties, never a type's name, and a type is never removed while a
+  relation uses it.
+- `setRelations` — relations between local sets, mostly across localities, each decided by the owner
+  case by case (`decidedBy`). `relationId` is `SETREL-` plus four digits, assigned by hand, never
+  renumbered or reused. A relation names `fromLocalSetId`, `toLocalSetId` and its `relationType`
+  (for a directed type `from` is the derived set, a catch-up or combined set, and `to` its source),
+  `coverage` (`full`, `partial` or null), `cardRange` and `note` for a partial one, `differences`
+  (`finish`, `card-list`, `features`) and its evidence: `basis` (`source-stated` with a tier 1-3
+  `providerId` and a `sourceUrl`, or `owner-attested` with `owner-attestation`; a `sourceUrl` is
+  always a URL or null), `sourceRef` (a
+  retained file under `verification/evidence/` or null), `evidence` (what the source says about both
+  lists) and `checkedAt`. Rules R1 to R4 hold the shape: two different sets once per type, a source
+  that is never tier 5, at most one availability-merging partner per locality, and coverage where
+  the type requires it. Promo series of the same name in different localities get no relation.
+
 **`data/images.json`** — `assets` (retained images with path, hash, scope and alt text, keyed by
 `asset-` plus the UUIDv5 of `https://github.com/m4s-ai/snoredex-data/asset/v1/<path>` in the URL
 namespace; a specimen original, kept in the photo repository `m4s-ai/snoredex-photos` under its

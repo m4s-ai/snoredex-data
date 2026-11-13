@@ -83,6 +83,19 @@ COLLECTIONS = {
         "setEditionId": S, "localSetId": S, "localizationId": S, "identityState": S, "releaseDate": OS,
         "releaseDatePrecision": PRECISION, "releaseApproximate": B, "releaseEventId": OS}),
     "sets.works": ("workId", "workId", {"workId": S, "cardKey": S}),
+    # Cardmarket bookkeeping: an x-prefixed set is a variant of its base set, never a set code of its own
+    "sets.cardmarketVariantSets": ("localSetId", "localSetId", {
+        "localSetId": S, "variantOfLocalSetId": S, "variantPrefix": S, "checkedAt": S}),
+    "sets.localityMarkers": ("localizationId", "localizationId", {  # one printed marker per localization
+        "localizationId": S, "marker": S, "status": enum("active", "retired"), "sourceRef": S}),
+    "sets.setRelationTypes": ("relationTypeId", "relationTypeId", {  # rules read these properties, not names
+        "relationTypeId": S, "label": S, "description": S, "symmetric": B, "mergesAvailability": B,
+        "requiresCoverage": B, "status": enum("active", "retired"), "addedAt": S}),
+    "sets.setRelations": ("relationId", "relationId", {
+        "relationId": S, "fromLocalSetId": S, "toLocalSetId": S, "relationType": S,
+        "coverage": enum("full", "partial", None), "cardRange": OS, "note": OS, "differences": L,
+        "basis": enum("source-stated", "owner-attested"), "providerId": S, "sourceUrl": OS, "sourceRef": OS,
+        "evidence": S, "checkedAt": S, "decidedBy": S}),
     "images.assets": ("assetId", "assetId", {
         "assetId": S, "path": S, "sha256": S, "imageScope": enum("exact-printing", "card-release", "legacy-product"),
         "altTextBasis": S, "preview?": S}),
@@ -155,7 +168,7 @@ def load() -> dict:
     owner = json.loads(OWNER.read_text(encoding="utf-8"))
     specimens = json.loads(SPECIMENS.read_text(encoding="utf-8"))["specimens"]
     photographs = {PHOTO_DIR + row["photograph"]: row.get("photographSha256") for row in specimens if row.get("photograph")}
-    return dict(model, raw=raw, owner=owner, specimens={row["specimenId"] for row in specimens},
+    return dict(model, raw=raw, owner=owner, specimens={row["specimenId"]: row for row in specimens},
                 photographs=photographs)
 
 
@@ -295,6 +308,59 @@ def replace(file: str, **collections):
     return lambda m: m.update({file: dict(m[file], **{k: v(m[file][k]) for k, v in collections.items()})})
 
 
+REL, VAR, MARK = "sets.setRelations", "sets.cardmarketVariantSets", "sets.localityMarkers"
+RTYPE, LS = "sets.setRelationTypes", "sets.localSets"
+DIFFERENCES = frozenset(("finish", "card-list", "features"))  # what a relation may name as differing
+
+
+def add_row(name: str, make):
+    """Append the synthetic records `make(model)` builds; their ids sort last, so the id order holds.
+    A rule over a collection that may be empty still gets a negative case."""
+    def mutate(m: dict) -> None:
+        file, collection = name.split(".")
+        m[file] = dict(m[file], **{collection: [*m[file][collection], *make(m)]})
+    return mutate
+
+
+def plain_sets(m: dict) -> list:
+    variants = ids(m, VAR)
+    return sorted(s["localSetId"] for s in rows(m, LS)
+                  if s["identityState"] == "identified" and s["localSetId"] not in variants)
+
+
+def first_provider(m: dict, tier: int) -> str:
+    return next(p["providerId"] for p in rows(m, "evidence.providers") if p["authorityTier"] == tier)
+
+
+def relation(m: dict, **values) -> dict:
+    """A valid relation: two identified non-variant sets, the first type requiring coverage, a tier-2 URL."""
+    first, second = plain_sets(m)[:2]
+    kind = next(t["relationTypeId"] for t in rows(m, RTYPE) if t["requiresCoverage"])
+    row = {"relationId": "SETREL-9999", "fromLocalSetId": first, "toLocalSetId": second, "relationType": kind,
+           "coverage": "full", "cardRange": None, "note": None, "differences": [], "basis": "source-stated",
+           "providerId": first_provider(m, 2), "sourceUrl": "https://example.org/setlists", "sourceRef": None,
+           "evidence": "The source lists both card lists side by side.", "checkedAt": "2026-11-13",
+           "decidedBy": "https://example.org/decision"}
+    return dict(row, **values)
+
+
+def merging_pair(m: dict) -> list:
+    """One set joined by an availability-merging type to two sets of one locality."""
+    kind = next(t["relationTypeId"] for t in rows(m, RTYPE) if t["mergesAvailability"])
+    plain, locality = plain_sets(m), {s["localSetId"]: s["locality"] for s in rows(m, LS)}
+    second, third = next((x, y) for x in plain[1:] for y in plain[1:] if x < y and locality[x] == locality[y])
+    return [relation(m, relationId=f"SETREL-999{n}", toLocalSetId=to, relationType=kind, coverage=None,
+                     fromLocalSetId=plain[0]) for n, to in ((8, second), (9, third))]
+
+
+def foreign_marker(m: dict) -> None:
+    """Cite, for the first marker, the specimen another localization's marker cites in another language."""
+    language = {loc["localizationId"]: loc["language"] for loc in rows(m, "sets.localizations")}
+    first = rows(m, MARK)[0]
+    other = next(r for r in rows(m, MARK) if language[r["localizationId"]] != language[first["localizationId"]])
+    edit(m, MARK).update(sourceRef=other["sourceRef"])
+
+
 # --- references: (check, negative case); an unresolved id is reported by its own reference only ---
 
 def pairs(model: dict, name: str, field: str):
@@ -320,6 +386,13 @@ SIMPLE_REFS = (
     ("images.galleryImages", "itemId", P, None, None),
     ("images.artworkGroups", "cardReleaseId", P, "cardReleaseId", None),
     ("images.placeholders", "baseItemId", P, None, None),
+    (REL, "fromLocalSetId", LS, None, lambda: add_row(REL, lambda m: [relation(m, fromLocalSetId="LOCALSET:~none")])),
+    (REL, "toLocalSetId", LS, None, lambda: add_row(REL, lambda m: [relation(m, toLocalSetId="LOCALSET:~none")])),
+    (REL, "relationType", RTYPE, None, lambda: add_row(REL, lambda m: [relation(m, relationType="~none")])),
+    (VAR, "localSetId", LS, None, None),
+    (VAR, "variantOfLocalSetId", LS, None, None),
+    (MARK, "localizationId", "sets.localizations", None, lambda: add_row(
+        MARK, lambda m: [dict(rows(m, MARK)[0], localizationId="LOCALIZATION:~none")])),
 )
 
 
@@ -331,6 +404,7 @@ def provider_refs(model: dict) -> tuple[int, list]:
     found = [(r["itemId"], r["languageEvidence"]["providerId"])
              for r in rows(model, "evidence.printings") if "languageEvidence" in r]
     found += [*pairs(model, C, "providerId"), *pairs(model, "claims.releaseRows", "sourceProviderId")]
+    found += pairs(model, REL, "providerId")
     found += [(r["printingId"], s["providerId"]) for r in rows(model, FP) for s in r["sources"]]
     return missing(found, ids(model, "evidence.providers"))
 
@@ -600,6 +674,117 @@ def gallery_sizes_error(row: dict) -> bool:
     return len(widths) != 3 or widths[:2] != [240, 480] or not 600 <= widths[2] <= 1200
 
 
+RELATION_ID = re.compile(r"SETREL-\d{4}")
+
+
+def typed_relations(model: dict) -> list:
+    """Each relation with its type, once both sets and the type resolve (an unresolved one: its reference)."""
+    sets, types = ids(model, LS), {t["relationTypeId"]: t for t in rows(model, RTYPE)}
+    return [(r, types[r["relationType"]]) for r in rows(model, REL)
+            if {r["fromLocalSetId"], r["toLocalSetId"]} <= sets and r["relationType"] in types]
+
+
+def relation_key(relation: dict, kind: dict) -> tuple:
+    pair = (relation["fromLocalSetId"], relation["toLocalSetId"])
+    return (tuple(sorted(pair)) if kind["symmetric"] else pair), relation["relationType"]
+
+
+def relation_shape_error(relation: dict, kind: dict) -> bool:
+    """An id of the SETREL form, two different sets, and a symmetric relation in canonical order."""
+    first, second = relation["fromLocalSetId"], relation["toLocalSetId"]
+    return not RELATION_ID.fullmatch(str(relation["relationId"])) or first == second or (kind["symmetric"] and first > second)
+
+
+def relation_identity(model: dict) -> tuple[int, list]:
+    """R1: a relation joins two different local sets, once per type, under a SETREL id."""
+    found, seen, errors = typed_relations(model), set(), []
+    for relation_row, kind in found:
+        key = relation_key(relation_row, kind)
+        if relation_shape_error(relation_row, kind) or key in seen:
+            errors.append(relation_row["relationId"])
+        seen.add(key)
+    return len(found), errors
+
+
+def relation_sourced(relation: dict, tiers: dict) -> bool:
+    if relation["basis"] == "owner-attested":
+        return relation["providerId"] == "owner-attestation"
+    return str(relation["sourceUrl"] or "").startswith("http") and tiers[relation["providerId"]] <= 3
+
+
+def retained_evidence(ref: str | None) -> bool:
+    """Nothing, or a retained proof file under verification/evidence/ (no path outside it)."""
+    if ref is None:
+        return True
+    inside = ref.startswith("verification/evidence/") and ".." not in ref.split("/")
+    return inside and (ROOT / ref).is_file()
+
+
+def relation_source_error(relation: dict, tiers: dict) -> bool:
+    """R2: a stated source with a URL (tier 1-3, never tier 5) or the owner; evidence and the decision recorded."""
+    kept = retained_evidence(relation["sourceRef"]) and str(relation["sourceUrl"] or "http").startswith("http")
+    described = len(str(relation["evidence"] or "")) >= 20 and bool(str(relation["decidedBy"] or "").strip())
+    return not (relation_sourced(relation, tiers) and kept and described)
+
+
+def relation_sources(model: dict) -> tuple[int, list]:
+    tiers = {p["providerId"]: p["authorityTier"] for p in rows(model, "evidence.providers")}
+    found = [r for r in rows(model, REL) if r["providerId"] in tiers]  # an unknown provider: its reference
+    return failing(found, lambda r: relation_source_error(r, tiers), lambda r: r["relationId"])
+
+
+def merging_partners(model: dict) -> tuple[int, list]:
+    """R3: through availability-merging types a local set has at most one partner per locality."""
+    locality = {s["localSetId"]: s["locality"] for s in rows(model, LS)}
+    merging = [r for r, kind in typed_relations(model) if kind["mergesAvailability"]]
+    partners = Counter()
+    for r in merging:
+        partners[r["fromLocalSetId"], locality[r["toLocalSetId"]]] += 1
+        partners[r["toLocalSetId"], locality[r["fromLocalSetId"]]] += 1
+    return len(merging), sorted(f"{s}: {n} partners in {loc}" for (s, loc), n in partners.items() if n > 1)
+
+
+def coverage_error(relation: dict, kind: dict) -> bool:
+    """R4: a type requiring coverage has it, a partial one says which part, differences use the vocabulary."""
+    if kind["requiresCoverage"] and relation["coverage"] is None:
+        return True
+    if relation["coverage"] == "partial" and not (relation["note"] or relation["cardRange"]):
+        return True
+    return any(not isinstance(d, str) or d not in DIFFERENCES for d in relation["differences"] or [])
+
+
+def variant_error(row: dict, sets: dict, variants: set) -> bool:
+    """V1: same locality, the base is no variant itself, and the code is the prefix plus the base code."""
+    variant, base = sets[row["localSetId"]], sets[row["variantOfLocalSetId"]]
+    return (variant["locality"] != base["locality"] or base["localSetId"] in variants
+            or variant["localSetCode"] != f"{row['variantPrefix']}{base['localSetCode']}")
+
+
+def variant_sets(model: dict) -> tuple[int, list]:
+    sets, variants = {s["localSetId"]: s for s in rows(model, LS)}, ids(model, VAR)
+    found = [r for r in rows(model, VAR) if r["localSetId"] in sets and r["variantOfLocalSetId"] in sets]
+    return failing(found, lambda r: variant_error(r, sets, variants), lambda r: r["localSetId"])
+
+
+def marker_error(row: dict, language: str, specimens: dict) -> bool:
+    """LM1: the marker cites a specimen of its language whose observation shows the marker as a word."""
+    ref = str(row["sourceRef"] or "")
+    if not ref.startswith("specimen:"):
+        return True
+    specimen = specimens.get(ref.removeprefix("specimen:"))
+    if specimen is None:  # an unknown specimen: its reference rule
+        return False
+    shown = re.search(rf"\s{re.escape(str(row['marker']))}\b", specimen.get("observed") or "")
+    return specimen["language"] != language or not shown
+
+
+def locality_markers(model: dict) -> tuple[int, list]:
+    languages = {loc["localizationId"]: loc["language"] for loc in rows(model, "sets.localizations")}
+    found = [r for r in rows(model, MARK) if r["localizationId"] in languages]
+    return failing(found, lambda r: marker_error(r, languages[r["localizationId"]], model["specimens"]),
+                   lambda r: r["localizationId"])
+
+
 def records(name: str, test, subset=None):
     """A rule failing every record of `name` (or `subset(model)`) that `test` rejects."""
     key = COLLECTIONS[name][0]
@@ -645,6 +830,21 @@ DOMAIN = {
     "E13: an owner finish decision closes only the list the evidence established": (finish_decisions, change(
         FU, lambda u: u["completenessStatus"] == "owner-adjudicated",
         availableFinishes=["holo", "mirror-holo", "non-holo", "reverse-holo"])),
+    "R1: a set relation joins two different local sets once, under a SETREL id": (
+        relation_identity, add_row(REL, lambda m: [relation(m, toLocalSetId=plain_sets(m)[0])])),
+    "R2: a set relation rests on a stated source with a URL or on the owner, never on tier 5": (
+        relation_sources, add_row(REL, lambda m: [relation(m, providerId=first_provider(m, 5))])),
+    "R3: a local set has one availability-merging partner per locality": (merging_partners, add_row(REL, merging_pair)),
+    "R4: coverage and differences fit the relation type": (
+        lambda m: failing(typed_relations(m), lambda pair: coverage_error(*pair), lambda pair: pair[0]["relationId"]),
+        add_row(REL, lambda m: [relation(m, coverage=None)])),
+    "R5: a Cardmarket variant set carries no set relation": (
+        lambda m: failing(rows(m, REL), lambda r, variants=ids(m, VAR): bool(
+            {r["fromLocalSetId"], r["toLocalSetId"]} & variants), lambda r: r["relationId"]),
+        add_row(REL, lambda m: [relation(m, fromLocalSetId=min(ids(m, VAR)))])),
+    "V1: a Cardmarket variant set is its base set's code plus the prefix, in the same locality": (
+        variant_sets, change(VAR, variantPrefix="y")),
+    "LM1: a locality marker cites a specimen of its language that shows it": (locality_markers, foreign_marker),
 }
 RULES = {
     "format: canonical serialization": (file_format, lambda m: m.update(
