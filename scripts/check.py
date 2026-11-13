@@ -712,9 +712,17 @@ def relation_sourced(relation: dict, tiers: dict) -> bool:
     return str(relation["sourceUrl"] or "").startswith("http") and tiers[relation["providerId"]] <= 3
 
 
+def retained_evidence(ref: str | None) -> bool:
+    """Nothing, or a retained proof file under verification/evidence/ (no path outside it)."""
+    if ref is None:
+        return True
+    inside = ref.startswith("verification/evidence/") and ".." not in ref.split("/")
+    return inside and (ROOT / ref).is_file()
+
+
 def relation_source_error(relation: dict, tiers: dict) -> bool:
     """R2: a stated source with a URL (tier 1-3, never tier 5) or the owner; evidence and the decision recorded."""
-    kept = relation["sourceRef"] is None or (ROOT / relation["sourceRef"]).is_file()
+    kept = retained_evidence(relation["sourceRef"])
     described = len(relation["evidence"]) >= 20 and bool(relation["decidedBy"].strip())
     return not (relation_sourced(relation, tiers) and kept and described)
 
