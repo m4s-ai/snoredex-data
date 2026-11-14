@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 781,
+  "count": 782,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -17069,6 +17069,32 @@
         "ownerAttestedAt": "2026-11-13"
       },
       "listingUrl": "https://www.pokemon.com/us/news/pokemon-happy-meals-are-coming-to-mcdonalds-in-an-exciting-new-way-"
+    },
+    {
+      "specimenId": "SPEC-0782",
+      "setCode": "DP1",
+      "number": "DPBP#174",
+      "variant": "1st Edition",
+      "language": "Japanese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Mastercoins (Australia) shop product photograph, original 1162x1600 JPEG retrieved from the recorded image URL on 2026-11-14 and visually inspected; the listing page URL is not known",
+      "photograph": "SPEC-0782.jpg",
+      "photographSource": "https://www.mastercoins.com.au/cdn/shop/files/snorlax-dpbp174-space-time-creation-pokemon-japanese-lp-6309394.jpg?v=1777106117",
+      "photographSha256": "sha256:d6b8f580bc0de454eee6dd75980bfa27f202d07255f696a6b9cfb26adfccfafa",
+      "observed": "Complete front of one Japanese Snorlax card: the name カビゴン LV.35, HP 100, the attacks とおせんぼ and ねころがる, Illus.Ken Sugimori and the line (c)2006 Pokémon/Nintendo/Creatures/GAME FREAK. beside DPBP#174 with a rarity diamond establish identity. The set mark at the bottom right, right of the number and diamond, reads DP1 (D and P full height, the 1 a small subscript-style digit). A 1 EDITION mark is printed at the bottom left. The image shows no foil pattern or finish-distinguishing feature, so no finish is recorded.",
+      "recordedAt": "2026-11-14",
+      "citedBy": [
+        "U0476",
+        "F0101-P01"
+      ],
+      "physicalObservation": {
+        "edition": "1st Edition",
+        "markings": "1 EDITION",
+        "markingRole": "print-identity",
+        "cardSize": "standard",
+        "basis": "The complete Japanese DPBP#174 face visibly carries the 1 EDITION mark at the bottom left, and the DP1 set mark at the bottom right."
+      },
+      "listingUrl": null
     }
   ]
 }
