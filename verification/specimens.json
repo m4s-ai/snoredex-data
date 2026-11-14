@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 785,
+  "count": 786,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -17156,6 +17156,25 @@
       "recordedAt": "2026-11-14",
       "citedBy": [
         "U0680"
+      ],
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0786",
+      "setCode": "CLV",
+      "number": "016/034",
+      "variant": "base",
+      "language": "English",
+      "heldBy": "third-party database",
+      "inspectedFrom": "pkmncards.com database scan (733x1024 PNG as served), retrieved on 2026-11-15 and visually inspected",
+      "photograph": "SPEC-0786.png",
+      "photographSource": "https://pkmncards.com/wp-content/uploads/clv_en_016-snorlax.png",
+      "photographSha256": "sha256:a2efdcef2c610d3a84561f915eb06ecf7fe9e6045dac50af05436314181b4694",
+      "observed": "English database scan of Snorlax from the Pokémon Trading Card Game Classic (Venusaur & Lugia ex deck). Basic Pokémon, HP 150, the attacks Collect and Collapse 120, Illus. Eri Yamaki, the line ©2023 Pokémon and the number 016/034 establish identity. The set-code box, green and at the bottom left beside the number, reads CLV, with no locality marker. No physical finish is inferred from this database render.",
+      "recordedAt": "2026-11-15",
+      "citedBy": [
+        "U0394",
+        "F0038-P01"
       ],
       "listingUrl": null
     }
