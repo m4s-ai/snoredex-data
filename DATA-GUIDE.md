@@ -98,7 +98,11 @@ Six further collections describe sets rather than cards; `scripts/build.py` does
 so they change no output.
 
 - `setEditionCodes` — the set code an edition prints, at most one record per `setEditionId`:
-  `printedSetCode` exactly as printed, without the regulation mark (`MA3 T`, `JTG DE`, `s2`),
+  `printedSetCode` exactly as printed, without the regulation mark (`ma3 T`, `JTG DE`, `s2`,
+  `XY10` from a set-mark badge). The code font prints a lowercase letter as a small capital: read
+  the case from the letter's height against the digits (a letter at x-height is lowercase, one at
+  digit height uppercase), never from its shape, and only where the image is sharp enough to
+  compare them,
   `printedBaseCode` only where the printed base differs from the set's `baseSetCode` (`JTG` on
   `PPS8 JTG`), `localityMarker` (null: the card shows the code without a marker), and the proof:
   `providerId`, `sourceRef` (`specimen:SPEC-nnnn` or null), `sourceUrl`, `evidence` (required, at
