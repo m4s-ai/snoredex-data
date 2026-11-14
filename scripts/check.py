@@ -77,7 +77,7 @@ COLLECTIONS = {
     "sets.languages": ("languageCode", "displayOrder", {
         "languageCode": S, "sourceName": S, "displayName": S, "region": S, "displayOrder": I}),
     "sets.localSets": ("localSetId", "localSetId", {
-        "localSetId": S, "locality": S, "localSetCode": OS, "localSetName": OS, "productKind": S,
+        "localSetId": S, "locality": S, "localSetCode": OS, "baseSetCode?": S, "localSetName": OS, "productKind": S,
         "identityState": S, "sourceRefs": L}),
     "sets.setEditions": ("setEditionId", "setEditionId", {
         "setEditionId": S, "localSetId": S, "localizationId": S, "identityState": S, "releaseDate": OS,
@@ -85,6 +85,9 @@ COLLECTIONS = {
     "sets.releaseEvents": ("releaseEventId", "releaseEventId", {  # an edition's date and its source
         "releaseEventId": S, "releaseDate": S, "releaseDatePrecision": PRECISION - {None}, "releaseApproximate": B,
         "providerId": S, "sourceUrl": OS, "sourceRef": OS, "evidence": S, "checkedAt": OS}),
+    "sets.setEditionCodes": ("setEditionId", "setEditionId", {  # the set code an edition prints, and its proof
+        "setEditionId": S, "printedSetCode": S, "printedBaseCode": OS, "localityMarker": OS, "providerId": S,
+        "sourceRef": OS, "sourceUrl": OS, "evidence": OS, "corroborated": B, "checkedAt": S}),
     "sets.works": ("workId", "workId", {"workId": S, "cardKey": S}),
     # Cardmarket bookkeeping: an x-prefixed set is a variant of its base set, never a set code of its own
     "sets.cardmarketVariantSets": ("localSetId", "localSetId", {
@@ -313,6 +316,7 @@ def replace(file: str, **collections):
 
 REL, VAR, MARK = "sets.setRelations", "sets.cardmarketVariantSets", "sets.localityMarkers"
 RTYPE, LS, ED, EV = "sets.setRelationTypes", "sets.localSets", "sets.setEditions", "sets.releaseEvents"
+CODE = "sets.setEditionCodes"
 DIFFERENCES = frozenset(("finish", "card-list", "features"))  # what a relation may name as differing
 
 
@@ -398,6 +402,8 @@ SIMPLE_REFS = (
     (REL, "toLocalSetId", LS, None, lambda: add_row(REL, lambda m: [relation(m, toLocalSetId="LOCALSET:~none")])),
     (REL, "relationType", RTYPE, None, lambda: add_row(REL, lambda m: [relation(m, relationType="~none")])),
     (ED, "releaseEventId", EV, None, lambda: add_row(ED, lambda m: dated_edition(m, releaseEventId="EVENT:~none"))),
+    (CODE, "setEditionId", ED, None, lambda: add_row(  # a copy: break_ref would strip a set of its carrier (PC6)
+        CODE, lambda m: [dict(rows(m, CODE)[0], setEditionId="EDITION:~none")])),
     (VAR, "localSetId", LS, None, None),
     (VAR, "variantOfLocalSetId", LS, None, None),
     (MARK, "localizationId", "sets.localizations", None, lambda: add_row(
@@ -413,7 +419,7 @@ def provider_refs(model: dict) -> tuple[int, list]:
     found = [(r["itemId"], r["languageEvidence"]["providerId"])
              for r in rows(model, "evidence.printings") if "languageEvidence" in r]
     found += [*pairs(model, C, "providerId"), *pairs(model, "claims.releaseRows", "sourceProviderId")]
-    found += [*pairs(model, REL, "providerId"), *pairs(model, EV, "providerId")]
+    found += [*pairs(model, REL, "providerId"), *pairs(model, EV, "providerId"), *pairs(model, CODE, "providerId")]
     found += [(r["printingId"], s["providerId"]) for r in rows(model, FP) for s in r["sources"]]
     return missing(found, ids(model, "evidence.providers"))
 
@@ -835,6 +841,124 @@ def weak_release(m: dict) -> None:
     edit(m, EV, lambda e: e["sourceRef"] is None).update(providerId=tier3, sourceUrl=None)
 
 
+def code_context(model: dict) -> list:
+    """(code record, its edition, the set whose base code it uses: a variant uses its base set's).
+    A record whose edition or set does not resolve is left to its reference rule."""
+    editions, sets = {e["setEditionId"]: e for e in rows(model, ED)}, {s["localSetId"]: s for s in rows(model, LS)}
+    variant_of = {v["localSetId"]: v["variantOfLocalSetId"] for v in rows(model, VAR)}
+    found = []
+    for row in rows(model, CODE):
+        edition = editions.get(row["setEditionId"])
+        if edition is not None and edition["localSetId"] in sets:
+            own = sets[edition["localSetId"]]
+            found.append((row, edition, sets.get(variant_of.get(own["localSetId"]), own)))
+    return found
+
+
+def code_source_shape(row: dict) -> bool:
+    """A sourceRef is a specimen or nothing, a sourceUrl a URL or nothing."""
+    ref, url = str(row["sourceRef"] or ""), str(row["sourceUrl"] or "")
+    return (not ref or ref.startswith("specimen:")) and (not url or url.startswith("http"))
+
+
+def code_unspecimened(row: dict) -> bool:
+    """Without a specimen: a URL or the owner, never a specimen provider, and the evidence in words."""
+    anchored = str(row["sourceUrl"] or "").startswith("http") or row["providerId"] == "owner-attestation"
+    return not anchored or row["providerId"] in SPECIMEN_PROVIDERS or len(str(row["evidence"] or "")) < 20
+
+
+def code_source_error(row: dict, tiers: dict) -> bool:
+    """PC1: tier 1-2, anchored in a specimen, a URL or the owner; a specimen provider cites one; text without one."""
+    specimen = str(row["sourceRef"] or "").startswith("specimen:")
+    weak = tiers[row["providerId"]] > 2 or not code_source_shape(row)
+    return weak or (not specimen and code_unspecimened(row))
+
+
+def code_sources(model: dict) -> tuple[int, list]:
+    tiers = {p["providerId"]: p["authorityTier"] for p in rows(model, "evidence.providers")}
+    found = [r for r in rows(model, CODE) if r["providerId"] in tiers]  # an unknown provider: its reference
+    return failing(found, lambda r: code_source_error(r, tiers), lambda r: r["setEditionId"])
+
+
+def code_markers(model: dict) -> tuple[int, list]:
+    """PC2: a locality marker is the one registered for the edition's localization."""
+    markers = {m["localizationId"]: m["marker"] for m in rows(model, MARK)}
+    found = [(r, e) for r, e, _ in code_context(model) if r["localityMarker"] is not None]
+    return failing(found, lambda pair: markers.get(pair[1]["localizationId"]) != pair[0]["localityMarker"],
+                   lambda pair: pair[0]["setEditionId"])
+
+
+def code_specimen_error(row: dict, language: str, specimens: dict) -> bool:
+    """PC3: the cited specimen is in the edition's language and its observation shows the code as written."""
+    specimen = specimens.get(str(row["sourceRef"]).removeprefix("specimen:"))
+    if specimen is None:  # an unknown specimen: its reference rule
+        return False
+    shown = re.search(rf"(?<!\w){re.escape(row['printedSetCode'])}(?!\w)", specimen.get("observed") or "")
+    return specimen["language"] != language or not shown
+
+
+def code_specimens(model: dict) -> tuple[int, list]:
+    language = {loc["localizationId"]: loc["language"] for loc in rows(model, "sets.localizations")}
+    found = [(r, e) for r, e, _ in code_context(model) if str(r["sourceRef"] or "").startswith("specimen:")]
+    return failing(found, lambda pair: code_specimen_error(
+        pair[0], language.get(pair[1]["localizationId"]), model["specimens"]), lambda pair: pair[0]["setEditionId"])
+
+
+def composed_code_error(row: dict, base_set: dict) -> bool:
+    """PC4: printed code = printed base (only where it differs from the set's base) or the base, plus the marker."""
+    set_base = base_set.get("baseSetCode")
+    base = row["printedBaseCode"] or set_base
+    marker = f" {row['localityMarker']}" if row["localityMarker"] else ""
+    return base is None or row["printedBaseCode"] == set_base or row["printedSetCode"] != f"{base}{marker}"
+
+
+def suffixed(code: str, markers: set) -> bool:
+    """A code ending in a space and a registered marker or a single capital (a regulation mark)."""
+    parts = code.rsplit(" ", 1)
+    return len(parts) == 2 and (parts[1] in markers or re.fullmatch("[A-Z]", parts[1]) is not None)
+
+
+def base_codes(model: dict) -> tuple[int, list]:
+    """PC5: a base code carries no marker and no regulation mark; a Cardmarket variant set carries none."""
+    markers, variants = {m["marker"] for m in rows(model, MARK)}, ids(model, VAR)
+    found = [(s["localSetId"], s["baseSetCode"], s["localSetId"] in variants) for s in rows(model, LS) if "baseSetCode" in s]
+    found += [(r["setEditionId"], r["printedBaseCode"], False) for r in rows(model, CODE) if r["printedBaseCode"]]
+    return failing(found, lambda f: f[2] or suffixed(str(f[1]), markers), lambda f: f[0])
+
+
+def carried_bases(model: dict) -> tuple[int, list]:
+    """PC6: a base code stands only on a set with a printed set code of its own or of a variant."""
+    carried = {s["localSetId"] for _, _, s in code_context(model)}
+    return failing([s for s in rows(model, LS) if "baseSetCode" in s], lambda s: s["localSetId"] not in carried,
+                   lambda s: s["localSetId"])
+
+
+def weak_code(m: dict) -> None:
+    edit(m, CODE, lambda r: str(r["sourceRef"] or "").startswith("specimen:"))["providerId"] = first_provider(m, 5)
+
+
+def foreign_code_marker(m: dict) -> None:
+    """Rest a marked code on the owner, with another localization's marker and the code rebuilt to match."""
+    row = edit(m, CODE, lambda r: r["localityMarker"])
+    other = next(x["marker"] for x in rows(m, MARK) if x["marker"] != row["localityMarker"])
+    row.update(providerId="owner-attestation", sourceRef=None, evidence="The collection owner states the code.",
+               localityMarker=other, printedSetCode=row["printedSetCode"].rsplit(" ", 1)[0] + " " + other)
+
+
+def foreign_code_specimen(m: dict) -> None:
+    row = edit(m, CODE, lambda r: str(r["sourceRef"] or "").startswith("specimen:"))
+    cited = m["specimens"][row["sourceRef"].removeprefix("specimen:")]
+    row["sourceRef"] = "specimen:" + next(k for k, s in m["specimens"].items() if s["language"] != cited["language"])
+
+
+def marked_base(m: dict) -> None:
+    """Move the whole printed code into the set's base code and drop the marker."""
+    row = edit(m, CODE, lambda r: r["localityMarker"] and not r["printedBaseCode"])
+    edition = next(e for e in rows(m, ED) if e["setEditionId"] == row["setEditionId"])
+    edit(m, LS, lambda s: s["localSetId"] == edition["localSetId"])["baseSetCode"] = row["printedSetCode"]
+    row["localityMarker"] = None
+
+
 def records(name: str, test, subset=None):
     """A rule failing every record of `name` (or `subset(model)`) that `test` rejects."""
     key = COLLECTIONS[name][0]
@@ -900,6 +1024,16 @@ DOMAIN = {
         ED, lambda e: e["releaseEventId"], releaseDate="1999-01-01")),
     "RE3: every release event dates a set edition": (unused_events, add_row(
         EV, lambda m: [dict(rows(m, EV)[0], releaseEventId="EVENT:~")])),
+    "PC1: a printed set code rests on a card image, a tier 1-2 URL or the owner": (code_sources, weak_code),
+    "PC2: the locality marker is registered for the edition's localization": (code_markers, foreign_code_marker),
+    "PC3: the cited specimen is in the edition's language and shows the code verbatim": (
+        code_specimens, foreign_code_specimen),
+    "PC4: printed set code = base code plus locality marker": (
+        lambda m: failing(code_context(m), lambda c: composed_code_error(c[0], c[2]), lambda c: c[0]["setEditionId"]),
+        change(CODE, lambda r: r["printedBaseCode"], printedBaseCode="ZZZ")),
+    "PC5: a base code carries no marker, no regulation mark and no variant prefix": (base_codes, marked_base),
+    "PC6: a base code is carried by a printed set code of the set": (carried_bases, lambda m: edit(
+        m, LS, lambda s: s["localSetId"] in plain_sets(m) and "baseSetCode" not in s).update(baseSetCode="ZZ")),
 }
 RULES = {
     "format: canonical serialization": (file_format, lambda m: m.update(

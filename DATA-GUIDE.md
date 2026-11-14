@@ -86,8 +86,29 @@ gallery), `languages` (the legacy claim language codes), `localSets` (a set or
 product of one locality, with its source references), `setEditions` (a local set released in one
 localization, with its release date where known) and `works` (card text, by `cardKey`).
 
-Five further collections describe sets rather than cards; `scripts/build.py` does not read them yet,
+`localSetCode` is a legacy value that mixes Cardmarket bookkeeping, the locality marker and the
+printed code; it stays as it is. The set code is recorded on three levels instead: `baseSetCode` on a
+local set (language-independent, without marker or regulation mark: `MA3`, `s2`; for a Prize Pack the
+owner's set identity, `PPS8 JTG`), and per edition the `localityMarker` and the `printedSetCode` in
+`setEditionCodes`. A set without `baseSetCode` has none established; a Cardmarket variant set never
+carries one and uses its base set's. `scripts/build.py` keeps `baseSetCode` out of the catalogue and
+the database until the contract carries it.
+
+Six further collections describe sets rather than cards; `scripts/build.py` does not read them yet,
 so they change no output.
+
+- `setEditionCodes` — the set code an edition prints, at most one record per `setEditionId`:
+  `printedSetCode` exactly as printed, without the regulation mark (`MA3 T`, `JTG DE`, `s2`),
+  `printedBaseCode` only where the printed base differs from the set's `baseSetCode` (`JTG` on
+  `PPS8 JTG`), `localityMarker` (null: the card shows the code without a marker), and the proof:
+  `providerId`, `sourceRef` (`specimen:SPEC-nnnn` or null), `sourceUrl`, `evidence` (required, at
+  least 20 characters, without a specimen; null with one, whose observation is the evidence),
+  `corroborated` and `checkedAt`. PC1 holds the proof at tier 1-2, resting on a specimen, a URL or the
+  owner; PC2 holds the marker to the one registered for the edition's localization; PC3 holds a
+  cited specimen to the edition's language and to showing the code verbatim (it does not apply to an
+  owner attestation); PC4 holds the printed code to the base (printed or the set's) plus a space and
+  the marker; PC5 keeps markers, regulation marks and variant sets out of a base code; PC6 lets a set
+  carry a `baseSetCode` only where an edition of it has a printed code.
 
 - `releaseEvents` — the dated release of a set edition and its source. A `setEditions` record with
   a date names its `releaseEventId` and repeats the event's `releaseDate`, `releaseDatePrecision`
