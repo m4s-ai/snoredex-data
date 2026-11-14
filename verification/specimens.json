@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 782,
+  "count": 784,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -4644,7 +4644,7 @@
       "photograph": "SPEC-0211.jpg",
       "photographSource": "https://product-images.s3.cardmarket.com/51/s5a/552704/552704.jpg",
       "photographSha256": "sha256:58f312b533e38d34d29dcdc8f47c2c7d85f90daf0a87a18231965640e5bf6a5d",
-      "observed": "Complete retained Cardmarket catalogue scan for Japanese Snorlax s5a 93 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Gold foil, texture and reflective stars are visible across the secret-rare card face.",
+      "observed": "The set-code box reads s5a (s and a at letter x-height, the 5 at digit height), beside regulation mark D and 093/070 UR. Complete retained Cardmarket catalogue scan for Japanese Snorlax s5a 93 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Gold foil, texture and reflective stars are visible across the secret-rare card face.",
       "recordedAt": "2026-08-28",
       "citedBy": [
         "U0600"
@@ -6746,7 +6746,7 @@
       "photograph": "SPEC-0314.png",
       "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00017038.png",
       "photographSha256": "sha256:5fc275616e5441930eef0e242bd7fe9cf630417e774080f60e0813639b14c600",
-      "observed": "Complete retained image for Traditional Chinese Snorlax MC F 567/742 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "observed": "The set-code box reads mC F (m at letter x-height, C at full height, then the marker F). Complete retained image for Traditional Chinese Snorlax MC F 567/742 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
       "recordedAt": "2026-08-28",
       "citedBy": [
         "TW:MC F:567/742:base",
@@ -6849,7 +6849,7 @@
       "photograph": "SPEC-0319.jpg",
       "photographSource": "https://cf.shopee.tw/file/tw-11134207-7r98p-lq0zta37yupu9a",
       "photographSha256": "sha256:f7a121b704c24010b60660e283485422a68192977a92f91d4977b8ae22e02021",
-      "observed": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity.",
+      "observed": "The green set-code box reads CLF F; the collection owner confirmed on 2026-11-14 that the CLF code prints in capitals. Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity.",
       "recordedAt": "2026-08-28",
       "citedBy": [
         "TW:CLF:016/032:base",
@@ -16595,7 +16595,7 @@
       "photograph": "SPEC-0764.jpg",
       "photographSource": "https://dlnxybxfzkpeatkjcztb.supabase.co/storage/v1/object/public/website-images/cards-asp/11148214-1737771796529.jpg",
       "photographSha256": "sha256:1c8008f4e06c5921226705e41e1a360e0e966c30f0d2aa143ee4f7ae4394d0eb",
-      "observed": "One upright Korean card face on a flat scan, complete and sharp, no glare: BASIC Snorlax (잠만보), HP 150, attacks 가져오기 and 쓰러지기 120, weakness x2, Illus. Eri Yamaki, ©2023 Pokémon/Nintendo/Creatures/GAME FREAK, the CLF regulation code and the number 016/032 establish identity. Gold speckled foil sparkle covers the artwork window; the yellow border and the card body show no speckle. The collection owner supplied this address as a better image than SPEC-0616.",
+      "observed": "The green set-code box reads CLF; the collection owner confirmed on 2026-11-14 that the CLF code prints in capitals. One upright Korean card face on a flat scan, complete and sharp, no glare: BASIC Snorlax (잠만보), HP 150, attacks 가져오기 and 쓰러지기 120, weakness x2, Illus. Eri Yamaki, ©2023 Pokémon/Nintendo/Creatures/GAME FREAK, the CLF regulation code and the number 016/032 establish identity. Gold speckled foil sparkle covers the artwork window; the yellow border and the card body show no speckle. The collection owner supplied this address as a better image than SPEC-0616.",
       "recordedAt": "2026-11-12",
       "citedBy": [
         "F0036-P01"
@@ -17093,6 +17093,51 @@
         "markingRole": "print-identity",
         "cardSize": "standard",
         "basis": "The complete Japanese DPBP#174 face visibly carries the 1 EDITION mark at the bottom left, and the DP1 set mark at the bottom right."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0783",
+      "setCode": "CLF",
+      "number": "016/032",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Samurai Sword Tokyo shop product photograph, 579x800 WebP as served, retrieved from the recorded image URL on 2026-11-14 and visually inspected; the listing page URL is not known. The WebP is kept untouched under verification/evidence/ and decoded losslessly to the PNG filed here",
+      "photograph": "SPEC-0783.png",
+      "photographSource": "https://samuraiswordtokyo.com/wp-content/uploads/sst-snkr/b3167e10925f19db7f8e874c/579.webp",
+      "photographSha256": "sha256:e5f19d68401289ade1875a5cf54b8a6ff032d05dc51ba5a6d1b4407808496d0d",
+      "observed": "Complete front of one Japanese Snorlax card: the name カビゴン, HP 150, the attacks もってくる and たおれこむ 120, Illus. Eri Yamaki and the number 016/032 establish identity. The green set-code box reads CLF; the image is too small to compare the letters against a digit, and the collection owner confirmed on 2026-11-14 that the code prints in capitals as CLF. The set is Pokémon Card Game Classic. No finish is recorded.",
+      "recordedAt": "2026-11-14",
+      "citedBy": [
+        "U0439",
+        "F0035-P01"
+      ],
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0784",
+      "setCode": "Pt2",
+      "number": "070/090",
+      "variant": "1st Edition",
+      "language": "Japanese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller product photograph, 600x800 WebP as served, retrieved from the recorded image URL on 2026-11-14 and visually inspected; the listing page URL is not known. The WebP is kept untouched under verification/evidence/ and decoded losslessly to the PNG filed here",
+      "photograph": "SPEC-0784.png",
+      "photographSource": "https://i.ebayimg.com/images/g/CX0AAOSw7kBg9QSt/s-l1600.webp",
+      "photographSha256": "sha256:cd44439e24b248f21f37cd03458ab893b74350fc3f7e578ac0409161b014317a",
+      "observed": "Complete front of one Japanese Snorlax card: the name カビゴン LV.40, HP 100, the Poké-Body めいわくねぞう, the attacks ねがえり 20+ and ヘビープレス 40+, Illus.Kouki Saitou, the line ©2008 Pokémon/Nintendo/Creatures/GAME FREAK. and the number 070/090 with a circle rarity mark establish identity. The set mark at the bottom right, right of the number and circle, reads Pt2 (P and 2 at full height, a small t between). A 1 EDITION mark is printed at the bottom left. The image shows no foil pattern or finish-distinguishing feature, so no finish is recorded.",
+      "recordedAt": "2026-11-14",
+      "citedBy": [
+        "U0751",
+        "F0301-P01"
+      ],
+      "physicalObservation": {
+        "edition": "1st Edition",
+        "markings": "1 EDITION",
+        "markingRole": "print-identity",
+        "cardSize": "standard",
+        "basis": "The complete Japanese 070/090 face visibly carries the 1 EDITION mark at the bottom left, and the Pt2 set mark at the bottom right."
       },
       "listingUrl": null
     }
