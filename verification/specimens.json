@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 784,
+  "count": 785,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -17139,6 +17139,24 @@
         "cardSize": "standard",
         "basis": "The complete Japanese 070/090 face visibly carries the 1 EDITION mark at the bottom left, and the Pt2 set mark at the bottom right."
       },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0785",
+      "setCode": "20th",
+      "number": "047/071",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Web-view rendition (1179x1798 JPEG, the largest the album serves, not necessarily the camera original) of the collection owner's shared photo album, retrieved on 2026-11-14 and visually inspected",
+      "photograph": "SPEC-0785.jpg",
+      "photographSource": "https://photos.icloud.com/shared/album/02dohha3CgK7ZjcgQebBGR1OQ",
+      "photographSha256": "sha256:5a038da329989e7c3009cb6d3350378f09360a82cad57c2a0c9335ec7b175fd5",
+      "observed": "Korean Snorlax card held in a hand: the name 잠만보, HP 130, the Ability 다시자기, the attack 자빠지기 프레스 120, Illus. Mitsuhiro Arita, the line ©2016 Pokémon and the number 047/071 establish identity. The set mark, a dark badge at the bottom right beside the number, reads 20th (2 and 0 at full height, a small th). The image does not settle whether this copy is the non-holo or the reverse-holo printing, so no finish is recorded.",
+      "recordedAt": "2026-11-14",
+      "citedBy": [
+        "U0680"
+      ],
       "listingUrl": null
     }
   ]
