@@ -210,7 +210,8 @@ def correction_link(item: dict) -> str:
 # --- collector_catalogue.json ---
 
 def set_tables(sets: dict) -> tuple[dict, dict]:
-    local_sets = {row["localSetId"]: dict(row, sortKey="|".join((
+    # baseSetCode stays out of the catalogue and SQLite until contract 1.1.0 (Set-DB 07/08) carries it
+    local_sets = {row["localSetId"]: dict({k: v for k, v in row.items() if k != "baseSetCode"}, sortKey="|".join((
         row["locality"], natural_key(row["localSetCode"]), natural_key(row["localSetName"]), row["localSetId"])))
         for row in sets["localSets"]}
     editions = {}
