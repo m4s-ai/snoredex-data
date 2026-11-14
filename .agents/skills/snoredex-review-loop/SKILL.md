@@ -17,7 +17,7 @@ This skill orchestrates two skills and adds no review or fix rules of its own:
 Two things count as the owner's instruction for one PR's loop: the owner asking to run it on that
 PR, or the owner turning on Auto-fix for it. That instruction covers, for that PR only:
 - each round's review post;
-- the replies to findings;
+- the replies to findings, and resolving each thread a pushed fix settles;
 - fast-forward pushes of in-scope fixes.
 
 Everything else stays gated as AGENTS.md says: the first push of a branch, force pushes, the merge,
@@ -57,7 +57,10 @@ Repeat until a round finds nothing.
    - The commit message names the root cause.
    - Push fast-forward to the PR branch (see *Authority*).
    - Then run `python verification/publication_audit.py`.
-6. **Reply.** Answer each inline finding with its disposition and fix commit.
+6. **Reply and resolve.**
+   - Answer each inline finding with its disposition and fix commit.
+   - Resolve a thread once the pushed fix settles it.
+   - Leave a thread open when it is disputed or waits on the owner; it then blocks the merge.
 7. **Start the next round** on the new head with a fresh full review, not just a recheck of the
    fix.
 
