@@ -868,10 +868,11 @@ def code_unspecimened(row: dict) -> bool:
 
 
 def code_source_error(row: dict, tiers: dict) -> bool:
-    """PC1: tier 1-2, anchored in a specimen, a URL or the owner; a specimen provider cites one; text without one."""
+    """PC1: tier 1-2, anchored in a specimen, a URL or the owner; a specimen provider cites one; text only
+    without one (a specimen's observation is its evidence)."""
     specimen = str(row["sourceRef"] or "").startswith("specimen:")
     weak = tiers[row["providerId"]] > 2 or not code_source_shape(row)
-    return weak or (not specimen and code_unspecimened(row))
+    return weak or (row["evidence"] is not None if specimen else code_unspecimened(row))
 
 
 def code_sources(model: dict) -> tuple[int, list]:
