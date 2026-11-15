@@ -41,4 +41,4 @@ The LPP exact Italian SKU is the remaining concrete lead from this round. A read
 image is needed before its printed language and stamp can be assessed; an exact image would go
 through the existing specimen procedure and its collision check. Search snippets and translated
 catalogues alone are not a reason to change U0469/U0471. This report is retained in the #434
-series PR alongside the already verified #438 and #574 corrections.
+series PR alongside the already verified #438 corrections.
