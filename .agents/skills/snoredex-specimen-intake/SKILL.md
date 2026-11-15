@@ -23,7 +23,7 @@ Filing specimens and preparing preview and gallery images runs in a subagent: Cl
 (`claude-sonnet-5-5`) at medium effort on Claude runtimes, GPT-6 Luna (`gpt-6-luna`) at medium
 reasoning effort on OpenAI runtimes (owner decision, 2026-11-12; model names as of that date).
 The orchestrating session hands over the original paths, their SHA-256, the source addresses and
-the target items, and verifies the result itself: the checks in step 9 and a look at every crop. A
+the target items, and verifies the result itself: the checks in step 10 and a look at every crop. A
 subagent's report is not proof. Where the runtime cannot start that model, do the work in the
 session and say so in the report.
 
@@ -40,32 +40,39 @@ session and say so in the report.
    marks and size cues.
 3. Run the collision check below, then assign the next free `SPEC-nnnn`. Identical bytes reuse their
    existing record; never give identical bytes a second id.
-4. Photograph. Work in a checkout of the photo repository: clone
+4. Scrub location. The photo repository is public, so a photograph never carries location metadata.
+   Before the file is saved, remove the GPS block from its Exif (and any XMP GPS coordinates) without
+   recompressing the image data: rewrite only the metadata segment, keep the orientation tag, and
+   prove the scrubbed file decodes pixel-identical to the download. Record the scrubbed file's SHA-256;
+   state "Exif GPS removed before filing; image data unchanged" in `inspectedFrom`, without
+   coordinates, device or person names; and delete the unscrubbed download. `check.py --photos` fails
+   any registered photograph that still carries GPS.
+5. Photograph. Work in a checkout of the photo repository: clone
    `https://github.com/m4s-ai/snoredex-photos` beside this repository once, and `git pull` there
    before every intake. Save the original as `verification/specimens/SPEC-nnnn.<png|jpg>`, compute
    its SHA-256, then commit and push it to that repository's `main` directly: no pull request and no
    separate permission, it is part of intake. The pushed file is what reserves the id. It is never
    changed, renamed or deleted afterwards; a wrong photograph gets a new record, not an overwrite.
-5. Record. Add the register entry to `verification/specimens.json` here, keeping the fields existing
+6. Record. Add the register entry to `verification/specimens.json` here, keeping the fields existing
    records use: `specimenId`, `setCode`, `number`, `variant`, `language`, `heldBy`,
    `inspectedFrom`, `observed`, `recordedAt` (the real inspection date), `photograph` (the file
    name), `photographSha256` (the hash just computed), `photographSource` (the issue or image URL)
    and `listingUrl` for a seller photo (never invent one), and `citedBy` (the exact `unitId` or
    printing id the image supports). Update the register's `count`. File a seller photograph as a
    third-party-held specimen, never as a bare marketplace link.
-6. Record visible physical properties under `physicalObservation` (`finish`, `foilPattern`,
+7. Record visible physical properties under `physicalObservation` (`finish`, `foilPattern`,
    `markings`, `markingRole`, `cardSize`, `edition`) with a `basis` that quotes what the image
    shows. Leave a property unset when the image does not establish it. An explicit owner
    determination is recorded as `ownerAttestedFields` with `ownerAttestedAt`. For a set printed in
    both editions, a visible 1st Edition mark is 1st Edition and a visibly empty mark position on a
    complete, legible face is Unlimited.
-7. Cite the specimen where it carries a claim: a language claim's `sourceRef: "specimen:SPEC-nnnn"`
+8. Cite the specimen where it carries a claim: a language claim's `sourceRef: "specimen:SPEC-nnnn"`
    with the matching provider (`inspected-specimen`, `cardmarket-listing-photo` or
    `seller-listing-photo`), or the printing's evidence. Follow
    [claim evidence](../snoredex-claim-evidence/SKILL.md) for the claim change.
-8. Images. Where the item needs them, prepare its table preview and gallery images as
+9. Images. Where the item needs them, prepare its table preview and gallery images as
    [the image section](#specimen-intake-table-and-gallery-images) describes.
-9. Verify. Run `python scripts/check.py`: every `specimen:SPEC-nnnn` in `data/` must resolve, and
+10. Verify. Run `python scripts/check.py`: every `specimen:SPEC-nnnn` in `data/` must resolve, and
    specimen authority must cite a specimen, and every specimen path in `data/` must be a
    photograph the register names, with the same SHA-256 on its asset. Run
    `python scripts/check.py --photos DIR` against the photo-repository checkout: every photograph
@@ -83,7 +90,7 @@ without cropping, resizing or enhancement, and require exact pixel equality betw
 source and the reopened PNG in the same mode. Record the original URL, retrieval date, MIME type,
 size, dimensions and SHA-256, plus the PNG's path and SHA-256, the decoder and version and the
 equality result, in that folder's `sources.json`. File the PNG as the specimen: it goes to the
-photo repository (step 4), while the untouched WebP stays under `verification/evidence/` here.
+photo repository (step 5), while the untouched WebP stays under `verification/evidence/` here.
 
 ## Specimen-intake table and gallery images
 

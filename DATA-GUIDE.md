@@ -103,12 +103,13 @@ hand with a data change) and frozen fields of the previous pipeline.
 **`data/sets.json`** — `localizations` (locality-qualified languages: `WEST/es-ES` and
 `LATAM/es-419` are distinct; their `displayOrder` is the language order of the table and
 gallery), `languages` (the legacy claim language codes), `localSets` (a set or
-product of one locality, with its source references), `setEditions` (a local set released in one
+product of one locality, with its source references; never one resting on a claim the owner
+adjudicated `not-printed`, rule LS1), `setEditions` (a local set released in one
 localization, with its release date where known) and `works` (card text, by `cardKey`).
 
 `localSetCode` is a legacy value that mixes Cardmarket bookkeeping, the locality marker and the
 printed code; it stays as it is. The set code is recorded on three levels instead: `baseSetCode` on a
-local set (language-independent, without marker or regulation mark: `MA3`, `s2`; for a Prize Pack the
+local set (language-independent, without marker or regulation mark: `ma3`, `s2`; for a Prize Pack the
 owner's set identity, `PPS8 JTG`), and per edition the `localityMarker` and the `printedSetCode` in
 `setEditionCodes`. A set without `baseSetCode` has none established; a Cardmarket variant set never
 carries one and uses its base set's. `scripts/build.py` keeps `baseSetCode` out of the catalogue and
@@ -118,7 +119,16 @@ Six further collections describe sets rather than cards; `scripts/build.py` does
 so they change no output.
 
 - `setEditionCodes` — the set code an edition prints, at most one record per `setEditionId`:
-  `printedSetCode` exactly as printed, without the regulation mark (`MA3 T`, `JTG DE`, `s2`),
+  `printedSetCode` exactly as printed, without the regulation mark (`ma3 T`, `JTG DE`, `s2`,
+  `XY10` from a set-mark badge). The code font prints a lowercase letter as a small capital: read
+  the case from the letter's height against the digits (a letter at x-height is lowercase, one at
+  digit height uppercase), never from its shape, and only where the image is sharp enough to
+  compare them. A locality marker is told by its own glyph style, not by spacing (the F in
+  `sv2a F`, the C in `cs1D C`). A promo whose code box shows only PROMO takes its code from the collector number
+  (`S-P` from `030/S-P`, `SWSH` from `SWSH032`, `XY` from `XY179`; owner ruling 2026-11-15).
+  Where a card prints no code at all (the Wizards promo number `49`, Diamond & Pearl's set
+  symbol), only the collection owner may assign the recognized code (`WP`, `DP`), recorded as an
+  `owner-attestation`; without that ruling the edition has no record,
   `printedBaseCode` only where the printed base differs from the set's `baseSetCode` (`JTG` on
   `PPS8 JTG`), `localityMarker` (null: the card shows the code without a marker), and the proof:
   `providerId`, `sourceRef` (`specimen:SPEC-nnnn` or null), `sourceUrl`, `evidence` (required, at

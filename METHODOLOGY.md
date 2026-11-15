@@ -241,8 +241,8 @@ request without a new lead or access method.
   and most SM-P.
 - **Never take the set code from the mark asset's filename**; render the badge
   (`/<locale>/card-img/mark/<file>.png`, upscale) or read the card image. Thai codes take a `T`
-  suffix and Indonesian an `I` (`sc1a T`, `sc1D I`); Sun & Moon-era codes take an `A` prefix instead
-  (`AS1b`, `AC3a`). One code can name two products, and the code is not always the Japanese one
+  suffix and Indonesian an `I` (`sc1a T`, `sc1D I`); Sun & Moon-era codes take an `a` prefix instead
+  (`as1b`, `ac3a`). One code can name two products, and the code is not always the Japanese one
   (`136/193` is `m2a` in Traditional Chinese but `ma3` in Thai and Indonesian): identify by number,
   denominator, card name and regulation mark.
 - When a structured field is missing or looks like a placeholder, check whether the image carries
