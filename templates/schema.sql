@@ -1,4 +1,4 @@
--- snoredex.sqlite 2.0.0: the canonical model in data/ as a relational database, built by
+-- snoredex.sqlite 2.1.0: the canonical model in data/ as a relational database, built by
 -- scripts/build.py. This file is the database contract. JSON text columns end in _json.
 -- Absence is never encoded: `not-printed` exists only beside an owner adjudication, and no
 -- column claims that a source supports absence.
@@ -30,7 +30,11 @@ CREATE TABLE localizations (
     display_order INTEGER NOT NULL
 ) WITHOUT ROWID;
 
--- One local set or product of one locality.
+-- One local set or product of one locality. local_set_code is the legacy Cardmarket-derived value;
+-- base_set_code is the language-independent code (null: not established), and the Cardmarket
+-- columns are marketplace bookkeeping, never evidence. A set's availability group is the sets joined
+-- to it by availability-merging relations; known_localization_ids_json lists the localizations an
+-- edition of the group is known in, and a missing localization is unknown, not absent.
 CREATE TABLE local_sets (
     local_set_id TEXT PRIMARY KEY,
     locality TEXT NOT NULL,
@@ -39,10 +43,31 @@ CREATE TABLE local_sets (
     product_kind TEXT NOT NULL,
     identity_state TEXT NOT NULL,
     source_refs_json TEXT NOT NULL,
+    base_set_code TEXT,
+    cardmarket_set_codes_json TEXT NOT NULL,
+    cardmarket_variant_prefix TEXT,
+    variant_of_local_set_id TEXT REFERENCES local_sets(local_set_id),
+    availability_group_id TEXT NOT NULL REFERENCES local_sets(local_set_id),
+    known_localization_ids_json TEXT NOT NULL,
     sort_key TEXT NOT NULL
 ) WITHOUT ROWID;
 
--- One release of a local set in one localization, with its release date where known.
+-- One dated release of a set edition, with its source (data/sets.json releaseEvents).
+CREATE TABLE release_events (
+    release_event_id TEXT PRIMARY KEY,
+    release_date TEXT NOT NULL,
+    release_date_precision TEXT NOT NULL,
+    release_approximate INTEGER NOT NULL CHECK (release_approximate IN (0, 1)),
+    provider_id TEXT NOT NULL REFERENCES providers(provider_id),
+    source_url TEXT,
+    source_ref TEXT,
+    evidence TEXT,
+    checked_at TEXT
+) WITHOUT ROWID;
+
+-- One release of a local set in one localization, with its release date where known and the code it
+-- prints. availability is established or unresolved-placeholder; not-printed is reserved for an owner
+-- adjudication and is never derived from a source's silence.
 CREATE TABLE set_editions (
     set_edition_id TEXT PRIMARY KEY,
     local_set_id TEXT NOT NULL REFERENCES local_sets(local_set_id),
@@ -51,8 +76,73 @@ CREATE TABLE set_editions (
     release_date TEXT,
     release_date_precision TEXT,
     release_approximate INTEGER NOT NULL CHECK (release_approximate IN (0, 1)),
-    release_event_id TEXT,
+    release_event_id TEXT REFERENCES release_events(release_event_id),
+    printed_set_code TEXT,
+    locality_marker TEXT,
+    availability TEXT NOT NULL CHECK (availability IN ('established', 'unresolved-placeholder', 'not-printed')),
     sort_key TEXT NOT NULL
+) WITHOUT ROWID;
+
+-- The set code one edition prints, with its proof (data/sets.json setEditionCodes).
+CREATE TABLE set_edition_codes (
+    set_edition_id TEXT PRIMARY KEY REFERENCES set_editions(set_edition_id),
+    printed_set_code TEXT NOT NULL,
+    printed_base_code TEXT,
+    locality_marker TEXT,
+    provider_id TEXT NOT NULL REFERENCES providers(provider_id),
+    source_ref TEXT,
+    source_url TEXT,
+    evidence TEXT,
+    corroborated INTEGER NOT NULL CHECK (corroborated IN (0, 1)),
+    checked_at TEXT NOT NULL
+) WITHOUT ROWID;
+
+-- A Cardmarket variant set (the x prefix) and the set it is bookkeeping for; never a printed code.
+CREATE TABLE cardmarket_variant_sets (
+    local_set_id TEXT PRIMARY KEY REFERENCES local_sets(local_set_id),
+    variant_of_local_set_id TEXT NOT NULL REFERENCES local_sets(local_set_id),
+    variant_prefix TEXT NOT NULL,
+    checked_at TEXT NOT NULL
+) WITHOUT ROWID;
+
+-- The locality marker a localization prints after the set code, with the specimen that shows it.
+-- A localization without a row has no marker established, not none.
+CREATE TABLE locality_markers (
+    localization_id TEXT PRIMARY KEY REFERENCES localizations(localization_id),
+    marker TEXT NOT NULL,
+    status TEXT NOT NULL CHECK (status IN ('active', 'retired')),
+    source_ref TEXT NOT NULL
+) WITHOUT ROWID;
+
+-- One kind of relation between two local sets; the registry is extensible.
+CREATE TABLE set_relation_types (
+    relation_type_id TEXT PRIMARY KEY,
+    label TEXT NOT NULL,
+    description TEXT NOT NULL,
+    symmetric INTEGER NOT NULL CHECK (symmetric IN (0, 1)),
+    merges_availability INTEGER NOT NULL CHECK (merges_availability IN (0, 1)),
+    requires_coverage INTEGER NOT NULL CHECK (requires_coverage IN (0, 1)),
+    status TEXT NOT NULL CHECK (status IN ('active', 'retired')),
+    added_at TEXT NOT NULL
+) WITHOUT ROWID;
+
+-- One owner-decided relation between two local sets, with its source.
+CREATE TABLE set_relations (
+    relation_id TEXT PRIMARY KEY,
+    from_local_set_id TEXT NOT NULL REFERENCES local_sets(local_set_id),
+    to_local_set_id TEXT NOT NULL REFERENCES local_sets(local_set_id),
+    relation_type TEXT NOT NULL REFERENCES set_relation_types(relation_type_id),
+    coverage TEXT,
+    card_range TEXT,
+    note TEXT,
+    differences_json TEXT NOT NULL,
+    basis TEXT NOT NULL,
+    provider_id TEXT NOT NULL REFERENCES providers(provider_id),
+    source_url TEXT,
+    source_ref TEXT,
+    evidence TEXT NOT NULL,
+    checked_at TEXT NOT NULL,
+    decided_by TEXT NOT NULL
 ) WITHOUT ROWID;
 
 -- One card text (name plus attacks), shared by printings across sets and languages.
@@ -349,6 +439,20 @@ SELECT
 FROM printings p
 JOIN localizations l USING (localization_id)
 LEFT JOIN assets a ON a.asset_id = p.image_asset_id;
+
+-- One row per set edition: its set, localization, codes, availability and release with its source.
+CREATE VIEW app_sets AS
+SELECT
+    e.set_edition_id, e.local_set_id, s.locality, e.localization_id, l.display_name AS language,
+    s.local_set_code, s.local_set_name, s.base_set_code, e.printed_set_code, e.locality_marker,
+    e.availability, e.release_date, e.release_date_precision, e.release_approximate,
+    e.release_event_id, r.provider_id AS release_provider_id, r.source_url AS release_source_url,
+    s.cardmarket_set_codes_json, s.variant_of_local_set_id, s.availability_group_id,
+    s.known_localization_ids_json
+FROM set_editions e
+JOIN local_sets s USING (local_set_id)
+JOIN localizations l USING (localization_id)
+LEFT JOIN release_events r USING (release_event_id);
 
 -- One row per language claim with its product, provider grade and any owner adjudication.
 CREATE VIEW app_language_claims AS

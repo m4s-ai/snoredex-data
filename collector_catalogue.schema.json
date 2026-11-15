@@ -10,6 +10,8 @@
     "localSets",
     "setEditions",
     "works",
+    "setRelationTypes",
+    "setRelations",
     "items",
     "assets",
     "qualitySummary"
@@ -35,7 +37,7 @@
           "const": "snoredex-collector-catalogue"
         },
         "schemaVersion": {
-          "const": "1.0.0"
+          "const": "1.1.0"
         },
         "datasetId": {
           "type": "string"
@@ -113,6 +115,18 @@
       "type": "array",
       "items": {
         "$ref": "#/$defs/work"
+      }
+    },
+    "setRelationTypes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/setRelationType"
+      }
+    },
+    "setRelations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/setRelation"
       }
     },
     "items": {
@@ -630,6 +644,12 @@
         "productKind",
         "identityState",
         "sourceRefs",
+        "baseSetCode",
+        "cardmarketSetCodes",
+        "cardmarketVariantPrefix",
+        "variantOfLocalSetId",
+        "availabilityGroupId",
+        "knownLocalizationIds",
         "sortKey"
       ],
       "properties": {
@@ -664,6 +684,47 @@
           },
           "uniqueItems": true
         },
+        "baseSetCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Language-independent set code; null: not established. A Cardmarket variant set carries its base set's."
+        },
+        "cardmarketSetCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "Cardmarket set codes of the legacy products behind the set's claims: marketplace bookkeeping, never evidence."
+        },
+        "cardmarketVariantPrefix": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The Cardmarket prefix (x) when this set is a Cardmarket variant set."
+        },
+        "variantOfLocalSetId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The local set a Cardmarket variant set is bookkeeping for."
+        },
+        "availabilityGroupId": {
+          "type": "string",
+          "description": "The smallest localSetId of the sets joined to this one by availability-merging relations (itself when none)."
+        },
+        "knownLocalizationIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "Localizations an edition of the availability group is known in; a missing localization is unknown, not absent."
+        },
         "sortKey": {
           "type": "string"
         }
@@ -683,6 +744,10 @@
         "releaseDatePrecision",
         "releaseApproximate",
         "releaseEventId",
+        "printedSetCode",
+        "localityMarker",
+        "availability",
+        "releaseSource",
         "sortKey"
       ],
       "properties": {
@@ -730,6 +795,65 @@
             "string",
             "null"
           ]
+        },
+        "printedSetCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The set code exactly as the edition prints it, without the regulation mark; null: not recorded."
+        },
+        "localityMarker": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The locality marker within printedSetCode; null: the code prints without one or none is recorded."
+        },
+        "availability": {
+          "enum": [
+            "established",
+            "unresolved-placeholder",
+            "not-printed"
+          ],
+          "description": "not-printed only beside an owner adjudication; never derived from a source's silence."
+        },
+        "releaseSource": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "providerId",
+            "sourceUrl",
+            "sourceRef",
+            "checkedAt"
+          ],
+          "properties": {
+            "providerId": {
+              "type": "string"
+            },
+            "sourceUrl": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "sourceRef": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "checkedAt": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "description": "The source of the edition's release event; null without an event."
         },
         "sortKey": {
           "type": "string"
@@ -824,6 +948,148 @@
               "const": "THIRD_PARTY_NOTICES.md"
             }
           }
+        }
+      }
+    },
+    "setRelationType": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relationTypeId",
+        "label",
+        "description",
+        "symmetric",
+        "mergesAvailability",
+        "requiresCoverage",
+        "status",
+        "addedAt"
+      ],
+      "properties": {
+        "relationTypeId": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "symmetric": {
+          "type": "boolean"
+        },
+        "mergesAvailability": {
+          "type": "boolean"
+        },
+        "requiresCoverage": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "active",
+            "retired"
+          ]
+        },
+        "addedAt": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "setRelation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relationId",
+        "fromLocalSetId",
+        "toLocalSetId",
+        "relationType",
+        "coverage",
+        "cardRange",
+        "note",
+        "differences",
+        "basis",
+        "providerId",
+        "sourceUrl",
+        "sourceRef",
+        "evidence",
+        "checkedAt",
+        "decidedBy"
+      ],
+      "properties": {
+        "relationId": {
+          "type": "string",
+          "pattern": "^SETREL-[0-9]{4}$"
+        },
+        "fromLocalSetId": {
+          "type": "string"
+        },
+        "toLocalSetId": {
+          "type": "string"
+        },
+        "relationType": {
+          "type": "string"
+        },
+        "coverage": {
+          "enum": [
+            "full",
+            "partial",
+            null
+          ]
+        },
+        "cardRange": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "differences": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "finish",
+              "card-list",
+              "features"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "basis": {
+          "enum": [
+            "source-stated",
+            "owner-attested"
+          ]
+        },
+        "providerId": {
+          "type": "string"
+        },
+        "sourceUrl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sourceRef": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 20
+        },
+        "checkedAt": {
+          "type": "string",
+          "format": "date"
+        },
+        "decidedBy": {
+          "type": "string"
         }
       }
     }
