@@ -247,6 +247,9 @@ request without a new lead or access method.
   denominator, card name and regulation mark.
 - When a structured field is missing or looks like a placeholder, check whether the image carries
   it before recording anything.
+- Singapore's English details may omit the collector number in text while the linked card image
+  shows it. Retain the source-native number and set/language badge from that image; a regional
+  page or render does not establish a distinct SEA manufactured edition or physical finish.
 - Thai, Indonesian and Traditional Chinese have catch-up sets of already-released cards under local
   codes and numbers, and a card can live in another set entirely (`svLN 010` in Traditional Chinese
   is the standalone promo `SV-P 215`). Check for the card under another set before treating a

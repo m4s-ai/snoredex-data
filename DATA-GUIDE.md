@@ -40,6 +40,19 @@ before building anything on the data.
   universe plus separately evidenced admissions; source and locality gaps stay explicit.
 - **Code cards are excluded** from the catalogue; their legacy claims are `out-of-scope`.
 
+### Official-source boundaries
+
+The open source gaps are tracked in [#444](https://github.com/m4s-ai/snoredex-data/issues/444).
+These limits qualify coverage, not the positive card records already retained.
+
+| Source | What remains unknown |
+|---|---|
+| Japan | The name search omits known variants; its results are not a complete print manifest or a rule excluding a rarity class. |
+| Mainland China | The announced WeChat directory has not supplied inspected native card responses. Its existence alone confirms no card. |
+| Korea | Current name-search results do not establish historical coverage; earlier positive identities remain valid independently. |
+| Singapore English | Collector numbers may be readable in the official card image despite missing text fields. A regional listing and English render do not establish a separately manufactured SEA edition or its physical finish. |
+| LATAM xJTG | The exact localized stamped versions still need positive evidence; European Spanish cannot fill that gap. |
+
 ## The status vocabularies
 
 | Field | Values and what an application may conclude |
