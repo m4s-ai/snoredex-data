@@ -1,68 +1,62 @@
 <!-- doc: role=retained gallery image research and source provenance; stage=task -->
 # Gallery image research, #481 round 05
 
-Part of [#476](https://github.com/m4s-ai/snoredex-data/issues/476).
-`targets.json` freezes four active, unprepared RR 33/111 items before source acquisition,
-against main `c5263c2c`. This deliberately bounded follow-up does not repeat the old 973-item
-inventory or assert a gallery-wide visual acceptance. Acquisition date: 2026-11-15.
+Part of [#476](https://github.com/m4s-ai/snoredex-data/issues/476), inspected 2026-11-15.
+`targets.json` froze four active, unprepared RR 33/111 items against main `c5263c2c` before
+acquisition. This bounded round accepts one exact photograph and documents three remaining image
+needs. It is not the gallery-wide acceptance in #482 and closes no language or finish question.
 
-## Source review
+## Source review and outcome
 
-No existing specimen asset is assigned to these four items: their shared legacy asset is a
-representative marketplace image, not an exact localized front. The round-04 report already
-records the unsuccessful German/French reverse leads. Rechecked stored sources before the
-bounded searches for exact German, French and Italian RR 33/111 fronts.
+The four items initially shared a representative legacy marketplace asset; none had a matching
+specimen asset. Reviewed retained sources and the round-04 report before the bounded localized
+searches. The source map records acquired bytes, hashes, dimensions and URLs.
 
 | Item | Target | Result and remaining work |
 | --- | --- | --- |
-| `item-053fc7df-8865-5b74-ae7e-bef9e10822b2` | German Reverse Holo | No qualifying exact photo acquired. Search results include English League crosshatch copies and 81/111, neither interchangeable with this card. Need a complete German 33/111 front with visible reverse foil and at least 600 effective pixels across the card. |
-| `item-09429ed9-cdf8-594d-9677-19183a4798e8` | French Reverse Holo | `fr-reverse.jpg`, 1200 × 1600: Ronflex niv.37, PV100, Choisir et collectionner, Se retourner 60, 33/111, RR symbol and ©2009; rainbow foil crosses the rules area and header outside the artwork. All four yellow borders are visible, with no stand, stamp or slab hiding them. Classically perspective-corrected to 840 × 1176 without enlargement; the complete border and readable face passed independent visual review. Preview and three gallery sizes are prepared. **Photo upload and canonical gallery association remain pending.** |
-| `item-ad9ed036-f421-5934-8a4f-61f3606bd05d` | Italian non-holo | The exact publisher image is only 245 × 342. The retained publisher HTML from the earlier local-name research identifies its URL. Italian-language price pages point to English sales and cannot supply an Italian card face by translation. Need a larger complete Italian regular front; do not upscale the publisher thumbnail. |
-| `item-c703b5f2-de23-54f6-8897-5e9fe21d9a4d` | German non-holo | The localized publisher image is only 245 × 342; the Last Sold German face is 467 × 650. Both are below the 600-pixel minimum before any crop. Need a larger exact German front; neither image is accepted. |
+| `item-053fc7df-8865-5b74-ae7e-bef9e10822b2` | German Reverse Holo | Placeholder retained. Results included English League crosshatch copies and 81/111, neither interchangeable with this card. Need a complete German 33/111 front with visible reverse foil and at least 600 effective pixels across the card. |
+| `item-09429ed9-cdf8-594d-9677-19183a4798e8` | French Reverse Holo | Accepted exact photo, SPEC-0796: Ronflex niv.37, PV100, Choisir et collectionner, Se retourner 60, 33/111, RR symbol and ©2009. Rainbow foil crosses the rules area and header outside the artwork. Complete yellow border, no stand or slab hiding the face. Corrected 840 × 1176 face, 360-pixel preview and 240/480/840-pixel gallery images. |
+| `item-ad9ed036-f421-5934-8a4f-61f3606bd05d` | Italian non-holo | Placeholder retained. Publisher image is only 245 × 342; its URL comes from the earlier retained publisher HTML. Italian price pages point to English sales and cannot establish an Italian face by translation. Need a larger complete Italian regular front; do not upscale the thumbnail. |
+| `item-c703b5f2-de23-54f6-8897-5e9fe21d9a4d` | German non-holo | Placeholder retained. Publisher image is 245 × 342 and the acquired Last Sold face is 467 × 650, below the 600-pixel threshold before cropping. Need a larger exact German front. |
 
-The source map records the acquired bytes, hashes and URLs. Seller metadata alone was not used
-to identify the French reverse; its retained card face was inspected. The Last Sold Italian
-listing page and German listing page returned the same Italian-market content on this retrieval;
-their translated market labels are not localized-card evidence. The live Italian publisher page
-returned a 1032-byte interstitial; its retained earlier HTML remains the URL provenance.
+The live Italian publisher page returned an interstitial. German and Italian Last Sold listing
+pages returned the same Italian-market content on this retrieval; translated labels were not
+used as localized-card evidence. Seller metadata alone did not identify the French reverse:
+the retained face was inspected manually. Local OCR was unavailable.
 
-## Handoff
+## Preparation and canonical records
 
-- Prepared: inverse projective homography, complete perimeter, 360-pixel palette preview and
-  240/480/840-pixel WebPs. `preparation.json` records geometry, encoder parameters and hashes.
-  The first draft was rejected for enlarging the narrow source edge and clipping the top border;
-  only the independently reviewed 840-pixel revision is retained as the prepared output.
-- The photo-repository collision check found ids through `SPEC-0795`; `SPEC-0796` is tentative
-  until its original is pushed. Automatic approval review rejected that push for lack of an
-  explicit chat instruction. Do not retry until the owner grants it; recheck collisions before
-  reserving an id. No specimen or item has been assigned this tentative id in canonical data.
-- After the upload, register the seller photo and add only its exact French printing association
-  to `data/images.json`. Keep existing language and finish verdicts separate from this gallery work.
-- Inspect this item on desktop/mobile in grid, binder and lightbox after integration, then build
-  and verify the Pages artifact. `proposed-records.json` is a reviewable proposal only; it must
-  be reconciled with the photo repository before applying its tentative specimen id.
-- Three targets remain documented image needs. The French candidate remains a placeholder
-  until preparation and visual acceptance pass. No issue criterion is closed by this report.
+`preparation.json` records the source hash, source quadrilateral, inverse homography, Pillow
+version, conservative effective width, encoding parameters and derivative hashes. Classical
+perspective correction preserves the complete border and printed marks; no retouching or
+enlargement. The orchestrator independently reviewed the original and final crop and verified
+all four homography mappings, exact reconstructed pixels, preview mode and all output hashes.
+Preparation was delegated to GPT-6 Luna at medium effort.
 
-The current offline baseline gate passed before gallery-data edits (none have been made).
-Windows required a writable temporary directory and permission for the test-created local Git
-repositories. The first restricted attempts failed at those environment boundaries; the complete
-retry passed all model/selftests, build checks, link checks and 11 publication checks.
+The unchanged JPEG is reserved as `verification/specimens/SPEC-0796.jpg` in
+[photo commit f6ac25a](https://github.com/m4s-ai/snoredex-photos/commit/f6ac25a5d1900e07ae807b78548eb94d421d18d6).
+The remote commit and original SHA-256 were independently checked after the owner explicitly
+approved the upload. Canonical changes: one specimen record, one exact image asset, one gallery
+association, the existing item's image reference, and its seller-listing provenance URL.
+All item ids, other items, language/finish verdicts, providers and owner decisions are unchanged.
+The five consumer outputs were rebuilt from those inputs.
 
-The research-stage `python scripts/regen.py` also passed. A separate assert-based check verified all four
-target memberships against active `data/printings.json`, their lack of a prepared gallery image,
-and all four retained file hashes and dimensions. Generated outputs remained unchanged. Browser,
-photo-repository intake and Pages-artifact acceptance are pending because no canonical gallery
-association has changed. Preparation was delegated to GPT-6 Luna at medium effort; the orchestrator
-independently reviewed the original and revised crop and verified source SHA-256, all four
-homography corner mappings, no enlargement, exact reconstructed crop pixels, palette preview mode
-and all three WebP dimensions and hashes. Local OCR was unavailable; card fields were visually read.
+## Verification and remaining scope
 
-After preparation, `python scripts/regen.py` passed again with canonical data unchanged. A local
-gallery preview was built from the proposed records in memory. All four target entries passed grid
-and lightbox checks on desktop and mobile DPR2; the prepared French image also passed 2×2, 3×3,
-4×4 and 5×5 binder layouts in both reading orders on both viewports (16 layout checks). Loaded
-resource pixel sizes cover the displayed pixel density, with no browser/page or HTTP errors.
-The orchestrator visually inspected the desktop/mobile lightboxes and mobile binder crop.
-`preview-check.json` records this limited scope; it does not replace post-integration browser
-checks or Pages-artifact verification.
+- Full `python scripts/regen.py`: passed.
+- Full `python verification/test_site.py`: 102/102 passed.
+- Built Pages artifact: 2661 files, 195989 KB; allowlist verification passed.
+- All four targets in the built artifact: grid/lightbox on desktop and mobile DPR2 passed.
+  The accepted French image also passed 2×2, 3×3, 4×4 and 5×5 binders in both reading orders
+  on both viewports (16 layout checks), with adequate loaded pixel sizes and no browser/HTTP errors.
+- A scope assertion verified only the intended specimen and exact image association were added;
+  all other item records, ids and verdicts were preserved. `validation.json` records the final scope.
+- Full photo checkout check: 692 photographs checked, one **pre-existing** mismatch, SPEC-0042.
+  Pre-task register hash is `ad7f48ec5393d4a8bee7c33c1225ad4972eaed894433cc12d0dd665310186b88`;
+  pre-intake photo commit `afd535b`, current commit and checkout all contain
+  `2b29aea2742fa5dd9a0f4241554a2e2174f2eebf3de1ea8e03298210e5073263`.
+  Left unchanged. SPEC-0796 matches its register hash. Fourteen other photo files are not yet
+  registered on this data branch and belong to other intake work.
+
+The three remaining image needs stay open in #481; #476 and #482 remain open. No data-branch
+push, pull request, issue comment or Pages deployment was performed.

@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 781,
+  "count": 782,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -17069,6 +17069,28 @@
         "ownerAttestedAt": "2026-11-13"
       },
       "listingUrl": "https://www.pokemon.com/us/news/pokemon-happy-meals-are-coming-to-mcdonalds-in-an-exciting-new-way-"
+    },
+    {
+      "specimenId": "SPEC-0796",
+      "setCode": "RR",
+      "number": "33/111",
+      "variant": "base",
+      "language": "French",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Original French seller listing photograph visually inspected at source resolution; local OCR unavailable",
+      "observed": "Complete French Ronflex Niv. 37 33/111 card face with 100 PV, the French rules text, and the Rising Rivals set symbol. Rainbow-reflective foil bands cross the rules-text area, visibly establishing reverse holo on this copy. The full yellow border and all four rounded corners are visible.",
+      "recordedAt": "2026-11-15",
+      "photograph": "SPEC-0796.jpg",
+      "photographSha256": "sha256:2e0af144043312c3d5681893bb2175189396b828af1a45b459ad090e4d85cb0e",
+      "photographSource": "https://i.ebayimg.com/images/g/gPsAAOSwoqpiZAI~/s-l1600.jpg",
+      "listingUrl": "https://www.ebay.fr/itm/134095537917",
+      "citedBy": [
+        "F0309-P02"
+      ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "basis": "The complete face visibly reflects rainbow foil bands across the rules-text area."
+      }
     }
   ]
 }
