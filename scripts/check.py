@@ -845,6 +845,18 @@ def unused_events(model: dict) -> tuple[int, list]:
     return failing(rows(model, EV), lambda e: e["releaseEventId"] not in used, lambda e: e["releaseEventId"])
 
 
+def adjudicated_sets(model: dict) -> tuple[int, list]:
+    """LS1: no local set rests on a claim the owner adjudicated not-printed: such a set was never made."""
+    gone = {"CLAIM:legacy:" + c["unitId"] for c in rows(model, C) if c["applicationStatus"] == "not-printed"}
+    return failing(rows(model, LS), lambda s: bool(gone & set(s["sourceRefs"])), lambda s: s["localSetId"])
+
+
+def not_printed_source(m: dict) -> None:
+    unit = next(c["unitId"] for c in rows(m, C) if c["applicationStatus"] == "not-printed")
+    record = edit(m, LS)
+    record["sourceRefs"] = record["sourceRefs"] + ["CLAIM:legacy:" + unit]
+
+
 def weak_release(m: dict) -> None:
     tier3 = first_provider(m, 3)
     edit(m, EV, lambda e: e["sourceRef"] is None).update(providerId=tier3, sourceUrl=None)
@@ -1029,6 +1041,7 @@ DOMAIN = {
     "V1: a Cardmarket variant set is its base set's code plus the prefix, in the same locality": (
         variant_sets, change(VAR, variantPrefix="y")),
     "LM1: a locality marker cites a specimen of its language that shows it": (locality_markers, foreign_marker),
+    "LS1: no local set rests on a claim the owner adjudicated not-printed": (adjudicated_sets, not_printed_source),
     "RE1: a release event's source is checkable or strong": (release_sources, weak_release),
     "RE2: a set edition's release date is its event's": (edition_dates, change(
         ED, lambda e: e["releaseEventId"], releaseDate="1999-01-01")),
