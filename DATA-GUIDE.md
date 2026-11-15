@@ -123,8 +123,10 @@ owner's set identity, `PPS8 JTG`), and per edition the `localityMarker` and the 
 `setEditionCodes`. A set without `baseSetCode` has none established; a Cardmarket variant set never
 carries one and uses its base set's.
 
-Six further collections describe sets rather than cards; the catalogue and the database carry them
-(contract 1.1.0, database 2.1.0).
+Six further collections describe sets rather than cards. The database carries each as a table
+(2.1.0). The catalogue (1.1.0) carries `setRelationTypes` and `setRelations` as they are and derives
+set fields from three others (`setEditionCodes`, `releaseEvents`, `cardmarketVariantSets`, see the
+catalogue contract above); `localityMarkers` stays out of it.
 
 - `setEditionCodes` — the set code an edition prints, at most one record per `setEditionId`:
   `printedSetCode` exactly as printed, without the regulation mark (`ma3 T`, `JTG DE`, `s2`,
