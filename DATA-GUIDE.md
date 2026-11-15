@@ -61,6 +61,13 @@ hashes the whole document. An `itemId` is stored verbatim and never recomputed. 
 routes are published, so between two catalogue versions an item can be removed or re-keyed, and a
 consumer sees that as an id that is gone and one that is new.
 
+Items with `active: false` stay in the catalogue for traceability, but are excluded from the table
+and gallery. In `qualitySummary.counts`, `items` counts all retained records; `activeItems` and
+`inactiveItems` split that total. The kind/progress totals (`verifiedPrintings`, `finishCandidates`,
+`researchPlaceholders`, `currentKnown`, `research`) and `graphAccounting` count active items only.
+`legacyCompatibility.counts` still accounts for all retained predecessor rows, including inactive
+ones; it is a historical compatibility count, not an open research queue.
+
 ## The five files in `data/`
 
 Each file is UTF-8 JSON with one record per line, sorted by id. `scripts/check.py` validates
