@@ -294,6 +294,13 @@ def lone_release(m: dict):
     return lambda r: counts[r["cardReleaseId"]] == 1
 
 
+def uncoded(m: dict):
+    """An edition without a printed set code: breaking a coded one would also strip its set's carrier (PC6)
+    and its marker's localization (PC2), so the mutation would not fire its own rule alone."""
+    coded = {r["setEditionId"] for r in rows(m, "sets.setEditionCodes")}
+    return lambda r: r["setEditionId"] not in coded
+
+
 def foreign_language(m: dict) -> None:
     unit = edit(m, FU, lambda u: u["products"] and u["completenessStatus"] != "owner-adjudicated")
     spoken = {c["languageCode"] for c in rows(m, C) if c["productId"] == unit["products"][0]["productId"]}
@@ -387,8 +394,9 @@ SIMPLE_REFS = (
     (P, "imageAssetId", "images.assets", None, None),
     (P, "finishUnitId", FU, None, None),
     (P, "sourcePrintingId", FP, None, None),
-    ("sets.setEditions", "localSetId", "sets.localSets", None, None),
-    ("sets.setEditions", "localizationId", "sets.localizations", None, None),
+    ("sets.setEditions", "localSetId", "sets.localSets", None, lambda: break_ref(ED, "localSetId", uncoded)),
+    ("sets.setEditions", "localizationId", "sets.localizations", None,
+     lambda: break_ref(ED, "localizationId", uncoded)),
     (C, "productId", "claims.legacyProducts", None, lambda: add_claim(productId=-1)),
     (C, "languageCode", "sets.languages", None, lambda: add_claim(languageCode="xx")),
     (FU, "languageCode", "sets.languages", None, None),
