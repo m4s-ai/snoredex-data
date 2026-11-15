@@ -102,7 +102,8 @@ so they change no output.
   `XY10` from a set-mark badge). The code font prints a lowercase letter as a small capital: read
   the case from the letter's height against the digits (a letter at x-height is lowercase, one at
   digit height uppercase), never from its shape, and only where the image is sharp enough to
-  compare them. A promo whose code box shows only PROMO takes its code from the collector number
+  compare them. A locality marker is told by its own glyph style, not by spacing (the F in
+  `sv2a F`, the C in `cs1D C`). A promo whose code box shows only PROMO takes its code from the collector number
   (`S-P` from `030/S-P`, `SWSH` from `SWSH032`, `XY` from `XY179`; owner ruling 2026-11-15).
   Where a card prints no code at all (the Wizards promo number `49`, Diamond & Pearl's set
   symbol), only the collection owner may assign the recognized code (`WP`, `DP`), recorded as an
