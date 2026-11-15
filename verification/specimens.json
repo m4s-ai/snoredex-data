@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 793,
+  "count": 795,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -17308,6 +17308,44 @@
       "citedBy": [
         "U0650",
         "F0061-P01"
+      ],
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0794",
+      "setCode": "CSAC",
+      "number": "009/024",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Holon Card Shop product scan, 600x600 JPEG as served (flatbed scanner Exif, no GPS metadata), retrieved from the recorded image URL on 2026-11-15, visually inspected and filed unchanged; the listing page URL is not known",
+      "photograph": "SPEC-0794.jpg",
+      "photographSource": "https://holoncardshop.com/wp-content/uploads/2026/04/cn_apr14_98.jpg",
+      "photographSha256": "sha256:c76a971c1319b39f056663383af36e8d09b98a2434a17f3c6e6f6c24ef79e79b",
+      "observed": "The set-code box reads csA C: c and s at letter x-height, A at full height, and the C, set in its own thinner style like the F of Traditional Chinese codes, is the Simplified Chinese locality marker. One complete Simplified Chinese card face, scanned flat; the card face is about 520 px wide. 基础 卡比兽V HP 220, attacks 吞下 60 and 跌落 170, Illus. Masakazu Fukuda, csA C, regulation D, 009/024, ©2023 establish the exact Simplified Chinese card. The scan shows no distinguishing foil pattern; no finish is recorded.",
+      "recordedAt": "2026-11-15",
+      "citedBy": [
+        "U0514",
+        "F0064-P01"
+      ],
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0795",
+      "setCode": "CSM2.1C",
+      "number": "054/045",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller product photograph, 868x1127 WebP as served, retrieved from the recorded image URL on 2026-11-15 and visually inspected; the listing page URL is not known. The WebP carried no GPS metadata; it is kept untouched under verification/evidence/ and decoded losslessly to the PNG filed here",
+      "photograph": "SPEC-0795.png",
+      "photographSource": "https://i.ebayimg.com/images/g/u9AAAOSwlbJlC6hx/s-l1600.webp",
+      "photographSha256": "sha256:b57633f320eb4ad39c74c9a5a23081cfb6306af4264175ec27ba876495ac2b6e",
+      "observed": "The set-code box reads csm2.1 C: c, s and m at letter x-height, 2 and 1 at full height with a point between them, and the C, set in its own thinner style like the F of Traditional Chinese codes, is the Simplified Chinese locality marker. One complete Simplified Chinese card face in a clear sleeve on a dark mat; the card face is about 780 px wide. 基础 伊布&卡比兽GX TAG TEAM HP 270, attacks 应援, 抛掷压制 120+ and 百万吨友谊GX 210, Illus. 5ban Graphics, csm2.1 C, regulation C, 054/045, ©2023 establish the exact Simplified Chinese card. A rainbow foil covers the whole face.",
+      "recordedAt": "2026-11-15",
+      "citedBy": [
+        "U0559",
+        "F0066-P01"
       ],
       "listingUrl": null
     }  ]
