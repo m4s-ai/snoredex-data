@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 786,
+  "count": 788,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -17175,6 +17175,44 @@
       "citedBy": [
         "U0394",
         "F0038-P01"
+      ],
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0787",
+      "setCode": "m3",
+      "number": "062/080",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "third-party database",
+      "inspectedFrom": "tcgcollector.com database image (320x447 WebP as served; link supplied by the collection owner), retrieved on 2026-11-15 and visually inspected. The WebP is kept untouched under verification/evidence/ and decoded losslessly to the PNG filed here",
+      "photograph": "SPEC-0787.png",
+      "photographSource": "https://static.tcgcollector.com/content/images/61/c2/e9/61c2e9b8e6aa2514c7325d4437685eb9c82d25339d7b2cd8615def04cda01ac5.webp",
+      "photographSha256": "sha256:580da9cfd2b2b8e844b9ae39cb8966133387c8e7da83933a441f4ffd04a70c4d",
+      "observed": "Korean database image of one complete Snorlax card face: the name 잠만보, Basic Pokémon, HP 160, the attacks 대식가 and 쓰러지기 160, Illus. Toshinao Aoki, the line ©2026 Pokémon/Nintendo/Creatures/GAME FREAK, regulation mark J and the number 062/080 C establish identity. The set-code box, dark and between the regulation mark and the number, reads m3 (the m at letter x-height, the 3 at full height). A Pokémon Card Game watermark crosses the art. No physical finish is inferred from this database image.",
+      "recordedAt": "2026-11-15",
+      "citedBy": [
+        "U0257",
+        "F0214-P01"
+      ],
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0788",
+      "setCode": "BW7",
+      "number": "055/070",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Full-size download of the collection owner's shared photo album (3024x4032 JPEG), retrieved on 2026-11-15 and visually inspected. Exif metadata removed before filing; image data unchanged",
+      "photograph": "SPEC-0788.jpg",
+      "photographSource": "https://photos.icloud.com/shared/album/0beQkeG85NmifEqsqY0kkeG9A",
+      "photographSha256": "sha256:3068e26c2e909d8394029a46e6d030700977150eafa830a3b40f44e8d7b618d8",
+      "observed": "Korean Snorlax card on a dark cloth, complete legible face: the name 잠만보, HP 130, the Team Plasma design (플라스마단), the Ability 블록, the attack 팀임팩트 30×, Illus. 5ban Graphics, the line ©2013 Pokémon and the number 055/070 U establish identity. The set mark, a dark badge at the bottom right beside the number, reads BW7 (B and W in a dark box, a small stylized 7). The image does not settle the finish, so none is recorded.",
+      "recordedAt": "2026-11-15",
+      "citedBy": [
+        "U0579",
+        "F0029-P01"
       ],
       "listingUrl": null
     }
