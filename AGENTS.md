@@ -186,9 +186,10 @@ and report the run. Publishing cannot be undone.
   bytes to the photo repository `m4s-ai/snoredex-photos` under the path the record names
   (`verification/specimens/SPEC-nnnn.<ext>`) and record their SHA-256 in `photographSha256`. A
   photograph is pushed to the photo repository as part of intake, before the record that names it
-  lands here, and it is never changed or renamed afterwards. check.py proves every specimen path in
-  `data/` is a registered photograph; `python scripts/check.py --photos DIR` proves each registered
-  photograph exists in a checkout with its SHA-256.
+  lands here, and it is never changed or renamed afterwards. The photo repository is public: intake
+  removes GPS metadata losslessly before the push. check.py proves every specimen path in `data/` is
+  a registered photograph; `python scripts/check.py --photos DIR` proves each registered photograph
+  exists in a checkout with its SHA-256 and carries no GPS.
   WebP originals are retained and losslessly converted, never rejected.
 - **Item identity is frozen.** `itemId`, `physicalPrintingId`, `finishGroupId`, `legacyChecklistIds`
   and the other contract ids in `data/printings.json` are stored verbatim and never recomputed; an

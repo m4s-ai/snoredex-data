@@ -5,6 +5,8 @@ Part of [#476](https://github.com/m4s-ai/snoredex-data/issues/476), inspected 20
 `targets.json` froze four active, unprepared RR 33/111 items against main `c5263c2c` before
 acquisition. This bounded round accepts one exact photograph and documents three remaining image
 needs. It is not the gallery-wide acceptance in #482 and closes no language or finish question.
+Before PR delivery the branch was merged with current main `5daa655c`; source records were
+preserved from both sides and generated outputs were rebuilt.
 
 ## Source review and outcome
 
@@ -43,20 +45,18 @@ The five consumer outputs were rebuilt from those inputs.
 
 ## Verification and remaining scope
 
-- Full `python scripts/regen.py`: passed.
+- Full `python scripts/regen.py --check` after the main merge: passed (75 model rules and selftests).
 - Full `python verification/test_site.py`: 102/102 passed.
-- Built Pages artifact: 2661 files, 195989 KB; allowlist verification passed.
+- Built Pages artifact `_site-round05`: 2661 files, 196247 KB; allowlist verification passed.
 - All four targets in the built artifact: grid/lightbox on desktop and mobile DPR2 passed.
   The accepted French image also passed 2×2, 3×3, 4×4 and 5×5 binders in both reading orders
   on both viewports (16 layout checks), with adequate loaded pixel sizes and no browser/HTTP errors.
 - A scope assertion verified only the intended specimen and exact image association were added;
   all other item records, ids and verdicts were preserved. `validation.json` records the final scope.
-- Full photo checkout check: 692 photographs checked, one **pre-existing** mismatch, SPEC-0042.
-  Pre-task register hash is `ad7f48ec5393d4a8bee7c33c1225ad4972eaed894433cc12d0dd665310186b88`;
-  pre-intake photo commit `afd535b`, current commit and checkout all contain
-  `2b29aea2742fa5dd9a0f4241554a2e2174f2eebf3de1ea8e03298210e5073263`.
-  Left unchanged. SPEC-0796 matches its register hash. Fourteen other photo files are not yet
-  registered on this data branch and belong to other intake work.
+- Full photo checkout check after the main merge: all 706 photographs match their SHA-256 and
+  carry no GPS. The earlier SPEC-0042 register mismatch was already corrected on main and that
+  correction is preserved; the 14 previously unregistered photo files are now registered there.
+  SPEC-0796 remains the only specimen this round adds.
 
-The three remaining image needs stay open in #481; #476 and #482 remain open. No data-branch
-push, pull request, issue comment or Pages deployment was performed.
+The three remaining image needs stay open in #481; #476 and #482 remain open.
+No Pages deployment was performed.

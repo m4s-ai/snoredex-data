@@ -3,15 +3,16 @@
   "scope": "Canonical association and built Pages artifact",
   "photoCommit": "f6ac25a5d1900e07ae807b78548eb94d421d18d6",
   "photoOriginalSha256": "2e0af144043312c3d5681893bb2175189396b828af1a45b459ad090e4d85cb0e",
-  "fullGate": "passed",
+  "fullGate": "regen.py --check passed after main merge; 75 model rules and selftests",
   "browserChecks": {
     "passed": 102,
     "failed": 0
   },
   "artifact": {
     "files": 2661,
-    "kilobytes": 195989,
-    "allowlist": "passed"
+    "kilobytes": 196247,
+    "allowlist": "passed",
+    "directory": "_site-round05"
   },
   "targetChecks": [
     {
@@ -31,17 +32,17 @@
   ],
   "scopeAssertions": "One specimen, one exact asset/gallery association; other ids, items, verdicts, providers and owner decisions preserved",
   "photoCheckout": {
-    "checked": 692,
-    "preExistingHashMismatches": [
-      "SPEC-0042"
-    ],
+    "checked": 706,
+    "preExistingHashMismatches": [],
     "newSpecimenHash": "passed",
-    "unregisteredOtherIntakeFiles": 14
+    "gps": "none",
+    "unregisteredOtherIntakeFiles": 0
   },
   "roundOutcome": {
     "targets": 4,
     "acceptedImages": 1,
     "documentedImageNeeds": 3
   },
-  "deployed": false
+  "deployed": false,
+  "syncBase": "5daa655c2157bae0b4911c9e92ab61f78da363c3"
 }
