@@ -42,8 +42,8 @@ UNDATED = "9999-99-99"
 MIME = {"png": "image/png", "jpg": "image/jpeg", "jpeg": "image/jpeg", "webp": "image/webp"}
 ATTRIBUTION = {"rightsStatus": "third-party-rights-excluded-from-project-grants",
                "licenceRef": "LICENSE.md", "noticeRef": "THIRD_PARTY_NOTICES.md"}
-# Catalogue contract 1.0.0 constants.
-CATALOGUE_META = {"schema": "snoredex-collector-catalogue", "schemaVersion": "1.0.0",
+# Catalogue contract 1.1.0 constants.
+CATALOGUE_META = {"schema": "snoredex-collector-catalogue", "schemaVersion": "1.1.0",
                   "datasetId": "snoredex-data/snorlax-current-known", "sourceRepository": REPOSITORY}
 CATALOGUE_SCOPE = {"policy": "positive-evidence/current-known", "allLocalitiesComplete": False,
                    "absenceIsNotEvidence": True}
@@ -209,21 +209,84 @@ def correction_link(item: dict) -> str:
 
 # --- collector_catalogue.json ---
 
-def set_tables(sets: dict) -> tuple[dict, dict]:
-    # baseSetCode stays out of the catalogue and SQLite until contract 1.1.0 (Set-DB 07/08) carries it
-    local_sets = {row["localSetId"]: dict({k: v for k, v in row.items() if k != "baseSetCode"}, sortKey="|".join((
-        row["locality"], natural_key(row["localSetCode"]), natural_key(row["localSetName"]), row["localSetId"])))
-        for row in sets["localSets"]}
-    editions = {}
+def cited_claims(sets: dict, printings: list) -> list:
+    """(localSetId, claim reference) for every reference a set's printings, or the set itself, cite."""
+    set_of = {e["setEditionId"]: e["localSetId"] for e in sets["setEditions"]}
+    cited = [(set_of[p["setEditionId"]], ref) for p in printings for ref in p["sourceClaimRefs"]]
+    return cited + [(s["localSetId"], ref) for s in sets["localSets"] for ref in s["sourceRefs"]]
+
+
+def cardmarket_codes(sets: dict, printings: list, claims: dict) -> dict:
+    """Cardmarket set codes per local set: the legacy products behind the claims its printings (or, for a
+    placeholder, its own source references) cite. Marketplace bookkeeping, never evidence."""
+    product = {u["unitId"]: u["productId"] for u in claims["languageClaims"]}
+    code = {p["productId"]: p["setCode"] for p in claims["legacyProducts"]}
+    found = {s["localSetId"]: set() for s in sets["localSets"]}
+    for local_set, ref in cited_claims(sets, printings):
+        if ref.startswith("CLAIM:legacy:"):
+            found[local_set].add(code[product[ref.removeprefix("CLAIM:legacy:")]])
+    return {key: sorted(value) for key, value in found.items()}
+
+
+def availability_groups(sets: dict) -> dict:
+    """Each local set's group: the sets joined to it by availability-merging relations, itself included."""
+    merging = {t["relationTypeId"] for t in sets["setRelationTypes"] if t["mergesAvailability"]}
+    group = {s["localSetId"]: {s["localSetId"]} for s in sets["localSets"]}
+    for relation in sets["setRelations"]:
+        if relation["relationType"] in merging:
+            joined = group[relation["fromLocalSetId"]] | group[relation["toLocalSetId"]]
+            for member in joined:
+                group[member] = joined
+    return group
+
+
+def local_set_record(row: dict, derived: dict) -> dict:
+    variant = derived["variants"].get(row["localSetId"]) or {}
+    group = derived["groups"][row["localSetId"]]
+    return dict({k: v for k, v in row.items() if k != "baseSetCode"},
+                baseSetCode=row.get("baseSetCode", derived["bases"].get(variant.get("variantOfLocalSetId"))),
+                cardmarketSetCodes=derived["codes"][row["localSetId"]],
+                cardmarketVariantPrefix=variant.get("variantPrefix"),
+                variantOfLocalSetId=variant.get("variantOfLocalSetId"),
+                availabilityGroupId=min(group),
+                knownLocalizationIds=sorted({loc for member in group for loc in derived["spoken"].get(member, ())}),
+                sortKey="|".join((row["locality"], natural_key(row["localSetCode"]),
+                                  natural_key(row["localSetName"]), row["localSetId"])))
+
+
+def release_source(event: dict | None) -> dict | None:
+    return None if event is None else {key: event[key] for key in ("providerId", "sourceUrl", "sourceRef", "checkedAt")}
+
+
+def edition_record(row: dict, local_set: dict, code: dict, events: dict) -> dict:
+    return {
+        "setEditionId": row["setEditionId"], "localSetId": row["localSetId"],
+        "localizationId": row["localizationId"], "localSetCode": local_set["localSetCode"],
+        "localSetName": local_set["localSetName"], **{k: v for k, v in row.items() if k not in (
+            "setEditionId", "localSetId", "localizationId")},
+        "printedSetCode": code.get("printedSetCode"), "localityMarker": code.get("localityMarker"),
+        # not-printed belongs to an owner adjudication of a claim, which never names an edition
+        "availability": "unresolved-placeholder" if row["identityState"] == "needs-local-identifier"
+        else "established",
+        "releaseSource": release_source(events.get(row["releaseEventId"])),
+        "sortKey": "|".join((row["releaseDate"] or "9999", local_set["locality"],
+                             natural_key(local_set["localSetCode"]), row["setEditionId"]))}
+
+
+def set_tables(sets: dict, printings: list, claims: dict) -> tuple[dict, dict]:
+    spoken = {}
     for row in sets["setEditions"]:
-        local_set = local_sets[row["localSetId"]]
-        editions[row["setEditionId"]] = {
-            "setEditionId": row["setEditionId"], "localSetId": row["localSetId"],
-            "localizationId": row["localizationId"], "localSetCode": local_set["localSetCode"],
-            "localSetName": local_set["localSetName"], **{k: v for k, v in row.items() if k not in (
-                "setEditionId", "localSetId", "localizationId")},
-            "sortKey": "|".join((row["releaseDate"] or "9999", local_set["locality"],
-                                 natural_key(local_set["localSetCode"]), row["setEditionId"]))}
+        spoken.setdefault(row["localSetId"], set()).add(row["localizationId"])
+    derived = {"variants": {v["localSetId"]: v for v in sets["cardmarketVariantSets"]},
+               "bases": {s["localSetId"]: s.get("baseSetCode") for s in sets["localSets"]},
+               "groups": availability_groups(sets), "codes": cardmarket_codes(sets, printings, claims),
+               "spoken": spoken}
+    local_sets = {row["localSetId"]: local_set_record(row, derived) for row in sets["localSets"]}
+    codes = {row["setEditionId"]: row for row in sets["setEditionCodes"]}
+    events = {row["releaseEventId"]: row for row in sets["releaseEvents"]}
+    editions = {row["setEditionId"]: edition_record(row, local_sets[row["localSetId"]],
+                                                    codes.get(row["setEditionId"], {}), events)
+                for row in sets["setEditions"]}
     return local_sets, editions
 
 
@@ -290,8 +353,8 @@ def fingerprint(document: dict) -> str:
     return "sha256:" + hashlib.sha256(canonical).hexdigest()
 
 
-def catalogue(printings_doc: dict, sets: dict, images: dict, evidence: dict) -> dict:
-    local_sets, editions = set_tables(sets)
+def catalogue(printings_doc: dict, sets: dict, images: dict, evidence: dict, claims: dict) -> dict:
+    local_sets, editions = set_tables(sets, printings_doc["printings"], claims)
     assets = {row["assetId"]: catalogue_asset(row) for row in images["assets"]}
     links = {row["itemId"]: row["sourceLinks"] for row in evidence["printings"]}
     items = sorted((catalogue_item(row, editions[row["setEditionId"]], assets, links[row["itemId"]])
@@ -309,6 +372,8 @@ def catalogue(printings_doc: dict, sets: dict, images: dict, evidence: dict) -> 
         "setEditions": sorted(editions.values(), key=lambda row: row["sortKey"]),
         "works": sorted((dict(row, displayName=names.get(row["workId"])) for row in sets["works"]),
                         key=lambda row: row["workId"]),
+        "setRelationTypes": sorted(sets["setRelationTypes"], key=lambda row: row["relationTypeId"]),
+        "setRelations": sorted(sets["setRelations"], key=lambda row: row["relationId"]),
         "items": items,
         "assets": sorted(assets.values(), key=lambda row: row["assetId"]),
     }
@@ -630,7 +695,7 @@ def gallery_page(cards: list) -> str:
 # --- snoredex.sqlite ---
 
 SCHEMA_SQL = ROOT / "templates" / "schema.sql"
-DATABASE_SCHEMA = ("snoredex-database", "2.0.0")
+DATABASE_SCHEMA = ("snoredex-database", "2.1.0")
 OWNER_ADJUDICATIONS = ROOT / "verification" / "owner_adjudications.json"  # owner file, read in place
 SPECIMENS = ROOT / "verification" / "specimens.json"  # curated specimen store, read in place
 
@@ -745,14 +810,21 @@ def claim_tables(db, model: dict) -> list[int]:
 
 
 def model_tables(db, model: dict) -> list[int]:
-    document, images = model["document"], model["images"]
+    document, images, sets = model["document"], model["images"], model["sets"]
     previews = {row["assetId"]: row.get("preview") for row in images["assets"]}
     return [
         insert(db, "metadata", ({"key": k, "value": v} for k, v in sorted(model["metadata"].items()))),
-        insert(db, "languages", model["sets"]["languages"]),
+        insert(db, "languages", sets["languages"]),
         insert(db, "localizations", document["localizations"]),
+        insert(db, "release_events", sets["releaseEvents"]),
         insert(db, "local_sets", document["localSets"]),
-        insert(db, "set_editions", (without_keys(row, "localSetCode", "localSetName") for row in document["setEditions"])),
+        insert(db, "set_editions", (without_keys(row, "localSetCode", "localSetName", "releaseSource")
+                                    for row in document["setEditions"])),
+        insert(db, "set_edition_codes", sets["setEditionCodes"]),
+        insert(db, "cardmarket_variant_sets", sets["cardmarketVariantSets"]),
+        insert(db, "locality_markers", sets["localityMarkers"]),
+        insert(db, "set_relation_types", sets["setRelationTypes"]),
+        insert(db, "set_relations", sets["setRelations"]),
         insert(db, "works", document["works"]),
         insert(db, "assets", (dict(row, preview=previews[row["assetId"]]) for row in document["assets"])),
         insert(db, "providers", model["evidence"]["providers"]),
@@ -799,7 +871,7 @@ def write_outputs(out: Path) -> str:
     printings_doc, sets, images, evidence, claims = (read(name) for name in (
         "printings.json", "sets.json", "images.json", "evidence.json", "claims.json"))
     printings = {row["itemId"]: row for row in printings_doc["printings"]}
-    document = catalogue(printings_doc, sets, images, evidence)
+    document = catalogue(printings_doc, sets, images, evidence, claims)
     cards, ranks = gallery_cards(document, printings, images)
     rows = table_rows(document, printings, images, evidence, ranks)
     # dataAsOf and siteGenerated are stored in data/printings.json meta and bumped by hand with a data change.

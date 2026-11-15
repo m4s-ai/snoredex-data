@@ -6,7 +6,7 @@
   "catalogue": {
     "meta": {
       "schema": "snoredex-collector-catalogue",
-      "schemaVersion": "1.0.0",
+      "schemaVersion": "1.1.0",
       "datasetId": "fixture",
       "sourceRepository": "https://github.com/m4s-ai/snoredex-data",
       "dataAsOf": "2026-08-24",
@@ -96,6 +96,16 @@
         "sourceRefs": [
           "fixture-source"
         ],
+        "baseSetCode": "FX",
+        "cardmarketSetCodes": [
+          "FX"
+        ],
+        "cardmarketVariantPrefix": null,
+        "variantOfLocalSetId": null,
+        "availabilityGroupId": "fixture-set-1",
+        "knownLocalizationIds": [
+          "fixture-loc-west-es"
+        ],
         "sortKey": "1"
       },
       {
@@ -107,6 +117,16 @@
         "identityState": "identified",
         "sourceRefs": [
           "fixture-source"
+        ],
+        "baseSetCode": "FX",
+        "cardmarketSetCodes": [
+          "FX"
+        ],
+        "cardmarketVariantPrefix": null,
+        "variantOfLocalSetId": null,
+        "availabilityGroupId": "fixture-set-2",
+        "knownLocalizationIds": [
+          "fixture-loc-latam-es"
         ],
         "sortKey": "2"
       },
@@ -120,6 +140,16 @@
         "sourceRefs": [
           "fixture-source"
         ],
+        "baseSetCode": "FX",
+        "cardmarketSetCodes": [
+          "FX"
+        ],
+        "cardmarketVariantPrefix": null,
+        "variantOfLocalSetId": null,
+        "availabilityGroupId": "fixture-set-3",
+        "knownLocalizationIds": [
+          "fixture-loc-west-en"
+        ],
         "sortKey": "3"
       },
       {
@@ -131,6 +161,16 @@
         "identityState": "identified",
         "sourceRefs": [
           "fixture-source"
+        ],
+        "baseSetCode": "FX",
+        "cardmarketSetCodes": [
+          "FX"
+        ],
+        "cardmarketVariantPrefix": null,
+        "variantOfLocalSetId": null,
+        "availabilityGroupId": "fixture-set-4",
+        "knownLocalizationIds": [
+          "fixture-loc-west-pt"
         ],
         "sortKey": "4"
       }
@@ -147,6 +187,15 @@
         "releaseDatePrecision": "day",
         "releaseApproximate": false,
         "releaseEventId": "fixture-event-1",
+        "printedSetCode": null,
+        "localityMarker": null,
+        "availability": "established",
+        "releaseSource": {
+          "providerId": "fixture-provider",
+          "sourceUrl": "https://example.org/fixture",
+          "sourceRef": null,
+          "checkedAt": "2026-01-01"
+        },
         "sortKey": "1"
       },
       {
@@ -160,6 +209,15 @@
         "releaseDatePrecision": "day",
         "releaseApproximate": false,
         "releaseEventId": "fixture-event-2",
+        "printedSetCode": null,
+        "localityMarker": null,
+        "availability": "established",
+        "releaseSource": {
+          "providerId": "fixture-provider",
+          "sourceUrl": "https://example.org/fixture",
+          "sourceRef": null,
+          "checkedAt": "2026-01-01"
+        },
         "sortKey": "2"
       },
       {
@@ -173,6 +231,15 @@
         "releaseDatePrecision": "day",
         "releaseApproximate": false,
         "releaseEventId": "fixture-event-3",
+        "printedSetCode": null,
+        "localityMarker": null,
+        "availability": "established",
+        "releaseSource": {
+          "providerId": "fixture-provider",
+          "sourceUrl": "https://example.org/fixture",
+          "sourceRef": null,
+          "checkedAt": "2026-01-01"
+        },
         "sortKey": "3"
       },
       {
@@ -186,6 +253,15 @@
         "releaseDatePrecision": "day",
         "releaseApproximate": false,
         "releaseEventId": "fixture-event-4",
+        "printedSetCode": null,
+        "localityMarker": null,
+        "availability": "established",
+        "releaseSource": {
+          "providerId": "fixture-provider",
+          "sourceUrl": "https://example.org/fixture",
+          "sourceRef": null,
+          "checkedAt": "2026-01-01"
+        },
         "sortKey": "4"
       }
     ],
@@ -196,6 +272,8 @@
         "displayName": "Snorlax"
       }
     ],
+    "setRelationTypes": [],
+    "setRelations": [],
     "items": [
       {
         "itemId": "item-00000000-0000-5000-8000-000000000001",
