@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 788,
+  "count": 789,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -9617,7 +9617,7 @@
       "photograph": "SPEC-0461.png",
       "photographSource": "https://cdn.collectory.cc/cards/kr/ST2014001/026_036.webp",
       "photographSha256": "sha256:afff12b582d438f855bba081d1a585cdd3bccf0f73f29740afa03595fa8ebdde",
-      "observed": "Complete Korean database render of Snorlax from the XY Chespin First Set. The Hangul name and rules text, printed HXY set mark and collector number 026/036 establish the exact localized card. The printed rarity is N. A digital render is identity and rarity evidence only; no physical finish is inferred.",
+      "observed": "Complete Korean database render of Snorlax from the XY Chespin First Set. The Hangul name and rules text, set mark (too small at 207 px to read; SPEC-0789 shows the badge reads FXY) and collector number 026/036 establish the exact localized card. The printed rarity is N. A digital render is identity and rarity evidence only; no physical finish is inferred.",
       "recordedAt": "2026-08-30",
       "citedBy": [
         "U0586"
@@ -17213,6 +17213,25 @@
       "citedBy": [
         "U0579",
         "F0029-P01"
+      ],
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-0789",
+      "setCode": "FXY",
+      "number": "026/036",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Full-size download of the collection owner's shared photo album (3024x4032 JPEG), retrieved on 2026-11-15 and visually inspected. Exif GPS removed before filing; image data unchanged",
+      "photograph": "SPEC-0789.jpg",
+      "photographSource": "https://photos.icloud.com/shared/album/0d7gJwhHQ0Wmz7liAzEob9Hng",
+      "photographSha256": "sha256:4045fae9c5f93813d90463d0bac0119262a94b4683ea8049b8ea54065ec9e2eb",
+      "observed": "Korean Snorlax card on a dark cloth, complete legible face: the name 잠만보, HP 120, the attacks 바위깨기 10+ and 괴력 70, Illus. Naoki Saito, the line ©2014 Pokémon and the number 026/036 establish identity. The set mark, a green badge at the bottom right beside the number, reads FXY (F, X and Y all at full height). The image does not settle the finish, so none is recorded.",
+      "recordedAt": "2026-11-15",
+      "citedBy": [
+        "U0586",
+        "F0153-P01"
       ],
       "listingUrl": null
     }
