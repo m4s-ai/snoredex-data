@@ -300,11 +300,12 @@ def check_gallery(browser, origin):
 
     mobile = browser.new_page(viewport={"width": 375, "height": 667}, is_mobile=True, has_touch=True)
     mobile.goto(origin + "/gallery.html")
-    hypothesis = mobile.locator('[data-card-id="research-kss-26-it-wave-holo"]')
+    assert mobile.locator('[data-card-id="research-kss-26-it-wave-holo"]').count() == 0
+    hypothesis = mobile.locator('[data-card-id="research-cl-33-fr-prerelease"]')
     assert hypothesis.locator(".gallery-placeholder").count() == 1
     hypothesis.tap()
     assert mobile.locator("#card-dialog").is_visible()
-    assert "closed at non-holo" in mobile.locator("#card-note").inner_text()
+    assert mobile.locator('#card-sources a[href="https://github.com/m4s-ai/snoredex-data/issues/440"]').count() == 1
     mobile.get_by_role("button", name="Close").tap()
     mobile.locator("#binder-toggle").tap()
     assert mobile.locator("#gallery-cards").evaluate("(node) => node.scrollWidth > node.clientWidth")

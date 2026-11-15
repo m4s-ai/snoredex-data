@@ -261,17 +261,19 @@ def kind_counts(items: list, per_legacy_row: bool) -> Counter:
 
 def quality_summary(quality: dict, document: dict) -> dict:
     items = document["items"]
-    kinds, legacy = kind_counts(items, False), kind_counts(items, True)
+    active = [item for item in items if item["active"]]
+    kinds, legacy = kind_counts(active, False), kind_counts(items, True)
     return {
         **{key: quality[key] for key in quality if key != "predecessor"},
         "counts": {
             **{name: len(document[name]) for name in ("localizations", "localSets", "setEditions", "works", "items")},
+            "activeItems": len(active), "inactiveItems": len(items) - len(active),
             "verifiedPrintings": kinds["verified-printing"], "finishCandidates": kinds["finish-candidate"],
             "researchPlaceholders": kinds["research-placeholder"], "currentKnown": kinds["current-known"],
             "research": kinds["research"], "assets": len(document["assets"])},
         "predecessor": quality["predecessor"],
-        "graphAccounting": {"cardReleases": len({item["cardReleaseId"] for item in items}),
-                            "physicalPrintings": sum(1 for item in items if item["physicalPrintingId"])},
+        "graphAccounting": {"cardReleases": len({item["cardReleaseId"] for item in active}),
+                            "physicalPrintings": sum(1 for item in active if item["physicalPrintingId"])},
         "candidateProgressPolicy": CANDIDATE_PROGRESS_POLICY,
         "legacyCompatibility": {**LEGACY_COMPATIBILITY, "counts": {
             "legacyRows": sum(len(item["legacyChecklistIds"]) for item in items),
