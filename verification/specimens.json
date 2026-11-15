@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 789,
+  "count": 790,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -17234,6 +17234,24 @@
         "F0153-P01"
       ],
       "listingUrl": null
-    }
-  ]
+    },
+    {
+      "specimenId": "SPEC-0790",
+      "setCode": "sv5a",
+      "number": "051/066",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "third-party database",
+      "inspectedFrom": "k-tcg.com Korean card shop catalogue image (400x558 PNG as served; the owner-supplied link was the same file through the WordPress image CDN with ?w=400), retrieved on 2026-11-15 and visually inspected. No Exif or XMP GPS present (the only XMP is a data-mining usage flag)",
+      "photograph": "SPEC-0790.png",
+      "photographSource": "https://k-tcg.com/wp-content/uploads/2024/05/SV5a_051.png",
+      "photographSha256": "sha256:c6da74815c1576e52787afed7188d8a84785d0a7f3430cd24671a61ef8088f85",
+      "observed": "Korean shop catalogue image of one complete Snorlax card face: the name 잠만보, Basic Pokémon, HP 160, the attacks 배채우기 and 헤비임팩트 160, Illus. Souichirou Gunjima, the line ©2024 Pokémon/Nintendo/Creatures/GAME FREAK, regulation mark H and the number 051/066 U establish identity. The set-code box, dark and between the regulation mark and the number, reads sv5a (the s, v and a at letter x-height, the 5 at full height). A Pokémon Card Game watermark crosses the card. No physical finish is inferred from this catalogue image.",
+      "recordedAt": "2026-11-15",
+      "citedBy": [
+        "U0233",
+        "F0486-P01"
+      ],
+      "listingUrl": null
+    }  ]
 }
