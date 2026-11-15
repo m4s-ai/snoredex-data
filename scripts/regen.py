@@ -21,6 +21,7 @@ STEPS = (
     ("scripts/check.py", "--selftest"),
     ("scripts/collection.py", "selftest"),
     ("scripts/build.py",),  # --check is appended under --check
+    ("verification/test_build_summary.py",),
     ("verification/test_complexity.py",),
     ("verification/test_sensitive_scan.py",),
     ("verification/test_gate_handoff.py",),
