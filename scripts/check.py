@@ -11,7 +11,8 @@ writes nothing. It never compares against the old pipeline's outputs.
 The specimen originals live in the photo repository m4s-ai/snoredex-photos under the same path
 (verification/specimens/...). The offline rules prove that every specimen path in data/ is a
 photograph the register names, with the register's SHA-256 on its asset; --photos proves that each
-registered photograph exists in the checkout with those bytes. --photos is run at intake and after
+registered photograph exists in the checkout with those bytes and carries no GPS metadata (the photo
+repository is public). --photos is run at intake and after
 changing photographs, not in regen.py or CI. A photograph no record names yet is only noted: an
 intake pushes it first.
 """
@@ -1072,9 +1073,30 @@ def digest(path: Path) -> str:
     return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def gps_entries(data: bytes, tiff: int) -> int:
+    """The number of entries in the GPS IFD of the TIFF/Exif block at `tiff`, 0 when it has none."""
+    order = "big" if data[tiff:tiff + 2] == b"MM" else "little"
+    read = lambda at, size: int.from_bytes(data[at:at + size], order)  # noqa: E731
+    ifd0 = tiff + read(tiff + 4, 4)
+    for entry in range(read(ifd0, 2)):
+        at = ifd0 + 2 + 12 * entry
+        if read(at, 2) == 0x8825:  # GPSInfo
+            return read(tiff + read(at + 8, 4), 2)
+    return 0
+
+
+def carries_location(data: bytes) -> bool:
+    """A photograph carries location metadata: an Exif GPS IFD with entries, or XMP GPS coordinates.
+    The photo repository is public, so intake removes it (snoredex-specimen-intake)."""
+    head = data[:262144]
+    starts = {m.start() for m in re.finditer(rb"MM\x00\x2a|II\x2a\x00", head)}
+    return b"GPSLatitude" in head or any(gps_entries(head, s) for s in starts if len(head) > s + 8)
+
+
 def photo_problems(photos: Path, photographs: dict) -> tuple[int, list, list]:
-    """Every photograph the register names exists under the photo checkout with its SHA-256. Also returns
-    the photographs no record names: an intake in flight pushes its photograph before its record lands."""
+    """Every photograph the register names exists under the photo checkout with its SHA-256 and without
+    location metadata. Also returns the photographs no record names: an intake in flight pushes its
+    photograph before its record lands."""
     problems = []
     for path, sha in sorted(photographs.items()):
         file = photos / path
@@ -1082,6 +1104,8 @@ def photo_problems(photos: Path, photographs: dict) -> tuple[int, list, list]:
             problems.append(f"{path}: missing")
         elif digest(file) != sha:
             problems.append(f"{path}: SHA-256 differs")
+        elif carries_location(file.read_bytes()):
+            problems.append(f"{path}: carries GPS location metadata")
     present = {f.relative_to(photos).as_posix() for f in (photos / PHOTO_DIR).rglob("*") if f.is_file()}
     return len(photographs), problems, sorted(present - photographs.keys())
 
@@ -1102,6 +1126,16 @@ def photo_selftest() -> None:
         file.write_bytes(b"photo")
         (root / PHOTO_DIR / "SPEC-0002.png").write_bytes(b"other")
         assert photo_problems(root, register) == (1, [], [f"{PHOTO_DIR}SPEC-0002.png"])
+        # big-endian TIFF: IFD0 at 8 with one GPSInfo entry pointing at a GPS IFD of 1 (located) or 0 entries
+        tiff = lambda n: b"MM\x00\x2a" + (8).to_bytes(4, "big") + (1).to_bytes(2, "big") + (  # noqa: E731
+            0x8825).to_bytes(2, "big") + b"\x00\x04\x00\x00\x00\x01" + (26).to_bytes(4, "big") + (
+            0).to_bytes(4, "big") + n.to_bytes(2, "big") + b"\x00" * 12
+        file.write_bytes(b"\xff\xd8\xff\xe1\x00\x30Exif\x00\x00" + tiff(1))
+        register = {PHOTO_DIR + name: digest(file)}
+        assert photo_problems(root, register)[1] == [f"{PHOTO_DIR}{name}: carries GPS location metadata"]
+        file.write_bytes(b"\xff\xd8\xff\xe1\x00\x30Exif\x00\x00" + tiff(0))
+        register = {PHOTO_DIR + name: digest(file)}
+        assert photo_problems(root, register)[1] == []
 
 
 def check_photos(photos: Path | None, model: dict) -> int:
@@ -1109,7 +1143,8 @@ def check_photos(photos: Path | None, model: dict) -> int:
         print("note originals not checked: run python scripts/check.py --photos DIR against a photo-repository checkout")
         return 0
     count, problems, unnamed = photo_problems(photos, model["photographs"])
-    print(f"{'FAIL' if problems else 'ok  '} originals in {photos} match their SHA-256: {count} checked"
+    print(f"{'FAIL' if problems else 'ok  '} originals in {photos} match their SHA-256 and carry no GPS: "
+          f"{count} checked"
           + (f", {len(problems)} failing: {problems[:5]}" if problems else ""))
     if unnamed:
         print(f"note {len(unnamed)} photograph(s) in {photos} not named by the register: {unnamed[:5]}")
