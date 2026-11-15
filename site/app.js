@@ -140,7 +140,7 @@
   const ROW_FIELD = {
     dateStatus: (r) => [r.dateStatus],
     name: (r) => [r.name],
-    setCode: (r) => [r.setCode],
+    setCode: (r) => [r.setGroup],
     setName: (r) => [r.setName],
     number: (r) => [r.number || "—"],
     edition: (r) => [r.edition],
@@ -363,6 +363,11 @@
     const entries = [
       ["Release", escapeHTML(row.dateDisplay)],
       ["Expansion", escapeHTML(row.setName || "—")],
+      ["Set code", escapeHTML(row.printedSetCode ? row.printedSetCode + " (printed)"
+        : row.setCode + " (catalogue code; no printed code recorded)")],
+      ["Base set code", escapeHTML(row.baseSetCode || "—")],
+      ["Cardmarket code", escapeHTML((row.cardmarketSetCodes || []).join(", ") || "—")],
+      ["Related sets", (row.relatedSets || []).map(escapeHTML).join("<br>") || "—"],
       ["Language", escapeHTML(row.languageLabel)],
       ["Rarity", escapeHTML(row.rarity || "—")],
       ["Artist", escapeHTML(row.artist || "—")],
@@ -383,6 +388,8 @@
 
   function rowHTML(row, index) {
     const detailId = "rowdetail-" + index;
+    // The printed code where one is recorded, else the catalogue's legacy code; sorting stays on the latter.
+    const shownCode = row.printedSetCode || row.setCode;
     const note = evidenceNote(row, row.langCodes[0]);
     const label = row.languageLabel + ": confirmed";
     const languageCell = '<td class="col-language" data-tier="' + (note ? note.tier : 0) +
@@ -414,7 +421,7 @@
       '<td class="img">' + image + "</td>" +
       '<td class="col-release">' + release + "</td>" +
       '<td class="col-card">' + escapeHTML(row.name) + "</td>" +
-      '<td class="col-set">' + escapeHTML(row.setCode) + "</td>" +
+      '<td class="col-set">' + escapeHTML(shownCode) + "</td>" +
       '<td class="col-number">' + escapeHTML(row.number || "—") + "</td>" +
       languageCell +
       clippedCell(row.setName, "col-expansion") +
@@ -818,7 +825,7 @@
       ];
 
       const body = rows.map((row) => [
-        row.dateDisplay, row.name, row.setCode, row.number || "", row.languageLabel, row.setName || "",
+        row.dateDisplay, row.name, row.printedSetCode || row.setCode, row.number || "", row.languageLabel, row.setName || "",
         row.rarity || "", row.artist || "",
         row.edition || "", (row.finishes || []).map(finishLabel).join("; "),
         (row.patterns || []).map(patternLabel).join("; "), (row.markings || []).join("; "),

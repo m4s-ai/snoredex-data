@@ -423,8 +423,32 @@ def language_evidence(grade: dict, provider: dict) -> dict:
             "corroborated": grade["corroborated"], "checkable": grade["checkable"]}
 
 
+def related_sets(document: dict) -> dict:
+    """Per local set, one line for each set relation it takes part in, naming the other set."""
+    labels = {row["relationTypeId"]: row["label"] for row in document["setRelationTypes"]}
+    local_sets = {row["localSetId"]: row for row in document["localSets"]}
+    related = {}
+    for relation in document["setRelations"]:
+        ends = (relation["fromLocalSetId"], relation["toLocalSetId"])
+        for own, other in (ends, ends[::-1]):
+            other = local_sets[other]
+            related.setdefault(own, []).append(" ".join(filter(None, (
+                labels[relation["relationType"]] + ":", other["locality"], other["localSetCode"],
+                other["localSetName"]))))
+    return related
+
+
+def set_fields(item: dict, edition: dict, local_set: dict, related: dict) -> dict:
+    """The set as the table shows it: the printed code where one is recorded, the cross-language group
+    (baseSetCode, else the legacy code) for filtering, and the Cardmarket bookkeeping for the details."""
+    return {"printedSetCode": edition["printedSetCode"], "baseSetCode": local_set["baseSetCode"],
+            "setGroup": local_set["baseSetCode"] or item["localSetCode"] or "Unknown",
+            "cardmarketSetCodes": local_set["cardmarketSetCodes"],
+            "relatedSets": related.get(item["localSetId"], [])}
+
+
 def table_row(item: dict, localization: dict, printing: dict, asset: dict, grades: dict, providers: dict,
-              order: int) -> dict:
+              order: int, sets: dict) -> dict:
     language = {"LATAM": "Spanish (Latin America)"}.get(localization["locality"], localization["language"])
     date_sort, display, date_status = date_view(item)
     best, finishes, technical = finish_view(item)
@@ -455,14 +479,15 @@ def table_row(item: dict, localization: dict, printing: dict, asset: dict, grade
                                          item["completenessStatus"], item["itemKind"]})),
         "confirmedLanguages": [language], "langCodes": lang_codes,
         "langEvidence": {code: language_evidence(grade, providers[grade["providerId"]]) for code in lang_codes},
-        "correctionUrl": item["correctionLink"],
+        "correctionUrl": item["correctionLink"], **sets,
     }
     row["search"] = row_search(row)
     return row
 
 
 def row_search(row: dict) -> str:
-    words = [row[key] for key in ("name", "setCode", "setName", "number", "variant", "languageLabel", "variantName")]
+    words = [row[key] or "" for key in ("name", "setCode", "printedSetCode", "baseSetCode", "setName", "number",
+                                         "variant", "languageLabel", "variantName")]
     words += [row["rarity"] or "", row["artist"] or "", row["edition"], *map(" ".join, (
         row["finishes"], row["technicalFinishes"], row["patterns"], row["markings"], row["langCodes"])),
         row["dateDisplay"]]
@@ -474,18 +499,23 @@ def table_rows(document: dict, printings: dict, images: dict, evidence: dict, ra
     assets = {row["assetId"]: row for row in images["assets"]}
     grades = {row["itemId"]: row for row in evidence["printings"]}
     providers = {row["providerId"]: row for row in evidence["providers"]}
+    editions = {row["setEditionId"]: row for row in document["setEditions"]}
+    local_sets = {row["localSetId"]: row for row in document["localSets"]}
+    related = related_sets(document)
     return [table_row(item, localizations[item["localizationId"]], printings[item["itemId"]],
                       assets.get(item["imageAssetId"]) or {}, grades[item["itemId"]], providers,
-                      ranks[item["itemId"]])
+                      ranks[item["itemId"]], set_fields(item, editions[item["setEditionId"]],
+                                                        local_sets[item["localSetId"]], related))
             for item in document["items"] if item["active"] and item["itemKind"] == "verified-printing"]
 
 
 # --- gallery.html cards ---
 
-def gallery_card(item: dict, language: str, group: str, artist, image: dict | None) -> dict:
+def gallery_card(item: dict, language: str, group: str, artist, image: dict | None, printed: str | None) -> dict:
     card = {
         "id": item["itemId"], "group": group, "name": item["localCardName"] or item["cardName"],
-        "set": item["localSetName"], "setCode": item["localSetCode"], "number": printed_number(item),
+        "set": item["localSetName"], "setCode": item["localSetCode"], "printedSetCode": printed,
+        "number": printed_number(item),
         "artist": artist, "language": language, "edition": item["edition"], "finish": item["finish"],
         "foilPattern": item["foilPattern"], "markings": mark_values(item, "text"),
         "distribution": (item["distribution"] or {}).get("name"), "cardSize": item["cardSize"],
@@ -551,11 +581,13 @@ def gallery_cards(document: dict, printings: dict, images: dict) -> tuple[list[d
     items = [row for row in document["items"] if row["active"]]
     by_id = {row["itemId"]: row for row in items}
     artists, fallback = gallery_artists(items, printings)
+    printed = {row["setEditionId"]: row["printedSetCode"] for row in document["setEditions"]}
 
     def card(item, image=None):
         release = item["cardReleaseId"]
         made = gallery_card(item, languages[item["localizationId"]], groups.get(release, release),
-                            artists.get(item["itemId"], fallback.get(release)), image)
+                            artists.get(item["itemId"], fallback.get(release)), image,
+                            printed[item["setEditionId"]])
         made["_order"] = print_order(item, language_order)
         return made
 

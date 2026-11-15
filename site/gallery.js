@@ -61,7 +61,7 @@ function openCard(card, button) {
     ? [card.date, card.datePrecision, card.approximate ? "approximate" : ""].filter(Boolean).join(" · ")
     : "Undated";
   for (const [label, value] of Object.entries({
-    Set: card.set, "Set code / number": [card.setCode, card.number].filter(Boolean).join(" "),
+    Set: card.set, "Set code / number": [card.printedSetCode || card.setCode, card.number].filter(Boolean).join(" "),
     Artist: card.artist, Language: card.language, Edition: card.edition, Finish: card.finish,
     "Foil pattern": card.foilPattern, Markings: card.markings.join(", "), Distribution: card.distribution,
     "Card size": card.cardSize, Release: release, "Artwork group": `#${card.artworkNumber}`,
@@ -107,7 +107,7 @@ function tile(card) {
     card.kind === "verified-printing" ? "" : "Open research"].filter(Boolean).join(", "));
   const caption = element("span", "", "gallery-caption");
   caption.append(element("strong", card.set || "Unknown set"),
-    element("span", [card.setCode, card.number].filter(Boolean).join(" ")),
+    element("span", [card.printedSetCode || card.setCode, card.number].filter(Boolean).join(" ")),
     element("span", card.artist || "Unknown artist"));
   button.append(picture(card), caption);
   button.addEventListener("click", () => openCard(card, button));
