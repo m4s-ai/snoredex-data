@@ -103,12 +103,13 @@ hand with a data change) and frozen fields of the previous pipeline.
 **`data/sets.json`** — `localizations` (locality-qualified languages: `WEST/es-ES` and
 `LATAM/es-419` are distinct; their `displayOrder` is the language order of the table and
 gallery), `languages` (the legacy claim language codes), `localSets` (a set or
-product of one locality, with its source references), `setEditions` (a local set released in one
+product of one locality, with its source references; never one resting on a claim the owner
+adjudicated `not-printed`, rule LS1), `setEditions` (a local set released in one
 localization, with its release date where known) and `works` (card text, by `cardKey`).
 
 `localSetCode` is a legacy value that mixes Cardmarket bookkeeping, the locality marker and the
 printed code; it stays as it is. The set code is recorded on three levels instead: `baseSetCode` on a
-local set (language-independent, without marker or regulation mark: `MA3`, `s2`; for a Prize Pack the
+local set (language-independent, without marker or regulation mark: `ma3`, `s2`; for a Prize Pack the
 owner's set identity, `PPS8 JTG`), and per edition the `localityMarker` and the `printedSetCode` in
 `setEditionCodes`. A set without `baseSetCode` has none established; a Cardmarket variant set never
 carries one and uses its base set's. `scripts/build.py` keeps `baseSetCode` out of the catalogue and
