@@ -2,7 +2,7 @@
 # Application database and collection tracker
 
 [`snoredex.sqlite`](snoredex.sqlite) is the current-known catalogue as a relational database, schema
-`snoredex-database` 2.0.0. It is built from the canonical model in `data/` ([`data/printings.json`](data/printings.json) and its
+`snoredex-database` 2.1.0. It is built from the canonical model in `data/` ([`data/printings.json`](data/printings.json) and its
 neighbours) and holds the
 same facts: the catalogue items, their sets and localizations, images, providers, the legacy
 language claims with their Cardmarket products, release rows and finish evidence, plus the owner
@@ -25,6 +25,7 @@ python scripts/build.py --check   # fails if a committed output is stale
 | View | One row per |
 |---|---|
 | `app_checklist` | catalogue item to collect, keyed by the stable `item_id`, with names, number, edition, finish, pattern, markings, distribution, size, status and release fields resolved |
+| `app_sets` | set edition: its local set, localization, legacy `local_set_code`, `base_set_code`, `printed_set_code` and `locality_marker`, availability, release with its source, Cardmarket bookkeeping codes and availability group |
 | `app_language_claims` | legacy language claim: product identity, repository verdict, application status, provider and tier, evidence, and the owner adjudication where one exists |
 | `collection_tracker_seed` | item, with blank `have`, `wanted` and `quantity`; only `current-known` items start as wanted |
 
@@ -36,6 +37,9 @@ python scripts/build.py --check   # fails if a committed output is stale
   `unresolved` means not yet established, never proven absent.
 - `providers.authority_tier` is 1, 2, 3 or 5: tiers 1-3 grade external evidence, strongest first;
   5 marks what is not external evidence. There is no tier 4.
+- `set_editions.availability = 'not-printed'` is reserved for an owner adjudication and is never
+  derived; a localization missing from `known_localization_ids_json` is unknown, not absent. The
+  Cardmarket columns of `local_sets` are marketplace bookkeeping, never evidence.
 - Foreign keys are declared and checked on every build (`PRAGMA foreign_key_check` must be empty).
 
 ## Example queries

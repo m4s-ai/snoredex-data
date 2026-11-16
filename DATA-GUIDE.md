@@ -10,7 +10,7 @@ before building anything on the data.
 | You want | Read |
 |---|---|
 | A ready-to-use application database | [`snoredex.sqlite`](snoredex.sqlite), starting from its `app_*` views ([DATABASE.md](DATABASE.md)) |
-| A versioned collector-app contract | [`collector_catalogue.json`](collector_catalogue.json) (contract 1.0.0), [schema](collector_catalogue.schema.json), [fixture](collector_catalogue.fixture.json) |
+| A versioned collector-app contract | [`collector_catalogue.json`](collector_catalogue.json) (contract 1.1.0), [schema](collector_catalogue.schema.json), [fixture](collector_catalogue.fixture.json) |
 | A personal have/need tracker | [`snoredex-tracker-template.sqlite`](snoredex-tracker-template.sqlite) and `scripts/collection.py` |
 | The facts themselves, one record per line | the five files in `data/`, below |
 | Final owner decisions | [`verification/owner_adjudications.json`](verification/owner_adjudications.json) |
@@ -67,10 +67,19 @@ These limits qualify coverage, not the positive card records already retained.
 ## The catalogue contract
 
 `collector_catalogue.json` is pinned by an external collector app that keys personal state by
-`itemId`. Its collections are `localizations`, `localSets`, `setEditions`, `works`, `items` and
-`assets`, plus `meta` and `qualitySummary`; the JSON schema is
+`itemId`. Its collections are `localizations`, `localSets`, `setEditions`, `works`,
+`setRelationTypes`, `setRelations`, `items` and `assets`, plus `meta` and `qualitySummary`; the JSON
+schema is
 [`collector_catalogue.schema.json`](collector_catalogue.schema.json). `meta.catalogueFingerprint`
-hashes the whole document. An `itemId` is stored verbatim and never recomputed. No migration
+hashes the whole document. Contract 1.1.0 added, without changing an existing value, the set
+fields derived from `data/sets.json`: on `localSets` the `baseSetCode` (a Cardmarket variant set's is
+its base set's), the Cardmarket bookkeeping (`cardmarketSetCodes` through the legacy claims its
+printings cite, `cardmarketVariantPrefix`, `variantOfLocalSetId`; never evidence), the
+`availabilityGroupId` of the sets joined by availability-merging relations and their
+`knownLocalizationIds` (a missing localization is unknown, never absent); on `setEditions` the
+`printedSetCode` and `localityMarker`, `availability` (`established`, `unresolved-placeholder`, or
+`not-printed` only beside an owner adjudication) and the `releaseSource` of its release event.
+`sortKey` still orders by `localSetCode`. An `itemId` is stored verbatim and never recomputed. No migration
 routes are published, so between two catalogue versions an item can be removed or re-keyed, and a
 consumer sees that as an id that is gone and one that is new.
 
@@ -112,11 +121,12 @@ printed code; it stays as it is. The set code is recorded on three levels instea
 local set (language-independent, without marker or regulation mark: `ma3`, `s2`; for a Prize Pack the
 owner's set identity, `PPS8 JTG`), and per edition the `localityMarker` and the `printedSetCode` in
 `setEditionCodes`. A set without `baseSetCode` has none established; a Cardmarket variant set never
-carries one and uses its base set's. `scripts/build.py` keeps `baseSetCode` out of the catalogue and
-the database until the contract carries it.
+carries one and uses its base set's.
 
-Six further collections describe sets rather than cards; `scripts/build.py` does not read them yet,
-so they change no output.
+Six further collections describe sets rather than cards. The database carries each as a table
+(2.1.0). The catalogue (1.1.0) carries `setRelationTypes` and `setRelations` as they are and derives
+set fields from three others (`setEditionCodes`, `releaseEvents`, `cardmarketVariantSets`, see the
+catalogue contract above); `localityMarkers` stays out of it.
 
 - `setEditionCodes` — the set code an edition prints, at most one record per `setEditionId`:
   `printedSetCode` exactly as printed, without the regulation mark (`ma3 T`, `JTG DE`, `s2`,
