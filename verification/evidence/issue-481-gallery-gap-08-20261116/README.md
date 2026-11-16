@@ -44,3 +44,19 @@ rounds 05–08 cover 34 distinct targets, twelve new gallery images (two exact, 
 and 22 documented image needs. The global prepared-image count becomes 256; this is not a
 whole-gallery visual acceptance. #476, #481 and whole-gallery acceptance #482 remain open.
 No merge into main or Pages deployment was performed.
+
+## Verification
+
+Main `643ebe0d` is integrated, including its set-code guidance and page documentation.
+Generated outputs were rebuilt. The full `scripts/regen.py` and pre-push
+`scripts/regen.py --check` passed, including 76 data rules with negative tests. All 106 browser
+checks passed. All twelve targets were checked on desktop and mobile DPR2 in grid/lightbox and
+eight binder layouts each: 192 target/layout checks, correct sources/scope/placeholders,
+adequate selected pixel density, no overflow and no HTTP/page errors. All 706 original photos
+match their register hashes and carry no GPS.
+
+The built and allowlist-verified `_site-round08` package has 2699 files / 203747 KB. All 2687
+non-Markdown source files match byte-for-byte, and both SQLite files pass `quick_check`.
+An independent comparison with current main preserves its canonical records and allows only
+the PR's six new assets, twelve gallery associations, two primary references, one seller-source
+link, SPEC-0796 and data dates. `validation.json` records the result. No deployment was run.

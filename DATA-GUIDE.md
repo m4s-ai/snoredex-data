@@ -158,8 +158,12 @@ catalogue contract above); `localityMarkers` stays out of it.
   `sourceRef` (a retained file under `verification/evidence/` or null), `evidence` (the page and
   field or the quoted wording) and `checkedAt` (the retrieval date, null where none was recorded).
   RE1 holds the source checkable or strong, as E3 does for claims: without a URL the provider is
-  tier 1 or 2. RE3 keeps no event without an edition. The ids are opaque and never parsed; an id
-  that contains a date is not the release date, and an id is not renamed after a date correction.
+  tier 1 or 2. RE3 keeps no event without an edition. The date is the release in that edition's
+  language and locality, never the Japanese or English one; in the West each language has its own
+  event (`EVENT:WEST:<localSetCode>:<Language>:launch-<date>`), and an official source outranks a
+  wiki. A date known only to its month is stored on the 1st (D1). Promo series have no single
+  launch and no event. The ids are opaque and never parsed; an id that contains a date is not the
+  release date, and an id is not renamed after a date correction.
 
 - `cardmarketVariantSets` — Cardmarket bookkeeping. Cardmarket files alternative versions of a card
   under an `x`-prefixed copy of the set (`xm2a` beside `m2a`). Each record names such a
@@ -167,8 +171,8 @@ catalogue contract above); `localityMarkers` stays out of it.
   part of a set code and no id changes because of it. Rule V1 holds the variant in its base set's
   locality, its code equal to the prefix plus the base code; R5 keeps set relations off variant sets.
 - `localityMarkers` — the marker a localization prints after the set code (`F` Traditional Chinese,
-  `I` Indonesian, `T` Thai, `LA` Latin American Spanish, `EN`, `DE`, `FR`, `IT`, `ES`, `PT` in the
-  West), one per localization. A marker enters only with its proof: `sourceRef` cites a specimen of
+  `C` Simplified Chinese, `I` Indonesian, `T` Thai, `LA` Latin American Spanish, `EN`, `DE`, `FR`,
+  `IT`, `ES`, `PT` in the West), one per localization. A marker enters only with its proof: `sourceRef` cites a specimen of
   that language whose observation shows the marker (rule LM1). A localization without a record has
   no marker established, which does not mean it prints none.
 - `setRelationTypes` — the registry of relation types: `symmetric` (no direction; the pair is stored
@@ -188,7 +192,10 @@ catalogue contract above); `localityMarkers` stays out of it.
   retained file under `verification/evidence/` or null), `evidence` (what the source says about both
   lists) and `checkedAt`. Rules R1 to R4 hold the shape: two different sets once per type, a source
   that is never tier 5, at most one availability-merging partner per locality, and coverage where
-  the type requires it. Promo series of the same name in different localities get no relation.
+  the type requires it. Promo series of the same name in different localities get no relation. A
+  family of the same list across localities is a star around its Japanese set (without one, around
+  the smallest id); a different numbering of the same cards stays `identical-list` with a `note`. A
+  similar code, a shared Cardmarket set or a run match is only a candidate, never a relation.
 
 **`data/images.json`** — `assets` (retained images with path, hash, scope and alt text, keyed by
 `asset-` plus the UUIDv5 of `https://github.com/m4s-ai/snoredex-data/asset/v1/<path>` in the URL
