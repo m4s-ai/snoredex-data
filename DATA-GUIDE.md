@@ -147,7 +147,7 @@ set fields from two others (`setEditionCodes`, `releaseEvents`, see the catalogu
   owner; PC2 holds the marker to the one registered for the edition's localization; PC3 holds a
   cited specimen to the edition's language and to showing the code verbatim (it does not apply to an
   owner attestation); PC4 holds the printed code to the base (printed or the set's) plus a space and
-  the marker; PC5 keeps markers, regulation marks and variant sets out of a base code; PC6 lets a set
+  the marker; PC5 keeps markers and regulation marks out of a base code; PC6 lets a set
   carry a `baseSetCode` only where an edition of it has a printed code.
 
 - `releaseEvents` — the dated release of a set edition and its source. A `setEditions` record with
