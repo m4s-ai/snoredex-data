@@ -157,21 +157,26 @@ Which source answers which question, how to query it, and the traps. Every sourc
 positive only. A failed fetch is an access caveat, not evidence; do not repeat an unchanged failed
 request without a new lead or access method.
 
+**Bot protection is not a stop.** A public page behind bot protection (a Cloudflare interstitial or
+address ban, HTTP 403, a JavaScript-only page) is fetched through the owner's fetch services,
+Firecrawl or FlareSolverr. A runtime without them uses a browser session, in-app or the owner's,
+then an independent source. A login or paywall is an access control, not bot protection, and is
+never bypassed; a rate limit such as Cardmarket's quota holds on every route. The route changes
+nothing about what the fetched page proves.
+
 ### Cardmarket
 
 - Product pages, language filters, offers and counts are routing metadata, never localized-card
   evidence. There is no open API; a rolling quota of about 55 requests answers HTTP 429. Use the
-  in-app browser. An agent never solves a bot check (HTTP 403 with a Cloudflare interstitial, which
-  waiting does not clear): navigate once more, and if it still stands, ask the owner to clear it in
-  the browser pane or to send the image address.
+  in-app browser.
 - A retained exact product image (`product-images.s3.cardmarket.com`) or seller photograph supports
   only what is visible on the pictured card face, filed as a `SPEC-nnnn` record. A selected language
   filter is never projected onto an image printed in another language.
 - Seller photographs hang on the individual offers of a product page and show real cards
-  (SPEC-0648 to SPEC-0652). Fetch them whenever the browser reaches the product page without a bot
-  check: filter the offers by language and, where the set has both, by edition, and retain the
-  article-scan URL (`marketplace-article-scans.s3.cardmarket.com/<article>/<article>.jpg`) as the
-  record's `photographSource`.
+  (SPEC-0648 to SPEC-0652). Fetch them whenever the product page is reached: filter the offers by
+  language and, where the set has both, by edition, and retain the article-scan URL
+  (`marketplace-article-scans.s3.cardmarket.com/<article>/<article>.jpg`) as the record's
+  `photographSource`.
 - Cardmarket codes: `x<SET>` is a special treatment of a card from `<SET>` (patterned reverse,
   retail stamp) whose printed number belongs to `<SET>`; `PPS<n> <SET>` is Play! Pokémon Prize Pack
   Series `<n>`, a stamped reprint. Prize Packs and `x` printings are separate cards and need their
@@ -299,7 +304,8 @@ whose own `/series/<set>/<number>/` path matches the set asked for.
   reachable and their "Illus." lines match the catalogue.
 - **52poke** (`wiki.52poke.com/api.php`) names card pages by the Japanese set code, so its pages
   evidence the card, not a Simplified Chinese printing.
-- **LigaPokemon** bans datacenter IPs (Cloudflare 1008): use an authenticated user browser session.
+- **LigaPokemon** bans datacenter addresses (Cloudflare 1005 or 1008, a ban and not a challenge):
+  fetch it from a residential address, through FlareSolverr or a user browser session.
 - **LATAM Spanish:** the official `pokemon.com/latam` site; the edition exists from Journey Together
   (2025) onward and differs in attack translation, set name and set code.
 - **Japanese editions:** closed Yahoo! Auctions and Yahoo!フリマ listings (`auctions.c.yimg.jp`
@@ -308,9 +314,10 @@ whose own `/series/<set>/<number>/` path matches the set asked for.
   page contains the resolved `private-user-images.githubusercontent.com` URLs. HTML-unescape them
   (`&amp;`), strip a trailing `\` and embedded `&`, download, and commit the bytes to the photo
   repository (specimen intake): a signed URL is perishable.
-- **Dead ends** worth not repeating: `ptcg.cn` (a Magic site), `pokebeach.com` (403 to scripts),
-  `namu.wiki` and `pokeos.com` (JavaScript-rendered), `krystalkollectz.com` (a shop),
+- **Dead ends** worth not repeating: `ptcg.cn` (a Magic site), `krystalkollectz.com` (a shop),
   `jihuanshe.com` (an app landing page).
+- **Blocked to plain scripts, untried through the fetch services:** `pokebeach.com` (403),
+  `namu.wiki` and `pokeos.com` (JavaScript-rendered).
 
 ### Illustrators and localized names
 

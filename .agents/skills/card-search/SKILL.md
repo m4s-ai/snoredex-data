@@ -55,11 +55,11 @@ inspected URLs, findings and blockers, prioritizing fields a source can actually
    and actual image URLs. Shopee CDN, Bunjang media, eBay image and shop-hosted image links may
    remain accessible when a listing fails. Follow exposed or user-supplied URLs; guessed variants
    are unverified until fetched and inspected. A resized preview is not the original resolution.
-5. For blocked pages, try the available browser (see the access notes in METHODOLOGY.md's source
-   techniques), then an independent source. Record login/403/expired-image limits; do not retry indefinitely or bypass
-   access controls. If images remain inaccessible, give the user both listing and direct-image
-   links, target identity and missing field so they can supply the image. Never claim inspection
-   of unavailable bytes.
+5. For blocked pages, follow the access notes in METHODOLOGY.md's source techniques (fetch
+   services, else the available browser), then an independent source. Record login/403/expired-image
+   limits; do not retry indefinitely or bypass a login or paywall. If images remain inaccessible,
+   give the user both listing and direct-image links, target identity and missing field so they
+   can supply the image. Never claim inspection of unavailable bytes.
 
 Stop a round when requested fields are supported, promising independent routes are exhausted,
 or a specific image/clarification is needed. Record the next useful lead. Zero results and missing
