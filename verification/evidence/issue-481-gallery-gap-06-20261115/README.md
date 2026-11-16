@@ -45,11 +45,11 @@ visually. Sources remain unchanged, including their previously removed location 
 ## Verification and scope
 
 - Full `scripts/regen.py` and pre-push `scripts/regen.py --check`.
-- 106/106 general browser checks after integrating main `093dedb6`.
+- 106/106 general browser checks after integrating main `d8ddd365`.
 - All six targets in grid and lightbox on desktop and mobile DPR2, with correct source and scope.
 - All six targets in 2×2/3×3/4×4/5×5 binders, both reading orders, both viewports:
   96 target/layout checks, adequate selected image pixel sizes, no page overflow or HTTP/page errors.
-- Built `_site-round06-sync`: 2681 files, 200415 KB; allowlist verification passed.
+- Built `_site-round06-final`: 2681 files, 200722 KB; allowlist verification passed.
 - All 706 registered photos match their hashes and carry no GPS.
 - Independent scope assertions: five image-asset/gallery additions, one primary image reference,
   and the two data-date fields. All existing images, identities, claims, registry entries,
@@ -57,10 +57,12 @@ visually. Sources remain unchanged, including their previously removed location 
 
 The final conflict resolution integrated main `093dedb6`, including its release-event,
 catalogue 1.1.0 / SQLite 2.1.0 and SPEC-0015 corrections. Independent assertions against
-that main confirm the cumulative PR changes: six added asset/gallery records, two primary
+main confirm the cumulative PR changes: six added asset/gallery records, two primary
 image references, one seller-source link, SPEC-0796 and data dates. All other canonical
 records from main are preserved. The full gate, browser suite, photo check and all 96
 round-06 target/layout checks passed again on the integrated tree.
+The subsequent main `d8ddd365` adds owner-decided set relations; these are also preserved,
+with outputs rebuilt and the same gate, browser and target/layout checks repeated.
 
 `validation.json` records the batch result. The single obstructed-image need remains open in
 #481. Together with round 05, this PR covers ten fixed targets, six new gallery images
