@@ -241,13 +241,14 @@ def availability_groups(sets: dict) -> dict:
 
 
 def local_set_record(row: dict, derived: dict) -> dict:
-    variant = derived["variants"].get(row["localSetId"]) or {}
     group = derived["groups"][row["localSetId"]]
+    # The Cardmarket x-sets are normalized into their base sets (owner ruling 2026-11-16): no local set is a
+    # variant any more, so the two contract-1.1.0 variant fields stay null.
     return dict({k: v for k, v in row.items() if k != "baseSetCode"},
-                baseSetCode=row.get("baseSetCode", derived["bases"].get(variant.get("variantOfLocalSetId"))),
+                baseSetCode=row.get("baseSetCode"),
                 cardmarketSetCodes=derived["codes"][row["localSetId"]],
-                cardmarketVariantPrefix=variant.get("variantPrefix"),
-                variantOfLocalSetId=variant.get("variantOfLocalSetId"),
+                cardmarketVariantPrefix=None,
+                variantOfLocalSetId=None,
                 availabilityGroupId=min(group),
                 knownLocalizationIds=sorted({loc for member in group for loc in derived["spoken"].get(member, ())}),
                 sortKey="|".join((row["locality"], natural_key(row["localSetCode"]),
@@ -277,9 +278,7 @@ def set_tables(sets: dict, printings: list, claims: dict) -> tuple[dict, dict]:
     spoken = {}
     for row in sets["setEditions"]:
         spoken.setdefault(row["localSetId"], set()).add(row["localizationId"])
-    derived = {"variants": {v["localSetId"]: v for v in sets["cardmarketVariantSets"]},
-               "bases": {s["localSetId"]: s.get("baseSetCode") for s in sets["localSets"]},
-               "groups": availability_groups(sets), "codes": cardmarket_codes(sets, printings, claims),
+    derived = {"groups": availability_groups(sets), "codes": cardmarket_codes(sets, printings, claims),
                "spoken": spoken}
     local_sets = {row["localSetId"]: local_set_record(row, derived) for row in sets["localSets"]}
     codes = {row["setEditionId"]: row for row in sets["setEditionCodes"]}
@@ -729,7 +728,7 @@ def gallery_page(cards: list) -> str:
 # --- snoredex.sqlite ---
 
 SCHEMA_SQL = ROOT / "templates" / "schema.sql"
-DATABASE_SCHEMA = ("snoredex-database", "2.1.0")
+DATABASE_SCHEMA = ("snoredex-database", "2.2.0")
 OWNER_ADJUDICATIONS = ROOT / "verification" / "owner_adjudications.json"  # owner file, read in place
 SPECIMENS = ROOT / "verification" / "specimens.json"  # curated specimen store, read in place
 

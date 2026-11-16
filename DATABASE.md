@@ -2,7 +2,7 @@
 # Application database and collection tracker
 
 [`snoredex.sqlite`](snoredex.sqlite) is the current-known catalogue as a relational database, schema
-`snoredex-database` 2.1.0. It is built from the canonical model in `data/` ([`data/printings.json`](data/printings.json) and its
+`snoredex-database` 2.2.0. It is built from the canonical model in `data/` ([`data/printings.json`](data/printings.json) and its
 neighbours) and holds the
 same facts: the catalogue items, their sets and localizations, images, providers, the legacy
 language claims with their Cardmarket products, release rows and finish evidence, plus the owner
