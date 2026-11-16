@@ -857,6 +857,22 @@ def not_printed_source(m: dict) -> None:
     record["sourceRefs"] = record["sourceRefs"] + ["CLAIM:legacy:" + unit]
 
 
+DATED = ((P, "releaseDatePrecision"), (ED, "releaseDatePrecision"), (EV, "releaseDatePrecision"),
+         ("claims.releaseRows", "datePrecision"))
+
+
+def month_dates(model: dict) -> tuple[int, list]:
+    """D1: a date known only to its month is stored on the 1st (owner ruling 2026-11-16)."""
+    dated = [(name, row, field) for name, field in DATED for row in rows(model, name) if row.get("releaseDate")]
+    return failing(dated, lambda t: t[1].get(t[2]) == "month" and not re.fullmatch(r"\d{4}-\d{2}-01", t[1]["releaseDate"]),
+                   lambda t: f"{t[0]}: {t[1]['releaseDate']}")
+
+
+def mid_month(m: dict) -> None:
+    item = edit(m, P, lambda r: r.get("releaseDatePrecision") == "month")
+    item["releaseDate"] = item["releaseDate"][:8] + "15"
+
+
 def weak_release(m: dict) -> None:
     tier3 = first_provider(m, 3)
     edit(m, EV, lambda e: e["sourceRef"] is None).update(providerId=tier3, sourceUrl=None)
@@ -1045,6 +1061,7 @@ DOMAIN = {
     "RE1: a release event's source is checkable or strong": (release_sources, weak_release),
     "RE2: a set edition's release date is its event's": (edition_dates, change(
         ED, lambda e: e["releaseEventId"], releaseDate="1999-01-01")),
+    "D1: a date known only to its month falls on the 1st": (month_dates, mid_month),
     "RE3: every release event dates a set edition": (unused_events, add_row(
         EV, lambda m: [dict(rows(m, EV)[0], releaseEventId="EVENT:~")])),
     "PC1: a printed set code rests on a card image, a tier 1-2 URL or the owner": (code_sources, weak_code),
