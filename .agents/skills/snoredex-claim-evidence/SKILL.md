@@ -50,8 +50,8 @@ finish section of METHODOLOGY.md as well.
 ## Claim-evidence source recovery
 
 For a bot-gated source link (Cloudflare, CAPTCHA, 403, JavaScript), use the access notes in
-METHODOLOGY.md's source techniques: an in-app or authenticated user browser where authorized, then
-an independent source. Retrieval is never evidence by itself; deciding what the recovered source
+METHODOLOGY.md's source techniques: the owner's fetch services, else a browser session, then an
+independent source. Retrieval is never evidence by itself; deciding what the recovered source
 proves for this exact claim is this workflow's task. Catalogue metadata is not specimen evidence
 and cannot establish a physical finish. Source silence proves neither absence nor first release;
 keep catch-up and reprint identities separate from the original set.

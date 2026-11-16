@@ -689,7 +689,7 @@
             "string",
             "null"
           ],
-          "description": "Language-independent set code; null: not established. A Cardmarket variant set carries its base set's."
+          "description": "Language-independent set code; null: not established."
         },
         "cardmarketSetCodes": {
           "type": "array",
@@ -704,14 +704,14 @@
             "string",
             "null"
           ],
-          "description": "The Cardmarket prefix (x) when this set is a Cardmarket variant set."
+          "description": "Always null: the Cardmarket x-sets are normalized into their base sets, whose x code appears in cardmarketSetCodes."
         },
         "variantOfLocalSetId": {
           "type": [
             "string",
             "null"
           ],
-          "description": "The local set a Cardmarket variant set is bookkeeping for."
+          "description": "Always null: no local set is a Cardmarket variant set."
         },
         "availabilityGroupId": {
           "type": "string",

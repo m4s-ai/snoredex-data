@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 796,
+  "count": 799,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -17369,6 +17369,68 @@
       "physicalObservation": {
         "finish": "reverse-holo",
         "basis": "The complete face visibly reflects rainbow foil bands across the rules-text area."
+      }
+    },
+    {
+      "specimenId": "SPEC-0797",
+      "setCode": "B2",
+      "number": "30/130",
+      "variant": "base",
+      "language": "English",
+      "heldBy": "third-party catalogue",
+      "inspectedFrom": "Original source bytes visually inspected at native resolution on 2026-11-16; local OCR unavailable. No GPS metadata; filed unchanged. Listing page URL not established.",
+      "observed": "Complete English Snorlax card face with Base Set 2 symbol and printed 30/130. This catalogue image is used only as a representative rendering; it establishes no physical finish.",
+      "recordedAt": "2026-11-16",
+      "photograph": "SPEC-0797.png",
+      "photographSha256": "sha256:e7461029f9ff0bf9dd98647b52a51403b7f204d39bbfde6ffecd988cfc04e031",
+      "photographSource": "https://assets.tcgdex.net/en/base/base4/30/high.png",
+      "listingUrl": null,
+      "citedBy": [
+        "F0005-P01"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0798",
+      "setCode": "JU",
+      "number": "27/64",
+      "variant": "V2",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Original source bytes visually inspected at native resolution on 2026-11-16; local OCR unavailable. No GPS metadata; filed unchanged. Listing page URL not established.",
+      "observed": "Complete sharp German Relaxo face with 90 KP, German rules text, Jungle symbol and printed 27/64. The printed EDITION 1 mark is visible below the artwork at left on the card itself. No physical foil observation is asserted.",
+      "recordedAt": "2026-11-16",
+      "photograph": "SPEC-0798.jpg",
+      "photographSha256": "sha256:3df571dd720778d5abd85d7487d4984a9bd2ea6a37c9cff33f6a5f662a99c566",
+      "photographSource": "https://jk-entertainment.de/media/8e/70/39/1726488387/346429f94cb54e11afe24aaa03f9b730.JPG",
+      "listingUrl": null,
+      "citedBy": [
+        "F0170-P01"
+      ],
+      "physicalObservation": {
+        "edition": "1st Edition",
+        "basis": "The printed first-edition mark is legible on the complete card face; no reliance on listing title or grading label."
+      }
+    },
+    {
+      "specimenId": "SPEC-0799",
+      "setCode": "EC5",
+      "number": "062/088",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Original source bytes visually inspected at native resolution on 2026-11-16; local OCR unavailable. No GPS metadata; filed unchanged. Listing page URL not established.",
+      "observed": "Complete Japanese カビゴン face, HP80, printed 062/088 and printed 1 EDITION mark at bottom right. The image is assigned conservatively as representative; no physical finish is asserted.",
+      "recordedAt": "2026-11-16",
+      "photograph": "SPEC-0799.jpg",
+      "photographSha256": "sha256:cde1337e8db005f512092016b5358ca8710d9b76a088b351c1fcb98426f40818",
+      "photographSource": "https://s3-ap-northeast-1.amazonaws.com/jiraffe-magi/prod/images/item/8640167/1.jpg",
+      "listingUrl": null,
+      "citedBy": [
+        "F0104-P01"
+      ],
+      "physicalObservation": {
+        "edition": "1st Edition",
+        "basis": "The printed first-edition mark is legible on the complete card face; no reliance on listing title or grading label."
       }
     }
   ]

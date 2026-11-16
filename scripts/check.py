@@ -90,9 +90,9 @@ COLLECTIONS = {
         "setEditionId": S, "printedSetCode": S, "printedBaseCode": OS, "localityMarker": OS, "providerId": S,
         "sourceRef": OS, "sourceUrl": OS, "evidence": OS, "corroborated": B, "checkedAt": S}),
     "sets.works": ("workId", "workId", {"workId": S, "cardKey": S}),
-    # Cardmarket bookkeeping: an x-prefixed set is a variant of its base set, never a set code of its own
-    "sets.cardmarketVariantSets": ("localSetId", "localSetId", {
-        "localSetId": S, "variantOfLocalSetId": S, "variantPrefix": S, "checkedAt": S}),
+    # Cardmarket bookkeeping: the x-prefixed Cardmarket code of a base set, never a local set of its own
+    "sets.cardmarketVariantSets": ("variantOfLocalSetId", "variantOfLocalSetId", {
+        "variantOfLocalSetId": S, "cardmarketSetCode": S, "variantPrefix": S, "checkedAt": S}),
     "sets.localityMarkers": ("localizationId", "localizationId", {  # one printed marker per localization
         "localizationId": S, "marker": S, "status": enum("active", "retired"), "sourceRef": S}),
     "sets.setRelationTypes": ("relationTypeId", "relationTypeId", {  # rules read these properties, not names
@@ -338,9 +338,7 @@ def add_row(name: str, make):
 
 
 def plain_sets(m: dict) -> list:
-    variants = ids(m, VAR)
-    return sorted(s["localSetId"] for s in rows(m, LS)
-                  if s["identityState"] == "identified" and s["localSetId"] not in variants)
+    return sorted(s["localSetId"] for s in rows(m, LS) if s["identityState"] == "identified")
 
 
 def first_provider(m: dict, tier: int) -> str:
@@ -348,7 +346,7 @@ def first_provider(m: dict, tier: int) -> str:
 
 
 def relation(m: dict, **values) -> dict:
-    """A valid relation: two identified non-variant sets, the first type requiring coverage, a tier-2 URL."""
+    """A valid relation: two identified sets, the first type requiring coverage, a tier-2 URL."""
     first, second = plain_sets(m)[:2]
     kind = next(t["relationTypeId"] for t in rows(m, RTYPE) if t["requiresCoverage"])
     row = {"relationId": "SETREL-9999", "fromLocalSetId": first, "toLocalSetId": second, "relationType": kind,
@@ -413,7 +411,6 @@ SIMPLE_REFS = (
     (ED, "releaseEventId", EV, None, lambda: add_row(ED, lambda m: dated_edition(m, releaseEventId="EVENT:~none"))),
     (CODE, "setEditionId", ED, None, lambda: add_row(  # a copy: break_ref would strip a set of its carrier (PC6)
         CODE, lambda m: [dict(rows(m, CODE)[0], setEditionId="EDITION:~none")])),
-    (VAR, "localSetId", LS, None, None),
     (VAR, "variantOfLocalSetId", LS, None, None),
     (MARK, "localizationId", "sets.localizations", None, lambda: add_row(
         MARK, lambda m: [dict(rows(m, MARK)[0], localizationId="LOCALIZATION:~none")])),
@@ -777,17 +774,29 @@ def coverage_error(relation: dict, kind: dict) -> bool:
     return any(not isinstance(d, str) or d not in DIFFERENCES for d in relation["differences"] or [])
 
 
-def variant_error(row: dict, sets: dict, variants: set) -> bool:
-    """V1: same locality, the base is no variant itself, and the code is the prefix plus the base code."""
-    variant, base = sets[row["localSetId"]], sets[row["variantOfLocalSetId"]]
-    return (variant["locality"] != base["locality"] or base["localSetId"] in variants
-            or variant["localSetCode"] != f"{row['variantPrefix']}{base['localSetCode']}")
+def variant_codes(model: dict) -> tuple[int, list]:
+    """V1: a Cardmarket variant code is its base set's code plus the prefix."""
+    sets = {s["localSetId"]: s for s in rows(model, LS)}
+    found = [r for r in rows(model, VAR) if r["variantOfLocalSetId"] in sets]
+    return failing(found, lambda r: r["cardmarketSetCode"] != r["variantPrefix"] + sets[r["variantOfLocalSetId"]]["localSetCode"],
+                   lambda r: r["variantOfLocalSetId"])
 
 
-def variant_sets(model: dict) -> tuple[int, list]:
-    sets, variants = {s["localSetId"]: s for s in rows(model, LS)}, ids(model, VAR)
-    found = [r for r in rows(model, VAR) if r["localSetId"] in sets and r["variantOfLocalSetId"] in sets]
-    return failing(found, lambda r: variant_error(r, sets, variants), lambda r: r["localSetId"])
+def normalized_variants(model: dict) -> tuple[int, list]:
+    """V2: no local set carries a Cardmarket variant code in its base set's locality: the x-sets are normalized
+    into their base sets (owner ruling 2026-11-16)."""
+    sets = {s["localSetId"]: s for s in rows(model, LS)}
+    variant = {(sets[r["variantOfLocalSetId"]]["locality"], r["cardmarketSetCode"])
+               for r in rows(model, VAR) if r["variantOfLocalSetId"] in sets}
+    return failing(rows(model, LS), lambda s: (s["locality"], s["localSetCode"]) in variant, lambda s: s["localSetId"])
+
+
+def variant_set(m: dict) -> list:
+    """A local set re-created under a Cardmarket variant code, without a base code (PC6) or editions."""
+    row = rows(m, VAR)[0]
+    base = next(s for s in rows(m, LS) if s["localSetId"] == row["variantOfLocalSetId"])
+    copy = {k: v for k, v in base.items() if k != "baseSetCode"}
+    return [dict(copy, localSetId="LOCALSET:~", localSetCode=row["cardmarketSetCode"])]
 
 
 def marker_error(row: dict, language: str, specimens: dict) -> bool:
@@ -879,16 +888,14 @@ def weak_release(m: dict) -> None:
 
 
 def code_context(model: dict) -> list:
-    """(code record, its edition, the set whose base code it uses: a variant uses its base set's).
-    A record whose edition or set does not resolve is left to its reference rule."""
+    """(code record, its edition, its set). A record whose edition or set does not resolve is left to its
+    reference rule."""
     editions, sets = {e["setEditionId"]: e for e in rows(model, ED)}, {s["localSetId"]: s for s in rows(model, LS)}
-    variant_of = {v["localSetId"]: v["variantOfLocalSetId"] for v in rows(model, VAR)}
     found = []
     for row in rows(model, CODE):
         edition = editions.get(row["setEditionId"])
         if edition is not None and edition["localSetId"] in sets:
-            own = sets[edition["localSetId"]]
-            found.append((row, edition, sets.get(variant_of.get(own["localSetId"]), own)))
+            found.append((row, edition, sets[edition["localSetId"]]))
     return found
 
 
@@ -957,15 +964,15 @@ def suffixed(code: str, markers: set) -> bool:
 
 
 def base_codes(model: dict) -> tuple[int, list]:
-    """PC5: a base code carries no marker and no regulation mark; a Cardmarket variant set carries none."""
-    markers, variants = {m["marker"] for m in rows(model, MARK)}, ids(model, VAR)
-    found = [(s["localSetId"], s["baseSetCode"], s["localSetId"] in variants) for s in rows(model, LS) if "baseSetCode" in s]
-    found += [(r["setEditionId"], r["printedBaseCode"], False) for r in rows(model, CODE) if r["printedBaseCode"]]
-    return failing(found, lambda f: f[2] or suffixed(str(f[1]), markers), lambda f: f[0])
+    """PC5: a base code carries no marker and no regulation mark."""
+    markers = {m["marker"] for m in rows(model, MARK)}
+    found = [(s["localSetId"], s["baseSetCode"]) for s in rows(model, LS) if "baseSetCode" in s]
+    found += [(r["setEditionId"], r["printedBaseCode"]) for r in rows(model, CODE) if r["printedBaseCode"]]
+    return failing(found, lambda f: suffixed(str(f[1]), markers), lambda f: f[0])
 
 
 def carried_bases(model: dict) -> tuple[int, list]:
-    """PC6: a base code stands only on a set with a printed set code of its own or of a variant."""
+    """PC6: a base code stands only on a set with a printed set code of its own."""
     carried = {s["localSetId"] for _, _, s in code_context(model)}
     return failing([s for s in rows(model, LS) if "baseSetCode" in s], lambda s: s["localSetId"] not in carried,
                    lambda s: s["localSetId"])
@@ -1050,12 +1057,10 @@ DOMAIN = {
     "R4: coverage and differences fit the relation type": (
         lambda m: failing(typed_relations(m), lambda pair: coverage_error(*pair), lambda pair: pair[0]["relationId"]),
         add_row(REL, lambda m: [relation(m, coverage=None)])),
-    "R5: a Cardmarket variant set carries no set relation": (
-        lambda m: failing(rows(m, REL), lambda r, variants=ids(m, VAR): bool(
-            {r["fromLocalSetId"], r["toLocalSetId"]} & variants), lambda r: r["relationId"]),
-        add_row(REL, lambda m: [relation(m, fromLocalSetId=min(ids(m, VAR)))])),
-    "V1: a Cardmarket variant set is its base set's code plus the prefix, in the same locality": (
-        variant_sets, change(VAR, variantPrefix="y")),
+    "V1: a Cardmarket variant code is its base set's code plus the prefix": (
+        variant_codes, change(VAR, variantPrefix="y")),
+    "V2: no local set carries a Cardmarket variant code: x-sets are normalized into their base set": (
+        normalized_variants, add_row(LS, variant_set)),
     "LM1: a locality marker cites a specimen of its language that shows it": (locality_markers, foreign_marker),
     "LS1: no local set rests on a claim the owner adjudicated not-printed": (adjudicated_sets, not_printed_source),
     "RE1: a release event's source is checkable or strong": (release_sources, weak_release),
@@ -1071,7 +1076,7 @@ DOMAIN = {
     "PC4: printed set code = base code plus locality marker": (
         lambda m: failing(code_context(m), lambda c: composed_code_error(c[0], c[2]), lambda c: c[0]["setEditionId"]),
         change(CODE, lambda r: r["printedBaseCode"], printedBaseCode="ZZZ")),
-    "PC5: a base code carries no marker, no regulation mark and no variant prefix": (base_codes, marked_base),
+    "PC5: a base code carries no marker and no regulation mark": (base_codes, marked_base),
     "PC6: a base code is carried by a printed set code of the set": (carried_bases, lambda m: edit(
         m, LS, lambda s: s["localSetId"] in plain_sets(m) and "baseSetCode" not in s).update(baseSetCode="ZZ")),
 }
