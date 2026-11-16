@@ -107,7 +107,7 @@ finish-store printing), `sourceClaimRefs`, `cardName` and `localCardName`, `coll
 status, claim refs), `completenessStatus` and `completenessEvidence`, `imageAssetId`, and `artist`
 where reviewed. `releaseDate`, `releaseDatePrecision` and `releaseApproximate` appear only where the
 item's date differs from its set edition's. A date known only to its month is stored on the 1st
-with `releaseDatePrecision: month` and shown as the month (rule D1); a year date stays the bare year. `meta` carries the data date (`dataAsOf`, bumped by
+with `releaseDatePrecision: month` and shown as that day (rule D1, owner decision #581); a year date stays the bare year. `meta` carries the data date (`dataAsOf`, bumped by
 hand with a data change) and frozen fields of the previous pipeline.
 
 **`data/sets.json`** — `localizations` (locality-qualified languages: `WEST/es-ES` and
