@@ -1,4 +1,4 @@
--- snoredex.sqlite 2.1.0: the canonical model in data/ as a relational database, built by
+-- snoredex.sqlite 2.2.0: the canonical model in data/ as a relational database, built by
 -- scripts/build.py. This file is the database contract. JSON text columns end in _json.
 -- Absence is never encoded: `not-printed` exists only beside an owner adjudication, and no
 -- column claims that a source supports absence.
@@ -97,10 +97,11 @@ CREATE TABLE set_edition_codes (
     checked_at TEXT NOT NULL
 ) WITHOUT ROWID;
 
--- A Cardmarket variant set (the x prefix) and the set it is bookkeeping for; never a printed code.
+-- The x-prefixed Cardmarket code of a base set: marketplace bookkeeping, never a printed code and never a
+-- local set of its own (the x-sets are normalized into their base sets).
 CREATE TABLE cardmarket_variant_sets (
-    local_set_id TEXT PRIMARY KEY REFERENCES local_sets(local_set_id),
-    variant_of_local_set_id TEXT NOT NULL REFERENCES local_sets(local_set_id),
+    variant_of_local_set_id TEXT PRIMARY KEY REFERENCES local_sets(local_set_id),
+    cardmarket_set_code TEXT NOT NULL,
     variant_prefix TEXT NOT NULL,
     checked_at TEXT NOT NULL
 ) WITHOUT ROWID;

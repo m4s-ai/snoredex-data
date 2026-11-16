@@ -72,9 +72,9 @@ These limits qualify coverage, not the positive card records already retained.
 schema is
 [`collector_catalogue.schema.json`](collector_catalogue.schema.json). `meta.catalogueFingerprint`
 hashes the whole document. Contract 1.1.0 added, without changing an existing value, the set
-fields derived from `data/sets.json`: on `localSets` the `baseSetCode` (a Cardmarket variant set's is
-its base set's), the Cardmarket bookkeeping (`cardmarketSetCodes` through the legacy claims its
-printings cite, `cardmarketVariantPrefix`, `variantOfLocalSetId`; never evidence), the
+fields derived from `data/sets.json`: on `localSets` the `baseSetCode`, the Cardmarket bookkeeping (`cardmarketSetCodes` through the legacy
+claims its printings cite, an x code included; `cardmarketVariantPrefix` and `variantOfLocalSetId` stay
+null since the x-sets are normalized away; never evidence), the
 `availabilityGroupId` of the sets joined by availability-merging relations and their
 `knownLocalizationIds` (a missing localization is unknown, never absent); on `setEditions` the
 `printedSetCode` and `localityMarker`, `availability` (`established`, `unresolved-placeholder`, or
@@ -121,13 +121,12 @@ localization, with its release date where known) and `works` (card text, by `car
 printed code; it stays as it is. The set code is recorded on three levels instead: `baseSetCode` on a
 local set (language-independent, without marker or regulation mark: `ma3`, `s2`; for a Prize Pack the
 owner's set identity, `PPS8 JTG`), and per edition the `localityMarker` and the `printedSetCode` in
-`setEditionCodes`. A set without `baseSetCode` has none established; a Cardmarket variant set never
-carries one and uses its base set's.
+`setEditionCodes`. A set without `baseSetCode` has none established.
 
 Six further collections describe sets rather than cards. The database carries each as a table
-(2.1.0). The catalogue (1.1.0) carries `setRelationTypes` and `setRelations` as they are and derives
-set fields from three others (`setEditionCodes`, `releaseEvents`, `cardmarketVariantSets`, see the
-catalogue contract above); `localityMarkers` stays out of it.
+(2.2.0). The catalogue (1.1.0) carries `setRelationTypes` and `setRelations` as they are and derives
+set fields from two others (`setEditionCodes`, `releaseEvents`, see the catalogue contract above);
+`cardmarketVariantSets` and `localityMarkers` stay out of it.
 
 - `setEditionCodes` — the set code an edition prints, at most one record per `setEditionId`:
   `printedSetCode` exactly as printed, without the regulation mark (`ma3 T`, `JTG DE`, `s2`,
@@ -166,10 +165,11 @@ catalogue contract above); `localityMarkers` stays out of it.
   release date, and an id is not renamed after a date correction.
 
 - `cardmarketVariantSets` — Cardmarket bookkeeping. Cardmarket files alternative versions of a card
-  under an `x`-prefixed copy of the set (`xm2a` beside `m2a`). Each record names such a
-  `localSetId`, the `variantOfLocalSetId` it belongs to and the `variantPrefix`. The prefix is never
-  part of a set code and no id changes because of it. Rule V1 holds the variant in its base set's
-  locality, its code equal to the prefix plus the base code; R5 keeps set relations off variant sets.
+  under an `x`-prefixed copy of the set (`xm2a` beside `m2a`). That copy is not a set: its cards
+  belong to the base set's editions, and it never becomes a local set, an edition or a release event
+  (owner ruling 2026-11-16). Each record names the `variantOfLocalSetId`, the `cardmarketSetCode` and
+  the `variantPrefix`; the Cardmarket code stays on the legacy products. Rule V1 holds the code equal
+  to the prefix plus the base code; V2 keeps any local set from carrying it.
 - `localityMarkers` — the marker a localization prints after the set code (`F` Traditional Chinese,
   `C` Simplified Chinese, `I` Indonesian, `T` Thai, `LA` Latin American Spanish, `EN`, `DE`, `FR`,
   `IT`, `ES`, `PT` in the West), one per localization. A marker enters only with its proof: `sourceRef` cites a specimen of
