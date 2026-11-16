@@ -157,13 +157,18 @@ Which source answers which question, how to query it, and the traps. Every sourc
 positive only. A failed fetch is an access caveat, not evidence; do not repeat an unchanged failed
 request without a new lead or access method.
 
+**Bot protection is not a stop.** A public page behind bot protection (a Cloudflare interstitial or
+address ban, HTTP 403, a JavaScript-only page) is fetched through the owner's fetch services,
+Firecrawl or FlareSolverr. A runtime without them uses a browser session, in-app or the owner's,
+then an independent source. A login or paywall is an access control, not bot protection, and is
+never bypassed; a rate limit such as Cardmarket's quota holds on every route. The route changes
+nothing about what the fetched page proves.
+
 ### Cardmarket
 
 - Product pages, language filters, offers and counts are routing metadata, never localized-card
   evidence. There is no open API; a rolling quota of about 55 requests answers HTTP 429. Use the
-  in-app browser. An agent never solves a bot check (HTTP 403 with a Cloudflare interstitial, which
-  waiting does not clear): navigate once more, and if it still stands, ask the owner to clear it in
-  the browser pane or to send the image address.
+  in-app browser.
 - A retained exact product image (`product-images.s3.cardmarket.com`) or seller photograph supports
   only what is visible on the pictured card face, filed as a `SPEC-nnnn` record. A selected language
   filter is never projected onto an image printed in another language.
@@ -299,7 +304,8 @@ whose own `/series/<set>/<number>/` path matches the set asked for.
   reachable and their "Illus." lines match the catalogue.
 - **52poke** (`wiki.52poke.com/api.php`) names card pages by the Japanese set code, so its pages
   evidence the card, not a Simplified Chinese printing.
-- **LigaPokemon** bans datacenter IPs (Cloudflare 1008): use an authenticated user browser session.
+- **LigaPokemon** bans datacenter addresses (Cloudflare 1005 or 1008, a ban and not a challenge):
+  fetch it from a residential address, through FlareSolverr or a user browser session.
 - **LATAM Spanish:** the official `pokemon.com/latam` site; the edition exists from Journey Together
   (2025) onward and differs in attack translation, set name and set code.
 - **Japanese editions:** closed Yahoo! Auctions and Yahoo!フリマ listings (`auctions.c.yimg.jp`
