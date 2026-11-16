@@ -394,9 +394,11 @@ def date_view(item: dict) -> tuple[str, str, str]:
     date_sort = release_sort(date)
     if date_sort.startswith("9999"):
         return date_sort, "Undated", "unknown"
+    # a month or year date is stored on its first day; show only what is known
+    shown = date[:{"month": 7, "year": 4}.get(item["releaseDatePrecision"], len(date))]
     if item["releaseApproximate"]:
-        return date_sort, "~" + date, "approximate"
-    return date_sort, date, "exact"
+        return date_sort, "~" + shown, "approximate"
+    return date_sort, shown, "exact"
 
 
 def finish_view(item: dict) -> tuple[dict, list, list]:

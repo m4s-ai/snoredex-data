@@ -57,8 +57,10 @@ function openCard(card, button) {
   }
   const facts = document.querySelector("#card-facts");
   facts.replaceChildren();
+  // a month date is stored on the 1st: show only the month
+  const shown = card.date && card.datePrecision === "month" ? card.date.slice(0, 7) : card.date;
   const release = card.date
-    ? [card.date, card.datePrecision, card.approximate ? "approximate" : ""].filter(Boolean).join(" · ")
+    ? [shown, card.datePrecision, card.approximate ? "approximate" : ""].filter(Boolean).join(" · ")
     : "Undated";
   for (const [label, value] of Object.entries({
     Set: card.set, "Set code / number": [card.printedSetCode || card.setCode, card.number].filter(Boolean).join(" "),
