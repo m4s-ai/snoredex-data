@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 799,
+  "count": 801,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -17432,6 +17432,42 @@
         "edition": "1st Edition",
         "basis": "The printed first-edition mark is legible on the complete card face; no reliance on listing title or grading label."
       }
+    },
+    {
+      "specimenId": "SPEC-0800",
+      "setCode": "RR",
+      "number": "81/111",
+      "variant": "base",
+      "language": "French",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Original source bytes visually inspected at native resolution on 2026-11-16; local OCR unavailable. No GPS metadata; filed unchanged. Listing page URL not established.",
+      "observed": "Complete French Ronflex Niv.40 face with 100 PV, French rules text, Rising Rivals symbol and printed 81/111. All borders are visible. This seller image is representative only; the surface does not establish a physical finish.",
+      "recordedAt": "2026-11-16",
+      "photograph": "SPEC-0800.jpg",
+      "photographSha256": "sha256:f2a527f62124e27e1ed3a538f05e37dc23b7a9e41876ebef76c149976712c84e",
+      "photographSource": "https://i.ebayimg.com/images/g/P4EAAOxyfyhRYWrC/s-l1200.jpg",
+      "listingUrl": null,
+      "citedBy": [
+        "F0313-P01"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0801",
+      "setCode": "RR",
+      "number": "81/111",
+      "variant": "base",
+      "language": "English",
+      "heldBy": "third-party catalogue",
+      "inspectedFrom": "Original source bytes visually inspected at native resolution on 2026-11-16; local OCR unavailable. No GPS metadata; filed unchanged. Listing page URL not established.",
+      "observed": "Complete English Snorlax Lv.40 face with 100 HP, English rules text, Rising Rivals symbol and printed 81/111. This catalogue image is representative only; no physical finish is asserted.",
+      "recordedAt": "2026-11-16",
+      "photograph": "SPEC-0801.png",
+      "photographSha256": "sha256:0af829264ab1813288776ca1568101971596853f8ce61107fdb21d6effccbe7b",
+      "photographSource": "https://assets.tcgdex.net/en/pl/pl2/81/high.png",
+      "listingUrl": null,
+      "citedBy": [
+        "F0312-P01"
+      ]
     }
   ]
 }

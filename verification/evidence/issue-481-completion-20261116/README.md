@@ -17,11 +17,15 @@ Twenty-five API responses have no image and sixty-six requests were unresolved. 
 establishes absence. Existing retained photographs have priority when they meet the quality
 threshold. Each candidate still needs identity, language/locality, effective resolution, full rim,
 and target-assignment review. A shared API link is not proof that every routed target matches.
-Two reviewed regular-set images (CAT-018/CAT-047) depict Dustox rather than the target Snorlax
-TG10; their routing is rejected and the correct trainer-gallery set is recorded separately.
+All 160 candidate faces have now received visual inspection. Six regular-set images
+(CAT-018/047/071/096/121/152) depict Dustox rather than the target Snorlax TG10; their routing
+is rejected and the correct trainer-gallery set is recorded separately. CAT-160 is rejected
+for visibly soft fine text. The other 153 pass only preliminary identity/quality review;
+retained-photo priority and per-target edition, locality and scope checks remain pending.
 
-Round 10 has three accepted additions and seventeen remaining image needs. Round 11 source
-research is in progress. Rounds 12–42 are planned and partially acquired, not complete. Contact
+Round 10 has three accepted additions and seventeen remaining image needs. Round 11 has two
+representative additions and eighteen remaining image needs. Rounds 12–42 are planned and
+partially acquired, not complete. Contact
 sheet inspection alone does not complete a round. Final acceptance under #482 remains pending
 after the fixed rounds, including the grid, binder, detail views and explicitly retained gaps.
 
