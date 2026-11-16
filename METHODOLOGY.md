@@ -173,10 +173,10 @@ nothing about what the fetched page proves.
   only what is visible on the pictured card face, filed as a `SPEC-nnnn` record. A selected language
   filter is never projected onto an image printed in another language.
 - Seller photographs hang on the individual offers of a product page and show real cards
-  (SPEC-0648 to SPEC-0652). Fetch them whenever the browser reaches the product page without a bot
-  check: filter the offers by language and, where the set has both, by edition, and retain the
-  article-scan URL (`marketplace-article-scans.s3.cardmarket.com/<article>/<article>.jpg`) as the
-  record's `photographSource`.
+  (SPEC-0648 to SPEC-0652). Fetch them whenever the product page is reached: filter the offers by
+  language and, where the set has both, by edition, and retain the article-scan URL
+  (`marketplace-article-scans.s3.cardmarket.com/<article>/<article>.jpg`) as the record's
+  `photographSource`.
 - Cardmarket codes: `x<SET>` is a special treatment of a card from `<SET>` (patterned reverse,
   retail stamp) whose printed number belongs to `<SET>`; `PPS<n> <SET>` is Play! Pokémon Prize Pack
   Series `<n>`, a stamped reprint. Prize Packs and `x` printings are separate cards and need their
@@ -314,9 +314,10 @@ whose own `/series/<set>/<number>/` path matches the set asked for.
   page contains the resolved `private-user-images.githubusercontent.com` URLs. HTML-unescape them
   (`&amp;`), strip a trailing `\` and embedded `&`, download, and commit the bytes to the photo
   repository (specimen intake): a signed URL is perishable.
-- **Dead ends** worth not repeating: `ptcg.cn` (a Magic site), `pokebeach.com` (403 to scripts),
-  `namu.wiki` and `pokeos.com` (JavaScript-rendered), `krystalkollectz.com` (a shop),
+- **Dead ends** worth not repeating: `ptcg.cn` (a Magic site), `krystalkollectz.com` (a shop),
   `jihuanshe.com` (an app landing page).
+- **Blocked to plain scripts, untried through the fetch services:** `pokebeach.com` (403),
+  `namu.wiki` and `pokeos.com` (JavaScript-rendered).
 
 ### Illustrators and localized names
 
