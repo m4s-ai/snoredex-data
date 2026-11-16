@@ -48,7 +48,15 @@ Local verification: full regeneration gate, 106/106 general browser checks, all 
 and GPS checks, and all twelve targets in desktop/mobile DPR2 grid, lightbox and eight binder
 layouts per viewport (192 target/layout checks). Source/scope notices, placeholders, selected
 pixel density, no overflow and no HTTP/page errors were checked. The built and allowlist-verified
-package `_site-round07-final` has 2693 files / 202604 KB; its published database matches the built
+package `_site-round07-sync` has 2693 files / 202743 KB; its published database matches the built
 source. Independent scope assertions preserve all other canonical records. `validation.json`
 records the result. #476, #481 and whole-gallery acceptance #482 remain open. No merge or
 Pages deployment was performed.
+
+Before the follow-up push, main `7cfae944` was integrated. Its release events, month-date
+normalization, display changes and new date rule are preserved. Generated conflicts were
+resolved by rebuilding. The integrated tree passed the full pre-push gate (76 data rules with
+negative tests), 106 browser checks and the 192 target/layout checks. A cumulative comparison
+against that main allows only the PR's six asset additions, ten gallery additions, two primary
+image references, one seller-source link, SPEC-0796 and data dates; all other canonical source
+records from main are preserved.
