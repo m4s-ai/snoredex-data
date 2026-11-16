@@ -183,7 +183,8 @@ and report the run. Publishing cannot be undone.
   bookkeeping, marker and printed code mixed); `baseSetCode` is the language-independent code of a
   local set; `localityMarker` and `printedSetCode` (`setEditionCodes`) are what an edition prints,
   read from a card image by letter height and glyph style; a Cardmarket code (`legacyProducts.setCode`,
-  the `x` of `cardmarketVariantSets`) is tier-5 bookkeeping. Sorting stays on `localSetCode`; a set
+  the `x` of `cardmarketVariantSets`) is tier-5 bookkeeping. An x-set is never a local set, edition
+  or release event: its cards belong to the base set (rule V2). Sorting stays on `localSetCode`; a set
   relation is never inferred from similar codes (DATA-GUIDE.md).
 - **Code cards are excluded**: `legacyProducts.isCodeCard`; their claims are `out-of-scope`.
 - **Physical specimens are cited, not described.** A card the owner holds has a stable id in

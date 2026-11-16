@@ -158,7 +158,9 @@ set fields from two others (`setEditionCodes`, `releaseEvents`, see the catalogu
   field or the quoted wording) and `checkedAt` (the retrieval date, null where none was recorded).
   RE1 holds the source checkable or strong, as E3 does for claims: without a URL the provider is
   tier 1 or 2. RE3 keeps no event without an edition. The date is the release in that edition's
-  language and locality, never the Japanese or English one; in the West each language has its own
+  language and locality. Where none is found, the international date may stand in as a placeholder
+  with `releaseApproximate: true` and an `evidence` text that says so (owner rule 2026-11-16), until a
+  local date replaces it; in the West each language has its own
   event (`EVENT:WEST:<localSetCode>:<Language>:launch-<date>`), and an official source outranks a
   wiki. A date known only to its month is stored on the 1st (D1). Promo series have no single
   launch and no event. The ids are opaque and never parsed; an id that contains a date is not the
