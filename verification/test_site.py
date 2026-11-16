@@ -600,6 +600,36 @@ def main() -> int:
               and next(row for row in localized if row['setCode'] == '30C LA')['langCodes'] == ['ES-LA'],
               f"Localized anniversary rows: {localized}")
 
+        # --- Set column: the printed code; the Set filter groups one set across languages (#577) ---
+        set_view = page.evaluate("""() => {
+          const rows = JSON.parse(document.getElementById('data-rows').textContent);
+          const cn = rows.find(row => row.setCode === 'CS3DC');
+          const ma3 = rows.filter(row => row.setGroup === 'ma3');
+          const options = Array.from(document.querySelectorAll('#f-setCode option')).map(o => o.value);
+          return {printed: cn && cn.printedSetCode, base: cn && cn.baseSetCode, market: cn && cn.cardmarketSetCodes,
+                  ma3Languages: [...new Set(ma3.map(row => row.languageLabel))].length,
+                  ma3Codes: [...new Set(ma3.map(row => row.setCode))].sort(),
+                  groupOption: options.includes('ma3'), legacyOption: options.includes('MA3 T')};
+        }""")
+        check("a row carries its printed set code, base code and Cardmarket code",
+              set_view["printed"] == "cs3D C" and set_view["base"] == "cs3D" and set_view["market"] == ["CS3DC"],
+              str(set_view))
+        check("the Set filter offers the cross-language base code instead of each legacy code",
+              set_view["groupOption"] and not set_view["legacyOption"] and set_view["ma3Languages"] > 1,
+              str(set_view))
+        page.fill("#f-q", "primordial arts")
+        page.wait_for_timeout(120)
+        cell = page.locator("#rows tr:not(.yearsep) td.col-set").first
+        check("the Set cell shows the printed code; the set name stays in the Expansion column only",
+              cell.text_content() == "cs3D C", cell.inner_html())
+        page.locator("#rows tr:not(.yearsep) button.rowmore").first.click()
+        detail = page.locator("#rows .rowdetail").first.text_content() or ""
+        check("the row details name the printed, base and Cardmarket codes",
+              "cs3D C (printed)" in detail and "cs3D" in detail and "CS3DC" in detail, detail[:300])
+        page.locator("#rows tr:not(.yearsep) button.rowmore").first.click()
+        page.fill("#f-q", "")
+        page.wait_for_timeout(120)
+
         required_filters = [
             "dateStatus", "name", "setCode", "setName", "number", "edition", "language", "rarity", "artist", "finish", "pattern", "marking",
             "markingRole", "size", "distribution", "evidence",
