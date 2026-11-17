@@ -330,6 +330,7 @@
 
   let visibleRows = [];
   let refreshLanguageEvidence = () => {};
+  let refreshCardPreview = () => {};
 
   function pill(text, cls) {
     return '<span class="pill ' + escapeHTML(cls) + '">' + escapeHTML(text) + "</span>";
@@ -489,6 +490,7 @@
     window.requestAnimationFrame(() => {
       refreshClippedCells();
       refreshLanguageEvidence();
+      refreshCardPreview();
     });
   }
 
@@ -668,6 +670,8 @@
 
     const previewImage = $("img", preview);
     const caption = $("figcaption", preview);
+    // States: closed (active null), hovering (active, not pinned), pinned (active, pinned by a click).
+    // Every way out goes through hide(), which resets both.
     let active = null;
     let pinned = false;
 
@@ -744,6 +748,12 @@
     previewImage.addEventListener("load", position);
     window.addEventListener("resize", position);
     window.addEventListener("scroll", position, { passive: true });
+
+    // render() replaces the rows: a preview whose thumbnail is gone gets no pointerout to close it.
+    return () => {
+      if (active && !active.isConnected) hide();
+      else position();
+    };
   }
 
 
@@ -857,7 +867,7 @@
   buildControls();
   refreshClippedCells = initClippedCells();
   refreshLanguageEvidence = initLanguageEvidence();
-  initCardPreview();
+  refreshCardPreview = initCardPreview();
   syncControls();
   render();
 })();
