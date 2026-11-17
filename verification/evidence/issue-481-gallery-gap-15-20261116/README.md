@@ -35,3 +35,8 @@ Full regeneration, all 75 rules and negative cases, all 756 original hashes/GPS 
 106 browser checks passed. Every frozen target passed desktop/mobile-DPR2 grid/detail and
 eight binder layouts per view. The two supplemental cards passed the same checks. Local artifact:
 2904 files, 222410 KB; 2892 non-Markdown source-byte matches, both SQLite quick checks passed.
+
+A subsequent full-width policy audit caught three premature600px full renditions. The staged
+follow-up restores SPEC-0409 to800×1120, SPEC-0845 to1200×1680 and SPEC-0846 to748×1044.
+The original bytes,240/480 renditions and previews remain unchanged. Independent reconstruction
+passes; browser/artifact acceptance for this follow-up passed with round16 (see its validation.json).
