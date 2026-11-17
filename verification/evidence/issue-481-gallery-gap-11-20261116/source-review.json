@@ -1,0 +1,1389 @@
+{
+  "issue": 481,
+  "pullRequest": 593,
+  "round": 11,
+  "targetsFile": "targets.json",
+  "reviewedOn": "2026-11-16",
+  "selection": "All 20 frozen IDs reviewed. Prior failed URLs from rounds 01–04 were not retried without a new lead; distinct new image leads were checked. Cardmarket was not requested.",
+  "retrievalLimit": "The first default-route image request failed DNS. Public read-only retrieval through the approved elevated route then succeeded for new image leads; every direct API, image, and page-probe outcome is in retrievalLog. Only downloaded, visually inspected originals are listed as retrieved images; placeholder thumbnails, insufficient faces, 403/426 responses, and image:null API results remain rejected or open.",
+  "targetReviews": [
+    {
+      "itemId": "item-669de0c0-4bae-5a66-bc90-0fde2ae26e75",
+      "sourcePrintingId": "F0248-P01",
+      "language": "Japanese",
+      "identity": {
+        "setEditionId": "EDITION:JP:Japanese:PCG9",
+        "collectorNumber": "001",
+        "edition": "1st Edition",
+        "finish": "holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-0a27a020-94f4-5c0e-bde8-bc526793a996",
+        "specimenId": null,
+        "scope": "legacy-product",
+        "dimensions": [
+          255,
+          361
+        ],
+        "visualReview": "Round03 already searched the same first-edition Japanese card; new image search found a Japanese 001/068 seller photo but does not establish its 1st-edition mark. Retained 255x361 image is a digital render, below threshold."
+      },
+      "targetedSearch": {
+        "query": "Japanese PCG9 Snorlax Delta 001/068 image",
+        "searchedOn": "2026-11-16",
+        "result": "potential-image-lead"
+      },
+      "reviewStatus": "held-edition-not-established",
+      "retrievals": [
+        {
+          "url": "https://api.tcgdex.net/v2/ja/cards/PCG9-001",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "application/json",
+          "sha256": "sha256:82c96f646bdc745412689d8a095c06201fa53f54e7e8e8748d0bcc6730cbe45d",
+          "dimensions": null,
+          "apiCardId": "PCG9-001",
+          "apiName": "Snorlax（デルタ種）",
+          "apiImage": null
+        },
+        {
+          "url": "https://i.ebayimg.com/images/g/5n0AAeSw9ktpDXPN/s-l1200.jpg",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "image/jpeg",
+          "sha256": "sha256:85262fa031db9758defd4d8f25bf20de3f5a34d66450291fc04c5f3c54231a2c",
+          "dimensions": [
+            900,
+            1200
+          ],
+          "format": "JPEG"
+        }
+      ],
+      "retrievedImageReview": "Downloaded 900x1200 seller photograph. Whole Japanese front is sharp and complete; first-edition mark at lower left is not legible at this view, so do not assign to the frozen 1st Edition target.",
+      "parentDecision": "The downloaded Japanese PCG9 photograph is complete and sharp, but the required first-edition mark cannot be established. Listing labels are insufficient."
+    },
+    {
+      "itemId": "item-c64e770b-aaec-5c46-8b0b-a679ba0ca729",
+      "sourcePrintingId": "F0086-P02",
+      "language": "German",
+      "identity": {
+        "setEditionId": "EDITION:WEST:German:DF",
+        "collectorNumber": "10",
+        "edition": null,
+        "finish": "reverse-holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-fa21d769-6096-53c1-aa67-2a1c99292fd0",
+        "specimenId": null,
+        "scope": "legacy-product",
+        "dimensions": [
+          251,
+          345
+        ],
+        "visualReview": "German reverse target: new search returned German regular holo, not reverse. Round03/04 found German listing photos whose card area was below threshold; not repeated. Retained 251x345 is a digital regular holo render, wrong finish."
+      },
+      "targetedSearch": {
+        "query": "German Relaxo Dragon Frontiers 10/101 reverse",
+        "searchedOn": "2026-11-16",
+        "result": "no-new-qualifying-lead"
+      },
+      "reviewStatus": "open-image-need",
+      "retrievals": [
+        {
+          "url": "https://api.tcgdex.net/v2/de/cards/ex15-10",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "application/json",
+          "sha256": "sha256:13d3ebf722c04989aed182a8dfc842932e18e9c8efa05ece3919c5bdb028c2d1",
+          "dimensions": null,
+          "apiCardId": "ex15-10",
+          "apiName": "Relaxo δ",
+          "apiImage": null
+        }
+      ]
+    },
+    {
+      "itemId": "item-77994710-5957-5c13-b5e3-4de732811070",
+      "sourcePrintingId": "F0087-P02",
+      "language": "Italian",
+      "identity": {
+        "setEditionId": "EDITION:WEST:Italian:DF",
+        "collectorNumber": "10",
+        "edition": null,
+        "finish": "reverse-holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-fa21d769-6096-53c1-aa67-2a1c99292fd0",
+        "specimenId": null,
+        "scope": "legacy-product",
+        "dimensions": [
+          251,
+          345
+        ],
+        "visualReview": "Italian reverse target: new search returned Italian regular holo #10/101 (wrong finish) and English reverse copies. Round03 previously found no qualifying marked Italian original; not repeated. Retained 251x345 is a digital regular holo render, wrong finish."
+      },
+      "targetedSearch": {
+        "query": "Italian Snorlax Dragon Frontiers 10/101 reverse",
+        "searchedOn": "2026-11-16",
+        "result": "no-new-qualifying-lead"
+      },
+      "reviewStatus": "open-image-need",
+      "retrievals": []
+    },
+    {
+      "itemId": "item-9cec74ef-9ca6-5aa3-9728-fcde4ed81f4e",
+      "sourcePrintingId": "F0101-P02",
+      "language": "Japanese",
+      "identity": {
+        "setEditionId": "EDITION:JP:Japanese:DP1",
+        "collectorNumber": "DPBP#174",
+        "edition": "Unlimited",
+        "finish": "non-holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-7f506d58-ff13-5ca7-90e6-14984dbd1a8a",
+        "specimenId": "SPEC-0581",
+        "scope": "exact-printing",
+        "dimensions": [
+          810,
+          1080
+        ],
+        "visualReview": "Inspected retained SPEC-0581 original at full resolution: Japanese identity and complete face are legible, with perspective/skew. Round04 measured the narrow edge at about 550 effective card pixels, below threshold. The previously failed Mercari pair was not retried."
+      },
+      "targetedSearch": {
+        "query": "Japanese DP1 DPBP#174 Snorlax unlimited",
+        "searchedOn": "2026-11-16",
+        "result": "no-new-qualifying-lead"
+      },
+      "reviewStatus": "open-image-need",
+      "retrievals": [
+        {
+          "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0203/user/866e84e8ba8f330fcb6c7d451138f6e341eb7de695a3ab3444d7359de6e6d30d/i-img900x1200-17737323452545wporbm397854.jpg",
+          "checkedAt": "2026-11-16",
+          "status": 403,
+          "mimeType": "text/html",
+          "sha256": null,
+          "dimensions": null
+        },
+        {
+          "url": "https://img.tradera.net/large-fit/409/654652409_d73a7e37-484b-4677-b619-3e845ce19b0c.jpg",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "image/jpeg",
+          "sha256": "sha256:a6d4772748cf59e7a4740a975d748f9b8f57a47198205a01a3fc0d75a35204e2",
+          "dimensions": [
+            675,
+            900
+          ],
+          "format": "JPEG"
+        },
+        {
+          "url": "https://media.okini.land/172980-large_default/pokemon-tcg-dp1-dpbp174-uncommon-snorlax.jpg",
+          "checkedAt": "2026-11-16",
+          "status": 426,
+          "mimeType": "text/html",
+          "sha256": null,
+          "dimensions": null
+        }
+      ],
+      "retrievedImageReview": "Tradera direct image downloaded at 675x900; full Japanese face is legible, but perspective/narrow-edge card width is about 550 effective pixels, below threshold. Yahoo image returned 403; Okini image returned 426."
+    },
+    {
+      "itemId": "item-1f538f9c-df3e-5337-9aa5-96e062c75a96",
+      "sourcePrintingId": "F0091-P01",
+      "language": "Italian",
+      "identity": {
+        "setEditionId": "EDITION:WEST:Italian:DP",
+        "collectorNumber": "37",
+        "edition": null,
+        "finish": "non-holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-c40108b6-5c5d-5cce-b334-63d38869a773",
+        "specimenId": null,
+        "scope": "legacy-product",
+        "dimensions": [
+          251,
+          345
+        ],
+        "visualReview": "Italian DP 37/130 non-holo: new search surfaced English scan/listing only; Round04 had catalog data and English sellers. No new exact-language photo lead. Retained 251x345 is a digital English render."
+      },
+      "targetedSearch": {
+        "query": "Snorlax DP 37/130 Italian non-holo",
+        "searchedOn": "2026-11-16",
+        "result": "no-new-qualifying-lead"
+      },
+      "reviewStatus": "open-image-need",
+      "retrievals": []
+    },
+    {
+      "itemId": "item-468fb4c4-b355-52c2-87bf-4596a2eee877",
+      "sourcePrintingId": "F0092-P01",
+      "language": "Spanish (Europe)",
+      "identity": {
+        "setEditionId": "EDITION:WEST:Spanish:DP",
+        "collectorNumber": "37",
+        "edition": null,
+        "finish": "non-holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-c40108b6-5c5d-5cce-b334-63d38869a773",
+        "specimenId": null,
+        "scope": "legacy-product",
+        "dimensions": [
+          251,
+          345
+        ],
+        "visualReview": "European Spanish DP 37/130 non-holo: new search surfaced no exact Spanish face; Round04 had an index and English/different-card results. Retained 251x345 is a digital English render."
+      },
+      "targetedSearch": {
+        "query": "Snorlax DP 37/130 Spanish non-holo",
+        "searchedOn": "2026-11-16",
+        "result": "no-new-qualifying-lead"
+      },
+      "reviewStatus": "open-image-need",
+      "retrievals": [
+        {
+          "url": "https://api.tcgdex.net/v2/es/cards/dp1-37",
+          "checkedAt": "2026-11-16",
+          "status": 404,
+          "mimeType": "application/json",
+          "sha256": null,
+          "dimensions": null
+        }
+      ]
+    },
+    {
+      "itemId": "item-daa3d95a-2a3d-50cd-8b7b-071dd93a8374",
+      "sourcePrintingId": "F0093-P01",
+      "language": "Portuguese",
+      "identity": {
+        "setEditionId": "EDITION:WEST:Portuguese:DP",
+        "collectorNumber": "37",
+        "edition": null,
+        "finish": "non-holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-006c2008-66af-5da2-9c01-9c649b32c09f",
+        "specimenId": "SPEC-0056",
+        "scope": "exact-printing",
+        "dimensions": [
+          900,
+          1600
+        ],
+        "visualReview": "Inspected retained SPEC-0056 original: Portuguese text and card number are legible, but a display stand overlaps the lower border and effective card width is near/below 600 pixels. Round04 local catalog lead was not repeated; no new unobstructed exact-language lead."
+      },
+      "targetedSearch": {
+        "query": "Snorlax DP 37/130 Portuguese non-holo",
+        "searchedOn": "2026-11-16",
+        "result": "no-new-qualifying-lead"
+      },
+      "reviewStatus": "open-image-need",
+      "retrievals": [
+        {
+          "url": "https://api.tcgdex.net/v2/pt/cards/dp1-37",
+          "checkedAt": "2026-11-16",
+          "status": 404,
+          "mimeType": "application/json",
+          "sha256": null,
+          "dimensions": null
+        }
+      ]
+    },
+    {
+      "itemId": "item-d424418b-70de-5edb-8fe3-ad4ba7934a37",
+      "sourcePrintingId": "F0091-P02",
+      "language": "Italian",
+      "identity": {
+        "setEditionId": "EDITION:WEST:Italian:DP",
+        "collectorNumber": "37",
+        "edition": null,
+        "finish": "reverse-holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-c40108b6-5c5d-5cce-b334-63d38869a773",
+        "specimenId": null,
+        "scope": "legacy-product",
+        "dimensions": [
+          251,
+          345
+        ],
+        "visualReview": "Italian DP 37/130 reverse: new search returned no exact-language reverse front; Round04 market page led to English copies and was not repeated. Retained 251x345 is English regular render, wrong language and finish."
+      },
+      "targetedSearch": {
+        "query": "Snorlax DP 37/130 Italian reverse",
+        "searchedOn": "2026-11-16",
+        "result": "no-new-qualifying-lead"
+      },
+      "reviewStatus": "open-image-need",
+      "retrievals": []
+    },
+    {
+      "itemId": "item-caa17c85-2eea-5c77-80df-f4c85c1b1269",
+      "sourcePrintingId": "F0090-P02",
+      "language": "German",
+      "identity": {
+        "setEditionId": "EDITION:WEST:German:DP",
+        "collectorNumber": "37",
+        "edition": null,
+        "finish": "reverse-holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-c40108b6-5c5d-5cce-b334-63d38869a773",
+        "specimenId": null,
+        "scope": "legacy-product",
+        "dimensions": [
+          251,
+          345
+        ],
+        "visualReview": "German DP 37/130 reverse: new search returned German regular print only, wrong finish. Round04 German listing showed plain face and was not repeated. Retained 251x345 is English regular render."
+      },
+      "targetedSearch": {
+        "query": "Relaxo DP 37/130 German reverse",
+        "searchedOn": "2026-11-16",
+        "result": "no-new-qualifying-lead"
+      },
+      "reviewStatus": "open-image-need",
+      "retrievals": [
+        {
+          "url": "https://api.tcgdex.net/v2/de/cards/dp1-37",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "application/json",
+          "sha256": "sha256:5a90477f698b69e49eeae056f5910e55416d1c3bb3879aba939f54796084d57f",
+          "dimensions": null,
+          "apiCardId": "dp1-37",
+          "apiName": "Relaxo",
+          "apiImage": null
+        }
+      ]
+    },
+    {
+      "itemId": "item-6b4ab492-1b89-5e70-beb4-55c81c2f098c",
+      "sourcePrintingId": "F0089-P01",
+      "language": "French",
+      "identity": {
+        "setEditionId": "EDITION:WEST:French:DP",
+        "collectorNumber": "37",
+        "edition": null,
+        "finish": "non-holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-c40108b6-5c5d-5cce-b334-63d38869a773",
+        "specimenId": null,
+        "scope": "legacy-product",
+        "dimensions": [
+          251,
+          345
+        ],
+        "visualReview": "French DP 37/130 non-holo: new image search did not surface an exact face. Round04 scan was 444x620 and seller lead did not expose a qualifying original; unchanged leads not repeated. Retained 251x345 is English render."
+      },
+      "targetedSearch": {
+        "query": "Ronflex DP 37/130 French non-holo",
+        "searchedOn": "2026-11-16",
+        "result": "no-new-qualifying-lead"
+      },
+      "reviewStatus": "open-image-need",
+      "retrievals": [
+        {
+          "url": "https://api.tcgdex.net/v2/fr/cards/dp1-37",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "application/json",
+          "sha256": "sha256:ff0c55d7338522b944474b6d531a554ac3085c11c88d5a74928c7871f3001ff7",
+          "dimensions": null,
+          "apiCardId": "dp1-37",
+          "apiName": "Ronflex",
+          "apiImage": null
+        }
+      ]
+    },
+    {
+      "itemId": "item-58c53aa9-6ae4-5872-a925-15e6728515da",
+      "sourcePrintingId": "F0089-P02",
+      "language": "French",
+      "identity": {
+        "setEditionId": "EDITION:WEST:French:DP",
+        "collectorNumber": "37",
+        "edition": null,
+        "finish": "reverse-holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-c40108b6-5c5d-5cce-b334-63d38869a773",
+        "specimenId": null,
+        "scope": "legacy-product",
+        "dimensions": [
+          251,
+          345
+        ],
+        "visualReview": "French DP 37/130 reverse: new search did not surface an exact reverse. Round04 had price page and regular scan; unchanged leads not repeated. Retained 251x345 is English regular render, wrong finish."
+      },
+      "targetedSearch": {
+        "query": "Ronflex DP 37/130 French reverse",
+        "searchedOn": "2026-11-16",
+        "result": "no-new-qualifying-lead"
+      },
+      "reviewStatus": "open-image-need",
+      "retrievals": []
+    },
+    {
+      "itemId": "item-f34871ab-84e0-51ad-b3f4-506210aba834",
+      "sourcePrintingId": null,
+      "language": "Korean",
+      "identity": {
+        "setEditionId": "EDITION:KR:Korean:BS2",
+        "collectorNumber": "30",
+        "edition": null,
+        "finish": "non-holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-cf89dbd2-50e8-5a8f-9555-e52e170dbbf5",
+        "specimenId": "SPEC-0037",
+        "scope": "exact-printing",
+        "dimensions": [
+          207,
+          288
+        ],
+        "visualReview": "Korean BS2 30/40 non-holo: inspected retained SPEC-0037; card text identifiable but a diagonal watermark crosses face and source is only 207x288. New targeted Korean image search yielded no larger exact physical photo; Round04 publisher image was not repeated."
+      },
+      "targetedSearch": {
+        "query": "Korean Snorlax BS2 30 card non-holo",
+        "searchedOn": "2026-11-16",
+        "result": "no-new-qualifying-lead"
+      },
+      "reviewStatus": "open-image-need",
+      "retrievals": []
+    },
+    {
+      "itemId": "item-4f32febf-27a6-5378-8d66-d3088acad72f",
+      "sourcePrintingId": "F0098-P01",
+      "language": "Japanese",
+      "identity": {
+        "setEditionId": "EDITION:JP:Japanese:DP-P",
+        "collectorNumber": "127",
+        "edition": null,
+        "finish": "holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-3cdef7fa-5a2c-5112-a376-a8201f191370",
+        "specimenId": "SPEC-0231",
+        "scope": "exact-printing",
+        "dimensions": [
+          255,
+          361
+        ],
+        "visualReview": "Japanese DP-P 127/DP-P Snorlax LV.X: new eBay seller lead identifies a Japanese 127/DP-P card; image is a potential exact-language physical front, but bytes and visible finish/face not inspected. TCGplayer result is only representative render, not accepted."
+      },
+      "targetedSearch": {
+        "query": "Japanese Snorlax LV.X 127/DP-P",
+        "searchedOn": "2026-11-16",
+        "result": "potential-image-lead"
+      },
+      "reviewStatus": "rejected-gallery-quality",
+      "retrievals": [
+        {
+          "url": "https://i.ebayimg.com/images/g/RYAAAeSwdOFpTmId/s-l1200.png",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "image/png",
+          "sha256": "sha256:e15348560b6ccac2c9ee7fce5de6efd77d8d5b5efdd6756c42901b0a74b0450b",
+          "dimensions": [
+            1111,
+            1200
+          ],
+          "format": "PNG"
+        }
+      ],
+      "retrievedImageReview": "Downloaded 1111x1200 physical Japanese seller photo. Exact 127/DP-P front is legible; display stand touches the bottom rim and some text is soft, so reject on full-rim/sharpness quality.",
+      "parentDecision": "The downloaded Japanese 127/DP-P front is soft and the display stand touches the lower rim. Need a sharper full face clear of the stand."
+    },
+    {
+      "itemId": "item-c623a097-9ca5-5d74-96a6-10dace68ea3f",
+      "sourcePrintingId": "F0319-P01",
+      "language": "Italian",
+      "identity": {
+        "setEditionId": "EDITION:WEST:Italian:RR",
+        "collectorNumber": "111",
+        "edition": null,
+        "finish": "holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-bd0621c2-2e7b-548a-b082-cb4e5ec88a4b",
+        "specimenId": "SPEC-0119",
+        "scope": "exact-printing",
+        "dimensions": [
+          1200,
+          1600
+        ],
+        "visualReview": "Italian RR 111/111 holo: inspected retained SPEC-0119; Italian text is legible, but card is small in a blue-background photo (about 550 effective face pixels), below threshold. New search found only language-unclear graded slab and English seller fronts; no exact Italian photo."
+      },
+      "targetedSearch": {
+        "query": "Italian Snorlax LV.X 111/111 Rising Rivals",
+        "searchedOn": "2026-11-16",
+        "result": "no-new-qualifying-lead"
+      },
+      "reviewStatus": "open-image-need",
+      "retrievals": [
+        {
+          "url": "https://api.tcgdex.net/v2/it/cards/pl2-111",
+          "checkedAt": "2026-11-16",
+          "status": 404,
+          "mimeType": "application/json",
+          "sha256": null,
+          "dimensions": null
+        }
+      ]
+    },
+    {
+      "itemId": "item-8d57bf6e-7005-58ee-bdaf-9c3c3e95a2f0",
+      "sourcePrintingId": "F0099-P01",
+      "language": "Korean",
+      "identity": {
+        "setEditionId": "EDITION:KR:Korean:DP",
+        "collectorNumber": "006",
+        "edition": null,
+        "finish": "holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-a05cf000-a0eb-5d53-ad44-f9efe58ff5cf",
+        "specimenId": "SPEC-0440",
+        "scope": "exact-printing",
+        "dimensions": [
+          480,
+          480
+        ],
+        "visualReview": "Korean DP 006 holo: inspected SPEC-0440; card face is behind a holder and under 600 px. New targeted Korean search did not surface a better exact DP 006 front. Existing Bunjang photo link was not repeated."
+      },
+      "targetedSearch": {
+        "query": "Korean Snorlax DP 006 LV.X",
+        "searchedOn": "2026-11-16",
+        "result": "no-new-qualifying-lead"
+      },
+      "reviewStatus": "open-image-need",
+      "retrievals": []
+    },
+    {
+      "itemId": "item-1116dc0d-2d71-58fb-961b-190275537822",
+      "sourcePrintingId": "F0301-P01",
+      "language": "Japanese",
+      "identity": {
+        "setEditionId": "EDITION:JP:Japanese:Pt2",
+        "collectorNumber": "070",
+        "edition": "1st Edition",
+        "finish": "non-holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-28a53024-d0e6-51be-b81a-8b240c9cf0df",
+        "specimenId": "SPEC-0582",
+        "scope": "exact-printing",
+        "dimensions": [
+          400,
+          400
+        ],
+        "visualReview": "Japanese Pt2 070/090 first edition non-holo: new eBay listing identifies Japanese first edition 070/090 and provides a direct photo lead. Candidate pending bytes confirming complete, sharp face and stamp. Retained SPEC-0582 face is only about 260px high; SPEC-0635 is Unlimited and cannot substitute."
+      },
+      "targetedSearch": {
+        "query": "Japanese Snorlax Pt2 070/090 first edition",
+        "searchedOn": "2026-11-16",
+        "result": "potential-image-lead"
+      },
+      "reviewStatus": "open-image-need",
+      "retrievals": [
+        {
+          "url": "https://i.ebayimg.com/images/g/CX0AAeSw7kBg9QSt/s-l1200.jpg",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "image/jpeg",
+          "sha256": "sha256:a567462f4edd496bdf5cd00da5bbde64131c283e3cf396bfd58c0fac26b13d9a",
+          "dimensions": [
+            80,
+            80
+          ],
+          "format": "JPEG"
+        },
+        {
+          "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/f295095e039561e1989634aae3725083c076b7a3/i-img1200x1200-1791671439442cepgbn.jpg",
+          "checkedAt": "2026-11-16",
+          "status": 403,
+          "mimeType": "text/html",
+          "sha256": null,
+          "dimensions": null
+        },
+        {
+          "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/f295095e039561e1989634aae3725083c076b7a3/i-img1200x1200-1791671439442gbspfq.jpg",
+          "checkedAt": "2026-11-16",
+          "status": 403,
+          "mimeType": "text/html",
+          "sha256": null,
+          "dimensions": null
+        },
+        {
+          "url": "https://i.ebayimg.com/images/g/7-8AAeSwzlFlWTDy/s-l1600.jpg",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "image/jpeg",
+          "sha256": "sha256:a567462f4edd496bdf5cd00da5bbde64131c283e3cf396bfd58c0fac26b13d9a",
+          "dimensions": [
+            80,
+            80
+          ],
+          "format": "JPEG"
+        },
+        {
+          "url": "https://api.tcgdex.net/v2/ja/cards/pt2-70",
+          "checkedAt": "2026-11-16",
+          "status": 404,
+          "mimeType": "application/json",
+          "sha256": null,
+          "dimensions": null
+        }
+      ],
+      "retrievedImageReview": "Two direct eBay image URLs returned HTTP 200 but only 80x80 placeholder bytes; two frozen Yahoo image URLs returned 403. No image candidate accepted.",
+      "parentDecision": "New eBay image requests returned 80x80 placeholders; Yahoo requests returned 403. No qualifying retained first-edition front was obtained."
+    },
+    {
+      "itemId": "item-c72498d5-0eb0-5e8a-b714-dca5add72951",
+      "sourcePrintingId": "F0312-P01",
+      "language": "English",
+      "identity": {
+        "setEditionId": "EDITION:WEST:English:RR",
+        "collectorNumber": "81",
+        "edition": null,
+        "finish": "non-holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-80f28687-c1c7-5d39-a5b1-c72a1c29e899",
+        "specimenId": null,
+        "scope": "legacy-product",
+        "dimensions": [
+          251,
+          345
+        ],
+        "visualReview": "English RR 81/111 non-holo: new eBay listing identifies exact number/language/finish and direct seller image; lead pending byte inspection. TCGdex high image is a digital render and representative only. Retained 251x345 image is undersized."
+      },
+      "targetedSearch": {
+        "query": "Snorlax Rising Rivals 81/111 English non-holo",
+        "searchedOn": "2026-11-16",
+        "result": "potential-image-lead"
+      },
+      "reviewStatus": "accepted-representative",
+      "retrievals": [
+        {
+          "url": "https://api.tcgdex.net/v2/en/cards/pl2-81",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "application/json",
+          "sha256": "sha256:a7a0e8102599cf8858d4bbf5eee4b3bf59f113404018c2c0dd8d164a52cdfbdc",
+          "dimensions": null,
+          "apiCardId": "pl2-81",
+          "apiName": "Snorlax",
+          "apiImage": "https://assets.tcgdex.net/en/pl/pl2/81"
+        },
+        {
+          "url": "https://i.ebayimg.com/images/g/T~cAAeSwT5Fllyg2/s-l1200.jpg",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "image/jpeg",
+          "sha256": "sha256:a567462f4edd496bdf5cd00da5bbde64131c283e3cf396bfd58c0fac26b13d9a",
+          "dimensions": [
+            80,
+            80
+          ],
+          "format": "JPEG"
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/pl/pl2/81/high.png",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "image/png",
+          "sha256": "sha256:0af829264ab1813288776ca1568101971596853f8ce61107fdb21d6effccbe7b",
+          "dimensions": [
+            600,
+            825
+          ],
+          "format": "PNG"
+        }
+      ],
+      "retrievedImageReview": "The exact English eBay image URL returned an 80x80 placeholder. TCGdex card API and high image returned 200; 600x825 digital render is representative only, not finish evidence.",
+      "status": "gallery-added",
+      "specimenId": "SPEC-0801",
+      "scope": "representative",
+      "reason": "Complete English Snorlax Lv.40 face with 100 HP, English rules text, Rising Rivals symbol and printed 81/111. This catalogue image is representative only; no physical finish is asserted.",
+      "recommendation": "Classical derivatives prepared and source retained; physical finish claims unchanged."
+    },
+    {
+      "itemId": "item-b4f67812-9bd3-5d0b-b3e7-a84a89b1c49f",
+      "sourcePrintingId": "F0314-P01",
+      "language": "German",
+      "identity": {
+        "setEditionId": "EDITION:WEST:German:RR",
+        "collectorNumber": "81",
+        "edition": null,
+        "finish": "non-holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-80f28687-c1c7-5d39-a5b1-c72a1c29e899",
+        "specimenId": null,
+        "scope": "legacy-product",
+        "dimensions": [
+          251,
+          345
+        ],
+        "visualReview": "German RR 81/111 non-holo: new Ricardo seller listing shows right German text and number; lead pending raw-byte inspection and effective card-pixel measurement. Retained 251x345 image is an English render."
+      },
+      "targetedSearch": {
+        "query": "Relaxo Rising Rivals 81/111 German non-holo",
+        "searchedOn": "2026-11-16",
+        "result": "potential-image-lead"
+      },
+      "reviewStatus": "rejected-gallery-quality",
+      "retrievals": [
+        {
+          "url": "https://api.tcgdex.net/v2/de/cards/pl2-81",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "application/json",
+          "sha256": "sha256:0ffd577f23a54e9e08bc9ec039c861484ff013d734b35751e9d3b0ba73d6e99c",
+          "dimensions": null,
+          "apiCardId": "pl2-81",
+          "apiName": "Relaxo",
+          "apiImage": null
+        },
+        {
+          "url": "https://img.ricardostatic.ch/images/5f6dfd26-1ff2-445b-bc51-71e88340cf87/t_1800x1350/pokemon-relaxo-snorlax-platinum-rising-rivals-non-holo",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "image/jpeg",
+          "sha256": "sha256:c76f3d3f61f3dee4b8312e42f7b025f68883a290e57db3d8ca0c9b431fc8ea90",
+          "dimensions": [
+            1013,
+            1350
+          ],
+          "format": "JPEG"
+        }
+      ],
+      "retrievedImageReview": "Downloaded 1013x1350 German seller photograph; card face is complete and text legible at full size, with mild softness. Keep pending parent review of visible finish; if surface treatment remains ambiguous, representative-only.",
+      "parentDecision": "The German Ricardo photo is complete but fine text is visibly soft at native size. Reject gallery preparation under the sharpness threshold; its finish is not inferred from the title or lack of glare."
+    },
+    {
+      "itemId": "item-fd29aa81-9db8-5ce3-9d2f-20df44ea5a4d",
+      "sourcePrintingId": "F0315-P01",
+      "language": "Italian",
+      "identity": {
+        "setEditionId": "EDITION:WEST:Italian:RR",
+        "collectorNumber": "81",
+        "edition": null,
+        "finish": "non-holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-80f28687-c1c7-5d39-a5b1-c72a1c29e899",
+        "specimenId": null,
+        "scope": "legacy-product",
+        "dimensions": [
+          251,
+          345
+        ],
+        "visualReview": "Italian RR 81/111 non-holo: targeted image search found no exact Italian face. Italian Dragon Frontiers results were wrong set/card and excluded. Retained 251x345 image is an English render."
+      },
+      "targetedSearch": {
+        "query": "Snorlax Rising Rivals 81/111 Italian non-holo",
+        "searchedOn": "2026-11-16",
+        "result": "no-new-qualifying-lead"
+      },
+      "reviewStatus": "open-image-need",
+      "retrievals": [
+        {
+          "url": "https://api.tcgdex.net/v2/it/cards/pl2-81",
+          "checkedAt": "2026-11-16",
+          "status": 404,
+          "mimeType": "application/json",
+          "sha256": null,
+          "dimensions": null
+        }
+      ]
+    },
+    {
+      "itemId": "item-ad557769-a035-52fc-9201-30304a203224",
+      "sourcePrintingId": "F0313-P01",
+      "language": "French",
+      "identity": {
+        "setEditionId": "EDITION:WEST:French:RR",
+        "collectorNumber": "81",
+        "edition": null,
+        "finish": "non-holo"
+      },
+      "retainedOriginal": {
+        "assetId": "asset-80f28687-c1c7-5d39-a5b1-c72a1c29e899",
+        "specimenId": null,
+        "scope": "legacy-product",
+        "dimensions": [
+          251,
+          345
+        ],
+        "visualReview": "French RR 81/111 non-holo: new eBay listing identifies French Ronflex 81/111 and exposes a direct front image; lead pending raw-byte inspection and pixel measurement. Retained 251x345 image is English render."
+      },
+      "targetedSearch": {
+        "query": "Ronflex Rising Rivals 81/111 French non-holo",
+        "searchedOn": "2026-11-16",
+        "result": "potential-image-lead"
+      },
+      "reviewStatus": "accepted-representative",
+      "retrievals": [
+        {
+          "url": "https://api.tcgdex.net/v2/fr/cards/pl2-81",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "application/json",
+          "sha256": "sha256:5caf31592db6a622b980bc0099fe3581d1e251c28db5beee9ede290175cbcaa8",
+          "dimensions": null,
+          "apiCardId": "pl2-81",
+          "apiName": "Ronflex Niv. 40",
+          "apiImage": "https://assets.tcgdex.net/fr/pl/pl2/81"
+        },
+        {
+          "url": "https://i.ebayimg.com/images/g/P4EAAOxyfyhRYWrC/s-l1200.jpg",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "image/jpeg",
+          "sha256": "sha256:f2a527f62124e27e1ed3a538f05e37dc23b7a9e41876ebef76c149976712c84e",
+          "dimensions": [
+            698,
+            920
+          ],
+          "format": "JPEG"
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pl/pl2/81/high.png",
+          "checkedAt": "2026-11-16",
+          "status": 200,
+          "mimeType": "image/png",
+          "sha256": "sha256:caeeda1299d64bb95809df3059e0341ffc6dfcc22ec0ecb2dc6a6e6a51e75d46",
+          "dimensions": [
+            600,
+            825
+          ],
+          "format": "PNG"
+        }
+      ],
+      "retrievedImageReview": "Downloaded 698x920 French seller image; complete sharp French front and rim are visible. Keep pending parent review of visible finish; if surface treatment remains ambiguous, representative-only. TCGdex API and 600x825 render also retrieved; digital render is representative only.",
+      "status": "gallery-added",
+      "specimenId": "SPEC-0800",
+      "scope": "representative",
+      "reason": "Complete French Ronflex Niv.40 face with 100 PV, French rules text, Rising Rivals symbol and printed 81/111. All borders are visible. This seller image is representative only; the surface does not establish a physical finish.",
+      "recommendation": "Classical derivatives prepared and source retained; physical finish claims unchanged."
+    }
+  ],
+  "retrievalAttempts": [
+    {
+      "url": "https://i.ebayimg.com/images/g/5n0AAeSw9ktpDXPN/s-l1200.jpg",
+      "date": "2026-11-16",
+      "status": "failed-dns-resolution",
+      "mimeType": null,
+      "sha256": null,
+      "dimensions": null
+    }
+  ],
+  "candidateLeads": [
+    {
+      "itemId": "item-669de0c0-4bae-5a66-bc90-0fde2ae26e75",
+      "sourcePrintingId": "F0248-P01",
+      "listingUrl": "https://www.ebay.com/itm/386335022774",
+      "imageUrl": "https://i.ebayimg.com/images/g/5n0AAeSw9ktpDXPN/s-l1200.jpg",
+      "searchedOn": "2026-11-16",
+      "status": "retrieved-image-reviewed",
+      "mimeType": "image/jpeg",
+      "sha256": "sha256:85262fa031db9758defd4d8f25bf20de3f5a34d66450291fc04c5f3c54231a2c",
+      "dimensions": [
+        900,
+        1200
+      ],
+      "effectiveCardPixels": null,
+      "assessment": "Identity lead only; exact surface, sharpness, complete rim, print markers and image dimensions remain unverified.",
+      "cachedPath": "9b288222ae7b.jpg",
+      "visualReview": "Downloaded 900x1200 seller photograph. Whole Japanese front is sharp and complete; first-edition mark at lower left is not legible at this view, so do not assign to the frozen 1st Edition target."
+    },
+    {
+      "itemId": "item-4f32febf-27a6-5378-8d66-d3088acad72f",
+      "sourcePrintingId": "F0098-P01",
+      "listingUrl": "https://www.ebay.com/itm/136917061477",
+      "imageUrl": "https://i.ebayimg.com/images/g/RYAAAeSwdOFpTmId/s-l1200.png",
+      "searchedOn": "2026-11-16",
+      "status": "retrieved-image-reviewed",
+      "mimeType": "image/png",
+      "sha256": "sha256:e15348560b6ccac2c9ee7fce5de6efd77d8d5b5efdd6756c42901b0a74b0450b",
+      "dimensions": [
+        1111,
+        1200
+      ],
+      "effectiveCardPixels": null,
+      "assessment": "Identity lead only; exact surface, sharpness, complete rim, print markers and image dimensions remain unverified.",
+      "cachedPath": "622b863cdbb4.png",
+      "visualReview": "Downloaded 1111x1200 physical Japanese seller photo. Exact 127/DP-P front is legible; display stand touches the bottom rim and some text is soft, so reject on full-rim/sharpness quality."
+    },
+    {
+      "itemId": "item-1116dc0d-2d71-58fb-961b-190275537822",
+      "sourcePrintingId": "F0301-P01",
+      "listingUrl": "https://www.ebay.com/itm/304071921864",
+      "imageUrl": "https://i.ebayimg.com/images/g/CX0AAeSw7kBg9QSt/s-l1200.jpg",
+      "searchedOn": "2026-11-16",
+      "status": "retrieved-image-reviewed",
+      "mimeType": "image/jpeg",
+      "sha256": "sha256:a567462f4edd496bdf5cd00da5bbde64131c283e3cf396bfd58c0fac26b13d9a",
+      "dimensions": [
+        80,
+        80
+      ],
+      "effectiveCardPixels": null,
+      "assessment": "Identity lead only; exact surface, sharpness, complete rim, print markers and image dimensions remain unverified.",
+      "cachedPath": "c34802224be5.jpg",
+      "visualReview": "Two direct eBay image URLs returned HTTP 200 but only 80x80 placeholder bytes; two frozen Yahoo image URLs returned 403. No image candidate accepted."
+    },
+    {
+      "itemId": "item-c72498d5-0eb0-5e8a-b714-dca5add72951",
+      "sourcePrintingId": "F0312-P01",
+      "listingUrl": "https://www.ebay.com/itm/116029859940",
+      "imageUrl": "https://i.ebayimg.com/images/g/T~cAAeSwT5Fllyg2/s-l1200.jpg",
+      "searchedOn": "2026-11-16",
+      "status": "retrieved-image-reviewed",
+      "mimeType": "image/jpeg",
+      "sha256": "sha256:a567462f4edd496bdf5cd00da5bbde64131c283e3cf396bfd58c0fac26b13d9a",
+      "dimensions": [
+        80,
+        80
+      ],
+      "effectiveCardPixels": null,
+      "assessment": "Identity lead only; exact surface, sharpness, complete rim, print markers and image dimensions remain unverified.",
+      "cachedPath": "5e88e56afc5b.jpg",
+      "visualReview": "The exact English eBay image URL returned an 80x80 placeholder. TCGdex card API and high image returned 200; 600x825 digital render is representative only, not finish evidence."
+    },
+    {
+      "itemId": "item-b4f67812-9bd3-5d0b-b3e7-a84a89b1c49f",
+      "sourcePrintingId": "F0314-P01",
+      "listingUrl": "https://www.ricardo.ch/de/a/pokemon-relaxo-snorlax-platinum-rising-rivals-non-holo-1308036096/",
+      "imageUrl": "https://img.ricardostatic.ch/images/5f6dfd26-1ff2-445b-bc51-71e88340cf87/t_1800x1350/pokemon-relaxo-snorlax-platinum-rising-rivals-non-holo",
+      "searchedOn": "2026-11-16",
+      "status": "retrieved-image-reviewed",
+      "mimeType": "image/jpeg",
+      "sha256": "sha256:c76f3d3f61f3dee4b8312e42f7b025f68883a290e57db3d8ca0c9b431fc8ea90",
+      "dimensions": [
+        1013,
+        1350
+      ],
+      "effectiveCardPixels": null,
+      "assessment": "Identity lead only; exact surface, sharpness, complete rim, print markers and image dimensions remain unverified.",
+      "cachedPath": "e5592a6e6e57.jpg",
+      "visualReview": "Downloaded 1013x1350 German seller photograph; card face is complete and text legible at full size, with mild softness. Keep pending parent review of visible finish; if surface treatment remains ambiguous, representative-only."
+    },
+    {
+      "itemId": "item-ad557769-a035-52fc-9201-30304a203224",
+      "sourcePrintingId": "F0313-P01",
+      "listingUrl": "https://www.ebay.fr/itm/312178306116",
+      "imageUrl": "https://i.ebayimg.com/images/g/P4EAAOxyfyhRYWrC/s-l1200.jpg",
+      "searchedOn": "2026-11-16",
+      "status": "retrieved-image-reviewed",
+      "mimeType": "image/jpeg",
+      "sha256": "sha256:f2a527f62124e27e1ed3a538f05e37dc23b7a9e41876ebef76c149976712c84e",
+      "dimensions": [
+        698,
+        920
+      ],
+      "effectiveCardPixels": null,
+      "assessment": "Identity lead only; exact surface, sharpness, complete rim, print markers and image dimensions remain unverified.",
+      "cachedPath": "9c26b29b7ca8.jpg",
+      "visualReview": "Downloaded 698x920 French seller image; complete sharp French front and rim are visible. Keep pending parent review of visible finish; if surface treatment remains ambiguous, representative-only. TCGdex API and 600x825 render also retrieved; digital render is representative only."
+    },
+    {
+      "itemId": "item-9cec74ef-9ca6-5aa3-9728-fcde4ed81f4e",
+      "listingUrl": null,
+      "imageUrl": "https://img.tradera.net/large-fit/409/654652409_d73a7e37-484b-4677-b619-3e845ce19b0c.jpg",
+      "searchedOn": "2026-11-16",
+      "status": 200,
+      "mimeType": "image/jpeg",
+      "sha256": "sha256:a6d4772748cf59e7a4740a975d748f9b8f57a47198205a01a3fc0d75a35204e2",
+      "dimensions": [
+        675,
+        900
+      ],
+      "effectiveCardPixels": null,
+      "visualReview": "Tradera direct image downloaded at 675x900; full Japanese face is legible, but perspective/narrow-edge card width is about 550 effective pixels, below threshold. Yahoo image returned 403; Okini image returned 426."
+    },
+    {
+      "itemId": "item-c72498d5-0eb0-5e8a-b714-dca5add72951",
+      "listingUrl": null,
+      "imageUrl": "https://assets.tcgdex.net/en/pl/pl2/81/high.png",
+      "searchedOn": "2026-11-16",
+      "status": 200,
+      "mimeType": "image/png",
+      "sha256": "sha256:0af829264ab1813288776ca1568101971596853f8ce61107fdb21d6effccbe7b",
+      "dimensions": [
+        600,
+        825
+      ],
+      "effectiveCardPixels": null,
+      "visualReview": "The exact English eBay image URL returned an 80x80 placeholder. TCGdex card API and high image returned 200; 600x825 digital render is representative only, not finish evidence."
+    },
+    {
+      "itemId": "item-ad557769-a035-52fc-9201-30304a203224",
+      "listingUrl": null,
+      "imageUrl": "https://assets.tcgdex.net/fr/pl/pl2/81/high.png",
+      "searchedOn": "2026-11-16",
+      "status": 200,
+      "mimeType": "image/png",
+      "sha256": "sha256:caeeda1299d64bb95809df3059e0341ffc6dfcc22ec0ecb2dc6a6e6a51e75d46",
+      "dimensions": [
+        600,
+        825
+      ],
+      "effectiveCardPixels": null,
+      "visualReview": "Downloaded 698x920 French seller image; complete sharp French front and rim are visible. Keep pending parent review of visible finish; if surface treatment remains ambiguous, representative-only. TCGdex API and 600x825 render also retrieved; digital render is representative only."
+    }
+  ],
+  "retrievalLog": [
+    {
+      "itemId": "item-669de0c0-4bae-5a66-bc90-0fde2ae26e75",
+      "url": "https://api.tcgdex.net/v2/ja/cards/PCG9-001",
+      "kind": "tcgdex-api",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "application/json",
+      "sha256": "sha256:82c96f646bdc745412689d8a095c06201fa53f54e7e8e8748d0bcc6730cbe45d",
+      "dimensions": null,
+      "apiCardId": "PCG9-001",
+      "apiName": "Snorlax（デルタ種）",
+      "apiImage": null
+    },
+    {
+      "itemId": "item-c64e770b-aaec-5c46-8b0b-a679ba0ca729",
+      "url": "https://api.tcgdex.net/v2/de/cards/ex15-10",
+      "kind": "tcgdex-api",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "application/json",
+      "sha256": "sha256:13d3ebf722c04989aed182a8dfc842932e18e9c8efa05ece3919c5bdb028c2d1",
+      "dimensions": null,
+      "apiCardId": "ex15-10",
+      "apiName": "Relaxo δ",
+      "apiImage": null
+    },
+    {
+      "itemId": "item-caa17c85-2eea-5c77-80df-f4c85c1b1269",
+      "url": "https://api.tcgdex.net/v2/de/cards/dp1-37",
+      "kind": "tcgdex-api",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "application/json",
+      "sha256": "sha256:5a90477f698b69e49eeae056f5910e55416d1c3bb3879aba939f54796084d57f",
+      "dimensions": null,
+      "apiCardId": "dp1-37",
+      "apiName": "Relaxo",
+      "apiImage": null
+    },
+    {
+      "itemId": "item-6b4ab492-1b89-5e70-beb4-55c81c2f098c",
+      "url": "https://api.tcgdex.net/v2/fr/cards/dp1-37",
+      "kind": "tcgdex-api",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "application/json",
+      "sha256": "sha256:ff0c55d7338522b944474b6d531a554ac3085c11c88d5a74928c7871f3001ff7",
+      "dimensions": null,
+      "apiCardId": "dp1-37",
+      "apiName": "Ronflex",
+      "apiImage": null
+    },
+    {
+      "itemId": "item-c72498d5-0eb0-5e8a-b714-dca5add72951",
+      "url": "https://api.tcgdex.net/v2/en/cards/pl2-81",
+      "kind": "tcgdex-api",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "application/json",
+      "sha256": "sha256:a7a0e8102599cf8858d4bbf5eee4b3bf59f113404018c2c0dd8d164a52cdfbdc",
+      "dimensions": null,
+      "apiCardId": "pl2-81",
+      "apiName": "Snorlax",
+      "apiImage": "https://assets.tcgdex.net/en/pl/pl2/81"
+    },
+    {
+      "itemId": "item-b4f67812-9bd3-5d0b-b3e7-a84a89b1c49f",
+      "url": "https://api.tcgdex.net/v2/de/cards/pl2-81",
+      "kind": "tcgdex-api",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "application/json",
+      "sha256": "sha256:0ffd577f23a54e9e08bc9ec039c861484ff013d734b35751e9d3b0ba73d6e99c",
+      "dimensions": null,
+      "apiCardId": "pl2-81",
+      "apiName": "Relaxo",
+      "apiImage": null
+    },
+    {
+      "itemId": "item-ad557769-a035-52fc-9201-30304a203224",
+      "url": "https://api.tcgdex.net/v2/fr/cards/pl2-81",
+      "kind": "tcgdex-api",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "application/json",
+      "sha256": "sha256:5caf31592db6a622b980bc0099fe3581d1e251c28db5beee9ede290175cbcaa8",
+      "dimensions": null,
+      "apiCardId": "pl2-81",
+      "apiName": "Ronflex Niv. 40",
+      "apiImage": "https://assets.tcgdex.net/fr/pl/pl2/81"
+    },
+    {
+      "itemId": "item-669de0c0-4bae-5a66-bc90-0fde2ae26e75",
+      "url": "https://i.ebayimg.com/images/g/5n0AAeSw9ktpDXPN/s-l1200.jpg",
+      "kind": "image-lead",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "image/jpeg",
+      "sha256": "sha256:85262fa031db9758defd4d8f25bf20de3f5a34d66450291fc04c5f3c54231a2c",
+      "dimensions": [
+        900,
+        1200
+      ],
+      "format": "JPEG"
+    },
+    {
+      "itemId": "item-4f32febf-27a6-5378-8d66-d3088acad72f",
+      "url": "https://i.ebayimg.com/images/g/RYAAAeSwdOFpTmId/s-l1200.png",
+      "kind": "image-lead",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "image/png",
+      "sha256": "sha256:e15348560b6ccac2c9ee7fce5de6efd77d8d5b5efdd6756c42901b0a74b0450b",
+      "dimensions": [
+        1111,
+        1200
+      ],
+      "format": "PNG"
+    },
+    {
+      "itemId": "item-1116dc0d-2d71-58fb-961b-190275537822",
+      "url": "https://i.ebayimg.com/images/g/CX0AAeSw7kBg9QSt/s-l1200.jpg",
+      "kind": "image-lead",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "image/jpeg",
+      "sha256": "sha256:a567462f4edd496bdf5cd00da5bbde64131c283e3cf396bfd58c0fac26b13d9a",
+      "dimensions": [
+        80,
+        80
+      ],
+      "format": "JPEG"
+    },
+    {
+      "itemId": "item-c72498d5-0eb0-5e8a-b714-dca5add72951",
+      "url": "https://i.ebayimg.com/images/g/T~cAAeSwT5Fllyg2/s-l1200.jpg",
+      "kind": "image-lead",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "image/jpeg",
+      "sha256": "sha256:a567462f4edd496bdf5cd00da5bbde64131c283e3cf396bfd58c0fac26b13d9a",
+      "dimensions": [
+        80,
+        80
+      ],
+      "format": "JPEG"
+    },
+    {
+      "itemId": "item-b4f67812-9bd3-5d0b-b3e7-a84a89b1c49f",
+      "url": "https://img.ricardostatic.ch/images/5f6dfd26-1ff2-445b-bc51-71e88340cf87/t_1800x1350/pokemon-relaxo-snorlax-platinum-rising-rivals-non-holo",
+      "kind": "image-lead",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "image/jpeg",
+      "sha256": "sha256:c76f3d3f61f3dee4b8312e42f7b025f68883a290e57db3d8ca0c9b431fc8ea90",
+      "dimensions": [
+        1013,
+        1350
+      ],
+      "format": "JPEG"
+    },
+    {
+      "itemId": "item-ad557769-a035-52fc-9201-30304a203224",
+      "url": "https://i.ebayimg.com/images/g/P4EAAOxyfyhRYWrC/s-l1200.jpg",
+      "kind": "image-lead",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "image/jpeg",
+      "sha256": "sha256:f2a527f62124e27e1ed3a538f05e37dc23b7a9e41876ebef76c149976712c84e",
+      "dimensions": [
+        698,
+        920
+      ],
+      "format": "JPEG"
+    },
+    {
+      "itemId": "item-c72498d5-0eb0-5e8a-b714-dca5add72951",
+      "url": "https://assets.tcgdex.net/en/pl/pl2/81/high.png",
+      "kind": "tcgdex-image",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "image/png",
+      "sha256": "sha256:0af829264ab1813288776ca1568101971596853f8ce61107fdb21d6effccbe7b",
+      "dimensions": [
+        600,
+        825
+      ],
+      "format": "PNG"
+    },
+    {
+      "itemId": "item-ad557769-a035-52fc-9201-30304a203224",
+      "url": "https://assets.tcgdex.net/fr/pl/pl2/81/high.png",
+      "kind": "tcgdex-image",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "image/png",
+      "sha256": "sha256:caeeda1299d64bb95809df3059e0341ffc6dfcc22ec0ecb2dc6a6e6a51e75d46",
+      "dimensions": [
+        600,
+        825
+      ],
+      "format": "PNG"
+    },
+    {
+      "itemId": "item-9cec74ef-9ca6-5aa3-9728-fcde4ed81f4e",
+      "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0203/user/866e84e8ba8f330fcb6c7d451138f6e341eb7de695a3ab3444d7359de6e6d30d/i-img900x1200-17737323452545wporbm397854.jpg",
+      "kind": "frozen-source-link-image",
+      "checkedAt": "2026-11-16",
+      "status": 403,
+      "mimeType": "text/html",
+      "sha256": null,
+      "dimensions": null
+    },
+    {
+      "itemId": "item-9cec74ef-9ca6-5aa3-9728-fcde4ed81f4e",
+      "url": "https://img.tradera.net/large-fit/409/654652409_d73a7e37-484b-4677-b619-3e845ce19b0c.jpg",
+      "kind": "frozen-source-link-image",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "image/jpeg",
+      "sha256": "sha256:a6d4772748cf59e7a4740a975d748f9b8f57a47198205a01a3fc0d75a35204e2",
+      "dimensions": [
+        675,
+        900
+      ],
+      "format": "JPEG"
+    },
+    {
+      "itemId": "item-1116dc0d-2d71-58fb-961b-190275537822",
+      "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/f295095e039561e1989634aae3725083c076b7a3/i-img1200x1200-1791671439442cepgbn.jpg",
+      "kind": "frozen-source-link-image",
+      "checkedAt": "2026-11-16",
+      "status": 403,
+      "mimeType": "text/html",
+      "sha256": null,
+      "dimensions": null
+    },
+    {
+      "itemId": "item-1116dc0d-2d71-58fb-961b-190275537822",
+      "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/f295095e039561e1989634aae3725083c076b7a3/i-img1200x1200-1791671439442gbspfq.jpg",
+      "kind": "frozen-source-link-image",
+      "checkedAt": "2026-11-16",
+      "status": 403,
+      "mimeType": "text/html",
+      "sha256": null,
+      "dimensions": null
+    },
+    {
+      "itemId": "item-9cec74ef-9ca6-5aa3-9728-fcde4ed81f4e",
+      "url": "https://media.okini.land/172980-large_default/pokemon-tcg-dp1-dpbp174-uncommon-snorlax.jpg",
+      "kind": "new-image-search-lead",
+      "checkedAt": "2026-11-16",
+      "status": 426,
+      "mimeType": "text/html",
+      "sha256": null,
+      "dimensions": null
+    },
+    {
+      "itemId": "item-1116dc0d-2d71-58fb-961b-190275537822",
+      "url": "https://i.ebayimg.com/images/g/7-8AAeSwzlFlWTDy/s-l1600.jpg",
+      "kind": "new-image-search-lead",
+      "checkedAt": "2026-11-16",
+      "status": 200,
+      "mimeType": "image/jpeg",
+      "sha256": "sha256:a567462f4edd496bdf5cd00da5bbde64131c283e3cf396bfd58c0fac26b13d9a",
+      "dimensions": [
+        80,
+        80
+      ],
+      "format": "JPEG"
+    },
+    {
+      "itemId": "item-1f538f9c-9ca6-5aa7-9101-9ee6e1e9c3a0",
+      "url": "https://api.tcgdex.net/v2/it/cards/dp1-37",
+      "kind": "tcgdex-api-targeted-language-probe",
+      "checkedAt": "2026-11-16",
+      "status": 404,
+      "mimeType": "application/json",
+      "sha256": null,
+      "dimensions": null
+    },
+    {
+      "itemId": "item-468fb4c4-b355-52c2-87bf-4596a2eee877",
+      "url": "https://api.tcgdex.net/v2/es/cards/dp1-37",
+      "kind": "tcgdex-api-targeted-language-probe",
+      "checkedAt": "2026-11-16",
+      "status": 404,
+      "mimeType": "application/json",
+      "sha256": null,
+      "dimensions": null
+    },
+    {
+      "itemId": "item-daa3d95a-2a3d-50cd-8b7b-071dd93a8374",
+      "url": "https://api.tcgdex.net/v2/pt/cards/dp1-37",
+      "kind": "tcgdex-api-targeted-language-probe",
+      "checkedAt": "2026-11-16",
+      "status": 404,
+      "mimeType": "application/json",
+      "sha256": null,
+      "dimensions": null
+    },
+    {
+      "itemId": "item-fd29aa81-9db8-5ce3-9d2f-20df44ea5a4d",
+      "url": "https://api.tcgdex.net/v2/it/cards/pl2-81",
+      "kind": "tcgdex-api-targeted-language-probe",
+      "checkedAt": "2026-11-16",
+      "status": 404,
+      "mimeType": "application/json",
+      "sha256": null,
+      "dimensions": null
+    },
+    {
+      "itemId": "item-c623a097-9ca5-5d74-96a6-10dace68ea3f",
+      "url": "https://api.tcgdex.net/v2/it/cards/pl2-111",
+      "kind": "tcgdex-api-targeted-language-probe",
+      "checkedAt": "2026-11-16",
+      "status": 404,
+      "mimeType": "application/json",
+      "sha256": null,
+      "dimensions": null
+    },
+    {
+      "itemId": "item-1116dc0d-2d71-58fb-961b-190275537822",
+      "url": "https://api.tcgdex.net/v2/ja/cards/pt2-70",
+      "kind": "tcgdex-api-targeted-language-probe",
+      "checkedAt": "2026-11-16",
+      "status": 404,
+      "mimeType": "application/json",
+      "sha256": null,
+      "dimensions": null
+    }
+  ],
+  "parentVerification": {
+    "date": "2026-11-16",
+    "accepted": 2,
+    "exactPrinting": 0,
+    "representative": 2,
+    "remainingTargets": 18,
+    "finishClaimsChanged": false,
+    "note": "Every original and full prepared face independently inspected. No absent glare inference. Source research by Luna; preparation and filing completed by parent because Luna usage limit prevented continuation.",
+    "candidateRejections": {
+      "F0248-P01": "The downloaded Japanese PCG9 photograph is complete and sharp, but the required first-edition mark cannot be established. Listing labels are insufficient.",
+      "F0098-P01": "The downloaded Japanese 127/DP-P front is soft and the display stand touches the lower rim. Need a sharper full face clear of the stand.",
+      "F0301-P01": "New eBay image requests returned 80x80 placeholders; Yahoo requests returned 403. No qualifying retained first-edition front was obtained.",
+      "F0314-P01": "The German Ricardo photo is complete but fine text is visibly soft at native size. Reject gallery preparation under the sharpness threshold; its finish is not inferred from the title or lack of glare."
+    },
+    "scope": "Two representative associations, no exact-printing association, no primary reference or finish changes; eighteen image needs remain."
+  }
+}
