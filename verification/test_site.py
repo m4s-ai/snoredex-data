@@ -544,6 +544,15 @@ def main() -> int:
         check("the enlarged card preview closes with Escape",
               page.locator(".card-preview").evaluate("element => element.hidden"),
               "preview remained open")
+        image_trigger.click()  # pins the preview; fill() below types without clicking
+        pinned_open = not page.locator(".card-preview").evaluate("element => element.hidden")
+        page.fill("#f-q", "no-such-card-zzz")
+        page.wait_for_timeout(200)
+        check("a pinned card preview closes when filtering removes its row",
+              pinned_open and page.locator(".card-preview").evaluate("element => element.hidden"),
+              "preview stayed open over a row that no longer exists")
+        page.fill("#f-q", "")
+        page.wait_for_timeout(200)
 
         count_text = page.text_content("#count")
         check("shown/total count is displayed", str(EXPECTED_ROWS) in (count_text or ""), count_text or "")
