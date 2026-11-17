@@ -1,0 +1,49 @@
+{
+  "round": 23,
+  "checkedAt": "2026-11-17",
+  "previousRoundBasis": "195265bea61126d553f887edaf07f17ca1f0bfbb",
+  "scopeAudit": {
+    "newAssets": 13,
+    "newSpecimens": 13,
+    "newGalleryAssociations": 13,
+    "existingRowsPreserved": true,
+    "printingsClaimsEvidenceSetsOwnerDecisionsUnchanged": true
+  },
+  "dataRules": "75/75 passed",
+  "originals": {
+    "count": 828,
+    "sha256AndNoGps": true
+  },
+  "regeneration": "Complete regen.py passed; see local regen23.log",
+  "globalBrowserBaseline": "107/107 passed after round21; UI code unchanged. New image data tested by targeted checks below.",
+  "targetedBrowser": [
+    {
+      "viewport": "desktop",
+      "targets": 20,
+      "gridAndLightbox": "passed",
+      "binderLayoutsPerTarget": 8,
+      "acceptedImages": 13,
+      "representativeImages": 13,
+      "placeholders": 7,
+      "errors": []
+    },
+    {
+      "viewport": "mobile-dpr2",
+      "targets": 20,
+      "gridAndLightbox": "passed",
+      "binderLayoutsPerTarget": 8,
+      "acceptedImages": 13,
+      "representativeImages": 13,
+      "placeholders": 7,
+      "errors": []
+    }
+  ],
+  "artifact": {
+    "files": 3192,
+    "kilobytes": 252226,
+    "allowlistVerified": true,
+    "nonMarkdownSourceByteMatches": 3180,
+    "sqliteQuickChecks": 2
+  },
+  "goalLimit": "Rounds24–42 and whole-gallery acceptance remain open."
+}
