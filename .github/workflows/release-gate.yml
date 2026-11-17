@@ -48,8 +48,10 @@ jobs:
         uses: actions/cache@v5
         with:
           path: .git/snoredex-memo
-          key: snoredex-memo-${{ runner.os }}-${{ hashFiles('verification/sensitive_scan.py') }}-${{ github.run_id }}
-          restore-keys: snoredex-memo-${{ runner.os }}-${{ hashFiles('verification/sensitive_scan.py') }}-
+          # The memo is plain JSON of blob hashes: the Linux run on main seeds it for Windows too.
+          enableCrossOsArchive: true
+          key: snoredex-memo-${{ hashFiles('verification/sensitive_scan.py') }}-${{ github.run_id }}
+          restore-keys: snoredex-memo-${{ hashFiles('verification/sensitive_scan.py') }}-
 
       - name: Install browser test dependencies
         if: runner.os == 'Linux' && github.event_name != 'pull_request'
@@ -185,8 +187,10 @@ jobs:
         uses: actions/cache@v5
         with:
           path: .git/snoredex-memo
-          key: snoredex-memo-${{ runner.os }}-${{ hashFiles('verification/sensitive_scan.py') }}-${{ github.run_id }}
-          restore-keys: snoredex-memo-${{ runner.os }}-${{ hashFiles('verification/sensitive_scan.py') }}-
+          # The memo is plain JSON of blob hashes: the Linux run on main seeds it for Windows too.
+          enableCrossOsArchive: true
+          key: snoredex-memo-${{ hashFiles('verification/sensitive_scan.py') }}-${{ github.run_id }}
+          restore-keys: snoredex-memo-${{ hashFiles('verification/sensitive_scan.py') }}-
 
       # GitHub serves every pull request's head permanently, so they are published history too
       # (#467). Mapped under a `/pull/` path: P6 (`--all`) scans them, P7's merge-ref filter skips
