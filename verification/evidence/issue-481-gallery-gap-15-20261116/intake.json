@@ -20,7 +20,7 @@
       "setEditionId": "EDITION:WEST:German:BKT",
       "setCode": "BKT",
       "number": "118/162",
-      "language": "BKT",
+      "language": "German",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0838.png",
@@ -63,7 +63,7 @@
       "setEditionId": "EDITION:WEST:English:BKT",
       "setCode": "BKT",
       "number": "118/162",
-      "language": "BKT",
+      "language": "English",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0839.png",
@@ -106,7 +106,7 @@
       "setEditionId": "EDITION:WEST:Spanish:BKT",
       "setCode": "BKT",
       "number": "118/162",
-      "language": "BKT",
+      "language": "Spanish",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0840.png",
@@ -149,7 +149,7 @@
       "setEditionId": "EDITION:WEST:French:GEN",
       "setCode": "GEN",
       "number": "58/83",
-      "language": "GEN",
+      "language": "French",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0841.png",
@@ -192,7 +192,7 @@
       "setEditionId": "EDITION:WEST:French:BKT",
       "setCode": "BKT",
       "number": "118/162",
-      "language": "BKT",
+      "language": "French",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0842.png",
@@ -235,7 +235,7 @@
       "setEditionId": "EDITION:WEST:Italian:BKT",
       "setCode": "BKT",
       "number": "118/162",
-      "language": "BKT",
+      "language": "Italian",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0843.png",
@@ -276,7 +276,7 @@
       "setEditionId": "EDITION:WEST:Portuguese:BKT",
       "setCode": "BKT",
       "number": "118/162",
-      "language": "BKT",
+      "language": "Portuguese",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0844.png",
@@ -317,7 +317,7 @@
       "setEditionId": "EDITION:WEST:Russian:BKT",
       "setCode": "BKT",
       "number": "118/162",
-      "language": "BKT",
+      "language": "Russian",
       "scope": "exact-printing",
       "mediaKind": "photo",
       "photograph": "SPEC-0845.jpg",
@@ -359,7 +359,7 @@
       "setEditionId": "EDITION:JP:Japanese:XY-P",
       "setCode": "XY-P",
       "number": "149/XY-P",
-      "language": "XY-P",
+      "language": "Japanese",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0846.jpg",
@@ -508,5 +508,56 @@
     ],
     "independentPixelReconstruction": "passed",
     "browserAndArtifactAcceptance": "passed in round16 delivery:106browserchecks, all20round15targets desktop/mobile-DPR2 grid/detail/eightbinderlayouts;2940-file artifact verified."
+  },
+  "languageMetadataCorrection": {
+    "checkedAt": "2026-11-17",
+    "cause": "An intake helper selected the final set-code segment of setEditionId for the language; corrected to its penultimate language segment, independently cross-checked against the visually reviewed source and frozen target. Originals, gallery associations, identity and finish assertions are unchanged.",
+    "correctedRecords": [
+      {
+        "specimenId": "SPEC-0838",
+        "before": "BKT",
+        "after": "German"
+      },
+      {
+        "specimenId": "SPEC-0839",
+        "before": "BKT",
+        "after": "English"
+      },
+      {
+        "specimenId": "SPEC-0840",
+        "before": "BKT",
+        "after": "Spanish"
+      },
+      {
+        "specimenId": "SPEC-0841",
+        "before": "GEN",
+        "after": "French"
+      },
+      {
+        "specimenId": "SPEC-0842",
+        "before": "BKT",
+        "after": "French"
+      },
+      {
+        "specimenId": "SPEC-0843",
+        "before": "BKT",
+        "after": "Italian"
+      },
+      {
+        "specimenId": "SPEC-0844",
+        "before": "BKT",
+        "after": "Portuguese"
+      },
+      {
+        "specimenId": "SPEC-0845",
+        "before": "BKT",
+        "after": "Russian"
+      },
+      {
+        "specimenId": "SPEC-0846",
+        "before": "XY-P",
+        "after": "Japanese"
+      }
+    ]
   }
 }

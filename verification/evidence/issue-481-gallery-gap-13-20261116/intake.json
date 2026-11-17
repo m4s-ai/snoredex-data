@@ -22,7 +22,7 @@
       "setEditionId": "EDITION:WEST:German:BCR",
       "setCode": "BCR",
       "number": "109/149",
-      "language": "BCR",
+      "language": "German",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0811.png",
@@ -65,7 +65,7 @@
       "setEditionId": "EDITION:WEST:German:PLS",
       "setCode": "PLS",
       "number": "101/135",
-      "language": "PLS",
+      "language": "German",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0812.png",
@@ -106,7 +106,7 @@
       "setEditionId": "EDITION:WEST:German:KSS",
       "setCode": "KSS",
       "number": "26/39",
-      "language": "KSS",
+      "language": "German",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0813.png",
@@ -149,7 +149,7 @@
       "setEditionId": "EDITION:WEST:English:PLS",
       "setCode": "PLS",
       "number": "101/135",
-      "language": "PLS",
+      "language": "English",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0814.png",
@@ -190,7 +190,7 @@
       "setEditionId": "EDITION:WEST:English:KSS",
       "setCode": "KSS",
       "number": "26/39",
-      "language": "KSS",
+      "language": "English",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0815.png",
@@ -233,7 +233,7 @@
       "setEditionId": "EDITION:WEST:Spanish:PLS",
       "setCode": "PLS",
       "number": "101/135",
-      "language": "PLS",
+      "language": "Spanish",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0816.png",
@@ -276,7 +276,7 @@
       "setEditionId": "EDITION:WEST:French:BCR",
       "setCode": "BCR",
       "number": "109/149",
-      "language": "BCR",
+      "language": "French",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0817.png",
@@ -319,7 +319,7 @@
       "setEditionId": "EDITION:WEST:French:PLS",
       "setCode": "PLS",
       "number": "101/135",
-      "language": "PLS",
+      "language": "French",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0818.png",
@@ -362,7 +362,7 @@
       "setEditionId": "EDITION:WEST:Italian:PLS",
       "setCode": "PLS",
       "number": "101/135",
-      "language": "PLS",
+      "language": "Italian",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0819.png",
@@ -403,7 +403,7 @@
       "setEditionId": "EDITION:WEST:Italian:KSS",
       "setCode": "KSS",
       "number": "26/39",
-      "language": "KSS",
+      "language": "Italian",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0820.png",
@@ -444,7 +444,7 @@
       "setEditionId": "EDITION:WEST:Portuguese:PLS",
       "setCode": "PLS",
       "number": "101/135",
-      "language": "PLS",
+      "language": "Portuguese",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0821.png",
@@ -485,7 +485,7 @@
       "setEditionId": "EDITION:JP:Japanese:BW7",
       "setCode": "BW7",
       "number": "055/070",
-      "language": "BW7",
+      "language": "Japanese",
       "scope": "representative",
       "mediaKind": "render",
       "photograph": "SPEC-0822.jpg",
@@ -527,5 +527,71 @@
   "placeholders": [],
   "photoCommit": "ce6c3b4b9aedd4ce746cc6c156f8713e6ce3ac45",
   "verificationScriptPath": "verification/cache/completion/round13/prepared/verify_round13.py",
-  "photoCommitVerified": true
+  "photoCommitVerified": true,
+  "languageMetadataCorrection": {
+    "checkedAt": "2026-11-17",
+    "cause": "An intake helper selected the final set-code segment of setEditionId for the language; corrected to its penultimate language segment, independently cross-checked against the visually reviewed source and frozen target. Originals, gallery associations, identity and finish assertions are unchanged.",
+    "correctedRecords": [
+      {
+        "specimenId": "SPEC-0811",
+        "before": "BCR",
+        "after": "German"
+      },
+      {
+        "specimenId": "SPEC-0812",
+        "before": "PLS",
+        "after": "German"
+      },
+      {
+        "specimenId": "SPEC-0813",
+        "before": "KSS",
+        "after": "German"
+      },
+      {
+        "specimenId": "SPEC-0814",
+        "before": "PLS",
+        "after": "English"
+      },
+      {
+        "specimenId": "SPEC-0815",
+        "before": "KSS",
+        "after": "English"
+      },
+      {
+        "specimenId": "SPEC-0816",
+        "before": "PLS",
+        "after": "Spanish"
+      },
+      {
+        "specimenId": "SPEC-0817",
+        "before": "BCR",
+        "after": "French"
+      },
+      {
+        "specimenId": "SPEC-0818",
+        "before": "PLS",
+        "after": "French"
+      },
+      {
+        "specimenId": "SPEC-0819",
+        "before": "PLS",
+        "after": "Italian"
+      },
+      {
+        "specimenId": "SPEC-0820",
+        "before": "KSS",
+        "after": "Italian"
+      },
+      {
+        "specimenId": "SPEC-0821",
+        "before": "PLS",
+        "after": "Portuguese"
+      },
+      {
+        "specimenId": "SPEC-0822",
+        "before": "BW7",
+        "after": "Japanese"
+      }
+    ]
+  }
 }

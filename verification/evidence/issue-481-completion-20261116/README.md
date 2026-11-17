@@ -1,33 +1,14 @@
 <!-- doc: role=frozen whole-gallery completion inventory and work plan; stage=task -->
-# Remaining gallery rounds, #481 / #482
+# Gallery completion plan, #481 / #482
 
-`inventory.json` freezes the active physical-item universe at `bb563f20`, before round 10:
-940 active items, 261 prepared images, 679 image needs. Twenty-five needs had already received
-a review in rounds 05–09. The other 654 stable item IDs are divided into 33 fixed rounds 10–42,
-with at most twenty targets per round. Two gallery research hypotheses are recorded separately;
-they are not physical printings or proof that a card exists.
+`inventory.json` is the historical freeze at `bb563f20`, before round10: 940 active physical items, 261 prepared images and 679 image needs. Twenty-five needs already had reviews in rounds05–09. The other654 stable IDs form fixed rounds10–42, at most20 targets each. Two research hypotheses are separate from physical printings.
 
-The freeze is historical. Main `c3a5f156` subsequently normalized x-set metadata into base sets;
-current assignments must resolve the stable item IDs against current data rather than reuse
-frozen edition fields. The frozen target membership must not silently change with later builds.
+Current item assignments resolve those frozen IDs against current canonical data. Main `156cf05d` is integrated; its earlier normalization of x-set metadata into base sets does not change frozen target membership. `progress.json` proves stable IDs and preserved collector identity fields.
 
-`acquisition-index.json` records a bounded retrieval of existing TCGdex source links for rounds
-12–42. Its 160 downloaded images are candidates, not accepted evidence or gallery assignments.
-Twenty-five API responses have no image and sixty-six requests were unresolved. Neither outcome
-establishes absence. Existing retained photographs have priority when they meet the quality
-threshold. Each candidate still needs identity, language/locality, effective resolution, full rim,
-and target-assignment review. A shared API link is not proof that every routed target matches.
-All 160 candidate faces have now received visual inspection. Six regular-set images
-(CAT-018/047/071/096/121/152) depict Dustox rather than the target Snorlax TG10; their routing
-is rejected and the correct trainer-gallery set is recorded separately. CAT-160 is rejected
-for visibly soft fine text. The other 153 pass only preliminary identity/quality review;
-retained-photo priority and per-target edition, locality and scope checks remain pending.
+Rounds05–20 now have source decisions and canonical integration: 262 fixed targets, 166 new gallery associations (11 exact,155 representative), and96 reviewed image needs. One clearer Russian reverse photo replaces an older gallery crop separately. There are410 prepared active images and530 active physical image needs. Rounds21–42 retain434 fixed targets; their completion and whole-gallery acceptance under#482 remain open. The round validation reports record the actual final checks; contact sheets alone do not establish acceptance.
 
-Round 10 has three accepted additions and seventeen remaining image needs. Round 11 has two
-representative additions and eighteen remaining image needs. Rounds 12–42 are planned and
-partially acquired, not complete. Contact
-sheet inspection alone does not complete a round. Final acceptance under #482 remains pending
-after the fixed rounds, including the grid, binder, detail views and explicitly retained gaps.
+`acquisition-index.json` retains the initial bounded retrieval of existing TCGdex links. Its160 native faces were visually inspected: six Dustox/TG10 routing mismatches and one soft render are rejected;153 passed preliminary identity/quality review. Initial no-image responses and server errors never establish absence. `browser-acquisition.json` records the subsequent normal-browser route for66 server failures, yielding48 further native images with preliminary visual review and18 unresolved/no-image outcomes. Actual assignments require retained-photo priority and the per-target decisions in each completed round; later-round downloads are not blanket acceptance.
 
-No claim, owner decision or hypothesis is settled by this plan. No merge or publication is
-authorized by completing the images. PR #593 remains the review surface.
+`language-metadata-audit.json` records correction of26 new intake records whose helper selected the set-code segment instead of the language segment. All83 intake sources in rounds12–20 now pass an independent language/target/asset-prefix check. Original bytes and finish/ownership assertions are unchanged. All88 prepared source instances retain native face width up to1200px; the round preparation records carry reproducible pixel and encoding proof.
+
+On2026-11-17 the owner explicitly requested a checkpoint after round20, review/remediation with babysit-pr and a normal merge ofPR#593 once its exact-head checks and review pass. The later rounds pause after that verified merge. Publication is a separate action and was not requested. No claim, owner decision or hypothesis is settled by this plan.
