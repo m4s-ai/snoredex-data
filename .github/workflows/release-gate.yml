@@ -40,6 +40,17 @@ jobs:
         with:
           python-version: "3.11"
 
+      # P6 reads every reachable blob; the scanner memoises each one it has read under .git
+      # (verification/sensitive_scan.py, keyed by the scanner's own fingerprint). Without this
+      # cache every run starts cold and spends minutes rereading immutable blobs. New blobs are
+      # always read, and a changed scanner invalidates the file by fingerprint.
+      - name: Restore the history-scan memo
+        uses: actions/cache@v5
+        with:
+          path: .git/snoredex-memo
+          key: snoredex-memo-${{ runner.os }}-${{ hashFiles('verification/sensitive_scan.py') }}-${{ github.run_id }}
+          restore-keys: snoredex-memo-${{ runner.os }}-${{ hashFiles('verification/sensitive_scan.py') }}-
+
       - name: Install browser test dependencies
         if: runner.os == 'Linux' && github.event_name != 'pull_request'
         run: python -m pip install -r requirements.txt
@@ -165,6 +176,17 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
+
+      # P6 reads every reachable blob; the scanner memoises each one it has read under .git
+      # (verification/sensitive_scan.py, keyed by the scanner's own fingerprint). Without this
+      # cache every run starts cold and spends minutes rereading immutable blobs. New blobs are
+      # always read, and a changed scanner invalidates the file by fingerprint.
+      - name: Restore the history-scan memo
+        uses: actions/cache@v5
+        with:
+          path: .git/snoredex-memo
+          key: snoredex-memo-${{ runner.os }}-${{ hashFiles('verification/sensitive_scan.py') }}-${{ github.run_id }}
+          restore-keys: snoredex-memo-${{ runner.os }}-${{ hashFiles('verification/sensitive_scan.py') }}-
 
       # GitHub serves every pull request's head permanently, so they are published history too
       # (#467). Mapped under a `/pull/` path: P6 (`--all`) scans them, P7's merge-ref filter skips

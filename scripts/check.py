@@ -42,6 +42,8 @@ GRANULARITIES = frozenset(("specimen-or-card", "product-or-set", "market-or-era"
                            "unclassified"))  # how far a claim's evidence reaches
 FINISHES = frozenset(("non-holo", "holo", "reverse-holo", "mirror-holo", "unknown"))  # technical finishes
 COMPLETENESS = frozenset(("owner-adjudicated", "positive-evidence-only", "pending", "not-applicable"))
+# a set or edition is identified, or a placeholder awaiting its local code (build.py edition_record)
+IDENTITY = frozenset(("identified", "needs-local-identifier"))
 MARKING_ROLES = frozenset(("print-identity", "reverse-holo-treatment", "distribution-promo"))
 MAPPED, UNMAPPED = ("mapped", "mapped-by-explicit-equivalence"), ("needs-explicit-equivalence", "unmapped")
 SPECIMEN_PROVIDERS = ("inspected-specimen", "cardmarket-listing-photo", "seller-listing-photo")  # was S14
@@ -79,9 +81,9 @@ COLLECTIONS = {
         "languageCode": S, "sourceName": S, "displayName": S, "region": S, "displayOrder": I}),
     "sets.localSets": ("localSetId", "localSetId", {
         "localSetId": S, "locality": S, "localSetCode": OS, "baseSetCode?": S, "localSetName": OS, "productKind": S,
-        "identityState": S, "sourceRefs": L}),
+        "identityState": IDENTITY, "sourceRefs": L}),
     "sets.setEditions": ("setEditionId", "setEditionId", {
-        "setEditionId": S, "localSetId": S, "localizationId": S, "identityState": S, "releaseDate": OS,
+        "setEditionId": S, "localSetId": S, "localizationId": S, "identityState": IDENTITY, "releaseDate": OS,
         "releaseDatePrecision": PRECISION, "releaseApproximate": B, "releaseEventId": OS}),
     "sets.releaseEvents": ("releaseEventId", "releaseEventId", {  # an edition's date and its source
         "releaseEventId": S, "releaseDate": S, "releaseDatePrecision": PRECISION - {None}, "releaseApproximate": B,

@@ -57,7 +57,8 @@ def main() -> int:
     assert "push:" in release and "branches: [main]" in release
     assert "github.event_name != 'pull_request'" in release
     assert "python scripts/regen.py --check" in release
-    assert "memo" not in release, "the release gate has no memo since the cut"
+    # the step memo stays cut (regen.py runs every step); only the scanner's immutable-blob memo is cached
+    assert "--memo" not in release and release.count("path: .git/snoredex-memo") == 2, "release gate memo scope"
     assert "Install browser test dependencies\n        if: runner.os == 'Linux' && github.event_name != 'pull_request'" in release
     assert "matrix:\n        os: [ubuntu-latest, windows-latest]" in release
     assert "runner.os == 'Linux' && github.event_name != 'pull_request'" in release
