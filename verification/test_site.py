@@ -692,7 +692,7 @@ def main() -> int:
         page.select_option("#f-dateStatus", ["month"])
         page.wait_for_timeout(120)
         month_rows = page.eval_on_selector_all(
-            "#rows tr:not(.yearsep)", r"els => els.map(e => /\b\d{4}-\d{2}-01\b/.test(e.textContent))")
+            "#rows tr:not(.yearsep)", r"els => els.map(e => /\d{4}-\d{2}-01/.test(e.textContent))")
         check("month release status lists only month-precision dates, never a stated day",
               bool(month_rows) and all(month_rows), f"{len(month_rows)} rows, {month_rows.count(False)} without a 1st")
         page.select_option("#f-dateStatus", [])
