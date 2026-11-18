@@ -113,13 +113,20 @@ def verify_original_geometry(photos, row, stage):
             require(list(image.size) == stage["source"]["nativeDimensions"], f"Native dimensions differ: {source}")
 
 
+def item_citations(item):
+    refs = item.get("sourceClaimRefs", [])
+    return ({item.get("sourcePrintingId"), item.get("finishUnitId")} - {None}
+            | set(refs) | {ref.removeprefix("CLAIM:legacy:") for ref in refs})
+
+
 def apply_source(root, row, stage, specimen, items, targets):
     ids = row["itemIds"]
     validate_targets(row, ids, targets, items)
     require(set(stage["targetIds"]) == set(ids), "Preparation and intake refer to different targets.")
     require(specimen_matches(specimen, row),
             f"Specimen language or number mismatch: {row['specimenId']}")
-    require({items[key]["sourcePrintingId"] for key in ids} <= set(specimen["citedBy"]),
+    citations = set(specimen["citedBy"])
+    require(all(item_citations(items[key]) & citations for key in ids),
             "Specimen citations differ from the reviewed targets.")
     require(specimen["photographSha256"] == "sha256:" + row["photoRepositorySha256"]
             and row["photoRepositoryPath"] == PHOTO + specimen["photograph"], "Specimen hash or archive path mismatch.")
@@ -145,6 +152,14 @@ def asset_row(row, stage, item):
     return {"assetId": "asset-" + str(uuid.uuid5(uuid.NAMESPACE_URL, ASSET_NAMESPACE + source)),
             "path": source, "sha256": "sha256:" + row["photoRepositorySha256"], "imageScope": scope,
             "altTextBasis": label, "preview": stage["preview"]["canonicalPath"]}
+
+
+def merge_asset(assets, asset):
+    prior = assets.get(asset["assetId"])
+    identity = ("path", "sha256", "imageScope", "preview")
+    if prior and all(prior.get(field) == asset[field] for field in identity):
+        return
+    merge(assets, asset["assetId"], asset)
 
 
 def record_associations(gallery, accepted, row, renders):
@@ -231,7 +246,7 @@ def apply_round(root, folder, photos):
         ensure_unique_original(registry, sid, additions[sid])
         merge(registry, sid, additions[sid])
         asset = asset_row(row, stage, items[row["itemIds"][0]])
-        merge(assets, asset["assetId"], asset)
+        merge_asset(assets, asset)
         record_associations(gallery, accepted, row, renders)
     for row in intake.get("reusedSpecimens", []):
         existing_association(gallery, accepted, registry, row, items, targets)

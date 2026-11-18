@@ -6,7 +6,7 @@ import io
 import math
 from pathlib import Path
 
-from gallery_workflow import digest, local_path, read, read_optional, require, save, write
+from gallery_workflow import REGISTER, digest, local_path, read, read_optional, require, save, write
 
 
 def coefficients(corners, size):
@@ -60,6 +60,30 @@ def output(root, stage, name, image, fmt, **options):
             "width": image.width, "height": image.height, "dimensions": list(image.size)}
 
 
+def preview_output(root, stage, row, face, icc):
+    from PIL import Image
+
+    specimen = row["specimenId"]
+    target = f"images/previews/{specimen}.png"
+    existing = local_path(root, target, "images/previews/")
+    if existing.is_file():
+        registry = read(root / REGISTER)["specimens"]
+        require(any(spec["specimenId"] == specimen and
+                    spec.get("photographSha256") == "sha256:" + row["photoRepositorySha256"]
+                    for spec in registry), f"Existing preview belongs to another original: {specimen}")
+        data = existing.read_bytes()
+        with Image.open(io.BytesIO(data)) as image:
+            dimensions = list(image.size)
+            require(image.format == "PNG" and image.width == 360, f"Invalid retained preview: {specimen}")
+        staged = stage / target
+        save(staged, data)
+        return {"canonicalPath": target, "stagingPath": staged.relative_to(root).as_posix(),
+                "sha256": digest(data), "width": dimensions[0], "height": dimensions[1], "dimensions": dimensions}
+    thumb = resize(face, 360).quantize(colors=256, method=Image.Quantize.MEDIANCUT,
+                                     dither=Image.Dither.FLOYDSTEINBERG)
+    return output(root, stage, target, thumb, "PNG", optimize=True, icc_profile=icc)
+
+
 def render(root, folder, candidate, specimen, photo, corners):
     from PIL import Image
 
@@ -82,9 +106,7 @@ def render(root, folder, candidate, specimen, photo, corners):
     require(face.width >= 600, "The native face must be at least 600 pixels wide.")
     renders = [output(root, stage, None, resize(face, width), "WEBP", quality=90, method=6)
                for width in (240, 480, min(1200, face.width))]
-    thumb = resize(face, 360).quantize(colors=256, method=Image.Quantize.MEDIANCUT,
-                                     dither=Image.Dither.FLOYDSTEINBERG)
-    preview = output(root, stage, f"images/previews/{specimen}.png", thumb, "PNG", optimize=True, icc_profile=icc)
+    preview = preview_output(root, stage, row, face, icc)
     record = {"candidateId": candidate, "targetIds": row["itemIds"], "source": source, "scope": row["scope"],
               "mediaKind": row["mediaKind"], "galleryRenders": renders, "preview": preview,
               "faceExtraction": geometry}
