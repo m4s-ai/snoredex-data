@@ -111,7 +111,8 @@ and report the run. Publishing cannot be undone.
    anything you write.
 6. **Evidence is entered as records in `data/`** (and, for a physical specimen, in
    `verification/specimens.json`, with its photograph under `verification/specimens/` in the photo
-   repository `m4s-ai/snoredex-photos`). There is no importer: entry is by hand, and
+   repository `m4s-ai/snoredex-photos`). Evidence decisions are entered by hand. The [gallery workflow](verification/GALLERY-WORKFLOW.md)
+   can apply a reviewed batch of image records and derivatives. For all entries,
    `python scripts/check.py` and its `--selftest` are the guard; a new rule goes into check.py
    with its negative case. Never write a prose description of a specimen into a claim; cite its
    `SPEC-nnnn`.
