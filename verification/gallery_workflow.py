@@ -246,6 +246,11 @@ def file_artifact(root, artifact):
             require(connection.execute("PRAGMA quick_check").fetchone() == ("ok",), f"Database corrupt: {db.name}")
 
 
+def preview_paths(root):
+    paths = {asset["preview"] for asset in read(root / IMAGES)["assets"] if asset.get("preview")}
+    return [local_path(root, path, "images/previews/") for path in sorted(paths)]
+
+
 def gallery_files(root, cards):
     from PIL import Image
 
@@ -256,10 +261,10 @@ def gallery_files(root, cards):
             require(image.size == (row["width"], row["height"]) and image.format == "WEBP",
                     f"Incorrect rendition size or type: {path}")
             image.verify()
-    previews = {asset["preview"] for asset in read(root / IMAGES)["assets"] if asset.get("preview")}
+    previews = preview_paths(root)
     for path in previews:
-        with Image.open(local_path(root, path, "images/previews/")) as image:
-            expected = {".png": "PNG", ".jpg": "JPEG"}.get(Path(path).suffix.lower())
+        with Image.open(path) as image:
+            expected = {".png": "PNG", ".jpg": "JPEG"}.get(path.suffix.lower())
             require(0 < image.width <= 360 and image.format == expected, f"Incorrect preview: {path}")
             image.verify()
     return {"renditions": len(outputs), "previews": len(previews)}
@@ -270,7 +275,7 @@ def verification_basis(root):
     paths += [root / name for name in ("gallery.html", "index.html", "collector_catalogue.json",
                                        "snoredex.sqlite", "snoredex-tracker-template.sqlite", REGISTER)]
     paths += sorted(p for p in (root / "site").rglob("*") if p.is_file())
-    paths += sorted(p for p in (root / "images/previews").glob("*.png") if p.is_file())
+    paths += preview_paths(root)
     return {"head": git(root, "rev-parse", "HEAD").decode().strip(),
             "sha256": {p.relative_to(root).as_posix(): digest(p.read_bytes()) for p in paths}}
 

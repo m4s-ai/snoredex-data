@@ -22,10 +22,15 @@ def merge(rows, key, record):
     rows[key] = record
 
 
+def normalized_number(number, set_code):
+    if set_code == "SWSH":
+        number = number.removeprefix("SWSH")
+    return number.lstrip("0")
+
+
 def same_number(row, item):
     number, _, denominator = row["number"].partition("/")
-    number = number.removeprefix("SWSH") if row["setCode"] == "SWSH" else number
-    return (item["collectorNumber"].lstrip("0") == number.lstrip("0") and
+    return (item["collectorNumber"].lstrip("0") == normalized_number(number, row["setCode"]) and
             item["collectorNumberDenominator"] == (denominator or None))
 
 
@@ -92,10 +97,10 @@ def prepare_outputs(root, stage, specimen_id):
 
 
 def specimen_matches(specimen, row):
-    registered = specimen["number"]
-    printed = row["number"].split("/")[0]
+    registered = normalized_number(specimen["number"], row["setCode"])
+    printed = normalized_number(row["number"], row["setCode"])
     return (specimen["language"] == row["language"] and
-            registered.lstrip("0") in (row["number"].lstrip("0"), printed.lstrip("0")))
+            registered in (printed, printed.partition("/")[0]))
 
 
 def verify_original_geometry(photos, row, stage):

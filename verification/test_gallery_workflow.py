@@ -2,15 +2,59 @@
 #!/usr/bin/env python3
 """Regression tests for gallery identity, replay and native crop geometry."""
 import unittest
+from argparse import Namespace
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
-from gallery_apply import face_width, merge, validate_targets
+from gallery_apply import face_width, merge, specimen_matches, validate_targets
 from gallery_prepare import coefficients
-from gallery_workflow import confirmed_associations, local_path
+from gallery_workflow import IMAGES, REGISTER, confirmed_associations, local_path, sign_off, verification_basis, write
 
 
 class GalleryWorkflowTests(unittest.TestCase):
+    def test_swsh_printed_number_matches_canonical_specimen(self):
+        item = {"setEditionId": "EDITION:WEST:English:SWSH", "collectorNumber": "068",
+                "collectorNumberDenominator": None}
+        row = {"scope": "exact-printing", "setEditionId": item["setEditionId"], "setCode": "SWSH",
+               "number": "SWSH068", "language": "English"}
+        specimen = {"number": "068", "language": "English"}
+        validate_targets(row, ["a"], {"a": {}}, {"a": item})
+        self.assertTrue(specimen_matches(specimen, row))
+        self.assertFalse(specimen_matches(specimen, dict(row, setCode="XY")))
+        self.assertFalse(specimen_matches(dict(specimen, language="German"), row))
+        self.assertFalse(specimen_matches(dict(specimen, number="069"), row))
+        row.update(setCode="VIV", number="131/185")
+        self.assertTrue(specimen_matches(dict(specimen, number="131"), row))
+        self.assertTrue(specimen_matches(dict(specimen, number="131/185"), row))
+        self.assertFalse(specimen_matches(dict(specimen, number="131/198"), row))
+
+    def test_signoff_rejects_replaced_jpeg_or_png_preview(self):
+        from PIL import Image
+
+        with TemporaryDirectory() as directory, patch("gallery_workflow.git", return_value=b"head"):
+            root = Path(directory).resolve()
+            for name in ("gallery.html", "index.html", "collector_catalogue.json", "snoredex.sqlite",
+                         "snoredex-tracker-template.sqlite", REGISTER, IMAGES):
+                path = root / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.touch()
+            previews = ["images/previews/registered.jpg", "images/previews/registered.png"]
+            (root / previews[0]).parent.mkdir(parents=True)
+            write(root / IMAGES, {"assets": [{"preview": path} for path in previews]})
+            for preview in previews:
+                Image.new("RGB", (20, 28), "white").save(root / preview)
+            before = verification_basis(root)
+            report = root / "audit.json"
+            write(report, {"basis": before, "visualAcceptance": "pending"})
+            for preview in previews:
+                with self.subTest(preview=preview):
+                    Image.new("RGB", (20, 28), "black").save(root / preview)
+                    with self.assertRaisesRegex(ValueError, "older state"):
+                        sign_off(Namespace(repo=root, report=report))
+                    Image.new("RGB", (20, 28), "white").save(root / preview)
+                    self.assertEqual(verification_basis(root), before)
+
     def test_ready_to_resume_from_canonical_rows_without_receipt(self):
         expected = {"source": "verification/specimens/SPEC-0099.png", "scope": "representative", "mediaKind": "photo"}
         self.assertEqual(confirmed_associations({}, {"card": expected}, {"card": dict(expected)}), {"card"})
