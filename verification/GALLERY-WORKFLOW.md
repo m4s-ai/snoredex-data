@@ -28,6 +28,8 @@ Image preparation uses Pillow. Browser checks require Pillow, Playwright and Chr
    `specimenId` and `"scope": "representative"` in `reusedSpecimens`. The source must come
    from the same release and have matching edition, distribution, marks and size. When preparing
    new renditions for a registered specimen, supply its original register record unchanged.
+   The specimen must cite the item through its printing, finish unit, or source claim. If it
+   already has a canonical specimen preview, rendering preserves that preview's bytes.
 4. Run `python verification/gallery_workflow.py render DIR --candidate KEY --specimen SPEC-ID --source FILE`.
    Use the whole canvas only if it holds a complete, upright face. Add
    `--corners X1 Y1 X2 Y2 X3 Y3 X4 Y4` for perspective correction, clockwise from top left in

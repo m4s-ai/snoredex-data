@@ -7,12 +7,30 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
-from gallery_apply import face_width, merge, specimen_matches, validate_targets
+from gallery_apply import face_width, item_citations, merge, merge_asset, specimen_matches, validate_targets
 from gallery_prepare import coefficients
 from gallery_workflow import IMAGES, REGISTER, confirmed_associations, local_path, sign_off, verification_basis, write
 
 
 class GalleryWorkflowTests(unittest.TestCase):
+    def test_retained_registry_supports_legacy_and_source_first_citations(self):
+        legacy = {"sourcePrintingId": "F0074-P03", "finishUnitId": "F0074",
+                  "sourceClaimRefs": ["CLAIM:legacy:U0761"]}
+        self.assertIn("U0761", item_citations(legacy))
+        self.assertIn("F0074-P03", item_citations(legacy))
+        source_first = {"sourcePrintingId": None, "sourceClaimRefs": ["CLAIM:positive:observed"]}
+        self.assertEqual(item_citations(source_first), {"CLAIM:positive:observed"})
+
+    def test_same_archive_keeps_existing_asset_description(self):
+        prior = {"assetId": "a", "path": "verification/specimens/SPEC-0688.jpg",
+                 "sha256": "original", "imageScope": "exact-printing", "preview": "images/previews/SPEC-0688.png",
+                 "altTextBasis": "Existing description"}
+        assets = {"a": prior}
+        merge_asset(assets, dict(prior, altTextBasis="New description"))
+        self.assertEqual(assets["a"], prior)
+        with self.assertRaisesRegex(ValueError, "conflicts"):
+            merge_asset(assets, dict(prior, sha256="Different bytes"))
+
     def test_swsh_printed_number_matches_canonical_specimen(self):
         item = {"setEditionId": "EDITION:WEST:English:SWSH", "collectorNumber": "068",
                 "collectorNumberDenominator": None}
