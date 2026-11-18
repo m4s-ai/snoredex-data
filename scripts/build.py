@@ -396,7 +396,9 @@ def date_view(item: dict) -> tuple[str, str, str]:
     # a month date is stored and shown on the 1st (owner decision #581); a year date is the bare year
     if item["releaseApproximate"]:
         return date_sort, "~" + date, "approximate"
-    return date_sort, date, "exact"
+    # "exact" is a source-stated day; a month or year date carries a placeholder day or none
+    precision = item["releaseDatePrecision"]
+    return date_sort, date, precision if precision in ("month", "year") else "exact"
 
 
 def finish_view(item: dict) -> tuple[dict, list, list]:
