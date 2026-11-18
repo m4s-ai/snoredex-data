@@ -8,8 +8,9 @@ description: File physical Snoredex card or seller-listing photographs as stable
 # Snoredex specimen intake
 
 Turn physical-card image evidence into a stable, checkable specimen record without asserting
-anything the image cannot establish. There is no importer: filing is a manual
-procedure, guarded by `scripts/check.py` and its `--selftest`.
+anything the image cannot establish. Evidence and archive reservation are reviewed manually.
+The [gallery workflow](../../../verification/GALLERY-WORKFLOW.md) can prepare and apply
+reviewed batches. `scripts/check.py` and its `--selftest` guard the data.
 
 ## Specimen-intake context
 
@@ -94,8 +95,8 @@ photo repository (step 5), while the untouched WebP stays under `verification/ev
 
 ## Specimen-intake table and gallery images
 
-There is no importer: Pillow does all of it and is deliberately not a repository dependency, since
-nothing that builds or checks needs it. SPEC-0742 is the worked example.
+Image preparation uses Pillow, an optional dependency for intake and gallery review. The
+standard site build does not need it. SPEC-0742 is the worked example.
 
 - **When:** the item has no gallery image, or only a render, a representative image or a clearly
   worse photograph. A new photograph replaces an existing gallery photograph only when it is clearly
