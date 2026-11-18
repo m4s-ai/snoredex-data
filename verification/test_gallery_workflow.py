@@ -30,8 +30,6 @@ class GalleryWorkflowTests(unittest.TestCase):
         self.assertFalse(specimen_matches(dict(specimen, number="131/198"), row))
 
     def test_signoff_rejects_replaced_jpeg_or_png_preview(self):
-        from PIL import Image
-
         with TemporaryDirectory() as directory, patch("gallery_workflow.git", return_value=b"head"):
             root = Path(directory).resolve()
             for name in ("gallery.html", "index.html", "collector_catalogue.json", "snoredex.sqlite",
@@ -43,16 +41,16 @@ class GalleryWorkflowTests(unittest.TestCase):
             (root / previews[0]).parent.mkdir(parents=True)
             write(root / IMAGES, {"assets": [{"preview": path} for path in previews]})
             for preview in previews:
-                Image.new("RGB", (20, 28), "white").save(root / preview)
+                (root / preview).write_bytes(b"audited bytes")
             before = verification_basis(root)
             report = root / "audit.json"
             write(report, {"basis": before, "visualAcceptance": "pending"})
             for preview in previews:
                 with self.subTest(preview=preview):
-                    Image.new("RGB", (20, 28), "black").save(root / preview)
+                    (root / preview).write_bytes(b"changed bytes")
                     with self.assertRaisesRegex(ValueError, "older state"):
                         sign_off(Namespace(repo=root, report=report))
-                    Image.new("RGB", (20, 28), "white").save(root / preview)
+                    (root / preview).write_bytes(b"audited bytes")
                     self.assertEqual(verification_basis(root), before)
 
     def test_ready_to_resume_from_canonical_rows_without_receipt(self):
