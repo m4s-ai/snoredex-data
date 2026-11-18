@@ -3,7 +3,7 @@
 
 `inventory.json` is the historical freeze at `bb563f20`, before round10: 940 active physical items, 261 prepared images and 679 image needs. Twenty-five needs already had reviews in rounds05–09. The other654 stable IDs form fixed rounds10–42, at most20 targets each. Two research hypotheses are separate from physical printings.
 
-Current item assignments resolve those frozen IDs against current canonical data. Main `28c6e3f1` is integrated; the earlier normalization of x-set metadata into base sets does not change frozen target membership. `progress.json` proves stable IDs and preserved collector identity fields.
+Current item assignments resolve those frozen IDs against current canonical data. Main `2dd6af0b` is integrated; the earlier normalization of x-set metadata into base sets does not change frozen target membership. `progress.json` proves stable IDs and preserved collector identity fields.
 
 The merged rounds05–20 checkpoint recorded source decisions and canonical integration: 262 fixed targets, 166 new gallery associations (11 exact,155 representative), and96 reviewed image needs. One clearer Russian reverse photo replaces an older gallery crop separately. At that checkpoint there were410 prepared active images and530 active physical image needs. Rounds21–42 retain434 fixed targets; their completion and whole-gallery acceptance under#482 remain open. The round validation reports record the actual final checks; contact sheets alone do not establish acceptance.
 
@@ -11,4 +11,4 @@ The merged rounds05–20 checkpoint recorded source decisions and canonical inte
 
 `language-metadata-audit.json` records correction of26 new intake records whose helper selected the set-code segment instead of the language segment. All83 intake sources in rounds12–20 now pass an independent language/target/asset-prefix check. Original bytes and finish/ownership assertions are unchanged. All88 prepared source instances retain native face width up to1200px; the round preparation records carry reproducible pixel and encoding proof.
 
-The checkpoint through round 20 was merged as PR593 (147a388d). Work resumed on a new branch from main 28c6e3f1. Rounds 21 through 33 add 182 gallery associations (ten exact, 172 representative) and document 78 image needs. The gallery now has images for 592 of 940 active physical items. Rounds 34 through 42 retain 174 fixed targets. Whole-gallery acceptance under #482 remains open. See progress.json for current counts.
+The checkpoint through round 20 was merged as PR593 (147a388d). Work resumed on a new branch from main 28c6e3f1. Rounds 21 through 34 add 202 gallery associations (eleven exact, 191 representative) and document 78 image needs. The gallery now has images for 612 of 940 active physical items. Rounds 35 through 42 retain 154 fixed targets. Whole-gallery acceptance under #482 remains open. See progress.json for current counts.
