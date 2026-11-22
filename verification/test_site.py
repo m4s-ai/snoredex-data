@@ -26,6 +26,7 @@ from contextlib import contextmanager
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from urllib.parse import urlsplit
 from threading import Thread
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -241,6 +242,72 @@ def serve_site(directory: Path = ROOT):
         finally:
             server.shutdown()
             thread.join()
+
+
+def check_card_pages(browser, origin):
+    from card_pages import read_social, render_pages
+
+    rows = read_social(ROOT)
+    poke = "item-b26a638d-ed89-538b-ab49-a5c879572f60"
+    master = "item-a2f8335e-94ff-54d2-8b10-5bdf55349451"
+    rows[poke]["instagramPosts"] = [
+        "https://www.instagram.com/p/fixtureOne/", "https://www.instagram.com/p/fixtureTwo/"]
+    rows[master]["instagramPosts"] = ["https://www.instagram.com/p/fixtureThree/"]
+    pages = render_pages()
+
+    def serve_share(route):
+        name = urlsplit(route.request.url).path.lstrip("/") + "index.html"
+        route.fulfill(content_type="text/html", body=pages[name])
+
+    crawler = browser.new_page(java_script_enabled=False)
+    crawler.route("**/cards/item-*/", serve_share)
+    previews = []
+    for item, name in [(poke, "poke-ball"), (master, "master-ball")]:
+        crawler.goto(f"{origin}/cards/{item}/")
+        assert name in crawler.title()
+        assert crawler.get_by_role("link", name="Open card details").get_attribute("href").endswith(item)
+        image = crawler.locator('meta[property="og:image"]').get_attribute("content")
+        image_path = urlsplit(image).path.removeprefix("/snoredex-data")
+        response = crawler.request.get(origin + image_path)
+        assert response.ok and response.headers["content-type"].startswith("image/")
+        previews.append(image)
+    assert previews[0] != previews[1]
+    crawler.close()
+
+    page = browser.new_page(viewport={"width": 393, "height": 852})
+    page.route("**/cards/item-*/", serve_share)
+    page.route("**/data/social.json", lambda route: route.fulfill(json=list(rows.values())))
+    for item, foil, posts in [(poke, "poke-ball", 2), (master, "master-ball", 1)]:
+        page.goto(f"{origin}/cards/{item}/")
+        page.wait_for_url(f"**/card.html?item={item}")
+        page.get_by_role("heading", name=re.compile(foil)).wait_for()
+        photo = page.get_by_role("img")
+        photo.wait_for()
+        page.wait_for_function("document.querySelector('#card-photo').naturalWidth > 0")
+        assert page.get_by_role("link", name="Instagram post").count() == posts
+        page.reload()
+        page.get_by_role("heading", name=re.compile(foil)).wait_for()
+    page.goto(f"{origin}/card.html?item=unknown")
+    page.get_by_text("Printing not found.", exact=True).wait_for()
+    page.close()
+
+    other = next(item for item in CANONICAL_ITEMS if item["itemId"] not in rows)
+    page = browser.new_page(viewport={"width": 1280, "height": 900})
+    page.route("**/data/social.json", lambda route: route.fulfill(json=list(rows.values())))
+    page.goto(origin + "/gallery.html")
+    for item, posts in [(poke, 2), (master, 1), (other["itemId"], 0)]:
+        page.locator(f'[data-card-id="{item}"]').click()
+        if posts:
+            page.get_by_role("link", name=f"Instagram post {posts}", exact=True).wait_for()
+        assert page.get_by_role("link", name="Instagram post").count() == posts
+        if item == other["itemId"]:
+            page.get_by_role("link", name="Card detail page").click()
+            page.wait_for_url(f"**/card.html?item={item}")
+            page.get_by_role("heading", name=re.compile(re.escape(other["localCardName"] or other["cardName"]))).wait_for()
+            assert page.get_by_role("link", name="Instagram post").count() == 0
+        else:
+            page.keyboard.press("Escape")
+    page.close()
 
 
 def check_gallery(browser, origin):
@@ -1206,6 +1273,8 @@ def main() -> int:
 
         check_gallery(browser, origin)
         print("[ok ] gallery navigation, dialog, binder and mobile")
+        check_card_pages(browser, origin)
+        print("[ok ] card detail pages, own previews and per-print Instagram links")
         browser.close()
         shutil.rmtree(scratch, ignore_errors=True)
 

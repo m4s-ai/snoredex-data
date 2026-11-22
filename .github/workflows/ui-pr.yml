@@ -7,6 +7,11 @@ on:
     # before every deploy, and the release gate checks the built pages on every pull request.
     paths:
       - templates/index.html
+      - templates/card.html
+      - card.html
+      - scripts/card_pages.py
+      - scripts/publish.py
+      - data/social.json
       - site/**
       - scripts/build.py
       - verification/test_site.py

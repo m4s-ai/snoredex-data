@@ -362,6 +362,7 @@
   // Details use the same structured identity and evidence as the visible row.
   function rowDetailHTML(row) {
     const entries = [
+      ["Card", '<a href="card.html?item=' + encodeURIComponent(row.rowId) + '">Card detail page</a>'],
       ["Release", escapeHTML(row.dateDisplay)],
       ["Expansion", escapeHTML(row.setName || "—")],
       ["Set code", escapeHTML(row.printedSetCode ? row.printedSetCode + " (printed)"

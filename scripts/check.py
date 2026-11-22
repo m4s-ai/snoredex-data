@@ -28,6 +28,8 @@ import tempfile
 from collections import Counter
 from pathlib import Path
 
+from owner_photo import photographer_problem
+
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 FILES = ("printings", "sets", "images", "evidence", "claims")
@@ -1082,7 +1084,23 @@ DOMAIN = {
     "PC6: a base code is carried by a printed set code of the set": (carried_bases, lambda m: edit(
         m, LS, lambda s: s["localSetId"] in plain_sets(m) and "baseSetCode" not in s).update(baseSetCode="ZZ")),
 }
+def specimen_photographers(model: dict) -> tuple[int, list]:
+    specimens = model["specimens"]
+    failures = [f"{key}: {problem}" for key, specimen in specimens.items()
+                if (problem := photographer_problem(specimen))]
+    return len(specimens), failures
+
+
+def misattribute_seller_photo(model: dict) -> None:
+    specimens = model["specimens"]
+    model["specimens"] = dict(specimens, **{
+        "SPEC-0641": dict(specimens["SPEC-0641"], photographedBy="collection owner")
+    })
+
+
 RULES = {
+    "specimen photographer: attributed photos require evidence and archive hash": (
+        specimen_photographers, misattribute_seller_photo),
     "format: canonical serialization": (file_format, lambda m: m.update(
         raw=dict(m["raw"], sets=m["raw"]["sets"] + b" "))),
     "format: unique ids in sorted order": (id_order, replace("sets", works=lambda works: works[::-1])),

@@ -7,6 +7,7 @@ a Markdown target must name a heading there. Exit 1 lists every broken link.
 """
 from __future__ import annotations
 
+import posixpath
 import re
 import subprocess
 import sys
@@ -41,10 +42,7 @@ def problems(files: dict[str, str]) -> list[str]:
             if re.match(r"[a-z]+:|//|\{\{", target):
                 continue
             path, _, fragment = target.partition("#")
-            resolved = str(PurePosixPath(*(base / path).parts)) if path else name
-            resolved = re.sub(r"(^|/)\./", r"\1", resolved)
-            while "/../" in f"/{resolved}":
-                resolved = re.sub(r"(^|/)[^/]+/\.\./", r"\1", resolved, count=1)
+            resolved = posixpath.normpath(str(base / path)) if path else name
             if resolved not in files:
                 found.append(f"{name}: {target} -> missing {resolved}")
             elif fragment and resolved.endswith(".md") and fragment not in anchors(files[resolved]):
@@ -62,6 +60,8 @@ def tracked() -> dict[str, str]:
 def main() -> int:
     seeded = problems({"a.md": "[x](missing.md) [y](b.md#nowhere) [z](b.md#real-heading)", "b.md": "# Real heading\n"})
     assert seeded == ["a.md: missing.md -> missing missing.md", "a.md: b.md#nowhere -> no heading #nowhere"], seeded
+    assert problems({"nested/template.html": '<a href="../../outside.html">example</a>'}) == [
+        "nested/template.html: ../../outside.html -> missing ../outside.html"]
     files = tracked()
     checked = {name: text for name, text in files.items()
                if (name.endswith(".md") and not name.startswith(EXEMPT)) or name in PAGES}

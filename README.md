@@ -50,6 +50,12 @@ a fact.
 The catalogue, both pages, the database and the tracker template are built from `data/` by
 `scripts/build.py`; never edit them by hand.
 
+The gallery and table open card details at `card.html?item=<itemId>`. The page loads the selected
+printing and its image from the current catalogue. For entries in `data/social.json`, the Pages
+artifact also serves share URLs under `cards/<itemId>/` with an approved owner photo in the link
+preview. Those URLs open the same detail view. Record only verified YOURLS aliases and the permalinks
+of published Instagram posts. Keep an existing alias assigned to the same item when updating its target.
+
 ## Build and check
 
 Python 3.11, standard library only; `requirements.txt` (Playwright) is for the browser suite.
