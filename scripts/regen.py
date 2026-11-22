@@ -23,6 +23,7 @@ STEPS = (
     ("scripts/build.py",),  # --check is appended under --check
     ("verification/test_build_summary.py",),
     ("verification/test_owner_photo.py",),
+    ("verification/test_yourls.py",),
     ("verification/test_complexity.py",),
     ("verification/test_gallery_workflow.py",),
     ("verification/test_sensitive_scan.py",),

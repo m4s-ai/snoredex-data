@@ -14,6 +14,8 @@ after applying the original's EXIF orientation. Leave a small margin around the 
 corners, the draft shows the whole original. The exporter never enlarges a small crop. Use a new
 output directory via `--out` if the inputs have changed.
 
+Use the [YOURLS link pilot](YOURLS-PILOT.md) to check or assign a permanent keyword.
+
 Once the matching entry in `data/social.json` has a verified `shortAlias`, generate a fresh draft.
 The full `go.m4s.eu` URL appears in the caption. An unconfigured alias is shown as
 `[Kurzlink fehlt]`. Before posting, compare image, caption and alt text against the card, then open
