@@ -50,6 +50,11 @@ a fact.
 The catalogue, both pages, the database and the tracker template are built from `data/` by
 `scripts/build.py`; never edit them by hand.
 
+The Pages artifact also contains public detail pages for the items listed in `data/social.json`.
+Each entry pairs an exact printing with its approved owner photo. Record only verified YOURLS aliases
+and the permalinks of published Instagram posts. Keep an existing alias assigned to the same item
+when updating its target. The gallery displays the recorded posts in its card dialog.
+
 ## Build and check
 
 Python 3.11, standard library only; `requirements.txt` (Playwright) is for the browser suite.

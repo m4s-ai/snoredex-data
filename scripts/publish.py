@@ -20,6 +20,8 @@ import shutil
 import sys
 from pathlib import Path
 
+from card_pages import SOCIAL_FILE, render_pages
+
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PREFIX = "_site"
 REPO_BLOB = "https://github.com/m4s-ai/snoredex-data/blob/main/"
@@ -36,6 +38,7 @@ MARKDOWN_LINK = re.compile(r'(\]\()([^)\s]+)(\))')
 FILES = [
     "index.html",
     "gallery.html",
+    SOCIAL_FILE,
     "README.md",
     "DATA-GUIDE.md",
     "METHODOLOGY.md",
@@ -162,11 +165,12 @@ def relink_markdown(text: str, source: str, published: set[str]) -> str:
 
 def build(out: Path) -> list[str]:
     out = validate_output(out)
+    pages = render_pages(ROOT)
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)
     wanted = collect()
-    published = set(wanted)
+    published = set(wanted) | pages.keys()
     for relative in wanted:
         target = out / relative
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -176,9 +180,13 @@ def build(out: Path) -> list[str]:
             rewritten = relink_markdown(original, relative, published)
             if rewritten != original:
                 target.write_text(rewritten, encoding="utf-8", newline="\n")
+    for relative, text in pages.items():
+        target = out / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(text, encoding="utf-8", newline="\n")
     # Pages serves Jekyll by default, which would skip files beginning with an underscore.
     (out / ".nojekyll").write_text("", encoding="utf-8", newline="\n")
-    return wanted
+    return wanted + list(pages)
 
 
 def size_problems(size: int) -> list[str]:
@@ -188,12 +196,22 @@ def size_problems(size: int) -> list[str]:
             "ceiling below the 1 GB GitHub Pages site limit"]
 
 
+def verify_card_outputs(out: Path, pages: dict) -> list[str]:
+    errors = [f"{name}: stale card page" for name, html in pages.items()
+              if (out / name).is_file() and (out / name).read_text(encoding="utf-8") != html]
+    social = out / SOCIAL_FILE
+    if social.is_file() and social.read_bytes() != (ROOT / SOCIAL_FILE).read_bytes():
+        errors.append(f"{SOCIAL_FILE}: stale social links")
+    return errors
+
+
 def verify(out: Path) -> int:
     out = validate_output(out)
     if not out.is_dir():
         print(f"{out} does not exist; run without --verify first", file=sys.stderr)
         return 1
-    allowed = set(collect()) | {".nojekyll"}
+    pages = render_pages(ROOT)
+    allowed = set(collect()) | pages.keys() | {".nojekyll"}
     allowed.update(name for name in RUNTIME_FILES if (out / name).is_file())
     problems: list[str] = []
     present = []
@@ -239,6 +257,7 @@ def verify(out: Path) -> int:
             if target and not target_path.exists() and relative_target not in RUNTIME_FILES:
                 problems.append(f"{name} references a missing local target: {target}")
 
+    problems += verify_card_outputs(out, pages)
     size = sum(p.stat().st_size for p in out.rglob("*") if p.is_file())
     problems += size_problems(size)
 
@@ -264,11 +283,10 @@ def main() -> int:
         print(f"refusing unsafe output path: {error}", file=sys.stderr)
         return 2
 
-    if args.verify:
-        return verify(out)
-
     try:
-        wanted = build(out)
+        if args.verify:
+            return verify(out)
+        build(out)
     except (OSError, ValueError, KeyError, TypeError) as error:
         print(f"artifact build failed: {error}", file=sys.stderr)
         return 1

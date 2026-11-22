@@ -26,6 +26,8 @@ from contextlib import contextmanager
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from unittest.mock import patch
+from urllib.parse import urlsplit
 from threading import Thread
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -241,6 +243,52 @@ def serve_site(directory: Path = ROOT):
         finally:
             server.shutdown()
             thread.join()
+
+
+def check_card_pages(browser, origin):
+    from card_pages import read_social, render_pages
+
+    rows = read_social(ROOT)
+    poke = "item-b26a638d-ed89-538b-ab49-a5c879572f60"
+    master = "item-a2f8335e-94ff-54d2-8b10-5bdf55349451"
+    rows[poke]["instagramPosts"] = [
+        "https://www.instagram.com/p/fixtureOne/", "https://www.instagram.com/p/fixtureTwo/"]
+    rows[master]["instagramPosts"] = ["https://www.instagram.com/p/fixtureThree/"]
+    with patch("card_pages.read_social", return_value=rows):
+        pages = render_pages()
+
+    page = browser.new_page(viewport={"width": 393, "height": 852}, java_script_enabled=False)
+    page.route("**/cards/item-*/", lambda route: route.fulfill(
+        content_type="text/html", body=pages[urlsplit(route.request.url).path.lstrip("/") + "index.html"]))
+    images = []
+    for item, name, posts in [(poke, "poke-ball", 2), (master, "master-ball", 1)]:
+        url = f"{origin}/cards/{item}/"
+        page.goto(url)
+        assert name in page.title()
+        assert page.get_by_role("img").evaluate("(img) => img.complete && img.naturalWidth > 0")
+        assert page.get_by_role("link", name="Instagram post").count() == posts
+        image = page.locator('meta[property="og:image"]').get_attribute("content")
+        image_path = urlsplit(image).path.removeprefix("/snoredex-data")
+        response = page.request.get(origin + image_path)
+        assert response.ok and response.headers["content-type"].startswith("image/")
+        images.append(image)
+        page.reload()
+        assert name in page.title()
+        page.get_by_role("link", name="Artwork gallery").focus()
+        assert page.locator(":focus").count() == 1
+    assert images[0] != images[1]
+    assert page.goto(origin + "/cards/unknown-item/").status == 404
+    page.close()
+
+    page = browser.new_page(viewport={"width": 1280, "height": 900})
+    page.route("**/data/social.json", lambda route: route.fulfill(json=list(rows.values())))
+    page.goto(origin + "/gallery.html")
+    for item, posts in [(poke, 2), (master, 1), ("item-bbea2621-c8f4-5647-b576-e309aa29d24a", 0)]:
+        page.locator(f'[data-card-id="{item}"]').click()
+        page.get_by_role("link", name="Card detail page").wait_for()
+        assert page.get_by_role("link", name="Instagram post").count() == posts
+        page.keyboard.press("Escape")
+    page.close()
 
 
 def check_gallery(browser, origin):
@@ -1206,6 +1254,8 @@ def main() -> int:
 
         check_gallery(browser, origin)
         print("[ok ] gallery navigation, dialog, binder and mobile")
+        check_card_pages(browser, origin)
+        print("[ok ] card detail pages, own previews and per-print Instagram links")
         browser.close()
         shutil.rmtree(scratch, ignore_errors=True)
 

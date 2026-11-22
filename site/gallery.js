@@ -17,6 +17,27 @@ let columns = 3;
 let order = "page";
 let spread = 0;
 let opener;
+const social = fetch("data/social.json").then((response) => response.ok ? response.json() : []).catch(() => []);
+
+function socialLinks(card, sources) {
+  const links = element("li");
+  links.hidden = true;
+  sources.append(links);
+  social.then((cards) => {
+    const entry = cards.find((row) => row.itemId === card.id);
+    if (!entry) return;
+    const detail = element("a", "Card detail page");
+    detail.href = `cards/${encodeURIComponent(card.id)}/`;
+    links.append(detail);
+    entry.instagramPosts.forEach((url, index) => {
+      if (!/^https:\/\/www\.instagram\.com\/(?:p|reel)\/[A-Za-z0-9_-]+\/$/.test(url)) return;
+      const post = element("a", `Instagram post ${index + 1}`);
+      post.href = url;
+      links.append(" · ", post);
+    });
+    links.hidden = false;
+  });
+}
 
 function element(tag, text, className) {
   const node = document.createElement(tag);
@@ -90,6 +111,7 @@ function openCard(card, button) {
     item.append(imageSource);
     sources.append(item);
   }
+  socialLinks(card, sources);
   dialog.showModal();
 }
 
