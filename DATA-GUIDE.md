@@ -17,6 +17,11 @@ before building anything on the data.
 | Inspected physical specimens | [`verification/specimens.json`](verification/specimens.json) |
 | The historical candidate universe | [`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json): provenance, not an all-locality manifest |
 
+Specimen records may name `photographedBy` and its supporting `photographedByBasis`.
+The photographer is independent of the card holder (`heldBy`). A missing photographer means unknown.
+The Instagram workflow requires an explicitly attributed owner photograph, the archived SHA-256
+and a single exact verified printing.
+
 ## Scope and caveats — read before using
 
 - **A Cardmarket language is marketplace availability, not a print manifest.** Every legacy
