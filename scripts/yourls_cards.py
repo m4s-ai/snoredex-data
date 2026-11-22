@@ -70,7 +70,7 @@ def expanded_target(api, alias: str) -> str | None:
     row = api("expand", shorturl=alias)
     if row.get("keyword") != alias:
         raise ValueError("YOURLS did not return the requested keyword")
-    if str(row.get("errorCode")) == "404":
+    if str(row.get("errorCode")) == "404" and "longurl" not in row:
         return None
     if str(row.get("statusCode")) != "200" or row.get("shorturl") != SHORT_BASE + alias:
         raise ValueError("YOURLS did not confirm the requested short URL")
@@ -83,8 +83,8 @@ def expanded_target(api, alias: str) -> str | None:
 def select_keyword(rows: dict, item_id: str, alias: str | None) -> str:
     recorded = rows[item_id].get("shortAlias")
     alias = alias or recorded or ("sd" + item_id[5:].replace("-", "")[:12])
-    if not KEYWORD.fullmatch(alias):
-        raise ValueError("Use a lowercase alphanumeric YOURLS keyword")
+    if not KEYWORD.fullmatch(alias) or not alias.startswith("sd"):
+        raise ValueError("Use a lowercase alphanumeric YOURLS keyword in the sd namespace")
     if recorded and alias != recorded:
         raise ValueError("This printing already has a permanent keyword")
     if any(key != item_id and entry.get("shortAlias") == alias for key, entry in rows.items()):
@@ -117,7 +117,7 @@ def verify_public_page(plan: dict, preview: str) -> None:
 
 def verify_redirect(plan: dict) -> int:
     try:
-        with build_opener(NoRedirect).open(Request(plan["shortUrl"], method="HEAD"), timeout=12):
+        with build_opener(NoRedirect).open(Request(plan["shortUrl"]), timeout=12):
             raise ValueError("The public short URL did not redirect")
     except HTTPError as response:
         with response:
@@ -137,34 +137,64 @@ def provision(api, plan: dict, preview: str, create: bool) -> str:
     if not create:
         return "unassigned"
     verify_public_page(plan, preview)
-    api("shorturl", keyword=alias, url=target, title=f"Snoredex {plan['itemId']}")
-    if expanded_target(api, alias) != target:
-        raise ValueError("YOURLS did not confirm the requested assignment. Check the keyword before retrying.")
+    create_keyword(api, plan)
     return "verified"
+
+
+def create_keyword(api, plan: dict) -> None:
+    alias, target = plan["shortAlias"], plan["targetUrl"]
+    try:
+        result = api("shorturl", keyword=alias, url=target, title=f"Snoredex {plan['itemId']}")
+        if result.get("shorturl") != plan["shortUrl"]:
+            raise ValueError("YOURLS returned a different short URL")
+    except (OSError, ValueError):
+        # A timeout or duplicate response can follow a write. Never retry before expanding again.
+        pass
+    if expanded_target(api, alias) != target:
+        raise ValueError("YOURLS did not confirm the exact assignment. No creation was retried.")
+
+
+def batch_plans(item_ids: list[str], keyword: str | None) -> list[tuple[dict, str]]:
+    if not 1 <= len(item_ids) <= 3 or len(set(item_ids)) != len(item_ids):
+        raise ValueError("Supply one to three distinct item IDs")
+    if keyword and len(item_ids) != 1:
+        raise ValueError("A custom keyword applies to a single printing")
+    plans = [card_plan(item_id, keyword) for item_id in item_ids]
+    if len({plan["shortAlias"] for plan, _ in plans}) != len(plans):
+        raise ValueError("Two items in the batch would use the same YOURLS keyword")
+    return plans
+
+
+def run_batch(args) -> list[dict]:
+    plans = batch_plans(args.item_id, args.keyword)
+    if not (args.check or args.create):
+        return [dict(plan, status="plan") for plan, _ in plans]
+    signature = os.environ.get("SNOREDEX_YOURLS_SIGNATURE")
+    if not signature:
+        raise ValueError("The protected execution environment needs SNOREDEX_YOURLS_SIGNATURE")
+    results = []
+    for plan, preview in plans:
+        status = provision(lambda action, **params: call_api(signature, action, **params),
+                           plan, preview, args.create)
+        if status == "verified":
+            plan["redirectStatus"] = verify_redirect(plan)
+        results.append(dict(plan, status=status))
+    return results
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("item_id", help="itemId of a card in data/social.json")
-    parser.add_argument("--keyword", help="choose a free keyword before recording it")
+    parser.add_argument("item_id", nargs="+", help="item IDs of published cards in data/social.json")
+    parser.add_argument("--keyword", help="choose a free sd keyword for a single printing")
     mode = parser.add_mutually_exclusive_group()
-    mode.add_argument("--check", action="store_true", help="check the keyword and the published card")
-    mode.add_argument("--create", action="store_true", help="create an unused keyword after verifying the card")
+    mode.add_argument("--check", action="store_true", help="check keywords and the published cards")
+    mode.add_argument("--create", action="store_true", help="create unused keywords after verifying their cards")
     args = parser.parse_args()
     try:
-        plan, preview = card_plan(args.item_id, args.keyword)
-        status = "plan"
-        if args.check or args.create:
-            signature = os.environ.get("SNOREDEX_YOURLS_SIGNATURE")
-            if not signature:
-                raise ValueError("The local process needs SNOREDEX_YOURLS_SIGNATURE")
-            status = provision(lambda action, **params: call_api(signature, action, **params),
-                               plan, preview, args.create)
-            if status == "verified":
-                plan["redirectStatus"] = verify_redirect(plan)
+        results = run_batch(args)
     except (OSError, ValueError) as error:
         parser.exit(2, f"YOURLS: {error}\n")
-    print(json.dumps(dict(plan, status=status), indent=2))
+    print(json.dumps(results[0] if len(results) == 1 else results, indent=2))
     return 0
 
 

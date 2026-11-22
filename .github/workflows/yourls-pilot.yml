@@ -1,0 +1,49 @@
+name: Provision Snoredex short links
+
+on:
+  workflow_dispatch:
+    inputs:
+      item_ids:
+        description: One to three published item IDs, separated by spaces
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: snoredex-yourls-pilot
+  cancel-in-progress: false
+
+jobs:
+  provision:
+    if: ${{ github.repository == 'm4s-ai/snoredex-data' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    environment: yourls-pilot
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - name: Verify and provision aliases
+        env:
+          ITEM_IDS: ${{ inputs.item_ids }}
+          SNOREDEX_YOURLS_SIGNATURE: ${{ secrets.SNOREDEX_YOURLS_SIGNATURE }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$ITEM_IDS" == *$'\n'* || "$ITEM_IDS" == *$'\r'* ]]; then
+            echo 'Enter item IDs on one line.'
+            exit 2
+          fi
+          read -r -a ids <<< "$ITEM_IDS"
+          python scripts/yourls_cards.py --create -- "${ids[@]}" > "$RUNNER_TEMP/yourls-result.json"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: yourls-verified
+          path: ${{ runner.temp }}/yourls-result.json
+          if-no-files-found: error

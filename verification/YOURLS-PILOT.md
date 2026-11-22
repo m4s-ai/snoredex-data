@@ -14,14 +14,43 @@ This mode uses local data only and prints the proposed keyword, card URL and app
 The suggested lowercase keyword is based on the stable item ID. Once the card and preview are publicly
 available, pass `--check` to check an existing keyword, or `--create` to create an unused one. Those modes
 read the YOURLS API signature from the local process environment as `SNOREDEX_YOURLS_SIGNATURE`.
-Set it only in the Homelab environment used for this task. The signature belongs in the authenticated
-YOURLS administration, the process environment, or the Homelab's secret store.
+Use the protected workflow below for the hosted pilot. Local planning needs no signature.
 
 The script confirms an exact destination through `expand` and refuses a keyword that points elsewhere.
 It verifies the deployed page metadata and preview bytes before creating a link. A verified result
 also reports the public HTTP redirect status. This public request can be counted as a visit by YOURLS.
 Record the verified keyword as `shortAlias` on the same item before generating its Instagram caption.
 The script prints a result and leaves the catalogue record to review.
+
+## Protected pilot workflow
+
+Configure the GitHub Environment `yourls-pilot` **before** adding credentials. Set its deployment
+policy to **Selected branches and tags**, add an exact **branch** rule for `main`, leave tags out,
+and require operator approval where the repository plan allows it. Do this in GitHub settings,
+even though the workflow checks its ref. Scope the dedicated YOURLS signature to the environment
+secret `SNOREDEX_YOURLS_SIGNATURE`. Keep the signature out of the repo, PRs, chat and artifacts.
+The core YOURLS signature grants broad API access. The workflow boundary and its reviewed code
+limit which operations the pilot performs.
+
+After the workflow code is reviewed and merged, run **Provision Snoredex short links** from
+`main`. Start with SPEC-0774. Then run the two CSV7C variants in one batch, reverse the order and
+repeat to prove stable assignments. The operator approves the protected job if an approval is
+configured. The job accepts one to three space-separated item IDs from the catalogue.
+
+| Pilot | Item ID |
+|---|---|
+| SPEC-0774 | `item-bbea2621-c8f4-5647-b576-e309aa29d24a` |
+| SPEC-0779 (Poke Ball) | `item-b26a638d-ed89-538b-ab49-a5c879572f60` |
+| SPEC-0780 (Master Ball) | `item-a2f8335e-94ff-54d2-8b10-5bdf55349451` |
+
+Read the `yourls-verified` artifact. Only a fully verified result may enter `data/social.json`.
+Record each `shortAlias` under its exact `itemId` in a reviewed data change. The job leaves GitHub
+content unchanged. If a later item fails after an earlier alias was created, fix the reported
+condition and rerun the batch. Existing correct aliases are read back and reused. A timeout
+or duplicate response triggers a read of the exact keyword before another attempt. The job
+never renames, deletes or retargets an existing alias.
+
+[GitHub Environment branch rules and secrets](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments)
 
 ## Moving the site
 
