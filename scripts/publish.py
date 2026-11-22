@@ -38,6 +38,7 @@ MARKDOWN_LINK = re.compile(r'(\]\()([^)\s]+)(\))')
 FILES = [
     "index.html",
     "gallery.html",
+    "card.html",
     SOCIAL_FILE,
     "README.md",
     "DATA-GUIDE.md",
@@ -248,7 +249,7 @@ def verify(out: Path) -> int:
                 continue
             if "${" in target:
                 continue  # A client-side template placeholder, resolved only in the browser.
-            target = target.split("#")[0]
+            target = target.split("#", 1)[0].split("?", 1)[0]
             target_path = page.parent / target
             relative_target = (
                 target_path.relative_to(out).as_posix()

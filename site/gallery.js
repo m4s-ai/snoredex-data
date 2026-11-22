@@ -20,22 +20,21 @@ let opener;
 const social = fetch("data/social.json").then((response) => response.ok ? response.json() : []).catch(() => []);
 
 function socialLinks(card, sources) {
+  if (!card.id.startsWith("item-")) return;
   const links = element("li");
-  links.hidden = true;
+  const detail = element("a", "Card detail page");
+  detail.href = `card.html?item=${encodeURIComponent(card.id)}`;
+  links.append(detail);
   sources.append(links);
   social.then((cards) => {
     const entry = cards.find((row) => row.itemId === card.id);
     if (!entry) return;
-    const detail = element("a", "Card detail page");
-    detail.href = `cards/${encodeURIComponent(card.id)}/`;
-    links.append(detail);
     entry.instagramPosts.forEach((url, index) => {
       if (!/^https:\/\/www\.instagram\.com\/(?:p|reel)\/[A-Za-z0-9_-]+\/$/.test(url)) return;
       const post = element("a", `Instagram post ${index + 1}`);
       post.href = url;
       links.append(" · ", post);
     });
-    links.hidden = false;
   });
 }
 

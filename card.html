@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Card details · Snoredex</title>
+<link rel="stylesheet" href="site/app.css">
+<link rel="stylesheet" href="site/gallery.css">
+<script src="site/card.js" defer></script>
+</head>
+<body class="gallery">
+<header class="gallery-toolbar"><a href="gallery.html">Artwork gallery</a> <a href="index.html">Collection table</a></header>
+<main class="printing-detail">
+  <h1>Card details</h1>
+  <p id="card-status" role="status">Loading card details…</p>
+  <noscript><p>Enable JavaScript to load the selected printing.</p></noscript>
+  <div id="card-content" class="gallery-detail" hidden>
+    <figure><img id="card-photo" hidden alt=""><figcaption id="image-caption"></figcaption></figure>
+    <div>
+      <dl id="card-facts"></dl>
+      <section id="card-posts" hidden><h2>On Instagram</h2><ul></ul></section>
+      <section id="card-evidence" hidden><h2>Sources</h2><ul></ul></section>
+    </div>
+  </div>
+</main>
+</body>
+</html>

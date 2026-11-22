@@ -26,7 +26,6 @@ from contextlib import contextmanager
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from unittest.mock import patch
 from urllib.parse import urlsplit
 from threading import Thread
 
@@ -254,40 +253,60 @@ def check_card_pages(browser, origin):
     rows[poke]["instagramPosts"] = [
         "https://www.instagram.com/p/fixtureOne/", "https://www.instagram.com/p/fixtureTwo/"]
     rows[master]["instagramPosts"] = ["https://www.instagram.com/p/fixtureThree/"]
-    with patch("card_pages.read_social", return_value=rows):
-        pages = render_pages()
+    pages = render_pages()
 
-    page = browser.new_page(viewport={"width": 393, "height": 852}, java_script_enabled=False)
-    page.route("**/cards/item-*/", lambda route: route.fulfill(
-        content_type="text/html", body=pages[urlsplit(route.request.url).path.lstrip("/") + "index.html"]))
-    images = []
-    for item, name, posts in [(poke, "poke-ball", 2), (master, "master-ball", 1)]:
-        url = f"{origin}/cards/{item}/"
-        page.goto(url)
-        assert name in page.title()
-        assert page.get_by_role("img").evaluate("(img) => img.complete && img.naturalWidth > 0")
-        assert page.get_by_role("link", name="Instagram post").count() == posts
-        image = page.locator('meta[property="og:image"]').get_attribute("content")
+    def serve_share(route):
+        name = urlsplit(route.request.url).path.lstrip("/") + "index.html"
+        route.fulfill(content_type="text/html", body=pages[name])
+
+    crawler = browser.new_page(java_script_enabled=False)
+    crawler.route("**/cards/item-*/", serve_share)
+    previews = []
+    for item, name in [(poke, "poke-ball"), (master, "master-ball")]:
+        crawler.goto(f"{origin}/cards/{item}/")
+        assert name in crawler.title()
+        assert crawler.get_by_role("link", name="Open card details").get_attribute("href").endswith(item)
+        image = crawler.locator('meta[property="og:image"]').get_attribute("content")
         image_path = urlsplit(image).path.removeprefix("/snoredex-data")
-        response = page.request.get(origin + image_path)
+        response = crawler.request.get(origin + image_path)
         assert response.ok and response.headers["content-type"].startswith("image/")
-        images.append(image)
+        previews.append(image)
+    assert previews[0] != previews[1]
+    crawler.close()
+
+    page = browser.new_page(viewport={"width": 393, "height": 852})
+    page.route("**/cards/item-*/", serve_share)
+    page.route("**/data/social.json", lambda route: route.fulfill(json=list(rows.values())))
+    for item, foil, posts in [(poke, "poke-ball", 2), (master, "master-ball", 1)]:
+        page.goto(f"{origin}/cards/{item}/")
+        page.wait_for_url(f"**/card.html?item={item}")
+        page.get_by_role("heading", name=re.compile(foil)).wait_for()
+        photo = page.get_by_role("img")
+        photo.wait_for()
+        page.wait_for_function("document.querySelector('#card-photo').naturalWidth > 0")
+        assert page.get_by_role("link", name="Instagram post").count() == posts
         page.reload()
-        assert name in page.title()
-        page.get_by_role("link", name="Artwork gallery").focus()
-        assert page.locator(":focus").count() == 1
-    assert images[0] != images[1]
-    assert page.goto(origin + "/cards/unknown-item/").status == 404
+        page.get_by_role("heading", name=re.compile(foil)).wait_for()
+    page.goto(f"{origin}/card.html?item=unknown")
+    page.get_by_text("Printing not found.", exact=True).wait_for()
     page.close()
 
+    other = next(item for item in CANONICAL_ITEMS if item["itemId"] not in rows)
     page = browser.new_page(viewport={"width": 1280, "height": 900})
     page.route("**/data/social.json", lambda route: route.fulfill(json=list(rows.values())))
     page.goto(origin + "/gallery.html")
-    for item, posts in [(poke, 2), (master, 1), ("item-bbea2621-c8f4-5647-b576-e309aa29d24a", 0)]:
+    for item, posts in [(poke, 2), (master, 1), (other["itemId"], 0)]:
         page.locator(f'[data-card-id="{item}"]').click()
-        page.get_by_role("link", name="Card detail page").wait_for()
+        if posts:
+            page.get_by_role("link", name=f"Instagram post {posts}", exact=True).wait_for()
         assert page.get_by_role("link", name="Instagram post").count() == posts
-        page.keyboard.press("Escape")
+        if item == other["itemId"]:
+            page.get_by_role("link", name="Card detail page").click()
+            page.wait_for_url(f"**/card.html?item={item}")
+            page.get_by_role("heading", name=re.compile(re.escape(other["localCardName"] or other["cardName"]))).wait_for()
+            assert page.get_by_role("link", name="Instagram post").count() == 0
+        else:
+            page.keyboard.press("Escape")
     page.close()
 
 

@@ -1,4 +1,4 @@
-"""Static card pages and links for the Instagram pilot."""
+"""Public share metadata and link validation for the Instagram pilot."""
 from html import escape
 from pathlib import Path
 from string import Template
@@ -47,33 +47,22 @@ def read_social(root: Path) -> dict:
     return items
 
 
-def link_list(urls: list, title: str) -> str:
-    if not urls:
-        return ""
-    links = "".join(f'<li><a href="{escape(url)}">{escape(label)}</a></li>' for url, label in urls)
-    return f"<h2>{title}</h2><ul>{links}</ul>"
+def share_page(template: Template, item_id: str, card: dict | None, preview: str = "") -> str:
+    title = "Retired printing"
+    description = "This printing is no longer in the active collection."
+    image_meta = ""
+    if card:
+        title = " · ".join(filter(None, (card["name"], card["number"], card["language"],
+                                        card["finish"], card["foilPattern"])))
+        description = f"{card['set']} · {title}"
+        image_meta = (f'<meta property="og:image" content="{escape(ASSET_BASE_URL + preview)}">\n'
+                      f'<meta property="og:image:alt" content="{escape("Card front: " + title)}">')
+    return template.substitute(title=escape(title), description=escape(description), image_meta=image_meta,
+                               url=ASSET_BASE_URL + f"cards/{item_id}/",
+                               detail=f"../../card.html?item={item_id}")
 
 
-def card_page(template: Template, card: dict, row: dict, image: tuple[str, str]) -> str:
-    title = " · ".join(filter(None, (card["name"], card["number"], card["language"], card["finish"],
-                                    card["foilPattern"])))
-    details = {"Set": card["set"], "Set code": card["printedSetCode"] or card["setCode"],
-               "Card number": card["number"], "Language": card["language"], "Edition": card["edition"],
-               "Finish": card["finish"], "Foil pattern": card["foilPattern"], "Artist": card["artist"],
-               "Markings": ", ".join(card["markings"])}
-    facts = "".join(f"<dt>{label}</dt><dd>{escape(value)}</dd>"
-                    for label, value in details.items() if value and value != "unknown")
-    posts = [(url, f"Instagram post {n}") for n, url in enumerate(row["instagramPosts"], start=1)]
-    sources = [(url, url) for url in card["sources"] if url.startswith(("https://", "http://"))]
-    photo, preview = image
-    values = {"url": f"{ASSET_BASE_URL}cards/{row['itemId']}/", "title": title,
-              "description": f"{card['set']} · {title}", "preview": ASSET_BASE_URL + preview,
-              "alt": f"Card front: {title}", "photo": "../../" + photo}
-    return template.substitute({key: escape(value) for key, value in values.items()}, facts=facts,
-                               sources=link_list(sources, "Sources"), posts=link_list(posts, "On Instagram"))
-
-
-def approved_image(root: Path, model: dict, card: dict, row: dict, photos: dict) -> tuple[str, str]:
+def approved_preview(root: Path, model: dict, row: dict, photos: dict) -> str:
     specimen, printing = owner_specimen(model, row["specimenId"])
     asset = photos.get("verification/specimens/" + specimen["photograph"])
     if printing["itemId"] != row["itemId"] or not asset or asset["imageScope"] != "exact-printing":
@@ -81,9 +70,7 @@ def approved_image(root: Path, model: dict, card: dict, row: dict, photos: dict)
     preview = asset["preview"]
     if not preview or asset["sha256"] != specimen["photographSha256"] or not (root / preview).is_file():
         raise ValueError(f"{row['itemId']}: own preview does not match its archived specimen")
-    if card["imageScope"] == "exact-printing" and (card["imageSource"] or "").endswith("/" + specimen["photograph"]):
-        return card["preview"], preview
-    return preview, preview
+    return preview
 
 
 def render_pages(root: Path = ROOT) -> dict[str, str]:
@@ -99,8 +86,8 @@ def render_pages(root: Path = ROOT) -> dict[str, str]:
     for item_id, row in rows.items():
         name = f"cards/{item_id}/index.html"
         if item_id in printings and not printings[item_id]["active"]:
-            pages[name] = (root / "templates/retired-card.html").read_text(encoding="utf-8")
+            pages[name] = share_page(template, item_id, None)
         else:
-            image = approved_image(root, model, cards[item_id], row, photos)
-            pages[name] = card_page(template, cards[item_id], row, image)
+            preview = approved_preview(root, model, row, photos)
+            pages[name] = share_page(template, item_id, cards[item_id], preview)
     return pages
