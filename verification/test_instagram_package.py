@@ -13,15 +13,15 @@ from owner_photo import owner_specimen
 class InstagramDraftTests(unittest.TestCase):
     def test_release_precision_keeps_estimate(self):
         edition = {"releaseDate": "2026-11-01", "releaseDatePrecision": "month", "releaseApproximate": True}
-        self.assertEqual(release_label({}, edition), "ca. November 2026")
+        self.assertEqual(release_label({}, edition), "c. November 2026")
         self.assertEqual(release_label({"releaseDate": "2026", "releaseDatePrecision": "year"}, edition), "2026")
         self.assertEqual(release_label({"releaseDate": "2026-11-12", "releaseDatePrecision": "day"}, {}),
-                         "12. November 2026")
+                         "12 November 2026")
         self.assertEqual(release_label({"releaseDate": "2026-11-01"}, edition), "")
 
     def test_adjacent_variants_keep_distinct_copy(self):
         model = load()
-        cases = [("SPEC-0779", "Pokéball", "pilot-poke"), ("SPEC-0780", "Meisterball", "pilot-master")]
+        cases = [("SPEC-0779", "Poké Ball", "pilot-poke"), ("SPEC-0780", "Master Ball", "pilot-master")]
         for sid, foil, alias in cases:
             with self.subTest(specimen=sid):
                 _, item = owner_specimen(model, sid)
@@ -30,7 +30,11 @@ class InstagramDraftTests(unittest.TestCase):
                 self.assertIn(foil, caption)
                 self.assertIn(foil, alt)
                 self.assertIn(f"https://go.m4s.eu/{alias}", caption)
-                self.assertNotIn("[Kurzlink fehlt]", caption)
+                self.assertNotIn("[short link missing]", caption)
+                # the account is English; a localized name joins Snorlax and never replaces it
+                self.assertIn("(Snorlax)", caption)
+                self.assertIn("Chinese (Simplified)", caption)
+                self.assertTrue(alt.startswith("Own photo of "))
 
     def test_orientation_and_crop(self):
         raw = BytesIO()
@@ -43,6 +47,28 @@ class InstagramDraftTests(unittest.TestCase):
         with Image.open(BytesIO(data)) as draft:
             self.assertEqual(draft.size, (1080, 1350))
             self.assertEqual(len(draft.getexif()), 0)
+
+    def test_dark_cover_keeps_the_card_and_marks_the_corner(self):
+        # a light wall with a yellow card standing in it, as photographed on its stand
+        photo = Image.new("RGB", (3000, 4000), (225, 225, 220))
+        ImageDraw.Draw(photo).rounded_rectangle((700, 800, 2300, 3040), radius=70, fill=(230, 210, 40))
+        raw = BytesIO()
+        photo.save(raw, "PNG")
+        corners = [(700, 800), (2300, 800), (2300, 3040), (700, 3040)]
+        data, geometry = post_image(raw.getvalue(), corners)
+        left, top, right, bottom = geometry["frame"]
+        self.assertAlmostEqual(1600 / (right - left), 0.6, places=2)
+        self.assertEqual((right - left) * 5, (bottom - top) * 4)
+        with Image.open(BytesIO(data)) as draft:
+            scale = 1080 / (right - left)
+            def at(x, y):
+                return draft.getpixel((round((x - geometry["frame"][0]) * scale),
+                                       round((y - geometry["frame"][1]) * scale)))
+            self.assertGreater(at(1500, 1900)[0], 215, "the card stays as photographed")
+            self.assertLess(at(400, 600)[0], 70, "the wall is darkened")
+            self.assertLess(at(712, 812)[0], 70, "outside the rounded corner is wall")
+            mark = draft.crop((780, 1280, 1050, 1330)).convert("L")
+            self.assertGreater(mark.getextrema()[1], 150, "the @SnoreDex watermark is drawn")
 
     def test_edited_photo_preserves_full_frame_and_records_source(self):
         data = BytesIO()

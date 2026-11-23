@@ -10,7 +10,7 @@ from pathlib import Path
 import sys
 from tempfile import TemporaryDirectory
 
-from gallery_prepare import extract
+from gallery_prepare import coefficients, extract
 from card_pages import read_social
 from build import ASSET_BASE_URL, printed_number
 from check import load
@@ -19,11 +19,13 @@ from owner_photo import verified_owner_photo
 ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / "verification/cache/instagram"
 POST_SIZE = (1080, 1350)
-MONTHS = ("Januar", "Februar", "März", "April", "Mai", "Juni",
-          "Juli", "August", "September", "Oktober", "November", "Dezember")
-LANGUAGES = {"zh-Hans": "Vereinfachtes Chinesisch", "zh-Hant": "Traditionelles Chinesisch"}
+# The @SnoreDex account is kept in English (owner decision, 2026-11-23).
+MONTHS = ("January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December")
 FINISH = {"non-holo": "Non-Holo", "holo": "Holo", "reverse-holo": "Reverse Holo", "mirror-holo": "Mirror Holo"}
-PATTERN = {"poke-ball": "Pokéball-Muster", "master-ball": "Meisterball-Muster"}
+PATTERN = {"poke-ball": "Poké Ball pattern", "master-ball": "Master Ball pattern"}
+CANVAS = "#0d0f10"
+WATERMARK = "@SnoreDex"
 
 
 def digest(data: bytes) -> str:
@@ -43,8 +45,8 @@ def release_label(item: dict, edition: dict) -> str:
     elif precision == "month":
         label = f"{MONTHS[int(parts[1]) - 1]} {year}"
     else:
-        label = f"{int(parts[2])}. {MONTHS[int(parts[1]) - 1]} {year}"
-    return f"ca. {label}" if source.get("releaseApproximate") else label
+        label = f"{int(parts[2])} {MONTHS[int(parts[1]) - 1]} {year}"
+    return f"c. {label}" if source.get("releaseApproximate") else label
 
 
 def caption_facts(model: dict, item: dict) -> tuple[str, str, str, str]:
@@ -52,7 +54,8 @@ def caption_facts(model: dict, item: dict) -> tuple[str, str, str, str]:
     edition = next(row for row in sets["setEditions"] if row["setEditionId"] == item["setEditionId"])
     local_set = next(row for row in sets["localSets"] if row["localSetId"] == edition["localSetId"])
     locale = next(row for row in sets["localizations"] if row["localizationId"] == edition["localizationId"])
-    language = LANGUAGES.get(locale["languageTag"], locale["displayName"])
+    language = locale["displayName"]
+    # a localized name joins Snorlax, it never replaces it
     name = item.get("localCardName") or item["cardName"]
     if name != item["cardName"]:
         name += f" ({item['cardName']})"
@@ -70,30 +73,86 @@ def post_copy(model: dict, item: dict, short_url: str | None) -> tuple[str, str]
     card, set_name, facts, date = caption_facts(model, item)
     lines = [f"{card} · {set_name}", facts]
     if date:
-        lines.append(f"Veröffentlicht: {date}")
-    lines += ["", "Eigenes Sammlungsfoto für @SnoreDex.", f"Kartendetails: {short_url or '[Kurzlink fehlt]'}"]
-    alt = f"Eigene Aufnahme der Vorderseite von {card} aus {set_name}."
+        lines.append(f"Released: {date}")
+    lines += ["", "Own collection photo for @SnoreDex.", f"Card details: {short_url or '[short link missing]'}"]
+    alt = f"Own photo of {card} from {set_name}."
     if facts:
-        alt += f" Druckvariante: {facts}."
+        alt += f" Print variant: {facts}."
     return "\n".join(lines) + "\n", alt + "\n"
 
 
+def watermark(image):
+    """@SnoreDex in the bottom right corner, white at three quarters opacity."""
+    from PIL import Image, ImageDraw, ImageFont
+
+    overlay = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    ImageDraw.Draw(overlay).text((image.width - 40, image.height - 36), WATERMARK, anchor="rs",
+                                 font=ImageFont.load_default(size=34), fill=(255, 255, 255, 190))
+    return Image.alpha_composite(image.convert("RGBA"), overlay).convert("RGB")
+
+
+def card_to_photo(corners, size) -> list[float]:
+    """Perspective coefficients mapping photo pixels into card space (the inverse of extract's)."""
+    a, b, c, d, e, f, g, h = coefficients(corners, size)
+    m = ((a, b, c), (d, e, f), (g, h, 1.0))
+    adj = [[m[(j + 1) % 3][(i + 1) % 3] * m[(j + 2) % 3][(i + 2) % 3]
+            - m[(j + 1) % 3][(i + 2) % 3] * m[(j + 2) % 3][(i + 1) % 3] for j in range(3)] for i in range(3)]
+    return [value / adj[2][2] for row in adj for value in row][:8]
+
+
+def card_mask(photo_size, corners, card_size):
+    """The card face with its rounded corners, as a feathered mask over the photo."""
+    from PIL import Image, ImageDraw, ImageFilter
+
+    shape = Image.new("L", card_size, 0)
+    ImageDraw.Draw(shape).rounded_rectangle((0, 0, card_size[0] - 1, card_size[1] - 1),
+                                            radius=round(card_size[0] * 0.045), fill=255)
+    mask = shape.transform(photo_size, Image.Transform.PERSPECTIVE, card_to_photo(corners, card_size),
+                           Image.Resampling.BILINEAR)
+    return mask.filter(ImageFilter.GaussianBlur(2))
+
+
+def frame(photo_size, corners) -> tuple[int, int, int, int]:
+    """A 4:5 window with the card at about 60 % width, nudged down to keep its stand in view."""
+    xs, ys = [x for x, _ in corners], [y for _, y in corners]
+    unit = int(min(photo_size[0] / 4, photo_size[1] / 5, (max(xs) - min(xs)) / 0.6 / 4))
+    width, height = 4 * unit, 5 * unit
+    centre_x = (min(xs) + max(xs)) / 2
+    centre_y = (min(ys) + max(ys)) / 2 + 0.1 * (max(ys) - min(ys))
+    left = min(max(0, round(centre_x - width / 2)), photo_size[0] - width)
+    top = min(max(0, round(centre_y - height / 2)), photo_size[1] - height)
+    return left, top, left + width, top + height
+
+
+def dark_cover(photo, corners):
+    """Darken everything but the card, in a vignette; the card's own pixels stay untouched."""
+    from PIL import Image, ImageChops
+
+    face, geometry = extract(photo, corners)
+    box = frame(photo.size, corners)
+    window = photo.crop(box)
+    mask = card_mask(photo.size, corners, face.size).crop(box)
+    fade = Image.radial_gradient("L").resize(window.size)
+    factor = fade.point(lambda v: round(255 * (0.26 - 0.16 * v / 255)))
+    dark = ImageChops.multiply(window, Image.merge("RGB", (factor,) * 3))
+    return Image.composite(window, dark, mask), dict(geometry, frame=list(box))
+
+
 def post_image(data: bytes, corners) -> tuple[bytes, dict]:
+    """The cover: with card corners the darkened photo around the card, else the whole photo."""
     from PIL import Image, ImageOps
 
     with Image.open(io.BytesIO(data)) as image:
         upright = ImageOps.exif_transpose(image)
         rgba = upright.convert("RGBA")
-        face = Image.alpha_composite(Image.new("RGBA", rgba.size, "white"), rgba).convert("RGB")
+        photo = Image.alpha_composite(Image.new("RGBA", rgba.size, "white"), rgba).convert("RGB")
         icc = upright.info.get("icc_profile") if upright.mode == "RGB" else None
-    face, geometry = extract(face, corners)
-    if face.width < 600 or face.width >= face.height:
-        raise ValueError("Die vollständige Kartenfront muss hochkant und mindestens 600 Pixel breit sein.")
-    face.thumbnail((1000, 1270), Image.Resampling.LANCZOS)
-    canvas = Image.new("RGB", POST_SIZE, "#f2ede5")
-    canvas.paste(face, ((canvas.width - face.width) // 2, (canvas.height - face.height) // 2))
+    picture, geometry = dark_cover(photo, corners) if corners else (photo, {})
+    picture.thumbnail(POST_SIZE, Image.Resampling.LANCZOS)
+    canvas = Image.new("RGB", POST_SIZE, CANVAS)
+    canvas.paste(picture, ((canvas.width - picture.width) // 2, (canvas.height - picture.height) // 2))
     output = io.BytesIO()
-    canvas.save(output, "JPEG", quality=93, icc_profile=icc)
+    watermark(canvas).save(output, "JPEG", quality=93, icc_profile=icc)
     return output.getvalue(), geometry
 
 
@@ -127,7 +186,7 @@ def edited_post_image(data: bytes) -> bytes:
     canvas.paste(photo, ((width - photo.width) // 2, (height - photo.height) // 2))
     output = io.BytesIO()
     # The pixels are already sRGB. Omitting the generated ICC profile keeps repeated exports byte-identical.
-    canvas.save(output, "JPEG", quality=94, subsampling=0)
+    watermark(canvas).save(output, "JPEG", quality=94, subsampling=0)
     return output.getvalue()
 
 
