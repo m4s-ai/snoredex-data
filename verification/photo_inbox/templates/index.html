@@ -12,21 +12,41 @@
 <body>
 <main>
 <h1>Fotoeingang</h1>
-<p>Gib ein eigenes Kartenfoto als DNG oder JPEG im Heimnetz ab. Es bleibt privat und wird nicht veröffentlicht.</p>
-<form id="upload" method="post">
-  <label for="photo">Foto (DNG oder JPEG, bis 200 MB)</label>
-  <input id="photo" type="file" accept=".dng,image/x-adobe-dng,image/dng,.jpg,.jpeg,image/jpeg" required>
-  <label for="specimen">SPEC-Nummer</label>
-  <input id="specimen" placeholder="SPEC-0774" pattern="[Ss][Pp][Ee][Cc]-[0-9]{4,8}" autocapitalize="characters"
-         autocomplete="off" aria-describedby="hint">
-  <label for="note">Notiz zur Karte</label>
-  <textarea id="note" maxlength="240" rows="3" placeholder="z. B. Relaxo, Dschungel, deutsch, 1. Auflage"
-            aria-describedby="hint"></textarea>
-  <p id="hint" class="hint">SPEC-Nummer oder Notiz: eines von beiden genügt.</p>
-  <label class="check"><input id="owner" type="checkbox" required> Ich habe das Foto selbst aufgenommen.</label>
-  <button type="submit">Hochladen</button>
-</form>
-<p id="status" role="status" aria-live="polite"></p>
+<p>Für eigene Kartenfotos, DNG oder JPEG. Die Fotos bleiben privat im Heimnetz und werden nicht
+  veröffentlicht. Fotos aus anderen Quellen gehören nicht hierher.</p>
+
+<section aria-labelledby="upload-title">
+  <h2 id="upload-title">Hochladen</h2>
+  <form id="upload" method="post">
+    <label for="photos">Fotos (DNG oder JPEG, je bis 200 MB)</label>
+    <input id="photos" type="file" multiple required
+           accept=".dng,image/x-adobe-dng,image/dng,.jpg,.jpeg,image/jpeg">
+    <button type="submit">Hochladen</button>
+  </form>
+  <ul id="transfers" aria-live="polite"></ul>
+</section>
+
+<section aria-labelledby="jobs-title">
+  <h2 id="jobs-title">Fotos zuordnen</h2>
+  <label class="check"><input id="open-only" type="checkbox"> Nur Fotos ohne Angabe</label>
+  <p id="jobs-status" role="status"></p>
+  <ul id="jobs"></ul>
+</section>
+
+<template id="job-template">
+  <li class="job">
+    <a class="photo" target="_blank" rel="noopener"><img alt="" loading="lazy" width="400" height="400"></a>
+    <div class="facts"><span class="state"></span> <span class="when"></span></div>
+    <form class="describe">
+      <label>SPEC-Nummer<input name="specimen" placeholder="SPEC-0774" autocapitalize="characters"
+             autocomplete="off" pattern="[Ss][Pp][Ee][Cc]-[0-9]{4,8}"></label>
+      <label>Notiz zur Karte<textarea name="note" maxlength="240" rows="2"
+             placeholder="z. B. Relaxo, Dschungel, deutsch, 1. Auflage"></textarea></label>
+      <button type="submit">Speichern</button>
+      <p class="saved" role="status"></p>
+    </form>
+  </li>
+</template>
 </main>
 </body>
 </html>
