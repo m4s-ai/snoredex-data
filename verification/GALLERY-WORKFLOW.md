@@ -11,7 +11,9 @@ Image preparation uses Pillow. Browser checks require Pillow, Playwright and Chr
 1. Use the next frozen round directory or create its target list with
    `python verification/gallery_workflow.py freeze --out DIR/targets.json --round N ID...`.
    Select up to twenty active image gaps.
-2. Check registered owner and third-party originals first, then research alternatives. Review
+2. Check registered owner and third-party originals first, then research alternatives. The owner's
+   own photograph of the printing always wins when it shows the complete face at gallery size
+   (owner decision, 2026-11-23). Review
    the actual language, number, edition, finish cues, marks, completeness and effective face width.
    Record one decision per `itemId` in the `targets` array of `source-review.json`. Selected rows
    use `"decision": "selected"`, the reviewed `candidateId` and `"scope": "representative"` or

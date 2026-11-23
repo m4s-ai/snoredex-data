@@ -9,8 +9,9 @@ Read [the gallery workflow](../../../verification/GALLERY-WORKFLOW.md) and the l
 Use round status before reopening a gap round or reserving another specimen ID. Resume work against
 the same frozen targets.
 
-- Inspect retained owner photos and registered originals first. Search for a matching source only
-  when needed. Document exact photos, representative images and concrete gaps. An example image
+- The owner's own photograph of the printing always wins when it shows the complete face at
+  gallery size (owner decision, 2026-11-23); it replaces any other image. Inspect retained owner
+  photos first, then registered originals. Search for a matching source only when needed. Document exact photos, representative images and concrete gaps. An example image
   alone does not establish a physical finish.
 - Use [specimen intake](../snoredex-specimen-intake/SKILL.md) for original evidence and archive
   reservation. Inspect every face and prepared crop. Apply only after the archive check passes.
