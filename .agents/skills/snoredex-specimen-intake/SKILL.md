@@ -109,9 +109,13 @@ photo repository (step 5), while the untouched WebP stays under `verification/ev
 Image preparation uses Pillow, an optional dependency for intake and gallery review. The
 standard site build does not need it. SPEC-0742 is the worked example.
 
-- **When:** the item has no gallery image, or only a render, a representative image or a clearly
-  worse photograph. A new photograph replaces an existing gallery photograph only when it is clearly
-  better (sharper, flatter, less worn); name why in the commit.
+- **When:** the owner's own photograph (a specimen the collection owner photographed or holds) is
+  always the item's image, in the table and above all in the gallery, over any render, catalogue
+  scan or third-party photograph, however good (owner decision, 2026-11-23). Otherwise prepare one
+  when the item has no gallery image, or only a render, a representative image or a clearly worse
+  photograph. Between two owner photographs, or two others, a new one replaces an existing one only
+  when it is clearly better (sharper, flatter, less worn); name why in the commit. Only the crop and
+  size rules below keep an owner photograph out of the gallery; name that reason in the commit.
 - **Crop:** the individual card face, upright, with its edges, text and on-card marks; record the
   pixel box in the original. Perspective-correct a visibly skewed card to the face's own
   proportions. Never retouch or remove marks. Glare, blur, a watermark over the card or an
