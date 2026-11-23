@@ -14,6 +14,22 @@ after applying the original's EXIF orientation. Leave a small margin around the 
 corners, the draft shows the whole original. The exporter never enlarges a small crop. Use a new
 output directory via `--out` if the inputs have changed.
 
+## Use an edited photo of the card on its stand
+
+Pass `--owner-feed-jpeg` only for an edited JPEG you photographed and have checked against the
+exact printing for the SPEC. Use `--feed-alt` to describe the visible card, stand and any important
+details in that image. The command below assumes a new, locally prepared photo of SPEC-0774.
+
+```console
+python verification/instagram_package.py SPEC-0774 --photos ../snoredex-photos --owner-feed-jpeg halter.jpg --feed-alt "Chinesische Relaxo-Karte 061/S-P auf einem Kartenhalter vor dunklem Hintergrund." --out verification/cache/instagram/SPEC-0774-halter
+```
+
+This option preserves the edited composition, adds padding when needed, and writes a 1080 × 1350
+sRGB JPEG without EXIF or XMP. Use `--corners` only with the original-photo path. The archive still
+supplies the verified specimen and its hash. The private manifest also records the edited JPEG's
+hash and your confirmation that it shows the same printing. Keep any DNG originals in your private
+photo archive. Review legibility, borders and foil in the phone draft before posting.
+
 Use the [YOURLS link pilot](YOURLS-PILOT.md) to check or assign a permanent keyword.
 
 Once the matching entry in `data/social.json` has a verified `shortAlias`, generate a fresh draft.

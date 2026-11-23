@@ -1,10 +1,12 @@
 """Local Instagram draft regression checks. Requires Pillow like the exporter."""
 from io import BytesIO
+from pathlib import Path
+from tempfile import TemporaryDirectory
 import unittest
 
-from PIL import Image
+from PIL import Image, ImageCms, ImageDraw
 
-from instagram_package import load, post_copy, post_image, release_label
+from instagram_package import digest, edited_post_image, load, package, post_copy, post_image, release_label
 from owner_photo import owner_specimen
 
 
@@ -41,6 +43,53 @@ class InstagramDraftTests(unittest.TestCase):
         with Image.open(BytesIO(data)) as draft:
             self.assertEqual(draft.size, (1080, 1350))
             self.assertEqual(len(draft.getexif()), 0)
+
+    def test_edited_photo_preserves_full_frame_and_records_source(self):
+        data = BytesIO()
+        exif = Image.Exif()
+        exif[315] = "private camera metadata"
+        exif[34853] = {1: "N", 2: (1, 2, 3)}
+        picture = Image.new("RGB", (1200, 1500), "navy")
+        ImageDraw.Draw(picture).rectangle((0, 1300, 1199, 1499), fill="yellow")
+        srgb = ImageCms.ImageCmsProfile(ImageCms.createProfile("sRGB"))
+        picture.save(data, "JPEG", exif=exif, xmp=b"<x:xmpmeta>private metadata</x:xmpmeta>",
+                     icc_profile=srgb.tobytes())
+        feed_bytes = data.getvalue()
+        alt = "Snorlax-Karte auf einem Kartenhalter."
+        specimen_id = "SPEC-0774"
+        model = load()
+        original = b"test archive input"
+        model["specimens"][specimen_id]["photographSha256"] = f"sha256:{digest(original)}"
+        with TemporaryDirectory(ignore_cleanup_errors=True) as directory:
+            archive = Path(directory)
+            photos = archive / "verification/specimens"
+            photos.mkdir(parents=True)
+            (photos / model["specimens"][specimen_id]["photograph"]).write_bytes(original)
+            feed = archive / "feed.jpg"
+            feed.write_bytes(feed_bytes)
+            files, manifest = package(model, specimen_id, archive, owner_feed_jpeg=feed, feed_alt=alt)
+            with self.assertRaisesRegex(ValueError, "Alt-Text"):
+                package(model, specimen_id, archive, owner_feed_jpeg=feed)
+        self.assertEqual(manifest["specimenId"], specimen_id)
+        self.assertEqual(manifest["photoSha256"], f"sha256:{digest(original)}")
+        self.assertEqual(manifest["feedPhoto"]["sha256"], f"sha256:{digest(feed_bytes)}")
+        self.assertEqual(manifest["files"]["post.jpg"], digest(files["post.jpg"]))
+        self.assertEqual(files["alt-text.txt"].decode(), alt + "\n")
+        self.assertIn("Owner review", manifest["requiredBeforePosting"])
+        self.assertIn(b"https://go.m4s.eu/sdbbea2621c8f4", files["caption-draft.txt"])
+        with Image.open(BytesIO(files["post.jpg"])) as draft:
+            self.assertEqual(draft.size, (1080, 1350))
+            self.assertGreater(draft.getpixel((10, 10))[2], 110)
+            self.assertGreater(draft.getpixel((1070, 1340))[0], 230)
+            self.assertFalse(draft.getexif())
+            self.assertNotIn("xmp", draft.info)
+            self.assertNotIn("icc_profile", draft.info)
+
+    def test_feed_rejects_wrong_format(self):
+        data = BytesIO()
+        Image.new("RGB", (800, 1000)).save(data, "PNG")
+        with self.assertRaisesRegex(ValueError, "JPEG"):
+            edited_post_image(data.getvalue())
 
 
 if __name__ == "__main__":
