@@ -1,22 +1,34 @@
-<!-- doc: role=private photo inbox for owner phone uploads (#626); stage=task -->
+<!-- doc: role=private photo inbox for owner phone uploads (#626, #639); stage=task -->
 
-# Private SnoreDex photo inbox (#626)
+# Private SnoreDex photo inbox (#626, #639)
 
-A small LAN service where the owner hands in an own photo from the phone: the iPhone's DNG
-(ProRAW) or a JPEG. It keeps the original bytes unchanged, GPS included, in a private folder outside
-every Git checkout and publishes nothing. Each upload becomes a job folder named by the SHA-256 of
-its bytes, holding `photo.dng` or `photo.jpg` and `job.json` with the SPEC hint or note, `ownPhoto`,
-the file name and the hash. The same photo with the same details is the same job (a double tap or a
-repeat after a restart); the same photo with other details is refused with 409.
+A small LAN service where the owner hands in their own photos from the phone: the iPhone's DNG
+(ProRAW) or JPEG. Every photo here is the owner's own; images found elsewhere go through the regular
+specimen intake, never through this inbox. The service keeps the original bytes unchanged, GPS
+included, in a private folder outside every Git checkout and publishes nothing. Each photo becomes a
+job folder named by the SHA-256 of its bytes, holding `photo.dng` or `photo.jpg` and `job.json` with
+`ownPhoto`, the file name, the hash, `receivedAt`, and once described `specimenHint`, `note` and
+`describedAt`. A job is its bytes: uploading the same photo again, described or not, is the same job.
 
-The German mobile page (`templates/index.html`, `static/`) asks for the photo (camera, gallery or
-files), the SPEC number or a short note and the confirmation "selbst aufgenommen". It shows the job
-number, a repeat and each refusal in words. There is no access code (owner decision, 2026-11-23):
-the service is reachable only in the home network.
+Upload and card assignment are separate (owner decision, 2026-11-23). The German mobile page
+(`templates/index.html`, `static/`) takes any number of photos at once, without details, and sends
+them one by one with progress and a result per file; a bad file does not stop the rest. Below it, a
+dashboard lists every job, newest first, with a preview (a DNG shows its embedded full-size
+preview), a link to a large view, its state ("ohne Angabe" or "beschrieben") and a form for the SPEC
+number or a short note, checked as the single upload always checked them. Saving writes `job.json`
+at once; a description can be corrected, the photo never changes. Previews are cached beside the job
+as `preview-400.jpg` and `preview-1600.jpg`, upright and without Exif. There is no access code (owner
+decision, 2026-11-23): the service is reachable only in the home network.
 
 A JPEG is decoded completely. A DNG is checked at header level only (a TIFF whose first IFD carries
-`DNGVersion`); the raw decoder at intake proves its pixels, and the intake derives the cleaned public
-copy from it.
+`DNGVersion`); the intake derives the cleaned public copy from it. Intake takes the described jobs.
+
+| Request | Does |
+|---|---|
+| `POST /uploads` | one photo as `application/octet-stream`; 201 new, 200 already there |
+| `GET /jobs` | every job, newest first |
+| `GET /jobs/<id>/preview?size=400\|1600` | the cached preview JPEG |
+| `POST /jobs/<id>` | JSON `{"specimen", "note"}`: saves the description |
 
 ## Run
 
@@ -67,13 +79,14 @@ pip install -r requirements.txt -r verification/photo_inbox/requirements.txt
 python verification/photo_inbox/test_app.py
 ```
 
-It covers a JPEG with GPS (kept privately, byte for byte), DNGs in both byte orders, a plain TIFF and
-a truncated DNG header, a missing owner confirmation or card hint, invalid SPEC numbers and notes,
-non-photo and truncated JPEG files, the size and pixel limits, repeat and conflicting uploads, a
-restart, an inbox inside a Git checkout, the page in a phone-sized Chromium, and the archive copy of
-a phone-like DNG and JPEG (location, maker, XMP and second frame gone; pixels, profile and
-orientation kept; a DNG without preview refused). It is not part of `regen.py`, whose gate stays
-standard-library only.
+It covers uploads without details (a JPEG with GPS kept privately, byte for byte; DNGs in both byte
+orders; a plain TIFF, a truncated DNG header, non-photo and truncated JPEG files refused; the size
+and pixel limits; repeats), the dashboard (newest first, previews without Exif or GPS, a DNG without
+an embedded preview, invalid and corrected descriptions, a described photo uploaded again), a
+restart, an inbox inside a Git checkout, a bulk upload with one bad file and a description saved in a
+phone-sized Chromium, and the archive copy of a phone-like DNG and JPEG (location, maker, XMP and
+second frame gone; pixels, profile and orientation kept; a DNG without preview refused). It is not
+part of `regen.py`, whose gate stays standard-library only.
 
 ## Still open
 
@@ -81,7 +94,9 @@ standard-library only.
    the phone's photo picker and is readable over the share, hash matching its job.
 2. Done 2026-11-23: the first job went through intake as SPEC-1111; `derive.py` now makes that
    archive copy. Next: its Instagram package through #625.
-3. Later in #626: HEIC input, an edited JPEG and its DNG in one job, status and questions on the job,
-   and resuming after an interrupted archive push.
+3. Done in #639: bulk upload and the dashboard. Open there: showing "filed as SPEC-nnnn" on a job,
+   since intake reads the share without writing to it.
+4. Later in #626: HEIC input, an edited JPEG and its DNG in one job, questions on the job, and
+   resuming after an interrupted archive push.
 
-[Upload and import issue](https://github.com/m4s-ai/snoredex-data/issues/626)
+[Upload and import issue](https://github.com/m4s-ai/snoredex-data/issues/626) · [Bulk upload and dashboard](https://github.com/m4s-ai/snoredex-data/issues/639)

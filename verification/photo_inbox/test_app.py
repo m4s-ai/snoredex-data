@@ -1,5 +1,5 @@
-"""Acceptance checks for the private photo inbox (#626): JPEG and DNG, restart, the German mobile page
-and the derived archive copy.
+"""Acceptance checks for the private photo inbox (#626, #639): bulk upload of JPEG and DNG, the
+dashboard that describes each job, restart, the German mobile page and the derived archive copy.
 
 Needs the inbox and browser requirements:
     pip install -r requirements.txt -r verification/photo_inbox/requirements.txt
@@ -39,77 +39,99 @@ def dng(order=b"II", tag=50706):
     return order + struct.pack(end + "HI", 42, 8) + struct.pack(end + "H", 1) + entry + bytes(68)
 
 
-def post(client, body, **headers):
-    sent = {"Content-Type": "application/octet-stream", "X-Snoredex-Owner": "yes"}
-    sent.update({key.replace("_", "-"): value for key, value in headers.items()})
-    return client.post("/uploads", data=body, headers={k: v for k, v in sent.items() if v is not None})
+def post(client, body, content_type="application/octet-stream"):
+    return client.post("/uploads", data=body, headers={"Content-Type": content_type})
 
 
 def jobs(root):
     return sorted(path.name for path in root.iterdir())
 
 
-def api_checks(root):
-    app = create_app(root)
-    client = app.test_client()
+def upload_checks(root, app, client):
+    """Photos arrive without details: each is its own job, all of them the owner's own (#639)."""
     photo = jpeg(gps=True)
     digest = sha256(photo).hexdigest()
-
-    first = post(client, photo, X_Snoredex_Specimen="spec-0774")
+    first = post(client, photo)
     assert first.status_code == 201 and first.json == {"id": digest, "status": "received", "existing": False}
     stored = root / digest
     assert (stored / "photo.jpg").read_bytes() == photo, "raw bytes kept unchanged"
     with Image.open(stored / "photo.jpg") as kept:
         assert kept.getexif().get_ifd(0x8825), "GPS stays in the private original"
     receipt = json.loads((stored / "job.json").read_text(encoding="utf-8"))
-    assert receipt["specimenHint"] == "SPEC-0774" and receipt["ownPhoto"] is True and receipt["sha256"] == digest
+    assert receipt["ownPhoto"] is True and receipt["sha256"] == digest and receipt["receivedAt"]
+    assert receipt["specimenHint"] is None and receipt["note"] == ""
     assert b"\r\n" not in (stored / "job.json").read_bytes()
-
-    repeat = post(client, photo, X_Snoredex_Specimen="SPEC-0774")
-    assert repeat.status_code == 200 and repeat.json["existing"] is True, "double tap is the same job"
-    assert post(client, photo, X_Snoredex_Note="andere%20Karte").status_code == 409, "conflicting details"
+    assert post(client, photo).json["existing"] is True, "double tap is the same job"
 
     raw = dng(b"MM")
-    taken = post(client, raw, X_Snoredex_Note="Relaxo DNG")
+    taken = post(client, raw)
     assert taken.status_code == 201 and (root / taken.json["id"] / "photo.dng").read_bytes() == raw, "a DNG is kept"
-    assert json.loads((root / taken.json["id"] / "job.json").read_text(encoding="utf-8"))["file"] == "photo.dng"
-    assert post(client, dng(b"II"), X_Snoredex_Note="x").status_code == 201, "little-endian DNG"
+    assert post(client, dng(b"II")).status_code == 201, "little-endian DNG"
     kept = jobs(root)
 
     tiff = BytesIO()
     Image.new("RGB", (8, 8)).save(tiff, "TIFF")
-    refused = [
-        (post(client, tiff.getvalue(), X_Snoredex_Note="x"), 400),
-        (post(client, dng(tag=305), X_Snoredex_Note="x"), 400),
-        (post(client, dng()[:12], X_Snoredex_Note="x"), 400),
-        (post(client, jpeg((1, 2, 3)), Content_Type="image/jpeg", X_Snoredex_Note="x"), 415),
-        (post(client, jpeg((1, 2, 3)), X_Snoredex_Owner=None, X_Snoredex_Note="x"), 400),
-        (post(client, jpeg((1, 2, 3))), 400),
-        (post(client, jpeg((1, 2, 3)), X_Snoredex_Specimen="SPEC-12"), 400),
-        (post(client, jpeg((1, 2, 3)), X_Snoredex_Note="x" * 241), 400),
-        (post(client, jpeg((1, 2, 3)), X_Snoredex_Note="%FF"), 400),
-        (post(client, b"not a jpeg", X_Snoredex_Note="x"), 400),
-        (post(client, jpeg((1, 2, 3))[:300], X_Snoredex_Note="x"), 400),
-    ]
-    for response, expected in refused:
-        assert response.status_code == expected and response.json["error"], (expected, response.status_code)
-    assert jobs(root) == kept, "a refused upload leaves nothing behind"
-    app.config["MAX_CONTENT_LENGTH"] = 1024
-    too_big = post(client, bytes(2048), X_Snoredex_Note="x")
-    assert too_big.status_code == 413 and "200 MB" in too_big.json["error"]
-    app.config["MAX_CONTENT_LENGTH"] = 200 * 1024 * 1024
-
     big = BytesIO()
     Image.new("L", (7800, 7800)).save(big, "JPEG")
-    assert post(client, big.getvalue(), X_Snoredex_Note="x").status_code == 400, "over 60 megapixels"
+    refused = [(tiff.getvalue(), 400), (dng(tag=305), 400), (dng()[:12], 400), (b"not a photo", 400),
+               (jpeg((1, 2, 3))[:300], 400), (big.getvalue(), 400)]
+    for body, expected in refused:
+        response = post(client, body)
+        assert response.status_code == expected and response.json["error"], (expected, response.status_code)
+    assert post(client, jpeg((1, 2, 3)), "image/jpeg").status_code == 415
+    assert jobs(root) == kept, "a refused upload leaves nothing behind"
+    app.config["MAX_CONTENT_LENGTH"] = 1024
+    too_big = post(client, bytes(2048))
+    assert too_big.status_code == 413 and "200 MB" in too_big.json["error"]
+    app.config["MAX_CONTENT_LENGTH"] = 200 * 1024 * 1024
+    return photo, digest
 
+
+def dashboard_checks(root, client, digest):
+    """The list, the previews and the description, saved like the single workflow saved it."""
+    listed = client.get("/jobs").json["jobs"]
+    assert {job["id"] for job in listed} == set(jobs(root))
+    assert [job["receivedAt"] for job in listed] == sorted((job["receivedAt"] for job in listed), reverse=True)
+    assert all(not job["described"] for job in listed)
+
+    with_preview = post(client, dng_with_preview(camera_jpeg())).json["id"]
+    for job_id in (digest, with_preview):
+        picture = client.get(f"/jobs/{job_id}/preview?size=400")
+        assert picture.status_code == 200 and picture.mimetype == "image/jpeg"
+        with Image.open(BytesIO(picture.data)) as small:
+            assert max(small.size) <= 400 and not small.getexif(), "small, upright, no Exif or GPS"
+            assert not carries_location(picture.data)
+    with Image.open(BytesIO(client.get(f"/jobs/{with_preview}/preview?size=1600").data)) as large:
+        assert large.size == (48, 64), "the DNG's preview, turned upright by its orientation"
+    plain_dng = next(job["id"] for job in listed if job["file"] == "photo.dng")
+    assert client.get(f"/jobs/{plain_dng}/preview?size=400").status_code == 404, "no embedded preview"
+    assert client.get(f"/jobs/{digest}/preview?size=999").status_code == 404
+    assert client.get("/jobs/../../etc/preview?size=400").status_code == 404
+
+    for bad in ({}, {"specimen": "SPEC-12"}, {"note": "x" * 241}):
+        assert client.post(f"/jobs/{digest}", json=bad).status_code == 400, bad
+    assert client.post(f"/jobs/{'0' * 64}", json={"note": "x"}).status_code == 404
+    saved = client.post(f"/jobs/{digest}", json={"specimen": "spec-0774", "note": " Relaxo "})
+    assert saved.status_code == 200 and saved.json["described"] is True
+    record = json.loads((root / digest / "job.json").read_text(encoding="utf-8"))
+    assert record["specimenHint"] == "SPEC-0774" and record["note"] == "Relaxo" and record["describedAt"]
+    fixed = client.post(f"/jobs/{digest}", json={"note": "Relaxo, korrigiert"}).json
+    assert fixed["specimenHint"] is None and fixed["note"] == "Relaxo, korrigiert", "a description can be corrected"
+    assert (root / digest / "photo.jpg").read_bytes() == jpeg(gps=True), "describing never touches the photo"
+    assert post(client, jpeg(gps=True)).json["existing"] is True, "a described photo uploads as the same job"
+
+
+def api_checks(root):
+    app = create_app(root)
+    client = app.test_client()
+    photo, digest = upload_checks(root, app, client)
+    dashboard_checks(root, client, digest)
     page = client.get("/")
     assert page.status_code == 200 and page.headers["Cache-Control"] == "no-store"
     assert "frame-ancestors 'none'" in page.headers["Content-Security-Policy"]
-
     restarted = create_app(root).test_client()
-    again = post(restarted, photo, X_Snoredex_Specimen="SPEC-0774")
-    assert again.status_code == 200 and again.json["existing"] is True, "the job survives a restart"
+    again = [job for job in restarted.get("/jobs").json["jobs"] if job["id"] == digest]
+    assert again and again[0]["note"] == "Relaxo, korrigiert", "jobs and descriptions survive a restart"
     return photo, digest
 
 
@@ -123,7 +145,8 @@ def refuses_checkout():
     raise AssertionError("an inbox inside a Git checkout must be refused")
 
 
-def browser_checks(root, photo_path, digest, dng_path):
+def browser_checks(root, files):
+    """Bulk upload with one bad file, then describe a job in the dashboard, on a phone-sized page."""
     server = create_server(create_app(root), host="127.0.0.1", port=0)
     threading.Thread(target=server.run, daemon=True).start()
     url = f"http://127.0.0.1:{server.effective_port}/"
@@ -131,26 +154,41 @@ def browser_checks(root, photo_path, digest, dng_path):
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch()
             page = browser.new_page(viewport={"width": 375, "height": 812})
-            problems = []  # script errors and CSP refusals
+            problems = []  # script errors and CSP refusals; the bad file's own 400 line is expected
             page.on("pageerror", lambda error: problems.append(str(error)))
-            page.on("console", lambda message: message.type == "error" and problems.append(message.text))
+            page.on("console", lambda message: message.type == "error"
+                    and "Failed to load resource" not in message.text and problems.append(message.text))
             page.goto(url)
-            page.set_input_files("#photo", str(photo_path))
-            page.check("#owner")
-            page.click("button")
-            assert "SPEC-Nummer oder eine kurze Notiz" in page.text_content("#status"), "hint checked before upload"
+            page.set_input_files("#photos", [str(path) for path in files])
+            page.click("#upload button")
+            # the page's CSP forbids eval, so wait with locators rather than wait_for_function
+            page.locator("#transfers li.ok, #transfers li.error").nth(len(files) - 1).wait_for()
+            lines = page.locator("#transfers li").all_text_contents()
+            assert sum("neu im Eingang" in line for line in lines) == 2, lines
+            assert sum("JPEG- oder DNG-Foto" in line for line in lines) == 1, lines
+            assert any("schon vorhanden" in line for line in lines), lines
 
-            page.fill("#specimen", "SPEC-0774")
-            page.click("button")
-            page.wait_for_selector("#status.ok")
-            assert digest in page.text_content("#status") and "lag schon" in page.text_content("#status")
+            new = sha256(files[1].read_bytes()).hexdigest()
+            item = page.locator(f'li.job[data-job="{new}"]')
+            item.wait_for()
+            for _ in range(50):
+                if item.locator("img").evaluate("image => image.complete && image.naturalWidth > 0"):
+                    break
+                page.wait_for_timeout(100)
+            else:
+                raise AssertionError("the preview of the new DNG did not load")
+            assert item.locator(".state").text_content() == "ohne Angabe"
+            item.locator("textarea").fill("Relaxo, Sammel-Upload")
+            item.locator("button").click()
+            item.locator(".saved.ok").wait_for()
+            assert item.locator(".state").text_content() == "beschrieben"
 
-            page.set_input_files("#photo", str(dng_path))
-            page.fill("#specimen", "")
-            page.fill("#note", "Relaxo, im Browser als DNG")
-            page.click("button")
-            page.wait_for_selector("#status.ok >> text=Foto empfangen")
-            assert sha256(dng_path.read_bytes()).hexdigest() in page.text_content("#status")
+            page.reload()
+            page.check("#open-only")
+            page.locator(f'li.job[data-job="{new}"]').wait_for(state="detached")
+            page.uncheck("#open-only")
+            page.locator(f'li.job[data-job="{new}"] textarea').wait_for()
+            assert page.locator(f'li.job[data-job="{new}"] textarea').input_value() == "Relaxo, Sammel-Upload"
             assert page.evaluate("document.documentElement.scrollWidth") <= 375, "no sideways scroll on a phone"
             assert not problems, problems
             browser.close()
@@ -207,14 +245,15 @@ def main():
     refuses_checkout()
     with TemporaryDirectory() as temp:
         derive_checks(temp)
-    with TemporaryDirectory() as temp:
         root = Path(temp) / "inbox"
-        photo, digest = api_checks(root)
-        photo_path = Path(temp) / "upload.jpg"
-        photo_path.write_bytes(photo)
-        dng_path = Path(temp) / "browser.dng"
-        dng_path.write_bytes(dng() + b"browser")
-        browser_checks(root, photo_path, digest, dng_path)
+        photo, _ = api_checks(root)
+        names = ("again.jpg", "new.dng", "notes.txt", "new.jpg")
+        bodies = (photo, dng_with_preview(jpeg((5, 6, 7), size=(48, 64))), b"not a photo", jpeg((9, 9, 9)))
+        files = []
+        for name, body in zip(names, bodies):
+            files.append(Path(temp) / name)
+            files[-1].write_bytes(body)
+        browser_checks(root, files)
     print("photo inbox: all checks passed")
 
 
