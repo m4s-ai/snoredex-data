@@ -1,5 +1,6 @@
 """Local Instagram draft regression checks. Requires Pillow like the exporter."""
 from io import BytesIO
+import re
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
@@ -45,6 +46,24 @@ class InstagramDraftTests(unittest.TestCase):
                 caption, alt = post_copy(model, item, "https://go.m4s.eu/sdtest")
                 self.assertIn(foil, caption)
                 self.assertIn(foil, alt)
+
+    def test_hashtags_close_the_caption(self):
+        model = load()
+        cases = [("SPEC-1114", "#Snorlax #PokemonTCG #PokemonCards #GymHeroes"),
+                 ("SPEC-1113", "#Snorlax #PokemonTCG #PokemonCards #Relaxo #RisingRivals"),
+                 ("SPEC-1120", "#Snorlax #PokemonTCG #PokemonCards #カビゴン #MEGADreamEx")]
+        for sid, line in cases:
+            with self.subTest(specimen=sid):
+                _, item = owner_specimen(model, sid)
+                caption, alt = post_copy(model, item, "https://go.m4s.eu/sdtest")
+                self.assertEqual(caption.rstrip("\n").splitlines()[-1], line)
+                self.assertNotIn("#", alt)
+        # Instagram refuses more than five; every printing stays within it, without repeats or spaces
+        for item in model["printings"]["printings"]:
+            caption, _ = post_copy(model, item, None)
+            tags = caption.rstrip("\n").splitlines()[-1].split(" ")
+            self.assertTrue(3 <= len(tags) <= 5 and len(set(tags)) == len(tags), (item["itemId"], tags))
+            self.assertTrue(all(re.fullmatch(r"#[^\s#$%&.,!?'()<>·-]+", tag) for tag in tags), tags)
 
     def test_orientation_and_crop(self):
         raw = BytesIO()

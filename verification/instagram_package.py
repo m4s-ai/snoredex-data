@@ -7,8 +7,10 @@ import hashlib
 import io
 import json
 from pathlib import Path
+import re
 import sys
 from tempfile import TemporaryDirectory
+import unicodedata
 
 from gallery_prepare import coefficients, extract
 from card_pages import read_social
@@ -27,6 +29,9 @@ PATTERN = {"poke-ball": "Poké Ball pattern", "master-ball": "Master Ball patter
            "colorless-energy-star": "Colorless Energy pattern"}
 CANVAS = "#0d0f10"
 WATERMARK = "@SnoreDex"
+# Instagram takes at most five hashtags per post (Help Center, 2026); they label, they do not reach
+HASHTAGS = ("#Snorlax", "#PokemonTCG", "#PokemonCards")
+SPECIES = ("カビゴン", "卡比兽", "卡比獸", "잠만보", "Relaxo", "Ronflex", "คาบิกอน", "Снорлакс")
 
 
 def digest(data: bytes) -> str:
@@ -70,12 +75,26 @@ def caption_facts(model: dict, item: dict) -> tuple[str, str, str, str]:
     return card, local_set["localSetName"], facts, release_label(item, edition)
 
 
+def hashtags(item: dict, set_name: str) -> str:
+    """Three fixed tags, then the local name of Snorlax, the set and a reverse holo, five at most."""
+    local = item.get("localCardName") or ""
+    tags = [*HASHTAGS, *(f"#{name}" for name in SPECIES if name in local)][:4]
+    plain = unicodedata.normalize("NFKD", set_name).encode("ascii", "ignore").decode()  # Pokémon -> Pokemon
+    set_tag = "".join(word[:1].upper() + word[1:] for word in re.findall(r"[0-9A-Za-z]+", plain))
+    if set_tag and len(set_tag) <= 24 and len(plain) >= len(set_name) - 2:
+        tags.append(f"#{set_tag}")
+    if item.get("finish") == "reverse-holo":
+        tags.append("#ReverseHolo")
+    return " ".join(tags[:5])
+
+
 def post_copy(model: dict, item: dict, short_url: str | None) -> tuple[str, str]:
     card, set_name, facts, date = caption_facts(model, item)
     lines = [f"{card} · {set_name}", facts]
     if date:
         lines.append(f"Released: {date}")
-    lines += ["", "Own collection photo for @SnoreDex.", f"Card details: {short_url or '[short link missing]'}"]
+    lines += ["", "Own collection photo for @SnoreDex.", f"Card details: {short_url or '[short link missing]'}",
+              "", hashtags(item, set_name)]
     alt = f"Own photo of {card} from {set_name}."
     if facts:
         alt += f" Print variant: {facts}."
