@@ -29,6 +29,22 @@ Without `--host` the service listens on loopback only; `--host 0.0.0.0` (or a re
 Homelab) makes it reachable in the home network on port 8765 (`--port`). Uploads are limited to
 200 MB, and JPEGs to 60 megapixels.
 
+## Intake access
+
+The inbox runs as a Docker container on the Homelab with the data folder as a bind mount. Intake
+reads the jobs through a read-only SMB share of that folder, `snoredex-inbox`, hidden from browsing
+and open to the owner's user only (owner decision, 2026-11-23). The host firewall must allow TCP 445
+from the home network; a Docker port passes the firewall differently, so the page being reachable
+does not prove the share is. On the Windows intake machine, store the login once (the command asks
+for it) and map the share; where PowerShell does not find the commands, call them from `System32`:
+
+```console
+cmdkey /add:<host> /user:<owner user> /pass
+net use I: \\<host>\snoredex-inbox /persistent:yes
+```
+
+Raw files are read from the share and never copied into a repository.
+
 ## Check
 
 ```console
@@ -44,10 +60,10 @@ restart, an inbox inside a Git checkout, and the page in a phone-sized Chromium.
 
 ## Still open
 
-1. Run it on the Homelab and upload a DNG from the iPhone in the home network; note the address,
-   runtime and persistent folder, and where the local import reads the jobs.
-2. Hand a job's photo to intake: the cleaned, checked copy goes through #625; raw bytes never leave
-   the inbox.
+1. Done 2026-11-23: an iPhone 15 Pro ProRAW DNG (DNG 1.6, 12 megapixels) arrived unchanged from
+   the phone's photo picker and is readable over the share, hash matching its job.
+2. Hand a job's photo to intake: decode the DNG, make the cleaned, checked copy and pass it through
+   #625; raw bytes never leave the inbox.
 3. Later in #626: HEIC input, an edited JPEG and its DNG in one job, status and questions on the job,
    and resuming after an interrupted archive push.
 
