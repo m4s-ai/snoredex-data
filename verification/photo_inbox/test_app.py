@@ -1,4 +1,5 @@
-"""Acceptance checks for the private photo inbox (#626): JPEG and DNG, restart and the German mobile page.
+"""Acceptance checks for the private photo inbox (#626): JPEG and DNG, restart, the German mobile page
+and the derived archive copy.
 
 Needs the inbox and browser requirements:
     pip install -r requirements.txt -r verification/photo_inbox/requirements.txt
@@ -14,11 +15,12 @@ import subprocess
 from tempfile import TemporaryDirectory
 import threading
 
-from PIL import Image
+from PIL import Image, ImageChops
 from playwright.sync_api import sync_playwright
 from waitress.server import create_server
 
 from app import create_app
+from derive import carries_location, derive
 
 
 def jpeg(colour=(200, 40, 40), size=(64, 48), gps=False):
@@ -156,8 +158,55 @@ def browser_checks(root, photo_path, digest, dng_path):
         server.close()
 
 
+def camera_jpeg():
+    """A phone-like JPEG: GPS, maker and XMP data, an ICC profile, orientation 6 and a second frame."""
+    exif = Image.Exif()
+    exif.update({271: "TestMaker", 274: 6})
+    exif.get_ifd(0x8825).update({1: "N", 2: (10.0, 20.0, 30.0), 3: "E", 4: (10.0, 20.0, 30.0)})
+    out, extra = BytesIO(), BytesIO()
+    Image.new("RGB", (64, 48), (90, 140, 60)).save(out, "JPEG", exif=exif, icc_profile=b"test-icc",
+                                                   xmp=b"<x:xmpmeta>GPSLatitude 10,20</x:xmpmeta>")
+    Image.new("L", (8, 8), 128).save(extra, "JPEG")
+    return out.getvalue() + extra.getvalue()
+
+
+def dng_with_preview(preview, compression=7):
+    """A DNG whose IFD0 stores the preview as one strip, as an iPhone ProRAW file does."""
+    entries = [(254, 4, 1), (259, 3, compression), (273, 4, 74), (279, 4, len(preview))]
+    ifd = struct.pack("<H", 5) + b"".join(struct.pack("<HHII", tag, kind, 1, value) for tag, kind, value in entries)
+    ifd += struct.pack("<HHI", 50706, 1, 4) + bytes([1, 6, 0, 0]) + bytes(4)
+    return b"II*\0" + struct.pack("<I", 8) + ifd + preview
+
+
+def derive_checks(temp):
+    source = camera_jpeg()
+    copies = {}
+    for name, body in (("photo.dng", dng_with_preview(source)), ("photo.jpg", source)):
+        job = Path(temp) / name.replace(".", "-")
+        job.mkdir()
+        (job / name).write_bytes(body)
+        copies[name] = derive(job)[0]
+    copy = copies["photo.dng"]
+    assert copies["photo.jpg"] == copy, "a DNG preview and the same JPEG derive the same copy"
+    with Image.open(BytesIO(source)) as before, Image.open(BytesIO(copy)) as after:
+        assert ImageChops.difference(before.convert("RGB"), after.convert("RGB")).getbbox() is None
+        assert dict(after.getexif()) == {274: 6} and after.info["icc_profile"] == b"test-icc"
+    assert not carries_location(copy) and b"TestMaker" not in copy and b"xmpmeta" not in copy
+    assert copy.count(b"\xff\xd8") == 1, "the second frame is dropped"
+    flat = Path(temp) / "flat"
+    flat.mkdir()
+    (flat / "photo.dng").write_bytes(dng_with_preview(source, compression=1))
+    try:
+        derive(flat)
+    except ValueError:
+        return
+    raise AssertionError("a DNG without a JPEG preview must be refused")
+
+
 def main():
     refuses_checkout()
+    with TemporaryDirectory() as temp:
+        derive_checks(temp)
     with TemporaryDirectory() as temp:
         root = Path(temp) / "inbox"
         photo, digest = api_checks(root)

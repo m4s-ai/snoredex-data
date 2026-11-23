@@ -47,7 +47,10 @@ session and say so in the report.
    prove the scrubbed file decodes pixel-identical to the download. Record the scrubbed file's SHA-256;
    state "Exif GPS removed before filing; image data unchanged" in `inspectedFrom`, without
    coordinates, device or person names; and delete the unscrubbed download. `check.py --photos` fails
-   any registered photograph that still carries GPS.
+   any registered photograph that still carries GPS. A job from the private photo inbox (#626)
+   instead goes through `verification/photo_inbox/derive.py`, which writes the photograph with only
+   orientation and colour profile kept (a DNG gives its embedded full-size preview) and proves the
+   pixels unchanged; SPEC-1111 is the worked example.
 5. Photograph. Work in a checkout of the photo repository: clone
    `https://github.com/m4s-ai/snoredex-photos` beside this repository once, and `git pull` there
    before every intake. Save the original as `verification/specimens/SPEC-nnnn.<png|jpg>`, compute
