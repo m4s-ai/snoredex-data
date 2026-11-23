@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 1110,
+  "count": 1111,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -23240,6 +23240,37 @@
       "citedBy": [
         "F0267-P02"
       ]
+    },
+    {
+      "specimenId": "SPEC-1111",
+      "photographedBy": "collection owner",
+      "photographedByBasis": "The collection owner confirmed own authorship (\"selbst aufgenommen\", ownPhoto true) when uploading the photograph through the private photo inbox on 2026-11-23, job bf400238f3d10b9eb1705de3a28be44498c7fce55e7290f4b77dece7f4a1075b.",
+      "setCode": "GEN",
+      "number": "58/83",
+      "variant": "reverse-holo",
+      "language": "Spanish",
+      "heldBy": "collection owner",
+      "inspectedFrom": "Owner photograph taken on an iPhone as an Apple ProRAW DNG (12 MP) and uploaded on 2026-11-23 through the private photo inbox (the DNG stays private). The DNG's embedded full-size preview JPEG was extracted byte for byte and its metadata reduced to the orientation tag and the ICC colour profile (Exif including GPS, XMP, maker data and the gain-map frame removed); the primary image decodes pixel-identical to the extracted preview. Inspected at full resolution (4032x3024 stored, Exif orientation 6).",
+      "photograph": "SPEC-1111.jpg",
+      "photographSource": null,
+      "photographSha256": "sha256:3baffff988f2bde692dab22ca74cab19a9d24b973315759724101e0e52df8706",
+      "observed": "One complete upright Spanish Generations Snorlax card face standing in a clear acrylic stand against a plain light wall; the stand's clips touch the bottom border only. BÁSICO, Snorlax, PS 130, Habilidad Vuelta y Cabezadita, attack Presión Soporífera 120, Ilus. Mitsuhiro Arita, ©2016 Pokémon, 58/83 with rarity star and the Generations set symbol establish the exact Spanish card. The artwork is matte; the card body outside it shows foil with a repeating star-shaped Colorless type-symbol pattern and a rainbow sheen at the right of the text box. The card face is about 1868 px wide.",
+      "recordedAt": "2026-11-23",
+      "citedBy": [
+        "F0139-P02"
+      ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "foilPattern": "type-symbol-background",
+        "markings": null,
+        "cardSize": "standard",
+        "basis": "Matte artwork with foil across the card body outside it: a repeating star-shaped Colorless type-symbol pattern and a rainbow sheen at the right of the text box; the collection owner's upload note calls it the Spanish Generations reverse holo.",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-11-23"
+      },
+      "listingUrl": null
     }
   ]
 }
