@@ -1,4 +1,4 @@
-"""Acceptance checks for the private photo inbox (#626): API, restart and the German mobile page.
+"""Acceptance checks for the private photo inbox (#626): JPEG and DNG, restart and the German mobile page.
 
 Needs the inbox and browser requirements:
     pip install -r requirements.txt -r verification/photo_inbox/requirements.txt
@@ -9,6 +9,7 @@ from hashlib import sha256
 from io import BytesIO
 import json
 from pathlib import Path
+import struct
 import subprocess
 from tempfile import TemporaryDirectory
 import threading
@@ -17,11 +18,7 @@ from PIL import Image
 from playwright.sync_api import sync_playwright
 from waitress.server import create_server
 
-from app import MAX_UPLOAD, create_app
-
-TOKEN = "inbox-test-code-0123456789"
-WRONG = "wrong-code-0123456789"
-AUTH = {"Authorization": "Bearer " + TOKEN}
+from app import create_app
 
 
 def jpeg(colour=(200, 40, 40), size=(64, 48), gps=False):
@@ -33,8 +30,15 @@ def jpeg(colour=(200, 40, 40), size=(64, 48), gps=False):
     return out.getvalue()
 
 
+def dng(order=b"II", tag=50706):
+    """The smallest TIFF whose first IFD holds one tag; 50706 (DNGVersion) makes it a DNG."""
+    end = "<" if order == b"II" else ">"
+    entry = struct.pack(end + "HHI", tag, 1, 4) + bytes([1, 4, 0, 0])
+    return order + struct.pack(end + "HI", 42, 8) + struct.pack(end + "H", 1) + entry + bytes(68)
+
+
 def post(client, body, **headers):
-    sent = {"Content-Type": "application/octet-stream", "X-Snoredex-Owner": "yes", **AUTH}
+    sent = {"Content-Type": "application/octet-stream", "X-Snoredex-Owner": "yes"}
     sent.update({key.replace("_", "-"): value for key, value in headers.items()})
     return client.post("/uploads", data=body, headers={k: v for k, v in sent.items() if v is not None})
 
@@ -44,7 +48,8 @@ def jobs(root):
 
 
 def api_checks(root):
-    client = create_app(root, TOKEN).test_client()
+    app = create_app(root)
+    client = app.test_client()
     photo = jpeg(gps=True)
     digest = sha256(photo).hexdigest()
 
@@ -62,9 +67,19 @@ def api_checks(root):
     assert repeat.status_code == 200 and repeat.json["existing"] is True, "double tap is the same job"
     assert post(client, photo, X_Snoredex_Note="andere%20Karte").status_code == 409, "conflicting details"
 
+    raw = dng(b"MM")
+    taken = post(client, raw, X_Snoredex_Note="Relaxo DNG")
+    assert taken.status_code == 201 and (root / taken.json["id"] / "photo.dng").read_bytes() == raw, "a DNG is kept"
+    assert json.loads((root / taken.json["id"] / "job.json").read_text(encoding="utf-8"))["file"] == "photo.dng"
+    assert post(client, dng(b"II"), X_Snoredex_Note="x").status_code == 201, "little-endian DNG"
+    kept = jobs(root)
+
+    tiff = BytesIO()
+    Image.new("RGB", (8, 8)).save(tiff, "TIFF")
     refused = [
-        (post(client, jpeg((1, 2, 3)), Authorization="Bearer " + WRONG, X_Snoredex_Note="x"), 401),
-        (post(client, jpeg((1, 2, 3)), Authorization=None, X_Snoredex_Note="x"), 401),
+        (post(client, tiff.getvalue(), X_Snoredex_Note="x"), 400),
+        (post(client, dng(tag=305), X_Snoredex_Note="x"), 400),
+        (post(client, dng()[:12], X_Snoredex_Note="x"), 400),
         (post(client, jpeg((1, 2, 3)), Content_Type="image/jpeg", X_Snoredex_Note="x"), 415),
         (post(client, jpeg((1, 2, 3)), X_Snoredex_Owner=None, X_Snoredex_Note="x"), 400),
         (post(client, jpeg((1, 2, 3))), 400),
@@ -73,11 +88,14 @@ def api_checks(root):
         (post(client, jpeg((1, 2, 3)), X_Snoredex_Note="%FF"), 400),
         (post(client, b"not a jpeg", X_Snoredex_Note="x"), 400),
         (post(client, jpeg((1, 2, 3))[:300], X_Snoredex_Note="x"), 400),
-        (post(client, b"\0" * (MAX_UPLOAD + 1), X_Snoredex_Note="x"), 413),
     ]
     for response, expected in refused:
         assert response.status_code == expected and response.json["error"], (expected, response.status_code)
-    assert jobs(root) == [digest], "a refused upload leaves nothing behind"
+    assert jobs(root) == kept, "a refused upload leaves nothing behind"
+    app.config["MAX_CONTENT_LENGTH"] = 1024
+    too_big = post(client, bytes(2048), X_Snoredex_Note="x")
+    assert too_big.status_code == 413 and "200 MB" in too_big.json["error"]
+    app.config["MAX_CONTENT_LENGTH"] = 200 * 1024 * 1024
 
     big = BytesIO()
     Image.new("L", (7800, 7800)).save(big, "JPEG")
@@ -87,7 +105,7 @@ def api_checks(root):
     assert page.status_code == 200 and page.headers["Cache-Control"] == "no-store"
     assert "frame-ancestors 'none'" in page.headers["Content-Security-Policy"]
 
-    restarted = create_app(root, TOKEN).test_client()
+    restarted = create_app(root).test_client()
     again = post(restarted, photo, X_Snoredex_Specimen="SPEC-0774")
     assert again.status_code == 200 and again.json["existing"] is True, "the job survives a restart"
     return photo, digest
@@ -97,43 +115,40 @@ def refuses_checkout():
     with TemporaryDirectory() as temp:
         subprocess.run(["git", "init", "-q", temp], check=True)
         try:
-            create_app(Path(temp) / "inbox", TOKEN)
+            create_app(Path(temp) / "inbox")
         except ValueError:
             return
     raise AssertionError("an inbox inside a Git checkout must be refused")
 
 
-def browser_checks(root, photo_path, digest):
-    server = create_server(create_app(root, TOKEN), host="127.0.0.1", port=0)
+def browser_checks(root, photo_path, digest, dng_path):
+    server = create_server(create_app(root), host="127.0.0.1", port=0)
     threading.Thread(target=server.run, daemon=True).start()
     url = f"http://127.0.0.1:{server.effective_port}/"
     try:
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch()
             page = browser.new_page(viewport={"width": 375, "height": 812})
-            problems = []  # script errors and CSP refusals; a refused upload's own 401 line is expected
+            problems = []  # script errors and CSP refusals
             page.on("pageerror", lambda error: problems.append(str(error)))
-            page.on("console", lambda message: message.type == "error"
-                    and "Failed to load resource" not in message.text and problems.append(message.text))
+            page.on("console", lambda message: message.type == "error" and problems.append(message.text))
             page.goto(url)
             page.set_input_files("#photo", str(photo_path))
             page.check("#owner")
-            page.fill("#code", WRONG)
             page.click("button")
             assert "SPEC-Nummer oder eine kurze Notiz" in page.text_content("#status"), "hint checked before upload"
 
             page.fill("#specimen", "SPEC-0774")
             page.click("button")
-            page.wait_for_selector("#status.error >> text=Upload-Code stimmt nicht")
-
-            page.fill("#code", TOKEN)
-            page.click("button")
             page.wait_for_selector("#status.ok")
             assert digest in page.text_content("#status") and "lag schon" in page.text_content("#status")
-            assert TOKEN not in page.url and "?" not in page.url, "the code stays out of the URL"
 
-            page.reload()
-            assert page.input_value("#code") == TOKEN, "the code is remembered on this device"
+            page.set_input_files("#photo", str(dng_path))
+            page.fill("#specimen", "")
+            page.fill("#note", "Relaxo, im Browser als DNG")
+            page.click("button")
+            page.wait_for_selector("#status.ok >> text=Foto empfangen")
+            assert sha256(dng_path.read_bytes()).hexdigest() in page.text_content("#status")
             assert page.evaluate("document.documentElement.scrollWidth") <= 375, "no sideways scroll on a phone"
             assert not problems, problems
             browser.close()
@@ -148,7 +163,9 @@ def main():
         photo, digest = api_checks(root)
         photo_path = Path(temp) / "upload.jpg"
         photo_path.write_bytes(photo)
-        browser_checks(root, photo_path, digest)
+        dng_path = Path(temp) / "browser.dng"
+        dng_path.write_bytes(dng() + b"browser")
+        browser_checks(root, photo_path, digest, dng_path)
     print("photo inbox: all checks passed")
 
 
