@@ -1,0 +1,14 @@
+:root { color-scheme: light dark; font: 17px/1.4 system-ui, sans-serif; }
+body { margin: 0; padding: 16px; }
+main { max-width: 32rem; margin: 0 auto; }
+label { display: block; margin-top: 1rem; font-weight: 600; }
+input:not([type="checkbox"]), textarea, button {
+  display: block; box-sizing: border-box; width: 100%; margin-top: .3rem; padding: .6rem; font: inherit;
+}
+.check { display: flex; gap: .6rem; align-items: center; font-weight: normal; }
+.check input { width: 1.4rem; height: 1.4rem; margin: 0; }
+.hint { margin: .3rem 0 0; font-size: .9rem; }
+button { min-height: 3rem; margin-top: 1.4rem; font-weight: 600; }
+#status code { display: block; margin-top: .3rem; overflow-wrap: anywhere; }
+.error { color: light-dark(#b00020, #ff8a80); font-weight: 600; }
+.ok { color: light-dark(#0a6b2d, #7ee2a0); }
