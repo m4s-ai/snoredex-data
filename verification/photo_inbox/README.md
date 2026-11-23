@@ -45,6 +45,21 @@ net use I: \\<host>\snoredex-inbox /persistent:yes
 
 Raw files are read from the share and never copied into a repository.
 
+## Archive copy
+
+`derive.py` turns one job into the photograph intake files (snoredex-specimen-intake, step 4):
+
+```console
+python verification/photo_inbox/derive.py I:\<job> <photo checkout>\verification\specimens\SPEC-nnnn.jpg
+```
+
+A DNG gives its embedded full-size preview, the camera's own rendering; a JPEG gives itself. The
+image data is copied, never re-encoded. Only the orientation tag and the ICC colour profile stay:
+GPS, XMP, maker data and any further frame (the HDR gain map) go. The script refuses unless the copy
+decodes pixel-identical to its source and carries no location, never overwrites a file, and prints
+the hashes and size the specimen record names. It reproduces SPEC-1111, the first inbox photo,
+byte for byte. A DNG without a full-size JPEG preview is refused and needs a raw decoder instead.
+
 ## Check
 
 ```console
@@ -55,15 +70,17 @@ python verification/photo_inbox/test_app.py
 It covers a JPEG with GPS (kept privately, byte for byte), DNGs in both byte orders, a plain TIFF and
 a truncated DNG header, a missing owner confirmation or card hint, invalid SPEC numbers and notes,
 non-photo and truncated JPEG files, the size and pixel limits, repeat and conflicting uploads, a
-restart, an inbox inside a Git checkout, and the page in a phone-sized Chromium. It is not part of
-`regen.py`, whose gate stays standard-library only.
+restart, an inbox inside a Git checkout, the page in a phone-sized Chromium, and the archive copy of
+a phone-like DNG and JPEG (location, maker, XMP and second frame gone; pixels, profile and
+orientation kept; a DNG without preview refused). It is not part of `regen.py`, whose gate stays
+standard-library only.
 
 ## Still open
 
 1. Done 2026-11-23: an iPhone 15 Pro ProRAW DNG (DNG 1.6, 12 megapixels) arrived unchanged from
    the phone's photo picker and is readable over the share, hash matching its job.
-2. Hand a job's photo to intake: decode the DNG, make the cleaned, checked copy and pass it through
-   #625; raw bytes never leave the inbox.
+2. Done 2026-11-23: the first job went through intake as SPEC-1111; `derive.py` now makes that
+   archive copy. Next: its Instagram package through #625.
 3. Later in #626: HEIC input, an edited JPEG and its DNG in one job, status and questions on the job,
    and resuming after an interrupted archive push.
 
