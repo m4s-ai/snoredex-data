@@ -23,7 +23,8 @@ POST_SIZE = (1080, 1350)
 MONTHS = ("January", "February", "March", "April", "May", "June",
           "July", "August", "September", "October", "November", "December")
 FINISH = {"non-holo": "Non-Holo", "holo": "Holo", "reverse-holo": "Reverse Holo", "mirror-holo": "Mirror Holo"}
-PATTERN = {"poke-ball": "Poké Ball pattern", "master-ball": "Master Ball pattern"}
+PATTERN = {"poke-ball": "Poké Ball pattern", "master-ball": "Master Ball pattern",
+           "colorless-energy-star": "Colorless Energy pattern"}
 CANVAS = "#0d0f10"
 WATERMARK = "@SnoreDex"
 

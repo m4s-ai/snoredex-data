@@ -36,6 +36,16 @@ class InstagramDraftTests(unittest.TestCase):
                 self.assertIn("Chinese (Simplified)", caption)
                 self.assertTrue(alt.startswith("Own photo of "))
 
+    def test_mirror_patterns_name_themselves(self):
+        # Japanese m2a 136: the two mirror cards differ only by their pattern
+        model = load()
+        for sid, foil in (("SPEC-1124", "Poké Ball pattern"), ("SPEC-1120", "Colorless Energy pattern")):
+            with self.subTest(specimen=sid):
+                _, item = owner_specimen(model, sid)
+                caption, alt = post_copy(model, item, "https://go.m4s.eu/sdtest")
+                self.assertIn(foil, caption)
+                self.assertIn(foil, alt)
+
     def test_orientation_and_crop(self):
         raw = BytesIO()
         exif = Image.Exif()
