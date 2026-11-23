@@ -5,7 +5,7 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "sourceRepository": "https://github.com/m4s-ai/snoredex-data",
     "dataAsOf": "2026-11-23",
-    "catalogueFingerprint": "sha256:260825bd3e2514e8199cf7781d84446b9813176aa26080961ab9b34408e3c526",
+    "catalogueFingerprint": "sha256:6d8a80da6c4f27193bf8e2e39f203bdc5dfdb885a0dd0c9a21a1d13edbf660d7",
     "previousFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
     "assetBaseUrl": "https://m4s-ai.github.io/snoredex-data/",
     "scope": {
@@ -81886,7 +81886,8 @@
       "finishUnitId": "F0208",
       "sourceClaimRefs": [
         "CLAIM:finish:F0208-P01",
-        "CLAIM:legacy:U0126"
+        "CLAIM:legacy:U0126",
+        "CLAIM:specimen:SPEC-1118"
       ],
       "localizationId": "LOCALIZATION:JP:ja",
       "cardName": "Hop's Snorlax",
@@ -81899,8 +81900,8 @@
       "edition": null,
       "editionAssignmentStatus": "not-applicable",
       "finishVerificationStatus": "confirmed",
-      "finish": "non-holo",
-      "finishFamily": "non-holo",
+      "finish": "holo",
+      "finishFamily": "holo",
       "finishGroupId": "finish-group-de015ce1-f02a-5864-a5a9-4cdaefa93352",
       "foilPattern": null,
       "markings": [],
@@ -81915,20 +81916,27 @@
           "RARITYCLAIM:fa33771a67ebacac"
         ]
       },
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
+      "completenessEvidence": {
+        "adjudicationId": "OAF-20261123-m2a-136-ja",
+        "evidenceRefs": [
+          "https://api.tcgdex.net/v2/ja/cards/M2a-136",
+          "specimen:SPEC-1118"
+        ]
+      },
       "releaseDate": "2025-11-28",
       "releaseDatePrecision": "day",
       "releaseApproximate": false,
       "releaseSortKey": "2025-11-28|LOCALIZATION:JP:ja|m000000000002a|000000000136|claim:CLAIM:finish:F0208-P01",
-      "imageAssetId": "asset-67490cbc-69e2-5a6b-a610-7d9295673381",
-      "imageScope": "legacy-product",
+      "imageAssetId": "asset-69545fe5-fef0-5eca-8fbd-7a9cd90d7a36",
+      "imageScope": "exact-printing",
       "sourceLinks": [
         "https://api.tcgdex.net/v2/ja/cards/M2a-136"
       ],
       "evidenceLinks": [
         "https://api.tcgdex.net/v2/ja/cards/M2a-136"
       ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Hop%27s+Snorlax+%E2%80%94+m2a+%E2%80%94+MEGA+Dream+ex+136+%28verified-printing%29&row-id=item-4acd4945-b309-5610-8357-a133b843d69d&card-name=Hop%27s+Snorlax&set-code=m2a+%E2%80%94+MEGA+Dream+ex&card-number=136&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Hop%27s+Snorlax+%E2%80%94+m2a+%E2%80%94+MEGA+Dream+ex+136+%28verified-printing%29&row-id=item-4acd4945-b309-5610-8357-a133b843d69d&card-name=Hop%27s+Snorlax&set-code=m2a+%E2%80%94+MEGA+Dream+ex&card-number=136&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+owner-adjudicated+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
       "itemId": "item-9e4859d9-7656-5c48-a244-c706f64a73fc",
@@ -92832,6 +92840,20 @@
       }
     },
     {
+      "assetId": "asset-69545fe5-fef0-5eca-8fbd-7a9cd90d7a36",
+      "path": "verification/specimens/SPEC-1118.png",
+      "url": "https://raw.githubusercontent.com/m4s-ai/snoredex-photos/main/verification/specimens/SPEC-1118.png",
+      "sha256": "sha256:d0af46807e8ef1218ea4d18337383cb6b7d5e5c73ddd63f82825519a8c500195",
+      "mimeType": "image/png",
+      "imageScope": "exact-printing",
+      "altTextBasis": "Hop's Snorlax — MEGA Dream ex; exact-printing",
+      "attribution": {
+        "rightsStatus": "third-party-rights-excluded-from-project-grants",
+        "licenceRef": "LICENSE.md",
+        "noticeRef": "THIRD_PARTY_NOTICES.md"
+      }
+    },
+    {
       "assetId": "asset-69556262-5d24-5cbe-a7f7-20f8a060a06e",
       "path": "verification/specimens/SPEC-0521.jpg",
       "url": "https://raw.githubusercontent.com/m4s-ai/snoredex-photos/main/verification/specimens/SPEC-0521.jpg",
@@ -100411,7 +100433,7 @@
       "researchPlaceholders": 0,
       "currentKnown": 939,
       "research": 1,
-      "assets": 896
+      "assets": 897
     },
     "predecessor": {
       "schema": "snoredex-checklist",
