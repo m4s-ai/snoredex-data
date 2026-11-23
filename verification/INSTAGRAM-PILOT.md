@@ -12,6 +12,12 @@ an English caption draft, alt text and a JSON record linking the files, photo ha
 The @SnoreDex account is kept in English (owner decision, 2026-11-23). A localized card name joins
 Snorlax and never replaces it, for example `カビゴン (Snorlax)`.
 
+The caption ends with at most five hashtags, Instagram's limit per post, in the caption rather than a
+comment: `#Snorlax #PokemonTCG #PokemonCards`, then Snorlax's local name when the card carries one
+(`#カビゴン`, `#Relaxo`), the set when its name makes a short Latin tag (`#GymHeroes`) and
+`#ReverseHolo`, in that order until five. Hashtags label a post for collectors; they do not raise its
+reach. The searchable words are the card facts in the caption itself.
+
 The export verifies the archived original by SHA-256. Pass `--corners x1 y1 x2 y2 x3 y3 x4 y4` at the
 card face's own edges, clockwise from top left after applying the original's EXIF orientation. The
 cover then frames the card at about 60 % of the width, nudged down to keep its stand in view, and
