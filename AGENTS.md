@@ -43,8 +43,8 @@ faces. A question or audit request is answered, not implemented; read-only work 
 
 | Level | Actions |
 |---|---|
-| Free | local builds and checks, commits on the task branch, fast-forward pushes of verified follow-up commits to an existing authorized PR branch, pushes of intake photographs to `main` of the photo repository `m4s-ai/snoredex-photos` |
-| Only on explicit instruction | first push of a task branch, force pushes (including `--force-with-lease` after a rebase), opening or merging a PR (one instruction may name a series), issue/PR comments, live source refreshes (Cardmarket quota), running the `Publish site` workflow |
+| Free | local builds and checks, commits on the task branch, fast-forward pushes of verified follow-up commits to an existing authorized PR branch, pushes of intake photographs to `main` of the photo repository `m4s-ai/snoredex-photos`; once a specimen intake is merged (owner decision, 2026-11-23): the `Publish site` run that puts it on Pages, the `Provision Snoredex short links` run for its printings, and the data PR recording their verified aliases (opened, and merged on green CI) |
+| Only on explicit instruction | first push of a task branch, force pushes (including `--force-with-lease` after a rebase), opening or merging a PR (one instruction may name a series), issue/PR comments, live source refreshes (Cardmarket quota), running the `Publish site` workflow outside a merged specimen intake |
 | Owner only | `verification/owner_adjudications.json` entries (including `rejectedFinishes`), `publication-decisions.json` |
 | Never | push to this repository's `main`, edit `verification/archive/`, bypass or weaken the publication gate |
 

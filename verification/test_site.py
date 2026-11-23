@@ -254,6 +254,11 @@ def check_card_pages(browser, origin):
         "https://www.instagram.com/p/fixtureOne/", "https://www.instagram.com/p/fixtureTwo/"]
     rows[master]["instagramPosts"] = ["https://www.instagram.com/p/fixtureThree/"]
     pages = render_pages()
+    # every printing has a share page built from the data; only an own exact owner photo previews
+    assert {f"cards/{item['itemId']}/index.html" for item in CANONICAL_ITEMS} <= pages.keys()
+    plain = next(item["itemId"] for item in CANONICAL_ITEMS
+                 if item["itemId"] not in rows and "og:image" not in pages[f"cards/{item['itemId']}/index.html"])
+    assert "Open card details" in pages[f"cards/{plain}/index.html"]
 
     def serve_share(route):
         name = urlsplit(route.request.url).path.lstrip("/") + "index.html"

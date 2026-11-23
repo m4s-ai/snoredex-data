@@ -55,6 +55,7 @@ def share_page(template: Template, item_id: str, card: dict | None, preview: str
         title = " · ".join(filter(None, (card["name"], card["number"], card["language"],
                                         card["finish"], card["foilPattern"])))
         description = f"{card['set']} · {title}"
+    if card and preview:
         image_meta = (f'<meta property="og:image" content="{escape(ASSET_BASE_URL + preview)}">\n'
                       f'<meta property="og:image:alt" content="{escape("Card front: " + title)}">')
     return template.substitute(title=escape(title), description=escape(description), image_meta=image_meta,
@@ -73,21 +74,39 @@ def approved_preview(root: Path, model: dict, row: dict, photos: dict) -> str:
     return preview
 
 
+def own_preview(root: Path, model: dict, item: dict, photos: dict) -> str:
+    """The preview of the item's own exact owner photo, or "" when its image is anything else."""
+    asset = next((row for row in photos.values() if row["assetId"] == item.get("imageAssetId")), None)
+    match = asset and re.fullmatch(r"verification/specimens/(SPEC-\d+)\.\w+", asset["path"])
+    if not match:
+        return ""
+    try:
+        return approved_preview(root, model, {"itemId": item["itemId"], "specimenId": match[1]}, photos)
+    except ValueError:
+        return ""
+
+
 def render_pages(root: Path = ROOT) -> dict[str, str]:
+    """A share page for every printing: built from the data, never added one by one (owner, 2026-11-23).
+
+    The preview image is the printing's own exact owner photo; a social row must have one."""
     rows = read_social(root)
     model = load()
     doc = json.loads((root / "collector_catalogue.json").read_text(encoding="utf-8"))
     printings = {row["itemId"]: row for row in model["printings"]["printings"]}
+    if unknown := rows.keys() - printings.keys():
+        raise ValueError(f"social rows name unknown printings: {sorted(unknown)}")
     gallery, _ = gallery_cards(doc, printings, model["images"])
     cards = {card["id"]: card for card in gallery}
     photos = {asset["path"]: asset for asset in model["images"]["assets"]}
     template = Template((root / "templates/card.html").read_text(encoding="utf-8"))
     pages = {}
-    for item_id, row in rows.items():
-        name = f"cards/{item_id}/index.html"
-        if item_id in printings and not printings[item_id]["active"]:
-            pages[name] = share_page(template, item_id, None)
+    for item_id, item in printings.items():
+        if not item["active"]:
+            card, preview = None, ""
+        elif item_id in rows:
+            card, preview = cards[item_id], approved_preview(root, model, rows[item_id], photos)
         else:
-            preview = approved_preview(root, model, row, photos)
-            pages[name] = share_page(template, item_id, cards[item_id], preview)
+            card, preview = cards[item_id], own_preview(root, model, item, photos)
+        pages[f"cards/{item_id}/index.html"] = share_page(template, item_id, card, preview)
     return pages

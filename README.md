@@ -51,10 +51,12 @@ The catalogue, both pages, the database and the tracker template are built from 
 `scripts/build.py`; never edit them by hand.
 
 The gallery and table open card details at `card.html?item=<itemId>`. The page loads the selected
-printing and its image from the current catalogue. For entries in `data/social.json`, the Pages
-artifact also serves share URLs under `cards/<itemId>/` with an approved owner photo in the link
-preview. Those URLs open the same detail view. Record only verified YOURLS aliases and the permalinks
-of published Instagram posts. Keep an existing alias assigned to the same item when updating its target.
+printing and its image from the current catalogue. The Pages artifact also serves a share URL
+`cards/<itemId>/` for every printing, built from the data; its link preview is the printing's own
+exact owner photo, and a printing without one shares without an image. Those URLs open the same
+detail view. `data/social.json` names the printings shared on Instagram: record only verified YOURLS
+aliases and the permalinks of published Instagram posts. Keep an existing alias assigned to the same
+item when updating its target.
 
 ## Build and check
 

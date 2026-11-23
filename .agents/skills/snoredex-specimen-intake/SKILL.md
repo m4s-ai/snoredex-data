@@ -84,6 +84,14 @@ session and say so in the report.
    noted: another intake may be in flight). Run
    `python scripts/regen.py` once at delivery. Report retained, cited and unresolved evidence
    separately.
+11. Share an owner photograph. Every printing has a share page `cards/<itemId>/` built from the data;
+   its preview is the printing's own exact owner photo, so nothing is added per card. When the
+   specimen is the item's image and `photographedBy` is the collection owner, add its
+   `data/social.json` row (`itemId`, `specimenId`, empty `instagramPosts`) in the intake PR. Once
+   that PR is merged, without asking again (AGENTS.md authority table): run `Publish site`, check
+   the deployed card page and its preview, run **Provision Snoredex short links** with the item ids,
+   record each verified `shortAlias` in a data PR merged on green CI, and build the Instagram draft
+   ([INSTAGRAM-PILOT.md](../../../verification/INSTAGRAM-PILOT.md)).
 
 ### WebP source photographs
 
