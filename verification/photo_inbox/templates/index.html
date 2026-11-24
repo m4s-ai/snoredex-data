@@ -24,6 +24,9 @@
     <button type="button" role="tab" id="tab-uebersicht" aria-controls="panel-uebersicht" aria-selected="false" tabindex="-1">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
       <span>Übersicht</span></button>
+    <button type="button" role="tab" id="tab-posts" aria-controls="panel-posts" aria-selected="false" tabindex="-1">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4 18-7z"/></svg>
+      <span>Posts</span><span class="count" id="count-posts" hidden></span></button>
     <button type="button" role="tab" id="tab-statistik" aria-controls="panel-statistik" aria-selected="false" tabindex="-1">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg>
       <span>Statistik</span></button>
@@ -79,6 +82,21 @@
   <ul id="rows" class="rows"></ul>
 </section>
 
+<section id="panel-posts" role="tabpanel" aria-labelledby="tab-posts" tabindex="0" hidden>
+  <p class="lead">Entwürfe für @SnoreDex auf Instagram, der Facebook-Seite und Threads, gebaut aus dem Katalog
+    und dem Fotoarchiv. Hier wird noch nichts gepostet: Posten und Einplanen folgen mit #646.</p>
+  <div class="filters">
+    <label>Ansicht
+      <select id="post-view">
+        <option value="ready">Bereit für Instagram</option>
+        <option value="posted">Gepostet</option>
+        <option value="all">Alle</option>
+      </select></label>
+  </div>
+  <p id="posts-status" class="hint" role="status"></p>
+  <ul id="posts" class="jobs"></ul>
+</section>
+
 <section id="panel-statistik" role="tabpanel" aria-labelledby="tab-statistik" tabindex="0" hidden>
   <div class="filters">
     <label>Aufteilen nach
@@ -121,6 +139,19 @@
   <li class="row">
     <img alt="" loading="lazy" width="64" height="90">
     <div><p class="row-head"><span class="badge"></span></p><p class="label"></p><p class="links"></p></div>
+  </li>
+</template>
+
+<template id="post-template">
+  <li class="post">
+    <a class="photo" target="_blank" rel="noopener"><img alt="" loading="lazy" width="1080" height="1350"></a>
+    <div class="body">
+      <p class="facts"><span class="badge"></span> <span class="label"></span></p>
+      <label>Caption<textarea class="caption" readonly rows="11"></textarea></label>
+      <label>Alt-Text<textarea class="alt" readonly rows="3"></textarea></label>
+      <p class="todo"></p>
+      <p class="links"></p>
+    </div>
   </li>
 </template>
 

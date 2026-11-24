@@ -336,9 +336,57 @@ async function showTrash() {
   }
 }
 
+// the exporter's open points, in the page's language
+const OPEN_POINTS = {"Owner review": "Abnahme durch dich",
+                     "Register a permanent short link for this card": "Kurzlink anlegen",
+                     "Verify the public short link and matching preview": "Kurzlink und Vorschaubild öffnen und prüfen"};
+const POST_VIEWS = {ready: (post) => post.stage === "ready", posted: (post) => post.stage === "posted", all: () => true};
+
+function postItem(post) {
+  const item = field("post-template").content.firstElementChild.cloneNode(true);
+  item.dataset.item = post.itemId;
+  item.querySelector(".badge").textContent = STAGE_NAMES[post.stage];
+  item.querySelector(".badge").className = `badge stage-${post.stage}`;
+  item.querySelector(".label").textContent = `${post.label} · ${post.draftSpecimen}`;
+  const links = [link(post.card, "Kartenseite")];
+  if (post.shortUrl) links.push(link(post.shortUrl, "Kurzlink"));
+  post.posts.forEach((url, index) => links.push(link(url, `Instagram ${index + 1}`)));
+  if (post.error) {
+    item.querySelector(".photo").remove();
+    item.querySelectorAll("label").forEach((label) => label.remove());
+    item.querySelector(".todo").className = "todo error";
+    item.querySelector(".todo").textContent = post.error;
+  } else {
+    item.querySelector(".photo").href = post.image;
+    const image = item.querySelector("img");
+    image.src = post.image;
+    image.alt = `Postbild: ${post.alt}`;
+    item.querySelector(".caption").value = post.caption;
+    item.querySelector(".alt").value = post.alt;
+    item.querySelector(".todo").textContent = "Vor dem Posten: " + post.open.map((point) => OPEN_POINTS[point] || point).join(" · ");
+    const save = link(post.image, "Bild laden");
+    save.download = `${post.draftSpecimen}-post.jpg`;
+    links.push(save);
+  }
+  item.querySelector(".links").replaceChildren(...links);
+  return item;
+}
+
+async function showPosts() {
+  try {
+    const {posts} = await call("/posts");
+    showCount("count-posts", posts.filter(POST_VIEWS.ready).length);
+    const shown = posts.filter(POST_VIEWS[field("post-view").value]);
+    field("posts").replaceChildren(...shown.map(postItem));
+    field("posts-status").textContent = shown.length ? "" : "Keine Entwürfe in dieser Ansicht.";
+  } catch (error) {
+    field("posts-status").textContent = error.message || "Die Entwürfe konnten nicht geladen werden.";
+  }
+}
+
 async function refresh() {
   await showOverview();
-  await Promise.all([showJobs(), showTrash()]);
+  await Promise.all([showJobs(), showTrash(), showPosts()]);
 }
 
 field("stage").append(...STAGE_ORDER.map((stage) => Object.assign(document.createElement("option"), {value: stage, textContent: STAGE_NAMES[stage]})));
@@ -351,6 +399,7 @@ for (const tab of TABS) {
 window.addEventListener("hashchange", follow);
 follow();
 field("job-view").addEventListener("change", showJobs);
+field("post-view").addEventListener("change", showPosts);
 for (const id of ["view", "stage", "search"]) field(id).addEventListener("input", showRows);
 field("group-by").addEventListener("change", showStats);
 // a link to one job (#job-...) can only scroll once the jobs are there

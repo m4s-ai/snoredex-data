@@ -1,6 +1,6 @@
-<!-- doc: role=private photo inbox for owner phone uploads (#626, #639, #641); stage=task -->
+<!-- doc: role=private photo inbox for owner phone uploads (#626, #639, #641, #646); stage=task -->
 
-# Private SnoreDex photo inbox (#626, #639, #641)
+# Private SnoreDex photo inbox (#626, #639, #641, #646)
 
 A small LAN service where the owner hands in their own photos from the phone: the iPhone's DNG
 (ProRAW) or JPEG. Every photo here is the owner's own; images found elsewhere go through the regular
@@ -10,13 +10,13 @@ job folder named by the SHA-256 of its bytes, holding `photo.dng` or `photo.jpg`
 `ownPhoto`, the file name, the hash, `receivedAt`, and once described `specimenHint`, `note` and
 `describedAt`. A job is its bytes: uploading the same photo again, described or not, is the same job.
 
-**Page (owner decision, 2026-11-24).** The German page (`templates/index.html`, `static/`) has five
-tabs instead of one long page: Hochladen, Fotos, Übersicht, Statistik and Papierkorb. On a phone the
+**Page (owner decision, 2026-11-24).** The German page (`templates/index.html`, `static/`) has six
+tabs instead of one long page: Hochladen, Fotos, Übersicht, Posts, Statistik and Papierkorb. On a phone the
 tab bar sits at the bottom with an icon and a label, each tab at least 44 × 44 CSS px. From 48rem
 upward it moves beside the title. The tabs follow the WAI-ARIA tabs pattern: automatic activation,
 arrow keys, Home and End, one tab stop. Each tab has a hash (`#fotos`) for reload, back and links;
 the hash never equals the panel's id, so the browser neither scrolls nor focuses on load. Badges
-on the tabs count the photos without details and the trashed ones. The layout follows WCAG 2.2
+on the tabs count the photos without details, the drafts ready for Instagram and the trashed ones. The layout follows WCAG 2.2
 target sizes and impeccable.style guidance: 17 px body text at 1.5 line height, flat lists with
 dividers instead of nested cards, a visible focus outline, and no motion.
 
@@ -60,6 +60,14 @@ counted from the same rows. The published catalogue is re-read every ten minutes
 cannot be read, nothing counts as online and the page says so. The overview writes nothing to the
 repository, the photo archive or the site. Keep the checkout current (`git pull` on `main`).
 
+**Posts (#646, owner decision 2026-11-24).** With `--photos` pointing at a checkout of
+snoredex-photos, the Posts tab shows the draft of every printing with a verified short link in
+`data/social.json`: the post image, caption, alt text, the open points before posting, and links to
+the card page, the short link and the image file. The checkout's own `instagram_package.py` builds
+each draft from that checkout, with the cover corners stored in `postCorners`, into `.drafts` inside
+the data folder, once per state of the catalogue files. Nothing is posted from here yet: posting and
+scheduling follow in #646. Keep the photo checkout current (`git pull`), like the catalogue.
+
 A JPEG is decoded completely. A DNG is checked at header level only (a TIFF whose first IFD carries
 `DNGVersion`); the intake derives the cleaned public copy from it. Intake takes the described jobs.
 
@@ -75,12 +83,14 @@ A JPEG is decoded completely. A DNG is checked at header level only (a TIFF whos
 | `POST /trash/<id>/restore` | puts a trashed job back |
 | `DELETE /trash/<id>` | deletes a trashed job for good; 409 when filed or without catalogue |
 | `GET /overview` | every active printing with its stage, links and jobs (needs `--repo`) |
+| `GET /posts` | the draft of every shared printing (needs `--repo` and `--photos`) |
+| `GET /posts/<SPEC>/image` | that draft's post image |
 
 ## Run
 
 ```console
 pip install -r verification/photo_inbox/requirements.txt
-python verification/photo_inbox/app.py --data-dir <private folder outside Git> --host 0.0.0.0 --repo <checkout of main>
+python verification/photo_inbox/app.py --data-dir <private folder outside Git> --host 0.0.0.0 --repo <checkout of main> --photos <checkout of snoredex-photos>
 ```
 
 Without `--host` the service listens on loopback only; `--host 0.0.0.0` (or a reverse proxy on the
@@ -133,7 +143,8 @@ trash (no delete without catalogue or of a filed job, restore, a re-upload, dele
 after 30 days), the overview with test data for every stage (an unreadable site counts nothing as
 online), a restart, an inbox inside a Git checkout, and in a phone-sized Chromium a bulk upload with
 one bad file, a description with its printing, the views, counts and statistics, and delete,
-restore and delete for good, and the archive copy of a phone-like DNG and JPEG (location, maker, XMP and
+restore and delete for good, the Posts tab with a stand-in exporter (built once per catalogue state,
+a failed draft with its reason, no post button), and the archive copy of a phone-like DNG and JPEG (location, maker, XMP and
 second frame gone; pixels, profile and orientation kept; a DNG without preview refused). It is not
 part of `regen.py`, whose gate stays standard-library only.
 

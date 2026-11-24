@@ -18,6 +18,9 @@ from pathlib import Path
 import re
 import shutil
 import struct
+import subprocess
+import sys
+import threading
 from tempfile import TemporaryDirectory
 
 from flask import Flask, abort, jsonify, render_template, request, send_file
@@ -35,6 +38,7 @@ JOB_ID = re.compile(r"[0-9a-f]{64}")
 PREVIEW_SIZES = (400, 1600)
 # hidden, and never read by intake: it takes job folders named by their hash only
 TRASH = ".trash"
+DRAFTS = ".drafts"  # Instagram drafts, rebuilt from the checkout; intake reads hash folders only
 KEEP_DELETED = timedelta(days=30)
 
 
@@ -237,6 +241,37 @@ def restore(root, folder):
     folder.rename(root / folder.name)
 
 
+def exporter(repo):
+    """The checkout's own Instagram exporter, which reads that checkout's data (#625)."""
+    return [sys.executable, str(Path(repo) / "verification" / "instagram_package.py")]
+
+
+def draft(cache, command, photos, specimen, stamp):
+    """The post draft of one specimen, built once per catalogue state into the private data folder."""
+    key = sha256(repr((stamp, specimen)).encode()).hexdigest()[:16]
+    folder = cache / f"{specimen}-{key}"
+    if not (folder / "manifest.json").is_file():
+        try:
+            done = subprocess.run([*command, specimen, "--photos", str(photos), "--out", str(folder)],
+                                  capture_output=True, text=True, timeout=180)
+        except (OSError, subprocess.TimeoutExpired) as error:
+            raise ValueError(f"Der Entwurf ließ sich nicht bauen: {error}") from error
+        if done.returncode:
+            lines = (done.stderr or done.stdout).strip().splitlines()
+            raise ValueError(lines[-1] if lines else "Der Entwurf ließ sich nicht bauen.")
+        for old in cache.glob(f"{specimen}-*"):  # drafts of an older catalogue state
+            if old != folder:
+                shutil.rmtree(old, ignore_errors=True)
+    return folder
+
+
+def post_view(row, folder):
+    manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
+    return dict(row, caption=(folder / "caption-draft.txt").read_text(encoding="utf-8"),
+                alt=(folder / "alt-text.txt").read_text(encoding="utf-8").strip(),
+                open=manifest["requiredBeforePosting"], image=f"/posts/{row['draftSpecimen']}/image")
+
+
 def security_headers(response, image_origin):
     response.headers["Cache-Control"] = "no-store"
     response.headers["X-Content-Type-Options"] = "nosniff"
@@ -247,10 +282,12 @@ def security_headers(response, image_origin):
     return response
 
 
-def create_app(directory, repo=None, fetch=None):
+def create_app(directory, repo=None, fetch=None, photos=None, command=None):
     root = private_directory(directory)
     trash = root / TRASH
     trash.mkdir(mode=0o700, exist_ok=True)
+    drafts = root / DRAFTS
+    drafts.mkdir(mode=0o700, exist_ok=True)
     catalogue = Catalogue(repo, **({"fetch": fetch} if fetch else {})) if repo else None
     empty_trash(trash, catalogue)
     # catalogue thumbnails come from the published site; the page loads nothing else from outside
@@ -342,6 +379,40 @@ def create_app(directory, repo=None, fetch=None):
             return jsonify(error="Die Übersicht braucht einen Katalog (--repo)."), 404
         return jsonify(catalogue.overview(all_jobs(root, catalogue)))
 
+    building = threading.Lock()
+
+    def current_draft(specimen):
+        # one build at a time: two requests for an unbuilt draft would race for the same folder
+        with building:
+            return draft(drafts, command or exporter(repo), photos, specimen, catalogue.stamp)
+
+    @app.get("/posts")
+    def posts():
+        """The drafts of every printing ready for Instagram or posted; posting itself follows in #646."""
+        if catalogue is None:
+            return jsonify(error="Die Posts brauchen einen Katalog (--repo)."), 404
+        if photos is None:
+            return jsonify(error="Für die Entwürfe fehlt das Fotoarchiv (--photos)."), 404
+        views = []
+        for row in catalogue.shares():
+            try:
+                views.append(post_view(row, current_draft(row["draftSpecimen"])))
+            except (ValueError, OSError, KeyError) as error:
+                views.append(dict(row, error=str(error)))
+        return jsonify(posts=views)
+
+    @app.get("/posts/<specimen>/image")
+    def post_image(specimen):
+        if catalogue is None or photos is None or specimen not in {
+                row["draftSpecimen"] for row in catalogue.shares()}:
+            abort(404)
+        try:
+            folder = current_draft(specimen)
+        except ValueError:
+            abort(404)
+        return send_file(BytesIO((folder / "post.jpg").read_bytes()), mimetype="image/jpeg",
+                         download_name=f"{specimen}-post.jpg")
+
     return app
 
 
@@ -351,9 +422,10 @@ def main():
     parser.add_argument("--host", default="127.0.0.1", help="0.0.0.0 makes it reachable in the home network")
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--repo", type=Path, help="checkout of snoredex-data main for the overview and the trash")
+    parser.add_argument("--photos", type=Path, help="checkout of snoredex-photos for the Instagram drafts")
     args = parser.parse_args()
     try:
-        app = create_app(args.data_dir, args.repo)
+        app = create_app(args.data_dir, args.repo, photos=args.photos)
     except (ValueError, OSError) as error:
         parser.error(str(error))
     serve(app, host=args.host, port=args.port, threads=2, inbuf_overflow=MAX_UPLOAD + CHUNK,

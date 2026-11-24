@@ -146,6 +146,14 @@ class InstagramDraftTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "JPEG"):
             edited_post_image(data.getvalue())
 
+    def test_post_corners_are_four_pixel_pairs(self):
+        from card_pages import checked_corners
+
+        checked_corners([[654, 756], [2522, 756], [2522, 3392], [654, 3392]], "item")
+        for bad in ([[1, 2]] * 3, [[1, 2]] * 3 + [[1, -2]], [[1, 2]] * 3 + [[1, 2.5]], [[1, 2]] * 3 + [[1, True]]):
+            with self.assertRaises(ValueError):
+                checked_corners(bad, "item")
+
 
 if __name__ == "__main__":
     unittest.main()
