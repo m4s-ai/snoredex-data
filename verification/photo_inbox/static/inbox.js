@@ -188,8 +188,9 @@ async function toggleCorners(item, open) {
 }
 
 function startQuad(found) {
-  if (found.approved) return found.approved;
-  if (found.candidates.length) return found.candidates[0];
+  // a copy: dragging must never change the stored suggestion that "Vorschlag wiederherstellen" returns to
+  if (found.approved) return found.approved.map((point) => [...point]);
+  if (found.candidates.length) return found.candidates[0].map((point) => [...point]);
   const [width, height] = found.size;  // nothing found: a card-shaped frame in the middle to drag from
   const w = width * 0.5, h = w * 88 / 63, x = (width - w) / 2, y = Math.max(0, (height - h) / 2);
   return [[x, y], [x + w, y], [x + w, y + h], [x, y + h]].map((p) => p.map(Math.round));

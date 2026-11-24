@@ -504,6 +504,8 @@ def corner_checks(root, repo):
     assert approve(CARD[::-1]).status_code == 400, "clockwise from top left"
     assert approve([[0, 0], [500, 0], [500, 700], [0, 700]]).status_code == 400, "too narrow for the gallery"
     assert approve([[0, 0], [1800, 0], [1800, 2000], [0, 2000]]).status_code == 400, "inside the photo"
+    collapsed = [CARD[0], CARD[2], [CARD[2][0], CARD[2][1] + 1], CARD[3]]  # top right dragged onto bottom right
+    assert approve(collapsed).status_code == 400, "a quad the gallery crop cannot use"
     approved = approve(CARD)
     assert approved.status_code == 200 and approved.json["corners"] == CARD and approved.json["cornersApprovedAt"]
     cover = client.get(f"/jobs/{job}/cover?c=" + ",".join(str(v) for p in CARD for v in p))
@@ -726,6 +728,7 @@ def corner_page(page, root):
         box = handles.nth(index).bounding_box()
         assert box["width"] >= 44 and box["height"] >= 44, ("target size", index, box)
     label = lambda: handles.nth(0).get_attribute("aria-label")
+    suggested = label()
     before = int(label().split(": ")[1].split(",")[0])
     handles.nth(0).focus()
     page.keyboard.press("Shift+ArrowRight")
@@ -748,6 +751,8 @@ def corner_page(page, root):
     else:
         raise AssertionError("the title image from the corners did not load")
     assert page.evaluate("document.documentElement.scrollWidth") <= 375, "no sideways scroll"
+    item.locator(".reset").click()
+    assert label() == suggested, "the suggestion comes back unchanged after dragging"
     reopened_editor(page, root, item, job)
 
 

@@ -13,6 +13,7 @@ from datetime import datetime, timedelta, timezone
 from hashlib import sha256
 from io import BytesIO
 import json
+from math import dist
 import os
 from pathlib import Path
 import re
@@ -266,9 +267,13 @@ def approved_corners(value, size):
     turn = sum(a[0] * b[1] - b[0] * a[1] for a, b in zip(quad, quad[1:] + quad[:1]))
     if turn <= 0:
         raise ValueError("Die Ecken stehen nicht im Uhrzeigersinn ab oben links.")
-    width = min(abs(complex(*quad[1]) - complex(*quad[0])), abs(complex(*quad[2]) - complex(*quad[3])))
+    # the face as gallery_prepare.extract measures it, so an approval is one intake can crop
+    width = int(min(dist(quad[0], quad[1]), dist(quad[3], quad[2])))
+    height = int(min(dist(quad[0], quad[3]), dist(quad[1], quad[2])))
     if width < 600:
         raise ValueError("Die Karte ist im Foto schmaler als 600 Pixel. Bitte näher fotografieren.")
+    if height <= width:
+        raise ValueError("Die Ecken ergeben keine hochkant stehende Karte. Bitte die Ecken prüfen.")
     return quad
 
 
