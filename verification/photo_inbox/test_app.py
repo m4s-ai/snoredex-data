@@ -273,13 +273,14 @@ def adoption_checks(client, repo, folder):
         "the SPEC is the catalogue's; an ambiguous citation keeps the pick"
 
 
-FAKE_EXPORTER = """import json, pathlib, sys
+FAKE_EXPORTER = """import json, pathlib, sys, time
 spec, out = sys.argv[1], pathlib.Path(sys.argv[sys.argv.index("--out") + 1])
 here = pathlib.Path(__file__)
 with here.with_suffix(".log").open("a") as log:
     log.write(spec + "\\n")
 if spec == "SPEC-0905":
     sys.exit("Entwurf zurückgestellt: kein Foto im Archiv")
+time.sleep(0.5)  # long enough for a second request to arrive meanwhile
 out.mkdir(parents=True)
 (out / "post.jpg").write_bytes(here.with_suffix(".jpg").read_bytes())
 (out / "caption-draft.txt").write_text(f"Caption {spec}\\n", encoding="utf-8")
@@ -320,6 +321,17 @@ def posts_checks(root, repo, temp):
     client.get("/posts")
     assert log.read_text().split().count("SPEC-0904") == 2, "a changed catalogue rebuilds the draft"
     assert len(list((root / ".drafts").glob("SPEC-0904-*"))) == 1, "the older draft goes"
+    os.utime(social, ns=(later + 10**9, later + 10**9))
+    app = client.application
+    replies = []
+    requests = [threading.Thread(target=lambda: replies.append(app.test_client().get(ready["image"]).status_code))
+                for _ in range(2)]
+    for request in requests:
+        request.start()
+    for request in requests:
+        request.join()
+    assert replies == [200, 200], "two requests for an unbuilt draft both get it"
+    assert log.read_text().split().count("SPEC-0904") == 3, "and it is built once"
     assert all(job["id"] != ".drafts" for job in client.get("/jobs").json["jobs"])
     return command
 

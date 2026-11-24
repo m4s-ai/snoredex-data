@@ -20,6 +20,7 @@ import shutil
 import struct
 import subprocess
 import sys
+import threading
 from tempfile import TemporaryDirectory
 
 from flask import Flask, abort, jsonify, render_template, request, send_file
@@ -378,8 +379,12 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None):
             return jsonify(error="Die Übersicht braucht einen Katalog (--repo)."), 404
         return jsonify(catalogue.overview(all_jobs(root, catalogue)))
 
+    building = threading.Lock()
+
     def current_draft(specimen):
-        return draft(drafts, command or exporter(repo), photos, specimen, catalogue.stamp)
+        # one build at a time: two requests for an unbuilt draft would race for the same folder
+        with building:
+            return draft(drafts, command or exporter(repo), photos, specimen, catalogue.stamp)
 
     @app.get("/posts")
     def posts():
