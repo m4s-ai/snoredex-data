@@ -150,7 +150,41 @@ function jobItem(job) {
   const open = item.querySelector(".corners-open");
   resetCorners(item, job);
   open.addEventListener("click", () => toggleCorners(item, open));
+  item.querySelector(".number-confirm").onclick = () => confirmNumber(item);
+  showNumber(item, job);
   return item;
+}
+
+// --- number check (#658): what Tesseract read against the printing, a guard only ---
+
+function numberText(check, confirmed) {
+  const read = check.read.join(", ");
+  if (check.result === "match") return `Nummer gelesen: ${check.expected}. Passt zum Druck.`;
+  if (check.result === "unreadable") return `Nummer nicht lesbar${read ? ` (gelesen: ${read})` : ""}. Das hält nichts auf.`;
+  if (check.result === "unavailable") return "Nummernprüfung nicht verfügbar (kein Tesseract). Das hält nichts auf.";
+  return confirmed ? `Gelesen ${read}, erwartet ${check.expected}: von dir als richtig bestätigt.`
+    : `Nummer passt nicht: gelesen ${read}, erwartet ${check.expected}. Prüfe die Zuordnung oder bestätige sie.`;
+}
+
+function showNumber(item, job) {
+  const box = item.querySelector(".number");
+  const check = !job.filedAs && job.numberCheck && job.numberCheck.itemId === job.itemId ? job.numberCheck : null;
+  box.hidden = !check;
+  if (!check) return;
+  const pending = check.result === "mismatch" && !job.numberConfirmedAt;
+  const status = box.querySelector(".number-status");
+  status.textContent = numberText(check, Boolean(job.numberConfirmedAt));
+  status.className = `number-status ${pending ? "error" : check.result === "match" ? "ok" : ""}`;
+  box.querySelector(".number-confirm").hidden = !pending;
+}
+
+async function confirmNumber(item) {
+  if (!confirm("Die gelesene Nummer passt nicht zum Druck. Ist die Zuordnung trotzdem richtig?")) return;
+  try {
+    showNumber(item, await call(`/jobs/${item.dataset.job}/number`, {method: "POST"}));
+  } catch (error) {
+    item.querySelector(".number-status").textContent = error.message;
+  }
 }
 
 // --- card corners (#657): suggested, dragged on the phone, approved for intake ---
@@ -323,6 +357,7 @@ async function approveCorners(item, editor) {
                                                               body: JSON.stringify({corners: editor.quad})});
     status.textContent = `Ecken freigegeben am ${DATE.format(new Date(job.cornersApprovedAt))}.`;
     item.querySelector(".corners-open").textContent = "Ecken freigegeben · prüfen";
+    showNumber(item, job);
   } catch (error) {
     status.textContent = error.message;
   }
@@ -350,6 +385,7 @@ async function describe(event, item) {
     form.specimen.value = reply.specimenHint || "";
     form.item.value = itemLabel(reply.itemId);
     resetCorners(item, reply);
+    showNumber(item, reply);
     saved.className = "saved ok";
     saved.textContent = "Gespeichert.";
     showOverview();

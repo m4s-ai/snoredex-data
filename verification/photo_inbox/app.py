@@ -30,6 +30,7 @@ from waitress import serve
 
 import corners as card_corners
 from dng import dng_preview
+import number_check
 from overview import ITEM_ID, Catalogue
 import posting
 
@@ -277,15 +278,30 @@ def approved_corners(value, size):
     return quad
 
 
-def cover(folder, quad):
-    """The post's title image from these corners, as the Instagram exporter makes it."""
+def repository_modules():
     root = Path(__file__).resolve().parents[2]
     for path in (root / "scripts", root / "verification"):
         if str(path) not in sys.path:
             sys.path.append(str(path))
+
+
+def cover(folder, quad):
+    """The post's title image from these corners, as the Instagram exporter makes it."""
+    repository_modules()
     from instagram_package import post_image
 
     return post_image(source_photo(folder), [tuple(pair) for pair in quad])[0]
+
+
+def number_reading(folder, quad, item, language):
+    """The collector number read from the card face these corners frame, against the printing (#658)."""
+    repository_modules()
+    from gallery_prepare import extract
+
+    with Image.open(BytesIO(source_photo(folder))) as image:
+        face, _ = extract(ImageOps.exif_transpose(image).convert("RGB"), [tuple(pair) for pair in quad])
+    found = number_check.check(face, item.get("collectorNumber"), item.get("collectorNumberDenominator"), language)
+    return dict(found, itemId=item["itemId"], checkedAt=now())
 
 
 def restore(root, folder):
@@ -419,9 +435,9 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
         except ValueError as error:
             return jsonify(error=str(error)), 400
         job = json.loads((folder / "job.json").read_text(encoding="utf-8"))
-        if details["itemId"] != job.get("itemId"):  # corners approved for another printing do not carry over
-            job.pop("corners", None)
-            job.pop("cornersApprovedAt", None)
+        if details["itemId"] != job.get("itemId"):  # corners and their check belong to the old printing
+            for key in ("corners", "cornersApprovedAt", "numberCheck", "numberConfirmedAt"):
+                job.pop(key, None)
         # an older job keeps the upload time it is listed by once its record is rewritten
         job.update(details, receivedAt=job_summary(folder)["receivedAt"], describedAt=now())
         write_json(folder / "job.json", job)
@@ -448,6 +464,21 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
         except ValueError as error:
             return jsonify(error=str(error)), 400
         job.update(corners=quad, cornersApprovedAt=now())
+        job.pop("numberConfirmedAt", None)  # a new frame is read again, and confirmed again if it must be
+        item = catalogue.active_items().get(job["itemId"]) if catalogue else None
+        if item:
+            job["numberCheck"] = number_reading(folder, quad, item, catalogue.languages.get(item["localizationId"]))
+        write_json(folder / "job.json", job)
+        return jsonify(job_summary(folder, catalogue))
+
+    @app.post("/jobs/<job_id>/number")
+    def confirm_number(job_id):
+        """The owner confirms the assignment although the number read differs: intake may go on."""
+        folder = job_folder(root, job_id)
+        job = json.loads((folder / "job.json").read_text(encoding="utf-8"))
+        if (job.get("numberCheck") or {}).get("result") != "mismatch":
+            return jsonify(error="Es gibt keine abweichende Nummer zu bestätigen."), 400
+        job["numberConfirmedAt"] = now()
         write_json(folder / "job.json", job)
         return jsonify(job_summary(folder, catalogue))
 
