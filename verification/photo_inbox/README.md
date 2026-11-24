@@ -26,17 +26,20 @@ decision, 2026-11-23): the service is reachable only in the home network.
 the trash after a confirmation. The trash is the folder `.trash` inside the data folder: intake reads
 only job folders named by their hash, so it never sees it. A trashed job can be restored, or deleted
 for good at once after a second confirmation; after 30 days it is deleted for good on its own. A
-filed job cannot be deleted here: its archive copy is already in the public photo archive, and taking
-back a SPEC is a catalogue change. Uploading a deleted photo again makes it a new job. Deleting needs
-the catalogue (below), since without it the inbox cannot tell whether a photo was filed.
+filed job is never lost here: its archive copy is already in the public photo archive, and taking
+back a SPEC is a catalogue change. The same check guards all three ways a job goes: into the trash,
+for good from it, and the 30-day sweep. A job intake files after it was trashed stays there until it
+is restored. Each check reads the checkout as it is at that moment. Uploading a deleted photo again
+makes it a new job. Deleting needs the catalogue (below); without it the inbox cannot tell whether a
+photo was filed, so it neither deletes nor empties the trash.
 
 **Overview (#641).** With `--repo` pointing at a checkout of snoredex-data `main`, the page lists
 every active printing with the furthest stage its own photo has reached: no own photo, uploaded and
 assigned (a job names its `itemId`), filed (an owner specimen is the printing's image on `main`),
 online (the published site's catalogue shows that image), ready for Instagram (a verified short link
 in `data/social.json`) and posted (an Instagram permalink). A job counts as filed as SPEC-nnnn when
-`derive.py` makes exactly that specimen's archived photograph from it; the hash is cached beside the
-job as `archive.sha256`. Views show the printings with an owner photo, those without and every
+`derive.py` makes exactly that specimen's archived photograph from it. A successful hash is cached
+beside the job as `archive.sha256`; a failed derivation is not cached and is tried again. Views show the printings with an owner photo, those without and every
 printing, with a stage filter, a search, the count per stage and statistics by language or set, all
 counted from the same rows. The published catalogue is re-read every ten minutes; when the site
 cannot be read, nothing counts as online and the page says so. The overview writes nothing to the

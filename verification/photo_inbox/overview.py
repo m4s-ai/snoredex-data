@@ -9,6 +9,7 @@ from hashlib import sha256
 import json
 from pathlib import Path
 import re
+import struct
 import time
 from urllib.request import urlopen
 
@@ -34,15 +35,17 @@ def fetch_json(url):
 def archive_digest(folder):
     """The SHA-256 of the archive copy intake makes from this job, cached beside the job.
 
-    A job is filed as SPEC-nnnn exactly when its archive copy is that specimen's photograph."""
+    A job is filed as SPEC-nnnn exactly when its archive copy is that specimen's photograph. Only a
+    digest is cached: a failure may be passing (a read error on the share), so it is tried again."""
     cached = folder / "archive.sha256"
-    if not cached.is_file():
-        try:
-            digest = "sha256:" + sha256(derive(folder)[0]).hexdigest()
-        except (ValueError, KeyError, OSError, StopIteration):
-            digest = "none"  # no archive copy can be made, so nothing can have been filed from it
-        cached.write_text(digest + "\n", encoding="utf-8", newline="\n")
-    return cached.read_text(encoding="utf-8").strip()
+    if cached.is_file():
+        return cached.read_text(encoding="utf-8").strip()
+    try:
+        digest = "sha256:" + sha256(derive(folder)[0]).hexdigest()
+    except (ValueError, KeyError, IndexError, struct.error, OSError, StopIteration):
+        return None  # no archive copy can be made now, so nothing can be matched against it
+    cached.write_text(digest + "\n", encoding="utf-8", newline="\n")
+    return digest
 
 
 def label(item, languages):
@@ -95,8 +98,15 @@ class Catalogue:
             self.site_at = time.monotonic()
         return self.site
 
+    def active_items(self):
+        self.refresh()
+        return self.items
+
     def filed_as(self, folder):
-        return self.by_photo.get(archive_digest(folder))
+        """The SPEC this job was filed as, read against the checkout as it is now."""
+        self.refresh()
+        digest = archive_digest(folder)
+        return self.by_photo.get(digest) if digest else None
 
     def owner_specimen(self, item):
         match = SPEC_PATH.fullmatch(self.asset_paths.get(item.get("imageAssetId"), ""))

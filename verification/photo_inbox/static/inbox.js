@@ -245,7 +245,11 @@ function trashItem(job, keepDays) {
   image.onerror = () => image.replaceWith("Keine Vorschau für dieses Foto.");
   image.src = `/trash/${job.id}/preview?size=400`;
   const end = new Date(new Date(job.deletedAt).getTime() + keepDays * 86400000);
-  item.querySelector(".when").textContent = `${job.note || job.file} · endgültig gelöscht am ${DAY.format(end)}`;
+  // intake may file a job after it was trashed: then it only goes back, never away
+  item.querySelector(".when").textContent = job.filedAs
+    ? `${job.note || job.file} · übernommen als ${job.filedAs}, bitte wiederherstellen`
+    : `${job.note || job.file} · endgültig gelöscht am ${DAY.format(end)}`;
+  item.querySelector(".purge").hidden = Boolean(job.filedAs);
   item.querySelector(".restore").addEventListener("click", () => fromTrash(job.id, "POST", "restore"));
   item.querySelector(".purge").addEventListener("click", () => {
     if (confirm("Dieses Foto endgültig löschen? Das lässt sich nicht rückgängig machen.")) fromTrash(job.id, "DELETE", "");

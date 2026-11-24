@@ -192,6 +192,56 @@ def unreachable(_url):
     raise OSError("offline")
 
 
+def mark_filed(repo, folder, specimen_id):
+    """Intake files this job: the checkout now names its archive copy as a specimen's photograph."""
+    path = repo / "verification/specimens.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    photo = "sha256:" + sha256(derive(folder)[0]).hexdigest()
+    data["specimens"].append({"specimenId": specimen_id, "photographedBy": "collection owner", "photographSha256": photo})
+    path.write_text(json.dumps(data), encoding="utf-8", newline="\n")
+
+
+def age(record):
+    old = (datetime.now(timezone.utc) - timedelta(days=31)).isoformat(timespec="seconds")
+    aged = dict(json.loads(record.read_text(encoding="utf-8")), deletedAt=old)
+    record.write_text(json.dumps(aged), encoding="utf-8", newline="\n")
+
+
+def guard_checks(root, repo):
+    """A filed job is never lost, however it is deleted, and the checkout is read as it is now."""
+    client = create_app(root, repo, published).test_client()
+    late = post(client, jpeg((11, 22, 33))).json["id"]
+    mark_filed(repo, root / late, "SPEC-0950")  # no overview call in between
+    assert client.delete(f"/jobs/{late}").status_code == 409, "a job filed since the last overview stays"
+    trashed = post(client, jpeg((44, 55, 66))).json["id"]
+    assert client.delete(f"/jobs/{trashed}").status_code == 200
+    mark_filed(repo, root / ".trash" / trashed, "SPEC-0951")  # filed after it was trashed
+    assert client.delete(f"/trash/{trashed}").status_code == 409, "no deleting a filed job for good"
+    age(root / ".trash" / trashed / "job.json")
+    listed = client.get("/trash").json["jobs"]
+    assert [(job["id"], job["filedAs"]) for job in listed] == [(trashed, "SPEC-0951")], "the sweep keeps it"
+    assert client.post(f"/trash/{trashed}/restore").status_code == 200
+
+    blind = post(client, jpeg((77, 88, 99))).json["id"]
+    client.delete(f"/jobs/{blind}")
+    age(root / ".trash" / blind / "job.json")
+    create_app(root)  # a restart without catalogue cannot tell, so it keeps the trash
+    assert (root / ".trash" / blind).is_dir()
+    create_app(root, repo, published).test_client().get("/trash")
+    assert not (root / ".trash" / blind).exists()
+
+    path = repo / "collector_catalogue.json"
+    doc = json.loads(path.read_text(encoding="utf-8"))
+    doc["items"].append(dict(item("none"), itemId="item-99999999-0000-0000-0000-000000000000"))
+    path.write_text(json.dumps(doc), encoding="utf-8", newline="\n")
+    added = client.post(f"/jobs/{late}", json={"itemId": "item-99999999-0000-0000-0000-000000000000"})
+    assert added.status_code == 200, "a printing added to the checkout is offered at once"
+
+    broken = post(client, dng_with_preview(b"\xff\xd8\xff\xe0\x00\x10garbage")).json["id"]
+    assert client.get("/jobs").status_code == 200, "a job intake cannot derive does not break the list"
+    assert not (root / broken / "archive.sha256").exists(), "a failed derivation is tried again later"
+
+
 def overview_checks(root, temp):
     """Every printing at the furthest stage it reached; jobs land on their printing."""
     filed = post(create_app(root).test_client(), jpeg((30, 60, 90))).json["id"]
@@ -240,10 +290,7 @@ def trash_checks(root, client, digest, filed):
     assert client.delete(f"/trash/{digest}").status_code == 404
     post(client, jpeg(gps=True))
     client.delete(f"/jobs/{digest}")
-    record = root / ".trash" / digest / "job.json"
-    old = (datetime.now(timezone.utc) - timedelta(days=31)).isoformat(timespec="seconds")
-    aged = dict(json.loads(record.read_text(encoding="utf-8")), deletedAt=old)
-    record.write_text(json.dumps(aged), encoding="utf-8", newline="\n")
+    age(root / ".trash" / digest / "job.json")
     assert client.get("/trash").json["jobs"] == [] and not (root / ".trash" / digest).exists(), "emptied after 30 days"
     post(client, jpeg(gps=True))
 
@@ -409,6 +456,7 @@ def main():
         root = Path(temp) / "inbox"
         photo, digest = api_checks(root)
         repo, filed = overview_checks(root, temp)
+        guard_checks(Path(temp) / "guard", catalogue_repo(Path(temp) / "guard-repo", "sha256:none"))
         trash_checks(root, create_app(root, repo, published).test_client(), digest, filed)
         names = ("again.jpg", "new.dng", "notes.txt", "new.jpg")
         bodies = (photo, dng_with_preview(jpeg((5, 6, 7), size=(48, 64))), b"not a photo", jpeg((9, 9, 9)))

@@ -164,21 +164,30 @@ def all_jobs(root, catalogue=None):
     return sorted(jobs, key=lambda job: job["receivedAt"], reverse=True)
 
 
-def empty_trash(trash):
-    """Delete for good what has lain in the trash for longer than 30 days."""
-    limit = datetime.now(timezone.utc) - KEEP_DELETED
-    for job in all_jobs(trash):
-        if datetime.fromisoformat(job.get("deletedAt") or job["receivedAt"]) < limit:
-            shutil.rmtree(trash / job["id"])
-
-
-def to_trash(root, folder, catalogue):
-    """Move one job out of the inbox, unless intake may already have filed it."""
+def keep_filed(folder, catalogue):
+    """The one guard of every way a job is lost: a filed job keeps its private original."""
     if catalogue is None:
         raise PermissionError("Ohne Katalog kann der Eingang nicht prüfen, ob das Foto schon übernommen ist.")
     filed = catalogue.filed_as(folder)
     if filed:
         raise PermissionError(f"Das Foto ist schon als {filed} übernommen und bleibt erhalten.")
+
+
+def empty_trash(trash, catalogue):
+    """Delete for good what has lain in the trash for longer than 30 days, except a filed job."""
+    limit = datetime.now(timezone.utc) - KEEP_DELETED
+    for job in all_jobs(trash):
+        if datetime.fromisoformat(job.get("deletedAt") or job["receivedAt"]) < limit:
+            try:
+                keep_filed(trash / job["id"], catalogue)
+            except PermissionError:
+                continue
+            shutil.rmtree(trash / job["id"])
+
+
+def to_trash(root, folder, catalogue):
+    """Move one job out of the inbox, unless intake may already have filed it."""
+    keep_filed(folder, catalogue)
     job = json.loads((folder / "job.json").read_text(encoding="utf-8"))
     write_json(folder / "job.json", dict(job, receivedAt=job_summary(folder)["receivedAt"], deletedAt=now()))
     trash = root / TRASH
@@ -231,8 +240,8 @@ def create_app(directory, repo=None, fetch=None):
     root = private_directory(directory)
     trash = root / TRASH
     trash.mkdir(mode=0o700, exist_ok=True)
-    empty_trash(trash)
     catalogue = Catalogue(repo, **({"fetch": fetch} if fetch else {})) if repo else None
+    empty_trash(trash, catalogue)
     # catalogue thumbnails come from the published site; the page loads nothing else from outside
     image_origin = "/".join(catalogue.base.split("/")[:3]) if catalogue else ""
     app = Flask(__name__)
@@ -285,7 +294,7 @@ def create_app(directory, repo=None, fetch=None):
     def describe(job_id):
         folder = job_folder(root, job_id)
         try:
-            details = description(request.get_json(silent=True) or {}, catalogue.items if catalogue else None)
+            details = description(request.get_json(silent=True) or {}, catalogue.active_items() if catalogue else None)
         except ValueError as error:
             return jsonify(error=str(error)), 400
         job = json.loads((folder / "job.json").read_text(encoding="utf-8"))
@@ -301,8 +310,8 @@ def create_app(directory, repo=None, fetch=None):
 
     @app.get("/trash")
     def trashed():
-        empty_trash(trash)
-        return jsonify(jobs=all_jobs(trash), keepDays=KEEP_DELETED.days)
+        empty_trash(trash, catalogue)
+        return jsonify(jobs=all_jobs(trash, catalogue), keepDays=KEEP_DELETED.days)
 
     @app.post("/trash/<job_id>/restore")
     def restore_job(job_id):
@@ -311,7 +320,9 @@ def create_app(directory, repo=None, fetch=None):
 
     @app.delete("/trash/<job_id>")
     def delete_for_good(job_id):
-        shutil.rmtree(job_folder(trash, job_id))
+        folder = job_folder(trash, job_id)
+        keep_filed(folder, catalogue)
+        shutil.rmtree(folder)
         return jsonify(id=job_id, status="gone")
 
     @app.get("/overview")
