@@ -73,7 +73,18 @@ def job_input(folder, corners=None):
         checked_corners(corners, job["itemId"])
     except (TypeError, ValueError) as error:
         raise Refused("Die freigegebenen Kartenecken sind ungültig.") from error
+    number_guard(job)
     return job, corners
+
+
+def number_guard(job):
+    """A collector number read from the face that contradicts the printing stops intake until the owner
+    confirms the assignment (#658); an unreadable or unchecked number stops nothing."""
+    check = job.get("numberCheck") or {}
+    if check.get("itemId") == job["itemId"] and check.get("result") == "mismatch" and not job.get("numberConfirmedAt"):
+        read = ", ".join(check.get("read") or [])
+        raise Refused(f"Gelesen wurde {read}, der Druck hat {check.get('expected')}. "
+                      "Bitte die Zuordnung prüfen oder im Eingang bestätigen.")
 
 
 def model(root):

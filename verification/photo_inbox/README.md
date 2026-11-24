@@ -47,6 +47,19 @@ card at least 600 px wide, as the gallery needs. Another printing drops the appr
 keeps its corners in the catalogue. Without OpenCV the inbox suggests nothing and the owner drags
 from the middle.
 
+**Number check (#658).** On approval the inbox reads the collector number from the bottom of the
+card face those corners frame, with Tesseract offline (`number_check.py`: two readings, grey and
+binarized, in the printing's language and English), and stores `numberCheck` (`result`, `expected`,
+`read`, `itemId`, `checkedAt`) in `job.json`. It is a guard, never evidence. A number that contradicts
+the printing (`mismatch`, e.g. read `067/080` for `066/080`) shows on the job and stops intake until
+the owner corrects the printing or presses "Zuordnung stimmt trotzdem" (`numberConfirmedAt`). A number
+it cannot read (`unreadable`), or no Tesseract at all (`unavailable`), stops nothing. A new frame is
+read again and needs a new confirmation; another printing drops the check. It cannot tell apart
+variants with the same number, and it does not check the set code (read in only 18 % in #655).
+On the Homelab the container needs `tesseract-ocr` with the language packs of the collection
+(`tesseract-ocr-jpn`, `-deu`, `-chi-sim`, `-kor`, `-fra`, `-ita`, `-spa`, `-ind`, …); `TESSERACT` names
+another binary.
+
 **Trash (owner decision, 2026-11-24).** A job that has not been filed as a specimen can be moved to
 the trash after a confirmation. The trash is the folder `.trash` inside the data folder: intake reads
 only job folders named by their hash, so it never sees it. A trashed job can be restored, or deleted
@@ -114,7 +127,8 @@ A JPEG is decoded completely. A DNG is checked at header level only (a TIFF whos
 | `GET /jobs/<id>/preview?size=400\|1600` | the cached preview JPEG |
 | `POST /jobs/<id>` | JSON `{"specimen", "note", "itemId"}`: saves the description; another printing drops approved corners |
 | `GET /jobs/<id>/corners` | the photo's upright size, the suggested card quads and the approved corners |
-| `POST /jobs/<id>/corners` | JSON `{"corners"}`: approves them; 400 without printing or for invalid corners, 409 when filed |
+| `POST /jobs/<id>/corners` | JSON `{"corners"}`: approves them and reads the number; 400 without printing or for invalid corners, 409 when filed |
+| `POST /jobs/<id>/number` | the owner confirms the printing although the number read differs; 400 without a mismatch |
 | `GET /jobs/<id>/cover?c=x1,y1,…` | the post's title image from these corners |
 | `DELETE /jobs/<id>` | moves an unfiled job to the trash; 409 when filed or without catalogue |
 | `GET /trash` | the trashed jobs; anything older than 30 days is deleted first |
@@ -219,7 +233,8 @@ python verification/photo_inbox/intake.py I:\<job> --photos <photo checkout> [--
 
 - It needs the job's printing (`itemId`) and its approved card corners (`corners` in `job.json`, or
   `--corners` with eight pixel values clockwise from top left in the upright photo). Without them it
-  stops and says why.
+  stops and says why. It also stops on a number check that contradicts the printing until the owner
+  has confirmed it (#658).
 - The owner's assignment is an owner attestation of the printing's identity. The record claims that
   (`ownerAttestedFields: ["identity"]`, dated by the assignment) and nothing read from the face: no
   finish, edition or marking, neither read nor copied from the printing. The printing's source row
@@ -240,7 +255,12 @@ python verification/photo_inbox/intake.py I:\<job> --photos <photo checkout> [--
 pip install -r requirements.txt -r verification/photo_inbox/requirements.txt
 python verification/photo_inbox/test_app.py
 python verification/photo_inbox/test_intake.py --photos <photo checkout>
+python verification/photo_inbox/test_number_check.py
 ```
+
+`test_number_check.py` turns the misreadings seen in #655 into verdicts and checks when the guard
+stops intake. `test_app.py` reads a printed number on a synthetic card when Tesseract is installed
+(match, a wrong printing as mismatch, confirmation, a new frame read again) and says so when it is not.
 
 `test_intake.py` files a synthetic phone photo (sideways, with GPS) for a printing with and one
 without an owner photo and runs every `check.py` rule on the result; it refuses a job without printing

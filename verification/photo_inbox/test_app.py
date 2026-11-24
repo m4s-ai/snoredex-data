@@ -20,7 +20,7 @@ import sys
 from tempfile import TemporaryDirectory
 import threading
 
-from PIL import Image, ImageChops, ImageDraw
+from PIL import Image, ImageChops, ImageDraw, ImageFont
 from playwright.sync_api import sync_playwright
 from waitress.server import create_server
 
@@ -42,10 +42,14 @@ def jpeg(colour=(200, 40, 40), size=(64, 48), gps=False):
 CARD = [[300, 400], [1380, 410], [1370, 1910], [310, 1900]]  # a card's corners in card_photo(), upright
 
 
-def card_photo():
-    """A phone photo stored sideways (orientation 6): one light card on a dark wall, as on its stand."""
+def card_photo(number=None):
+    """A phone photo stored sideways (orientation 6): one light card on a dark wall, as on its stand,
+    with its collector number printed at the bottom right when given."""
     upright = Image.new("RGB", (1700, 2300), (20, 20, 24))
-    ImageDraw.Draw(upright).polygon([tuple(p) for p in CARD], fill=(225, 205, 60))
+    draw = ImageDraw.Draw(upright)
+    draw.polygon([tuple(p) for p in CARD], fill=(225, 205, 60))
+    if number:
+        draw.text((1080, 1800), number, fill=(10, 10, 10), font=ImageFont.load_default(size=56))
     exif = Image.Exif()
     exif[274] = 6
     out = BytesIO()
@@ -519,6 +523,29 @@ def corner_checks(root, repo):
     assert "corners" not in record() and "cornersApprovedAt" not in record(), "another printing drops it"
     mark_filed(repo, root / job, "SPEC-0960")
     assert approve(CARD).status_code == 409, "a filed job's corners are the catalogue's"
+    number_checks(client, root)
+
+
+def number_checks(client, root):
+    """The number read at approval guards the assignment; without Tesseract it is only marked (#658)."""
+    job = post(client, card_photo("1/64")).json["id"]  # ITEMS["none"] is 1/64
+    record = lambda: json.loads((root / job / "job.json").read_text(encoding="utf-8"))
+    client.post(f"/jobs/{job}", json={"itemId": ITEMS["none"]})
+    check = client.post(f"/jobs/{job}/corners", json={"corners": CARD}).json["numberCheck"]
+    assert check["itemId"] == ITEMS["none"] and check["expected"] == "1/64"
+    assert client.post(f"/jobs/{job}/number").status_code == 400, "nothing to confirm without a mismatch"
+    if check["result"] == "unavailable":
+        print("note: Tesseract not installed, the number readings were not exercised")
+        return
+    assert check["result"] == "match", check
+    client.post(f"/jobs/{job}", json={"itemId": ITEMS["assigned"]})  # 2/64: the wrong printing
+    assert "numberCheck" not in record(), "a check of another printing goes with it"
+    check = client.post(f"/jobs/{job}/corners", json={"corners": CARD}).json["numberCheck"]
+    assert (check["result"], check["expected"], check["read"]) == ("mismatch", "2/64", ["1/64"]), check
+    confirmed = client.post(f"/jobs/{job}/number")
+    assert confirmed.status_code == 200 and confirmed.json["numberConfirmedAt"]
+    client.post(f"/jobs/{job}/corners", json={"corners": CARD})
+    assert "numberConfirmedAt" not in record(), "a new frame is read and confirmed again"
 
 
 def label_checks():
@@ -744,6 +771,9 @@ def corner_page(page, root):
     stored = json.loads((root / job / "job.json").read_text(encoding="utf-8"))["corners"]
     assert stored[0][0] == before + 40 and stored[2][0] > CARD[2][0] - 40, stored
     assert item.locator(".corners-open").text_content() == "Ecken freigegeben · prüfen"
+    number = item.locator(".number-status")
+    assert number.is_visible() and "hält nichts auf" in number.text_content(), "a card without a number stops nothing"
+    assert item.locator(".number-confirm").is_hidden()
     for _ in range(100):
         if item.locator(".cover").evaluate("image => image.complete && image.naturalWidth === 1080"):
             break
