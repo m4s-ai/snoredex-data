@@ -98,6 +98,27 @@ class Catalogue:
         self.social = {row["itemId"]: row for row in social}
         self.thumbs = {row["itemId"]: min(row["images"], key=lambda image: image["width"])["path"]
                        for row in images["galleryImages"] if row.get("images")}
+        self.specimen_items = self.printings_of(specimens["specimens"])
+
+    def printings_of(self, specimens):
+        """SPEC -> the one printing it shows: the printing whose image it is, else the one its claims
+        cite. A specimen cited by several printings and the image of none stays unassigned."""
+        by_source = {}
+        for item_id, item in self.items.items():
+            by_source.setdefault(item.get("sourcePrintingId"), set()).add(item_id)
+        mapping = {}
+        for row in specimens:
+            cited = set().union(*(by_source.get(printing, set()) for printing in row.get("citedBy") or []))
+            if len(cited) == 1:
+                mapping[row["specimenId"]] = cited.pop()
+        for item_id, item in self.items.items():
+            if self.owner_specimen(item):
+                mapping[self.owner_specimen(item)] = item_id
+        return mapping
+
+    def filed_item(self, specimen):
+        self.refresh()
+        return self.specimen_items.get(specimen)
 
     def published(self):
         """itemId -> image asset of the catalogue Pages serves now, re-read every ten minutes."""
@@ -147,11 +168,9 @@ class Catalogue:
         """One row per active printing, with the inbox jobs that belong to it."""
         self.refresh()
         site = self.published()
-        owner_item = {self.owner_specimen(item): item_id for item_id, item in self.items.items()}
-        owner_item.pop(None, None)
         by_item = {}
         for job in jobs:
-            item_id = owner_item.get(job.get("filedAs")) or job.get("itemId")
+            item_id = self.specimen_items.get(job.get("filedAs")) or job.get("itemId")
             if item_id:
                 by_item.setdefault(item_id, []).append(job["id"])
         rows = [self.row(item, by_item.get(item_id, []), site) for item_id, item in self.items.items()]

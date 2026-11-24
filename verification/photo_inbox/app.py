@@ -153,9 +153,20 @@ def job_summary(folder, catalogue=None):
     job = json.loads((folder / "job.json").read_text(encoding="utf-8"))
     received = job.get("receivedAt") or datetime.fromtimestamp(
         (folder / "job.json").stat().st_mtime, timezone.utc).isoformat(timespec="seconds")
-    described = bool(job.get("specimenHint") or job.get("note") or job.get("itemId"))
     filed = catalogue.filed_as(folder) if catalogue else None
+    if filed:
+        adopt_filing(folder, job, received, filed, catalogue.filed_item(filed))
+    described = bool(job.get("specimenHint") or job.get("note") or job.get("itemId"))
     return dict(job, receivedAt=received, described=described, filedAs=filed)
+
+
+def adopt_filing(folder, job, received, specimen, item_id):
+    """A filed job takes its SPEC and printing from the catalogue, again whenever the catalogue
+    reassigns them; a printing the catalogue cannot name unambiguously keeps the job's own pick."""
+    adopted = {"specimenHint": specimen, **({"itemId": item_id} if item_id else {})}
+    if any(job.get(key) != value for key, value in adopted.items()):
+        job.update(adopted, receivedAt=received, describedAt=now())
+        write_json(folder / "job.json", job)
 
 
 def all_jobs(root, catalogue=None):

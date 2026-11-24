@@ -50,7 +50,11 @@ assigned (a job names its `itemId`), filed (an owner specimen is the printing's 
 online (the published site's catalogue shows that image), ready for Instagram (a verified short link
 in `data/social.json`) and posted (an Instagram permalink). A job counts as filed as SPEC-nnnn when
 `derive.py` makes exactly that specimen's archived photograph from it. A successful hash is cached
-beside the job as `archive.sha256`; a failed derivation is not cached and is tried again. Views show the printings with an owner photo, those without and every
+beside the job as `archive.sha256`; a failed derivation is not cached and is tried again. A filed
+job takes its SPEC number and its printing from the checkout into `job.json` (owner decision,
+2026-11-24), again whenever the checkout reassigns them: the printing whose image that specimen is,
+else the one printing its citations name; a specimen cited by several printings leaves the job's own
+pick. Views show the printings with an owner photo, those without and every
 printing, with a stage filter, a search, the count per stage and statistics by language or set, all
 counted from the same rows. The published catalogue is re-read every ten minutes; when the site
 cannot be read, nothing counts as online and the page says so. The overview writes nothing to the
