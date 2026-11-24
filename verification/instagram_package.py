@@ -225,13 +225,23 @@ def draft_photo(original: bytes, corners, owner_feed_jpeg: Path | None, feed_alt
     }
 
 
+def shared(item_id: str, specimen_id: str):
+    """The item's social row, its short URL and the approved cover's corners, when that row names this SPEC.
+    The corners are kept with the share, so every machine builds the same draft (#646)."""
+    share = read_social(ROOT).get(item_id)
+    own = share if share and share["specimenId"] == specimen_id else {}
+    alias = own.get("shortAlias")
+    corners = [tuple(pair) for pair in own["postCorners"]] if own.get("postCorners") else None
+    return share, (f"https://go.m4s.eu/{alias}" if alias else None), corners
+
+
 def package(model: dict, specimen_id: str, archive: Path, corners=None, *,
             owner_feed_jpeg: Path | None = None, feed_alt: str | None = None) -> tuple[dict, dict]:
     specimen, item, original = verified_owner_photo(model, specimen_id, archive)
     item_id = item["itemId"]
-    share = read_social(ROOT).get(item_id)
-    alias = share.get("shortAlias") if share and share["specimenId"] == specimen_id else None
-    short = f"https://go.m4s.eu/{alias}" if alias else None
+    share, short, stored = shared(item_id, specimen_id)
+    if corners is None and owner_feed_jpeg is None:
+        corners = stored
     caption, alt = post_copy(model, item, short)
     photo, geometry, feed = draft_photo(original, corners, owner_feed_jpeg, feed_alt)
     if feed_alt is not None:

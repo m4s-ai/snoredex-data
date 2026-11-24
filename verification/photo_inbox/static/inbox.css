@@ -1,4 +1,4 @@
-/* Private photo inbox: one task per tab, a bottom tab bar on a phone, a top one on a wide screen. */
+/* Private photo inbox: one task per tab (six), a bottom tab bar on a phone, a top one on a wide screen. */
 :root {
   color-scheme: light dark;
   --bg: light-dark(#f6f6f4, #141516);
@@ -24,14 +24,14 @@ h1 { margin: 0; padding: .7rem 1rem; font-size: 1.15rem; }
 
 /* phone: the tab bar sits at the bottom, in thumb reach, above the home indicator */
 .tabs {
-  position: fixed; inset: auto 0 0 0; display: grid; grid-template-columns: repeat(5, 1fr);
+  position: fixed; inset: auto 0 0 0; display: grid; grid-template-columns: repeat(6, 1fr);
   background: var(--surface); border-top: 1px solid var(--line);
   padding-bottom: env(safe-area-inset-bottom);
 }
 .tabs button {
   position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: .15rem; min-width: 0; min-height: var(--bar); padding: .4rem .1rem; border: 0; background: none;
-  color: var(--muted); font: inherit; font-size: .78rem; cursor: pointer;
+  color: var(--muted); font: inherit; font-size: min(.74rem, 3.1vw); cursor: pointer;  /* six labels fit down to 320 px */
 }
 .tabs svg { width: 1.6rem; height: 1.6rem; fill: none; stroke: currentColor; stroke-width: 1.8;
   stroke-linecap: round; stroke-linejoin: round; }
@@ -94,6 +94,8 @@ ul { list-style: none; margin: 0; padding: 0; }
 .open, .stage-none { color: var(--open); }
 .ok, .stage-ready, .stage-posted { color: var(--ok); }
 .error { color: var(--danger); font-weight: 600; }
+.todo { color: var(--muted); }
+textarea[readonly] { background: var(--bg); }
 .saved:empty { display: none; }
 
 .counts { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }

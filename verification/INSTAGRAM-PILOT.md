@@ -24,7 +24,9 @@ cover then frames the card at about 60 % of the width, nudged down to keep its s
 darkens everything around the card in a soft vignette, in the style of the owner's edited holder
 photos. The card's own pixels, foil included, stay as photographed. With no corners, the draft shows
 the whole original on a dark canvas. Every cover carries a small `@SnoreDex` watermark at the bottom
-right. The exporter never enlarges a small crop. Use a new output directory via `--out` if the inputs
+right. The exporter never enlarges a small crop. Once a cover is approved, record its corners as
+`postCorners` in the item's `data/social.json` entry; the exporter then uses them when no `--corners`
+are passed, so every machine with the photo archive and `main` builds the same draft (#646). Use a new output directory via `--out` if the inputs
 have changed.
 
 ## Use an edited photo of the card on its stand

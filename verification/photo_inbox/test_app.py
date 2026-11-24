@@ -11,9 +11,11 @@ from datetime import datetime, timedelta, timezone
 from hashlib import sha256
 from io import BytesIO
 import json
+import os
 from pathlib import Path
 import struct
 import subprocess
+import sys
 from tempfile import TemporaryDirectory
 import threading
 
@@ -47,7 +49,7 @@ def post(client, body, content_type="application/octet-stream"):
 
 
 def jobs(root):
-    return sorted(path.name for path in root.iterdir() if path.name != ".trash")
+    return sorted(path.name for path in root.iterdir() if path.name not in (".trash", ".drafts"))
 
 
 def upload_checks(root, app, client):
@@ -271,6 +273,57 @@ def adoption_checks(client, repo, folder):
         "the SPEC is the catalogue's; an ambiguous citation keeps the pick"
 
 
+FAKE_EXPORTER = """import json, pathlib, sys
+spec, out = sys.argv[1], pathlib.Path(sys.argv[sys.argv.index("--out") + 1])
+here = pathlib.Path(__file__)
+with here.with_suffix(".log").open("a") as log:
+    log.write(spec + "\\n")
+if spec == "SPEC-0905":
+    sys.exit("Entwurf zurückgestellt: kein Foto im Archiv")
+out.mkdir(parents=True)
+(out / "post.jpg").write_bytes(here.with_suffix(".jpg").read_bytes())
+(out / "caption-draft.txt").write_text(f"Caption {spec}\\n", encoding="utf-8")
+(out / "alt-text.txt").write_text(f"Alt {spec}\\n", encoding="utf-8")
+(out / "manifest.json").write_text(json.dumps({"requiredBeforePosting": ["Owner review"]}), encoding="utf-8")
+"""
+
+
+def fake_exporter(temp):
+    """Stands in for the checkout's instagram_package.py: one draft per SPEC, SPEC-0905 refused."""
+    script = Path(temp) / "exporter.py"
+    script.write_text(FAKE_EXPORTER, encoding="utf-8", newline="\n")
+    script.with_suffix(".jpg").write_bytes(jpeg((20, 20, 20), size=(40, 50)))
+    return [sys.executable, str(script)], script.with_suffix(".log")
+
+
+def posts_checks(root, repo, temp):
+    """Drafts of every shared printing, built once per catalogue state; nothing is posted."""
+    refused = create_app(root, repo, published).test_client().get("/posts")
+    assert refused.status_code == 404 and "--photos" in refused.json["error"]
+    command, log = fake_exporter(temp)
+    client = create_app(root, repo, published, photos=Path(temp), command=command).test_client()
+    posts = {post["draftSpecimen"]: post for post in client.get("/posts").json["posts"]}
+    assert set(posts) == {"SPEC-0904", "SPEC-0905"}, "only printings with a short link"
+    ready = posts["SPEC-0904"]
+    assert (ready["stage"], ready["caption"], ready["alt"], ready["open"]) == (
+        "ready", "Caption SPEC-0904\n", "Alt SPEC-0904", ["Owner review"])
+    assert "kein Foto" in posts["SPEC-0905"]["error"], "a failed draft shows its reason"
+    image = client.get(ready["image"])
+    assert image.status_code == 200 and image.mimetype == "image/jpeg"
+    assert client.get("/posts/SPEC-0905/image").status_code == 404
+    assert client.get("/posts/SPEC-0001/image").status_code == 404, "only shared printings"
+    client.get("/posts")
+    assert log.read_text().split().count("SPEC-0904") == 1, "a draft is built once per catalogue state"
+    social = repo / "data/social.json"
+    later = social.stat().st_mtime_ns + 10**9
+    os.utime(social, ns=(later, later))
+    client.get("/posts")
+    assert log.read_text().split().count("SPEC-0904") == 2, "a changed catalogue rebuilds the draft"
+    assert len(list((root / ".drafts").glob("SPEC-0904-*"))) == 1, "the older draft goes"
+    assert all(job["id"] != ".drafts" for job in client.get("/jobs").json["jobs"])
+    return command
+
+
 def label_checks():
     """The picker maps a label back to its printing, so no two printings may share one."""
     languages = {"LOCALIZATION:WEST:de": "German", "LOCALIZATION:WEST:en": "English"}
@@ -351,9 +404,9 @@ def refuses_checkout():
     raise AssertionError("an inbox inside a Git checkout must be refused")
 
 
-def browser_checks(root, files, repo):
+def browser_checks(root, files, repo, command, photos):
     """Bulk upload with one bad file, describe a job, the overview and the trash, on a phone-sized page."""
-    server = create_server(create_app(root, repo, published), host="127.0.0.1", port=0)
+    server = create_server(create_app(root, repo, published, photos=photos, command=command), host="127.0.0.1", port=0)
     threading.Thread(target=server.run, daemon=True).start()
     url = f"http://127.0.0.1:{server.effective_port}/"
     try:
@@ -412,6 +465,7 @@ def browser_checks(root, files, repo):
             assert page.locator(f'li.job[data-job="{new}"] input[name="item"]').input_value().startswith("JU 1/64")
             overview_page(page)
             trash_page(page, new)
+            posts_page(page)
             assert page.evaluate("document.documentElement.scrollWidth") <= 375, "no sideways scroll on a phone"
             tab_checks(page, url)
             assert not problems, problems
@@ -432,6 +486,12 @@ def tab_checks(page, url):
         box = tabs.nth(index).bounding_box()
         assert box["width"] >= 44 and box["height"] >= 44, ("target size", index, box)
         assert box["y"] + box["height"] >= 812 - 1, "the phone tab bar sits at the bottom"
+    labels = page.locator('[role="tab"] span:not(.count)')
+    for width in (320, 375):
+        page.set_viewport_size({"width": width, "height": 812})
+        for index in range(labels.count()):
+            assert labels.nth(index).evaluate("label => label.scrollWidth <= label.parentElement.clientWidth"), \
+                ("a tab label fits its tab", width, labels.nth(index).text_content())
     page.locator("#tab-papierkorb").focus()
     page.keyboard.press("ArrowRight")
     assert page.evaluate("document.activeElement.id") == "tab-hochladen", "arrows wrap around"
@@ -441,12 +501,34 @@ def tab_checks(page, url):
     page.keyboard.press("Home")
     page.keyboard.press("ArrowLeft")
     assert page.locator("#tab-papierkorb").get_attribute("tabindex") == "0"
-    assert [tabs.nth(index).get_attribute("tabindex") for index in range(4)] == ["-1"] * 4, "one tab stop"
+    assert [tabs.nth(index).get_attribute("tabindex") for index in range(5)] == ["-1"] * 5, "one tab stop"
     page.set_viewport_size({"width": 1280, "height": 800})
     page.click("#tab-uebersicht")
     assert page.locator("#tab-uebersicht").bounding_box()["y"] < 80, "the wide tab bar sits at the top"
     assert page.evaluate("document.documentElement.scrollWidth") <= 1280
     page.set_viewport_size({"width": 375, "height": 812})
+
+
+def posts_page(page):
+    """The draft of a printing ready for Instagram: image, caption, alt text, open points; no post button."""
+    page.click("#tab-posts")
+    assert page.locator("#count-posts").text_content() == "1"
+    post = page.locator("#posts li.post")
+    post.wait_for()
+    assert post.count() == 1 and post.locator(".badge").text_content() == "bereit für Instagram"
+    for _ in range(50):
+        if post.locator("img").evaluate("image => image.complete && image.naturalWidth > 0"):
+            break
+        page.wait_for_timeout(100)
+    else:
+        raise AssertionError("the post image did not load")
+    assert post.locator(".caption").input_value() == "Caption SPEC-0904\n"
+    assert post.locator(".alt").input_value() == "Alt SPEC-0904"
+    assert post.locator(".todo").text_content() == "Vor dem Posten: Abnahme durch dich"
+    assert post.get_by_role("link", name="Bild laden").get_attribute("download") == "SPEC-0904-post.jpg"
+    assert page.locator("#panel-posts button").count() == 0, "nothing posts yet (#646)"
+    page.select_option("#post-view", "posted")
+    assert "kein Foto" in page.locator("#posts li.post .todo.error").text_content()
 
 
 def overview_page(page):
@@ -561,13 +643,14 @@ def main():
         repo, filed = overview_checks(root, temp)
         guard_checks(Path(temp) / "guard", catalogue_repo(Path(temp) / "guard-repo", "sha256:none"))
         trash_checks(root, create_app(root, repo, published).test_client(), digest, filed)
+        command = posts_checks(root, repo, temp)
         names = ("again.jpg", "new.dng", "notes.txt", "new.jpg")
         bodies = (photo, dng_with_preview(jpeg((5, 6, 7), size=(48, 64))), b"not a photo", jpeg((9, 9, 9)))
         files = []
         for name, body in zip(names, bodies):
             files.append(Path(temp) / name)
             files[-1].write_bytes(body)
-        browser_checks(root, files, repo)
+        browser_checks(root, files, repo, command, Path(temp))
     print("photo inbox: all checks passed")
 
 

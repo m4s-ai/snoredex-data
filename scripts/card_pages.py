@@ -32,15 +32,27 @@ def checked_alias(alias, aliases: set) -> None:
     aliases.add(alias)
 
 
+def checked_corners(corners, item_id: str) -> None:
+    """The post cover's card corners: four [x, y] pixel pairs of the upright original, clockwise from top left."""
+    if corners is None:
+        return
+    if not (isinstance(corners, list) and len(corners) == 4 and all(
+            isinstance(pair, list) and len(pair) == 2 and all(type(v) is int and v >= 0 for v in pair)
+            for pair in corners)):
+        raise ValueError(f"Invalid post corners: {item_id}")
+
+
 def read_social(root: Path) -> dict:
     rows = json.loads((root / SOCIAL_FILE).read_text(encoding="utf-8"))
     items, aliases, posts = {}, set(), set()
     for row in rows:
-        if not isinstance(row, dict) or row.keys() - {"itemId", "specimenId", "instagramPosts", "shortAlias"}:
+        if not isinstance(row, dict) or row.keys() - {"itemId", "specimenId", "instagramPosts", "shortAlias",
+                                                      "postCorners"}:
             raise ValueError("Unexpected social fields")
         item_id, links = row["itemId"], row["instagramPosts"]
         if not ITEM_ID.fullmatch(item_id) or item_id in items:
             raise ValueError(f"Invalid or duplicate social item: {item_id}")
+        checked_corners(row.get("postCorners"), item_id)
         checked_posts(links, posts)
         checked_alias(row.get("shortAlias"), aliases)
         items[item_id] = row

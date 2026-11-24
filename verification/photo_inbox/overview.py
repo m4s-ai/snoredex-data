@@ -164,6 +164,14 @@ class Catalogue:
                 "shortUrl": SHORT_BASE + social["shortAlias"] if social.get("shortAlias") else None,
                 "posts": social.get("instagramPosts", [])}
 
+    def shares(self):
+        """The printings with a verified short link, ready for Instagram or posted, newest SPEC first."""
+        self.refresh()
+        site = self.published()
+        rows = [dict(self.row(self.items[item_id], [], site), draftSpecimen=share["specimenId"])
+                for item_id, share in self.social.items() if share.get("shortAlias") and item_id in self.items]
+        return sorted(rows, key=lambda row: row["draftSpecimen"], reverse=True)
+
     def overview(self, jobs):
         """One row per active printing, with the inbox jobs that belong to it."""
         self.refresh()
