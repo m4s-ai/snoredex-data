@@ -403,6 +403,7 @@ def posting_checks(root, repo, temp, command):
     posting.tick(root, uploader)
     targets = mine()["order"]["targets"]
     assert targets["ig:snoredex"]["status"] == "pending" and "erreichbar" in targets["ig:snoredex"]["problem"]
+    assert client.delete("/posts/SPEC-0904/order").status_code == 409, "a tried send may have arrived: no take-back"
     uploader.down = False
     posting.tick(root, uploader)
     assert len(uploader.media_calls) == 2 and len(uploader.uploads) == 3, "one image upload per round"

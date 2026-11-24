@@ -133,7 +133,9 @@ def cancel_order(root, specimen):
     order = read_order(root, specimen)
     if order is None:
         raise LookupError
-    if any(target.get("jobId") or target["status"] != "pending" for target in order["targets"].values()):
+    # a send that failed on the way may still have reached the uploader: only an untried plan goes back
+    if any(target.get("jobId") or target.get("problem") or target["status"] != "pending"
+           for target in order["targets"].values()):
         raise PermissionError("Der Post ist schon unterwegs und lässt sich nicht mehr zurücknehmen.")
     shutil.rmtree(order_folder(root, specimen))
 
