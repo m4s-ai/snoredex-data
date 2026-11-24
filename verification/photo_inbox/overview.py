@@ -1,0 +1,136 @@
+"""Every printing of the catalogue and how far its own photo has come on the way to Instagram (#641).
+
+The catalogue comes from a checkout of `main` (`--repo`), whether a printing is online from the
+published site. Nothing here writes to the repository, the photo archive or the site. Every number
+the page shows is counted from these rows.
+"""
+
+from hashlib import sha256
+import json
+from pathlib import Path
+import re
+import time
+from urllib.request import urlopen
+
+from derive import derive
+
+# the furthest stage reached wins, earlier ones count as done
+STAGES = ("none", "assigned", "filed", "online", "ready", "posted")
+SHORT_BASE = "https://go.m4s.eu/"
+SITE_TTL = 600
+SPEC_PATH = re.compile(r"verification/specimens/(SPEC-\d+)\.\w+")
+ITEM_ID = re.compile(r"item-[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}")
+
+
+def read_json(path):
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def fetch_json(url):
+    with urlopen(url, timeout=20) as response:  # noqa: S310  (the site's own https URL)
+        return json.load(response)
+
+
+def archive_digest(folder):
+    """The SHA-256 of the archive copy intake makes from this job, cached beside the job.
+
+    A job is filed as SPEC-nnnn exactly when its archive copy is that specimen's photograph."""
+    cached = folder / "archive.sha256"
+    if not cached.is_file():
+        try:
+            digest = "sha256:" + sha256(derive(folder)[0]).hexdigest()
+        except (ValueError, KeyError, OSError, StopIteration):
+            digest = "none"  # no archive copy can be made, so nothing can have been filed from it
+        cached.write_text(digest + "\n", encoding="utf-8", newline="\n")
+    return cached.read_text(encoding="utf-8").strip()
+
+
+def label(item, languages):
+    number = "/".join(filter(None, (item.get("collectorNumber"), item.get("collectorNumberDenominator"))))
+    parts = (" ".join(filter(None, (item.get("localSetCode"), number))), languages.get(item["localizationId"], ""), item.get("finish"),
+             item.get("edition"), item.get("localCardName") or item["cardName"])
+    return " · ".join(str(part) for part in parts if part)
+
+
+class Catalogue:
+    """The data of one `main` checkout, re-read whenever a file changes, and the published site."""
+
+    FILES = ("collector_catalogue.json", "verification/specimens.json", "data/social.json", "data/images.json")
+
+    def __init__(self, repo, fetch=fetch_json):
+        self.repo = Path(repo).resolve()
+        missing = [name for name in self.FILES if not (self.repo / name).is_file()]
+        if missing:
+            raise ValueError(f"Im Katalog fehlt {missing[0]}.")
+        self.fetch, self.stamp, self.site, self.site_at, self.site_error = fetch, None, {}, 0.0, None
+        self.refresh()
+
+    def refresh(self):
+        stamp = tuple((self.repo / name).stat().st_mtime_ns for name in self.FILES)
+        if stamp == self.stamp:
+            return
+        doc, specimens, social, images = (read_json(self.repo / name) for name in self.FILES)
+        self.doc, self.stamp = doc, stamp
+        self.base = doc["meta"]["assetBaseUrl"]
+        self.items = {item["itemId"]: item for item in doc["items"] if item["active"]}
+        self.languages = {row["localizationId"]: row["displayName"] for row in doc["localizations"]}
+        self.asset_paths = {asset["assetId"]: asset["path"] for asset in doc["assets"]}
+        self.owner = {row["specimenId"]: row for row in specimens["specimens"]
+                      if row.get("photographedBy") == "collection owner"}
+        self.by_photo = {row["photographSha256"]: row["specimenId"] for row in specimens["specimens"]
+                         if row.get("photographSha256")}
+        self.social = {row["itemId"]: row for row in social}
+        self.thumbs = {row["itemId"]: min(row["images"], key=lambda image: image["width"])["path"]
+                       for row in images["galleryImages"] if row.get("images")}
+
+    def published(self):
+        """itemId -> image asset of the catalogue Pages serves now, re-read every ten minutes."""
+        if time.monotonic() - self.site_at > SITE_TTL or not self.site_at:
+            try:
+                doc = self.fetch(self.base + "collector_catalogue.json")
+                self.site = {item["itemId"]: item.get("imageAssetId") for item in doc["items"]}
+                self.site_error = None
+            except (OSError, ValueError, KeyError) as error:
+                self.site_error = f"Die Website war nicht lesbar: {error}"
+            self.site_at = time.monotonic()
+        return self.site
+
+    def filed_as(self, folder):
+        return self.by_photo.get(archive_digest(folder))
+
+    def owner_specimen(self, item):
+        match = SPEC_PATH.fullmatch(self.asset_paths.get(item.get("imageAssetId"), ""))
+        return match[1] if match and match[1] in self.owner else None
+
+    def stage(self, item, specimen, jobs, site):
+        social = self.social.get(item["itemId"]) or {}
+        reached = [bool(jobs), bool(specimen),
+                   bool(specimen) and site.get(item["itemId"]) == item.get("imageAssetId"),
+                   bool(social.get("shortAlias")), bool(social.get("instagramPosts"))]
+        return STAGES[max((index + 1 for index, done in enumerate(reached) if done), default=0)]
+
+    def row(self, item, jobs, site):
+        specimen = self.owner_specimen(item)
+        social = self.social.get(item["itemId"]) or {}
+        thumb = self.thumbs.get(item["itemId"])
+        return {"itemId": item["itemId"], "label": label(item, self.languages),
+                "set": item["localSetCode"], "language": self.languages.get(item["localizationId"], ""),
+                "stage": self.stage(item, specimen, jobs, site), "specimen": specimen, "jobs": jobs,
+                "preview": self.base + thumb if thumb else None, "card": self.base + f"cards/{item['itemId']}/",
+                "shortUrl": SHORT_BASE + social["shortAlias"] if social.get("shortAlias") else None,
+                "posts": social.get("instagramPosts", [])}
+
+    def overview(self, jobs):
+        """One row per active printing, with the inbox jobs that belong to it."""
+        self.refresh()
+        site = self.published()
+        owner_item = {self.owner_specimen(item): item_id for item_id, item in self.items.items()}
+        owner_item.pop(None, None)
+        by_item = {}
+        for job in jobs:
+            item_id = owner_item.get(job.get("filedAs")) or job.get("itemId")
+            if item_id:
+                by_item.setdefault(item_id, []).append(job["id"])
+        rows = [self.row(item, by_item.get(item_id, []), site) for item_id, item in self.items.items()]
+        return {"dataAsOf": self.doc["meta"]["dataAsOf"], "siteError": self.site_error, "stages": STAGES,
+                "rows": sorted(rows, key=lambda row: row["label"].casefold())}

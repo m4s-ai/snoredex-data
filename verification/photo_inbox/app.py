@@ -1,18 +1,22 @@
 """Receive the owner's own JPEG or DNG photos in a private local inbox, then describe them.
 
 Upload and card assignment are separate (#639): photos arrive without details, and a dashboard
-lists every job with a preview and saves its SPEC number or note. Every photo here is the owner's
-own; images found elsewhere go through the regular specimen intake, never through this inbox.
+lists every job with a preview and saves its SPEC number, note or exact printing. A job that has not
+been filed as a specimen can be moved to a trash, restored from it, or deleted for good; the trash
+empties itself after 30 days. With a catalogue checkout, an overview shows every printing and how
+far its own photo has come (#641). Every photo here is the owner's own; images found elsewhere go
+through the regular specimen intake, never through this inbox.
 """
 
 from argparse import ArgumentParser
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from hashlib import sha256
 from io import BytesIO
 import json
 import os
 from pathlib import Path
 import re
+import shutil
 import struct
 from tempfile import TemporaryDirectory
 
@@ -21,6 +25,7 @@ from PIL import Image, ImageOps
 from waitress import serve
 
 from dng import dng_preview
+from overview import ITEM_ID, Catalogue
 
 # an iPhone ProRAW DNG at 48 megapixels is often 75-100 MB
 MAX_UPLOAD = 200 * 1024 * 1024
@@ -28,6 +33,9 @@ CHUNK = 64 * 1024
 DNG_VERSION_TAG = 50706
 JOB_ID = re.compile(r"[0-9a-f]{64}")
 PREVIEW_SIZES = (400, 1600)
+# hidden, and never read by intake: it takes job folders named by their hash only
+TRASH = ".trash"
+KEEP_DELETED = timedelta(days=30)
 
 
 def now():
@@ -42,15 +50,18 @@ def private_directory(directory):
     return root
 
 
-def description(form):
-    """The card details for one job, checked like the single upload always was."""
+def description(form, items=None):
+    """The card details for one job, checked like the single upload always was, plus its printing."""
     specimen = str(form.get("specimen") or "").strip().upper()
     note = str(form.get("note") or "").strip()
+    item = str(form.get("itemId") or "").strip()
     if specimen and not re.fullmatch(r"SPEC-[0-9]{4,8}", specimen):
         raise ValueError("Gib die SPEC-Nummer im Format SPEC-0774 ein.")
-    if not (specimen or note) or len(note) > 240:
-        raise ValueError("Gib die SPEC-Nummer oder eine kurze Notiz zur Karte an (bis 240 Zeichen).")
-    return {"specimenHint": specimen or None, "note": note}
+    if item and (not ITEM_ID.fullmatch(item) or items is None or item not in items):
+        raise ValueError("Wähle den Druck aus der Liste des Katalogs.")
+    if not (specimen or note or item) or len(note) > 240:
+        raise ValueError("Gib die SPEC-Nummer, den Druck oder eine kurze Notiz zur Karte an (bis 240 Zeichen).")
+    return {"specimenHint": specimen or None, "note": note, "itemId": item or None}
 
 
 def check_jpeg(path):
@@ -126,6 +137,8 @@ def receive(root, stream):
             if not (root / digest).is_dir():
                 raise
             return {"id": digest, "status": "received", "existing": True}
+    # the photo is back, so its deleted copy is no longer needed
+    shutil.rmtree(root / TRASH / digest, ignore_errors=True)
     return {"id": digest, "status": "received", "existing": False}
 
 
@@ -136,16 +149,42 @@ def job_folder(root, job_id):
     return folder
 
 
-def job_summary(folder):
+def job_summary(folder, catalogue=None):
     job = json.loads((folder / "job.json").read_text(encoding="utf-8"))
     received = job.get("receivedAt") or datetime.fromtimestamp(
         (folder / "job.json").stat().st_mtime, timezone.utc).isoformat(timespec="seconds")
-    return dict(job, receivedAt=received, described=bool(job.get("specimenHint") or job.get("note")))
+    described = bool(job.get("specimenHint") or job.get("note") or job.get("itemId"))
+    filed = catalogue.filed_as(folder) if catalogue else None
+    return dict(job, receivedAt=received, described=described, filedAs=filed)
 
 
-def all_jobs(root):
+def all_jobs(root, catalogue=None):
     folders = [path for path in root.iterdir() if JOB_ID.fullmatch(path.name) and (path / "job.json").is_file()]
-    return sorted((job_summary(folder) for folder in folders), key=lambda job: job["receivedAt"], reverse=True)
+    jobs = (job_summary(folder, catalogue) for folder in folders)
+    return sorted(jobs, key=lambda job: job["receivedAt"], reverse=True)
+
+
+def empty_trash(trash):
+    """Delete for good what has lain in the trash for longer than 30 days."""
+    limit = datetime.now(timezone.utc) - KEEP_DELETED
+    for job in all_jobs(trash):
+        if datetime.fromisoformat(job.get("deletedAt") or job["receivedAt"]) < limit:
+            shutil.rmtree(trash / job["id"])
+
+
+def to_trash(root, folder, catalogue):
+    """Move one job out of the inbox, unless intake may already have filed it."""
+    if catalogue is None:
+        raise PermissionError("Ohne Katalog kann der Eingang nicht prüfen, ob das Foto schon übernommen ist.")
+    filed = catalogue.filed_as(folder)
+    if filed:
+        raise PermissionError(f"Das Foto ist schon als {filed} übernommen und bleibt erhalten.")
+    job = json.loads((folder / "job.json").read_text(encoding="utf-8"))
+    write_json(folder / "job.json", dict(job, receivedAt=job_summary(folder)["receivedAt"], deletedAt=now()))
+    trash = root / TRASH
+    trash.mkdir(mode=0o700, exist_ok=True)
+    shutil.rmtree(trash / folder.name, ignore_errors=True)
+    folder.rename(trash / folder.name)
 
 
 def preview(folder, size):
@@ -169,19 +208,39 @@ def preview(folder, size):
     return cached
 
 
-def create_app(directory):
+def restore(root, folder):
+    if (root / folder.name).exists():
+        raise PermissionError("Dieses Foto ist schon wieder im Eingang.")
+    job = json.loads((folder / "job.json").read_text(encoding="utf-8"))
+    job.pop("deletedAt", None)
+    write_json(folder / "job.json", job)
+    folder.rename(root / folder.name)
+
+
+def security_headers(response, image_origin):
+    response.headers["Cache-Control"] = "no-store"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    images = " ".join(filter(None, ("'self'", image_origin)))
+    response.headers["Content-Security-Policy"] = (
+        f"default-src 'self'; img-src {images}; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
+    )
+    return response
+
+
+def create_app(directory, repo=None, fetch=None):
     root = private_directory(directory)
+    trash = root / TRASH
+    trash.mkdir(mode=0o700, exist_ok=True)
+    empty_trash(trash)
+    catalogue = Catalogue(repo, **({"fetch": fetch} if fetch else {})) if repo else None
+    # catalogue thumbnails come from the published site; the page loads nothing else from outside
+    image_origin = "/".join(catalogue.base.split("/")[:3]) if catalogue else ""
     app = Flask(__name__)
     app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD
 
     @app.after_request
     def private_response(response):
-        response.headers["Cache-Control"] = "no-store"
-        response.headers["X-Content-Type-Options"] = "nosniff"
-        response.headers["Content-Security-Policy"] = (
-            "default-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
-        )
-        return response
+        return security_headers(response, image_origin)
 
     @app.get("/")
     def index():
@@ -195,6 +254,10 @@ def create_app(directory):
     def not_found(_error):
         return jsonify(error="Diesen Auftrag gibt es nicht."), 404
 
+    @app.errorhandler(PermissionError)
+    def refused(error):
+        return jsonify(error=str(error)), 409
+
     @app.post("/uploads")
     def upload():
         if request.mimetype != "application/octet-stream":
@@ -207,28 +270,55 @@ def create_app(directory):
 
     @app.get("/jobs")
     def jobs():
-        return jsonify(jobs=all_jobs(root))
+        return jsonify(jobs=all_jobs(root, catalogue), catalogue=catalogue is not None)
 
-    @app.get("/jobs/<job_id>/preview")
-    def job_preview(job_id):
+    @app.get("/<any(jobs, trash):place>/<job_id>/preview")
+    def job_preview(place, job_id):
         size = request.args.get("size", type=int)
         if size not in PREVIEW_SIZES:
             abort(404)
+        folder = job_folder(root if place == "jobs" else trash, job_id)
         # bytes, not a path: no open handle outlives the response (Windows cannot delete an open file)
-        return send_file(BytesIO(preview(job_folder(root, job_id), size).read_bytes()), mimetype="image/jpeg")
+        return send_file(BytesIO(preview(folder, size).read_bytes()), mimetype="image/jpeg")
 
     @app.post("/jobs/<job_id>")
     def describe(job_id):
         folder = job_folder(root, job_id)
         try:
-            details = description(request.get_json(silent=True) or {})
+            details = description(request.get_json(silent=True) or {}, catalogue.items if catalogue else None)
         except ValueError as error:
             return jsonify(error=str(error)), 400
         job = json.loads((folder / "job.json").read_text(encoding="utf-8"))
         # an older job keeps the upload time it is listed by once its record is rewritten
         job.update(details, receivedAt=job_summary(folder)["receivedAt"], describedAt=now())
         write_json(folder / "job.json", job)
-        return jsonify(job_summary(folder))
+        return jsonify(job_summary(folder, catalogue))
+
+    @app.delete("/jobs/<job_id>")
+    def delete(job_id):
+        to_trash(root, job_folder(root, job_id), catalogue)
+        return jsonify(id=job_id, status="deleted")
+
+    @app.get("/trash")
+    def trashed():
+        empty_trash(trash)
+        return jsonify(jobs=all_jobs(trash), keepDays=KEEP_DELETED.days)
+
+    @app.post("/trash/<job_id>/restore")
+    def restore_job(job_id):
+        restore(root, job_folder(trash, job_id))
+        return jsonify(id=job_id, status="received")
+
+    @app.delete("/trash/<job_id>")
+    def delete_for_good(job_id):
+        shutil.rmtree(job_folder(trash, job_id))
+        return jsonify(id=job_id, status="gone")
+
+    @app.get("/overview")
+    def overview():
+        if catalogue is None:
+            return jsonify(error="Die Übersicht braucht einen Katalog (--repo)."), 404
+        return jsonify(catalogue.overview(all_jobs(root, catalogue)))
 
     return app
 
@@ -238,9 +328,10 @@ def main():
     parser.add_argument("--data-dir", type=Path, required=True, help="private persistent folder outside Git")
     parser.add_argument("--host", default="127.0.0.1", help="0.0.0.0 makes it reachable in the home network")
     parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument("--repo", type=Path, help="checkout of snoredex-data main for the overview and the trash")
     args = parser.parse_args()
     try:
-        app = create_app(args.data_dir)
+        app = create_app(args.data_dir, args.repo)
     except (ValueError, OSError) as error:
         parser.error(str(error))
     serve(app, host=args.host, port=args.port, threads=2, inbuf_overflow=MAX_UPLOAD + CHUNK,

@@ -19,3 +19,19 @@ ul { list-style: none; padding: 0; }
 .open { color: light-dark(#8a4b00, #ffb86b); }
 .error { color: light-dark(#b00020, #ff8a80); font-weight: 600; }
 .ok { color: light-dark(#0a6b2d, #7ee2a0); }
+nav { display: flex; flex-wrap: wrap; gap: .4rem 1rem; }
+select { display: block; width: 100%; margin-top: .3rem; padding: .6rem; font: inherit; }
+.job .delete, .danger { background: light-dark(#fde7e9, #4a1a1f); }
+.counts { display: flex; flex-wrap: wrap; gap: .4rem; }
+.counts li { padding: .2rem .5rem; border: 1px solid light-dark(#ccc, #444); border-radius: .4rem; }
+.row { display: flex; gap: .8rem; align-items: flex-start; padding: .6rem 0;
+  border-top: 1px solid light-dark(#ccc, #444); overflow-wrap: anywhere; }
+.row img { flex: none; width: 80px; height: auto; }
+.badge { font-weight: 600; }
+.stage-none { color: light-dark(#8a4b00, #ffb86b); }
+.stage-ready, .stage-posted { color: light-dark(#0a6b2d, #7ee2a0); }
+.links { display: flex; flex-wrap: wrap; gap: .2rem .8rem; margin-top: .3rem; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; }
+th, td { text-align: left; padding: .3rem .5rem; border-bottom: 1px solid light-dark(#ccc, #444); }
+[hidden] { display: none !important; }

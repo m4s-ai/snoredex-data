@@ -14,6 +14,8 @@
 <h1>Fotoeingang</h1>
 <p>Für eigene Kartenfotos, DNG oder JPEG. Die Fotos bleiben privat im Heimnetz und werden nicht
   veröffentlicht. Fotos aus anderen Quellen gehören nicht hierher.</p>
+<nav aria-label="Bereiche"><a href="#upload-title">Hochladen</a> <a href="#jobs-title">Fotos</a>
+  <a href="#overview-title">Übersicht</a> <a href="#stats-title">Statistik</a> <a href="#trash-title">Papierkorb</a></nav>
 
 <section aria-labelledby="upload-title">
   <h2 id="upload-title">Hochladen</h2>
@@ -28,9 +30,47 @@
 
 <section aria-labelledby="jobs-title">
   <h2 id="jobs-title">Fotos zuordnen</h2>
-  <label class="check"><input id="open-only" type="checkbox"> Nur Fotos ohne Angabe</label>
+  <label for="job-view">Ansicht</label>
+  <select id="job-view">
+    <option value="all">Alle Fotos</option>
+    <option value="open">Ohne Angabe</option>
+    <option value="unclassified">Unklassifiziert: keinem Druck zugeordnet</option>
+    <option value="filed">Übernommen als SPEC</option>
+  </select>
   <p id="jobs-status" role="status"></p>
   <ul id="jobs"></ul>
+  <datalist id="items"></datalist>
+</section>
+
+<section aria-labelledby="overview-title">
+  <h2 id="overview-title">Übersicht aller Drucke</h2>
+  <p id="overview-status" role="status"></p>
+  <ul id="stage-counts" class="counts"></ul>
+  <label for="view">Ansicht</label>
+  <select id="view">
+    <option value="all">Alle Drucke</option>
+    <option value="own">Mit Owner-Foto als SPEC</option>
+    <option value="missing">Ohne Owner-Foto</option>
+  </select>
+  <label for="stage">Stufe</label>
+  <select id="stage"><option value="">Alle Stufen</option></select>
+  <label for="search">Suche</label>
+  <input id="search" type="search" placeholder="z. B. JU 11, German, holo" autocomplete="off">
+  <p id="rows-status" role="status"></p>
+  <ul id="rows"></ul>
+</section>
+
+<section aria-labelledby="stats-title">
+  <h2 id="stats-title">Statistik</h2>
+  <label for="group-by">Aufteilen nach</label>
+  <select id="group-by"><option value="language">Sprache</option><option value="set">Set</option></select>
+  <div class="scroll"><table id="stats"></table></div>
+</section>
+
+<section aria-labelledby="trash-title">
+  <h2 id="trash-title">Papierkorb</h2>
+  <p id="trash-status" role="status"></p>
+  <ul id="trash"></ul>
 </section>
 
 <template id="job-template">
@@ -40,11 +80,30 @@
     <form class="describe">
       <label>SPEC-Nummer<input name="specimen" placeholder="SPEC-0774" autocapitalize="characters"
              autocomplete="off" pattern="[Ss][Pp][Ee][Cc]-[0-9]{4,8}"></label>
+      <label>Druck aus dem Katalog<input name="item" list="items" autocomplete="off"
+             placeholder="Set, Nummer, Sprache oder Finish tippen"></label>
       <label>Notiz zur Karte<textarea name="note" maxlength="240" rows="2"
              placeholder="z. B. Relaxo, Dschungel, deutsch, 1. Auflage"></textarea></label>
       <button type="submit">Speichern</button>
       <p class="saved" role="status"></p>
     </form>
+    <button type="button" class="delete">In den Papierkorb</button>
+  </li>
+</template>
+
+<template id="row-template">
+  <li class="row">
+    <img alt="" loading="lazy" width="80" height="112">
+    <div><span class="badge"></span> <span class="label"></span><div class="links"></div></div>
+  </li>
+</template>
+
+<template id="trash-template">
+  <li class="job">
+    <img alt="" loading="lazy" width="400" height="400">
+    <div class="facts"><span class="when"></span></div>
+    <button type="button" class="restore">Wiederherstellen</button>
+    <button type="button" class="purge danger">Endgültig löschen</button>
   </li>
 </template>
 </main>
