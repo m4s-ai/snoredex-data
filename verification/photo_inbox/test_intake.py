@@ -191,6 +191,15 @@ def race_checks(temp):
     assert files == ["README", f"{first}.jpg", f"{got}.jpg"] and (ours / intake.PHOTO_DIR / f"{first}.jpg").read_bytes() \
         == b"another intake", "the other intake's photo stays untouched"
 
+    git(ours, "remote", "set-url", "--push", "origin", str(temp / "missing.git"))  # e.g. no write access
+    try:
+        intake.reserve(intake.ROOT, ours, b"next photo", intake.sha256(b"next photo").hexdigest(), data)
+    except Refused as error:
+        assert "abgelehnt" in str(error), "a refused push says why, not that another intake was faster"
+    else:
+        raise AssertionError("a refused push was taken as reserved")
+    assert git(ours, "status", "--porcelain").stdout == "" and len(list((ours / intake.PHOTO_DIR).iterdir())) == 3
+
 
 def reproduction_checks(photos):
     """SPEC-1125's committed gallery and preview files, rebuilt from its archive copy and corners."""

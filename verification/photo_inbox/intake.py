@@ -143,10 +143,13 @@ def reserve(root, photos, archive, digest, data):
             file.write(archive)
         git(photos, "add", f"{PHOTO_DIR}/{path.name}")
         git(photos, "commit", "-q", "-m", f"Add {specimen}: owner photograph from the private photo inbox (#656)")
-        if git(photos, "push", "-q", check=False).returncode == 0:
+        pushed = git(photos, "push", "-q", check=False)
+        if pushed.returncode == 0:
             return specimen
         git(photos, "reset", "-q", "--hard", "HEAD~1")  # only this run's own commit, not yet pushed
         git(photos, "pull", "-q", "--ff-only")
+        if not path.exists():  # nobody took the number: the push failed for another reason
+            raise Refused(f"Der Push ins Fotoarchiv wurde abgelehnt: {pushed.stderr.strip()}")
     raise Refused("Das Fotoarchiv hat dreimal eine andere Übernahme zuerst angenommen. Bitte erneut starten.")
 
 
