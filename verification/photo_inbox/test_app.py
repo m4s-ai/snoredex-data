@@ -1,11 +1,13 @@
-"""Acceptance checks for the private photo inbox (#626, #639): bulk upload of JPEG and DNG, the
-dashboard that describes each job, restart, the German mobile page and the derived archive copy.
+"""Acceptance checks for the private photo inbox (#626, #639, #641): bulk upload of JPEG and DNG, the
+dashboard that describes each job, the trash, the overview of every printing, restart, the German
+mobile page and the derived archive copy.
 
 Needs the inbox and browser requirements:
     pip install -r requirements.txt -r verification/photo_inbox/requirements.txt
     python verification/photo_inbox/test_app.py
 """
 
+from datetime import datetime, timedelta, timezone
 from hashlib import sha256
 from io import BytesIO
 import json
@@ -20,6 +22,7 @@ from playwright.sync_api import sync_playwright
 from waitress.server import create_server
 
 from app import create_app
+from overview import STAGES, unique_labels
 from derive import carries_location, derive
 
 
@@ -44,7 +47,7 @@ def post(client, body, content_type="application/octet-stream"):
 
 
 def jobs(root):
-    return sorted(path.name for path in root.iterdir())
+    return sorted(path.name for path in root.iterdir() if path.name != ".trash")
 
 
 def upload_checks(root, app, client):
@@ -108,7 +111,7 @@ def dashboard_checks(root, client, digest):
     assert client.get(f"/jobs/{digest}/preview?size=999").status_code == 404
     assert client.get("/jobs/../../etc/preview?size=400").status_code == 404
 
-    for bad in ({}, {"specimen": "SPEC-12"}, {"note": "x" * 241}):
+    for bad in ({}, {"specimen": "SPEC-12"}, {"note": "x" * 241}, {"itemId": ITEMS["none"]}):
         assert client.post(f"/jobs/{digest}", json=bad).status_code == 400, bad
     assert client.post(f"/jobs/{'0' * 64}", json={"note": "x"}).status_code == 404
     saved = client.post(f"/jobs/{digest}", json={"specimen": "spec-0774", "note": " Relaxo "})
@@ -132,7 +135,179 @@ def api_checks(root):
     restarted = create_app(root).test_client()
     again = [job for job in restarted.get("/jobs").json["jobs"] if job["id"] == digest]
     assert again and again[0]["note"] == "Relaxo, korrigiert", "jobs and descriptions survive a restart"
+    refused = restarted.delete(f"/jobs/{digest}")
+    assert refused.status_code == 409 and "Katalog" in refused.json["error"], "no deleting blind"
+    assert restarted.get("/overview").status_code == 404
     return photo, digest
+
+
+ITEMS = {stage: f"item-{index:08d}-0000-0000-0000-000000000000" for index, stage in enumerate(STAGES)}
+BASE = "https://example.test/snoredex/"
+OWNER_STAGES = ("filed", "online", "ready", "posted")
+
+
+def item(stage):
+    language = "LOCALIZATION:WEST:en" if stage == "none" else "LOCALIZATION:WEST:de"
+    return {"itemId": ITEMS[stage], "active": True, "localSetCode": "JU", "collectorNumber": str(STAGES.index(stage) + 1),
+            "collectorNumberDenominator": "64", "localizationId": language, "finish": "holo",
+            "edition": "1st Edition", "cardName": "Snorlax", "localCardName": "Relaxo", "imageAssetId": f"asset-{stage}"}
+
+
+def catalogue_repo(folder, filed_photo):
+    """A checkout of main with one printing at every stage; `filed` holds the inbox photo `filed_photo`."""
+    assets = [{"assetId": f"asset-{stage}", "path": f"verification/specimens/SPEC-0{900 + index}.jpg"}
+              for index, stage in enumerate(STAGES)]
+    specimens = [{"specimenId": f"SPEC-0{900 + STAGES.index(stage)}", "photographedBy": "collection owner",
+                  "photographSha256": filed_photo if stage == "filed" else f"sha256:{stage}"} for stage in OWNER_STAGES]
+    # the printings without an own photo show a third party's photo
+    specimens += [{"specimenId": f"SPEC-0{900 + index}", "photographedBy": "third party", "photographSha256": None}
+                  for index in range(2)]
+    files = {
+        "collector_catalogue.json": {
+            "meta": {"assetBaseUrl": BASE, "dataAsOf": "2026-11-24"},
+            "items": [item(stage) for stage in STAGES] + [dict(item("none"), itemId="item-retired", active=False)],
+            "localizations": [{"localizationId": "LOCALIZATION:WEST:de", "displayName": "German"},
+                              {"localizationId": "LOCALIZATION:WEST:en", "displayName": "English"}],
+            "assets": assets},
+        "verification/specimens.json": {"specimens": specimens},
+        "data/social.json": [{"itemId": ITEMS["ready"], "specimenId": "SPEC-0904", "instagramPosts": [],
+                              "shortAlias": "sdready"},
+                             {"itemId": ITEMS["posted"], "specimenId": "SPEC-0905", "shortAlias": "sdposted",
+                              "instagramPosts": ["https://www.instagram.com/p/test/"]}],
+        "data/images.json": {"galleryImages": []},
+    }
+    for name, data in files.items():
+        (folder / name).parent.mkdir(parents=True, exist_ok=True)
+        (folder / name).write_text(json.dumps(data), encoding="utf-8", newline="\n")
+    return folder
+
+
+def published(_url):
+    """The site as Pages serves it: the online stages show their own photo, `filed` still an older one."""
+    return {"items": [{"itemId": ITEMS[stage], "imageAssetId": "asset-old" if stage == "filed" else f"asset-{stage}"}
+                      for stage in STAGES]}
+
+
+def unreachable(_url):
+    raise OSError("offline")
+
+
+def mark_filed(repo, folder, specimen_id):
+    """Intake files this job: the checkout now names its archive copy as a specimen's photograph."""
+    path = repo / "verification/specimens.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    photo = "sha256:" + sha256(derive(folder)[0]).hexdigest()
+    data["specimens"].append({"specimenId": specimen_id, "photographedBy": "collection owner", "photographSha256": photo})
+    path.write_text(json.dumps(data), encoding="utf-8", newline="\n")
+
+
+def age(record):
+    old = (datetime.now(timezone.utc) - timedelta(days=31)).isoformat(timespec="seconds")
+    aged = dict(json.loads(record.read_text(encoding="utf-8")), deletedAt=old)
+    record.write_text(json.dumps(aged), encoding="utf-8", newline="\n")
+
+
+def guard_checks(root, repo):
+    """A filed job is never lost, however it is deleted, and the checkout is read as it is now."""
+    client = create_app(root, repo, published).test_client()
+    late = post(client, jpeg((11, 22, 33))).json["id"]
+    mark_filed(repo, root / late, "SPEC-0950")  # no overview call in between
+    assert client.delete(f"/jobs/{late}").status_code == 409, "a job filed since the last overview stays"
+    trashed = post(client, jpeg((44, 55, 66))).json["id"]
+    assert client.delete(f"/jobs/{trashed}").status_code == 200
+    mark_filed(repo, root / ".trash" / trashed, "SPEC-0951")  # filed after it was trashed
+    assert client.delete(f"/trash/{trashed}").status_code == 409, "no deleting a filed job for good"
+    age(root / ".trash" / trashed / "job.json")
+    listed = client.get("/trash").json["jobs"]
+    assert [(job["id"], job["filedAs"]) for job in listed] == [(trashed, "SPEC-0951")], "the sweep keeps it"
+    assert client.post(f"/trash/{trashed}/restore").status_code == 200
+
+    blind = post(client, jpeg((77, 88, 99))).json["id"]
+    client.delete(f"/jobs/{blind}")
+    age(root / ".trash" / blind / "job.json")
+    create_app(root)  # a restart without catalogue cannot tell, so it keeps the trash
+    assert (root / ".trash" / blind).is_dir()
+    create_app(root, repo, published).test_client().get("/trash")
+    assert not (root / ".trash" / blind).exists()
+
+    path = repo / "collector_catalogue.json"
+    doc = json.loads(path.read_text(encoding="utf-8"))
+    doc["items"].append(dict(item("none"), itemId="item-99999999-0000-0000-0000-000000000000"))
+    path.write_text(json.dumps(doc), encoding="utf-8", newline="\n")
+    added = client.post(f"/jobs/{late}", json={"itemId": "item-99999999-0000-0000-0000-000000000000"})
+    assert added.status_code == 200, "a printing added to the checkout is offered at once"
+
+    broken = post(client, dng_with_preview(b"\xff\xd8\xff\xe0\x00\x10garbage")).json["id"]
+    assert client.get("/jobs").status_code == 200, "a job intake cannot derive does not break the list"
+    assert not (root / broken / "archive.sha256").exists(), "a failed derivation is tried again later"
+
+
+def label_checks():
+    """The picker maps a label back to its printing, so no two printings may share one."""
+    languages = {"LOCALIZATION:WEST:de": "German", "LOCALIZATION:WEST:en": "English"}
+    base = item("none")
+    twins = {"item-a": dict(base, foilPattern="poke-ball"), "item-b": dict(base, foilPattern="master-ball"),
+             "item-c": dict(base, cardSize="jumbo"),
+             "item-d": dict(base, markings=[{"kind": "staff", "text": "Staff", "role": "distribution-promo"}]),
+             "item-e": dict(base), "item-f": dict(base)}
+    labels = unique_labels(twins, languages)
+    assert len(set(labels.values())) == len(twins), labels
+    assert "poke-ball" in labels["item-a"] and "jumbo" in labels["item-c"] and "Staff" in labels["item-d"]
+    assert labels["item-e"].endswith("item-e") and labels["item-f"].endswith("item-f"), "true twins carry their id"
+
+
+def overview_checks(root, temp):
+    """Every printing at the furthest stage it reached; jobs land on their printing."""
+    label_checks()
+    filed = post(create_app(root).test_client(), jpeg((30, 60, 90))).json["id"]
+    copy = "sha256:" + sha256(derive(root / filed)[0]).hexdigest()
+    repo = catalogue_repo(Path(temp) / "repo", copy)
+    client = create_app(root, repo, published).test_client()
+    assigned = post(client, jpeg((60, 30, 90))).json["id"]
+    assert client.post(f"/jobs/{assigned}", json={"itemId": "item-unknown"}).status_code == 400
+    assert client.post(f"/jobs/{assigned}", json={"itemId": ITEMS["assigned"]}).json["described"] is True
+    jobs = {job["id"]: job for job in client.get("/jobs").json["jobs"]}
+    assert jobs[filed]["filedAs"] == "SPEC-0902" and jobs[assigned]["filedAs"] is None
+    view = client.get("/overview").json
+    rows = {row["itemId"]: row for row in view["rows"]}
+    assert set(rows) == set(ITEMS.values()), "retired printings stay out"
+    assert {stage: rows[ITEMS[stage]]["stage"] for stage in STAGES} == {stage: stage for stage in STAGES}
+    assert rows[ITEMS["filed"]]["jobs"] == [filed] and rows[ITEMS["assigned"]]["jobs"] == [assigned]
+    assert rows[ITEMS["filed"]]["specimen"] == "SPEC-0902" and rows[ITEMS["none"]]["specimen"] is None
+    assert rows[ITEMS["ready"]]["shortUrl"] == "https://go.m4s.eu/sdready"
+    assert rows[ITEMS["posted"]]["posts"] == ["https://www.instagram.com/p/test/"]
+    assert rows[ITEMS["none"]]["label"] == "JU 1/64 · English · holo · 1st Edition · Relaxo"
+    assert rows[ITEMS["filed"]]["card"] == BASE + f"cards/{ITEMS['filed']}/" and view["siteError"] is None
+    assert "img-src 'self' https://example.test;" in client.get("/").headers["Content-Security-Policy"]
+    offline = create_app(root, repo, unreachable).test_client().get("/overview").json
+    stages = {row["itemId"]: row["stage"] for row in offline["rows"]}
+    assert stages[ITEMS["online"]] == "filed" and "nicht lesbar" in offline["siteError"], "an unread site is not online"
+    return repo, filed
+
+
+def trash_checks(root, client, digest, filed):
+    """Only an unfiled job goes to the trash; it can come back, or go for good."""
+    refused = client.delete(f"/jobs/{filed}")
+    assert refused.status_code == 409 and "SPEC-0902" in refused.json["error"], refused.json
+    assert client.delete(f"/jobs/{digest}").json["status"] == "deleted"
+    assert digest not in {job["id"] for job in client.get("/jobs").json["jobs"]} and not (root / digest).exists()
+    trashed = client.get("/trash").json
+    assert trashed["keepDays"] == 30 and [job["id"] for job in trashed["jobs"]] == [digest]
+    assert trashed["jobs"][0]["deletedAt"]
+    assert client.get(f"/trash/{digest}/preview?size=400").status_code == 200
+    assert client.post(f"/trash/{digest}/restore").status_code == 200 and (root / digest / "photo.jpg").is_file()
+    assert "deletedAt" not in json.loads((root / digest / "job.json").read_text(encoding="utf-8"))
+    client.delete(f"/jobs/{digest}")
+    assert post(client, jpeg(gps=True)).status_code == 201, "a deleted photo uploaded again is a new job"
+    assert not (root / ".trash" / digest).exists() and client.get("/trash").json["jobs"] == []
+    client.delete(f"/jobs/{digest}")
+    assert client.delete(f"/trash/{digest}").json["status"] == "gone" and not (root / ".trash" / digest).exists()
+    assert client.delete(f"/trash/{digest}").status_code == 404
+    post(client, jpeg(gps=True))
+    client.delete(f"/jobs/{digest}")
+    age(root / ".trash" / digest / "job.json")
+    assert client.get("/trash").json["jobs"] == [] and not (root / ".trash" / digest).exists(), "emptied after 30 days"
+    post(client, jpeg(gps=True))
 
 
 def refuses_checkout():
@@ -145,9 +320,9 @@ def refuses_checkout():
     raise AssertionError("an inbox inside a Git checkout must be refused")
 
 
-def browser_checks(root, files):
-    """Bulk upload with one bad file, then describe a job in the dashboard, on a phone-sized page."""
-    server = create_server(create_app(root), host="127.0.0.1", port=0)
+def browser_checks(root, files, repo):
+    """Bulk upload with one bad file, describe a job, the overview and the trash, on a phone-sized page."""
+    server = create_server(create_app(root, repo, published), host="127.0.0.1", port=0)
     threading.Thread(target=server.run, daemon=True).start()
     url = f"http://127.0.0.1:{server.effective_port}/"
     try:
@@ -179,21 +354,69 @@ def browser_checks(root, files):
                 raise AssertionError("the preview of the new DNG did not load")
             assert item.locator(".state").text_content() == "ohne Angabe"
             item.locator("textarea").fill("Relaxo, Sammel-Upload")
-            item.locator("button").click()
+            item.locator('input[name="item"]').fill("JU 1/64 · English · holo · 1st Edition · Relaxo")
+            item.locator('button[type="submit"]').click()
             item.locator(".saved.ok").wait_for()
             assert item.locator(".state").text_content() == "beschrieben"
+            none_row = page.locator(f'li.row[data-item="{ITEMS["none"]}"]')
+            none_row.locator(f'a[href="#job-{new}"]').wait_for()
+            assert none_row.locator(".badge").text_content() == "hochgeladen, zugeordnet"
 
             page.reload()
-            page.check("#open-only")
+            page.select_option("#job-view", "open")
             page.locator(f'li.job[data-job="{new}"]').wait_for(state="detached")
-            page.uncheck("#open-only")
+            page.select_option("#job-view", "all")
             page.locator(f'li.job[data-job="{new}"] textarea').wait_for()
             assert page.locator(f'li.job[data-job="{new}"] textarea').input_value() == "Relaxo, Sammel-Upload"
+            assert page.locator(f'li.job[data-job="{new}"] input[name="item"]').input_value().startswith("JU 1/64")
+            overview_page(page)
+            trash_page(page, new)
             assert page.evaluate("document.documentElement.scrollWidth") <= 375, "no sideways scroll on a phone"
             assert not problems, problems
             browser.close()
     finally:
         server.close()
+
+
+def overview_page(page):
+    """Views, stage filter, search, counts and statistics come from the same rows."""
+    counts = page.locator("#stage-counts li").all_text_contents()
+    assert counts == ["kein eigenes Foto: 0", "hochgeladen, zugeordnet: 2", "verarbeitet: 1", "online: 1",
+                      "bereit für Instagram: 1", "gepostet: 1"], counts
+    page.select_option("#view", "own")
+    assert page.locator("#rows li").count() == 4
+    page.select_option("#view", "missing")
+    assert page.locator("#rows li").count() == 2
+    page.select_option("#view", "all")
+    page.select_option("#stage", "posted")
+    assert page.locator("#rows li .badge").all_text_contents() == ["gepostet"]
+    assert page.locator("#rows li a", has_text="Instagram 1").count() == 1
+    page.select_option("#stage", "")
+    page.fill("#search", "english")
+    assert page.locator("#rows li").count() == 1
+    page.fill("#search", "")
+    stats = page.locator("#stats tr").all_text_contents()
+    assert stats == ["SpracheDruckemit Owner-Fotoonlinegepostet", "German5431", "English1000"], stats
+    page.select_option("#group-by", "set")
+    assert page.locator("#stats tr").nth(1).text_content() == "JU6431"
+
+
+def trash_page(page, job):
+    """Delete after confirming, restore, delete again and purge for good; a filed job has no delete."""
+    page.on("dialog", lambda dialog: dialog.accept())
+    card = page.locator(f'#jobs li[data-job="{job}"]')
+    card.locator(".delete").click()
+    card.wait_for(state="detached")
+    trashed = page.locator(f'#trash li[data-job="{job}"]')
+    assert "endgültig gelöscht am" in trashed.locator(".when").text_content()
+    trashed.locator(".restore").click()
+    card.wait_for()
+    card.locator(".delete").click()
+    trashed.locator(".purge").click()
+    trashed.wait_for(state="detached")
+    assert page.locator("#trash-status").text_content() == "Der Papierkorb ist leer."
+    filed = page.locator("#jobs li", has_text="übernommen als SPEC-0902")
+    assert filed.count() == 1 and filed.locator(".delete").is_hidden(), "a filed job offers no delete"
 
 
 def camera_jpeg():
@@ -246,14 +469,17 @@ def main():
     with TemporaryDirectory() as temp:
         derive_checks(temp)
         root = Path(temp) / "inbox"
-        photo, _ = api_checks(root)
+        photo, digest = api_checks(root)
+        repo, filed = overview_checks(root, temp)
+        guard_checks(Path(temp) / "guard", catalogue_repo(Path(temp) / "guard-repo", "sha256:none"))
+        trash_checks(root, create_app(root, repo, published).test_client(), digest, filed)
         names = ("again.jpg", "new.dng", "notes.txt", "new.jpg")
         bodies = (photo, dng_with_preview(jpeg((5, 6, 7), size=(48, 64))), b"not a photo", jpeg((9, 9, 9)))
         files = []
         for name, body in zip(names, bodies):
             files.append(Path(temp) / name)
             files[-1].write_bytes(body)
-        browser_checks(root, files)
+        browser_checks(root, files, repo)
     print("photo inbox: all checks passed")
 
 
