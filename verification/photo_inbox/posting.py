@@ -133,9 +133,9 @@ def cancel_order(root, specimen):
     order = read_order(root, specimen)
     if order is None:
         raise LookupError
-    # a send that failed on the way may still have reached the uploader: only an untried plan goes back
-    if any(target.get("jobId") or target.get("problem") or target["status"] != "pending"
-           for target in order["targets"].values()):
+    # a send that was started may have reached the uploader, even if the inbox never heard back or
+    # stopped on the way: only a plan that was never tried goes back
+    if any(target.get("tried") or target["status"] != "pending" for target in order["targets"].values()):
         raise PermissionError("Der Post ist schon unterwegs und lässt sich nicht mehr zurücknehmen.")
     shutil.rmtree(order_folder(root, specimen))
 
@@ -190,7 +190,10 @@ def tick(root, uploader, now=None):
         if datetime.fromisoformat(order["dueAt"]) > moment:
             continue
         cache = {}
-        for account in order["targets"]:
+        for account, target in order["targets"].items():
+            if target["status"] == "pending" and not target.get("tried"):
+                target["tried"] = True  # recorded before the uploader is called, so a crash cannot hide it
+                write_json(path, order)
             try:
                 advance(order, path.parent, uploader, account, cache)
             except UploaderError as error:
@@ -217,7 +220,7 @@ def order_view(order):
         return None
     return {"dueAt": order["dueAt"], "createdAt": order["createdAt"],
             "targets": {account: {key: target.get(key) for key in ("status", "permalink", "error", "problem",
-                                                                    "attempt")}
+                                                                    "attempt", "tried")}
                         for account, target in order["targets"].items()}}
 
 

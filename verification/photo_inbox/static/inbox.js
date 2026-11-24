@@ -364,7 +364,8 @@ function postItem(post) {
     image.alt = `Postbild: ${post.alt}`;
     item.querySelector(".caption").value = post.caption;
     item.querySelector(".alt").value = post.alt;
-    item.querySelector(".todo").textContent = "Vor dem Posten: " + post.open.map((point) => OPEN_POINTS[point] || point).join(" · ");
+    item.querySelector(".todo").textContent = post.order ? "So geht der Post raus: eingefroren bei der Freigabe."
+      : "Vor dem Posten: " + post.open.map((point) => OPEN_POINTS[point] || point).join(" · ");
     const save = link(post.image, "Bild laden");
     save.download = `${post.draftSpecimen}-post.jpg`;
     links.push(save);
@@ -398,7 +399,7 @@ function showOrder(item, post) {
   if (post.order) {
     const targets = Object.entries(post.order.targets);
     item.querySelector(".targets").replaceChildren(...targets.map(([id, target]) => targetLine(post, id, target, sent)));
-    const waiting = targets.every(([, target]) => target.status === "pending" && !target.problem);
+    const waiting = targets.every(([, target]) => target.status === "pending" && !target.tried);
     const due = new Date(post.order.dueAt);
     if (waiting && due > new Date()) {
       sent.textContent = `Eingeplant für ${DATE.format(due)}.`;
@@ -473,7 +474,7 @@ async function loadAccounts() {
 async function showPosts() {
   try {
     const {posts, canPost} = await call("/posts");
-    if (canPost && !state.canPost) await loadAccounts();
+    if (canPost && !state.accounts.length) await loadAccounts();  // again after a failed attempt
     state.canPost = canPost;
     showCount("count-posts", posts.filter(POST_VIEWS.ready).length);
     const shown = posts.filter(POST_VIEWS[field("post-view").value]);

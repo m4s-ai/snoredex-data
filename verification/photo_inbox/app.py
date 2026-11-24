@@ -277,6 +277,15 @@ def post_view(row, folder):
                 open=manifest["requiredBeforePosting"], image=image)
 
 
+def frozen_view(row, order):
+    """An ordered post as it goes out: the caption, images and alt texts its order froze."""
+    image = f"/posts/{row['draftSpecimen']}/image"
+    slides = [{"image": f"{image}?n={number}", "alt": frozen["alt"]}
+              for number, frozen in enumerate(order["images"], start=1)]
+    return dict(row, caption=order["caption"] + "\n", alt=slides[0]["alt"], slides=slides, draft=order["draft"],
+                open=[], image=image)
+
+
 def security_headers(response, image_origin):
     response.headers["Cache-Control"] = "no-store"
     response.headers["X-Content-Type-Options"] = "nosniff"
@@ -404,11 +413,13 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
             return jsonify(error="Für die Entwürfe fehlt das Fotoarchiv (--photos)."), 404
         views = []
         for row in catalogue.shares():
-            order = posting.order_view(posting.read_order(root, row["draftSpecimen"]))
+            order = posting.read_order(root, row["draftSpecimen"])
             try:
-                views.append(dict(post_view(row, current_draft(row["draftSpecimen"])), order=order))
+                # an ordered post shows what it froze, which is what goes out, never a newer draft
+                view = frozen_view(row, order) if order else post_view(row, current_draft(row["draftSpecimen"]))
+                views.append(dict(view, order=posting.order_view(order)))
             except (ValueError, OSError, KeyError) as error:
-                views.append(dict(row, error=str(error), order=order))
+                views.append(dict(row, error=str(error), order=posting.order_view(order)))
         return jsonify(posts=views, canPost=uploader is not None)
 
     def shared_specimen(specimen):
@@ -420,10 +431,12 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
     @app.get("/posts/<specimen>/image")
     def post_image(specimen):
         shared_specimen(specimen)
-        try:
-            folder = current_draft(specimen)
-        except ValueError:
-            abort(404)
+        folder = posting.order_folder(root, specimen)
+        if not (folder / "order.json").is_file():
+            try:
+                folder = current_draft(specimen)
+            except ValueError:
+                abort(404)
         names = posting.slides(folder)
         number = request.args.get("n", 1, type=int)
         if not 1 <= number <= len(names):

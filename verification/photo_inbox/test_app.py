@@ -344,10 +344,14 @@ class FakeUploader:
                 {"id": "fb_page:1", "platform": "facebook_page", "displayName": "SnoreDex"},
                 {"id": "threads:snoredex", "platform": "threads", "displayName": "SnoreDex"}]
 
-    def __init__(self):
-        self.media_calls, self.uploads, self.jobs, self.down = [], [], {}, False
+    def __init__(self, failing_account_lists=0):
+        self.media_calls, self.uploads, self.jobs, self.down, self.crash = [], [], {}, False, False
+        self.failing_account_lists = failing_account_lists
 
     def accounts(self):
+        if self.failing_account_lists:
+            self.failing_account_lists -= 1
+            raise posting.UploaderError("Uploader nicht erreichbar")
         return self.ACCOUNTS
 
     def media(self, jpeg):
@@ -357,6 +361,8 @@ class FakeUploader:
         return f"https://uploader.test/media/{len(self.media_calls)}.jpg"
 
     def upload(self, body):
+        if self.crash:  # the inbox stops while the request is on its way
+            raise SystemExit("stopped")
         same = [job for job in self.jobs.values() if job["clientRef"] == body["clientRef"] and job["status"] != "failed"]
         if same:
             return same[0]
@@ -397,7 +403,25 @@ def posting_checks(root, repo, temp, command):
     shutil.rmtree(root / ".posts" / "SPEC-0904")
 
     assert order(at=later).status_code == 201 and client.delete("/posts/SPEC-0904/order").status_code == 200
+    assert order(at=later).status_code == 201
+    uploader.crash = True
+    try:
+        posting.tick(root, uploader, datetime.now(timezone.utc) + timedelta(hours=3))
+    except SystemExit:
+        pass
+    uploader.crash = False
+    assert client.delete("/posts/SPEC-0904/order").status_code == 409, "a send cut off on its way may have arrived"
+    shutil.rmtree(root / ".posts" / "SPEC-0904")
+
     assert order().status_code == 201 and order().status_code == 409, "one order per draft"
+    frozen = root / ".posts" / "SPEC-0904" / "post.jpg"
+    frozen.write_bytes(b"frozen")  # stands for the approved image, against a later draft
+    social = repo / "data/social.json"
+    later_stamp = social.stat().st_mtime_ns + 10**10
+    os.utime(social, ns=(later_stamp, later_stamp))
+    shown = mine()
+    assert (shown["draft"], shown["open"]) == (ready["draft"], []), "an ordered post shows what it froze"
+    assert client.get(shown["image"]).data == b"frozen", "and its image is the frozen one"
     uploader.uploads.clear()
     uploader.down = True
     posting.tick(root, uploader)
@@ -406,10 +430,10 @@ def posting_checks(root, repo, temp, command):
     assert client.delete("/posts/SPEC-0904/order").status_code == 409, "a tried send may have arrived: no take-back"
     uploader.down = False
     posting.tick(root, uploader)
-    assert len(uploader.media_calls) == 2 and len(uploader.uploads) == 3, "one image upload per round"
+    assert len(uploader.media_calls) == 3 and len(uploader.uploads) == 3, "one image upload per round"
     first = uploader.uploads[0]
     assert (first["imageUrl"], first["altText"], first["caption"]) == (
-        "https://uploader.test/media/2.jpg", "Alt SPEC-0904", "Caption SPEC-0904"), first
+        "https://uploader.test/media/3.jpg", "Alt SPEC-0904", "Caption SPEC-0904"), first
     assert client.delete("/posts/SPEC-0904/order").status_code == 409, "a sent post cannot be taken back"
 
     uploader.jobs["job-1"].update(status="published", permalink="https://www.instagram.com/p/new/")
@@ -534,8 +558,9 @@ def refuses_checkout():
 
 def browser_checks(root, files, repo, command, photos):
     """Bulk upload with one bad file, describe a job, the overview and the trash, on a phone-sized page."""
+    uploader = FakeUploader()
     server = create_server(create_app(root, repo, published, photos=photos, command=command,
-                                      uploader=FakeUploader(), schedule=False), host="127.0.0.1", port=0)
+                                      uploader=uploader, schedule=False), host="127.0.0.1", port=0)
     threading.Thread(target=server.run, daemon=True).start()
     url = f"http://127.0.0.1:{server.effective_port}/"
     try:
@@ -594,7 +619,7 @@ def browser_checks(root, files, repo, command, photos):
             assert page.locator(f'li.job[data-job="{new}"] input[name="item"]').input_value().startswith("JU 1/64")
             overview_page(page)
             trash_page(page, new)
-            posts_page(page, root)
+            posts_page(page, root, uploader)
             assert page.evaluate("document.documentElement.scrollWidth") <= 375, "no sideways scroll on a phone"
             tab_checks(page, url)
             assert not problems, problems
@@ -638,12 +663,18 @@ def tab_checks(page, url):
     page.set_viewport_size({"width": 375, "height": 812})
 
 
-def posts_page(page, root):
+def posts_page(page, root, uploader):
     """The draft of a printing ready for Instagram: image, caption, alt text, open points, and the order form."""
+    uploader.failing_account_lists = 1
+    page.reload()
     page.click("#tab-posts")
-    assert page.locator("#count-posts").text_content() == "1"
     post = page.locator("#posts li.post")
     post.wait_for()
+    assert post.locator(".send").is_hidden(), "no accounts, no form"
+    page.select_option("#post-view", "all")
+    page.select_option("#post-view", "ready")
+    post.locator(".send").wait_for()  # the accounts are asked for again once the uploader answers
+    assert page.locator("#count-posts").text_content() == "1"
     assert post.count() == 1 and post.locator(".badge").text_content() == "bereit für Instagram"
     for _ in range(50):
         if post.locator("img").evaluate("image => image.complete && image.naturalWidth > 0"):
