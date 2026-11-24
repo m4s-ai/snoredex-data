@@ -771,6 +771,9 @@ def corner_page(page, root):
     stored = json.loads((root / job / "job.json").read_text(encoding="utf-8"))["corners"]
     assert stored[0][0] == before + 40 and stored[2][0] > CARD[2][0] - 40, stored
     assert item.locator(".corners-open").text_content() == "Ecken freigegeben · prüfen"
+    number = item.locator(".number-status")
+    assert number.is_visible() and "hält nichts auf" in number.text_content(), "a card without a number stops nothing"
+    assert item.locator(".number-confirm").is_hidden()
     for _ in range(100):
         if item.locator(".cover").evaluate("image => image.complete && image.naturalWidth === 1080"):
             break
