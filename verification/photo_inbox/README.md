@@ -58,7 +58,7 @@ A JPEG is decoded completely. A DNG is checked at header level only (a TIFF whos
 | `GET /trash` | the trashed jobs; anything older than 30 days is deleted first |
 | `GET /trash/<id>/preview?size=400\|1600` | the preview of a trashed job |
 | `POST /trash/<id>/restore` | puts a trashed job back |
-| `DELETE /trash/<id>` | deletes a trashed job for good |
+| `DELETE /trash/<id>` | deletes a trashed job for good; 409 when filed or without catalogue |
 | `GET /overview` | every active printing with its stage, links and jobs (needs `--repo`) |
 
 ## Run
