@@ -168,6 +168,9 @@ async function describe(event, item) {
   try {
     const reply = await call(`/jobs/${item.dataset.job}`, {method: "POST", headers: {"Content-Type": "application/json"}, body});
     setState(item, reply);
+    // a filed job keeps the catalogue's SPEC and printing, so show what was stored
+    form.specimen.value = reply.specimenHint || "";
+    form.item.value = itemLabel(reply.itemId);
     saved.className = "saved ok";
     saved.textContent = "Gespeichert.";
     showOverview();

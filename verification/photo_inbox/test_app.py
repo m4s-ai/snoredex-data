@@ -150,7 +150,8 @@ def item(stage):
     language = "LOCALIZATION:WEST:en" if stage == "none" else "LOCALIZATION:WEST:de"
     return {"itemId": ITEMS[stage], "active": True, "localSetCode": "JU", "collectorNumber": str(STAGES.index(stage) + 1),
             "collectorNumberDenominator": "64", "localizationId": language, "finish": "holo",
-            "edition": "1st Edition", "cardName": "Snorlax", "localCardName": "Relaxo", "imageAssetId": f"asset-{stage}"}
+            "edition": "1st Edition", "cardName": "Snorlax", "localCardName": "Relaxo", "imageAssetId": f"asset-{stage}",
+            "sourcePrintingId": f"P-{stage}"}
 
 
 def catalogue_repo(folder, filed_photo):
@@ -236,10 +237,38 @@ def guard_checks(root, repo):
     path.write_text(json.dumps(doc), encoding="utf-8", newline="\n")
     added = client.post(f"/jobs/{late}", json={"itemId": "item-99999999-0000-0000-0000-000000000000"})
     assert added.status_code == 200, "a printing added to the checkout is offered at once"
+    adoption_checks(client, repo, root / late)
 
     broken = post(client, dng_with_preview(b"\xff\xd8\xff\xe0\x00\x10garbage")).json["id"]
     assert client.get("/jobs").status_code == 200, "a job intake cannot derive does not break the list"
     assert not (root / broken / "archive.sha256").exists(), "a failed derivation is tried again later"
+
+
+def cite(repo, specimen_id, printings):
+    path = repo / "verification/specimens.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    for row in data["specimens"]:
+        if row["specimenId"] == specimen_id:
+            row["citedBy"] = printings
+    path.write_text(json.dumps(data), encoding="utf-8", newline="\n")
+
+
+def adoption_checks(client, repo, folder):
+    """A filed job shows its SPEC and printing, and follows the catalogue when it reassigns them."""
+    record = lambda: json.loads((folder / "job.json").read_text(encoding="utf-8"))
+    picked = "item-99999999-0000-0000-0000-000000000000"
+    client.get("/jobs")
+    assert (record()["specimenHint"], record()["itemId"]) == ("SPEC-0950", picked), "uncited: the pick stays"
+    cite(repo, "SPEC-0950", ["P-ready"])
+    client.get("/jobs")
+    assert (record()["specimenHint"], record()["itemId"]) == ("SPEC-0950", ITEMS["ready"])
+    cite(repo, "SPEC-0950", ["P-assigned"])
+    client.get("/jobs")
+    assert record()["itemId"] == ITEMS["assigned"], "a reassignment is adopted"
+    cite(repo, "SPEC-0950", ["P-assigned", "P-none"])
+    client.post(f"/jobs/{folder.name}", json={"specimen": "SPEC-0001", "itemId": ITEMS["none"]})
+    assert (record()["specimenHint"], record()["itemId"]) == ("SPEC-0950", ITEMS["none"]), \
+        "the SPEC is the catalogue's; an ambiguous citation keeps the pick"
 
 
 def label_checks():
@@ -268,6 +297,8 @@ def overview_checks(root, temp):
     assert client.post(f"/jobs/{assigned}", json={"itemId": ITEMS["assigned"]}).json["described"] is True
     jobs = {job["id"]: job for job in client.get("/jobs").json["jobs"]}
     assert jobs[filed]["filedAs"] == "SPEC-0902" and jobs[assigned]["filedAs"] is None
+    assert (jobs[filed]["specimenHint"], jobs[filed]["itemId"]) == ("SPEC-0902", ITEMS["filed"]), \
+        "a filed job takes the printing whose image its SPEC is"
     view = client.get("/overview").json
     rows = {row["itemId"]: row for row in view["rows"]}
     assert set(rows) == set(ITEMS.values()), "retired printings stay out"
@@ -467,6 +498,13 @@ def trash_page(page, job):
     page.click("#tab-fotos")
     filed = page.locator("#jobs li", has_text="übernommen als SPEC-0902")
     assert filed.count() == 1 and filed.locator(".delete").is_hidden(), "a filed job offers no delete"
+    specimen, printing = filed.locator('input[name="specimen"]'), filed.locator('input[name="item"]')
+    assert specimen.input_value() == "SPEC-0902" and printing.input_value().startswith("JU 3/64"), \
+        "a filed job shows its SPEC and printing"
+    specimen.fill("SPEC-0001")
+    filed.locator('button[type="submit"]').click()
+    filed.locator(".saved.ok").wait_for()
+    assert specimen.input_value() == "SPEC-0902", "after saving the form shows what was stored"
 
 
 def camera_jpeg():
