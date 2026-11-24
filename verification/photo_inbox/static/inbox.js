@@ -216,12 +216,13 @@ function cornerEditor(item, panel, found) {
   });
   showChoices(editor, found);
   cornerStatus(editor, found);
-  panel.querySelector(".approve").addEventListener("click", () => approveCorners(item, editor));
-  panel.querySelector(".reset").addEventListener("click", () => {
+  // assigned, not added: the editor is built again after another printing resets it
+  panel.querySelector(".approve").onclick = () => approveCorners(item, editor);
+  panel.querySelector(".reset").onclick = () => {
     editor.quad = startQuad({...found, approved: null});
     drawQuad(editor);
     refreshCover(editor);
-  });
+  };
   drawQuad(editor);
   refreshCover(editor);
 }
@@ -235,8 +236,8 @@ function cornerStatus(editor, found) {
 
 function showChoices(editor, found) {
   const choices = editor.panel.querySelector(".choices");
-  if (found.candidates.length < 2) return choices.remove();
-  choices.replaceChildren(...found.candidates.map((quad, index) => {
+  choices.hidden = found.candidates.length < 2;
+  choices.replaceChildren(...(choices.hidden ? [] : found.candidates).map((quad, index) => {
     const button = Object.assign(document.createElement("button"), {type: "button", className: "primary", textContent: `Karte ${index + 1}`});
     button.addEventListener("click", () => { editor.quad = quad.map((p) => [...p]); drawQuad(editor); refreshCover(editor); });
     return button;

@@ -721,7 +721,7 @@ def corner_page(page, root):
     handles = item.locator(".handle")
     handles.nth(3).wait_for()
     assert item.locator(".corners-status").text_content().startswith("Karte erkannt")
-    assert item.locator(".choices").count() == 0, "one card, no choice to make"
+    assert item.locator(".choices").is_hidden(), "one card, no choice to make"
     for index in range(4):
         box = handles.nth(index).bounding_box()
         assert box["width"] >= 44 and box["height"] >= 44, ("target size", index, box)
@@ -748,6 +748,26 @@ def corner_page(page, root):
     else:
         raise AssertionError("the title image from the corners did not load")
     assert page.evaluate("document.documentElement.scrollWidth") <= 375, "no sideways scroll"
+    reopened_editor(page, root, item, job)
+
+
+def reopened_editor(page, root, item, job):
+    """Another printing resets the editor; built again, one click still approves once."""
+    item.locator('input[name="item"]').fill(ITEMS["assigned"])
+    item.locator('button[type="submit"]').click()
+    item.locator(".saved.ok").wait_for()
+    assert item.locator(".corners").is_hidden() and item.locator(".corners-open").text_content() == "Ecken festlegen"
+    assert "corners" not in json.loads((root / job / "job.json").read_text(encoding="utf-8"))
+    item.locator(".corners-open").click()
+    item.locator(".handle").nth(3).wait_for()
+    assert item.locator(".handle").count() == 4, "the handles are built once"
+    sent = []
+    page.on("request", lambda request: request.method == "POST" and request.url.endswith("/corners")
+            and sent.append(request.url))
+    item.locator(".approve").click()
+    item.locator(".corners-status", has_text="Ecken freigegeben am").wait_for()
+    page.wait_for_timeout(300)
+    assert len(sent) == 1, "one click approves once"
 
 
 def posts_page(page, root, uploader):
