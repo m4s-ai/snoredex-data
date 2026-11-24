@@ -97,7 +97,22 @@ def printing_facts(data, item_id):
                     if c["setEditionId"] == item["setEditionId"] and c.get("printedSetCode")), None)
     number = "/".join(filter(None, (item["collectorNumber"], item.get("collectorNumberDenominator"))))
     return {"item": item, "setCode": printed or local_set["localSetCode"], "number": number,
-            "language": language, "setName": local_set["localSetName"], "variant": variant(data, item)}
+            "language": language, "setName": local_set["localSetName"], "variant": variant(data, item),
+            "cites": cited_as(data, item)}
+
+
+def cited_as(data, item):
+    """How a specimen names this printing: a legacy printing by its finish-store row, a source-first
+    printing by its source-first key. Resolved before anything is written or pushed."""
+    if item.get("sourcePrintingId"):
+        if not any(r["printingId"] == item["sourcePrintingId"] for r in data["claims"]["finishPrintings"]):
+            raise Refused(f"Zum Druck fehlt die Zeile {item['sourcePrintingId']} im Katalog.")
+        return item["sourcePrintingId"]
+    keys = [ref.removeprefix("CLAIM:source-first:") for ref in item["sourceClaimRefs"]
+            if ref.startswith("CLAIM:source-first:")]
+    if len(keys) != 1:
+        raise Refused("Der Druck lässt sich keiner Katalogquelle eindeutig zuordnen.")
+    return keys[0]
 
 
 def variant(data, item):
@@ -132,6 +147,9 @@ def orphan(data, photos, digest):
 
 def reserve(root, photos, archive, digest, data):
     """Push the archive copy, which reserves its number; a lost race takes the next one."""
+    # a retry resets this run's own commit: nothing else in the checkout may be at stake
+    if git(photos, "status", "--porcelain").stdout.strip():
+        raise Refused("Der Checkout des Fotoarchivs hat ungesicherte Änderungen.")
     git(photos, "pull", "-q", "--ff-only")
     found = orphan(data, photos, digest)
     if found:
@@ -196,12 +214,12 @@ def specimen_record(specimen, job, facts, summary):
                          f"{summary['orientation'] or 1}.",
         "photograph": f"{specimen}.jpg", "photographSource": None, "photographSha256": f"sha256:{summary['sha256']}",
         "observed": "Not read from the face: filed by the inbox intake script. The photograph's identity rests on "
-                    f"the owner's assignment to printing {item['sourcePrintingId']} ({facts['language']} "
+                    f"the owner's assignment to printing {facts['cites']} ({facts['language']} "
                     f"{facts['setCode']} {facts['number']}); no finish, edition or marking is recorded from it.",
-        "recordedAt": attested, "citedBy": [item["sourcePrintingId"]],
+        "recordedAt": attested, "citedBy": [facts["cites"]],
         "physicalObservation": {
             "ownerAttestedFields": ["identity"], "ownerAttestedAt": attested,
-            "basis": f"The owner assigned this photograph to {item['itemId']} (printing {item['sourcePrintingId']}) "
+            "basis": f"The owner assigned this photograph to {item['itemId']} (printing {facts['cites']}) "
                      f"in the private photo inbox on {attested}."},
         "listingUrl": None,
     }
@@ -243,10 +261,14 @@ def changes(data, specimen, job, corners, facts, summary, archive):
     item, attested = facts["item"], (job.get("describedAt") or job["receivedAt"])[:10]
     data["specimens"]["specimens"].append(specimen_record(specimen, job, facts, summary))
     data["specimens"]["count"] = len(data["specimens"]["specimens"])
-    row = next(r for r in data["claims"]["finishPrintings"] if r["printingId"] == item["sourcePrintingId"])
-    row["sources"].insert(0, citation(specimen, facts, attested))
     out = {"verification/specimens.json": json.dumps(data["specimens"], ensure_ascii=False, indent=2) + "\n"}
-    out["data/claims.json"] = dump(data["claims"])
+    if item.get("sourcePrintingId"):  # a legacy printing: its finish-store row cites the specimen
+        row = next(r for r in data["claims"]["finishPrintings"] if r["printingId"] == item["sourcePrintingId"])
+        row["sources"].insert(0, citation(specimen, facts, attested))
+        out["data/claims.json"] = dump(data["claims"])
+    else:  # a source-first printing names its specimens among its own claim references
+        item["sourceClaimRefs"].append(f"CLAIM:specimen:{specimen}")
+        out["data/printings.json"] = dump(data["printings"])
     kept = owner_image(data, item)
     if not kept:
         out.update(imaging(data, specimen, item, facts, corners, archive))

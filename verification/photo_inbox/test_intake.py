@@ -50,7 +50,8 @@ def make_job(folder, item_id, corners=CORNERS, photo=None):
 def items(data):
     """An active verified printing whose image is not an owner photo, and one whose image is."""
     active = [p for p in data["printings"]["printings"] if p["active"] and p["itemKind"] == "verified-printing"]
-    plain = next(p for p in active if not intake.owner_image(data, p) and p.get("imageAssetId"))
+    plain = next(p for p in active if not intake.owner_image(data, p) and p.get("imageAssetId")
+                 and p.get("sourcePrintingId"))
     owned = next(p for p in active if intake.owner_image(data, p))
     return plain["itemId"], owned["itemId"]
 
@@ -112,6 +113,21 @@ def filing_checks(temp):
     job_record, corners, data, facts, archive, summary = intake.plan(intake.ROOT, owned_job, temp)
     files, kept = intake.changes(data, "SPEC-9999", job_record, corners, facts, summary, archive)
     assert kept and "data/images.json" not in files, "an item with an owner photo keeps it"
+    checked(files)
+
+    data = intake.model(intake.ROOT)
+    source_first = next(p for p in data["printings"]["printings"] if p["active"] and not p.get("sourcePrintingId")
+                        and p["itemKind"] == "verified-printing")
+    job_record, corners, data, facts, archive, summary = intake.plan(
+        intake.ROOT, make_job(temp / "source-first", source_first["itemId"]), temp)
+    files, _ = intake.changes(data, "SPEC-9999", job_record, corners, facts, summary, archive)
+    key = next(r.removeprefix("CLAIM:source-first:") for r in source_first["sourceClaimRefs"]
+               if r.startswith("CLAIM:source-first:"))
+    item = next(p for p in json.loads(files["data/printings.json"])["printings"] if p["itemId"] == source_first["itemId"])
+    record = json.loads(files["verification/specimens.json"])["specimens"][-1]
+    assert record["citedBy"] == [key] and "CLAIM:specimen:SPEC-9999" in item["sourceClaimRefs"], \
+        "a source-first printing names the specimen among its own claims"
+    assert "data/claims.json" not in files
     checked(files)
 
 
@@ -190,6 +206,16 @@ def race_checks(temp):
     files = sorted(p.name for p in (ours / intake.PHOTO_DIR).iterdir())
     assert files == ["README", f"{first}.jpg", f"{got}.jpg"] and (ours / intake.PHOTO_DIR / f"{first}.jpg").read_bytes() \
         == b"another intake", "the other intake's photo stays untouched"
+
+    (ours / "unrelated.txt").write_text("someone's work\n", encoding="utf-8", newline="\n")
+    try:
+        intake.reserve(intake.ROOT, ours, b"next photo", intake.sha256(b"next photo").hexdigest(), data)
+    except Refused as error:
+        assert "ungesicherte" in str(error)
+    else:
+        raise AssertionError("a dirty photo checkout was used")
+    assert (ours / "unrelated.txt").read_text(encoding="utf-8") == "someone's work\n", "nothing in it is touched"
+    (ours / "unrelated.txt").unlink()
 
     git(ours, "remote", "set-url", "--push", "origin", str(temp / "missing.git"))  # e.g. no write access
     try:
