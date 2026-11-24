@@ -80,7 +80,7 @@ def expected(number, denominator):
     denominator (LOR 143 -> 143)."""
     number = re.sub(r"\s+", "", number or "")
     if denominator:
-        return f"{number}/{re.sub(r'\s+', '', denominator)}".upper()
+        return (number + "/" + re.sub(r"\s+", "", denominator)).upper()
     match = re.search(r"\d+$", number)
     return match[0] if match else number.upper()
 
