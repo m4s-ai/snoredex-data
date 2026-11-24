@@ -18,6 +18,9 @@ READINGS = [  # (expected, Tesseract text, result), from the misreadings seen in
     ("1", "SM169", "unreadable"),             # digits inside another word are not the number
     ("169", "SM169", "match"),
     ("2/64", "1/64", "mismatch"),
+    ("TG10/TG30", "Illus. GOSSAN TG10/TG30", "match"),  # letter prefixes printed on the card
+    ("TG10/TG30", "TG20/TG30", "mismatch"),
+    ("SV107/SV122", "5V107/5V122", "match"),
 ]
 
 
@@ -25,6 +28,17 @@ def main():
     for wanted, text, result in READINGS:
         assert verdict(wanted, text)[0] == result, (wanted, text, verdict(wanted, text))
     assert expected("066", "080") == "066/080" and expected("LOR 143", None) == "143"
+    assert expected("TG10", "TG30") == "TG10/TG30", "an alphanumeric denominator never replaces the number"
+
+    import os
+    import number_check
+    from PIL import Image
+    os.environ["TESSERACT"] = os.path.join(os.path.dirname(__file__), "no-such-tesseract")
+    try:
+        found = number_check.check(Image.new("RGB", (630, 880), "white"), "1", "64", "German")
+    finally:
+        del os.environ["TESSERACT"]
+    assert found["result"] == "unavailable", "a broken Tesseract only marks the check, it never fails it"
 
     job = {"itemId": "item-a", "numberCheck": {"itemId": "item-a", "result": "mismatch", "expected": "066/080",
                                                "read": ["067/080"]}}

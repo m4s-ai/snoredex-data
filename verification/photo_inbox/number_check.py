@@ -22,7 +22,8 @@ LANGUAGES = {"Japanese": "jpn", "German": "deu", "Chinese (Simplified)": "chi_si
              "Indonesian": "ind", "Thai": "tha", "Russian": "rus", "Polish": "pol", "Dutch": "nld"}
 CONFUSIONS = str.maketrans({"O": "0", "o": "0", "D": "0", "Q": "0", "l": "1", "I": "1", "|": "1", "i": "1",
                             "S": "5", "B": "8", "Z": "2", "z": "2"})
-PAIR = re.compile(r"\d{1,3}/\d{2,3}")
+# a printed number over its set size, with the letter prefixes some sets print (TG10/TG30, SV107/SV122)
+PAIR = re.compile(r"[A-Z]{0,4}\d{1,3}/[A-Z]{0,4}\d{1,3}")
 
 
 def tesseract():
@@ -75,22 +76,30 @@ def read_text(binary, image, lang):
 
 
 def expected(number, denominator):
-    """The printed number: 066/080, or the digits of a number printed without denominator."""
-    printed = "/".join(filter(None, (number, denominator)))
-    match = re.search(r"(\d+)(?:/(\d+))?$", printed)
-    return match[0] if match else re.sub(r"\s+", "", printed)
+    """The printed number: 066/080 or TG10/TG30 as printed, or the digits of a number printed without
+    denominator (LOR 143 -> 143)."""
+    number = re.sub(r"\s+", "", number or "")
+    if denominator:
+        return f"{number}/{re.sub(r'\s+', '', denominator)}".upper()
+    match = re.search(r"\d+$", number)
+    return match[0] if match else number.upper()
+
+
+def normal(text):
+    """One reading's word in a comparable form: upper case, with the usual letter-for-digit confusions."""
+    return text.upper().translate(CONFUSIONS)
 
 
 def verdict(wanted, text):
     """match, mismatch or unreadable, with the numbers that were read. Words stay apart, so digits of
     neighbouring words never join into a number; a slash with spaces around it still joins."""
-    tokens = [token.translate(CONFUSIONS) for token in re.sub(r"\s*/\s*", "/", text).split()]
+    tokens = [normal(token) for token in re.sub(r"\s*/\s*", "/", text).split()]
     pairs = sorted({pair for token in tokens for pair in PAIR.findall(token)})
-    numerators = {pair.split("/")[0].lstrip("0") for pair in pairs}
+    numerators = {re.sub(r"^[A-Z]*", "", pair.split("/")[0]).lstrip("0") for pair in pairs}
     seven = str.maketrans("7", "1")  # the small italic 1 and 7 are the commonest confusion
-    alone = lambda needle: any(re.search(rf"(?<!\d){re.escape(needle)}(?!\d)", token.translate(seven))
-                               for token in tokens)
-    if alone(wanted.translate(seven)) or ("/" not in wanted and wanted.lstrip("0") in numerators):
+    wanted = normal(wanted).translate(seven)
+    alone = any(re.search(rf"(?<!\d){re.escape(wanted)}(?!\d)", token.translate(seven)) for token in tokens)
+    if alone or ("/" not in wanted and wanted.lstrip("0") in numerators):
         return "match", pairs
     return ("mismatch" if pairs else "unreadable"), pairs
 
@@ -101,9 +110,9 @@ def check(face, number, denominator, language):
     binary = tesseract()
     if not binary:
         return {"result": "unavailable", "expected": wanted, "read": []}
-    lang = languages(binary, language)
     band = bottom_band(face)
-    try:
+    try:  # a missing binary or a hanging Tesseract is no reason to refuse the owner's corners
+        lang = languages(binary, language)
         text = read_text(binary, band, lang) + "\n" + read_text(binary, binarized(band), lang)
     except (OSError, subprocess.TimeoutExpired):
         return {"result": "unavailable", "expected": wanted, "read": []}
