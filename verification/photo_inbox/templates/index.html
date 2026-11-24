@@ -132,6 +132,24 @@
         </div>
         <p class="saved" role="status"></p>
       </form>
+      <button type="button" class="corners-open primary" hidden aria-expanded="false">Ecken festlegen</button>
+      <section class="corners" hidden aria-label="Kartenecken">
+        <p class="corners-status" role="status"></p>
+        <div class="choices actions"></div>
+        <div class="stage">
+          <img class="frame-photo" alt="" draggable="false">
+          <svg class="frame" aria-hidden="true"><polygon></polygon></svg>
+          <div class="loupe" aria-hidden="true" hidden></div>
+        </div>
+        <p class="hint">Ziehe die vier Ecken auf die Kartenecken, auch per Tastatur: Pfeiltasten verschieben, mit
+          Umschalt in großen Schritten.</p>
+        <p class="cover-label">Titelbild aus diesen Ecken</p>
+        <img class="cover" alt="Titelbild für Instagram aus diesen Ecken" width="1080" height="1350">
+        <div class="actions">
+          <button type="button" class="approve primary">Ecken freigeben</button>
+          <button type="button" class="reset danger">Vorschlag wiederherstellen</button>
+        </div>
+      </section>
     </div>
   </li>
 </template>

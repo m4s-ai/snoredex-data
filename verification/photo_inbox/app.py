@@ -13,6 +13,7 @@ from datetime import datetime, timedelta, timezone
 from hashlib import sha256
 from io import BytesIO
 import json
+from math import dist
 import os
 from pathlib import Path
 import re
@@ -27,6 +28,7 @@ from flask import Flask, abort, jsonify, render_template, request, send_file
 from PIL import Image, ImageOps
 from waitress import serve
 
+import corners as card_corners
 from dng import dng_preview
 from overview import ITEM_ID, Catalogue
 import posting
@@ -233,6 +235,59 @@ def preview(folder, size):
     return cached
 
 
+def source_photo(folder):
+    """The photo the archive copy is made of: a DNG's embedded full-size preview, or the JPEG itself."""
+    photo = next(folder.glob("photo.*"))
+    data = photo.read_bytes()
+    try:
+        return dng_preview(data) if photo.suffix == ".dng" else data
+    except (ValueError, KeyError, struct.error):
+        abort(404)
+
+
+def suggested_corners(folder):
+    """Card quads in the upright full-size photo, the coordinates intake uses; cached beside the job."""
+    cached = folder / "corners-suggested.json"
+    if not cached.is_file():
+        with Image.open(BytesIO(source_photo(folder))) as image:
+            upright = ImageOps.exif_transpose(image)
+            found = {"size": list(upright.size), "candidates": card_corners.suggest(upright)}
+        write_json(cached, found)
+    return json.loads(cached.read_text(encoding="utf-8"))
+
+
+def approved_corners(value, size):
+    """Four [x, y] pairs clockwise from top left inside the photo, framing a card wide enough for the gallery."""
+    try:
+        quad = [[int(x), int(y)] for x, y in value]
+    except (TypeError, ValueError):
+        quad = []
+    if len(quad) != 4 or any(not (0 <= x < size[0] and 0 <= y < size[1]) for x, y in quad):
+        raise ValueError("Die Ecken müssen alle vier im Foto liegen.")
+    turn = sum(a[0] * b[1] - b[0] * a[1] for a, b in zip(quad, quad[1:] + quad[:1]))
+    if turn <= 0:
+        raise ValueError("Die Ecken stehen nicht im Uhrzeigersinn ab oben links.")
+    # the face as gallery_prepare.extract measures it, so an approval is one intake can crop
+    width = int(min(dist(quad[0], quad[1]), dist(quad[3], quad[2])))
+    height = int(min(dist(quad[0], quad[3]), dist(quad[1], quad[2])))
+    if width < 600:
+        raise ValueError("Die Karte ist im Foto schmaler als 600 Pixel. Bitte näher fotografieren.")
+    if height <= width:
+        raise ValueError("Die Ecken ergeben keine hochkant stehende Karte. Bitte die Ecken prüfen.")
+    return quad
+
+
+def cover(folder, quad):
+    """The post's title image from these corners, as the Instagram exporter makes it."""
+    root = Path(__file__).resolve().parents[2]
+    for path in (root / "scripts", root / "verification"):
+        if str(path) not in sys.path:
+            sys.path.append(str(path))
+    from instagram_package import post_image
+
+    return post_image(source_photo(folder), [tuple(pair) for pair in quad])[0]
+
+
 def restore(root, folder):
     if (root / folder.name).exists():
         raise PermissionError("Dieses Foto ist schon wieder im Eingang.")
@@ -364,10 +419,47 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
         except ValueError as error:
             return jsonify(error=str(error)), 400
         job = json.loads((folder / "job.json").read_text(encoding="utf-8"))
+        if details["itemId"] != job.get("itemId"):  # corners approved for another printing do not carry over
+            job.pop("corners", None)
+            job.pop("cornersApprovedAt", None)
         # an older job keeps the upload time it is listed by once its record is rewritten
         job.update(details, receivedAt=job_summary(folder)["receivedAt"], describedAt=now())
         write_json(folder / "job.json", job)
         return jsonify(job_summary(folder, catalogue))
+
+    @app.get("/jobs/<job_id>/corners")
+    def corner_suggestion(job_id):
+        folder = job_folder(root, job_id)
+        job = json.loads((folder / "job.json").read_text(encoding="utf-8"))
+        return jsonify(dict(suggested_corners(folder), approved=job.get("corners")))
+
+    @app.post("/jobs/<job_id>/corners")
+    def approve_corners(job_id):
+        """The owner's approval of the card corners intake crops and frames the post with (#657)."""
+        folder = job_folder(root, job_id)
+        if catalogue and catalogue.filed_as(folder):
+            raise PermissionError("Das Foto ist schon übernommen; seine Ecken stehen im Katalog.")
+        job = json.loads((folder / "job.json").read_text(encoding="utf-8"))
+        if not job.get("itemId"):
+            return jsonify(error="Ordne dem Foto zuerst einen Druck zu."), 400
+        try:
+            quad = approved_corners((request.get_json(silent=True) or {}).get("corners"),
+                                    suggested_corners(folder)["size"])
+        except ValueError as error:
+            return jsonify(error=str(error)), 400
+        job.update(corners=quad, cornersApprovedAt=now())
+        write_json(folder / "job.json", job)
+        return jsonify(job_summary(folder, catalogue))
+
+    @app.get("/jobs/<job_id>/cover")
+    def cover_preview(job_id):
+        folder = job_folder(root, job_id)
+        values = [int(v) for v in request.args.get("c", "").split(",") if v.strip().isdigit()]
+        try:
+            quad = approved_corners(list(zip(values[::2], values[1::2])), suggested_corners(folder)["size"])
+        except ValueError as error:
+            return jsonify(error=str(error)), 400
+        return send_file(BytesIO(cover(folder, quad)), mimetype="image/jpeg")
 
     @app.delete("/jobs/<job_id>")
     def delete(job_id):

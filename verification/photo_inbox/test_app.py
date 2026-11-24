@@ -20,7 +20,7 @@ import sys
 from tempfile import TemporaryDirectory
 import threading
 
-from PIL import Image, ImageChops
+from PIL import Image, ImageChops, ImageDraw
 from playwright.sync_api import sync_playwright
 from waitress.server import create_server
 
@@ -36,6 +36,20 @@ def jpeg(colour=(200, 40, 40), size=(64, 48), gps=False):
         exif.get_ifd(0x8825).update({1: "N", 2: (10.0, 20.0, 30.0), 3: "E", 4: (10.0, 20.0, 30.0)})
     out = BytesIO()
     Image.new("RGB", size, colour).save(out, "JPEG", exif=exif)
+    return out.getvalue()
+
+
+CARD = [[300, 400], [1380, 410], [1370, 1910], [310, 1900]]  # a card's corners in card_photo(), upright
+
+
+def card_photo():
+    """A phone photo stored sideways (orientation 6): one light card on a dark wall, as on its stand."""
+    upright = Image.new("RGB", (1700, 2300), (20, 20, 24))
+    ImageDraw.Draw(upright).polygon([tuple(p) for p in CARD], fill=(225, 205, 60))
+    exif = Image.Exif()
+    exif[274] = 6
+    out = BytesIO()
+    upright.transpose(Image.Transpose.ROTATE_90).save(out, "JPEG", exif=exif, quality=92)
     return out.getvalue()
 
 
@@ -476,6 +490,37 @@ def permalink_checks(temp):
                        facebookPosts=["https://www.facebook.com/1/posts/2"]), row
 
 
+def corner_checks(root, repo):
+    """Corners are suggested, approved only for an assigned printing, and dropped when it changes (#657)."""
+    client = create_app(root, repo, published).test_client()
+    job = post(client, card_photo()).json["id"]
+    found = client.get(f"/jobs/{job}/corners").json
+    assert found["size"] == [1700, 2300] and found["approved"] is None, "the upright photo's pixels"
+    error = max(abs(a - b) for quad in found["candidates"][:1] for p, q in zip(quad, CARD) for a, b in zip(p, q))
+    assert error <= 0.02 * 1080, found["candidates"]
+    approve = lambda corners: client.post(f"/jobs/{job}/corners", json={"corners": corners})
+    assert approve(CARD).status_code == 400, "no printing, no corners"
+    client.post(f"/jobs/{job}", json={"itemId": ITEMS["none"]})
+    assert approve(CARD[::-1]).status_code == 400, "clockwise from top left"
+    assert approve([[0, 0], [500, 0], [500, 700], [0, 700]]).status_code == 400, "too narrow for the gallery"
+    assert approve([[0, 0], [1800, 0], [1800, 2000], [0, 2000]]).status_code == 400, "inside the photo"
+    collapsed = [CARD[0], CARD[2], [CARD[2][0], CARD[2][1] + 1], CARD[3]]  # top right dragged onto bottom right
+    assert approve(collapsed).status_code == 400, "a quad the gallery crop cannot use"
+    approved = approve(CARD)
+    assert approved.status_code == 200 and approved.json["corners"] == CARD and approved.json["cornersApprovedAt"]
+    cover = client.get(f"/jobs/{job}/cover?c=" + ",".join(str(v) for p in CARD for v in p))
+    with Image.open(BytesIO(cover.data)) as image:
+        assert cover.status_code == 200 and image.size == (1080, 1350), "the post's title image"
+    assert client.get(f"/jobs/{job}/cover?c=1,2,3").status_code == 400
+    record = lambda: json.loads((root / job / "job.json").read_text(encoding="utf-8"))
+    client.post(f"/jobs/{job}", json={"itemId": ITEMS["none"], "note": "same printing"})
+    assert record()["corners"] == CARD, "a new note keeps the approval"
+    client.post(f"/jobs/{job}", json={"itemId": ITEMS["assigned"]})
+    assert "corners" not in record() and "cornersApprovedAt" not in record(), "another printing drops it"
+    mark_filed(repo, root / job, "SPEC-0960")
+    assert approve(CARD).status_code == 409, "a filed job's corners are the catalogue's"
+
+
 def label_checks():
     """The picker maps a label back to its printing, so no two printings may share one."""
     languages = {"LOCALIZATION:WEST:de": "German", "LOCALIZATION:WEST:en": "English"}
@@ -587,7 +632,7 @@ def browser_checks(root, files, repo, command, photos):
             item = page.locator(f'li.job[data-job="{new}"]')
             item.wait_for()
             for _ in range(50):
-                if item.locator("img").evaluate("image => image.complete && image.naturalWidth > 0"):
+                if item.locator(".photo img").evaluate("image => image.complete && image.naturalWidth > 0"):
                     break
                 page.wait_for_timeout(100)
             else:
@@ -619,6 +664,7 @@ def browser_checks(root, files, repo, command, photos):
             assert page.locator(f'li.job[data-job="{new}"] input[name="item"]').input_value().startswith("JU 1/64")
             overview_page(page)
             trash_page(page, new)
+            corner_page(page, root)
             posts_page(page, root, uploader)
             assert page.evaluate("document.documentElement.scrollWidth") <= 375, "no sideways scroll on a phone"
             tab_checks(page, url)
@@ -661,6 +707,72 @@ def tab_checks(page, url):
     assert page.locator("#tab-uebersicht").bounding_box()["y"] < 80, "the wide tab bar sits at the top"
     assert page.evaluate("document.documentElement.scrollWidth") <= 1280
     page.set_viewport_size({"width": 375, "height": 812})
+
+
+def corner_page(page, root):
+    """On the phone: the suggested frame, handles a thumb can hit, keyboard and drag, then approval."""
+    base = page.url.split("#")[0]
+    job = page.request.post(base + "uploads", data=card_photo(),
+                            headers={"Content-Type": "application/octet-stream"}).json()["id"]
+    page.request.post(base + f"jobs/{job}", data=json.dumps({"itemId": ITEMS["none"]}),
+                      headers={"Content-Type": "application/json"})
+    page.goto(base + "#fotos")
+    page.reload()
+    item = page.locator(f'li.job[data-job="{job}"]')
+    item.locator(".corners-open").click()
+    handles = item.locator(".handle")
+    handles.nth(3).wait_for()
+    assert item.locator(".corners-status").text_content().startswith("Karte erkannt")
+    assert item.locator(".choices").is_hidden(), "one card, no choice to make"
+    for index in range(4):
+        box = handles.nth(index).bounding_box()
+        assert box["width"] >= 44 and box["height"] >= 44, ("target size", index, box)
+    label = lambda: handles.nth(0).get_attribute("aria-label")
+    suggested = label()
+    before = int(label().split(": ")[1].split(",")[0])
+    handles.nth(0).focus()
+    page.keyboard.press("Shift+ArrowRight")
+    assert int(label().split(": ")[1].split(",")[0]) == before + 40, label()
+    assert item.locator(".loupe").is_visible(), "the loupe shows the corner under the thumb"
+    box = handles.nth(2).bounding_box()
+    page.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
+    page.mouse.down()
+    page.mouse.move(box["x"] + box["width"] / 2 + 10, box["y"] + box["height"] / 2 + 10, steps=4)
+    page.mouse.up()
+    item.locator(".approve").click()
+    item.locator(".corners-status", has_text="Ecken freigegeben am").wait_for()
+    stored = json.loads((root / job / "job.json").read_text(encoding="utf-8"))["corners"]
+    assert stored[0][0] == before + 40 and stored[2][0] > CARD[2][0] - 40, stored
+    assert item.locator(".corners-open").text_content() == "Ecken freigegeben · prüfen"
+    for _ in range(100):
+        if item.locator(".cover").evaluate("image => image.complete && image.naturalWidth === 1080"):
+            break
+        page.wait_for_timeout(100)
+    else:
+        raise AssertionError("the title image from the corners did not load")
+    assert page.evaluate("document.documentElement.scrollWidth") <= 375, "no sideways scroll"
+    item.locator(".reset").click()
+    assert label() == suggested, "the suggestion comes back unchanged after dragging"
+    reopened_editor(page, root, item, job)
+
+
+def reopened_editor(page, root, item, job):
+    """Another printing resets the editor; built again, one click still approves once."""
+    item.locator('input[name="item"]').fill(ITEMS["assigned"])
+    item.locator('button[type="submit"]').click()
+    item.locator(".saved.ok").wait_for()
+    assert item.locator(".corners").is_hidden() and item.locator(".corners-open").text_content() == "Ecken festlegen"
+    assert "corners" not in json.loads((root / job / "job.json").read_text(encoding="utf-8"))
+    item.locator(".corners-open").click()
+    item.locator(".handle").nth(3).wait_for()
+    assert item.locator(".handle").count() == 4, "the handles are built once"
+    sent = []
+    page.on("request", lambda request: request.method == "POST" and request.url.endswith("/corners")
+            and sent.append(request.url))
+    item.locator(".approve").click()
+    item.locator(".corners-status", has_text="Ecken freigegeben am").wait_for()
+    page.wait_for_timeout(300)
+    assert len(sent) == 1, "one click approves once"
 
 
 def posts_page(page, root, uploader):
@@ -828,6 +940,7 @@ def main():
         repo, filed = overview_checks(root, temp)
         guard_checks(Path(temp) / "guard", catalogue_repo(Path(temp) / "guard-repo", "sha256:none"))
         trash_checks(root, create_app(root, repo, published).test_client(), digest, filed)
+        corner_checks(Path(temp) / "corners", catalogue_repo(Path(temp) / "corners-repo", "sha256:none"))
         command = posts_checks(root, repo, temp)
         names = ("again.jpg", "new.dng", "notes.txt", "new.jpg")
         bodies = (photo, dng_with_preview(jpeg((5, 6, 7), size=(48, 64))), b"not a photo", jpeg((9, 9, 9)))

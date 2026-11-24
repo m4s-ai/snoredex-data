@@ -33,6 +33,20 @@ at once; a description can be corrected, the photo never changes. Previews are c
 as `preview-400.jpg` and `preview-1600.jpg`, upright and without Exif. There is no access code (owner
 decision, 2026-11-23): the service is reachable only in the home network.
 
+**Card corners (#657).** A job with a printing gets "Ecken festlegen". The inbox suggests the card
+corners with `corners.py`: long straight edges paired into quads of the card's shape, without a
+trained model (OpenCV and NumPy; measured in #655, within about 1 % of the card width for one card on
+a dark backdrop). The suggestion is cached beside the job as `corners-suggested.json`. With several
+cards on the photo the owner taps the right one; with none found, a card-shaped frame in the middle
+is the start. The owner drags the four handles on the photo, at least 44 × 44 px, with a loupe beside
+the corner under the thumb, or moves them with the arrow keys (Shift for large steps), and sees the
+post's title image those corners make. "Ecken freigeben" writes `corners` (four `[x, y]` pairs,
+clockwise from top left in the upright full-size photo, the coordinates intake uses) and
+`cornersApprovedAt` into `job.json`. The corners must lie inside the photo, run clockwise and frame a
+card at least 600 px wide, as the gallery needs. Another printing drops the approval; a filed job
+keeps its corners in the catalogue. Without OpenCV the inbox suggests nothing and the owner drags
+from the middle.
+
 **Trash (owner decision, 2026-11-24).** A job that has not been filed as a specimen can be moved to
 the trash after a confirmation. The trash is the folder `.trash` inside the data folder: intake reads
 only job folders named by their hash, so it never sees it. A trashed job can be restored, or deleted
@@ -98,7 +112,10 @@ A JPEG is decoded completely. A DNG is checked at header level only (a TIFF whos
 | `POST /uploads` | one photo as `application/octet-stream`; 201 new, 200 already there |
 | `GET /jobs` | every job, newest first |
 | `GET /jobs/<id>/preview?size=400\|1600` | the cached preview JPEG |
-| `POST /jobs/<id>` | JSON `{"specimen", "note", "itemId"}`: saves the description |
+| `POST /jobs/<id>` | JSON `{"specimen", "note", "itemId"}`: saves the description; another printing drops approved corners |
+| `GET /jobs/<id>/corners` | the photo's upright size, the suggested card quads and the approved corners |
+| `POST /jobs/<id>/corners` | JSON `{"corners"}`: approves them; 400 without printing or for invalid corners, 409 when filed |
+| `GET /jobs/<id>/cover?c=x1,y1,…` | the post's title image from these corners |
 | `DELETE /jobs/<id>` | moves an unfiled job to the trash; 409 when filed or without catalogue |
 | `GET /trash` | the trashed jobs; anything older than 30 days is deleted first |
 | `GET /trash/<id>/preview?size=400\|1600` | the preview of a trashed job |
@@ -203,7 +220,10 @@ trash (no delete without catalogue or of a filed job, restore, a re-upload, dele
 after 30 days), the overview with test data for every stage (an unreadable site counts nothing as
 online), a restart, an inbox inside a Git checkout, and in a phone-sized Chromium a bulk upload with
 one bad file, a description with its printing, the views, counts and statistics, and delete,
-restore and delete for good, the Posts tab with a stand-in exporter (built once per catalogue state,
+restore and delete for good, the card corners (a suggestion within 2 % on a sideways photo; no
+approval without printing, counter-clockwise, too narrow or outside the photo; the title image;
+a new note keeps, another printing drops and a filed job refuses the approval; in the browser the
+handle size, keyboard steps, the loupe, a drag and the approval), the Posts tab with a stand-in exporter (built once per catalogue state,
 a failed draft with its reason) and a stand-in uploader (accounts preselected, a dismissed confirmation
 posts nothing, a plan taken back; a changed draft, a time without zone and a second order refused;
 an unreachable uploader retried, a resend after a crash deduplicated, a failed job sent again; the

@@ -147,7 +147,185 @@ function jobItem(job) {
   const remove = item.querySelector(".delete");
   remove.hidden = !state.catalogue || Boolean(job.filedAs);
   remove.addEventListener("click", () => toTrash(item));
+  const open = item.querySelector(".corners-open");
+  resetCorners(item, job);
+  open.addEventListener("click", () => toggleCorners(item, open));
   return item;
+}
+
+// --- card corners (#657): suggested, dragged on the phone, approved for intake ---
+
+// another printing drops the approval on the server; the editor starts over from the next suggestion
+function resetCorners(item, job) {
+  const open = item.querySelector(".corners-open");
+  open.hidden = !job.itemId || Boolean(job.filedAs);
+  open.textContent = job.corners ? "Ecken freigegeben · prüfen" : "Ecken festlegen";
+  if (job.corners) return;
+  const panel = item.querySelector(".corners");
+  panel.hidden = true;
+  delete panel.dataset.ready;
+  panel.querySelectorAll(".handle").forEach((handle) => handle.remove());
+  open.setAttribute("aria-expanded", "false");
+}
+
+const CORNER_NAMES = ["oben links", "oben rechts", "unten rechts", "unten links"];
+
+async function toggleCorners(item, open) {
+  const panel = item.querySelector(".corners");
+  const opening = panel.hidden;
+  panel.hidden = !opening;
+  open.setAttribute("aria-expanded", String(opening));
+  if (!opening || panel.dataset.ready) return;
+  const status = panel.querySelector(".corners-status");
+  status.textContent = "Suche die Karte …";
+  try {
+    const found = await call(`/jobs/${item.dataset.job}/corners`);
+    panel.dataset.ready = "1";
+    cornerEditor(item, panel, found);
+  } catch (error) {
+    status.textContent = error.message;
+  }
+}
+
+function startQuad(found) {
+  // a copy: dragging must never change the stored suggestion that "Vorschlag wiederherstellen" returns to
+  if (found.approved) return found.approved.map((point) => [...point]);
+  if (found.candidates.length) return found.candidates[0].map((point) => [...point]);
+  const [width, height] = found.size;  // nothing found: a card-shaped frame in the middle to drag from
+  const w = width * 0.5, h = w * 88 / 63, x = (width - w) / 2, y = Math.max(0, (height - h) / 2);
+  return [[x, y], [x + w, y], [x + w, y + h], [x, y + h]].map((p) => p.map(Math.round));
+}
+
+function cornerEditor(item, panel, found) {
+  const job = item.dataset.job;
+  const [width, height] = found.size;
+  const editor = {quad: startQuad(found), handles: [], panel, job, width, height};
+  const photo = panel.querySelector(".frame-photo");
+  photo.src = `/jobs/${job}/preview?size=1600`;
+  photo.alt = "Foto mit dem Rahmen der Karte";
+  panel.querySelector(".frame").setAttribute("viewBox", `0 0 ${width} ${height}`);
+  panel.querySelector(".loupe").style.backgroundImage = `url("/jobs/${job}/preview?size=1600")`;
+  const stage = panel.querySelector(".stage");
+  editor.handles = CORNER_NAMES.map((name, index) => {
+    const handle = Object.assign(document.createElement("button"), {type: "button", className: "handle"});
+    handle.addEventListener("pointerdown", (event) => dragCorner(event, editor, index));
+    handle.addEventListener("keydown", (event) => nudgeCorner(event, editor, index));
+    handle.addEventListener("focus", () => showLoupe(editor, index));
+    handle.addEventListener("blur", () => { panel.querySelector(".loupe").hidden = true; });
+    stage.append(handle);
+    return handle;
+  });
+  showChoices(editor, found);
+  cornerStatus(editor, found);
+  // assigned, not added: the editor is built again after another printing resets it
+  panel.querySelector(".approve").onclick = () => approveCorners(item, editor);
+  panel.querySelector(".reset").onclick = () => {
+    editor.quad = startQuad({...found, approved: null});
+    drawQuad(editor);
+    refreshCover(editor);
+  };
+  drawQuad(editor);
+  refreshCover(editor);
+}
+
+function cornerStatus(editor, found) {
+  const count = found.candidates.length;
+  const text = found.approved ? "Freigegebene Ecken." : count === 1 ? "Karte erkannt. Prüfe die Ecken und gib sie frei."
+    : count > 1 ? `${count} Karten erkannt. Tippe die richtige an.` : "Keine Karte erkannt. Ziehe die Ecken auf die Karte.";
+  editor.panel.querySelector(".corners-status").textContent = text;
+}
+
+function showChoices(editor, found) {
+  const choices = editor.panel.querySelector(".choices");
+  choices.hidden = found.candidates.length < 2;
+  choices.replaceChildren(...(choices.hidden ? [] : found.candidates).map((quad, index) => {
+    const button = Object.assign(document.createElement("button"), {type: "button", className: "primary", textContent: `Karte ${index + 1}`});
+    button.addEventListener("click", () => { editor.quad = quad.map((p) => [...p]); drawQuad(editor); refreshCover(editor); });
+    return button;
+  }));
+}
+
+function drawQuad(editor) {
+  editor.panel.querySelector(".frame polygon").setAttribute("points", editor.quad.map((p) => p.join(",")).join(" "));
+  editor.handles.forEach((handle, index) => {
+    const [x, y] = editor.quad[index];
+    handle.style.left = `${(100 * x) / editor.width}%`;
+    handle.style.top = `${(100 * y) / editor.height}%`;
+    handle.setAttribute("aria-label", `Ecke ${CORNER_NAMES[index]}: ${x}, ${y}`);
+  });
+}
+
+function moveCorner(editor, index, x, y) {
+  editor.quad[index] = [Math.round(Math.min(Math.max(x, 0), editor.width - 1)),
+                        Math.round(Math.min(Math.max(y, 0), editor.height - 1))];
+  drawQuad(editor);
+  showLoupe(editor, index);
+}
+
+function dragCorner(event, editor, index) {
+  event.preventDefault();
+  const handle = editor.handles[index];
+  const photo = editor.panel.querySelector(".frame-photo");
+  handle.setPointerCapture(event.pointerId);
+  const follow = (move) => {
+    const box = photo.getBoundingClientRect();
+    moveCorner(editor, index, ((move.clientX - box.left) / box.width) * editor.width,
+               ((move.clientY - box.top) / box.height) * editor.height);
+  };
+  const stop = () => {
+    handle.removeEventListener("pointermove", follow);
+    editor.panel.querySelector(".loupe").hidden = true;
+    refreshCover(editor);
+  };
+  handle.addEventListener("pointermove", follow);
+  handle.addEventListener("pointerup", stop, {once: true});
+  handle.addEventListener("pointercancel", stop, {once: true});
+}
+
+function nudgeCorner(event, editor, index) {
+  const steps = {ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1]}[event.key];
+  if (!steps) return;
+  event.preventDefault();
+  const size = event.shiftKey ? 40 : 4;
+  const [x, y] = editor.quad[index];
+  moveCorner(editor, index, x + steps[0] * size, y + steps[1] * size);
+  clearTimeout(editor.coverTimer);
+  editor.coverTimer = setTimeout(() => refreshCover(editor), 600);
+}
+
+// a magnified view of the corner, so a fingertip does not hide what it places
+function showLoupe(editor, index) {
+  const loupe = editor.panel.querySelector(".loupe");
+  const [x, y] = editor.quad[index];
+  const zoom = 4;
+  const box = editor.panel.querySelector(".frame-photo").getBoundingClientRect();
+  const scale = (box.width * zoom) / editor.width;
+  loupe.hidden = false;
+  loupe.style.backgroundSize = `${box.width * zoom}px ${box.height * zoom}px`;
+  loupe.style.backgroundPosition = `${60 - x * scale}px ${60 - y * scale}px`;
+  loupe.classList.toggle("right", x < editor.width / 2);
+}
+
+function refreshCover(editor) {
+  const image = editor.panel.querySelector(".cover");
+  image.hidden = false;
+  image.onerror = () => {
+    image.hidden = true;
+    editor.panel.querySelector(".corners-status").textContent = "Aus diesen Ecken entsteht kein Titelbild. Bitte prüfen.";
+  };
+  image.src = `/jobs/${editor.job}/cover?c=${editor.quad.flat().join(",")}`;
+}
+
+async function approveCorners(item, editor) {
+  const status = editor.panel.querySelector(".corners-status");
+  try {
+    const job = await call(`/jobs/${editor.job}/corners`, {method: "POST", headers: {"Content-Type": "application/json"},
+                                                              body: JSON.stringify({corners: editor.quad})});
+    status.textContent = `Ecken freigegeben am ${DATE.format(new Date(job.cornersApprovedAt))}.`;
+    item.querySelector(".corners-open").textContent = "Ecken freigegeben · prüfen";
+  } catch (error) {
+    status.textContent = error.message;
+  }
 }
 
 function setState(item, job) {
@@ -171,6 +349,7 @@ async function describe(event, item) {
     // a filed job keeps the catalogue's SPEC and printing, so show what was stored
     form.specimen.value = reply.specimenHint || "";
     form.item.value = itemLabel(reply.itemId);
+    resetCorners(item, reply);
     saved.className = "saved ok";
     saved.textContent = "Gespeichert.";
     showOverview();
