@@ -83,8 +83,8 @@ taken back until it goes; a sent post cannot. One order per draft.
 
 **Permalinks into the data.** The inbox writes nothing into the repository. An agent run records the
 permalinks of published orders in `data/social.json` (`instagramPosts`, `facebookPosts`,
-`threadsPosts`) from the data folder or its read-only share, for a data PR merged on green CI (owner
-decision in #646, 2026-11-24; the entry in AGENTS.md's authority table is the owner's to add):
+`threadsPosts`) from the data folder or its read-only share, and opens a data PR that is merged on
+green CI (AGENTS.md):
 
 ```console
 python verification/photo_inbox/permalinks.py I:\
