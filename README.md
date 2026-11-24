@@ -55,8 +55,9 @@ printing and its image from the current catalogue. The Pages artifact also serve
 `cards/<itemId>/` for every printing, built from the data; its link preview is the printing's own
 exact owner photo, and a printing without one shares without an image. Those URLs open the same
 detail view. `data/social.json` names the printings shared on Instagram: record only verified YOURLS
-aliases, the permalinks of published Instagram posts and the approved post cover's card corners
-(`postCorners`). Keep an existing alias assigned to the same
+aliases, the permalinks of published Instagram, Facebook and Threads posts (`instagramPosts`,
+`facebookPosts`, `threadsPosts`), the approved post cover's card corners (`postCorners`) and any
+further carousel photos (`carousel`). Keep an existing alias assigned to the same
 item when updating its target.
 
 ## Build and check

@@ -226,20 +226,38 @@ def draft_photo(original: bytes, corners, owner_feed_jpeg: Path | None, feed_alt
 
 
 def shared(item_id: str, specimen_id: str):
-    """The item's social row, its short URL and the approved cover's corners, when that row names this SPEC.
-    The corners are kept with the share, so every machine builds the same draft (#646)."""
+    """The item's social row, its short URL, the approved cover's corners and the further carousel
+    photos, when that row names this SPEC. They are kept with the share, so every machine builds the
+    same draft (#646)."""
     share = read_social(ROOT).get(item_id)
     own = share if share and share["specimenId"] == specimen_id else {}
     alias = own.get("shortAlias")
-    corners = [tuple(pair) for pair in own["postCorners"]] if own.get("postCorners") else None
-    return share, (f"https://go.m4s.eu/{alias}" if alias else None), corners
+    return (share, (f"https://go.m4s.eu/{alias}" if alias else None), corner_pairs(own.get("postCorners")),
+            own.get("carousel", []))
+
+
+def corner_pairs(corners):
+    return [tuple(pair) for pair in corners] if corners else None
+
+
+def carousel_files(model: dict, item_id: str, slides: list, archive: Path) -> dict:
+    """The further carousel images (post-2.jpg, ...): each another own photo of the same printing,
+    with its own alt text, in the order data/social.json gives (#646)."""
+    files = {}
+    for number, slide in enumerate(slides, start=2):
+        _, item, original = verified_owner_photo(model, slide["specimenId"], archive)
+        if item["itemId"] != item_id:
+            raise ValueError(f"{slide['specimenId']}: shows another printing than the cover")
+        files[f"post-{number}.jpg"] = post_image(original, corner_pairs(slide.get("postCorners")))[0]
+        files[f"alt-text-{number}.txt"] = (slide["altText"].strip() + "\n").encode("utf-8")
+    return files
 
 
 def package(model: dict, specimen_id: str, archive: Path, corners=None, *,
             owner_feed_jpeg: Path | None = None, feed_alt: str | None = None) -> tuple[dict, dict]:
     specimen, item, original = verified_owner_photo(model, specimen_id, archive)
     item_id = item["itemId"]
-    share, short, stored = shared(item_id, specimen_id)
+    share, short, stored, slides = shared(item_id, specimen_id)
     if corners is None and owner_feed_jpeg is None:
         corners = stored
     caption, alt = post_copy(model, item, short)
@@ -247,6 +265,8 @@ def package(model: dict, specimen_id: str, archive: Path, corners=None, *,
     if feed_alt is not None:
         alt = feed_alt.strip() + "\n"
     files = {"post.jpg": photo, "caption-draft.txt": caption.encode("utf-8"), "alt-text.txt": alt.encode("utf-8")}
+    if owner_feed_jpeg is None:
+        files.update(carousel_files(model, item_id, slides, archive))
     manifest = {
         "status": "draft", "requiredBeforePosting": ["Owner review"] + (
             [] if short else ["Register a permanent short link for this card"]

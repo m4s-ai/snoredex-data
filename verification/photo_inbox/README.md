@@ -65,8 +65,30 @@ snoredex-photos, the Posts tab shows the draft of every printing with a verified
 `data/social.json`: the post image, caption, alt text, the open points before posting, and links to
 the card page, the short link and the image file. The checkout's own `instagram_package.py` builds
 each draft from that checkout, with the cover corners stored in `postCorners`, into `.drafts` inside
-the data folder, once per state of the catalogue files. Nothing is posted from here yet: posting and
-scheduling follow in #646. Keep the photo checkout current (`git pull`), like the catalogue.
+the data folder, once per state of the catalogue files. Keep the photo checkout current (`git pull`),
+like the catalogue. A carousel shows every image in order, each with its own alt text.
+
+**Posting (#646, owner decisions 2026-11-24).** With `--uploader` pointing at the owner's upload
+service and its key in the environment variable `UPLOADER_KEY` (never in a file, the repository
+or a log), each draft offers its connected accounts, all preselected, and a time. Only the owner's
+click, after a confirmation, posts: "Jetzt posten" at once, "Einplanen" at the chosen time. The
+order freezes the draft the owner saw in `.posts/<SPEC>/` inside the data folder, so a later catalogue
+change never alters it; a draft that changed since the page loaded is refused. A queue thread sends
+every due order: it uploads the images to the uploader, which serves them to Meta under an
+unguessable URL, and starts one job per account. Orders live on disk, so a scheduled post survives a
+restart. Every job carries a `clientRef` the uploader deduplicates on, so a restart between sending
+and recording never posts twice. The page shows each account's state and permalink; a job that failed
+before publishing shows its reason and can be sent again, as a new attempt. A planned order can be
+taken back until it goes; a sent post cannot. One order per draft.
+
+**Permalinks into the data.** The inbox writes nothing into the repository. An agent run records the
+permalinks of published orders in `data/social.json` (`instagramPosts`, `facebookPosts`,
+`threadsPosts`) from the data folder or its read-only share, for a data PR merged on green CI (owner
+decision in #646, 2026-11-24; the entry in AGENTS.md's authority table is the owner's to add):
+
+```console
+python verification/photo_inbox/permalinks.py I:\
+```
 
 A JPEG is decoded completely. A DNG is checked at header level only (a TIFF whose first IFD carries
 `DNGVersion`); the intake derives the cleaned public copy from it. Intake takes the described jobs.
@@ -84,14 +106,20 @@ A JPEG is decoded completely. A DNG is checked at header level only (a TIFF whos
 | `DELETE /trash/<id>` | deletes a trashed job for good; 409 when filed or without catalogue |
 | `GET /overview` | every active printing with its stage, links and jobs (needs `--repo`) |
 | `GET /posts` | the draft of every shared printing (needs `--repo` and `--photos`) |
-| `GET /posts/<SPEC>/image` | that draft's post image |
+| `GET /posts/<SPEC>/image?n=1` | that draft's post image, `n` counting the carousel |
+| `GET /accounts` | the uploader's connected accounts (needs `--uploader`) |
+| `POST /posts/<SPEC>/order` | JSON `{"draft", "accounts", "at"}`: posts now (`at` null) or at that time; 409 for a changed draft or a second order |
+| `DELETE /posts/<SPEC>/order` | takes back a planned order; 409 once it was sent |
+| `POST /posts/<SPEC>/retry` | JSON `{"account"}`: sends a failed job again |
 
 ## Run
 
 ```console
 pip install -r verification/photo_inbox/requirements.txt
-python verification/photo_inbox/app.py --data-dir <private folder outside Git> --host 0.0.0.0 --repo <checkout of main> --photos <checkout of snoredex-photos>
+python verification/photo_inbox/app.py --data-dir <private folder outside Git> --host 0.0.0.0 --repo <checkout of main> --photos <checkout of snoredex-photos> --uploader <uploader base URL>
 ```
+
+Set `UPLOADER_KEY` in the container's environment for `--uploader`.
 
 Without `--host` the service listens on loopback only; `--host 0.0.0.0` (or a reverse proxy on the
 Homelab) makes it reachable in the home network on port 8765 (`--port`). Uploads are limited to
@@ -144,7 +172,10 @@ after 30 days), the overview with test data for every stage (an unreadable site 
 online), a restart, an inbox inside a Git checkout, and in a phone-sized Chromium a bulk upload with
 one bad file, a description with its printing, the views, counts and statistics, and delete,
 restore and delete for good, the Posts tab with a stand-in exporter (built once per catalogue state,
-a failed draft with its reason, no post button), and the archive copy of a phone-like DNG and JPEG (location, maker, XMP and
+a failed draft with its reason) and a stand-in uploader (accounts preselected, a dismissed confirmation
+posts nothing, a plan taken back; a changed draft, a time without zone and a second order refused;
+an unreachable uploader retried, a resend after a crash deduplicated, a failed job sent again; the
+permalinks recorded once per platform), and the archive copy of a phone-like DNG and JPEG (location, maker, XMP and
 second frame gone; pixels, profile and orientation kept; a DNG without preview refused). It is not
 part of `regen.py`, whose gate stays standard-library only.
 

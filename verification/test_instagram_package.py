@@ -7,7 +7,8 @@ import unittest
 
 from PIL import Image, ImageCms, ImageDraw
 
-from instagram_package import digest, edited_post_image, load, package, post_copy, post_image, release_label
+from instagram_package import (carousel_files, digest, edited_post_image, load, package, post_copy, post_image,
+                               release_label)
 from owner_photo import owner_specimen
 
 
@@ -145,6 +146,45 @@ class InstagramDraftTests(unittest.TestCase):
         Image.new("RGB", (800, 1000)).save(data, "PNG")
         with self.assertRaisesRegex(ValueError, "JPEG"):
             edited_post_image(data.getvalue())
+
+    def test_carousel_slides_are_own_photos_of_the_same_printing(self):
+        model = load()
+        raw = BytesIO()
+        Image.new("RGB", (800, 1000), "navy").save(raw, "JPEG")
+        with TemporaryDirectory(ignore_cleanup_errors=True) as directory:
+            archive = Path(directory)
+            (archive / "verification/specimens").mkdir(parents=True)
+            for sid in ("SPEC-0774", "SPEC-0779"):
+                model["specimens"][sid]["photographSha256"] = f"sha256:{digest(raw.getvalue())}"
+                (archive / "verification/specimens" / model["specimens"][sid]["photograph"]).write_bytes(raw.getvalue())
+            _, item = owner_specimen(model, "SPEC-0774")
+            files = carousel_files(model, item["itemId"], [{"specimenId": "SPEC-0774", "altText": " Foil detail. "}],
+                                   archive)
+            self.assertEqual(sorted(files), ["alt-text-2.txt", "post-2.jpg"])
+            self.assertEqual(files["alt-text-2.txt"], b"Foil detail.\n")
+            with Image.open(BytesIO(files["post-2.jpg"])) as slide:
+                self.assertEqual(slide.size, (1080, 1350), "every slide is 4:5 like the cover")
+            with self.assertRaisesRegex(ValueError, "another printing"):
+                carousel_files(model, item["itemId"], [{"specimenId": "SPEC-0779", "altText": "x"}], archive)
+
+    def test_social_rows_take_three_platforms_and_a_carousel(self):
+        from card_pages import PLATFORM_URLS, checked_carousel, checked_posts
+
+        used = set()
+        checked_posts(["https://www.threads.com/@snoredex/post/DAbc12"], used, PLATFORM_URLS["threadsPosts"])
+        checked_posts(["https://www.facebook.com/123/posts/456"], used, PLATFORM_URLS["facebookPosts"])
+        for field, url in (("facebookPosts", "https://evil.test/x"), ("threadsPosts", "https://www.threads.com/x"),
+                           ("instagramPosts", "https://www.facebook.com/123/posts/456")):
+            with self.assertRaises(ValueError):
+                checked_posts([url], set(), PLATFORM_URLS[field])
+        with self.assertRaises(ValueError):
+            checked_posts(["https://www.facebook.com/123/posts/456"], used, PLATFORM_URLS["facebookPosts"])
+        checked_carousel([{"specimenId": "SPEC-1126", "altText": "Stamp detail.", "postCorners": [[1, 2]] * 4}], "item")
+        for bad in ([], [{"specimenId": "SPEC-1126"}], [{"specimenId": "1126", "altText": "x"}],
+                    [{"specimenId": "SPEC-1126", "altText": "x", "note": "y"}],
+                    [{"specimenId": "SPEC-1126", "altText": "x"}] * 20):
+            with self.assertRaises(ValueError):
+                checked_carousel(bad, "item")
 
     def test_post_corners_are_four_pixel_pairs(self):
         from card_pages import checked_corners

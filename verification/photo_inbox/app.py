@@ -29,6 +29,7 @@ from waitress import serve
 
 from dng import dng_preview
 from overview import ITEM_ID, Catalogue
+import posting
 
 # an iPhone ProRAW DNG at 48 megapixels is often 75-100 MB
 MAX_UPLOAD = 200 * 1024 * 1024
@@ -267,9 +268,13 @@ def draft(cache, command, photos, specimen, stamp):
 
 def post_view(row, folder):
     manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
+    image = f"/posts/{row['draftSpecimen']}/image"
+    slides = [{"image": f"{image}?n={number}",
+               "alt": (folder / posting.alt_name(name)).read_text(encoding="utf-8").strip()}
+              for number, name in enumerate(posting.slides(folder), start=1)]
     return dict(row, caption=(folder / "caption-draft.txt").read_text(encoding="utf-8"),
-                alt=(folder / "alt-text.txt").read_text(encoding="utf-8").strip(),
-                open=manifest["requiredBeforePosting"], image=f"/posts/{row['draftSpecimen']}/image")
+                alt=slides[0]["alt"], slides=slides, draft=folder.name,
+                open=manifest["requiredBeforePosting"], image=image)
 
 
 def security_headers(response, image_origin):
@@ -282,8 +287,12 @@ def security_headers(response, image_origin):
     return response
 
 
-def create_app(directory, repo=None, fetch=None, photos=None, command=None):
+def create_app(directory, repo=None, fetch=None, photos=None, command=None, uploader=None, schedule=True):
     root = private_directory(directory)
+    (root / posting.POSTS).mkdir(mode=0o700, exist_ok=True)
+    queue = threading.Lock()  # the scheduler and the order routes never change an order at once
+    if uploader and schedule:
+        posting.run_scheduler(root, uploader, queue)
     trash = root / TRASH
     trash.mkdir(mode=0o700, exist_ok=True)
     drafts = root / DRAFTS
@@ -388,30 +397,85 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None):
 
     @app.get("/posts")
     def posts():
-        """The drafts of every printing ready for Instagram or posted; posting itself follows in #646."""
+        """The drafts of every printing ready for Instagram or posted, each with its order (#646)."""
         if catalogue is None:
             return jsonify(error="Die Posts brauchen einen Katalog (--repo)."), 404
         if photos is None:
             return jsonify(error="Für die Entwürfe fehlt das Fotoarchiv (--photos)."), 404
         views = []
         for row in catalogue.shares():
+            order = posting.order_view(posting.read_order(root, row["draftSpecimen"]))
             try:
-                views.append(post_view(row, current_draft(row["draftSpecimen"])))
+                views.append(dict(post_view(row, current_draft(row["draftSpecimen"])), order=order))
             except (ValueError, OSError, KeyError) as error:
-                views.append(dict(row, error=str(error)))
-        return jsonify(posts=views)
+                views.append(dict(row, error=str(error), order=order))
+        return jsonify(posts=views, canPost=uploader is not None)
+
+    def shared_specimen(specimen):
+        rows = [row for row in catalogue.shares() if row["draftSpecimen"] == specimen] if catalogue and photos else []
+        if not rows:
+            abort(404)
+        return rows[0]
 
     @app.get("/posts/<specimen>/image")
     def post_image(specimen):
-        if catalogue is None or photos is None or specimen not in {
-                row["draftSpecimen"] for row in catalogue.shares()}:
-            abort(404)
+        shared_specimen(specimen)
         try:
             folder = current_draft(specimen)
         except ValueError:
             abort(404)
-        return send_file(BytesIO((folder / "post.jpg").read_bytes()), mimetype="image/jpeg",
-                         download_name=f"{specimen}-post.jpg")
+        names = posting.slides(folder)
+        number = request.args.get("n", 1, type=int)
+        if not 1 <= number <= len(names):
+            abort(404)
+        return send_file(BytesIO((folder / names[number - 1]).read_bytes()), mimetype="image/jpeg",
+                         download_name=f"{specimen}-{names[number - 1]}")
+
+    @app.get("/accounts")
+    def accounts():
+        if uploader is None:
+            return jsonify(error="Zum Posten fehlt der Uploader (--uploader)."), 404
+        try:
+            return jsonify(accounts=[{key: account.get(key) for key in ("id", "platform", "displayName")}
+                                     for account in uploader.accounts()])
+        except posting.UploaderError as error:
+            return jsonify(error=str(error)), 502
+
+    @app.post("/posts/<specimen>/order")
+    def place_order(specimen):
+        """Only the owner's click lands here: post now, or at the time they chose."""
+        row = shared_specimen(specimen)
+        if uploader is None:
+            return jsonify(error="Zum Posten fehlt der Uploader (--uploader)."), 404
+        body = request.get_json(silent=True) or {}
+        try:
+            folder = current_draft(specimen)
+            if body.get("draft") != folder.name:
+                raise PermissionError("Der Entwurf hat sich geändert. Bitte die neue Fassung prüfen.")
+            known = {account["id"] for account in uploader.accounts()}
+            with queue:
+                order = posting.place_order(root, specimen, row, folder, body.get("accounts"), known, body.get("at"))
+        except (ValueError, posting.UploaderError) as error:
+            return jsonify(error=str(error)), 400
+        return jsonify(order=posting.order_view(order)), 201
+
+    @app.delete("/posts/<specimen>/order")
+    def cancel_order(specimen):
+        with queue:
+            try:
+                posting.cancel_order(root, specimen)
+            except LookupError:
+                abort(404)
+        return jsonify(status="cancelled")
+
+    @app.post("/posts/<specimen>/retry")
+    def retry(specimen):
+        with queue:
+            try:
+                order = posting.retry_target(root, specimen, (request.get_json(silent=True) or {}).get("account"))
+            except LookupError:
+                abort(404)
+        return jsonify(order=posting.order_view(order))
 
     return app
 
@@ -423,9 +487,14 @@ def main():
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--repo", type=Path, help="checkout of snoredex-data main for the overview and the trash")
     parser.add_argument("--photos", type=Path, help="checkout of snoredex-photos for the Instagram drafts")
+    parser.add_argument("--uploader", help="base URL of the owner's uploader; its key comes from UPLOADER_KEY")
     args = parser.parse_args()
+    key = os.environ.get("UPLOADER_KEY")
+    if args.uploader and not key:
+        parser.error("--uploader braucht den Schlüssel in UPLOADER_KEY")
     try:
-        app = create_app(args.data_dir, args.repo, photos=args.photos)
+        app = create_app(args.data_dir, args.repo, photos=args.photos,
+                         uploader=posting.Uploader(args.uploader, key) if args.uploader else None)
     except (ValueError, OSError) as error:
         parser.error(str(error))
     serve(app, host=args.host, port=args.port, threads=2, inbuf_overflow=MAX_UPLOAD + CHUNK,

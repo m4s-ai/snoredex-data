@@ -5,7 +5,7 @@ const DATE = new Intl.DateTimeFormat("de-DE", {dateStyle: "medium", timeStyle: "
 const DAY = new Intl.DateTimeFormat("de-DE", {dateStyle: "medium"});
 const STAGE_NAMES = {none: "kein eigenes Foto", assigned: "hochgeladen, zugeordnet", filed: "verarbeitet",
                      online: "online", ready: "bereit für Instagram", posted: "gepostet"};
-const state = {overview: null, labels: new Map(), catalogue: false};
+const state = {overview: null, labels: new Map(), catalogue: false, canPost: false, accounts: []};
 
 function message(text, kind) {
   const line = document.createElement("li");
@@ -351,6 +351,7 @@ function postItem(post) {
   const links = [link(post.card, "Kartenseite")];
   if (post.shortUrl) links.push(link(post.shortUrl, "Kurzlink"));
   post.posts.forEach((url, index) => links.push(link(url, `Instagram ${index + 1}`)));
+  showOrder(item, post);
   if (post.error) {
     item.querySelector(".photo").remove();
     item.querySelectorAll("label").forEach((label) => label.remove());
@@ -367,18 +368,122 @@ function postItem(post) {
     const save = link(post.image, "Bild laden");
     save.download = `${post.draftSpecimen}-post.jpg`;
     links.push(save);
+    item.querySelector(".slides").replaceChildren(...post.slides.slice(1).map(slideItem));
   }
   item.querySelector(".links").replaceChildren(...links);
   return item;
 }
 
+function slideItem(slide, index) {
+  const item = field("slide-template").content.firstElementChild.cloneNode(true);
+  item.querySelector(".photo").href = slide.image;
+  item.querySelector("img").src = slide.image;
+  item.querySelector("img").alt = `Bild ${index + 2}: ${slide.alt}`;
+  item.querySelector("textarea").value = slide.alt;
+  return item;
+}
+
+const TARGET_STATES = {pending: "wartet", queued: "beim Uploader", container_created: "wird verarbeitet", processing: "wird verarbeitet",
+                       publishing: "wird veröffentlicht", published: "veröffentlicht", failed: "gescheitert"};
+const PLATFORM_NAMES = {instagram: "Instagram", facebook_page: "Facebook-Seite", threads: "Threads"};
+
+function accountName(id) {
+  const account = state.accounts.find((entry) => entry.id === id);
+  return account ? `${PLATFORM_NAMES[account.platform] || account.platform} ${account.displayName || ""}`.trim() : id;
+}
+
+// an order shows each target's state; without one, a post that may be sent gets the send form
+function showOrder(item, post) {
+  const sent = item.querySelector(".sent");
+  if (post.order) {
+    const targets = Object.entries(post.order.targets);
+    item.querySelector(".targets").replaceChildren(...targets.map(([id, target]) => targetLine(post, id, target, sent)));
+    const waiting = targets.every(([, target]) => target.status === "pending" && !target.problem);
+    const due = new Date(post.order.dueAt);
+    if (waiting && due > new Date()) {
+      sent.textContent = `Eingeplant für ${DATE.format(due)}.`;
+      const cancel = item.querySelector(".cancel");
+      cancel.hidden = false;
+      cancel.addEventListener("click", () => cancelOrder(post, sent));
+    }
+    return;
+  }
+  if (!state.canPost || post.error || !state.accounts.length) return;
+  const form = item.querySelector(".send");
+  form.hidden = false;
+  form.querySelector(".accounts").replaceChildren(...state.accounts.map((account) => {
+    const label = document.createElement("label");
+    label.className = "check";
+    label.append(Object.assign(document.createElement("input"), {type: "checkbox", name: "account", value: account.id, checked: true}),
+                 accountName(account.id));
+    return label;
+  }));
+  const button = form.querySelector("button");
+  form.elements.at.addEventListener("input", () => { button.textContent = form.elements.at.value ? "Einplanen" : "Jetzt posten"; });
+  form.addEventListener("submit", (event) => sendOrder(event, post, sent));
+}
+
+function targetLine(post, id, target, sent) {
+  const line = message(`${accountName(id)}: ${TARGET_STATES[target.status] || target.status}`,
+                       target.status === "failed" ? "error" : "");
+  if (target.permalink) line.append(" · ", link(target.permalink, "Post öffnen"));
+  const reason = target.error || target.problem;
+  if (reason) line.append(` · ${reason}`);
+  if (target.status === "failed") {
+    const again = Object.assign(document.createElement("button"), {type: "button", className: "primary", textContent: "Erneut senden"});
+    again.addEventListener("click", () => act(`/posts/${post.draftSpecimen}/retry`, {account: id}, sent));
+    line.append(" ", again);
+  }
+  return line;
+}
+
+async function act(url, body, sent, method = "POST") {
+  try {
+    await call(url, {method, headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)});
+    await showPosts();
+  } catch (error) {
+    sent.textContent = error.message;
+  }
+}
+
+function sendOrder(event, post, sent) {
+  event.preventDefault();
+  const form = event.target;
+  const accounts = [...form.querySelectorAll("input[name=account]:checked")].map((box) => box.value);
+  const at = form.elements.at.value ? new Date(form.elements.at.value).toISOString() : null;
+  const when = at ? `am ${DATE.format(new Date(at))}` : "sofort";
+  if (!accounts.length) { sent.textContent = "Wähle mindestens ein Konto."; return; }
+  if (!confirm(`${post.label} ${when} auf ${accounts.map(accountName).join(", ")} posten? Ein Post lässt sich nicht zurücknehmen.`)) return;
+  form.querySelector("button").disabled = true;
+  act(`/posts/${post.draftSpecimen}/order`, {draft: post.draft, accounts, at}, sent);
+}
+
+function cancelOrder(post, sent) {
+  if (confirm("Die Einplanung zurücknehmen? Der Entwurf bleibt.")) act(`/posts/${post.draftSpecimen}/order`, {}, sent, "DELETE");
+}
+
+async function loadAccounts() {
+  try {
+    state.accounts = (await call("/accounts")).accounts;
+  } catch {
+    state.accounts = [];
+  }
+}
+
 async function showPosts() {
   try {
-    const {posts} = await call("/posts");
+    const {posts, canPost} = await call("/posts");
+    if (canPost && !state.canPost) await loadAccounts();
+    state.canPost = canPost;
     showCount("count-posts", posts.filter(POST_VIEWS.ready).length);
     const shown = posts.filter(POST_VIEWS[field("post-view").value]);
     field("posts").replaceChildren(...shown.map(postItem));
     field("posts-status").textContent = shown.length ? "" : "Keine Entwürfe in dieser Ansicht.";
+    // a post on its way is followed until every target is published or failed
+    const moving = posts.some((post) => post.order && Object.values(post.order.targets).some((target) =>
+      !["published", "failed"].includes(target.status) && new Date(post.order.dueAt) <= new Date()));
+    clearTimeout(state.follow);
+    if (moving) state.follow = setTimeout(showPosts, 15000);
   } catch (error) {
     field("posts-status").textContent = error.message || "Die Entwürfe konnten nicht geladen werden.";
   }
