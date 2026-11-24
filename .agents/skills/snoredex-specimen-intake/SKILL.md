@@ -18,6 +18,17 @@ Read [AGENTS.md](../../../AGENTS.md), the finish and source-technique sections o
 [METHODOLOGY.md](../../../METHODOLOGY.md) (recording what a photograph shows, editions, multiple
 views, GitHub issue attachments) and [DATA-GUIDE.md](../../../DATA-GUIDE.md).
 
+## Photo-inbox jobs: the intake script
+
+A job from the private photo inbox (#626) that the owner assigned to a printing, with approved card
+corners, is filed by `verification/photo_inbox/intake.py`, not by hand (owner decision, 2026-11-24,
+#654). The owner's assignment is an owner attestation of the printing's identity; the script records
+that and nothing read from the face. It reserves the SPEC in the photo archive, writes the record, its
+citation, preview, gallery images and share row, runs the checks and commits; `--pr` opens the pull
+request, which is merged on green CI (AGENTS.md). Use the workflow below for everything else: issue
+attachments, seller photos, and inbox jobs whose observations (finish, edition, marking) should be read
+and recorded as a separate inspection.
+
 ## Specimen-intake delegation
 
 Filing specimens and preparing preview and gallery images runs in a subagent: Claude Sonnet 5.5

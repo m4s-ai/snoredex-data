@@ -156,12 +156,44 @@ decodes pixel-identical to its source and carries no location, never overwrites 
 the hashes and size the specimen record names. It reproduces SPEC-1111, the first inbox photo,
 byte for byte. A DNG without a full-size JPEG preview is refused and needs a raw decoder instead.
 
+## Filing a job without an agent (#656)
+
+`intake.py` files one job as an owner specimen, without an agent and without an AI service (owner
+decision, 2026-11-24, #654):
+
+```console
+python verification/photo_inbox/intake.py I:\<job> --photos <photo checkout> [--pr]
+```
+
+- It needs the job's printing (`itemId`) and its approved card corners (`corners` in `job.json`, or
+  `--corners` with eight pixel values clockwise from top left in the upright photo). Without them it
+  stops and says why.
+- The owner's assignment is an owner attestation of the printing's identity. The record claims that
+  (`ownerAttestedFields: ["identity"]`, dated by the assignment) and nothing read from the face: no
+  finish, edition or marking, neither read nor copied from the printing. The printing's source row
+  cites it with the provider `owner-attestation`.
+- The photo's archive copy comes from `derive.py`. Bytes that are already registered stop the run
+  with their SPEC. A copy that an interrupted run pushed but never recorded is found again by its bytes
+  and reused. Otherwise the next number after `origin/main` and the photo archive is reserved by pushing
+  the copy; when another intake pushed first, the run takes the next one.
+- Preview and gallery images come from the approved corners, exactly as the specimen-intake skill
+  makes them; they replace the item's image unless that already is an owner photograph, which the item
+  keeps. A new share row records the corners as `postCorners`.
+- Then `check.py`, `check.py --photos` and `regen.py`, and a commit on `intake/SPEC-nnnn`. `--pr` pushes
+  it and opens the pull request, which is merged on green CI (AGENTS.md). `--dry-run` writes nothing.
+
 ## Check
 
 ```console
 pip install -r requirements.txt -r verification/photo_inbox/requirements.txt
 python verification/photo_inbox/test_app.py
+python verification/photo_inbox/test_intake.py --photos <photo checkout>
 ```
+
+`test_intake.py` files a synthetic phone photo (sideways, with GPS) for a printing with and one
+without an owner photo and runs every `check.py` rule on the result; it refuses a job without printing
+or corners and a photo already filed, finds an orphaned archive copy, lets two intakes race for a
+number, and with the photo archive rebuilds SPEC-1125's gallery and preview files byte for byte.
 
 It covers uploads without details (a JPEG with GPS kept privately, byte for byte; DNGs in both byte
 orders; a plain TIFF, a truncated DNG header, non-photo and truncated JPEG files refused; the size
