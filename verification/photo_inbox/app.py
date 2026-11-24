@@ -467,7 +467,7 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
         job.pop("numberConfirmedAt", None)  # a new frame is read again, and confirmed again if it must be
         item = catalogue.active_items().get(job["itemId"]) if catalogue else None
         if item:
-            job["numberCheck"] = number_reading(folder, quad, item, catalogue.languages.get(item["localizationId"]))
+            job["numberCheck"] = number_reading(folder, quad, item, catalogue.languages.get(item.get("localizationId")))
         write_json(folder / "job.json", job)
         return jsonify(job_summary(folder, catalogue))
 
