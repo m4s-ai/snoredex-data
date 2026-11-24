@@ -22,7 +22,7 @@ from playwright.sync_api import sync_playwright
 from waitress.server import create_server
 
 from app import create_app
-from overview import STAGES
+from overview import STAGES, unique_labels
 from derive import carries_location, derive
 
 
@@ -242,8 +242,23 @@ def guard_checks(root, repo):
     assert not (root / broken / "archive.sha256").exists(), "a failed derivation is tried again later"
 
 
+def label_checks():
+    """The picker maps a label back to its printing, so no two printings may share one."""
+    languages = {"LOCALIZATION:WEST:de": "German", "LOCALIZATION:WEST:en": "English"}
+    base = item("none")
+    twins = {"item-a": dict(base, foilPattern="poke-ball"), "item-b": dict(base, foilPattern="master-ball"),
+             "item-c": dict(base, cardSize="jumbo"),
+             "item-d": dict(base, markings=[{"kind": "staff", "text": "Staff", "role": "distribution-promo"}]),
+             "item-e": dict(base), "item-f": dict(base)}
+    labels = unique_labels(twins, languages)
+    assert len(set(labels.values())) == len(twins), labels
+    assert "poke-ball" in labels["item-a"] and "jumbo" in labels["item-c"] and "Staff" in labels["item-d"]
+    assert labels["item-e"].endswith("item-e") and labels["item-f"].endswith("item-f"), "true twins carry their id"
+
+
 def overview_checks(root, temp):
     """Every printing at the furthest stage it reached; jobs land on their printing."""
+    label_checks()
     filed = post(create_app(root).test_client(), jpeg((30, 60, 90))).json["id"]
     copy = "sha256:" + sha256(derive(root / filed)[0]).hexdigest()
     repo = catalogue_repo(Path(temp) / "repo", copy)

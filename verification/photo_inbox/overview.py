@@ -5,6 +5,7 @@ published site. Nothing here writes to the repository, the photo archive or the 
 the page shows is counted from these rows.
 """
 
+from collections import Counter
 from hashlib import sha256
 import json
 from pathlib import Path
@@ -49,10 +50,21 @@ def archive_digest(folder):
 
 
 def label(item, languages):
+    """The printing as the owner picks it: every fact that tells two variants apart is named."""
     number = "/".join(filter(None, (item.get("collectorNumber"), item.get("collectorNumberDenominator"))))
-    parts = (" ".join(filter(None, (item.get("localSetCode"), number))), languages.get(item["localizationId"], ""), item.get("finish"),
-             item.get("edition"), item.get("localCardName") or item["cardName"])
+    size = item.get("cardSize") if item.get("cardSize") != "standard" else None
+    marks = ", ".join(mark["text"] for mark in item.get("markings") or [])
+    parts = (" ".join(filter(None, (item.get("localSetCode"), number))), languages.get(item["localizationId"], ""),
+             item.get("finish"), item.get("foilPattern"), item.get("edition"), size, marks,
+             item.get("localCardName") or item["cardName"])
     return " · ".join(str(part) for part in parts if part)
+
+
+def unique_labels(items, languages):
+    """itemId -> label, distinct for every printing: the page maps the picked label back to its item."""
+    labels = {item_id: label(item, languages) for item_id, item in items.items()}
+    counts = Counter(labels.values())
+    return {item_id: text if counts[text] == 1 else f"{text} · {item_id}" for item_id, text in labels.items()}
 
 
 class Catalogue:
@@ -77,6 +89,7 @@ class Catalogue:
         self.base = doc["meta"]["assetBaseUrl"]
         self.items = {item["itemId"]: item for item in doc["items"] if item["active"]}
         self.languages = {row["localizationId"]: row["displayName"] for row in doc["localizations"]}
+        self.labels = unique_labels(self.items, self.languages)
         self.asset_paths = {asset["assetId"]: asset["path"] for asset in doc["assets"]}
         self.owner = {row["specimenId"]: row for row in specimens["specimens"]
                       if row.get("photographedBy") == "collection owner"}
@@ -123,7 +136,7 @@ class Catalogue:
         specimen = self.owner_specimen(item)
         social = self.social.get(item["itemId"]) or {}
         thumb = self.thumbs.get(item["itemId"])
-        return {"itemId": item["itemId"], "label": label(item, self.languages),
+        return {"itemId": item["itemId"], "label": self.labels[item["itemId"]],
                 "set": item["localSetCode"], "language": self.languages.get(item["localizationId"], ""),
                 "stage": self.stage(item, specimen, jobs, site), "specimen": specimen, "jobs": jobs,
                 "preview": self.base + thumb if thumb else None, "card": self.base + f"cards/{item['itemId']}/",

@@ -16,7 +16,9 @@ them one by one with progress and a result per file; a bad file does not stop th
 dashboard lists every job, newest first, with a preview (a DNG shows its embedded full-size
 preview), a link to a large view, its state ("ohne Angabe", "beschrieben" or "übernommen als
 SPEC-nnnn") and a form for the SPEC number, a short note or the exact printing picked from the
-catalogue (`itemId`), checked as the single upload always checked them. Its views show all jobs,
+catalogue (`itemId`), checked as the single upload always checked them. A printing is picked by
+its label, which names everything that tells variants apart (foil pattern, markings, a size other
+than standard) and carries the `itemId` where two printings would still read the same. Its views show all jobs,
 those without details, the unclassified ones (no printing yet) and those already filed. Saving writes `job.json`
 at once; a description can be corrected, the photo never changes. Previews are cached beside the job
 as `preview-400.jpg` and `preview-1600.jpg`, upright and without Exif. There is no access code (owner
