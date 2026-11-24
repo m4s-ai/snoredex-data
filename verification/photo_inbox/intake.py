@@ -60,10 +60,6 @@ def read_json(path):
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
-def write_text(path, text):
-    Path(path).write_text(text, encoding="utf-8", newline="\n")
-
-
 def job_input(folder, corners=None):
     """The job's printing and approved corners; a job missing either is not ready."""
     job = read_json(Path(folder) / "job.json")
@@ -284,7 +280,7 @@ def write_files(root, files):
         if isinstance(content, bytes):
             path.write_bytes(content)
         else:
-            write_text(path, content)
+            path.write_text(content, encoding="utf-8", newline="\n")
 
 
 def gate(root, photos):
