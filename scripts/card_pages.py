@@ -13,15 +13,39 @@ ROOT = Path(__file__).resolve().parents[1]
 SOCIAL_FILE = "data/social.json"
 ITEM_ID = re.compile(r"item-[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}")
 POST_URL = re.compile(r"https://www\.instagram\.com/(?:p|reel)/[\w-]+/", re.ASCII)
+# the permalinks the uploader reports for the other two platforms (#646)
+PLATFORM_URLS = {"instagramPosts": POST_URL,
+                 "facebookPosts": re.compile(r"https://www\.facebook\.com/[\w./?=&%-]+", re.ASCII),
+                 "threadsPosts": re.compile(r"https://www\.threads\.(?:net|com)/@[\w.]+/post/[\w-]+/?", re.ASCII)}
 SHORT_ALIAS = re.compile(r"[a-zA-Z0-9-]+")
+SPECIMEN_ID = re.compile(r"SPEC-[0-9]{4,8}")
+SOCIAL_FIELDS = {"itemId", "specimenId", "shortAlias", "postCorners", "carousel", *PLATFORM_URLS}
 
 
-def checked_posts(links, used: set) -> None:
-    if not isinstance(links, list) or any(not isinstance(url, str) or not POST_URL.fullmatch(url) for url in links):
-        raise ValueError("Invalid Instagram permalink")
+def checked_posts(links, used: set, pattern=POST_URL) -> None:
+    if not isinstance(links, list) or any(not isinstance(url, str) or not pattern.fullmatch(url) for url in links):
+        raise ValueError("Invalid post permalink")
     if used.intersection(links) or len(set(links)) != len(links):
-        raise ValueError("Duplicate Instagram permalink")
+        raise ValueError("Duplicate post permalink")
     used.update(links)
+
+
+def checked_carousel(slides, item_id: str) -> None:
+    """Further own photos after the cover, in order, each with its corners and its own alt text (#646)."""
+    if slides is None:
+        return
+    if not isinstance(slides, list) or not 1 <= len(slides) <= 19:
+        raise ValueError(f"Invalid carousel: {item_id}")
+    for slide in slides:
+        if not valid_slide(slide):
+            raise ValueError(f"Invalid carousel slide: {item_id}")
+        checked_corners(slide.get("postCorners"), item_id)
+
+
+def valid_slide(slide) -> bool:
+    return (isinstance(slide, dict) and slide.keys() <= {"specimenId", "postCorners", "altText"}
+            and isinstance(slide.get("specimenId"), str) and bool(SPECIMEN_ID.fullmatch(slide["specimenId"]))
+            and isinstance(slide.get("altText"), str) and 0 < len(slide["altText"].strip()) <= 1000)
 
 
 def checked_alias(alias, aliases: set) -> None:
@@ -46,14 +70,15 @@ def read_social(root: Path) -> dict:
     rows = json.loads((root / SOCIAL_FILE).read_text(encoding="utf-8"))
     items, aliases, posts = {}, set(), set()
     for row in rows:
-        if not isinstance(row, dict) or row.keys() - {"itemId", "specimenId", "instagramPosts", "shortAlias",
-                                                      "postCorners"}:
+        if not isinstance(row, dict) or row.keys() - SOCIAL_FIELDS or "instagramPosts" not in row:
             raise ValueError("Unexpected social fields")
-        item_id, links = row["itemId"], row["instagramPosts"]
+        item_id = row["itemId"]
         if not ITEM_ID.fullmatch(item_id) or item_id in items:
             raise ValueError(f"Invalid or duplicate social item: {item_id}")
         checked_corners(row.get("postCorners"), item_id)
-        checked_posts(links, posts)
+        checked_carousel(row.get("carousel"), item_id)
+        for field, pattern in PLATFORM_URLS.items():
+            checked_posts(row.get(field, []), posts, pattern)
         checked_alias(row.get("shortAlias"), aliases)
         items[item_id] = row
     return items

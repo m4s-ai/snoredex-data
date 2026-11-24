@@ -96,6 +96,14 @@ ul { list-style: none; margin: 0; padding: 0; }
 .error { color: var(--danger); font-weight: 600; }
 .todo { color: var(--muted); }
 textarea[readonly] { background: var(--bg); }
+.slides { display: grid; gap: .75rem; }
+.slides li { display: grid; gap: .5rem; }
+.send { display: grid; gap: .75rem; }
+fieldset { margin: 0; padding: .5rem .75rem; border: 1px solid var(--line); border-radius: .5rem; }
+.check { display: flex; align-items: center; gap: .6rem; min-height: 2.75rem; font-weight: normal; }
+.check input { width: 1.4rem; height: 1.4rem; }
+.targets:empty, .sent:empty, .slides:empty { display: none; }
+.targets button { min-height: 2.75rem; }
 .saved:empty { display: none; }
 
 .counts { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }

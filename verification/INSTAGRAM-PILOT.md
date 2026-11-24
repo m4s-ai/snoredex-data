@@ -51,7 +51,22 @@ Once the matching entry in `data/social.json` has a verified `shortAlias`, gener
 The full `go.m4s.eu` URL appears in the caption. An unconfigured alias is shown as
 `[short link missing]`. Before posting, compare image, caption and alt text against the card, then open
 the actual short URL and verify the variant and share image. Confirm fit and cropping in the draft
-on the target account. Publish manually and record the Instagram permalink in the same item's
-`instagramPosts` array so that the card page and gallery can link back to it.
+on the target account.
+
+Posting goes through the photo inbox's Posts tab (#646, [README](photo_inbox/README.md)): the owner
+checks the draft there and clicks to post it now or at a chosen time, to Instagram, the Facebook page
+and Threads. No agent posts on its own. Once a post is published, an agent records its permalinks in
+the same item's `instagramPosts`, `facebookPosts` and `threadsPosts` with
+`python verification/photo_inbox/permalinks.py <inbox data folder>` and a data PR, so that the card
+page and gallery can link back to it.
+
+## Carousel
+
+A post may carry up to 20 images: the cover, then further own photos of the same printing, such as
+a detail of the foil or a stamp. Each one is its own owner SPEC of that printing. List them in order
+under `carousel` in the item's `data/social.json` entry, each with `specimenId`, an `altText` that
+describes that photo and, when approved, its `postCorners`. The exporter writes them as
+`post-2.jpg`, `alt-text-2.txt` and so on, every image 4:5 like the cover, since Instagram crops a
+carousel to its first image.
 
 Run the focused tests with `python verification/test_instagram_package.py`.

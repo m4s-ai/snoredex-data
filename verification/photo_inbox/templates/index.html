@@ -84,7 +84,8 @@
 
 <section id="panel-posts" role="tabpanel" aria-labelledby="tab-posts" tabindex="0" hidden>
   <p class="lead">Entwürfe für @SnoreDex auf Instagram, der Facebook-Seite und Threads, gebaut aus dem Katalog
-    und dem Fotoarchiv. Hier wird noch nichts gepostet: Posten und Einplanen folgen mit #646.</p>
+    und dem Fotoarchiv. Gepostet wird nur auf deinen Klick, sofort oder zur gewählten Uhrzeit. Ein Post
+    lässt sich nicht zurücknehmen.</p>
   <div class="filters">
     <label>Ansicht
       <select id="post-view">
@@ -149,10 +150,24 @@
       <p class="facts"><span class="badge"></span> <span class="label"></span></p>
       <label>Caption<textarea class="caption" readonly rows="11"></textarea></label>
       <label>Alt-Text<textarea class="alt" readonly rows="3"></textarea></label>
+      <ol class="slides"></ol>
       <p class="todo"></p>
       <p class="links"></p>
+      <form class="send" hidden>
+        <fieldset><legend>Konten</legend><div class="accounts"></div></fieldset>
+        <label>Zeitpunkt, leer für sofort<input type="datetime-local" name="at"></label>
+        <div class="actions"><button type="submit" class="primary">Jetzt posten</button></div>
+      </form>
+      <ul class="targets lines"></ul>
+      <div class="actions"><button type="button" class="cancel danger" hidden>Einplanung zurücknehmen</button></div>
+      <p class="sent" role="status"></p>
     </div>
   </li>
+</template>
+
+<template id="slide-template">
+  <li><a class="photo" target="_blank" rel="noopener"><img alt="" loading="lazy" width="1080" height="1350"></a>
+    <label>Alt-Text<textarea readonly rows="3"></textarea></label></li>
 </template>
 
 <template id="trash-template">

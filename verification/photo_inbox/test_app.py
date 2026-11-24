@@ -13,6 +13,7 @@ from io import BytesIO
 import json
 import os
 from pathlib import Path
+import shutil
 import struct
 import subprocess
 import sys
@@ -25,6 +26,7 @@ from waitress.server import create_server
 
 from app import create_app
 from overview import STAGES, unique_labels
+import posting
 from derive import carries_location, derive
 
 
@@ -49,7 +51,7 @@ def post(client, body, content_type="application/octet-stream"):
 
 
 def jobs(root):
-    return sorted(path.name for path in root.iterdir() if path.name not in (".trash", ".drafts"))
+    return sorted(path.name for path in root.iterdir() if path.name not in (".trash", ".drafts", ".posts"))
 
 
 def upload_checks(root, app, client):
@@ -336,6 +338,144 @@ def posts_checks(root, repo, temp):
     return command
 
 
+class FakeUploader:
+    """Stands in for the owner's uploader: records every call and deduplicates on clientRef like it."""
+    ACCOUNTS = [{"id": "ig:snoredex", "platform": "instagram", "displayName": "SnoreDex", "externalId": "secret"},
+                {"id": "fb_page:1", "platform": "facebook_page", "displayName": "SnoreDex"},
+                {"id": "threads:snoredex", "platform": "threads", "displayName": "SnoreDex"}]
+
+    def __init__(self, failing_account_lists=0):
+        self.media_calls, self.uploads, self.jobs, self.down, self.crash = [], [], {}, False, False
+        self.failing_account_lists = failing_account_lists
+
+    def accounts(self):
+        if self.failing_account_lists:
+            self.failing_account_lists -= 1
+            raise posting.UploaderError("Uploader nicht erreichbar")
+        return self.ACCOUNTS
+
+    def media(self, jpeg):
+        if self.down:
+            raise posting.UploaderError("Uploader nicht erreichbar")
+        self.media_calls.append(jpeg)
+        return f"https://uploader.test/media/{len(self.media_calls)}.jpg"
+
+    def upload(self, body):
+        if self.crash:  # the inbox stops while the request is on its way
+            raise SystemExit("stopped")
+        same = [job for job in self.jobs.values() if job["clientRef"] == body["clientRef"] and job["status"] != "failed"]
+        if same:
+            return same[0]
+        self.uploads.append(body)
+        job = {"id": f"job-{len(self.uploads)}", "status": "queued", "clientRef": body["clientRef"]}
+        self.jobs[job["id"]] = job
+        return job
+
+    def job(self, job_id):
+        return self.jobs[job_id]
+
+
+def posting_checks(root, repo, temp, command):
+    """Only the owner's order posts: now or at a time, once per account, a failure sent again on request."""
+    uploader = FakeUploader()
+    client = create_app(root, repo, published, photos=Path(temp), command=command, uploader=uploader,
+                        schedule=False).test_client()
+    assert client.get("/accounts").json["accounts"][0] == {"id": "ig:snoredex", "platform": "instagram",
+                                                           "displayName": "SnoreDex"}, "no account internals"
+    listing = client.get("/posts").json
+    mine = lambda: next(row for row in client.get("/posts").json["posts"] if row["draftSpecimen"] == "SPEC-0904")
+    ready = mine()
+    assert listing["canPost"] and ready["order"] is None and len(ready["slides"]) == 1
+    accounts = [account["id"] for account in FakeUploader.ACCOUNTS]
+    order = lambda **body: client.post("/posts/SPEC-0904/order", json=dict(draft=ready["draft"], accounts=accounts) | body)
+    assert order(draft="SPEC-0904-stale").status_code == 409, "only the draft the owner saw"
+    assert order(accounts=[]).status_code == 400 and order(accounts=["ig:other"]).status_code == 400
+    assert order(at="2026-12-01T18:00").status_code == 400, "a time needs its zone"
+    assert client.post("/posts/SPEC-0001/order", json={}).status_code == 404, "only shared printings"
+
+    later = (datetime.now(timezone.utc) + timedelta(hours=2)).isoformat()
+    assert order(at=later).status_code == 201
+    posting.tick(root, uploader)
+    assert not uploader.uploads, "a scheduled post waits for its time"
+    assert mine()["order"]["dueAt"], "the page shows the plan"
+    posting.tick(root, uploader, datetime.now(timezone.utc) + timedelta(hours=3))
+    assert len(uploader.uploads) == 3, "it goes out at its time, also after a restart: the order is on disk"
+    shutil.rmtree(root / ".posts" / "SPEC-0904")
+
+    assert order(at=later).status_code == 201 and client.delete("/posts/SPEC-0904/order").status_code == 200
+    assert order(at=later).status_code == 201
+    uploader.crash = True
+    try:
+        posting.tick(root, uploader, datetime.now(timezone.utc) + timedelta(hours=3))
+    except SystemExit:
+        pass
+    uploader.crash = False
+    assert client.delete("/posts/SPEC-0904/order").status_code == 409, "a send cut off on its way may have arrived"
+    shutil.rmtree(root / ".posts" / "SPEC-0904")
+
+    assert order().status_code == 201 and order().status_code == 409, "one order per draft"
+    frozen = root / ".posts" / "SPEC-0904" / "post.jpg"
+    frozen.write_bytes(b"frozen")  # stands for the approved image, against a later draft
+    social = repo / "data/social.json"
+    later_stamp = social.stat().st_mtime_ns + 10**10
+    os.utime(social, ns=(later_stamp, later_stamp))
+    shown = mine()
+    assert (shown["draft"], shown["open"]) == (ready["draft"], []), "an ordered post shows what it froze"
+    assert client.get(shown["image"]).data == b"frozen", "and its image is the frozen one"
+    uploader.uploads.clear()
+    uploader.down = True
+    posting.tick(root, uploader)
+    targets = mine()["order"]["targets"]
+    assert targets["ig:snoredex"]["status"] == "pending" and "erreichbar" in targets["ig:snoredex"]["problem"]
+    assert client.delete("/posts/SPEC-0904/order").status_code == 409, "a tried send may have arrived: no take-back"
+    uploader.down = False
+    posting.tick(root, uploader)
+    assert len(uploader.media_calls) == 3 and len(uploader.uploads) == 3, "one image upload per round"
+    first = uploader.uploads[0]
+    assert (first["imageUrl"], first["altText"], first["caption"]) == (
+        "https://uploader.test/media/3.jpg", "Alt SPEC-0904", "Caption SPEC-0904"), first
+    assert client.delete("/posts/SPEC-0904/order").status_code == 409, "a sent post cannot be taken back"
+
+    uploader.jobs["job-1"].update(status="published", permalink="https://www.instagram.com/p/new/")
+    uploader.jobs["job-2"].update(status="failed", error="Seite gesperrt")
+    record = root / ".posts" / "SPEC-0904" / "order.json"
+    crashed = json.loads(record.read_text(encoding="utf-8"))
+    crashed["targets"]["threads:snoredex"] = {"attempt": 1, "status": "pending"}  # sent, but not recorded
+    record.write_text(json.dumps(crashed), encoding="utf-8", newline="\n")
+    posting.tick(root, uploader)
+    assert len(uploader.uploads) == 3, "a resend after a crash finds the same job: no double post"
+    view = mine()["order"]["targets"]
+    assert view["ig:snoredex"]["permalink"] == "https://www.instagram.com/p/new/"
+    assert view["fb_page:1"]["error"] == "Seite gesperrt" and "media" not in json.dumps(view)
+    assert client.post("/posts/SPEC-0904/retry", json={"account": "ig:snoredex"}).status_code == 409
+    assert client.post("/posts/SPEC-0904/retry", json={"account": "fb_page:1"}).status_code == 200
+    posting.tick(root, uploader)
+    assert uploader.uploads[-1]["clientRef"].endswith("fb_page:1:2"), "a resend is a new attempt"
+    assert all(job["id"] != ".posts" for job in client.get("/jobs").json["jobs"])
+    assert posting.published_links(root) == {ITEMS["ready"]: {"instagramPosts": ["https://www.instagram.com/p/new/"]}}
+    return uploader
+
+
+def permalink_checks(temp):
+    """The data PR's input: each published permalink once, in its platform's field, nothing else."""
+    from permalinks import record
+
+    repo, inbox = Path(temp) / "links-repo", Path(temp) / "links-inbox"
+    (repo / "data").mkdir(parents=True)
+    social = [{"itemId": ITEMS["ready"], "specimenId": "SPEC-0904", "instagramPosts": []}]
+    (repo / "data/social.json").write_text(json.dumps(social, indent=2) + "\n", encoding="utf-8", newline="\n")
+    (inbox / ".posts/SPEC-0904").mkdir(parents=True)
+    targets = {"ig:snoredex": {"status": "published", "permalink": "https://www.instagram.com/p/abc/"},
+               "fb_page:1": {"status": "published", "permalink": "https://www.facebook.com/1/posts/2"},
+               "threads:snoredex": {"status": "failed", "permalink": None}}
+    (inbox / ".posts/SPEC-0904/order.json").write_text(json.dumps({"itemId": ITEMS["ready"], "targets": targets}),
+                                                          encoding="utf-8", newline="\n")
+    assert record(inbox, repo) == 2 and record(inbox, repo) == 0, "each link once"
+    row = json.loads((repo / "data/social.json").read_text(encoding="utf-8"))[0]
+    assert row == dict(social[0], instagramPosts=["https://www.instagram.com/p/abc/"],
+                       facebookPosts=["https://www.facebook.com/1/posts/2"]), row
+
+
 def label_checks():
     """The picker maps a label back to its printing, so no two printings may share one."""
     languages = {"LOCALIZATION:WEST:de": "German", "LOCALIZATION:WEST:en": "English"}
@@ -418,7 +558,9 @@ def refuses_checkout():
 
 def browser_checks(root, files, repo, command, photos):
     """Bulk upload with one bad file, describe a job, the overview and the trash, on a phone-sized page."""
-    server = create_server(create_app(root, repo, published, photos=photos, command=command), host="127.0.0.1", port=0)
+    uploader = FakeUploader()
+    server = create_server(create_app(root, repo, published, photos=photos, command=command,
+                                      uploader=uploader, schedule=False), host="127.0.0.1", port=0)
     threading.Thread(target=server.run, daemon=True).start()
     url = f"http://127.0.0.1:{server.effective_port}/"
     try:
@@ -477,7 +619,7 @@ def browser_checks(root, files, repo, command, photos):
             assert page.locator(f'li.job[data-job="{new}"] input[name="item"]').input_value().startswith("JU 1/64")
             overview_page(page)
             trash_page(page, new)
-            posts_page(page)
+            posts_page(page, root, uploader)
             assert page.evaluate("document.documentElement.scrollWidth") <= 375, "no sideways scroll on a phone"
             tab_checks(page, url)
             assert not problems, problems
@@ -521,12 +663,18 @@ def tab_checks(page, url):
     page.set_viewport_size({"width": 375, "height": 812})
 
 
-def posts_page(page):
-    """The draft of a printing ready for Instagram: image, caption, alt text, open points; no post button."""
+def posts_page(page, root, uploader):
+    """The draft of a printing ready for Instagram: image, caption, alt text, open points, and the order form."""
+    uploader.failing_account_lists = 1
+    page.reload()
     page.click("#tab-posts")
-    assert page.locator("#count-posts").text_content() == "1"
     post = page.locator("#posts li.post")
     post.wait_for()
+    assert post.locator(".send").is_hidden(), "no accounts, no form"
+    page.select_option("#post-view", "all")
+    page.select_option("#post-view", "ready")
+    post.locator(".send").wait_for()  # the accounts are asked for again once the uploader answers
+    assert page.locator("#count-posts").text_content() == "1"
     assert post.count() == 1 and post.locator(".badge").text_content() == "bereit für Instagram"
     for _ in range(50):
         if post.locator("img").evaluate("image => image.complete && image.naturalWidth > 0"):
@@ -538,7 +686,26 @@ def posts_page(page):
     assert post.locator(".alt").input_value() == "Alt SPEC-0904"
     assert post.locator(".todo").text_content() == "Vor dem Posten: Abnahme durch dich"
     assert post.get_by_role("link", name="Bild laden").get_attribute("download") == "SPEC-0904-post.jpg"
-    assert page.locator("#panel-posts button").count() == 0, "nothing posts yet (#646)"
+    boxes = post.locator("input[name=account]")
+    assert boxes.count() == 3 and all(boxes.nth(index).is_checked() for index in range(3)), "all three preselected"
+    assert post.locator(".accounts").text_content().startswith("Instagram SnoreDex")
+    send = post.locator(".send button")
+    assert send.text_content() == "Jetzt posten"
+    page.once("dialog", lambda dialog: dialog.dismiss())
+    send.click()
+    assert not list((root / ".posts").glob("SPEC-*")), "a dismissed confirmation posts nothing"
+    post.locator("input[name=at]").fill("2030-01-01T18:00")
+    assert send.text_content() == "Einplanen"
+    boxes.nth(1).uncheck()
+    page.once("dialog", lambda dialog: dialog.accept())
+    send.click()
+    post.locator(".targets li").nth(1).wait_for()
+    assert post.locator(".targets").text_content().count("wartet") == 2, "only the chosen accounts"
+    assert post.locator(".sent").text_content().startswith("Eingeplant für")
+    page.once("dialog", lambda dialog: dialog.accept())
+    post.locator(".cancel").click()
+    post.locator(".send").wait_for()
+    assert not list((root / ".posts").glob("SPEC-*")), "a plan can be taken back before it goes"
     page.select_option("#post-view", "posted")
     assert "kein Foto" in page.locator("#posts li.post .todo.error").text_content()
 
@@ -570,7 +737,13 @@ def overview_page(page):
 
 def trash_page(page, job):
     """Delete after confirming, restore, delete again and purge for good; a filed job has no delete."""
-    page.on("dialog", lambda dialog: dialog.accept())
+    accept = lambda dialog: dialog.accept()
+    page.on("dialog", accept)
+    trash_flow(page, job)
+    page.remove_listener("dialog", accept)
+
+
+def trash_flow(page, job):
     page.click("#tab-fotos")
     open_jobs = page.locator("#count-fotos").text_content()
     card = page.locator(f'#jobs li[data-job="{job}"]')
@@ -663,6 +836,8 @@ def main():
             files.append(Path(temp) / name)
             files[-1].write_bytes(body)
         browser_checks(root, files, repo, command, Path(temp))
+        posting_checks(root, repo, temp, command)
+        permalink_checks(temp)
     print("photo inbox: all checks passed")
 
 
