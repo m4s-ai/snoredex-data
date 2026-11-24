@@ -80,7 +80,9 @@ ul { list-style: none; margin: 0; padding: 0; }
 .lines li { padding: .35rem 0; overflow-wrap: anywhere; }
 .filters { display: grid; gap: .75rem; margin-bottom: .75rem; }
 
-.jobs > li { display: grid; gap: .75rem; padding: 1.25rem 0; border-top: 1px solid var(--line); }
+/* a job reached by link (#job-...) stops below the sticky header, not under it */
+.jobs > li { display: grid; gap: .75rem; padding: 1.25rem 0; border-top: 1px solid var(--line);
+  scroll-margin-top: 4rem; }
 .jobs > li:first-child { border-top: 0; }
 .photo img { display: block; width: 100%; height: auto; max-height: 22rem; object-fit: contain;
   border-radius: .5rem; background: var(--surface); }

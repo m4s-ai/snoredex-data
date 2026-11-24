@@ -365,6 +365,8 @@ def browser_checks(root, files, repo):
             none_row.locator(f'a[href="#job-{new}"]').click()
             item.wait_for()
             assert page.url.endswith(f"#job-{new}") and item.is_visible(), "a row's photo link opens the photos tab"
+            header = page.locator(".top").bounding_box()
+            assert item.bounding_box()["y"] >= header["y"] + header["height"], "the job stops below the header"
             page.locator("#tab-uebersicht").click()
             assert none_row.locator(".badge").text_content() == "hochgeladen, zugeordnet"
 
