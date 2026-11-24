@@ -50,6 +50,10 @@ function send(file, onProgress) {
 async function upload(event) {
   event.preventDefault();
   const files = [...field("photos").files];
+  if (!files.length) {
+    field("chosen").textContent = "Bitte zuerst Fotos auswählen.";
+    return;
+  }
   const button = event.target.querySelector("button");
   button.disabled = true;
   field("transfers").replaceChildren();
@@ -66,7 +70,57 @@ async function upload(event) {
   }
   button.disabled = false;
   event.target.reset();
+  showChosen();
   await refresh();
+}
+
+function showChosen() {
+  const count = field("photos").files.length;
+  field("chosen").textContent = count ? `${count} ${count === 1 ? "Foto" : "Fotos"} gewählt.` : "Noch keine Fotos gewählt.";
+}
+
+// tabs after the WAI-ARIA tabs pattern: automatic activation, arrows, Home and End, one hash per tab.
+// The hash names the tab (#fotos), never the panel's id, so the browser neither scrolls nor focuses it.
+const TABS = [...document.querySelectorAll('[role="tab"]')];
+const tabName = (tab) => tab.getAttribute("aria-controls").replace("panel-", "");
+
+function activate(name, focus) {
+  const tab = TABS.find((entry) => tabName(entry) === name) || TABS[0];
+  for (const entry of TABS) {
+    const selected = entry === tab;
+    entry.setAttribute("aria-selected", String(selected));
+    entry.tabIndex = selected ? 0 : -1;
+    field(entry.getAttribute("aria-controls")).hidden = !selected;
+  }
+  if (focus) tab.focus();
+}
+
+function follow() {
+  const target = decodeURIComponent(location.hash.slice(1));
+  if (target.startsWith("job-")) {
+    activate("fotos");
+    const job = field(target);
+    if (job) job.scrollIntoView({block: "start"});
+    return;
+  }
+  activate(target || "hochladen");
+  window.scrollTo(0, 0);
+}
+
+function onTabKey(event) {
+  const index = TABS.indexOf(event.target);
+  const moves = {ArrowRight: index + 1, ArrowLeft: index - 1, Home: 0, End: TABS.length - 1};
+  if (!(event.key in moves)) return;
+  event.preventDefault();
+  const next = TABS[(moves[event.key] + TABS.length) % TABS.length];
+  history.replaceState(null, "", "#" + tabName(next));
+  activate(tabName(next), true);
+}
+
+function showCount(id, count) {
+  const badge = field(id);
+  badge.hidden = !count;
+  badge.textContent = count;
 }
 
 function itemLabel(itemId) {
@@ -146,6 +200,7 @@ async function showJobs() {
   try {
     const reply = await call("/jobs");
     state.catalogue = reply.catalogue;
+    showCount("count-fotos", reply.jobs.filter(JOB_VIEWS.open).length);
     const jobs = reply.jobs.filter(JOB_VIEWS[field("job-view").value]);
     field("jobs").replaceChildren(...jobs.map(jobItem));
     field("jobs-status").textContent = jobs.length ? "" : "Keine Fotos.";
@@ -270,6 +325,7 @@ async function fromTrash(jobId, method, action) {
 async function showTrash() {
   try {
     const reply = await call("/trash");
+    showCount("count-papierkorb", reply.jobs.length);
     field("trash").replaceChildren(...reply.jobs.map((job) => trashItem(job, reply.keepDays)));
     field("trash-status").textContent = reply.jobs.length ? "" : "Der Papierkorb ist leer.";
   } catch {
@@ -284,7 +340,15 @@ async function refresh() {
 
 field("stage").append(...STAGE_ORDER.map((stage) => Object.assign(document.createElement("option"), {value: stage, textContent: STAGE_NAMES[stage]})));
 field("upload").addEventListener("submit", upload);
+field("photos").addEventListener("change", showChosen);
+for (const tab of TABS) {
+  tab.addEventListener("click", () => { location.hash = tabName(tab); });
+  tab.addEventListener("keydown", onTabKey);
+}
+window.addEventListener("hashchange", follow);
+follow();
 field("job-view").addEventListener("change", showJobs);
 for (const id of ["view", "stage", "search"]) field(id).addEventListener("input", showRows);
 field("group-by").addEventListener("change", showStats);
-refresh();
+// a link to one job (#job-...) can only scroll once the jobs are there
+refresh().then(() => location.hash.startsWith("#job-") && follow());

@@ -335,6 +335,7 @@ def browser_checks(root, files, repo):
                     and "Failed to load resource" not in message.text and problems.append(message.text))
             page.goto(url)
             page.set_input_files("#photos", [str(path) for path in files])
+            assert page.locator("#chosen").text_content() == "4 Fotos gewählt."
             page.click("#upload button")
             # the page's CSP forbids eval, so wait with locators rather than wait_for_function
             page.locator("#transfers li.ok, #transfers li.error").nth(len(files) - 1).wait_for()
@@ -344,6 +345,7 @@ def browser_checks(root, files, repo):
             assert any("schon vorhanden" in line for line in lines), lines
 
             new = sha256(files[1].read_bytes()).hexdigest()
+            page.click("#tab-fotos")
             item = page.locator(f'li.job[data-job="{new}"]')
             item.wait_for()
             for _ in range(50):
@@ -358,11 +360,19 @@ def browser_checks(root, files, repo):
             item.locator('button[type="submit"]').click()
             item.locator(".saved.ok").wait_for()
             assert item.locator(".state").text_content() == "beschrieben"
+            page.click("#tab-uebersicht")
             none_row = page.locator(f'li.row[data-item="{ITEMS["none"]}"]')
-            none_row.locator(f'a[href="#job-{new}"]').wait_for()
+            none_row.locator(f'a[href="#job-{new}"]').click()
+            item.wait_for()
+            assert page.url.endswith(f"#job-{new}") and item.is_visible(), "a row's photo link opens the photos tab"
+            header = page.locator(".top").bounding_box()
+            assert item.bounding_box()["y"] >= header["y"] + header["height"], "the job stops below the header"
+            page.locator("#tab-uebersicht").click()
             assert none_row.locator(".badge").text_content() == "hochgeladen, zugeordnet"
 
             page.reload()
+            assert page.locator("#panel-uebersicht").is_visible(), "a reload keeps the open tab"
+            page.click("#tab-fotos")
             page.select_option("#job-view", "open")
             page.locator(f'li.job[data-job="{new}"]').wait_for(state="detached")
             page.select_option("#job-view", "all")
@@ -372,14 +382,45 @@ def browser_checks(root, files, repo):
             overview_page(page)
             trash_page(page, new)
             assert page.evaluate("document.documentElement.scrollWidth") <= 375, "no sideways scroll on a phone"
+            tab_checks(page, url)
             assert not problems, problems
             browser.close()
     finally:
         server.close()
 
 
+def tab_checks(page, url):
+    """One tab bar: at the bottom within thumb reach on a phone, under the title on a wide screen."""
+    page.goto("about:blank")  # a fresh load, not a jump within the page already open
+    page.goto(url + "#papierkorb")
+    assert page.locator("#panel-papierkorb").is_visible() and not page.locator("#panel-hochladen").is_visible()
+    assert page.locator("#tab-papierkorb").get_attribute("aria-selected") == "true"
+    assert page.evaluate("window.scrollY === 0 && document.activeElement === document.body"), "a tab link jumps nowhere"
+    tabs = page.locator('[role="tab"]')
+    for index in range(tabs.count()):
+        box = tabs.nth(index).bounding_box()
+        assert box["width"] >= 44 and box["height"] >= 44, ("target size", index, box)
+        assert box["y"] + box["height"] >= 812 - 1, "the phone tab bar sits at the bottom"
+    page.locator("#tab-papierkorb").focus()
+    page.keyboard.press("ArrowRight")
+    assert page.evaluate("document.activeElement.id") == "tab-hochladen", "arrows wrap around"
+    assert page.locator("#panel-hochladen").is_visible() and page.url.endswith("#hochladen")
+    page.keyboard.press("End")
+    assert page.evaluate("document.activeElement.id") == "tab-papierkorb"
+    page.keyboard.press("Home")
+    page.keyboard.press("ArrowLeft")
+    assert page.locator("#tab-papierkorb").get_attribute("tabindex") == "0"
+    assert [tabs.nth(index).get_attribute("tabindex") for index in range(4)] == ["-1"] * 4, "one tab stop"
+    page.set_viewport_size({"width": 1280, "height": 800})
+    page.click("#tab-uebersicht")
+    assert page.locator("#tab-uebersicht").bounding_box()["y"] < 80, "the wide tab bar sits at the top"
+    assert page.evaluate("document.documentElement.scrollWidth") <= 1280
+    page.set_viewport_size({"width": 375, "height": 812})
+
+
 def overview_page(page):
     """Views, stage filter, search, counts and statistics come from the same rows."""
+    page.click("#tab-uebersicht")
     counts = page.locator("#stage-counts li").all_text_contents()
     assert counts == ["kein eigenes Foto: 0", "hochgeladen, zugeordnet: 2", "verarbeitet: 1", "online: 1",
                       "bereit für Instagram: 1", "gepostet: 1"], counts
@@ -395,6 +436,7 @@ def overview_page(page):
     page.fill("#search", "english")
     assert page.locator("#rows li").count() == 1
     page.fill("#search", "")
+    page.click("#tab-statistik")
     stats = page.locator("#stats tr").all_text_contents()
     assert stats == ["SpracheDruckemit Owner-Fotoonlinegepostet", "German5431", "English1000"], stats
     page.select_option("#group-by", "set")
@@ -404,17 +446,25 @@ def overview_page(page):
 def trash_page(page, job):
     """Delete after confirming, restore, delete again and purge for good; a filed job has no delete."""
     page.on("dialog", lambda dialog: dialog.accept())
+    page.click("#tab-fotos")
+    open_jobs = page.locator("#count-fotos").text_content()
     card = page.locator(f'#jobs li[data-job="{job}"]')
     card.locator(".delete").click()
     card.wait_for(state="detached")
+    assert page.locator("#count-papierkorb").text_content() == "1" and open_jobs, "the tabs show what waits"
+    page.click("#tab-papierkorb")
     trashed = page.locator(f'#trash li[data-job="{job}"]')
     assert "endgültig gelöscht am" in trashed.locator(".when").text_content()
     trashed.locator(".restore").click()
-    card.wait_for()
+    card.wait_for(state="attached")
+    assert page.locator("#count-papierkorb").is_hidden()
+    page.click("#tab-fotos")
     card.locator(".delete").click()
+    page.click("#tab-papierkorb")
     trashed.locator(".purge").click()
     trashed.wait_for(state="detached")
     assert page.locator("#trash-status").text_content() == "Der Papierkorb ist leer."
+    page.click("#tab-fotos")
     filed = page.locator("#jobs li", has_text="übernommen als SPEC-0902")
     assert filed.count() == 1 and filed.locator(".delete").is_hidden(), "a filed job offers no delete"
 
