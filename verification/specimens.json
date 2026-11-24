@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 1124,
+  "count": 1125,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -23628,6 +23628,32 @@
         ],
         "ownerAttestedAt": "2026-11-23",
         "basis": "A large Poké Ball outline in foil across the text box and the card body outside the artwork window; the owner's upload note reads \"SNorlax japanese m2a Pokeball Reverse Holo\"."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-1125",
+      "photographedBy": "collection owner",
+      "photographedByBasis": "Owner decision of 2026-11-23: every photograph in the private photo inbox is the collection owner's own. Uploaded through the private photo inbox on 2026-11-24, job 57cd36be5958fd880935ae395bddf4216904ea89a35342e5727475de4763a291; the owner described it there for this printing, without a note.",
+      "setCode": "XY2",
+      "number": "066/080",
+      "variant": "unlimited",
+      "language": "Japanese",
+      "heldBy": "collection owner",
+      "inspectedFrom": "Owner photograph taken as an iPhone JPEG (12 MP) and uploaded on 2026-11-24 through the private photo inbox (the original stays private). The JPEG's image data was filed unchanged with its metadata reduced to the orientation tag and the ICC colour profile (Exif including GPS, XMP and maker data removed); the filed image decodes pixel-identical to the upload. Inspected at full resolution (4032x3024 stored, Exif orientation 6).",
+      "photograph": "SPEC-1125.jpg",
+      "photographSource": null,
+      "photographSha256": "sha256:c449e062fecc798b0e73b9bc8cba31b109697e21a1aa2ff0ffe786b22fbc863e",
+      "observed": "One complete upright Japanese Snorlax card face in a clear acrylic stand against a backdrop of coloured binders. カビゴン HP130, Ability にどね, たおれこみプレス 120, Illus. Mitsuhiro Arita, ©2014 Pokémon/Nintendo/Creatures/GAME FREAK, 066/080 U with the XY2 mark establish the exact card. At the edition-mark position at lower left, below にげる, nothing is printed: no 1st Edition mark. The card face is about 1650 px wide.",
+      "recordedAt": "2026-11-24",
+      "citedBy": [
+        "F0628-P02"
+      ],
+      "physicalObservation": {
+        "markings": null,
+        "cardSize": "standard",
+        "edition": "Unlimited",
+        "basis": "The face is complete and legible and the edition-mark position at lower left, below にげる, is visibly empty, so this copy is the Unlimited printing. Finish is not recorded from this photograph."
       },
       "listingUrl": null
     }
