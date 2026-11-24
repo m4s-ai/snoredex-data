@@ -498,6 +498,13 @@ def trash_page(page, job):
     page.click("#tab-fotos")
     filed = page.locator("#jobs li", has_text="übernommen als SPEC-0902")
     assert filed.count() == 1 and filed.locator(".delete").is_hidden(), "a filed job offers no delete"
+    specimen, printing = filed.locator('input[name="specimen"]'), filed.locator('input[name="item"]')
+    assert specimen.input_value() == "SPEC-0902" and printing.input_value().startswith("JU 3/64"), \
+        "a filed job shows its SPEC and printing"
+    specimen.fill("SPEC-0001")
+    filed.locator('button[type="submit"]').click()
+    filed.locator(".saved.ok").wait_for()
+    assert specimen.input_value() == "SPEC-0902", "after saving the form shows what was stored"
 
 
 def camera_jpeg():
