@@ -114,7 +114,7 @@
 </section>
 {% macro checkout(name, repo, at) -%}
   {{ name }}: {% if at %}<a href="https://github.com/m4s-ai/{{ repo }}/commit/{{ at.commit }}" target="_blank"
-    rel="noreferrer">{{ at.commit[:7] }}</a> vom {{ at.date[:16] | replace("T", " ") }}{% else %}unbekannt{% endif %}
+    rel="noreferrer">{{ at.commit[:7] }}</a>{% if at.date %} vom {{ at.date[:16] | replace("T", " ") }}{% endif %}{% else %}unbekannt{% endif %}
 {%- endmacro %}
 <!-- which version runs (#666): after an update the code commit must be the one just built -->
 <footer class="version" id="version">

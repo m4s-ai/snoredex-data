@@ -387,14 +387,17 @@ def head(checkout):
     return {"commit": parts[0], "date": parts[1]} if len(parts) == 2 else None
 
 
-def running_version(repo, photos):
-    """The running code and the mounted checkouts (#666). The image names the commit it was built from
-    (INBOX_COMMIT); run from a checkout, the code is that checkout's HEAD. Unknown stays None."""
+def code_version():
+    """The code this process runs, read once at start (#666): the image names the commit it was built
+    from (INBOX_COMMIT); run from a checkout, it is that checkout's HEAD at start. Unknown stays None."""
     built = os.environ.get("INBOX_COMMIT")
     if built:
-        code = {"commit": built, "date": os.environ.get("INBOX_BUILT_AT") or None, "source": "image"}
-    else:
-        code = dict(head(Path(__file__).resolve().parents[2]) or {"commit": None, "date": None}, source="checkout")
+        return {"commit": built, "date": os.environ.get("INBOX_BUILT_AT") or None, "source": "image"}
+    return dict(head(Path(__file__).resolve().parents[2]) or {"commit": None, "date": None}, source="checkout")
+
+
+def running_version(code, repo, photos):
+    """The running code and the mounted checkouts as they are now (#666)."""
     changed = None  # whether the synced catalogue checkout carries other inbox code than is running
     if repo and code["commit"]:
         done = git_output(repo, "diff", "--quiet", code["commit"], "HEAD", "--", *CODE_PATHS)
@@ -416,6 +419,7 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
     empty_trash(trash, catalogue)
     # catalogue thumbnails come from the published site; the page loads nothing else from outside
     image_origin = "/".join(catalogue.base.split("/")[:3]) if catalogue else ""
+    code = code_version()  # a later pull into the checkout does not change the code already imported
     app = Flask(__name__)
     app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD
 
@@ -425,11 +429,11 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
 
     @app.get("/")
     def index():
-        return render_template("index.html", version=running_version(repo, photos))
+        return render_template("index.html", version=running_version(code, repo, photos))
 
     @app.get("/version")
     def version():
-        return jsonify(running_version(repo, photos))
+        return jsonify(running_version(code, repo, photos))
 
     @app.errorhandler(413)
     def upload_limit(_error):

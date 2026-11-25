@@ -990,8 +990,12 @@ def version_checks(temp):
         commit_file(repo, "verification/check.py", "two\n")
         assert client.get("/version").get_json()["codeChanged"] is True, "a code commit needs a rebuild"
         assert "neu bauen" in client.get("/").get_data(as_text=True)
-        os.environ["INBOX_COMMIT"] = "0" * 40
-        assert client.get("/version").get_json()["codeChanged"] is None, "an unknown commit is unknown"
+        os.environ.update(INBOX_COMMIT="0" * 40, INBOX_BUILT_AT="")
+        assert client.get("/version").get_json()["code"]["commit"] == built, "the code is read once at start"
+        unknown = create_app(Path(temp) / "version-inbox", repo, published).test_client()
+        assert unknown.get("/version").get_json()["codeChanged"] is None, "an unknown commit is unknown"
+        page = unknown.get("/")
+        assert page.status_code == 200 and "0000000</a>" in page.get_data(as_text=True), "no build date is no error"
     finally:
         os.environ.pop("INBOX_COMMIT", None)
         os.environ.pop("INBOX_BUILT_AT", None)
