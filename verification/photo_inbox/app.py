@@ -675,11 +675,11 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
         return send_file(BytesIO((folder / names[number - 1]).read_bytes()), mimetype="image/jpeg",
                          download_name=f"{specimen}-{names[number - 1]}")
 
-    # the inbox posts only as SnoreDex on Instagram and its Facebook page, never to the uploader's
-    # other accounts (owner decision 2026-11-25)
+    # the inbox posts only as SnoreDex on Instagram, its Facebook page and Threads, never to the
+    # uploader's other accounts (owner decision 2026-11-25)
     def snoredex_accounts():
         return [account for account in uploader.accounts()
-                if account.get("platform") in ("instagram", "facebook_page")
+                if account.get("platform") in ("instagram", "facebook_page", "threads")
                 and (account.get("displayName") or "").casefold() == "snoredex"]
 
     @app.get("/accounts")
