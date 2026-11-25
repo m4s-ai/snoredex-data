@@ -185,11 +185,14 @@ cp env.example .env        # then set the paths, PUID/PGID and the uploader
 docker compose up -d --build
 ```
 
-The image is built from the checkout the compose file sits in. For a code update, run `sh update.sh`
-in that folder instead of the last line above. It pulls the checkout, then rebuilds and restarts with
+The image is built from the checkout the compose file sits in. A merge that changes the inbox
+(`scripts/`, `verification/photo_inbox/`, `verification/*.py`) needs an update on the Homelab, which
+the owner or Hermes runs, never an agent (AGENTS.md). For it, run `sh update.sh` in that folder
+instead of the last line above. It pulls the checkout, then rebuilds and restarts with
 the commit the image is built from, and prints that commit.
 
-Then check the version line at the foot of the page (also as JSON under `/version`, #666):
+Then check the version line at the foot of the page (also as JSON under `/version`, #666). After an
+update it must name the merged commit and say `Code aktuell`. It shows:
 
 - **Code:** the commit the image was built from, and when. Without `update.sh` it says `unbekannt`.
 - **Katalog** and **Fotos:** the commit of each mounted checkout. Their dates show whether `sync`
