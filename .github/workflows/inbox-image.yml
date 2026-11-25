@@ -24,6 +24,9 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v5
+      - name: compose.yaml and env.example are valid together
+        working-directory: verification/photo_inbox/docker
+        run: cp env.example .env && docker compose config -q && rm .env
       - name: Build the image
         run: docker build -f verification/photo_inbox/docker/Dockerfile -t snoredex-inbox .
       - name: Tesseract has the collection's languages
