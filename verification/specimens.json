@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 1126,
+  "count": 1127,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -23681,6 +23681,33 @@
         ],
         "ownerAttestedAt": "2026-11-25",
         "basis": "The owner assigned this photograph to item-f7d50800-ce84-5797-9946-add986791470 (printing F0582-P03) in the private photo inbox on 2026-11-25."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-1127",
+      "photographedBy": "collection owner",
+      "photographedByBasis": "Owner decision of 2026-11-23: every photograph in the private photo inbox is the collection owner's own. Uploaded through the private photo inbox on 2026-11-24, job f32afebf30aa5d9f976225435b3efd09b8d5be66403e2abafbcc900fcb128213.",
+      "setCode": "SM-P",
+      "number": "166",
+      "variant": "base",
+      "language": "Indonesian",
+      "heldBy": "collection owner",
+      "inspectedFrom": "Owner photograph uploaded through the private photo inbox as a DNG, whose embedded full-size preview JPEG was extracted byte for byte; metadata reduced to the orientation tag and the ICC colour profile (Exif including GPS, XMP and maker data removed); the filed image decodes pixel-identical to its source. Filed by the inbox intake script (#656): 8064x6048 stored, Exif orientation 6.",
+      "photograph": "SPEC-1127.jpg",
+      "photographSource": null,
+      "photographSha256": "sha256:1874c13c97a01578201cc2acda705ae5dbd1003ef9cdd0ebd3389dc07a77d78a",
+      "observed": "Not read from the face: filed by the inbox intake script. The photograph's identity rests on the owner's assignment to printing ID:SM-P:166:base (Indonesian SM-P 166); no finish, edition or marking is recorded from it.",
+      "recordedAt": "2026-11-25",
+      "citedBy": [
+        "ID:SM-P:166:base"
+      ],
+      "physicalObservation": {
+        "ownerAttestedFields": [
+          "identity"
+        ],
+        "ownerAttestedAt": "2026-11-25",
+        "basis": "The owner assigned this photograph to item-9516d59c-fc9b-56f1-bf0d-8e04ba9939a7 (printing ID:SM-P:166:base) in the private photo inbox on 2026-11-25."
       },
       "listingUrl": null
     }
