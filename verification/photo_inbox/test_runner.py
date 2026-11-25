@@ -4,11 +4,13 @@ The real intake.py, check.py and regen.py are tested on their own (test_intake.p
 intake.py in the remote does what the run relies on: push the archive copy, commit on intake/SPEC-nnnn,
 print the branch, or refuse with a reason. Checked: the whole chain, a restart after every failure
 without a second intake, pull request or merge, red CI, a refusal, an alias already on main, a run a
-restart cut off, and the page's button.
+restart cut off, and the page's button. The stand-in GitHub answers a dispatch as GitHub does, with the
+id of the run it started, and titles each run by its workflow's run-name (#673).
 
     python verification/photo_inbox/test_runner.py
 """
 
+from datetime import timedelta
 from io import BytesIO
 import json
 import os
@@ -28,6 +30,7 @@ OTHER = "item-7cf9c091-8e34-58a1-9185-ff3c7f6bcfd6"
 SOURCE_FIRST = "item-9fd9f124-e143-550d-bc3c-27e26ca0bdb7"  # no legacy printing: cited by its source-first key
 PRINTINGS = {ITEM: "printing-a", OTHER: "printing-b", SOURCE_FIRST: None}
 JOB = "a" * 64
+TITLES = {"pages.yml": "Publish site", "yourls-pilot.yml": "Provision Snoredex short links"}  # run-name
 # the stand-in files the SPEC for the job's printing, cited the way the catalogue maps it back
 FAKE_INTAKE = '''import json, os, pathlib, subprocess, sys
 data, photos, job = pathlib.Path.cwd(), pathlib.Path(sys.argv[3]), pathlib.Path(sys.argv[1])
@@ -51,6 +54,10 @@ subprocess.run(["git", "add", "-A"], check=True)
 subprocess.run(["git", "commit", "-q", "-m", "File SPEC-0001"], check=True)
 print("intake/SPEC-0001")
 '''
+
+
+class Crash(BaseException):
+    """The inbox dies mid-call: nothing of the run catches it, only what is on disk survives."""
 
 
 def alias(item):
@@ -82,6 +89,9 @@ class StandIn:
     def __init__(self, data_remote, checks="success", fail_dispatch=0, fail_open=0):
         self.remote, self.result, self.fail_dispatch, self.fail_open = data_remote, checks, fail_dispatch, fail_open
         self.pulls, self.merged, self.dispatched, self.opened = {}, [], [], 0
+        # runs GitHub keeps, the (looks until done, conclusion) of the next dispatches, and the faults
+        self.runs, self.script, self.lose_answer, self.no_answer, self.lag, self.fail_poll = [], {}, 0, False, 0, 0
+        self.wrong_artifact = False
 
     def pull_for(self, branch):
         return next((pull for pull in self.pulls.values() if pull["branch"] == branch), None)
@@ -110,25 +120,50 @@ class StandIn:
         pull.update(merged_at="2026-11-25T12:00:00Z", state="closed")
         self.merged.append(number)
 
+    def start_run(self, workflow, inputs, looks=0, conclusion="success"):
+        """A run as GitHub keeps it: titled by its workflow's run-name, done after `looks` looks at it."""
+        number = 9000 + len(self.runs)
+        self.runs.append({"id": number, "workflow": workflow, "inputs": inputs, "looks": looks,
+                          "conclusion": conclusion, "display_title": f"{TITLES[workflow]} {inputs.get('request', '')}",
+                          "html_url": f"https://example.invalid/runs/{number}"})
+        return self.runs[-1]
+
     def dispatch(self, workflow, inputs):
         if self.fail_dispatch:
             self.fail_dispatch -= 1
-            raise runner.RunError(f"GitHub POST {workflow}: 500")
-        self.dispatched.append((workflow, inputs))
+            raise runner.RunError(f"GitHub POST {workflow}: 500")  # refused: no run started
+        assert inputs["request"].startswith("inbox-"), inputs
+        run = self.start_run(workflow, inputs, *(self.script.get(workflow) or [(0, "success")]).pop(0))
+        self.dispatched.append((workflow, {key: value for key, value in inputs.items() if key != "request"}))
+        if self.lose_answer:
+            self.lose_answer -= 1
+            raise Crash  # accepted, and the inbox died before the answer arrived
+        return None if self.no_answer else run["id"]
 
-    def run_since(self, workflow, _since):
-        return {"id": len(self.dispatched), "status": "completed", "conclusion": "success",
-                "html_url": f"https://example.invalid/{workflow}"}
+    def run(self, run_id):
+        if self.fail_poll:
+            self.fail_poll -= 1
+            raise Crash  # the inbox restarts while it waits for the run
+        run = next(run for run in self.runs if run["id"] == run_id)
+        if run["looks"]:
+            run["looks"] -= 1
+            return dict(run, status="in_progress", conclusion=None)
+        return dict(run, status="completed")
 
-    def item(self):
-        return self.dispatched[-1][1]["item_ids"]
+    def runs_titled(self, workflow, request, _dispatched_at):
+        if self.lag:  # GitHub lists the run a moment after it accepted the dispatch
+            self.lag -= 1
+            return []
+        return [run["id"] for run in self.runs if run["workflow"] == workflow and request in run["display_title"]]
 
-    def artifact(self, _run_id, name):
+    def artifact(self, run_id, name):
         assert name == "yourls-verified"
+        run = next(run for run in self.runs if run["id"] == run_id)
+        item = OTHER if self.wrong_artifact else run["inputs"]["item_ids"]  # the run's own printing
         out = BytesIO()
         with zipfile.ZipFile(out, "w") as archive:
             archive.writestr("yourls-result.json", json.dumps(
-                {"itemId": self.item(), "shortAlias": alias(self.item()), "status": "verified"}))
+                {"itemId": item, "shortAlias": alias(item), "status": "verified"}))
         return out.getvalue()
 
 
@@ -161,13 +196,15 @@ def write_job(root, **changes):
     path.write_text(json.dumps(dict(job, **changes)), encoding="utf-8", newline="\n")
 
 
-def make(root, github, data, photos):
-    return runner.Runner(root, github, urls=(data, photos), sleep=lambda _seconds: None, poll=0)
+def make(root, github, data, photos, **options):
+    """A runner that never sleeps; a dispatch that started no run is past its grace unless a test says."""
+    return runner.Runner(root, github, urls=(data, photos), sleep=lambda _seconds: None, poll=0,
+                         **dict({"grace": timedelta(0)}, **options))
 
 
-def go(root, github, data, photos):
+def go(root, github, data, photos, **options):
     """The owner's "Übernehmen": queue (which freezes the approval), then run."""
-    run = make(root, github, data, photos)
+    run = make(root, github, data, photos, **options)
     run.submit(JOB)
     run.run(JOB)
 
@@ -351,6 +388,111 @@ def old_checkpoint():
         assert state["status"] == "failed" and "eindeutig" in state["error"] and len(github.dispatched) == 1, state
 
 
+def own_run_only():
+    """#673: GitHub's answer names the run; a foreign run of the same workflow decides nothing here."""
+    with TemporaryDirectory() as temp:  # a Publish site started by hand succeeds while ours fails
+        root, data, photos = setup(temp)
+        github = StandIn(data)
+        github.start_run("pages.yml", {})
+        github.script["pages.yml"] = [(2, "failure")]
+        go(root, github, data, photos)
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "failed" and state["step"] == "publish" and "failure" in state["error"], state
+        assert "pages.yml" not in state["runs"], "a run that clearly failed is dispatched anew"
+        go(root, github, data, photos)
+        assert runner.read_state(root / JOB)["status"] == "done"
+        assert [name for name, _ in github.dispatched] == ["pages.yml", "pages.yml", "yourls-pilot.yml"]
+    with TemporaryDirectory() as temp:  # a foreign short-link run for the same printing succeeds, ours fails
+        root, data, photos = setup(temp)
+        github = StandIn(data)
+        github.start_run("yourls-pilot.yml", {"item_ids": ITEM})
+        github.script["yourls-pilot.yml"] = [(1, "failure")]
+        go(root, github, data, photos)
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "failed" and state["step"] == "alias" and "alias" not in state, state
+    with TemporaryDirectory() as temp:  # the run's result names another printing
+        root, data, photos = setup(temp)
+        github = StandIn(data)
+        github.wrong_artifact = True
+        go(root, github, data, photos)
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "failed" and "nicht bestätigt" in state["error"] and "alias" not in state, state
+        assert "yourls-pilot.yml" not in state["runs"] and "aliasPr" not in state, "the next start asks anew"
+
+
+def one_dispatch():
+    """#673: a new start waits for the run it dispatched. A lost answer is found by the run's title; it
+    neither dispatches blindly again nor counts as success."""
+    with TemporaryDirectory() as temp:  # A00 (#654): the inbox restarts while Publish site runs on to success
+        root, data, photos = setup(temp)
+        github = StandIn(data)
+        github.script["pages.yml"], github.fail_poll = [(3, "success")], 1
+        try:
+            go(root, github, data, photos)
+            raise AssertionError("the stand-in cuts the run off")
+        except Crash:
+            pass
+        make(root, github, data, photos).recover()  # the restarted inbox marks the run interrupted
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "failed" and "Neustart" in state["error"] and state["step"] == "publish", state
+        assert state["runs"]["pages.yml"]["runId"] == github.runs[0]["id"], "the run's id is beside the job"
+        go(root, github, data, photos)  # "Erneut versuchen" waits for that run instead of a second one
+        assert runner.read_state(root / JOB)["status"] == "done"
+        assert [name for name, _ in github.dispatched] == ["pages.yml", "yourls-pilot.yml"], "Pages ran once"
+    with TemporaryDirectory() as temp:  # GitHub started the run, its answer was lost, and the run fails
+        root, data, photos = setup(temp)
+        github = StandIn(data)
+        github.lose_answer, github.script["pages.yml"] = 1, [(0, "failure")]
+        try:
+            go(root, github, data, photos)
+            raise AssertionError("the stand-in cuts the run off")
+        except Crash:
+            pass
+        state = runner.read_state(root / JOB)
+        assert state["runs"]["pages.yml"]["runId"] is None, "the dispatch was on disk before GitHub heard of it"
+        go(root, github, data, photos)
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "failed" and "endete mit failure" in state["error"], state
+        assert len(github.dispatched) == 1, "the lost run is found by its title, not dispatched again"
+        go(root, github, data, photos)
+        assert runner.read_state(root / JOB)["status"] == "done", "a run that clearly failed is dispatched anew"
+    with TemporaryDirectory() as temp:  # the dispatch started nothing: no new one inside the grace
+        root, data, photos = setup(temp)
+        github = StandIn(data, fail_dispatch=1)
+        go(root, github, data, photos)
+        go(root, github, data, photos, grace=timedelta(minutes=10), patience=timedelta(0))
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "failed" and "ungeklärt" in state["error"] and github.dispatched == [], state
+        go(root, github, data, photos)  # past the grace no run carries the token: dispatched anew
+        assert runner.read_state(root / JOB)["status"] == "done"
+    with TemporaryDirectory() as temp:  # an answer without the run's id, and GitHub lists the run late
+        root, data, photos = setup(temp)
+        github = StandIn(data)
+        github.no_answer, github.lag = True, 2
+        go(root, github, data, photos)
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "done" and len(github.dispatched) == 2, state
+        assert state["runs"]["pages.yml"]["runId"] == github.runs[0]["id"], state
+
+
+def github_client():
+    """The real client: the dispatch asks for the run's id and reads it from GitHub's answer; a run is
+    found by its title only in a list GitHub gave in full."""
+    calls, answers = [], iter([
+        {"workflow_run_id": 42, "run_url": "https://api.github.com/r/42", "html_url": "https://github.com/r/42"},
+        {"total_count": 2, "workflow_runs": [{"id": 7, "display_title": "Publish site inbox-x"},
+                                             {"id": 8, "display_title": "Publish site "}]},
+        {"total_count": 101, "workflow_runs": []}])
+    client = runner.GitHub("token")
+    client.call = lambda method, path, body=None: calls.append((method, path, body)) or next(answers)
+    assert client.dispatch("pages.yml", {"request": "inbox-x"}) == 42
+    assert calls[0] == ("POST", "/actions/workflows/pages.yml/dispatches",
+                        {"ref": "main", "inputs": {"request": "inbox-x"}, "return_run_details": True}), calls
+    assert client.runs_titled("pages.yml", "inbox-x", "2026-11-25T12:00:00+00:00") == [7]
+    assert "created=%3E%3D2026-11-24T12%3A00%3A00Z" in calls[1][1], calls[1]
+    assert client.runs_titled("pages.yml", "inbox-x", "2026-11-25T12:00:00+00:00") is None, "a cut list says nothing"
+
+
 def corners_frozen():
     """Corners changed between the queue and intake do not replace the approval: intake never starts."""
     with TemporaryDirectory() as temp:
@@ -437,6 +579,9 @@ def main():
     source_first_printing()
     old_checkpoint()
     corners_frozen()
+    own_run_only()
+    one_dispatch()
+    github_client()
     recovers_and_queues_once()
     page_button()
     print("intake runner: all checks passed")

@@ -289,6 +289,13 @@ stopped:
 - `intake.py` finds its archive copy again by its bytes.
 - An open pull request is reused, and a merged one is not merged again.
 - An alias already on main is not recorded again.
+- `Publish site` and `Provision Snoredex short links` are dispatched once and followed by the id of the
+  run GitHub started (#673), never by its start time, so a foreign run of the same workflow decides
+  nothing. The id is written beside the job: a new start waits for that same run.
+- The dispatch is written down before GitHub hears of it, with a request token the run carries in its
+  title (`run-name`). An answer lost on the way is found again by that token. A new dispatch follows
+  only a run that clearly failed, or once GitHub lists every run since the dispatch, ten minutes on,
+  and none carries the token. Until then the job says it is unresolved.
 
 A restart of the container marks a cut-off run as interrupted.
 
@@ -331,6 +338,9 @@ whole chain, a restart after a failed step without a second filing, pull request
 refused job, an alias already on main, a run cut off by a restart, and the page's button. It also
 covers the frozen approval: a printing changed after filing, a SPEC main files for another printing,
 a run from before the freeze, corners changed between the queue and intake, and the page's lock.
+For the workflow runs (#673) it covers a foreign run of the same workflow, a restart while `Publish
+site` runs, a lost answer, a dispatch that started nothing, an answer without the run's id, a result
+for another printing, and the real client's requests.
 
 `test_number_check.py` turns the misreadings seen in #655 into verdicts and checks when the guard
 stops intake. `test_app.py` reads a printed number on a synthetic card when Tesseract is installed

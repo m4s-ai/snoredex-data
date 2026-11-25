@@ -80,6 +80,11 @@ def main() -> int:
     assert "--check-dir" in pages and "--expected-gate L4" in pages
     assert "Regenerate site artifacts" not in pages
     assert "collector_deployment.py" in pages and "publication_gate.py" in pages
+    # #673: the photo inbox's intake run finds its own dispatched run by the request token in its title
+    yourls = (ROOT / ".github" / "workflows" / "yourls-pilot.yml").read_text(encoding="utf-8")
+    for workflow, title in ((pages, "Publish site"), (yourls, "Provision Snoredex short links")):
+        assert f"\nrun-name: {title} ${{{{ inputs.request }}}}\n" in workflow, title
+        assert "      request:\n" in workflow.split("\npermissions:", 1)[0], title
     ui = (ROOT / ".github" / "workflows" / "ui-pr.yml").read_text(encoding="utf-8")
     assert "name: UI browser gate" in ui
     assert "ui-browser (chromium)" in ui

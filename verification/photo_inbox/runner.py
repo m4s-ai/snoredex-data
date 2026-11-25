@@ -9,6 +9,12 @@ Every finished step is written beside the job (`intake-run.json`), so a run that
 again where it stopped: the archive copy is found again by its bytes (`intake.py`), an existing pull
 request is reused, a merged one is not merged twice, a recorded alias is not recorded twice.
 
+A workflow is dispatched once and followed by the id of the run GitHub started (#673), never by its
+time: a foreign run of the same workflow decides nothing here. The dispatch is written beside the job
+before GitHub hears of it, with a request token the run carries in its title, so an answer lost on the
+way is found again by that title. A new dispatch follows only a run that clearly failed, or a dispatch
+that clearly started none.
+
 An approval holds for exactly one printing (#672, owner decision D01): queuing freezes the photo, its
 printing and its corners beside the run. Intake starts only on unchanged inputs, and before anything
 leaves for the printing (the short link, the alias PR) the run checks that main filed its SPEC for the
@@ -32,6 +38,7 @@ import time
 from urllib.error import HTTPError
 from urllib.parse import quote
 from urllib.request import HTTPRedirectHandler, Request, build_opener
+from uuid import uuid4
 import zipfile
 
 from overview import Catalogue
@@ -45,6 +52,8 @@ STATE = "intake-run.json"
 WORK = ".work"  # the runner's own clones in the private data folder; the page lists hash folders only
 STEPS = ("intake", "merge", "publish", "alias", "alias-pr")
 FAILED = {"failure", "cancelled", "timed_out", "action_required", "startup_failure", "stale"}
+# GitHub lists a run as it accepts its dispatch: a request token no listed run carries after this started none
+GRACE = timedelta(minutes=10)
 IDENTITY = {"GIT_AUTHOR_NAME": "SnoreDex inbox", "GIT_COMMITTER_NAME": "SnoreDex inbox",
             "GIT_AUTHOR_EMAIL": "snoredex-inbox@users.noreply.github.com",
             "GIT_COMMITTER_EMAIL": "snoredex-inbox@users.noreply.github.com"}
@@ -143,19 +152,30 @@ class GitHub:
         self.call("PUT", f"/pulls/{number}/merge", {"sha": sha, "merge_method": "merge"})
 
     def dispatch(self, workflow, inputs):
-        self.call("POST", f"/actions/workflows/{workflow}/dispatches", {"ref": "main", "inputs": inputs})
+        """Start a workflow on main; the id of the run GitHub started, or None when its answer names none."""
+        answer = self.call("POST", f"/actions/workflows/{workflow}/dispatches",
+                           {"ref": "main", "inputs": inputs, "return_run_details": True})
+        return answer.get("workflow_run_id")
 
-    def run_since(self, workflow, since):
-        # ponytail: the earliest dispatch run since our start; a manual run in the same seconds could be taken
-        runs = self.call("GET", f"/actions/workflows/{workflow}/runs?event=workflow_dispatch&branch=main"
-                                f"&created={quote('>=' + since)}")["workflow_runs"]
-        return min(runs, key=lambda run: run["created_at"]) if runs else None
+    def run(self, run_id):
+        return self.call("GET", f"/actions/runs/{run_id}")
+
+    def runs_titled(self, workflow, request, dispatched_at):
+        """The ids of the dispatched runs on main whose title carries `request`, or None when GitHub did not
+        list them all. The list reaches a day before the dispatch, so a clock off by hours still finds it."""
+        since = (datetime.fromisoformat(dispatched_at) - timedelta(days=1)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        found = self.call("GET", f"/actions/workflows/{workflow}/runs?event=workflow_dispatch&branch=main"
+                                 f"&per_page=100&created={quote('>=' + since)}")
+        if found["total_count"] > len(found["workflow_runs"]):
+            return None
+        return [run["id"] for run in found["workflow_runs"] if request in (run.get("display_title") or "")]
 
     def artifact(self, run_id, name):
+        """The bytes of a run's artifact, or None when the run left none."""
         found = self.call("GET", f"/actions/runs/{run_id}/artifacts")["artifacts"]
         artifact = next((item for item in found if item["name"] == name), None)
         if artifact is None:
-            raise RunError(f"Der Lauf hat kein Ergebnis {name} hinterlassen.")
+            return None
         location = self.call("GET", f"/actions/artifacts/{artifact['id']}/zip")["location"]
         with build_opener().open(location, timeout=120) as response:
             return response.read()
@@ -165,8 +185,9 @@ class Runner:
     """One run at a time, in order; the page and the nightly round only queue job ids."""
 
     def __init__(self, root, github, key=None, urls=(DATA_URL, PHOTOS_URL), sleep=time.sleep, poll=30,
-                 patience=timedelta(minutes=45)):
+                 patience=timedelta(minutes=45), grace=GRACE):
         self.root, self.github, self.sleep, self.poll, self.patience = Path(root), github, sleep, poll, patience
+        self.grace = grace
         self.urls = urls
         self.data, self.photos = self.root / WORK / "snoredex-data", self.root / WORK / "snoredex-photos"
         self.env = dict(os.environ, GIT_TERMINAL_PROMPT="0", GIT_ASKPASS=str(self.root / WORK / "askpass.sh"),
@@ -314,22 +335,58 @@ class Runner:
             self.sleep(self.poll)
         raise RunError(f"PR #{number} wurde nicht rechtzeitig grün: {pull['html_url']}")
 
-    def workflow(self, name, inputs):
-        """Start a workflow on main and wait for it; anything but success stops the run."""
-        since = (datetime.now(timezone.utc) - timedelta(seconds=5)).strftime("%Y-%m-%dT%H:%M:%SZ")
-        self.github.dispatch(name, inputs)
+    def workflow(self, folder, state, name, inputs):
+        """Start a workflow on main once and wait for exactly the run it started (#673); anything but
+        success stops the run. A run that clearly failed is forgotten, so the next start dispatches anew;
+        one still running, or not found yet, is waited for again by the next start."""
+        record = self.dispatched(folder, state, name, inputs)
         deadline = datetime.now(timezone.utc) + self.patience
-        while datetime.now(timezone.utc) < deadline:
-            self.sleep(self.poll)
-            run = self.github.run_since(name, since)
+        while True:
+            run = self.own_run(folder, state, name, record)
             if run and run["status"] == "completed":
                 if run["conclusion"] != "success":
+                    del state["runs"][name]
                     raise RunError(f"{name} endete mit {run['conclusion']}: {run['html_url']}")
                 return run
-        raise RunError(f"{name} wurde nicht rechtzeitig fertig.")
+            if datetime.now(timezone.utc) >= deadline:
+                raise RunError(f"{name} wurde nicht rechtzeitig fertig: {run['html_url']}" if run else
+                               f"{name}: Ob GitHub den Lauf gestartet hat, ist ungeklärt. „Erneut versuchen“ "
+                               "sucht ihn wieder; neu gestartet wird erst, wenn sicher keiner läuft.")
+            self.sleep(self.poll)
 
-    def step_publish(self, _folder, _state):
-        self.workflow("pages.yml", {})
+    def dispatched(self, folder, state, name, inputs):
+        """This job's dispatch of the workflow: the earlier one, or a new one written down before GitHub
+        hears of it, with the request token the run carries in its title."""
+        runs = state.setdefault("runs", {})
+        record = runs.get(name)
+        if record and not record["runId"] and self.never_started(name, record):
+            record = None
+        if record is None:
+            record = runs[name] = {"request": "inbox-" + uuid4().hex[:16], "dispatchedAt": now(), "runId": None}
+            write_state(folder, dict(state, status="running"))
+            record["runId"] = self.github.dispatch(name, dict(inputs, request=record["request"]))
+            write_state(folder, dict(state, status="running"))
+        return record
+
+    def never_started(self, name, record):
+        """Certain that a dispatch whose answer went missing started no run: the grace is over and GitHub
+        lists every run since, none of them with the request token."""
+        waited = datetime.now(timezone.utc) - datetime.fromisoformat(record["dispatchedAt"])
+        return waited >= self.grace and self.github.runs_titled(name, record["request"], record["dispatchedAt"]) == []
+
+    def own_run(self, folder, state, name, record):
+        """The run the dispatch started; while GitHub's answer is missing, the one run titled with the
+        request token, else None."""
+        if not record["runId"]:
+            found = self.github.runs_titled(name, record["request"], record["dispatchedAt"])
+            if not found or len(found) > 1:
+                return None
+            record["runId"] = found[0]
+            write_state(folder, dict(state, status="running"))
+        return self.github.run(record["runId"])
+
+    def step_publish(self, folder, state):
+        self.workflow(folder, state, "pages.yml", {})
 
     def printing(self, state):
         """The printing this run delivers to, checked on main before anything leaves for it: main must
@@ -346,10 +403,14 @@ class Runner:
                            "prüfen.")
         return frozen
 
-    def step_alias(self, _folder, state):
+    def step_alias(self, folder, state):
         item_id = self.printing(state)
-        run = self.workflow("yourls-pilot.yml", {"item_ids": item_id})
-        with zipfile.ZipFile(BytesIO(self.github.artifact(run["id"], "yourls-verified"))) as archive:
+        run = self.workflow(folder, state, "yourls-pilot.yml", {"item_ids": item_id})
+        found = self.github.artifact(run["id"], "yourls-verified")
+        del state["runs"]["yourls-pilot.yml"]  # the run has answered; another verification is another run
+        if found is None:
+            raise RunError("Der Lauf hat kein Ergebnis yourls-verified hinterlassen.")
+        with zipfile.ZipFile(BytesIO(found)) as archive:
             result = json.loads(archive.read("yourls-result.json"))
         if result.get("status") != "verified" or result.get("itemId") != item_id:
             raise RunError(f"Der Kurzlink wurde nicht bestätigt: {result.get('status')}")

@@ -34,7 +34,7 @@ The core YOURLS signature grants broad API access. The workflow boundary and its
 limit which operations the pilot performs.
 
 Run **Provision Snoredex short links** from `main` using the GitHub Actions UI or workflow dispatch
-API. The job accepts one to three space-separated item IDs from the catalogue. For the pilot,
+API. The job accepts one to three space-separated item IDs from the catalogue. Leave `request` empty: the photo inbox's intake run sets it to find its own run (#673). For the pilot,
 run SPEC-0774, run the two CSV7C variants in one batch, then repeat that batch in reverse order to
 verify stable assignments.
 
