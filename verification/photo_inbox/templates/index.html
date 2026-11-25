@@ -62,7 +62,6 @@
   </div>
   <p id="jobs-status" class="hint" role="status"></p>
   <ul id="jobs" class="jobs"></ul>
-  <datalist id="items"></datalist>
 </section>
 
 <section id="panel-uebersicht" role="tabpanel" aria-labelledby="tab-uebersicht" tabindex="0" hidden>
@@ -134,8 +133,11 @@
       <form class="describe">
         <label>SPEC-Nummer<input name="specimen" placeholder="SPEC-0774" autocapitalize="characters"
                autocomplete="off" pattern="[Ss][Pp][Ee][Cc]-[0-9]{4,8}"></label>
-        <label>Druck aus dem Katalog<input name="item" list="items" autocomplete="off"
-               placeholder="Set, Nummer, Sprache oder Finish tippen"></label>
+        <div class="pick">
+          <label>Druck aus dem Katalog<input name="item" autocomplete="off" spellcheck="false"
+                 placeholder="z. B. viv 131 spanisch stempel"></label>
+          <ul class="picks" hidden></ul>
+        </div>
         <label>Notiz zur Karte<textarea name="note" maxlength="240" rows="2"
                placeholder="z. B. Relaxo, Dschungel, deutsch, 1. Auflage"></textarea></label>
         <div class="actions">

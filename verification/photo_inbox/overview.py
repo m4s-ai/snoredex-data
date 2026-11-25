@@ -159,6 +159,7 @@ class Catalogue:
         thumb = self.thumbs.get(item["itemId"])
         return {"itemId": item["itemId"], "label": self.labels[item["itemId"]],
                 "set": item["localSetCode"], "language": self.languages.get(item["localizationId"], ""),
+                "marks": [mark["text"] for mark in item.get("markings") or []],
                 "stage": self.stage(item, specimen, jobs, site), "specimen": specimen, "jobs": jobs,
                 "preview": self.base + thumb if thumb else None, "card": self.base + f"cards/{item['itemId']}/",
                 "shortUrl": SHORT_BASE + social["shortAlias"] if social.get("shortAlias") else None,

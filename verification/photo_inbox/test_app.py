@@ -173,7 +173,8 @@ def item(stage):
     return {"itemId": ITEMS[stage], "active": True, "localSetCode": "JU", "collectorNumber": str(STAGES.index(stage) + 1),
             "collectorNumberDenominator": "64", "localizationId": language, "finish": "holo",
             "edition": "1st Edition", "cardName": "Snorlax", "localCardName": "Relaxo", "imageAssetId": f"asset-{stage}",
-            "sourcePrintingId": f"P-{stage}"}
+            "sourcePrintingId": f"P-{stage}",
+            "markings": [{"text": "Prerelease stamp", "role": "distribution-promo"}] if stage == "online" else []}
 
 
 def catalogue_repo(folder, filed_photo):
@@ -628,6 +629,27 @@ def refuses_checkout():
     raise AssertionError("an inbox inside a Git checkout must be refused")
 
 
+def pick_printing(item):
+    """The picker matches every typed word, German language names and "Stempel" included."""
+    picker, hits = item.locator('input[name="item"]'), item.locator(".picks button")
+    picker.fill("ju stempel")
+    assert hits.count() == 1 and "Prerelease stamp" in hits.first.text_content(), "Stempel finds the marked print"
+    picker.fill("english 1/64")
+    assert hits.count() == 1, "the English words match as well"
+    picker.fill("relaxo englisch 1/64")
+    assert hits.count() == 1 and "JU 1/64 · Englisch" in hits.first.text_content(), "words in any order, in German"
+    picker.press("Tab")
+    assert hits.first.evaluate("button => button === document.activeElement"), "Tab reaches the first hit"
+    hits.first.press("ArrowUp")
+    assert picker.evaluate("input => input === document.activeElement"), "ArrowUp goes back to the field"
+    picker.press("ArrowDown")
+    assert hits.first.evaluate("button => button === document.activeElement"), "ArrowDown enters the hits"
+    hits.first.press("Enter")
+    assert picker.input_value() == "JU 1/64 · English · holo · 1st Edition · Relaxo"
+    assert item.locator(".picks").is_hidden(), "a pick closes the list"
+    assert picker.evaluate("input => input === document.activeElement"), "the focus goes back to the field"
+
+
 def browser_checks(root, files, repo, command, photos):
     """Bulk upload with one bad file, describe a job, the overview and the trash, on a phone-sized page."""
     uploader = FakeUploader()
@@ -666,7 +688,7 @@ def browser_checks(root, files, repo, command, photos):
                 raise AssertionError("the preview of the new DNG did not load")
             assert item.locator(".state").text_content() == "ohne Angabe"
             item.locator("textarea").fill("Relaxo, Sammel-Upload")
-            item.locator('input[name="item"]').fill("JU 1/64 · English · holo · 1st Edition · Relaxo")
+            pick_printing(item)
             item.locator('button[type="submit"]').click()
             item.locator(".saved.ok").wait_for()
             assert item.locator(".state").text_content() == "beschrieben"

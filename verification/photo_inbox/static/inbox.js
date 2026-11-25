@@ -142,6 +142,7 @@ function jobItem(job) {
   const form = item.querySelector("form");
   form.specimen.value = job.specimenHint || "";
   form.item.value = itemLabel(job.itemId);
+  wirePicker(form.item, item.querySelector(".picks"));
   form.note.value = job.note || "";
   form.addEventListener("submit", (event) => describe(event, item));
   const remove = item.querySelector(".delete");
@@ -155,6 +156,83 @@ function jobItem(job) {
   item.querySelector(".intake-start").onclick = () => startIntake(item);
   showIntake(item, job);
   return item;
+}
+
+// --- printing picker: every typed word must match, German language names and "Stempel" included ---
+
+const LANGUAGES_DE = {"English": "Englisch", "German": "Deutsch", "French": "Französisch", "Italian": "Italienisch",
+  "Spanish (Europe)": "Spanisch (Europa)", "Spanish (Latin America)": "Spanisch (Lateinamerika)",
+  "Portuguese": "Portugiesisch", "Japanese": "Japanisch", "Chinese (Simplified)": "Chinesisch (vereinfacht)",
+  "Chinese (Traditional)": "Chinesisch (traditionell)", "Korean": "Koreanisch", "Indonesian": "Indonesisch",
+  "Thai": "Thailändisch", "Russian": "Russisch", "Dutch": "Niederländisch", "Polish": "Polnisch"};
+const PICK_LIMIT = 30;
+const fold = (text) => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+function pickText(row) {
+  if (!row.pickText) {
+    const stamp = row.marks && row.marks.length ? " stempel stamp markierung" : "";
+    row.pickText = fold(`${row.label} ${LANGUAGES_DE[row.language] || ""}${stamp}`);
+  }
+  return row.pickText;
+}
+
+function pickButton(row, input, list) {
+  const parts = row.label.split(" · ");
+  const head = parts.shift();
+  if (parts[0] === row.language) parts.shift();
+  const button = document.createElement("button");
+  button.type = "button";
+  const image = document.createElement("img");
+  image.alt = "";
+  image.loading = "lazy";
+  if (row.preview) image.src = row.preview;
+  const text = document.createElement("span");
+  const title = document.createElement("strong");
+  title.textContent = `${head} · ${LANGUAGES_DE[row.language] || row.language}`;
+  const details = document.createElement("span");
+  details.textContent = parts.join(" · ");
+  text.append(title, details);
+  button.append(image, text);
+  button.onmousedown = (event) => event.preventDefault();  // keeps the focus, so the list survives the click
+  button.onclick = () => {
+    input.value = row.label;
+    list.hidden = true;
+    input.focus();  // a pick by keyboard leaves the focus on the field, not on a hidden hit
+  };
+  const line = document.createElement("li");
+  line.append(button);
+  return line;
+}
+
+function showPicks(input, list) {
+  const words = fold(input.value).split(/[\s·,]+/).filter(Boolean);
+  const rows = state.overview && words.length ? state.overview.rows : [];
+  const hits = rows.filter((row) => row.label !== input.value && words.every((word) => pickText(row).includes(word)));
+  const items = hits.slice(0, PICK_LIMIT).map((row) => pickButton(row, input, list));
+  if (hits.length > PICK_LIMIT) items.push(message(`… und ${hits.length - PICK_LIMIT} weitere: genauer tippen.`, "more"));
+  if (words.length && !hits.length && !state.labels.has(input.value)) items.push(message("Kein Druck passt zu allen Wörtern.", "more"));
+  list.replaceChildren(...items);
+  list.hidden = !items.length;
+}
+
+function wirePicker(input, list) {
+  input.addEventListener("input", () => showPicks(input, list));
+  // closes only when the focus leaves field and hits together: Tab reaches the hits from the keyboard
+  list.parentNode.addEventListener("focusout", (event) => {
+    if (!list.parentNode.contains(event.relatedTarget)) list.hidden = true;
+  });
+  list.parentNode.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      list.hidden = true;
+      input.focus();
+    }
+    // ArrowDown from the field enters the hits, the arrows walk them, ArrowUp from the first goes back
+    const stops = [input, ...list.querySelectorAll("button")];
+    const step = {ArrowDown: 1, ArrowUp: -1}[event.key];
+    if (!step || list.hidden || stops.length < 2) return;
+    event.preventDefault();
+    stops[Math.min(Math.max(stops.indexOf(document.activeElement) + step, 0), stops.length - 1)].focus();
+  });
 }
 
 // --- intake run (#659): filed, merged, published and linked without an agent ---
@@ -538,7 +616,6 @@ async function showOverview() {
   }
   const {dataAsOf, siteError, rows} = state.overview;
   state.labels = new Map(rows.map((row) => [row.label, row.itemId]));
-  field("items").replaceChildren(...rows.map((row) => Object.assign(document.createElement("option"), {value: row.label})));
   field("overview-status").textContent = `Datenstand ${DAY.format(new Date(dataAsOf))}.` + (siteError ? ` ${siteError}` : "");
   showCounts(rows);
   showRows();
