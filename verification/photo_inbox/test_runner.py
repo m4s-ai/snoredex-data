@@ -325,6 +325,19 @@ def old_checkpoint():
         go(root, github, data, photos)
         assert runner.read_state(root / JOB)["status"] == "done"
         assert github.dispatched[-1] == ("yourls-pilot.yml", {"item_ids": ITEM}), "main's printing, not the form's"
+    with TemporaryDirectory() as temp:  # A's alias verified before #672, then main corrects the SPEC to C
+        root, data, photos = setup(temp)
+        github = StandIn(data, fail_dispatch=1)
+        go(root, github, data, photos)  # filed and merged for A
+        runner.write_state(root / JOB, {"status": "failed", "step": "alias-pr", "specimen": "SPEC-0001", "pr": 100,
+                                        "done": ["intake", "merge", "publish", "alias"], "alias": alias(ITEM)})
+        recite(data, temp, ["key-c"])
+        go(root, github, data, photos)
+        assert runner.read_state(root / JOB)["status"] == "done"
+        assert github.dispatched == [("yourls-pilot.yml", {"item_ids": SOURCE_FIRST})], "verified again for C"
+        rows = social_on(data, "main")
+        assert rows[1]["shortAlias"] == alias(SOURCE_FIRST) and "shortAlias" not in rows[0], \
+            "C's row gets C's own link, never the one that opens A"
     with TemporaryDirectory() as temp:
         root, data, photos = setup(temp)
         github = StandIn(data, fail_dispatch=1)

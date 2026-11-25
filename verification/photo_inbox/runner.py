@@ -353,10 +353,12 @@ class Runner:
             result = json.loads(archive.read("yourls-result.json"))
         if result.get("status") != "verified" or result.get("itemId") != item_id:
             raise RunError(f"Der Kurzlink wurde nicht bestätigt: {result.get('status')}")
-        state["alias"] = result["shortAlias"]
+        state["alias"], state["aliasItem"] = result["shortAlias"], item_id
 
-    def step_alias_pr(self, _folder, state):
+    def step_alias_pr(self, folder, state):
         item_id = self.printing(state)
+        if state.get("aliasItem") != item_id:  # verified for another printing, or before #672 said for which
+            self.step_alias(folder, state)
         path = self.data / "data/social.json"
         rows = json.loads(path.read_text(encoding="utf-8"))
         row = next((row for row in rows if row["itemId"] == item_id), None)
