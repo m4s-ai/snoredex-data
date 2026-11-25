@@ -150,11 +150,46 @@ pip install -r verification/photo_inbox/requirements.txt
 python verification/photo_inbox/app.py --data-dir <private folder outside Git> --host 0.0.0.0 --repo <checkout of main> --photos <checkout of snoredex-photos> --uploader <uploader base URL>
 ```
 
-Set `UPLOADER_KEY` in the container's environment for `--uploader`.
+Set `UPLOADER_KEY` in the environment for `--uploader`.
 
 Without `--host` the service listens on loopback only; `--host 0.0.0.0` (or a reverse proxy on the
 Homelab) makes it reachable in the home network on port 8765 (`--port`). Uploads are limited to
 200 MB, and JPEGs to 60 megapixels.
+
+## Container on the Homelab
+
+`docker/` holds the manifest the Homelab runs:
+
+- `Dockerfile` builds one image from the repository root.
+  - **Contents:** Python 3.12, the inbox's packages (OpenCV and NumPy for the corners), Tesseract with
+    the collection's languages for the number check, and git.
+  - **Repository code:** the image holds only the code the inbox runs or imports.
+    `Dockerfile.dockerignore` keeps data, images and evidence out.
+  - **User:** it runs as an unprivileged user whose `PUID` and `PGID` match the owner of the mounted
+    folders.
+- `compose.yaml` runs two services: `inbox`, and `sync`, which `git pull`s both checkouts every ten
+  minutes, fast-forward only.
+  - `inbox` gets the private data folder at `/data`, and the checkouts of snoredex-data and
+    snoredex-photos (branch `main`) read-only under `/checkouts`.
+  - The inbox notices a changed catalogue by itself.
+  - A change to the inbox's own code or requirements needs a rebuild.
+- `env.example` lists the settings. Copy it to `.env` beside `compose.yaml`; Git ignores that file. It
+  holds the three host paths, `PUID`/`PGID`, the port and, for posting, `UPLOADER_URL` and
+  `UPLOADER_KEY`. The key reaches the inbox only through the environment.
+
+```console
+git clone https://github.com/m4s-ai/snoredex-data /srv/snoredex/snoredex-data
+git clone https://github.com/m4s-ai/snoredex-photos /srv/snoredex/snoredex-photos
+cd /srv/snoredex/snoredex-data/verification/photo_inbox/docker
+cp env.example .env        # then set the paths, PUID/PGID and the uploader
+docker compose up -d --build
+```
+
+The image is built from the checkout the compose file sits in. For a code update, `git pull` there,
+then run `docker compose up -d --build`. The workflow `Inbox image` builds the image on every pull
+request that touches the inbox. It checks Tesseract's languages and the number guard's tests, starts
+the inbox against the repository and runs `docker/smoke.py` inside it: page, catalogue, suggested
+corners and a printed number read.
 
 ## Intake access
 

@@ -1,0 +1,39 @@
+# The private photo inbox on the Homelab (#626): the inbox itself and a sync service that keeps the
+# catalogue and photo-archive checkouts current. Copy env.example to .env beside this file, set
+# its paths, then from this folder:
+#
+#     docker compose up -d --build
+#
+# Rebuild after a change to the inbox's code or requirements (git pull in the repository first).
+services:
+  inbox:
+    build:
+      context: ../../..
+      dockerfile: verification/photo_inbox/docker/Dockerfile
+      args:
+        PUID: ${PUID:-1000}
+        PGID: ${PGID:-1000}
+    image: snoredex-inbox
+    container_name: snoredex-inbox
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "${INBOX_PORT:-8765}:8765"
+    volumes:
+      # private: the raw photos with GPS, outside every Git checkout; intake reads it over SMB
+      - ${INBOX_DATA:?set INBOX_DATA in .env}:/data
+      - ${SNOREDEX_DATA:?set SNOREDEX_DATA in .env}:/checkouts/snoredex-data:ro
+      - ${SNOREDEX_PHOTOS:?set SNOREDEX_PHOTOS in .env}:/checkouts/snoredex-photos:ro
+
+  sync:
+    image: snoredex-inbox
+    container_name: snoredex-inbox-sync
+    restart: unless-stopped
+    command: ["sync"]
+    environment:
+      SYNC_SECONDS: ${SYNC_SECONDS:-600}
+    volumes:
+      - ${SNOREDEX_DATA}:/checkouts/snoredex-data
+      - ${SNOREDEX_PHOTOS}:/checkouts/snoredex-photos
+    depends_on:
+      - inbox

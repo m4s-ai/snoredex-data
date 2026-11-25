@@ -1,0 +1,11 @@
+# The build needs only the inbox, the scripts and the verification modules; everything else stays out.
+*
+!scripts
+!verification
+verification/archive
+verification/cache
+verification/evidence
+verification/specimens
+**/__pycache__
+# the Homelab's settings with the uploader key: runtime only, never in an image layer
+**/.env
