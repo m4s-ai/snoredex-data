@@ -48,6 +48,10 @@ p { margin: 0; }
 .lead { max-width: 65ch; margin-bottom: 1.25rem; }
 .hint { color: var(--muted); margin: .75rem 0; }
 .hint:empty { display: none; }
+.version { display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin-top: 2.5rem; padding-top: .75rem;
+  border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; }
+.version a { color: inherit; font-family: ui-monospace, monospace; }
+.version .stale { color: var(--open); }
 
 label { display: block; font-weight: 600; }
 input, textarea, select {

@@ -112,6 +112,18 @@
   <p id="trash-status" class="hint" role="status"></p>
   <ul id="trash" class="jobs"></ul>
 </section>
+{% macro checkout(name, repo, at) -%}
+  {{ name }}: {% if at %}<a href="https://github.com/m4s-ai/{{ repo }}/commit/{{ at.commit }}" target="_blank"
+    rel="noreferrer">{{ at.commit[:7] }}</a> vom {{ at.date[:16] | replace("T", " ") }}{% else %}unbekannt{% endif %}
+{%- endmacro %}
+<!-- which version runs (#666): after an update the code commit must be the one just built -->
+<footer class="version" id="version">
+  <span>{{ checkout("Code", "snoredex-data", version.code if version.code.commit else none) }}{% if version.code.source == "checkout" and version.code.commit %} (Checkout){% endif %}</span>
+  {% if version.codeChanged %}<strong class="stale">Anderer Eingangs-Code im Checkout: neu bauen</strong>
+  {% elif version.codeChanged == false %}<span>Code aktuell</span>{% endif %}
+  <span>{{ checkout("Katalog", "snoredex-data", version.data) }}</span>
+  <span>{{ checkout("Fotos", "snoredex-photos", version.photos) }}</span>
+</footer>
 </main>
 
 <template id="job-template">

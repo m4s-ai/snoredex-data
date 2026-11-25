@@ -13,6 +13,9 @@ services:
       args:
         PUID: ${PUID:-1000}
         PGID: ${PGID:-1000}
+        # set by update.sh: the version line names the commit the image was built from (#666)
+        GIT_COMMIT: ${GIT_COMMIT:-}
+        BUILT_AT: ${BUILT_AT:-}
     image: snoredex-inbox
     container_name: snoredex-inbox
     restart: unless-stopped

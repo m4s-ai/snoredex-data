@@ -367,6 +367,41 @@ def security_headers(response, image_origin):
     return response
 
 
+# what the image copies of the repository: a change here on main needs a rebuild (#666)
+CODE_PATHS = ("scripts", "verification/photo_inbox", ":(glob)verification/*.py")
+
+
+def git_output(checkout, *args):
+    """git's exit code and output in a checkout; None when git cannot run there."""
+    try:
+        done = subprocess.run(["git", "-C", str(checkout), *args], capture_output=True, text=True, timeout=10)
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    return done.returncode, done.stdout
+
+
+def head(checkout):
+    """A checkout's HEAD commit and its date; None when it is no readable checkout."""
+    done = git_output(checkout, "log", "-1", "--format=%H %cI") if checkout else None
+    parts = done[1].split() if done and done[0] == 0 else []
+    return {"commit": parts[0], "date": parts[1]} if len(parts) == 2 else None
+
+
+def running_version(repo, photos):
+    """The running code and the mounted checkouts (#666). The image names the commit it was built from
+    (INBOX_COMMIT); run from a checkout, the code is that checkout's HEAD. Unknown stays None."""
+    built = os.environ.get("INBOX_COMMIT")
+    if built:
+        code = {"commit": built, "date": os.environ.get("INBOX_BUILT_AT") or None, "source": "image"}
+    else:
+        code = dict(head(Path(__file__).resolve().parents[2]) or {"commit": None, "date": None}, source="checkout")
+    changed = None  # whether the synced catalogue checkout carries other inbox code than is running
+    if repo and code["commit"]:
+        done = git_output(repo, "diff", "--quiet", code["commit"], "HEAD", "--", *CODE_PATHS)
+        changed = {0: False, 1: True}.get(done[0]) if done else None
+    return {"code": code, "codeChanged": changed, "data": head(repo), "photos": head(photos)}
+
+
 def create_app(directory, repo=None, fetch=None, photos=None, command=None, uploader=None, schedule=True):
     root = private_directory(directory)
     (root / posting.POSTS).mkdir(mode=0o700, exist_ok=True)
@@ -390,7 +425,11 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
 
     @app.get("/")
     def index():
-        return render_template("index.html")
+        return render_template("index.html", version=running_version(repo, photos))
+
+    @app.get("/version")
+    def version():
+        return jsonify(running_version(repo, photos))
 
     @app.errorhandler(413)
     def upload_limit(_error):

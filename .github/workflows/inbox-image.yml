@@ -28,7 +28,9 @@ jobs:
         working-directory: verification/photo_inbox/docker
         run: cp env.example .env && docker compose config -q
       - name: Build the image (with the .env present, as on the Homelab)
-        run: docker build -f verification/photo_inbox/docker/Dockerfile -t snoredex-inbox .
+        run: |
+          docker build -f verification/photo_inbox/docker/Dockerfile -t snoredex-inbox \
+            --build-arg GIT_COMMIT="$(git rev-parse HEAD)" --build-arg BUILT_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)" .
       - name: The .env with the uploader key stays out of the image
         run: docker run --rm --entrypoint sh snoredex-inbox -c '! find / -xdev -name .env 2>/dev/null | grep -q .'
       - name: Tesseract has the collection's languages

@@ -34,7 +34,11 @@ RUN groupadd --gid "${PGID}" inbox && useradd --uid "${PUID}" --gid inbox --no-c
  && git config --system --add safe.directory '*'
 USER inbox
 
-ENV PYTHONUNBUFFERED=1 PORT=8765
+# the commit and time this image was built from, shown in the inbox's version line (#666);
+# docker/update.sh passes both, and without them the line says "unbekannt"
+ARG GIT_COMMIT=
+ARG BUILT_AT=
+ENV PYTHONUNBUFFERED=1 PORT=8765 INBOX_COMMIT=${GIT_COMMIT} INBOX_BUILT_AT=${BUILT_AT}
 EXPOSE 8765
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
   CMD python -c "import os, urllib.request; urllib.request.urlopen(f'http://127.0.0.1:{os.environ[\"PORT\"]}/', timeout=4)"
