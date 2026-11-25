@@ -300,6 +300,8 @@ button or the night, freezes the photo's hash, its printing and its corners in `
 - Before the short link and again before the alias pull request, the run checks on main that its SPEC
   is filed for the frozen printing. A different or no unique printing stops the run there.
 - A run from before the freeze takes the printing main filed its SPEC for.
+- The run records which printing a short link was verified for. The alias pull request verifies the
+  link again when that printing is unknown or another one, so a row never gets another printing's link.
 - The page closes the printing field and the corners from the queue on. A run that stops before filing
   opens them again, and the next start freezes the corrected approval. Once the SPEC is filed they stay
   closed: a wrong assignment is then corrected in the catalogue.
