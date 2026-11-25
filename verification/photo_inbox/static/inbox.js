@@ -830,10 +830,11 @@ async function showPosts() {
     const {posts, canPost} = await call("/posts");
     state.canPost = canPost;
     listPosts(posts);
-    // the drafts never wait for the uploader, which can take a minute; the send forms follow its accounts
+    // the drafts never wait for the uploader, which can take a minute; the send forms follow its accounts,
+    // drawn from a fresh list, since a plan may have been taken back meanwhile
     if (canPost && !state.accounts.length) {  // again after a failed attempt
       await loadAccounts();
-      if (state.accounts.length) listPosts(posts);
+      if (state.accounts.length) return showPosts();
     }
     // a post on its way is followed until every target is published or failed
     const moving = posts.some((post) => post.order && Object.values(post.order.targets).some((target) =>

@@ -370,8 +370,9 @@ class FakeUploader:
         self.failing_account_lists, self.held = failing_account_lists, None
 
     def accounts(self):
-        if self.held:  # a slow uploader: the account list waits until the test lets it go
-            self.held.wait(30)
+        if self.held:  # a slow uploader: the next account list waits until the test lets it go
+            held, self.held = self.held, None
+            held.wait(30)
         if self.failing_account_lists:
             self.failing_account_lists -= 1
             raise posting.UploaderError("Uploader nicht erreichbar")
@@ -848,16 +849,15 @@ def reopened_editor(page, root, item, job):
 
 def posts_page(page, root, uploader):
     """The draft of a printing ready for Instagram: image, caption, alt text, open points, and the order form."""
-    uploader.held = threading.Event()
+    held = uploader.held = threading.Event()
     page.reload()
     page.click("#tab-posts")
     post = page.locator("#posts li.post")
     post.wait_for(timeout=3000)
     assert page.locator("#count-posts").text_content() == "1", "the drafts and their count never wait for the uploader"
     assert post.locator(".send").is_hidden()
-    uploader.held.set()
+    held.set()
     post.locator(".send").wait_for()  # the send form follows once the uploader names the accounts
-    uploader.held = None
     uploader.failing_account_lists = 1
     page.reload()
     page.click("#tab-posts")
@@ -895,10 +895,17 @@ def posts_page(page, root, uploader):
     post.locator(".targets li").first.wait_for()
     assert post.locator(".targets").text_content().count("wartet") == 2, "only the chosen accounts"
     assert post.locator(".sent").text_content().startswith("Eingeplant für")
+    held = uploader.held = threading.Event()  # the plan is taken back while the page still waits for the accounts
+    page.reload()
+    page.click("#tab-posts")
     page.once("dialog", lambda dialog: dialog.accept())
     post.locator(".cancel").click()
     post.locator(".send").wait_for()
     assert not list((root / ".posts").glob("SPEC-*")), "a plan can be taken back before it goes"
+    held.set()
+    page.wait_for_timeout(1000)
+    assert post.locator(".send").is_visible() and not post.locator(".sent").text_content(), \
+        "accounts that arrive late never bring back a plan that was taken back"
     page.select_option("#post-view", "posted")
     assert "kein Foto" in page.locator("#posts li.post .todo.error").text_content()
 
