@@ -733,6 +733,8 @@ def tab_checks(page, url):
     page.click("#tab-uebersicht")
     assert page.locator("#tab-uebersicht").bounding_box()["y"] < 80, "the wide tab bar sits at the top"
     assert page.evaluate("document.documentElement.scrollWidth") <= 1280
+    line = page.locator("#version").bounding_box()
+    assert 720 <= line["y"] and line["y"] + line["height"] <= 800, ("the version line stays in view on a wide screen", line)
     page.set_viewport_size({"width": 375, "height": 812})
 
 
