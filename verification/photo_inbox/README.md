@@ -264,6 +264,42 @@ python verification/photo_inbox/intake.py I:\<job> --photos <photo checkout> [--
 - Then `check.py`, `check.py --photos` and `regen.py`, and a commit on `intake/SPEC-nnnn`. `--pr` pushes
   it and opens the pull request, which is merged on green CI (AGENTS.md). `--dry-run` writes nothing.
 
+## Intake run on the Homelab (#659)
+
+`runner.py` runs the whole chain in the inbox container, without an agent. It starts from the
+**Übernehmen** button on a job, or each night at 03:00 UTC for every job that is ready, failed runs
+included. A job is ready when it has its printing, approved corners and no unconfirmed number mismatch,
+and is not filed yet.
+
+1. `intake.py` files the job in the run's own clones (`.work/` in the data folder). The run then pushes
+   the branch and opens its pull request.
+2. The pull request is merged once every check is green; a red check stops the run with its link.
+3. `Publish site` runs on main.
+4. `Provision Snoredex short links` runs for the printing; its verified alias is read from the run's
+   artifact.
+5. A second pull request records the alias in `data/social.json` and is merged on green CI. Once `sync`
+   has pulled main, the Posts tab shows the draft.
+
+The job shows each step, and when a step fails, the reason. The run writes every finished step to
+`intake-run.json` beside the job, so a new start, by the button or the night, carries on where it
+stopped:
+
+- `intake.py` finds its archive copy again by its bytes.
+- An open pull request is reused, and a merged one is not merged again.
+- An alias already on main is not recorded again.
+
+A restart of the container marks a cut-off run as interrupted.
+
+Access stays in the Homelab's environment only (owner decision, 2026-11-24, #654):
+
+- `INTAKE_GITHUB_TOKEN`: a fine-grained token for snoredex-data only (contents, pull requests and actions
+  read/write, checks read).
+- `PHOTOS_DEPLOY_KEY_FILE`: a deploy key with write access to snoredex-photos only, mounted read-only.
+
+Without both, the page shows no button and nothing runs at night. The token reaches git through an
+askpass script that reads it from the environment, never from a file or a command line. The run
+commits as `SnoreDex inbox` with a GitHub noreply address.
+
 ## Check
 
 ```console
@@ -271,7 +307,12 @@ pip install -r requirements.txt -r verification/photo_inbox/requirements.txt
 python verification/photo_inbox/test_app.py
 python verification/photo_inbox/test_intake.py --photos <photo checkout>
 python verification/photo_inbox/test_number_check.py
+python verification/photo_inbox/test_runner.py
 ```
+
+`test_runner.py` drives the intake run against local Git remotes and a stand-in GitHub. It covers the
+whole chain, a restart after a failed step without a second filing, pull request or merge, red CI, a
+refused job, an alias already on main, a run cut off by a restart, and the page's button.
 
 `test_number_check.py` turns the misreadings seen in #655 into verdicts and checks when the guard
 stops intake. `test_app.py` reads a printed number on a synthetic card when Tesseract is installed

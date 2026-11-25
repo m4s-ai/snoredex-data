@@ -8,10 +8,11 @@
 # sync service keeps them current. A code or dependency change needs a rebuild.
 FROM python:3.12-slim-bookworm
 
-# Tesseract and its language data for the collection's languages; git for the sync service
+# Tesseract and its language data for the collection's languages; git for the sync service and, with
+# ssh, for the intake run's push to the photo archive (#659)
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-      git tesseract-ocr \
+      git openssh-client tesseract-ocr \
       tesseract-ocr-eng tesseract-ocr-jpn tesseract-ocr-deu tesseract-ocr-chi-sim tesseract-ocr-chi-tra \
       tesseract-ocr-kor tesseract-ocr-fra tesseract-ocr-ita tesseract-ocr-spa tesseract-ocr-por \
       tesseract-ocr-ind tesseract-ocr-tha tesseract-ocr-rus tesseract-ocr-pol tesseract-ocr-nld \

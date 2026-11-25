@@ -20,11 +20,15 @@ services:
     container_name: snoredex-inbox
     restart: unless-stopped
     env_file: .env
+    environment:
+      PHOTOS_DEPLOY_KEY: /run/secrets/photos_deploy_key
     ports:
       - "${INBOX_PORT:-8765}:8765"
     volumes:
       # private: the raw photos with GPS, outside every Git checkout; intake reads it over SMB
       - ${INBOX_DATA:?set INBOX_DATA in .env}:/data
+      # the intake run's deploy key for snoredex-photos (#659); without one, no intake run
+      - ${PHOTOS_DEPLOY_KEY_FILE:-/dev/null}:/run/secrets/photos_deploy_key:ro
       - ${SNOREDEX_DATA:?set SNOREDEX_DATA in .env}:/checkouts/snoredex-data:ro
       - ${SNOREDEX_PHOTOS:?set SNOREDEX_PHOTOS in .env}:/checkouts/snoredex-photos:ro
 

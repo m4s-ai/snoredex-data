@@ -33,6 +33,7 @@ from dng import dng_preview
 import number_check
 from overview import ITEM_ID, Catalogue
 import posting
+import runner as intake_runner
 
 # an iPhone ProRAW DNG at 48 megapixels is often 75-100 MB
 MAX_UPLOAD = 200 * 1024 * 1024
@@ -44,6 +45,7 @@ PREVIEW_SIZES = (400, 1600)
 TRASH = ".trash"
 DRAFTS = ".drafts"  # Instagram drafts, rebuilt from the checkout; intake reads hash folders only
 KEEP_DELETED = timedelta(days=30)
+BUSY = ("queued", "running", "done")  # an intake run in these states gets no new start (#659)
 
 
 def now():
@@ -405,7 +407,49 @@ def running_version(code, repo, photos):
     return {"code": code, "codeChanged": changed, "data": head(repo), "photos": head(photos)}
 
 
-def create_app(directory, repo=None, fetch=None, photos=None, command=None, uploader=None, schedule=True):
+def intake_blocked(folder, filed):
+    """Why the job cannot be filed now, or None when it can (#659): the intake script's own rules."""
+    if filed:
+        return f"Schon übernommen als {filed}."
+    import intake  # loads the repository's modules only where a runner is set up
+    try:
+        intake.job_input(folder)
+    except intake.Refused as error:
+        return str(error)
+    return None
+
+
+def run_blocked(folder, filed, run):
+    """Why no run may start now, or None. A run that failed after its filing resumes although the
+    catalogue already names the job's SPEC: only publishing and the alias are left."""
+    if run.get("status") in BUSY:
+        return None  # the page shows the run itself
+    if run.get("status") == "failed" and "intake" in run.get("done", []):
+        return None
+    return intake_blocked(folder, filed)
+
+
+def with_intake(job, folder, runner):
+    """A job as the page lists it, with its intake run and whether the button may start one."""
+    if runner is None:
+        return dict(job, intake=None)
+    run = intake_runner.read_state(folder)
+    return dict(job, intake={"run": run or None, "blocked": run_blocked(folder, job["filedAs"], run)})
+
+
+def ready_jobs(root, catalogue):
+    """The nightly round: every job that may start a run, a failed one included."""
+    ready = []
+    for job in all_jobs(root, catalogue):
+        folder = root / job["id"]
+        run = intake_runner.read_state(folder)
+        if run.get("status") not in BUSY and not run_blocked(folder, job["filedAs"], run):
+            ready.append(job["id"])
+    return ready
+
+
+def create_app(directory, repo=None, fetch=None, photos=None, command=None, uploader=None, schedule=True,
+               runner=None):
     root = private_directory(directory)
     (root / posting.POSTS).mkdir(mode=0o700, exist_ok=True)
     queue = threading.Lock()  # the scheduler and the order routes never change an order at once
@@ -420,6 +464,9 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
     # catalogue thumbnails come from the published site; the page loads nothing else from outside
     image_origin = "/".join(catalogue.base.split("/")[:3]) if catalogue else ""
     code = code_version()  # a later pull into the checkout does not change the code already imported
+    if runner and schedule:
+        runner.start()
+        runner.nightly(lambda: ready_jobs(root, catalogue))
     app = Flask(__name__)
     app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD
 
@@ -459,7 +506,22 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
 
     @app.get("/jobs")
     def jobs():
-        return jsonify(jobs=all_jobs(root, catalogue), catalogue=catalogue is not None)
+        listed = [with_intake(job, root / job["id"], runner) for job in all_jobs(root, catalogue)]
+        return jsonify(jobs=listed, catalogue=catalogue is not None, intake=runner is not None)
+
+    @app.post("/jobs/<job_id>/intake")
+    def start_intake(job_id):
+        """The owner's "Übernehmen" (#659): queue the job for the intake run."""
+        folder = job_folder(root, job_id)
+        if runner is None:
+            return jsonify(error="Die Übernahme ist hier nicht eingerichtet."), 503
+        job = with_intake(job_summary(folder, catalogue), folder, runner)
+        if job["intake"]["blocked"]:
+            return jsonify(error=job["intake"]["blocked"]), 409
+        if (job["intake"]["run"] or {}).get("status") in BUSY:
+            return jsonify(error="Die Übernahme läuft schon oder ist fertig."), 409
+        runner.submit(job_id)
+        return jsonify(with_intake(job_summary(folder, catalogue), folder, runner)), 202
 
     @app.get("/<any(jobs, trash):place>/<job_id>/preview")
     def job_preview(place, job_id):
@@ -537,7 +599,10 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
 
     @app.delete("/jobs/<job_id>")
     def delete(job_id):
-        to_trash(root, job_folder(root, job_id), catalogue)
+        folder = job_folder(root, job_id)
+        if intake_runner.read_state(folder).get("status") in ("queued", "running"):
+            raise PermissionError("Die Übernahme dieses Fotos läuft gerade.")
+        to_trash(root, folder, catalogue)
         return jsonify(id=job_id, status="deleted")
 
     @app.get("/trash")
@@ -671,9 +736,14 @@ def main():
     key = os.environ.get("UPLOADER_KEY")
     if args.uploader and not key:
         parser.error("--uploader braucht den Schlüssel in UPLOADER_KEY")
+    # the intake run only with both accesses (#659); compose mounts /dev/null where no key is set
+    token, deploy_key = os.environ.get("INTAKE_GITHUB_TOKEN"), os.environ.get("PHOTOS_DEPLOY_KEY")
+    deploy_key = deploy_key if deploy_key and Path(deploy_key).is_file() else None
     try:
         app = create_app(args.data_dir, args.repo, photos=args.photos,
-                         uploader=posting.Uploader(args.uploader, key) if args.uploader else None)
+                         uploader=posting.Uploader(args.uploader, key) if args.uploader else None,
+                         runner=intake_runner.Runner(args.data_dir, intake_runner.GitHub(token), deploy_key)
+                         if token and deploy_key else None)
     except (ValueError, OSError) as error:
         parser.error(str(error))
     serve(app, host=args.host, port=args.port, threads=2, inbuf_overflow=MAX_UPLOAD + CHUNK,

@@ -152,7 +152,42 @@ function jobItem(job) {
   open.addEventListener("click", () => toggleCorners(item, open));
   item.querySelector(".number-confirm").onclick = () => confirmNumber(item);
   showNumber(item, job);
+  item.querySelector(".intake-start").onclick = () => startIntake(item);
+  showIntake(item, job);
   return item;
+}
+
+// --- intake run (#659): filed, merged, published and linked without an agent ---
+
+const STEP_NAMES = {intake: "Übernahme", merge: "Merge", publish: "Veröffentlichen", alias: "Kurzlink",
+                    "alias-pr": "Kurzlink eintragen"};
+
+function intakeText(intake) {
+  const run = intake.run || {};
+  if (run.status === "queued") return "Übernahme wartet auf ihren Lauf.";
+  if (run.status === "running") return `Übernahme läuft: ${STEP_NAMES[run.step] || run.step}.`;
+  if (run.status === "done") return `Übernommen als ${run.specimen}, veröffentlicht, Kurzlink ${run.alias}.`;
+  if (run.status === "failed") return `Übernahme angehalten bei ${STEP_NAMES[run.step] || run.step}: ${run.error}`;
+  return intake.blocked ? `Noch nicht bereit: ${intake.blocked}` : "Bereit zur Übernahme, sonst nachts automatisch.";
+}
+
+function showIntake(item, job) {
+  const box = item.querySelector(".intake");
+  box.hidden = !job.intake || (Boolean(job.filedAs) && !job.intake.run);
+  if (box.hidden) return;
+  const status = (job.intake.run || {}).status;
+  box.querySelector(".intake-status").textContent = intakeText(job.intake);
+  box.querySelector(".intake-status").className = `intake-status ${status === "failed" ? "error" : status === "done" ? "ok" : ""}`;
+  box.querySelector(".intake-start").hidden = Boolean(job.intake.blocked) || ["queued", "running", "done"].includes(status);
+  box.querySelector(".intake-start").textContent = status === "failed" ? "Erneut versuchen" : "Übernehmen";
+}
+
+async function startIntake(item) {
+  try {
+    showIntake(item, await call(`/jobs/${item.dataset.job}/intake`, {method: "POST"}));
+  } catch (error) {
+    item.querySelector(".intake-status").textContent = error.message;
+  }
 }
 
 // --- number check (#658): what Tesseract read against the printing, a guard only ---
