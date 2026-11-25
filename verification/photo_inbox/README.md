@@ -97,7 +97,9 @@ like the catalogue. A carousel shows every image in order, each with its own alt
 
 **Posting (#646, owner decisions 2026-11-24).** With `--uploader` pointing at the owner's upload
 service and its key in the environment variable `UPLOADER_KEY` (never in a file, the repository
-or a log), each draft offers its connected accounts, all preselected, and a time. Only the owner's
+or a log), each draft offers the SnoreDex accounts on Instagram, Facebook and Threads, all
+preselected, and a time; the uploader's other accounts never appear and cannot be posted to (owner decision
+2026-11-25). The drafts show at once; the send form follows when the uploader names the accounts. Only the owner's
 click, after a confirmation, posts: "Jetzt posten" at once, "Einplanen" at the chosen time. The
 order freezes the draft the owner saw in `.posts/<SPEC>/` inside the data folder, so a later catalogue
 change never alters it; a draft that changed since the page loaded is refused. A queue thread sends
@@ -138,7 +140,7 @@ A JPEG is decoded completely. A DNG is checked at header level only (a TIFF whos
 | `GET /overview` | every active printing with its stage, links and jobs (needs `--repo`) |
 | `GET /posts` | the draft of every shared printing (needs `--repo` and `--photos`) |
 | `GET /posts/<SPEC>/image?n=1` | that draft's post image, `n` counting the carousel |
-| `GET /accounts` | the uploader's connected accounts (needs `--uploader`) |
+| `GET /accounts` | the uploader's SnoreDex accounts on Instagram, Facebook and Threads (needs `--uploader`) |
 | `POST /posts/<SPEC>/order` | JSON `{"draft", "accounts", "at"}`: posts now (`at` null) or at that time; 409 for a changed draft or a second order |
 | `DELETE /posts/<SPEC>/order` | takes back a planned order; 409 once it was sent |
 | `POST /posts/<SPEC>/retry` | JSON `{"account"}`: sends a failed job again |

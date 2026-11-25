@@ -675,13 +675,20 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
         return send_file(BytesIO((folder / names[number - 1]).read_bytes()), mimetype="image/jpeg",
                          download_name=f"{specimen}-{names[number - 1]}")
 
+    # the inbox posts only as SnoreDex on Instagram, its Facebook page and Threads, never to the
+    # uploader's other accounts (owner decision 2026-11-25)
+    def snoredex_accounts():
+        return [account for account in uploader.accounts()
+                if account.get("platform") in ("instagram", "facebook_page", "threads")
+                and (account.get("displayName") or "").casefold() == "snoredex"]
+
     @app.get("/accounts")
     def accounts():
         if uploader is None:
             return jsonify(error="Zum Posten fehlt der Uploader (--uploader)."), 404
         try:
             return jsonify(accounts=[{key: account.get(key) for key in ("id", "platform", "displayName")}
-                                     for account in uploader.accounts()])
+                                     for account in snoredex_accounts()])
         except posting.UploaderError as error:
             return jsonify(error=str(error)), 502
 
@@ -696,7 +703,7 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
             folder = current_draft(specimen)
             if body.get("draft") != folder.name:
                 raise PermissionError("Der Entwurf hat sich geändert. Bitte die neue Fassung prüfen.")
-            known = {account["id"] for account in uploader.accounts()}
+            known = {account["id"] for account in snoredex_accounts()}
             with queue:
                 order = posting.place_order(root, specimen, row, folder, body.get("accounts"), known, body.get("at"))
         except (ValueError, posting.UploaderError) as error:
