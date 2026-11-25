@@ -263,6 +263,21 @@ function showIntake(item, job) {
 function showJob(item, job) {
   showNumber(item, job);
   showIntake(item, job);
+  showLock(item, job);
+}
+
+// an approval holds for one printing (#672): while a run holds it, printing and corners stay as approved
+function showLock(item, job) {
+  const locked = job.intake && job.intake.locked;
+  const hint = item.querySelector(".locked");
+  item.querySelector("form").item.disabled = Boolean(locked);
+  hint.textContent = locked || "";
+  hint.hidden = !locked;
+  if (!locked) return;
+  const open = item.querySelector(".corners-open");
+  open.hidden = true;
+  open.setAttribute("aria-expanded", "false");
+  item.querySelector(".corners").hidden = true;
 }
 
 async function startIntake(item) {

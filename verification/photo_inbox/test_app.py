@@ -662,8 +662,9 @@ def pick_printing(item):
 def browser_checks(root, files, repo, command, photos):
     """Bulk upload with one bad file, describe a job, the overview and the trash, on a phone-sized page."""
     uploader = FakeUploader()
+    idle = type("IdleRunner", (), {"submit": lambda self, job_id: True})()  # the intake box, no runs
     server = create_server(create_app(root, repo, published, photos=photos, command=command,
-                                      uploader=uploader, schedule=False), host="127.0.0.1", port=0)
+                                      uploader=uploader, schedule=False, runner=idle), host="127.0.0.1", port=0)
     threading.Thread(target=server.run, daemon=True).start()
     url = f"http://127.0.0.1:{server.effective_port}/"
     try:
@@ -720,6 +721,7 @@ def browser_checks(root, files, repo, command, photos):
             page.locator(f'li.job[data-job="{new}"] textarea').wait_for()
             assert page.locator(f'li.job[data-job="{new}"] textarea').input_value() == "Relaxo, Sammel-Upload"
             assert page.locator(f'li.job[data-job="{new}"] input[name="item"]').input_value().startswith("JU 1/64")
+            locked_job(page, root, new)
             overview_page(page)
             trash_page(page, new)
             corner_page(page, root)
@@ -730,6 +732,26 @@ def browser_checks(root, files, repo, command, photos):
             browser.close()
     finally:
         server.close()
+
+
+def locked_job(page, root, job_id):
+    """D01 (#672): while a run holds the approval, the printing field and the corners are closed, with why."""
+    state = root / job_id / "intake-run.json"
+    state.write_text(json.dumps({"status": "queued", "done": []}), encoding="utf-8", newline="\n")
+    try:
+        page.reload()
+        item = page.locator(f'li.job[data-job="{job_id}"]')
+        item.wait_for()
+        assert item.locator('input[name="item"]').is_disabled(), "the printing stays as approved"
+        assert "läuft" in item.locator(".locked").text_content() and item.locator(".locked").is_visible()
+        assert item.locator(".corners-open").is_hidden(), "so do the corners"
+        item.locator("textarea").fill("Relaxo, Sammel-Upload")
+        item.locator('button[type="submit"]').click()
+        item.locator(".saved.ok").wait_for()  # the note still saves: the disabled field sends the same printing
+    finally:
+        state.unlink()
+    page.reload()
+    page.locator(f'li.job[data-job="{job_id}"] input[name="item"]:not([disabled])').wait_for()
 
 
 def tab_checks(page, url):

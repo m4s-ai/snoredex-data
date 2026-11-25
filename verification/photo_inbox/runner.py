@@ -9,6 +9,11 @@ Every finished step is written beside the job (`intake-run.json`), so a run that
 again where it stopped: the archive copy is found again by its bytes (`intake.py`), an existing pull
 request is reused, a merged one is not merged twice, a recorded alias is not recorded twice.
 
+An approval holds for exactly one printing (#672, owner decision D01): queuing freezes the photo, its
+printing and its corners beside the run. Intake starts only on unchanged inputs, and before anything
+leaves for the printing (the short link, the alias PR) the run checks that main filed its SPEC for the
+frozen printing. A run from before the freeze takes the printing main filed its SPEC for.
+
 Access lives only in the Homelab's environment (#654): `INTAKE_GITHUB_TOKEN`, a token for pull
 requests, merges and workflow runs in snoredex-data, and `PHOTOS_DEPLOY_KEY`, the path of a deploy key
 for snoredex-photos only.
@@ -28,6 +33,8 @@ from urllib.error import HTTPError
 from urllib.parse import quote
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 import zipfile
+
+from overview import Catalogue
 
 REPO = "m4s-ai/snoredex-data"
 DATA_URL = f"https://github.com/{REPO}.git"
@@ -68,6 +75,26 @@ def write_state(folder, state):
             if attempt == 49:
                 raise
             time.sleep(0.05)
+
+
+def approval(folder):
+    """What "Übernehmen" approves: the photo, its printing and its corners, as the job holds them now."""
+    path = Path(folder) / "job.json"
+    job = json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}
+    return {"photoSha256": job.get("sha256") or Path(folder).name, "itemId": job.get("itemId"),
+            "corners": job.get("corners"), "cornersApprovedAt": job.get("cornersApprovedAt"), "approvedAt": now()}
+
+
+def assignment_lock(state):
+    """Why the printing and the corners may not change now, or None (D01): from "Übernehmen" until the
+    run ends, and for good once the run filed its SPEC for the approved printing."""
+    if "intake" in state.get("done", []):
+        return (f"Gesperrt: {state.get('specimen')} ist für diesen Druck angelegt. Ist die Zuordnung falsch, "
+                "muss diese SPEC im Katalog korrigiert werden.")
+    if state.get("status") in ("queued", "running"):
+        return ("Gesperrt, solange die Übernahme läuft. Hält sie vor dem Anlegen an, lassen sich Druck und "
+                "Ecken wieder ändern.")
+    return None
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -152,11 +179,15 @@ class Runner:
 
     # --- the queue ------------------------------------------------------------------------------
     def submit(self, job_id):
-        """Queue a job once; a queued or running job is not queued again."""
+        """Queue a job once; a queued or running job is not queued again. The button and the night both
+        land here, so both freeze the approval; a run that filed already keeps the one it filed for."""
         if job_id in self.waiting:
             return False
         self.waiting.add(job_id)
-        write_state(self.root / job_id, dict(read_state(self.root / job_id), status="queued", error=None))
+        state = read_state(self.root / job_id)
+        if "intake" not in state.get("done", []):
+            state["approval"] = approval(self.root / job_id)
+        write_state(self.root / job_id, dict(state, status="queued", error=None))
         self.jobs.put(job_id)
         return True
 
@@ -239,6 +270,11 @@ class Runner:
                     self.git(path, "branch", "-q", "-D", branch)
 
     def step_intake(self, folder, state):
+        job, approved = json.loads((folder / "job.json").read_text(encoding="utf-8")), state.get("approval") or {}
+        if not approved.get("itemId") or [job.get(key) for key in ("itemId", "corners")] != [
+                approved["itemId"], approved.get("corners")]:
+            raise RunError("Druck oder Ecken weichen von der Freigabe bei „Übernehmen“ ab. "
+                           "Bitte prüfen, dann „Erneut versuchen“.")
         self.prepare()
         done = subprocess.run([sys.executable, str(self.data / "verification/photo_inbox/intake.py"), str(folder),
                                "--photos", str(self.photos)], cwd=self.data, env=self.env, capture_output=True,
@@ -295,18 +331,34 @@ class Runner:
     def step_publish(self, _folder, _state):
         self.workflow("pages.yml", {})
 
-    def step_alias(self, folder, state):
-        item_id = json.loads((folder / "job.json").read_text(encoding="utf-8"))["itemId"]
+    def printing(self, state):
+        """The printing this run delivers to, checked on main before anything leaves for it: main must
+        file the run's SPEC for the frozen printing. A run from before the freeze takes main's."""
+        self.prepare()
+        filed = Catalogue(self.data).filed_item(state["specimen"])
+        if filed is None:
+            raise RunError(f"Auf main ist {state['specimen']} keinem Druck eindeutig zugeordnet. "
+                           "Bitte den Katalog prüfen, dann „Erneut versuchen“.")
+        frozen = (state.get("approval") or {}).get("itemId") or filed
+        if filed != frozen:
+            raise RunError(f"Auf main gehört {state['specimen']} zu einem anderen Druck als bei „Übernehmen“ "
+                           "freigegeben. Der Lauf hält an, bevor etwas für den Druck rausgeht; bitte den Katalog "
+                           "prüfen.")
+        return frozen
+
+    def step_alias(self, _folder, state):
+        item_id = self.printing(state)
         run = self.workflow("yourls-pilot.yml", {"item_ids": item_id})
         with zipfile.ZipFile(BytesIO(self.github.artifact(run["id"], "yourls-verified"))) as archive:
             result = json.loads(archive.read("yourls-result.json"))
         if result.get("status") != "verified" or result.get("itemId") != item_id:
             raise RunError(f"Der Kurzlink wurde nicht bestätigt: {result.get('status')}")
-        state["alias"] = result["shortAlias"]
+        state["alias"], state["aliasItem"] = result["shortAlias"], item_id
 
     def step_alias_pr(self, folder, state):
-        item_id = json.loads((folder / "job.json").read_text(encoding="utf-8"))["itemId"]
-        self.prepare()
+        item_id = self.printing(state)
+        if state.get("aliasItem") != item_id:  # verified for another printing, or before #672 said for which
+            self.step_alias(folder, state)
         path = self.data / "data/social.json"
         rows = json.loads(path.read_text(encoding="utf-8"))
         row = next((row for row in rows if row["itemId"] == item_id), None)

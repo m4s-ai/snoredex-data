@@ -434,7 +434,15 @@ def with_intake(job, folder, runner):
     if runner is None:
         return dict(job, intake=None)
     run = intake_runner.read_state(folder)
-    return dict(job, intake={"run": run or None, "blocked": run_blocked(folder, job["filedAs"], run)})
+    return dict(job, intake={"run": run or None, "blocked": run_blocked(folder, job["filedAs"], run),
+                             "locked": intake_runner.assignment_lock(run)})
+
+
+def refuse_if_locked(folder):
+    """D01 (#672): an approval holds for one printing, so a run's printing and corners stay as approved."""
+    locked = intake_runner.assignment_lock(intake_runner.read_state(folder))
+    if locked:
+        raise PermissionError(locked)
 
 
 def ready_jobs(root, catalogue):
@@ -535,11 +543,14 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
     @app.post("/jobs/<job_id>")
     def describe(job_id):
         folder = job_folder(root, job_id)
+        form = request.get_json(silent=True) or {}
+        job = json.loads((folder / "job.json").read_text(encoding="utf-8"))
+        if (str(form.get("itemId") or "").strip() or None) != job.get("itemId"):
+            refuse_if_locked(folder)  # the note and the SPEC hint stay open
         try:
-            details = description(request.get_json(silent=True) or {}, catalogue.active_items() if catalogue else None)
+            details = description(form, catalogue.active_items() if catalogue else None)
         except ValueError as error:
             return jsonify(error=str(error)), 400
-        job = json.loads((folder / "job.json").read_text(encoding="utf-8"))
         if details["itemId"] != job.get("itemId"):  # corners and their check belong to the old printing
             for key in ("corners", "cornersApprovedAt", "numberCheck", "numberConfirmedAt"):
                 job.pop(key, None)
@@ -560,6 +571,7 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
         folder = job_folder(root, job_id)
         if catalogue and catalogue.filed_as(folder):
             raise PermissionError("Das Foto ist schon übernommen; seine Ecken stehen im Katalog.")
+        refuse_if_locked(folder)
         job = json.loads((folder / "job.json").read_text(encoding="utf-8"))
         if not job.get("itemId"):
             return jsonify(error="Ordne dem Foto zuerst einen Druck zu."), 400

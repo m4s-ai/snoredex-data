@@ -292,6 +292,20 @@ stopped:
 
 A restart of the container marks a cut-off run as interrupted.
 
+An approval holds for exactly one printing (owner decision D01, 2026-11-25, #672). Queuing, by the
+button or the night, freezes the photo's hash, its printing and its corners in `intake-run.json`:
+
+- Intake starts only when the job still has the frozen printing and corners; otherwise the run stops
+  before anything is filed.
+- Before the short link and again before the alias pull request, the run checks on main that its SPEC
+  is filed for the frozen printing. A different or no unique printing stops the run there.
+- A run from before the freeze takes the printing main filed its SPEC for.
+- The run records which printing a short link was verified for. The alias pull request verifies the
+  link again when that printing is unknown or another one, so a row never gets another printing's link.
+- The page closes the printing field and the corners from the queue on. A run that stops before filing
+  opens them again, and the next start freezes the corrected approval. Once the SPEC is filed they stay
+  closed: a wrong assignment is then corrected in the catalogue.
+
 Access stays in the Homelab's environment only (owner decision, 2026-11-24, #654):
 
 - `INTAKE_GITHUB_TOKEN`: a fine-grained token for snoredex-data only (contents, pull requests and actions
@@ -314,7 +328,9 @@ python verification/photo_inbox/test_runner.py
 
 `test_runner.py` drives the intake run against local Git remotes and a stand-in GitHub. It covers the
 whole chain, a restart after a failed step without a second filing, pull request or merge, red CI, a
-refused job, an alias already on main, a run cut off by a restart, and the page's button.
+refused job, an alias already on main, a run cut off by a restart, and the page's button. It also
+covers the frozen approval: a printing changed after filing, a SPEC main files for another printing,
+a run from before the freeze, corners changed between the queue and intake, and the page's lock.
 
 `test_number_check.py` turns the misreadings seen in #655 into verdicts and checks when the guard
 stops intake. `test_app.py` reads a printed number on a synthetic card when Tesseract is installed
