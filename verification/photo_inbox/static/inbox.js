@@ -197,6 +197,7 @@ function pickButton(row, input, list) {
   button.onclick = () => {
     input.value = row.label;
     list.hidden = true;
+    input.focus();  // a pick by keyboard leaves the focus on the field, not on a hidden hit
   };
   const line = document.createElement("li");
   line.append(button);
@@ -216,9 +217,16 @@ function showPicks(input, list) {
 
 function wirePicker(input, list) {
   input.addEventListener("input", () => showPicks(input, list));
-  input.addEventListener("focus", () => showPicks(input, list));
-  input.addEventListener("blur", () => { list.hidden = true; });
-  input.addEventListener("keydown", (event) => { if (event.key === "Escape") list.hidden = true; });
+  // closes only when the focus leaves field and hits together: Tab reaches the hits from the keyboard
+  list.parentNode.addEventListener("focusout", (event) => {
+    if (!list.parentNode.contains(event.relatedTarget)) list.hidden = true;
+  });
+  list.parentNode.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      list.hidden = true;
+      input.focus();
+    }
+  });
 }
 
 // --- intake run (#659): filed, merged, published and linked without an agent ---

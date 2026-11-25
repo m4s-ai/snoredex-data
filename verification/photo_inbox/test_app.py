@@ -638,9 +638,12 @@ def pick_printing(item):
     assert hits.count() == 1, "the English words match as well"
     picker.fill("relaxo englisch 1/64")
     assert hits.count() == 1 and "JU 1/64 · Englisch" in hits.first.text_content(), "words in any order, in German"
-    hits.first.click()
+    picker.press("Tab")
+    assert hits.first.evaluate("button => button === document.activeElement"), "Tab reaches the first hit"
+    hits.first.press("Enter")
     assert picker.input_value() == "JU 1/64 · English · holo · 1st Edition · Relaxo"
     assert item.locator(".picks").is_hidden(), "a pick closes the list"
+    assert picker.evaluate("input => input === document.activeElement"), "the focus goes back to the field"
 
 
 def browser_checks(root, files, repo, command, photos):
