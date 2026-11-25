@@ -790,11 +790,9 @@ def corner_page(page, root):
     page.mouse.down()
     page.mouse.move(box["x"] + box["width"] / 2 + 10, box["y"] + box["height"] / 2 + 10, steps=4)
     page.mouse.up()
-    item.locator(".approve").click()
-    item.locator(".corners-status", has_text="Ecken freigegeben am").wait_for()
+    approved(item)
     stored = json.loads((root / job / "job.json").read_text(encoding="utf-8"))["corners"]
     assert stored[0][0] == before + 40 and stored[2][0] > CARD[2][0] - 40, stored
-    assert item.locator(".corners-open").text_content() == "Ecken freigegeben · prüfen"
     number = item.locator(".number-status")
     assert number.is_visible() and "hält nichts auf" in number.text_content(), "a card without a number stops nothing"
     assert item.locator(".number-confirm").is_hidden()
@@ -805,9 +803,21 @@ def corner_page(page, root):
     else:
         raise AssertionError("the title image from the corners did not load")
     assert page.evaluate("document.documentElement.scrollWidth") <= 375, "no sideways scroll"
+    item.locator(".corners-open").click()
+    assert item.locator(".corners-status").text_content().startswith("Ecken freigegeben am"), "reopened, it says so"
     item.locator(".reset").click()
     assert label() == suggested, "the suggestion comes back unchanged after dragging"
     reopened_editor(page, root, item, job)
+
+
+def approved(item):
+    """The answer to an approval shows where the owner looks: the editor below the fold closes onto its button."""
+    item.locator(".approve").click()
+    opener = item.locator(".corners-open", has_text="Ecken freigegeben am")
+    opener.wait_for()
+    assert item.locator(".corners").is_hidden(), "the editor closes, so what follows comes into view"
+    assert opener.evaluate("button => button === document.activeElement"), "the focus lands on the result"
+    assert item.locator(".approve").is_enabled() and item.locator(".approve").text_content() == "Ecken freigeben"
 
 
 def reopened_editor(page, root, item, job):
@@ -823,8 +833,7 @@ def reopened_editor(page, root, item, job):
     sent = []
     page.on("request", lambda request: request.method == "POST" and request.url.endswith("/corners")
             and sent.append(request.url))
-    item.locator(".approve").click()
-    item.locator(".corners-status", has_text="Ecken freigegeben am").wait_for()
+    approved(item)
     page.wait_for_timeout(300)
     assert len(sent) == 1, "one click approves once"
 

@@ -152,9 +152,8 @@ function jobItem(job) {
   resetCorners(item, job);
   open.addEventListener("click", () => toggleCorners(item, open));
   item.querySelector(".number-confirm").onclick = () => confirmNumber(item);
-  showNumber(item, job);
   item.querySelector(".intake-start").onclick = () => startIntake(item);
-  showIntake(item, job);
+  showJob(item, job);
   return item;
 }
 
@@ -260,6 +259,12 @@ function showIntake(item, job) {
   box.querySelector(".intake-start").textContent = status === "failed" ? "Erneut versuchen" : "Übernehmen";
 }
 
+// what the server answers about a job after any change: the number line and the intake box follow it
+function showJob(item, job) {
+  showNumber(item, job);
+  showIntake(item, job);
+}
+
 async function startIntake(item) {
   try {
     showIntake(item, await call(`/jobs/${item.dataset.job}/intake`, {method: "POST"}));
@@ -294,7 +299,7 @@ function showNumber(item, job) {
 async function confirmNumber(item) {
   if (!confirm("Die gelesene Nummer passt nicht zum Druck. Ist die Zuordnung trotzdem richtig?")) return;
   try {
-    showNumber(item, await call(`/jobs/${item.dataset.job}/number`, {method: "POST"}));
+    showJob(item, await call(`/jobs/${item.dataset.job}/number`, {method: "POST"}));
   } catch (error) {
     item.querySelector(".number-status").textContent = error.message;
   }
@@ -463,16 +468,31 @@ function refreshCover(editor) {
   image.src = `/jobs/${editor.job}/cover?c=${editor.quad.flat().join(",")}`;
 }
 
+// the button sits below a tall editor: busy, error and success are shown where the click was, and a success
+// closes the editor, so the number line and the intake box that follow from it come into view
 async function approveCorners(item, editor) {
-  const status = editor.panel.querySelector(".corners-status");
+  const button = editor.panel.querySelector(".approve");
+  const status = editor.panel.querySelector(".approve-status");
+  button.disabled = true;
+  button.textContent = "Wird gespeichert und gelesen …";
+  status.textContent = "";
   try {
     const job = await call(`/jobs/${editor.job}/corners`, {method: "POST", headers: {"Content-Type": "application/json"},
                                                               body: JSON.stringify({corners: editor.quad})});
-    status.textContent = `Ecken freigegeben am ${DATE.format(new Date(job.cornersApprovedAt))}.`;
-    item.querySelector(".corners-open").textContent = "Ecken freigegeben · prüfen";
-    showNumber(item, job);
+    editor.panel.querySelector(".corners-status").textContent =
+      `Ecken freigegeben am ${DATE.format(new Date(job.cornersApprovedAt))}.`;
+    const open = item.querySelector(".corners-open");
+    open.textContent = `Ecken freigegeben am ${DATE.format(new Date(job.cornersApprovedAt))} · prüfen`;
+    editor.panel.hidden = true;
+    open.setAttribute("aria-expanded", "false");
+    showJob(item, job);
+    open.focus();
+    open.scrollIntoView({block: "start", behavior: "smooth"});
   } catch (error) {
     status.textContent = error.message;
+  } finally {
+    button.disabled = false;
+    button.textContent = "Ecken freigeben";
   }
 }
 
@@ -498,7 +518,7 @@ async function describe(event, item) {
     form.specimen.value = reply.specimenHint || "";
     form.item.value = itemLabel(reply.itemId);
     resetCorners(item, reply);
-    showNumber(item, reply);
+    showJob(item, reply);
     saved.className = "saved ok";
     saved.textContent = "Gespeichert.";
     showOverview();
