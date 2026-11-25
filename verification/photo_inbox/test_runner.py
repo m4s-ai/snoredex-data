@@ -24,9 +24,12 @@ import app as inbox  # noqa: E402
 import runner  # noqa: E402
 
 ITEM = "item-c25516ed-66e0-5cb1-9b96-5fa22e4c99be"
+OTHER = "item-7cf9c091-8e34-58a1-9185-ff3c7f6bcfd6"
+PRINTINGS = {ITEM: "printing-a", OTHER: "printing-b"}
 JOB = "a" * 64
-FAKE_INTAKE = '''import os, pathlib, subprocess, sys
-data, photos = pathlib.Path.cwd(), pathlib.Path(sys.argv[3])
+# the stand-in files the SPEC for the job's printing, cited the way the catalogue maps it back
+FAKE_INTAKE = '''import json, os, pathlib, subprocess, sys
+data, photos, job = pathlib.Path.cwd(), pathlib.Path(sys.argv[3]), pathlib.Path(sys.argv[1])
 count = pathlib.Path(os.environ["FAKE_COUNT"])
 count.write_text(str(int(count.read_text() or 0) + 1) if count.exists() else "1")
 if os.environ.get("FAKE_REFUSE"):
@@ -37,7 +40,11 @@ if not (photos / "SPEC-0001.jpg").exists():  # an earlier attempt's copy is reus
     for args in (["add", "-A"], ["commit", "-q", "-m", "SPEC-0001"], ["push", "-q"]):
         subprocess.run(["git", "-C", str(photos), *args], check=True)
 subprocess.run(["git", "switch", "-q", "-c", "intake/SPEC-0001", "origin/main"], check=True)
-(data / "filed.txt").write_text("SPEC-0001\\n")
+item = json.loads((job / "job.json").read_text(encoding="utf-8"))["itemId"]
+cited = next(row["sourcePrintingId"] for row in json.loads((data / "collector_catalogue.json").read_text())["items"]
+             if row["itemId"] == item)
+(data / "verification/specimens.json").write_text(json.dumps({"specimens": [
+    {"specimenId": "SPEC-0001", "photographedBy": "collection owner", "citedBy": [cited]}]}))
 subprocess.run(["git", "add", "-A"], check=True)
 subprocess.run(["git", "commit", "-q", "-m", "File SPEC-0001"], check=True)
 print("intake/SPEC-0001")
@@ -118,19 +125,50 @@ class StandIn:
 def setup(temp, alias=None):
     social = [{"itemId": ITEM, "specimenId": "SPEC-0001", "instagramPosts": [],
                **({"shortAlias": alias} if alias else {})}]
+    catalogue = {"meta": {"assetBaseUrl": "https://example.invalid/", "dataAsOf": "2026-11-25"},
+                 "localizations": [{"localizationId": "en", "displayName": "English"}], "assets": [],
+                 "items": [{"itemId": item, "active": True, "localizationId": "en", "cardName": "Snorlax",
+                            "sourcePrintingId": printing} for item, printing in PRINTINGS.items()]}
     data = remote(temp, "data", {"verification/photo_inbox/intake.py": FAKE_INTAKE, "scripts/regen.py": "",
-                                 "data/social.json": json.dumps(social, indent=2) + "\n"})
+                                 "data/social.json": json.dumps(social, indent=2) + "\n",
+                                 "collector_catalogue.json": json.dumps(catalogue),
+                                 "verification/specimens.json": json.dumps({"specimens": []}),
+                                 "data/images.json": json.dumps({"galleryImages": []})})
     photos = remote(temp, "photos", {"README.md": "archive\n"})
     root = Path(temp) / "inbox"
     (root / JOB).mkdir(parents=True)
-    (root / JOB / "job.json").write_text(json.dumps({"id": JOB, "itemId": ITEM, "file": "photo.dng"}), encoding="utf-8",
-                                       newline="\n")
+    write_job(root, itemId=ITEM)
     os.environ["FAKE_COUNT"] = str(Path(temp) / "intake-count")
     return root, data, photos
 
 
+def write_job(root, **changes):
+    path = root / JOB / "job.json"
+    job = json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {"id": JOB, "file": "photo.dng"}
+    path.write_text(json.dumps(dict(job, **changes)), encoding="utf-8", newline="\n")
+
+
 def make(root, github, data, photos):
     return runner.Runner(root, github, urls=(data, photos), sleep=lambda _seconds: None, poll=0)
+
+
+def go(root, github, data, photos):
+    """The owner's "Übernehmen": queue (which freezes the approval), then run."""
+    run = make(root, github, data, photos)
+    run.submit(JOB)
+    run.run(JOB)
+
+
+def recite(data_remote, temp, cited):
+    """A later commit on main that cites SPEC-0001 differently, as a catalogue correction would."""
+    work = Path(temp) / "recite"
+    git("clone", "-q", data_remote, str(work))
+    path = work / "verification/specimens.json"
+    specimens = json.loads(path.read_text(encoding="utf-8"))
+    specimens["specimens"][0]["citedBy"] = cited
+    path.write_text(json.dumps(specimens), encoding="utf-8", newline="\n")
+    git("-C", str(work), "commit", "-q", "-am", "recite SPEC-0001")
+    git("-C", str(work), "push", "-q", "origin", "HEAD:main")
 
 
 def social_on(data_remote, ref):
@@ -141,7 +179,7 @@ def whole_chain():
     with TemporaryDirectory() as temp:
         root, data, photos = setup(temp)
         github = StandIn(data)
-        make(root, github, data, photos).run(JOB)
+        go(root, github, data, photos)
         state = runner.read_state(root / JOB)
         assert state["status"] == "done" and state["done"] == list(runner.STEPS), state
         assert state["specimen"] == "SPEC-0001" and state["alias"] == "sdc25516ed66e0", state
@@ -156,10 +194,10 @@ def restart_after_failure():
     with TemporaryDirectory() as temp:
         root, data, photos = setup(temp)
         github = StandIn(data, fail_dispatch=1)
-        make(root, github, data, photos).run(JOB)
+        go(root, github, data, photos)
         state = runner.read_state(root / JOB)
         assert state["status"] == "failed" and state["step"] == "publish" and "500" in state["error"], state
-        make(root, github, data, photos).run(JOB)
+        go(root, github, data, photos)
         assert runner.read_state(root / JOB)["status"] == "done"
         assert Path(os.environ["FAKE_COUNT"]).read_text() == "1", "the photo is filed once"
         assert github.opened == 2 and len(github.merged) == 2, "no pull request opened or merged twice"
@@ -170,10 +208,10 @@ def retry_after_failed_delivery():
     with TemporaryDirectory() as temp:
         root, data, photos = setup(temp)
         github = StandIn(data, fail_open=1)
-        make(root, github, data, photos).run(JOB)
+        go(root, github, data, photos)
         state = runner.read_state(root / JOB)
         assert state["status"] == "failed" and state["step"] == "intake" and "502" in state["error"], state
-        make(root, github, data, photos).run(JOB)
+        go(root, github, data, photos)
         assert runner.read_state(root / JOB)["status"] == "done", runner.read_state(root / JOB)
         assert git("--git-dir", photos, "rev-list", "--count", "main") == "2", "one archive copy, reused"
 
@@ -202,14 +240,14 @@ def worker_survives_a_trashed_job():
 def red_ci_and_refusal():
     with TemporaryDirectory() as temp:
         root, data, photos = setup(temp)
-        make(root, StandIn(data, checks="failure"), data, photos).run(JOB)
+        go(root, StandIn(data, checks="failure"), data, photos)
         state = runner.read_state(root / JOB)
         assert state["status"] == "failed" and state["step"] == "merge" and "ist rot" in state["error"], state
     with TemporaryDirectory() as temp:
         root, data, photos = setup(temp)
         os.environ["FAKE_REFUSE"] = "1"
         try:
-            make(root, StandIn(data), data, photos).run(JOB)
+            go(root, StandIn(data), data, photos)
         finally:
             del os.environ["FAKE_REFUSE"]
         state = runner.read_state(root / JOB)
@@ -220,9 +258,75 @@ def alias_already_recorded():
     with TemporaryDirectory() as temp:
         root, data, photos = setup(temp, alias="sdc25516ed66e0")
         github = StandIn(data)
-        make(root, github, data, photos).run(JOB)
+        go(root, github, data, photos)
         state = runner.read_state(root / JOB)
         assert state["status"] == "done" and "aliasPr" not in state and github.opened == 1, state
+
+
+def approval_holds():
+    """#672: A approved, B entered after intake, restart: the alias and the data PR are A's."""
+    with TemporaryDirectory() as temp:
+        root, data, photos = setup(temp)
+        github = StandIn(data, fail_dispatch=1)
+        go(root, github, data, photos)  # filed and merged for A, stopped before publishing
+        write_job(root, itemId=OTHER)
+        go(root, github, data, photos)
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "done" and state["approval"]["itemId"] == ITEM, state
+        assert github.dispatched[-1] == ("yourls-pilot.yml", {"item_ids": ITEM}), "the short link is A's"
+        assert social_on(data, "main")[0]["shortAlias"] == "sdc25516ed66e0", "the alias PR records A's row"
+    with TemporaryDirectory() as temp:  # main files the SPEC for B meanwhile: stop before the short link
+        root, data, photos = setup(temp)
+        github = StandIn(data, fail_dispatch=1)
+        go(root, github, data, photos)
+        recite(data, temp, [PRINTINGS[OTHER]])
+        go(root, github, data, photos)
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "failed" and state["step"] == "alias" and "anderen Druck" in state["error"], state
+        assert ("yourls-pilot.yml", {"item_ids": OTHER}) not in github.dispatched and len(github.dispatched) == 1
+
+
+def old_checkpoint():
+    """A run from before the freeze resumes for the printing main filed its SPEC for, or stops."""
+    with TemporaryDirectory() as temp:
+        root, data, photos = setup(temp)
+        github = StandIn(data, fail_dispatch=1)
+        go(root, github, data, photos)
+        state = runner.read_state(root / JOB)
+        del state["approval"]
+        runner.write_state(root / JOB, state)
+        write_job(root, itemId=OTHER)
+        go(root, github, data, photos)
+        assert runner.read_state(root / JOB)["status"] == "done"
+        assert github.dispatched[-1] == ("yourls-pilot.yml", {"item_ids": ITEM}), "main's printing, not the form's"
+    with TemporaryDirectory() as temp:
+        root, data, photos = setup(temp)
+        github = StandIn(data, fail_dispatch=1)
+        go(root, github, data, photos)
+        state = runner.read_state(root / JOB)
+        del state["approval"]
+        runner.write_state(root / JOB, state)
+        recite(data, temp, [])  # ambiguous: main ties SPEC-0001 to no printing
+        go(root, github, data, photos)
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "failed" and "eindeutig" in state["error"] and len(github.dispatched) == 1, state
+
+
+def corners_frozen():
+    """Corners changed between the queue and intake do not replace the approval: intake never starts."""
+    with TemporaryDirectory() as temp:
+        root, data, photos = setup(temp)
+        write_job(root, corners=[[10, 10], [90, 10], [90, 140], [10, 140]])
+        run = make(root, StandIn(data), data, photos)
+        run.submit(JOB)
+        write_job(root, corners=[[12, 10], [90, 10], [90, 140], [10, 140]])
+        run.run(JOB)
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "failed" and state["step"] == "intake" and "Freigabe" in state["error"], state
+        assert not Path(os.environ["FAKE_COUNT"]).exists(), "intake.py never ran"
+        assert runner.assignment_lock(state) is None, "stopped before filing: the owner may correct it"
+        go(root, StandIn(data), data, photos)  # "Erneut versuchen" freezes the corrected corners
+        assert runner.read_state(root / JOB)["status"] == "done"
 
 
 def recovers_and_queues_once():
@@ -267,6 +371,18 @@ def page_button():
             assert client.post(f"/jobs/{JOB}/intake").status_code == 202, "the button finishes it too"
         finally:
             inbox.intake_blocked = blocked
+        # D01: from "Übernehmen" on the printing and the corners stay as approved
+        runner.write_state(root / JOB, {"status": "queued", "done": []})
+        locked = client.get("/jobs").get_json()["jobs"][0]["intake"]["locked"]
+        assert "SPEC-" not in locked and "läuft" in locked, locked
+        refused = client.post(f"/jobs/{JOB}", json={"note": "Relaxo"})  # the form without A
+        assert refused.status_code == 409 and refused.get_json()["error"] == locked
+        assert client.post(f"/jobs/{JOB}/corners", json={}).status_code == 409, "no new corners either"
+        runner.write_state(root / JOB, {"status": "failed", "step": "publish", "done": ["intake", "merge"],
+                                        "specimen": "SPEC-0001"})
+        assert "SPEC-0001" in client.post(f"/jobs/{JOB}", json={"note": "Relaxo"}).get_json()["error"], \
+            "filed for A: locked for good, with the way to correct it"
+        runner.write_state(root / JOB, {"status": "failed", "step": "intake", "done": []})
         described = client.post(f"/jobs/{JOB}", json={"note": "Relaxo"}).get_json()
         assert described["intake"] == client.get("/jobs").get_json()["jobs"][0]["intake"],             "a changed job answers with its intake state, so the page never shows a stale box"
 
@@ -278,6 +394,9 @@ def main():
     worker_survives_a_trashed_job()
     red_ci_and_refusal()
     alias_already_recorded()
+    approval_holds()
+    old_checkpoint()
+    corners_frozen()
     recovers_and_queues_once()
     page_button()
     print("intake runner: all checks passed")
