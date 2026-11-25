@@ -361,13 +361,17 @@ class FakeUploader:
     """Stands in for the owner's uploader: records every call and deduplicates on clientRef like it."""
     ACCOUNTS = [{"id": "ig:snoredex", "platform": "instagram", "displayName": "SnoreDex", "externalId": "secret"},
                 {"id": "fb_page:1", "platform": "facebook_page", "displayName": "SnoreDex"},
-                {"id": "threads:snoredex", "platform": "threads", "displayName": "SnoreDex"}]
+                {"id": "threads:snoredex", "platform": "threads", "displayName": "SnoreDex"},
+                {"id": "ig:other", "platform": "instagram", "displayName": "other.page"}]
+    SNOREDEX = ["ig:snoredex", "fb_page:1"]  # what the inbox may post to
 
     def __init__(self, failing_account_lists=0):
         self.media_calls, self.uploads, self.jobs, self.down, self.crash = [], [], {}, False, False
-        self.failing_account_lists = failing_account_lists
+        self.failing_account_lists, self.held = failing_account_lists, None
 
     def accounts(self):
+        if self.held:  # a slow uploader: the account list waits until the test lets it go
+            self.held.wait(30)
         if self.failing_account_lists:
             self.failing_account_lists -= 1
             raise posting.UploaderError("Uploader nicht erreichbar")
@@ -401,14 +405,18 @@ def posting_checks(root, repo, temp, command):
                         schedule=False).test_client()
     assert client.get("/accounts").json["accounts"][0] == {"id": "ig:snoredex", "platform": "instagram",
                                                            "displayName": "SnoreDex"}, "no account internals"
+    assert [account["id"] for account in client.get("/accounts").json["accounts"]] == FakeUploader.SNOREDEX, \
+        "only SnoreDex on Instagram and Facebook, never the uploader's other accounts"
     listing = client.get("/posts").json
     mine = lambda: next(row for row in client.get("/posts").json["posts"] if row["draftSpecimen"] == "SPEC-0904")
     ready = mine()
     assert listing["canPost"] and ready["order"] is None and len(ready["slides"]) == 1
-    accounts = [account["id"] for account in FakeUploader.ACCOUNTS]
+    accounts = FakeUploader.SNOREDEX
     order = lambda **body: client.post("/posts/SPEC-0904/order", json=dict(draft=ready["draft"], accounts=accounts) | body)
     assert order(draft="SPEC-0904-stale").status_code == 409, "only the draft the owner saw"
-    assert order(accounts=[]).status_code == 400 and order(accounts=["ig:other"]).status_code == 400
+    assert order(accounts=[]).status_code == 400 and order(accounts=["ig:unknown"]).status_code == 400
+    assert order(accounts=["ig:other"]).status_code == 400, "the uploader knows it, but it is not SnoreDex"
+    assert order(accounts=["threads:snoredex"]).status_code == 400, "only Instagram and Facebook"
     assert order(at="2026-12-01T18:00").status_code == 400, "a time needs its zone"
     assert client.post("/posts/SPEC-0001/order", json={}).status_code == 404, "only shared printings"
 
@@ -418,7 +426,7 @@ def posting_checks(root, repo, temp, command):
     assert not uploader.uploads, "a scheduled post waits for its time"
     assert mine()["order"]["dueAt"], "the page shows the plan"
     posting.tick(root, uploader, datetime.now(timezone.utc) + timedelta(hours=3))
-    assert len(uploader.uploads) == 3, "it goes out at its time, also after a restart: the order is on disk"
+    assert len(uploader.uploads) == 2, "it goes out at its time, also after a restart: the order is on disk"
     shutil.rmtree(root / ".posts" / "SPEC-0904")
 
     assert order(at=later).status_code == 201 and client.delete("/posts/SPEC-0904/order").status_code == 200
@@ -449,20 +457,21 @@ def posting_checks(root, repo, temp, command):
     assert client.delete("/posts/SPEC-0904/order").status_code == 409, "a tried send may have arrived: no take-back"
     uploader.down = False
     posting.tick(root, uploader)
-    assert len(uploader.media_calls) == 3 and len(uploader.uploads) == 3, "one image upload per round"
+    assert len(uploader.media_calls) == 3 and len(uploader.uploads) == 2, "one image upload per round"
     first = uploader.uploads[0]
     assert (first["imageUrl"], first["altText"], first["caption"]) == (
         "https://uploader.test/media/3.jpg", "Alt SPEC-0904", "Caption SPEC-0904"), first
     assert client.delete("/posts/SPEC-0904/order").status_code == 409, "a sent post cannot be taken back"
 
-    uploader.jobs["job-1"].update(status="published", permalink="https://www.instagram.com/p/new/")
-    uploader.jobs["job-2"].update(status="failed", error="Seite gesperrt")
     record = root / ".posts" / "SPEC-0904" / "order.json"
     crashed = json.loads(record.read_text(encoding="utf-8"))
-    crashed["targets"]["threads:snoredex"] = {"attempt": 1, "status": "pending"}  # sent, but not recorded
+    crashed["targets"]["ig:snoredex"] = {"attempt": 1, "status": "pending"}  # sent, but not recorded
     record.write_text(json.dumps(crashed), encoding="utf-8", newline="\n")
     posting.tick(root, uploader)
-    assert len(uploader.uploads) == 3, "a resend after a crash finds the same job: no double post"
+    assert len(uploader.uploads) == 2, "a resend after a crash finds the same job: no double post"
+    uploader.jobs["job-1"].update(status="published", permalink="https://www.instagram.com/p/new/")
+    uploader.jobs["job-2"].update(status="failed", error="Seite gesperrt")
+    posting.tick(root, uploader)
     view = mine()["order"]["targets"]
     assert view["ig:snoredex"]["permalink"] == "https://www.instagram.com/p/new/"
     assert view["fb_page:1"]["error"] == "Seite gesperrt" and "media" not in json.dumps(view)
@@ -840,10 +849,19 @@ def reopened_editor(page, root, item, job):
 
 def posts_page(page, root, uploader):
     """The draft of a printing ready for Instagram: image, caption, alt text, open points, and the order form."""
-    uploader.failing_account_lists = 1
+    uploader.held = threading.Event()
     page.reload()
     page.click("#tab-posts")
     post = page.locator("#posts li.post")
+    post.wait_for(timeout=3000)
+    assert page.locator("#count-posts").text_content() == "1", "the drafts and their count never wait for the uploader"
+    assert post.locator(".send").is_hidden()
+    uploader.held.set()
+    post.locator(".send").wait_for()  # the send form follows once the uploader names the accounts
+    uploader.held = None
+    uploader.failing_account_lists = 1
+    page.reload()
+    page.click("#tab-posts")
     post.wait_for()
     assert post.locator(".send").is_hidden(), "no accounts, no form"
     page.select_option("#post-view", "all")
@@ -862,7 +880,8 @@ def posts_page(page, root, uploader):
     assert post.locator(".todo").text_content() == "Vor dem Posten: Abnahme durch dich"
     assert post.get_by_role("link", name="Bild laden").get_attribute("download") == "SPEC-0904-post.jpg"
     boxes = post.locator("input[name=account]")
-    assert boxes.count() == 3 and all(boxes.nth(index).is_checked() for index in range(3)), "all three preselected"
+    assert boxes.count() == 2 and all(boxes.nth(index).is_checked() for index in range(2)), \
+        "SnoreDex on Instagram and Facebook, both preselected; the uploader's other accounts never show"
     assert post.locator(".accounts").text_content().startswith("Instagram SnoreDex")
     send = post.locator(".send button")
     assert send.text_content() == "Jetzt posten"
@@ -874,8 +893,8 @@ def posts_page(page, root, uploader):
     boxes.nth(1).uncheck()
     page.once("dialog", lambda dialog: dialog.accept())
     send.click()
-    post.locator(".targets li").nth(1).wait_for()
-    assert post.locator(".targets").text_content().count("wartet") == 2, "only the chosen accounts"
+    post.locator(".targets li").first.wait_for()
+    assert post.locator(".targets").text_content().count("wartet") == 1, "only the chosen accounts"
     assert post.locator(".sent").text_content().startswith("Eingeplant für")
     page.once("dialog", lambda dialog: dialog.accept())
     post.locator(".cancel").click()

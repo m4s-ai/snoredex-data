@@ -818,15 +818,23 @@ async function loadAccounts() {
   }
 }
 
+function listPosts(posts) {
+  showCount("count-posts", posts.filter(POST_VIEWS.ready).length);
+  const shown = posts.filter(POST_VIEWS[field("post-view").value]);
+  field("posts").replaceChildren(...shown.map(postItem));
+  field("posts-status").textContent = shown.length ? "" : "Keine Entwürfe in dieser Ansicht.";
+}
+
 async function showPosts() {
   try {
     const {posts, canPost} = await call("/posts");
-    if (canPost && !state.accounts.length) await loadAccounts();  // again after a failed attempt
     state.canPost = canPost;
-    showCount("count-posts", posts.filter(POST_VIEWS.ready).length);
-    const shown = posts.filter(POST_VIEWS[field("post-view").value]);
-    field("posts").replaceChildren(...shown.map(postItem));
-    field("posts-status").textContent = shown.length ? "" : "Keine Entwürfe in dieser Ansicht.";
+    listPosts(posts);
+    // the drafts never wait for the uploader, which can take a minute; the send forms follow its accounts
+    if (canPost && !state.accounts.length) {  // again after a failed attempt
+      await loadAccounts();
+      if (state.accounts.length) listPosts(posts);
+    }
     // a post on its way is followed until every target is published or failed
     const moving = posts.some((post) => post.order && Object.values(post.order.targets).some((target) =>
       !["published", "failed"].includes(target.status) && new Date(post.order.dueAt) <= new Date()));
