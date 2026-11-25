@@ -25,7 +25,8 @@ import runner  # noqa: E402
 
 ITEM = "item-c25516ed-66e0-5cb1-9b96-5fa22e4c99be"
 OTHER = "item-7cf9c091-8e34-58a1-9185-ff3c7f6bcfd6"
-PRINTINGS = {ITEM: "printing-a", OTHER: "printing-b"}
+SOURCE_FIRST = "item-9fd9f124-e143-550d-bc3c-27e26ca0bdb7"  # no legacy printing: cited by its source-first key
+PRINTINGS = {ITEM: "printing-a", OTHER: "printing-b", SOURCE_FIRST: None}
 JOB = "a" * 64
 # the stand-in files the SPEC for the job's printing, cited the way the catalogue maps it back
 FAKE_INTAKE = '''import json, os, pathlib, subprocess, sys
@@ -41,14 +42,20 @@ if not (photos / "SPEC-0001.jpg").exists():  # an earlier attempt's copy is reus
         subprocess.run(["git", "-C", str(photos), *args], check=True)
 subprocess.run(["git", "switch", "-q", "-c", "intake/SPEC-0001", "origin/main"], check=True)
 item = json.loads((job / "job.json").read_text(encoding="utf-8"))["itemId"]
-cited = next(row["sourcePrintingId"] for row in json.loads((data / "collector_catalogue.json").read_text())["items"]
-             if row["itemId"] == item)
+row = next(row for row in json.loads((data / "collector_catalogue.json").read_text())["items"] if row["itemId"] == item)
+cited = row["sourcePrintingId"] or next(ref.removeprefix("CLAIM:source-first:") for ref in row["sourceClaimRefs"]
+                                       if ref.startswith("CLAIM:source-first:"))
 (data / "verification/specimens.json").write_text(json.dumps({"specimens": [
     {"specimenId": "SPEC-0001", "photographedBy": "collection owner", "citedBy": [cited]}]}))
 subprocess.run(["git", "add", "-A"], check=True)
 subprocess.run(["git", "commit", "-q", "-m", "File SPEC-0001"], check=True)
 print("intake/SPEC-0001")
 '''
+
+
+def alias(item):
+    """The alias Provision Snoredex short links gives a printing: its id's first two groups."""
+    return "sd" + item[5:13] + item[14:18]
 
 
 def git(*args):
@@ -113,22 +120,28 @@ class StandIn:
         return {"id": len(self.dispatched), "status": "completed", "conclusion": "success",
                 "html_url": f"https://example.invalid/{workflow}"}
 
+    def item(self):
+        return self.dispatched[-1][1]["item_ids"]
+
     def artifact(self, _run_id, name):
         assert name == "yourls-verified"
         out = BytesIO()
         with zipfile.ZipFile(out, "w") as archive:
             archive.writestr("yourls-result.json", json.dumps(
-                {"itemId": ITEM, "shortAlias": "sdc25516ed66e0", "status": "verified"}))
+                {"itemId": self.item(), "shortAlias": alias(self.item()), "status": "verified"}))
         return out.getvalue()
 
 
 def setup(temp, alias=None):
     social = [{"itemId": ITEM, "specimenId": "SPEC-0001", "instagramPosts": [],
-               **({"shortAlias": alias} if alias else {})}]
+               **({"shortAlias": alias} if alias else {})},
+              {"itemId": SOURCE_FIRST, "specimenId": "SPEC-0002", "instagramPosts": []}]
     catalogue = {"meta": {"assetBaseUrl": "https://example.invalid/", "dataAsOf": "2026-11-25"},
                  "localizations": [{"localizationId": "en", "displayName": "English"}], "assets": [],
                  "items": [{"itemId": item, "active": True, "localizationId": "en", "cardName": "Snorlax",
-                            "sourcePrintingId": printing} for item, printing in PRINTINGS.items()]}
+                            "sourcePrintingId": printing, "sourceClaimRefs": [] if printing else
+                            ["CLAIM:specimen:SPEC-0002", "CLAIM:source-first:key-c"]}
+                           for item, printing in PRINTINGS.items()]}
     data = remote(temp, "data", {"verification/photo_inbox/intake.py": FAKE_INTAKE, "scripts/regen.py": "",
                                  "data/social.json": json.dumps(social, indent=2) + "\n",
                                  "collector_catalogue.json": json.dumps(catalogue),
@@ -286,6 +299,19 @@ def approval_holds():
         assert ("yourls-pilot.yml", {"item_ids": OTHER}) not in github.dispatched and len(github.dispatched) == 1
 
 
+def source_first_printing():
+    """main maps a SPEC of a source-first printing back by its source-first key, as intake cites it."""
+    with TemporaryDirectory() as temp:
+        root, data, photos = setup(temp)
+        write_job(root, itemId=SOURCE_FIRST)
+        github = StandIn(data)
+        go(root, github, data, photos)
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "done", state
+        assert github.dispatched[-1] == ("yourls-pilot.yml", {"item_ids": SOURCE_FIRST})
+        assert social_on(data, "main")[1]["shortAlias"] == alias(SOURCE_FIRST)
+
+
 def old_checkpoint():
     """A run from before the freeze resumes for the printing main filed its SPEC for, or stops."""
     with TemporaryDirectory() as temp:
@@ -395,6 +421,7 @@ def main():
     red_ci_and_refusal()
     alias_already_recorded()
     approval_holds()
+    source_first_printing()
     old_checkpoint()
     corners_frozen()
     recovers_and_queues_once()

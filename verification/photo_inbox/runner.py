@@ -274,7 +274,7 @@ class Runner:
         if not approved.get("itemId") or [job.get(key) for key in ("itemId", "corners")] != [
                 approved["itemId"], approved.get("corners")]:
             raise RunError("Druck oder Ecken weichen von der Freigabe bei „Übernehmen“ ab. "
-                           "Bitte prüfen und erneut übernehmen.")
+                           "Bitte prüfen, dann „Erneut versuchen“.")
         self.prepare()
         done = subprocess.run([sys.executable, str(self.data / "verification/photo_inbox/intake.py"), str(folder),
                                "--photos", str(self.photos)], cwd=self.data, env=self.env, capture_output=True,
@@ -338,7 +338,7 @@ class Runner:
         filed = Catalogue(self.data).filed_item(state["specimen"])
         if filed is None:
             raise RunError(f"Auf main ist {state['specimen']} keinem Druck eindeutig zugeordnet. "
-                           "Bitte den Katalog prüfen, dann erneut übernehmen.")
+                           "Bitte den Katalog prüfen, dann „Erneut versuchen“.")
         frozen = (state.get("approval") or {}).get("itemId") or filed
         if filed != frozen:
             raise RunError(f"Auf main gehört {state['specimen']} zu einem anderen Druck als bei „Übernehmen“ "

@@ -102,10 +102,14 @@ class Catalogue:
 
     def printings_of(self, specimens):
         """SPEC -> the one printing it shows: the printing whose image it is, else the one its claims
-        cite. A specimen cited by several printings and the image of none stays unassigned."""
+        cite, by its legacy printing or its source-first key, as intake cites them. A specimen cited by
+        several printings and the image of none stays unassigned."""
         by_source = {}
         for item_id, item in self.items.items():
-            by_source.setdefault(item.get("sourcePrintingId"), set()).add(item_id)
+            keys = [ref.removeprefix("CLAIM:source-first:") for ref in item.get("sourceClaimRefs") or []
+                    if ref.startswith("CLAIM:source-first:")]
+            for key in [item.get("sourcePrintingId"), *keys]:
+                by_source.setdefault(key, set()).add(item_id)
         mapping = {}
         for row in specimens:
             cited = set().union(*(by_source.get(printing, set()) for printing in row.get("citedBy") or []))
