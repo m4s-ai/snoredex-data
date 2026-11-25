@@ -226,6 +226,12 @@ function wirePicker(input, list) {
       list.hidden = true;
       input.focus();
     }
+    // ArrowDown from the field enters the hits, the arrows walk them, ArrowUp from the first goes back
+    const stops = [input, ...list.querySelectorAll("button")];
+    const step = {ArrowDown: 1, ArrowUp: -1}[event.key];
+    if (!step || list.hidden || stops.length < 2) return;
+    event.preventDefault();
+    stops[Math.min(Math.max(stops.indexOf(document.activeElement) + step, 0), stops.length - 1)].focus();
   });
 }
 
