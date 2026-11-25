@@ -26,9 +26,11 @@ jobs:
       - uses: actions/checkout@v5
       - name: compose.yaml and env.example are valid together
         working-directory: verification/photo_inbox/docker
-        run: cp env.example .env && docker compose config -q && rm .env
-      - name: Build the image
+        run: cp env.example .env && docker compose config -q
+      - name: Build the image (with the .env present, as on the Homelab)
         run: docker build -f verification/photo_inbox/docker/Dockerfile -t snoredex-inbox .
+      - name: The .env with the uploader key stays out of the image
+        run: docker run --rm --entrypoint sh snoredex-inbox -c '! find / -xdev -name .env 2>/dev/null | grep -q .'
       - name: Tesseract has the collection's languages
         run: |
           docker run --rm --entrypoint tesseract snoredex-inbox --list-langs > langs.txt
