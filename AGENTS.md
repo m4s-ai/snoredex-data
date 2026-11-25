@@ -29,6 +29,7 @@ specimens. Owner statements are authoritative but are still graded explicitly as
 | [`METHODOLOGY.md`](METHODOLOGY.md) | adding or changing any confirmation, contradiction, finish or source; it holds the evidence ladder and the source techniques |
 | [`DATA-GUIDE.md`](DATA-GUIDE.md) | reading or changing a field in `data/` |
 | [`DATABASE.md`](DATABASE.md) | touching `snoredex.sqlite`, `templates/schema.sql` or the tracker |
+| [`verification/photo_inbox/README.md`](verification/photo_inbox/README.md) | touching the photo inbox, its image (`docker/`) or the intake |
 
 Priorities live in the issue tracker. Pick the matching skill in `.agents/skills/` by its
 description; skill discovery and instruction loading differ per runtime, so read the skill
@@ -45,6 +46,7 @@ faces. A question or audit request is answered, not implemented; read-only work 
 |---|---|
 | Free | local builds and checks, commits on the task branch, fast-forward pushes of verified follow-up commits to an existing authorized PR branch, pushes of intake photographs to `main` of the photo repository `m4s-ai/snoredex-photos`; once a specimen intake is merged (owner decision, 2026-11-23): the `Publish site` run that puts it on Pages, the `Provision Snoredex short links` run for its printings, and the data PR recording their verified aliases (opened, and merged on green CI); once the owner has posted from the photo inbox (owner decision, 2026-11-24, #646): the data PR recording those posts' permalinks with `verification/photo_inbox/permalinks.py` (opened, and merged on green CI). Posting itself is never an agent's action: only the owner's click in the inbox posts; for a photo-inbox job the owner assigned to a printing with approved card corners (owner decision, 2026-11-24, #654): filing it with `verification/photo_inbox/intake.py`, whose intake PR is opened and merged on green CI |
 | Only on explicit instruction | first push of a task branch, force pushes (including `--force-with-lease` after a rebase), opening or merging a PR (one instruction may name a series), issue/PR comments, live source refreshes (Cardmarket quota), running the `Publish site` workflow outside a merged specimen intake |
+| Homelab (owner or Hermes) | updating the photo inbox with `verification/photo_inbox/docker/update.sh` after a merge that changes it; an agent does not run it (owner decision, 2026-11-25, #669) |
 | Owner only | `verification/owner_adjudications.json` entries (including `rejectedFinishes`), `publication-decisions.json` |
 | Never | push to this repository's `main`, edit `verification/archive/`, bypass or weaken the publication gate |
 
