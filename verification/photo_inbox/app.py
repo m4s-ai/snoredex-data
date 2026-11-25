@@ -367,6 +367,44 @@ def security_headers(response, image_origin):
     return response
 
 
+# what the image copies of the repository: a change here on main needs a rebuild (#666)
+CODE_PATHS = ("scripts", "verification/photo_inbox", ":(glob)verification/*.py")
+
+
+def git_output(checkout, *args):
+    """git's exit code and output in a checkout; None when git cannot run there."""
+    try:
+        done = subprocess.run(["git", "-C", str(checkout), *args], capture_output=True, text=True, timeout=10)
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    return done.returncode, done.stdout
+
+
+def head(checkout):
+    """A checkout's HEAD commit and its date; None when it is no readable checkout."""
+    done = git_output(checkout, "log", "-1", "--format=%H %cI") if checkout else None
+    parts = done[1].split() if done and done[0] == 0 else []
+    return {"commit": parts[0], "date": parts[1]} if len(parts) == 2 else None
+
+
+def code_version():
+    """The code this process runs, read once at start (#666): the image names the commit it was built
+    from (INBOX_COMMIT); run from a checkout, it is that checkout's HEAD at start. Unknown stays None."""
+    built = os.environ.get("INBOX_COMMIT")
+    if built:
+        return {"commit": built, "date": os.environ.get("INBOX_BUILT_AT") or None, "source": "image"}
+    return dict(head(Path(__file__).resolve().parents[2]) or {"commit": None, "date": None}, source="checkout")
+
+
+def running_version(code, repo, photos):
+    """The running code and the mounted checkouts as they are now (#666)."""
+    changed = None  # whether the synced catalogue checkout carries other inbox code than is running
+    if repo and code["commit"]:
+        done = git_output(repo, "diff", "--quiet", code["commit"], "HEAD", "--", *CODE_PATHS)
+        changed = {0: False, 1: True}.get(done[0]) if done else None
+    return {"code": code, "codeChanged": changed, "data": head(repo), "photos": head(photos)}
+
+
 def create_app(directory, repo=None, fetch=None, photos=None, command=None, uploader=None, schedule=True):
     root = private_directory(directory)
     (root / posting.POSTS).mkdir(mode=0o700, exist_ok=True)
@@ -381,6 +419,7 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
     empty_trash(trash, catalogue)
     # catalogue thumbnails come from the published site; the page loads nothing else from outside
     image_origin = "/".join(catalogue.base.split("/")[:3]) if catalogue else ""
+    code = code_version()  # a later pull into the checkout does not change the code already imported
     app = Flask(__name__)
     app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD
 
@@ -390,7 +429,11 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
 
     @app.get("/")
     def index():
-        return render_template("index.html")
+        return render_template("index.html", version=running_version(code, repo, photos))
+
+    @app.get("/version")
+    def version():
+        return jsonify(running_version(code, repo, photos))
 
     @app.errorhandler(413)
     def upload_limit(_error):

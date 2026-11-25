@@ -185,11 +185,23 @@ cp env.example .env        # then set the paths, PUID/PGID and the uploader
 docker compose up -d --build
 ```
 
-The image is built from the checkout the compose file sits in. For a code update, `git pull` there,
-then run `docker compose up -d --build`. The workflow `Inbox image` builds the image on every pull
-request that touches the inbox. It checks Tesseract's languages and the number guard's tests, starts
-the inbox against the repository and runs `docker/smoke.py` inside it: page, catalogue, suggested
-corners and a printed number read.
+The image is built from the checkout the compose file sits in. For a code update, run `sh update.sh`
+in that folder instead of the last line above. It pulls the checkout, then rebuilds and restarts with
+the commit the image is built from, and prints that commit.
+
+Then check the version line at the foot of the page (also as JSON under `/version`, #666):
+
+- **Code:** the commit the image was built from, and when. Without `update.sh` it says `unbekannt`.
+- **Katalog** and **Fotos:** the commit of each mounted checkout. Their dates show whether `sync`
+  pulls.
+- **Neu bauen:** the line warns `Anderer Eingangs-Code im Checkout: neu bauen` when the synced
+  checkout carries other inbox code (`scripts/`, `verification/photo_inbox/`, `verification/*.py`)
+  than the running image. It says `Code aktuell` when it does not.
+
+The workflow `Inbox image` builds the image on every pull request that touches the inbox. It checks
+Tesseract's languages and the number guard's tests, starts the inbox against the repository and runs
+`docker/smoke.py` inside it. The smoke test covers the page, the catalogue, suggested corners, a
+printed number read, and a version line naming the commit just built.
 
 ## Intake access
 

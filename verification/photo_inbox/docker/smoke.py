@@ -6,6 +6,7 @@ Tesseract reading a printed number. Runs inside the container, where Pillow and 
 
 from io import BytesIO
 import json
+import os
 from pathlib import Path
 import sys
 import time
@@ -55,7 +56,13 @@ def main(base):
     face = card_photo().crop((300, 400, 1380, 1910))
     found = number_check.check(face, "1", "64", "Japanese")
     assert found["result"] == "match", found
-    print("inbox container: page, catalogue, corners and Tesseract work")
+    # #666: the image names the commit it was built from, and the mounted checkout is that commit
+    status, body = call(base, "/version")
+    version = json.loads(body)
+    built = os.environ.get("INBOX_COMMIT")
+    assert built and version["code"]["commit"] == built and version["code"]["source"] == "image", version
+    assert version["data"]["commit"] == built and version["codeChanged"] is False, version
+    print("inbox container: page, catalogue, corners, Tesseract and version line work")
 
 
 if __name__ == "__main__":

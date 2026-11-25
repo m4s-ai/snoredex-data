@@ -961,8 +961,51 @@ def derive_checks(temp):
     raise AssertionError("a DNG without a JPEG preview must be refused")
 
 
+def commit_file(repo, name, text):
+    (repo / name).parent.mkdir(parents=True, exist_ok=True)
+    (repo / name).write_text(text, encoding="utf-8", newline="\n")
+    git = ["git", "-C", str(repo), "-c", "user.name=t", "-c", "user.email=test"]
+    subprocess.run([*git, "add", "-A"], check=True)
+    subprocess.run([*git, "commit", "-q", "-m", name], check=True)
+    return subprocess.run([*git, "rev-parse", "HEAD"], capture_output=True, text=True, check=True).stdout.strip()
+
+
+def version_checks(temp):
+    """#666: the page and /version name the image's commit and the checkouts; a data commit keeps the
+    code current, an inbox-code commit asks for a rebuild, anything unreadable stays unknown."""
+    repo = catalogue_repo(Path(temp) / "version-repo", "sha256:none")
+    subprocess.run(["git", "init", "-q", str(repo)], check=True)
+    built = commit_file(repo, "verification/photo_inbox/app.py", "one\n")
+    os.environ.update(INBOX_COMMIT=built, INBOX_BUILT_AT="2026-11-25T10:00:00Z")
+    try:
+        client = create_app(Path(temp) / "version-inbox", repo, published).test_client()
+        found = client.get("/version").get_json()
+        assert found["code"] == {"commit": built, "date": "2026-11-25T10:00:00Z", "source": "image"}, found
+        assert found["data"]["commit"] == built and found["photos"] is None and found["codeChanged"] is False
+        page = client.get("/").get_data(as_text=True)
+        assert built[:7] in page and "Code aktuell" in page and "Fotos: unbekannt" in page, page
+        data = commit_file(repo, "data/printings.json", "{}\n")
+        found = client.get("/version").get_json()
+        assert found["data"]["commit"] == data and found["codeChanged"] is False, "a data commit needs no rebuild"
+        commit_file(repo, "verification/check.py", "two\n")
+        assert client.get("/version").get_json()["codeChanged"] is True, "a code commit needs a rebuild"
+        assert "neu bauen" in client.get("/").get_data(as_text=True)
+        os.environ.update(INBOX_COMMIT="0" * 40, INBOX_BUILT_AT="")
+        assert client.get("/version").get_json()["code"]["commit"] == built, "the code is read once at start"
+        unknown = create_app(Path(temp) / "version-inbox", repo, published).test_client()
+        assert unknown.get("/version").get_json()["codeChanged"] is None, "an unknown commit is unknown"
+        page = unknown.get("/")
+        assert page.status_code == 200 and "0000000</a>" in page.get_data(as_text=True), "no build date is no error"
+    finally:
+        os.environ.pop("INBOX_COMMIT", None)
+        os.environ.pop("INBOX_BUILT_AT", None)
+    assert create_app(Path(temp) / "version-inbox").test_client().get("/version").get_json()["code"]["source"] == "checkout"
+
+
 def main():
     refuses_checkout()
+    with TemporaryDirectory() as temp:
+        version_checks(temp)
     with TemporaryDirectory() as temp:
         derive_checks(temp)
         root = Path(temp) / "inbox"
