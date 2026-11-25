@@ -60,7 +60,14 @@ def write_state(folder, state):
     path = Path(folder) / STATE
     temporary = path.with_suffix(".tmp")
     temporary.write_text(json.dumps(dict(state, updatedAt=now()), indent=1) + "\n", encoding="utf-8", newline="\n")
-    os.replace(temporary, path)
+    for attempt in range(50):  # Windows refuses the replace while the page reads the file; Linux never
+        try:
+            os.replace(temporary, path)
+            return
+        except PermissionError:
+            if attempt == 49:
+                raise
+            time.sleep(0.05)
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -168,6 +175,8 @@ class Runner:
                 job_id = self.jobs.get()
                 try:
                     self.run(job_id)
+                except Exception as error:  # noqa: BLE001 - one broken job must not stop the queue
+                    print(f"Übernahme {job_id[:12]}: {error}", flush=True)
                 finally:
                     self.waiting.discard(job_id)
 
@@ -188,6 +197,8 @@ class Runner:
     # --- one run --------------------------------------------------------------------------------
     def run(self, job_id):
         folder = self.root / job_id
+        if not (folder / "job.json").is_file():
+            return  # moved to the trash after it was queued: nothing to file
         state = read_state(folder)
         state.setdefault("done", [])
         try:
@@ -222,6 +233,10 @@ class Runner:
             self.git(path, "fetch", "-q", "origin")
             self.git(path, "checkout", "-q", "-f", "-B", "main", "origin/main")
             self.git(path, "clean", "-q", "-fd")
+            # a branch an earlier attempt left would stop intake.py's own `switch -c intake/SPEC-nnnn`
+            for branch in self.git(path, "for-each-ref", "--format=%(refname:short)", "refs/heads/").split():
+                if branch != "main":
+                    self.git(path, "branch", "-q", "-D", branch)
 
     def step_intake(self, folder, state):
         self.prepare()

@@ -16,6 +16,7 @@ from pathlib import Path
 import subprocess
 import sys
 from tempfile import TemporaryDirectory
+import time
 import zipfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -31,9 +32,10 @@ count.write_text(str(int(count.read_text() or 0) + 1) if count.exists() else "1"
 if os.environ.get("FAKE_REFUSE"):
     print("Übernahme zurückgestellt: Die Kartenecken sind noch nicht freigegeben.", file=sys.stderr)
     sys.exit(2)
-(photos / "SPEC-0001.jpg").write_bytes(b"photo")
-for args in (["add", "-A"], ["commit", "-q", "-m", "SPEC-0001"], ["push", "-q"]):
-    subprocess.run(["git", "-C", str(photos), *args], check=True)
+if not (photos / "SPEC-0001.jpg").exists():  # an earlier attempt's copy is reused, as intake.py does
+    (photos / "SPEC-0001.jpg").write_bytes(b"photo")
+    for args in (["add", "-A"], ["commit", "-q", "-m", "SPEC-0001"], ["push", "-q"]):
+        subprocess.run(["git", "-C", str(photos), *args], check=True)
 subprocess.run(["git", "switch", "-q", "-c", "intake/SPEC-0001", "origin/main"], check=True)
 (data / "filed.txt").write_text("SPEC-0001\\n")
 subprocess.run(["git", "add", "-A"], check=True)
@@ -63,14 +65,17 @@ def remote(temp, name, files):
 class StandIn:
     """GitHub as the run sees it: pull requests, checks, merges, dispatched workflows, an artifact."""
 
-    def __init__(self, data_remote, checks="success", fail_dispatch=0):
-        self.remote, self.result, self.fail_dispatch = data_remote, checks, fail_dispatch
+    def __init__(self, data_remote, checks="success", fail_dispatch=0, fail_open=0):
+        self.remote, self.result, self.fail_dispatch, self.fail_open = data_remote, checks, fail_dispatch, fail_open
         self.pulls, self.merged, self.dispatched, self.opened = {}, [], [], 0
 
     def pull_for(self, branch):
         return next((pull for pull in self.pulls.values() if pull["branch"] == branch), None)
 
     def open_pull(self, branch, title, body):
+        if self.fail_open:
+            self.fail_open -= 1
+            raise runner.RunError("GitHub POST /pulls: 502")
         self.opened += 1
         number = 100 + len(self.pulls)
         self.pulls[number] = {"number": number, "branch": branch, "state": "open", "merged_at": None,
@@ -160,6 +165,40 @@ def restart_after_failure():
         assert github.opened == 2 and len(github.merged) == 2, "no pull request opened or merged twice"
 
 
+def retry_after_failed_delivery():
+    """The filing committed but its pull request did not open: the retry files again in the same clones."""
+    with TemporaryDirectory() as temp:
+        root, data, photos = setup(temp)
+        github = StandIn(data, fail_open=1)
+        make(root, github, data, photos).run(JOB)
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "failed" and state["step"] == "intake" and "502" in state["error"], state
+        make(root, github, data, photos).run(JOB)
+        assert runner.read_state(root / JOB)["status"] == "done", runner.read_state(root / JOB)
+        assert git("--git-dir", photos, "rev-list", "--count", "main") == "2", "one archive copy, reused"
+
+
+def worker_survives_a_trashed_job():
+    with TemporaryDirectory() as temp:
+        root, data, photos = setup(temp)
+        gone = "b" * 64
+        (root / gone).mkdir()
+        (root / gone / "job.json").write_text("{}", encoding="utf-8", newline="\n")
+        run = make(root, StandIn(data), data, photos)
+        run.recover = lambda: None  # started before both jobs are queued, as in the running inbox
+        run.submit(gone)
+        (root / gone / "job.json").unlink()
+        (root / gone / runner.STATE).unlink()
+        (root / gone).rmdir()  # moved to the trash while queued
+        run.submit(JOB)
+        run.start()
+        for _ in range(600):
+            if runner.read_state(root / JOB).get("status") in ("done", "failed"):
+                break
+            time.sleep(0.1)
+        assert runner.read_state(root / JOB)["status"] == "done", "the next job still runs"
+
+
 def red_ci_and_refusal():
     with TemporaryDirectory() as temp:
         root, data, photos = setup(temp)
@@ -216,8 +255,16 @@ def page_button():
             assert started.status_code == 202 and started.get_json()["intake"]["run"]["status"] == "queued"
             assert client.post(f"/jobs/{JOB}/intake").status_code == 409, "a queued job is not started twice"
             assert inbox.ready_jobs(root, None) == [], "the night skips a queued job"
+            assert client.delete(f"/jobs/{JOB}").status_code == 409, "a queued job stays out of the trash"
             runner.write_state(root / JOB, {"status": "failed", "error": "x", "done": []})
             assert inbox.ready_jobs(root, None) == [JOB], "the night tries a failed job again"
+            # filed, but publishing failed: the catalogue names the SPEC, and the run still resumes
+            inbox.intake_blocked = lambda _folder, _filed: "Schon übernommen als SPEC-0001."
+            assert inbox.ready_jobs(root, None) == [], "a failed filing of a filed photo does not start again"
+            runner.write_state(root / JOB, {"status": "failed", "step": "publish", "done": ["intake", "merge"]})
+            assert client.get("/jobs").get_json()["jobs"][0]["intake"]["blocked"] is None
+            assert inbox.ready_jobs(root, None) == [JOB], "the night finishes a filed job's run"
+            assert client.post(f"/jobs/{JOB}/intake").status_code == 202, "the button finishes it too"
         finally:
             inbox.intake_blocked = blocked
 
@@ -225,6 +272,8 @@ def page_button():
 def main():
     whole_chain()
     restart_after_failure()
+    retry_after_failed_delivery()
+    worker_survives_a_trashed_job()
     red_ci_and_refusal()
     alias_already_recorded()
     recovers_and_queues_once()

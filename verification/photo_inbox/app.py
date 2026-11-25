@@ -419,22 +419,31 @@ def intake_blocked(folder, filed):
     return None
 
 
+def run_blocked(folder, filed, run):
+    """Why no run may start now, or None. A run that failed after its filing resumes although the
+    catalogue already names the job's SPEC: only publishing and the alias are left."""
+    if run.get("status") in BUSY:
+        return None  # the page shows the run itself
+    if run.get("status") == "failed" and "intake" in run.get("done", []):
+        return None
+    return intake_blocked(folder, filed)
+
+
 def with_intake(job, folder, runner):
     """A job as the page lists it, with its intake run and whether the button may start one."""
     if runner is None:
         return dict(job, intake=None)
     run = intake_runner.read_state(folder)
-    busy = run.get("status") in BUSY
-    return dict(job, intake={"run": run or None, "blocked": None if busy else intake_blocked(folder, job["filedAs"])})
+    return dict(job, intake={"run": run or None, "blocked": run_blocked(folder, job["filedAs"], run)})
 
 
 def ready_jobs(root, catalogue):
-    """The nightly round: every job that may be filed and is not filed, queued, running or done;
-    a failed run is tried again."""
+    """The nightly round: every job that may start a run, a failed one included."""
     ready = []
     for job in all_jobs(root, catalogue):
         folder = root / job["id"]
-        if intake_runner.read_state(folder).get("status") not in BUSY and not intake_blocked(folder, job["filedAs"]):
+        run = intake_runner.read_state(folder)
+        if run.get("status") not in BUSY and not run_blocked(folder, job["filedAs"], run):
             ready.append(job["id"])
     return ready
 
@@ -590,7 +599,10 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
 
     @app.delete("/jobs/<job_id>")
     def delete(job_id):
-        to_trash(root, job_folder(root, job_id), catalogue)
+        folder = job_folder(root, job_id)
+        if intake_runner.read_state(folder).get("status") in ("queued", "running"):
+            raise PermissionError("Die Übernahme dieses Fotos läuft gerade.")
+        to_trash(root, folder, catalogue)
         return jsonify(id=job_id, status="deleted")
 
     @app.get("/trash")
