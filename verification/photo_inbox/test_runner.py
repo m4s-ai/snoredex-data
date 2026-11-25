@@ -267,6 +267,8 @@ def page_button():
             assert client.post(f"/jobs/{JOB}/intake").status_code == 202, "the button finishes it too"
         finally:
             inbox.intake_blocked = blocked
+        described = client.post(f"/jobs/{JOB}", json={"note": "Relaxo"}).get_json()
+        assert described["intake"] == client.get("/jobs").get_json()["jobs"][0]["intake"],             "a changed job answers with its intake state, so the page never shows a stale box"
 
 
 def main():

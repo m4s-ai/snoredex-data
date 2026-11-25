@@ -546,7 +546,7 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
         # an older job keeps the upload time it is listed by once its record is rewritten
         job.update(details, receivedAt=job_summary(folder)["receivedAt"], describedAt=now())
         write_json(folder / "job.json", job)
-        return jsonify(job_summary(folder, catalogue))
+        return jsonify(with_intake(job_summary(folder, catalogue), folder, runner))
 
     @app.get("/jobs/<job_id>/corners")
     def corner_suggestion(job_id):
@@ -574,7 +574,7 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
         if item:
             job["numberCheck"] = number_reading(folder, quad, item, catalogue.languages.get(item.get("localizationId")))
         write_json(folder / "job.json", job)
-        return jsonify(job_summary(folder, catalogue))
+        return jsonify(with_intake(job_summary(folder, catalogue), folder, runner))
 
     @app.post("/jobs/<job_id>/number")
     def confirm_number(job_id):
@@ -585,7 +585,7 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
             return jsonify(error="Es gibt keine abweichende Nummer zu bestätigen."), 400
         job["numberConfirmedAt"] = now()
         write_json(folder / "job.json", job)
-        return jsonify(job_summary(folder, catalogue))
+        return jsonify(with_intake(job_summary(folder, catalogue), folder, runner))
 
     @app.get("/jobs/<job_id>/cover")
     def cover_preview(job_id):
