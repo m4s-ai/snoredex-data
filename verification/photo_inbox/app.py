@@ -316,17 +316,30 @@ def exporter(repo):
 
 
 def code_stamp(command):
-    """When the exporter's code last changed, its own folder and the repository's scripts included: a pulled
-    change to the cover rebuilds every draft, as a changed catalogue does (#691)."""
+    """When the exporter's code last changed, its own folder and the repository's scripts included. With the
+    catalogue's stamp it says when a draft's fingerprint must be asked for again (#678)."""
     script = Path(command[-1])
     files = [*script.parent.glob("*.py"), *(script.parents[1] / "scripts").glob("*.py")]
     return max(path.stat().st_mtime_ns for path in files)
 
 
-def draft(cache, command, photos, specimen, stamp):
-    """The post draft of one specimen, built once per catalogue state into the private data folder."""
-    key = sha256(repr((stamp, specimen)).encode()).hexdigest()[:16]
-    folder = cache / f"{specimen}-{key}"
+def fingerprint(command, photos, specimen):
+    """What the exporter says this SPEC's draft is made of (#678): one hash over its photographs, its
+    printing, its share row and the exporter's code. Building nothing, it stays cheap."""
+    try:
+        done = subprocess.run([*command, specimen, "--photos", str(photos), "--fingerprint"],
+                              capture_output=True, text=True, timeout=120)
+    except (OSError, subprocess.TimeoutExpired) as error:
+        raise ValueError(f"Der Entwurf ließ sich nicht prüfen: {error}") from error
+    lines = (done.stdout if done.returncode == 0 else done.stderr or done.stdout).strip().splitlines()
+    if done.returncode or not lines or not re.fullmatch(r"[0-9a-f]{64}", lines[-1]):
+        raise ValueError(lines[-1] if lines else "Der Entwurf ließ sich nicht prüfen.")
+    return lines[-1]
+
+
+def draft(cache, command, photos, specimen, key):
+    """The post draft of one specimen, built once per fingerprint into the private data folder (#678)."""
+    folder = cache / f"{specimen}-{key[:16]}"
     if not (folder / "manifest.json").is_file():
         try:
             done = subprocess.run([*command, specimen, "--photos", str(photos), "--out", str(folder)],
@@ -336,7 +349,7 @@ def draft(cache, command, photos, specimen, stamp):
         if done.returncode:
             lines = (done.stderr or done.stdout).strip().splitlines()
             raise ValueError(lines[-1] if lines else "Der Entwurf ließ sich nicht bauen.")
-        for old in cache.glob(f"{specimen}-*"):  # drafts of an older catalogue state
+        for old in cache.glob(f"{specimen}-*"):  # drafts from older inputs
             if old != folder:
                 shutil.rmtree(old, ignore_errors=True)
     return folder
@@ -673,12 +686,35 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
         return jsonify(catalogue.overview(all_jobs(root, catalogue)))
 
     building = threading.Lock()
+    keys = {}  # SPEC -> (catalogue and code stamp, fingerprint): asked again only after a change (#678)
+
+    def key_of(specimen, ask):
+        """The SPEC's fingerprint while nothing changed since it was asked for; else asked anew, or None."""
+        built_by = command or exporter(repo)
+        catalogue.refresh()
+        stamp = (catalogue.stamp, code_stamp(built_by))
+        if keys.get(specimen, (None,))[0] != stamp:
+            if not ask:
+                return None
+            keys[specimen] = (stamp, fingerprint(built_by, photos, specimen))
+        return keys[specimen][1]
 
     def current_draft(specimen):
         # one build at a time: two requests for an unbuilt draft would race for the same folder
         with building:
-            built_by = command or exporter(repo)
-            return draft(drafts, built_by, photos, specimen, (catalogue.stamp, code_stamp(built_by)))
+            return draft(drafts, command or exporter(repo), photos, specimen, key_of(specimen, ask=True))
+
+    def built_draft(specimen):
+        """The draft as already built for the current inputs, or None; it starts no exporter (#678)."""
+        key = key_of(specimen, ask=False)
+        folder = drafts / f"{specimen}-{key[:16]}" if key else None
+        return folder if folder and (folder / "manifest.json").is_file() else None
+
+    def draft_view(row, order, folder):
+        # an ordered post shows what it froze, which is what goes out, never a newer draft
+        if order:
+            return frozen_view(row, order)
+        return post_view(row, folder) if folder else dict(row, opened=False)
 
     @app.get("/posts")
     def posts():
@@ -692,12 +728,24 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
             order = None
             try:  # an order.json that cannot be read shows at its own post and blocks no other (#676)
                 order = posting.read_order(root, row["draftSpecimen"])
-                # an ordered post shows what it froze, which is what goes out, never a newer draft
-                view = frozen_view(row, order) if order else post_view(row, current_draft(row["draftSpecimen"]))
+                # the list starts no exporter: a draft is built when it is opened (#678)
+                view = draft_view(row, order, None if order else built_draft(row["draftSpecimen"]))
                 views.append(dict(view, order=posting.order_view(order)))
             except (ValueError, OSError, KeyError) as error:
                 views.append(dict(row, error=str(error), order=posting.order_view(order)))
         return jsonify(posts=views, canPost=uploader is not None)
+
+    @app.get("/posts/<specimen>")
+    def post_detail(specimen):
+        """One post opened (#678): its draft, built now unless it is built for the current inputs already."""
+        row = shared_specimen(specimen)
+        order = None
+        try:
+            order = posting.read_order(root, specimen)
+            view = draft_view(row, order, None if order else current_draft(specimen))
+            return jsonify(dict(view, order=posting.order_view(order)))
+        except (ValueError, OSError, KeyError) as error:
+            return jsonify(dict(row, error=str(error), order=posting.order_view(order)))
 
     def shared_specimen(specimen):
         rows = [row for row in catalogue.shares() if row["draftSpecimen"] == specimen] if catalogue and photos else []

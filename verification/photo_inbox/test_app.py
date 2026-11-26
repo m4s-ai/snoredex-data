@@ -294,9 +294,13 @@ def adoption_checks(client, repo, folder):
         "the SPEC is the catalogue's; an ambiguous citation keeps the pick"
 
 
-FAKE_EXPORTER = """import json, pathlib, sys, time
-spec, out = sys.argv[1], pathlib.Path(sys.argv[sys.argv.index("--out") + 1])
-here = pathlib.Path(__file__)
+FAKE_EXPORTER = """import hashlib, json, pathlib, sys, time
+spec, here = sys.argv[1], pathlib.Path(__file__)
+if "--fingerprint" in sys.argv:  # what the draft is made of: this code and the SPEC's own input file
+    own = here.with_name(f"inputs-{spec}.txt")
+    print(hashlib.sha256(here.read_bytes() + (own.read_bytes() if own.exists() else b"")).hexdigest())
+    sys.exit(0)
+out = pathlib.Path(sys.argv[sys.argv.index("--out") + 1])
 with here.with_suffix(".log").open("a") as log:
     log.write(spec + "\\n")
 if spec == "SPEC-0905":
@@ -319,35 +323,53 @@ def fake_exporter(temp):
 
 
 def posts_checks(root, repo, temp):
-    """Drafts of every shared printing, built once per catalogue state; nothing is posted."""
+    """Drafts of every shared printing, built when opened and once per input (#678); nothing is posted."""
     refused = create_app(root, repo, published).test_client().get("/posts")
     assert refused.status_code == 404 and "--photos" in refused.json["error"]
     command, log = fake_exporter(temp)
+    builds = lambda spec="SPEC-0904": log.read_text().split().count(spec) if log.exists() else 0
     client = create_app(root, repo, published, photos=Path(temp), command=command).test_client()
     posts = {post["draftSpecimen"]: post for post in client.get("/posts").json["posts"]}
     assert set(posts) == {"SPEC-0904", "SPEC-0905"}, "only printings with a short link"
-    ready = posts["SPEC-0904"]
+    assert posts["SPEC-0904"]["opened"] is False and "caption" not in posts["SPEC-0904"]
+    assert builds() == builds("SPEC-0905") == 0, "a cold list starts no exporter"
+    ready = client.get("/posts/SPEC-0904").json
     assert (ready["stage"], ready["caption"], ready["alt"], ready["open"]) == (
         "ready", "Caption SPEC-0904\n", "Alt SPEC-0904", ["Owner review"])
-    assert "kein Foto" in posts["SPEC-0905"]["error"], "a failed draft shows its reason"
+    assert builds() == 1, "opening a draft builds it"
+    assert client.get("/posts/SPEC-0904").json["draft"] == ready["draft"] and builds() == 1, "and opening it again reuses it"
+    listed = {post["draftSpecimen"]: post for post in client.get("/posts").json["posts"]}
+    assert listed["SPEC-0904"]["caption"] == "Caption SPEC-0904\n", "the list shows a draft built already"
+    assert "kein Foto" in client.get("/posts/SPEC-0905").json["error"], "a failed draft shows its reason"
     image = client.get(ready["image"])
-    assert image.status_code == 200 and image.mimetype == "image/jpeg"
+    assert image.status_code == 200 and image.mimetype == "image/jpeg" and builds() == 1
     assert client.get("/posts/SPEC-0905/image").status_code == 404
     assert client.get("/posts/SPEC-0001/image").status_code == 404, "only shared printings"
-    client.get("/posts")
-    assert log.read_text().split().count("SPEC-0904") == 1, "a draft is built once per catalogue state"
+    assert client.get("/posts/SPEC-0001").status_code == 404
     social = repo / "data/social.json"
-    later = social.stat().st_mtime_ns + 10**9
-    os.utime(social, ns=(later, later))
-    client.get("/posts")
-    assert log.read_text().split().count("SPEC-0904") == 2, "a changed catalogue rebuilds the draft"
+
+    def change(spec=None):
+        """A pulled catalogue change; with `spec`, one that changes that SPEC's own inputs."""
+        if spec:
+            path = Path(temp) / f"inputs-{spec}.txt"
+            path.write_text((path.read_text() if path.exists() else "") + "changed\n", encoding="utf-8",
+                            newline="\n")
+        later = social.stat().st_mtime_ns + 10**9
+        os.utime(social, ns=(later, later))
+
+    change("SPEC-0905")  # another printing's data
+    assert client.get("/posts/SPEC-0904").json["draft"] == ready["draft"] and builds() == 1, \
+        "a change to another printing builds nothing for this one"
+    change("SPEC-0904")
+    moved = client.get("/posts/SPEC-0904").json["draft"]
+    assert moved != ready["draft"] and builds() == 2, "a change to its own inputs rebuilds it"
     assert len(list((root / ".drafts").glob("SPEC-0904-*"))) == 1, "the older draft goes"
     script = Path(command[-1])
-    edited = script.stat().st_mtime_ns + 10**9
-    os.utime(script, ns=(edited, edited))  # a pulled change to the exporter's code, the catalogue unchanged
-    client.get("/posts")
-    assert log.read_text().split().count("SPEC-0904") == 3, "a changed exporter rebuilds the draft (#691)"
-    os.utime(social, ns=(later + 10**9, later + 10**9))
+    script.write_text(script.read_text(encoding="utf-8") + "# a pulled change to the cover\n", encoding="utf-8",
+                      newline="\n")
+    change()
+    assert client.get("/posts/SPEC-0904").json["draft"] != moved and builds() == 3, "a changed exporter rebuilds it"
+    change("SPEC-0904")
     app = client.application
     replies = []
     requests = [threading.Thread(target=lambda: replies.append(app.test_client().get(ready["image"]).status_code))
@@ -357,7 +379,7 @@ def posts_checks(root, repo, temp):
     for request in requests:
         request.join()
     assert replies == [200, 200], "two requests for an unbuilt draft both get it"
-    assert log.read_text().split().count("SPEC-0904") == 4, "and it is built once"
+    assert builds() == 4, "and it is built once"
     assert all(job["id"] != ".drafts" for job in client.get("/jobs").json["jobs"])
     return command
 
@@ -415,11 +437,21 @@ def posting_checks(root, repo, temp, command):
         "only SnoreDex on Instagram, Facebook and Threads, never the uploader's other accounts"
     listing = client.get("/posts").json
     mine = lambda: next(row for row in client.get("/posts").json["posts"] if row["draftSpecimen"] == "SPEC-0904")
-    ready = mine()
-    assert listing["canPost"] and ready["order"] is None and len(ready["slides"]) == 1
+    assert listing["canPost"] and mine()["opened"] is False, "a new inbox has built nothing yet"
+    ready = client.get("/posts/SPEC-0904").json  # opened: built, or reused from the data folder
+    assert ready["order"] is None and len(ready["slides"]) == 1
     accounts = FakeUploader.SNOREDEX
     order = lambda **body: client.post("/posts/SPEC-0904/order", json=dict(draft=ready["draft"], accounts=accounts) | body)
     assert order(draft="SPEC-0904-stale").status_code == 409, "only the draft the owner saw"
+    own = Path(temp) / "inputs-SPEC-0904.txt"  # #678: its own inputs change after the owner looked
+    own.write_text((own.read_text() if own.exists() else "") + "corners moved\n", encoding="utf-8",
+                   newline="\n")
+    social = repo / "data/social.json"
+    stamp = social.stat().st_mtime_ns + 10**9
+    os.utime(social, ns=(stamp, stamp))
+    refused = order()
+    assert refused.status_code == 409 and "geändert" in refused.json["error"], "a stale draft is never approved unseen"
+    ready = client.get("/posts/SPEC-0904").json  # the owner opens the new version
     assert order(accounts=[]).status_code == 400 and order(accounts=["ig:unknown"]).status_code == 400
     assert order(accounts=["ig:other"]).status_code == 400, "the uploader knows it, but it is not SnoreDex"
     assert order(at="2026-12-01T18:00").status_code == 400, "a time needs its zone"
@@ -1035,6 +1067,10 @@ def posts_page(page, root, uploader):
     post.wait_for(timeout=3000)
     assert page.locator("#count-posts").text_content() == "1", "the drafts and their count never wait for the uploader"
     assert post.locator(".send").is_hidden()
+    # #678: the list built nothing; opening the draft builds it and shows it in place
+    assert post.locator(".caption").count() == 0 and post.locator(".open-draft button").is_visible()
+    post.locator(".open-draft button").click()
+    post.locator(".caption").wait_for()
     held.set()
     post.locator(".send").wait_for()  # the send form follows once the uploader names the accounts
     uploader.failing_account_lists = 1
@@ -1044,6 +1080,7 @@ def posts_page(page, root, uploader):
     assert post.locator(".send").is_hidden(), "no accounts, no form"
     page.select_option("#post-view", "all")
     page.select_option("#post-view", "ready")
+    post.nth(1).wait_for(state="detached")  # the view has switched back: the posted draft is gone again
     post.locator(".send").wait_for()  # the accounts are asked for again once the uploader answers
     assert page.locator("#count-posts").text_content() == "1"
     assert post.count() == 1 and post.locator(".badge").text_content() == "bereit für Instagram"
@@ -1086,6 +1123,7 @@ def posts_page(page, root, uploader):
     assert post.locator(".send").is_visible() and not post.locator(".sent").text_content(), \
         "accounts that arrive late never bring back a plan that was taken back"
     page.select_option("#post-view", "posted")
+    post.locator(".open-draft button").click()  # a draft that cannot be built says why once opened (#678)
     assert "kein Foto" in page.locator("#posts li.post .todo.error").text_content()
 
 

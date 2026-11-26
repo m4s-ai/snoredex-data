@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+from importlib import metadata
 import io
 import json
 from pathlib import Path
@@ -16,7 +17,7 @@ from gallery_prepare import coefficients, extract
 from card_pages import read_social
 from build import ASSET_BASE_URL, printed_number
 from check import load
-from owner_photo import verified_owner_photo
+from owner_photo import owner_specimen, verified_owner_photo
 
 ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / "verification/cache/instagram"
@@ -288,6 +289,37 @@ def package(model: dict, specimen_id: str, archive: Path, corners=None, *,
     return files, manifest
 
 
+def renderer_files() -> list[Path]:
+    """The repository's code a draft is rendered with: every module of this checkout the exporter has
+    loaded, itself and gallery_prepare.py included, read from sys.modules rather than listed by hand, so
+    a new import counts at once and an unrelated script never does (#678)."""
+    files = {Path(module.__file__).resolve() for module in list(sys.modules.values())
+             if getattr(module, "__file__", None) and Path(module.__file__).suffix == ".py"}
+    return sorted(path for path in files if path.is_relative_to(ROOT) and ".venv" not in path.parts)
+
+
+def fingerprint(model: dict, specimen_id: str) -> str:
+    """What a draft of this SPEC is made of (#678): its photographs by their registered SHA-256 (the cover's
+    and the further carousel photos'), the printing's record, its set edition, local set and localization,
+    the share row (short link, corners, carousel), the exporter's code and Pillow's version. A change elsewhere in the
+    catalogue leaves it as it is. `dataAsOf` in the manifest only says from which state a draft was built."""
+    specimen, item = owner_specimen(model, specimen_id)
+    share, _short, _corners, slides = shared(item["itemId"], specimen_id)
+    sets = model["sets"]
+    edition = next(row for row in sets["setEditions"] if row["setEditionId"] == item["setEditionId"])
+    inputs = {
+        "photographs": [specimen["photographSha256"],
+                        *(owner_specimen(model, slide["specimenId"])[0]["photographSha256"] for slide in slides)],
+        "item": item, "edition": edition, "share": share,
+        "localSet": next(row for row in sets["localSets"] if row["localSetId"] == edition["localSetId"]),
+        "localization": next(row for row in sets["localizations"]
+                             if row["localizationId"] == edition["localizationId"]),
+        "code": [digest(path.read_bytes()) for path in renderer_files()],
+        "pillow": metadata.version("pillow"),  # it encodes the images; imported only when they are drawn
+    }
+    return digest(json.dumps(inputs, sort_keys=True, ensure_ascii=False).encode("utf-8"))
+
+
 def save_package(out: Path, files: dict) -> None:
     if out.exists():
         if all((out / name).is_file() and (out / name).read_bytes() == data for name, data in files.items()):
@@ -319,8 +351,13 @@ def main() -> int:
     parser.add_argument("--owner-feed-jpeg", type=Path,
                         help="edited JPEG you photographed and confirm shows the exact printing for this SPEC")
     parser.add_argument("--feed-alt", help="alt text describing the actual edited feed photo")
+    parser.add_argument("--fingerprint", action="store_true",
+                        help="print what a draft of this SPEC is made of, as one hash, and build nothing (#678)")
     args = parser.parse_args()
     try:
+        if args.fingerprint:
+            print(fingerprint(load(), args.specimen))
+            return 0
         corners = list(zip(args.corners[::2], args.corners[1::2])) if args.corners else None
         files, manifest = package(load(), args.specimen, args.photos, corners,
                                   owner_feed_jpeg=args.owner_feed_jpeg, feed_alt=args.feed_alt)

@@ -88,13 +88,25 @@ cannot be read, nothing counts as online and the page says so. The overview writ
 repository, the photo archive or the site. Keep the checkout current (`git pull` on `main`).
 
 **Posts (#646, owner decision 2026-11-24).** With `--photos` pointing at a checkout of
-snoredex-photos, the Posts tab shows the draft of every printing with a verified short link in
-`data/social.json`: the post image, caption, alt text, the open points before posting, and links to
-the card page, the short link and the image file. The checkout's own `instagram_package.py` builds
-each draft from that checkout, with the cover corners stored in `postCorners`, into `.drafts` inside
-the data folder, once per state of the catalogue files and of the exporter's code, so a pulled fix to
-the cover reaches every draft (#691). Keep the photo checkout current (`git pull`),
-like the catalogue. A carousel shows every image in order, each with its own alt text.
+snoredex-photos, the Posts tab lists every printing with a verified short link in
+`data/social.json`. Opening one ("Entwurf öffnen") shows its draft: the post image, caption, alt
+text, the open points before posting, and links to the card page, the short link and the image file.
+The checkout's own `instagram_package.py` builds each draft from that checkout, with the cover
+corners stored in `postCorners`, into `.drafts` inside the data folder (#678):
+- **The list starts no exporter.** A draft is built when it is opened, and the list shows the drafts
+  already built for their current inputs.
+- **One draft per fingerprint.** `instagram_package.py SPEC --fingerprint` hashes what the draft is
+  made of: its photographs' SHA-256, the printing's record, its set edition, local set and
+  localization, the share row (short link, corners, carousel), every module of the checkout the exporter
+  loads (`gallery_prepare.py` for the cover included) and Pillow's version. A change to
+  another printing rebuilds nothing; a change to this one, or a pulled fix to the cover (#691),
+  rebuilds it once it is opened. The inbox asks for the fingerprint again only after the catalogue
+  files or the code changed.
+- **No unseen approval.** An order names the draft version the owner saw; a draft that changed since
+  is refused with 409. An order keeps the images, caption and alt texts it froze.
+
+Keep the photo checkout current (`git pull`), like the catalogue. A carousel shows every image in
+order, each with its own alt text.
 
 **Posting (#646, owner decisions 2026-11-24).** With `--uploader` pointing at the owner's upload
 service and its key in the environment variable `UPLOADER_KEY` (never in a file, the repository
@@ -143,7 +155,8 @@ A JPEG is decoded completely. A DNG is checked at header level only (a TIFF whos
 | `POST /trash/<id>/restore` | puts a trashed job back |
 | `DELETE /trash/<id>` | deletes a trashed job for good; 409 when filed or without catalogue |
 | `GET /overview` | every active printing with its stage, links and jobs (needs `--repo`) |
-| `GET /posts` | the draft of every shared printing (needs `--repo` and `--photos`) |
+| `GET /posts` | every shared printing, with its draft where it is built already and its order; it builds nothing (needs `--repo` and `--photos`) |
+| `GET /posts/<SPEC>` | that printing's draft, built now unless it is built for its current inputs (#678) |
 | `GET /posts/<SPEC>/image?n=1` | that draft's post image, `n` counting the carousel |
 | `GET /accounts` | the uploader's SnoreDex accounts on Instagram, Facebook and Threads (needs `--uploader`) |
 | `POST /posts/<SPEC>/order` | JSON `{"draft", "accounts", "at"}`: posts now (`at` null) or at that time; 409 for a changed draft or a second order |

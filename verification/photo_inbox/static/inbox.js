@@ -722,7 +722,13 @@ function postItem(post) {
   if (post.shortUrl) links.push(link(post.shortUrl, "Kurzlink"));
   post.posts.forEach((url, index) => links.push(link(url, `Instagram ${index + 1}`)));
   showOrder(item, post);
-  if (post.error) {
+  if (post.opened === false) {  // not built yet (#678): the list starts no exporter, opening builds it
+    item.querySelector(".photo").remove();
+    item.querySelectorAll("label").forEach((label) => label.remove());
+    const open = item.querySelector(".open-draft");
+    open.hidden = false;
+    open.querySelector("button").onclick = () => openDraft(item, post, open.querySelector("button"));
+  } else if (post.error) {
     item.querySelector(".photo").remove();
     item.querySelectorAll("label").forEach((label) => label.remove());
     item.querySelector(".todo").className = "todo error";
@@ -743,6 +749,18 @@ function postItem(post) {
   }
   item.querySelector(".links").replaceChildren(...links);
   return item;
+}
+
+async function openDraft(item, post, button) {
+  button.disabled = true;
+  button.textContent = "Entwurf wird gebaut …";
+  try {
+    item.replaceWith(postItem(await call(`/posts/${post.draftSpecimen}`)));
+  } catch (error) {
+    item.querySelector(".todo").textContent = error.message;
+    button.disabled = false;
+    button.textContent = "Entwurf öffnen";
+  }
 }
 
 function slideItem(slide, index) {
@@ -779,7 +797,7 @@ function showOrder(item, post) {
     }
     return;
   }
-  if (!state.canPost || post.error || !state.accounts.length) return;
+  if (!state.canPost || post.error || post.opened === false || !state.accounts.length) return;
   const form = item.querySelector(".send");
   form.hidden = false;
   form.querySelector(".accounts").replaceChildren(...state.accounts.map((account) => {

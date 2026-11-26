@@ -1,4 +1,5 @@
 """Local Instagram draft regression checks. Requires Pillow like the exporter."""
+import copy
 from io import BytesIO
 import re
 from pathlib import Path
@@ -7,12 +8,41 @@ import unittest
 
 from PIL import Image, ImageCms, ImageDraw, ImageStat
 
-from instagram_package import (carousel_files, digest, edited_post_image, load, package, post_copy, post_image,
-                               release_label)
+from instagram_package import (ROOT, carousel_files, digest, edited_post_image, fingerprint, load, package,
+                               post_copy, post_image, release_label, renderer_files)
 from owner_photo import owner_specimen
 
 
 class InstagramDraftTests(unittest.TestCase):
+    def test_fingerprint_is_per_printing(self):
+        """#678: a draft's key moves with its own inputs only, never with another printing or dataAsOf."""
+        model = load()
+        base = fingerprint(model, "SPEC-0779")
+        self.assertEqual(base, fingerprint(load(), "SPEC-0779"))
+        self.assertNotEqual(base, fingerprint(model, "SPEC-0780"))
+        _, own = owner_specimen(model, "SPEC-0779")
+        _, other = owner_specimen(model, "SPEC-0780")
+
+        def changed(item_id, **fields):
+            edited = copy.deepcopy(model)
+            row = next(row for row in edited["printings"]["printings"] if row["itemId"] == item_id)
+            row.update(fields)
+            edited["printings"]["meta"]["dataAsOf"] = "2099-01-01"
+            return edited
+
+        self.assertEqual(fingerprint(changed(other["itemId"], localCardName="Other"), "SPEC-0779"), base,
+                         "another printing and a new dataAsOf leave the draft as it is")
+        self.assertNotEqual(fingerprint(changed(own["itemId"], localCardName="Changed"), "SPEC-0779"), base,
+                            "the printing's own copy changes the draft")
+
+    def test_fingerprint_covers_the_renderer_it_loaded(self):
+        """#678: the code key is what the exporter imports, the cover's gallery_prepare.py included."""
+        names = {path.relative_to(ROOT).as_posix() for path in renderer_files()}
+        for needed in ("verification/instagram_package.py", "verification/gallery_prepare.py",
+                       "scripts/owner_photo.py", "scripts/card_pages.py", "scripts/build.py"):
+            self.assertIn(needed, names)
+        self.assertNotIn("scripts/regen.py", names, "a script the exporter never loads keys nothing")
+
     def test_release_precision_keeps_estimate(self):
         edition = {"releaseDate": "2026-11-01", "releaseDatePrecision": "month", "releaseApproximate": True}
         self.assertEqual(release_label({}, edition), "c. November 2026")

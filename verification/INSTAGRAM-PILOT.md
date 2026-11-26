@@ -71,4 +71,8 @@ describes that photo and, when approved, its `postCorners`. The exporter writes 
 `post-2.jpg`, `alt-text-2.txt` and so on, every image 4:5 like the cover, since Instagram crops a
 carousel to its first image.
 
+`--fingerprint` builds nothing and prints one hash over what the SPEC's draft is made of (its photographs,
+the printing's record and set rows, the share row, the checkout's modules it loads and Pillow's version); the photo inbox keys its draft
+cache by it (#678).
+
 Run the focused tests with `python verification/test_instagram_package.py`.
