@@ -8,12 +8,12 @@ assignment. The set code is not checked: Tesseract read it in only 18 %.
 """
 
 import io
-import os
 import re
-import shutil
 import subprocess
 
 from PIL import Image, ImageOps
+
+import toolchain
 
 # Tesseract's language data per catalogue language, English added for the digits and Latin codes
 LANGUAGES = {"Japanese": "jpn", "German": "deu", "Chinese (Simplified)": "chi_sim",
@@ -27,8 +27,9 @@ PAIR = re.compile(r"[A-Z]{0,4}\d{1,3}/[A-Z]{0,4}\d{1,3}")
 
 
 def tesseract():
-    """The Tesseract binary: TESSERACT, else the one on PATH; None when it is not installed."""
-    return os.environ.get("TESSERACT") or shutil.which("tesseract")
+    """The Tesseract binary: TESSERACT, else the one on PATH; None when it is not installed. toolchain.py
+    resolves it, so the tool check inspects this same binary (#681)."""
+    return toolchain.binary()
 
 
 def installed_languages(binary):

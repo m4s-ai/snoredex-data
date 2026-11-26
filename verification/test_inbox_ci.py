@@ -9,6 +9,7 @@ filter: it is the required check and must run on every pull request.
     python verification/test_inbox_ci.py
 """
 
+import os
 from pathlib import Path
 import re
 import sys
@@ -110,6 +111,12 @@ def toolchain_checks():
     moved = dict(have, packages=dict(have["packages"], pillow="12.0.0"), languages=want["languages"][1:])
     assert toolchain.drift(want, moved) == [f"Tesseract-Sprache fehlt: {want['languages'][0]}",
                                             f"pillow: 12.0.0 statt {want['packages']['pillow']}"]
+    configured = os.environ.get("TESSERACT")
+    try:  # the check inspects the Tesseract the number guard runs: TESSERACT first, as number_check does
+        os.environ["TESSERACT"] = str(Path(__file__).with_name("no-such-tesseract"))
+        assert toolchain.binary() == os.environ["TESSERACT"] and toolchain.tesseract() == (None, [])
+    finally:
+        os.environ.pop("TESSERACT") if configured is None else os.environ.update(TESSERACT=configured)
     gone = dict(have, tesseract=None, languages=[], packages=dict(have["packages"], numpy=None))
     assert toolchain.drift(want, gone) == [f"tesseract: fehlt statt {want['tesseract']}",
                                            f"numpy: fehlt statt {want['packages']['numpy']}"]

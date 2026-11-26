@@ -12,9 +12,11 @@ Debian's packages (Tesseract) follow bookworm's updates and are not pinned; a mo
 
 from importlib import metadata
 import json
+import os
 from pathlib import Path
 import platform
 import re
+import shutil
 import subprocess
 import sys
 
@@ -30,15 +32,24 @@ def accepted():
     return dict(baseline, packages={name: version for name, version in pins})
 
 
+def binary():
+    """The Tesseract the number guard runs (number_check.tesseract): TESSERACT, else the one on PATH;
+    None when there is none. One resolution, so the check inspects the binary that reads the numbers."""
+    return os.environ.get("TESSERACT") or shutil.which("tesseract")
+
+
 def tesseract():
     """Tesseract's version and languages, or (None, []) when it cannot be run."""
+    found = binary()
+    if not found:
+        return None, []
     try:
-        version = subprocess.run(["tesseract", "--version"], capture_output=True, text=True, timeout=10)
-        langs = subprocess.run(["tesseract", "--list-langs"], capture_output=True, text=True, timeout=10)
+        version = subprocess.run([found, "--version"], capture_output=True, text=True, timeout=10)
+        langs = subprocess.run([found, "--list-langs"], capture_output=True, text=True, timeout=10)
     except (OSError, subprocess.SubprocessError):
         return None, []
-    found = re.search(r"tesseract v?([0-9][0-9.]*)", version.stdout + version.stderr)
-    return (found[1] if found else None), langs.stdout.split()[1:]  # the first line is a heading
+    named = re.search(r"tesseract v?([0-9][0-9.]*)", version.stdout + version.stderr)
+    return (named[1] if named else None), langs.stdout.split()[1:]  # the first line is a heading
 
 
 def running():
