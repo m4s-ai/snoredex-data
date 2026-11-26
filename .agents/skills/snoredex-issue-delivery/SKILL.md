@@ -35,7 +35,7 @@ pull requests before planning. If the issue changes evidence, read
    page code changed.
 7. Before handing off, run `python scripts/regen.py` (it rebuilds the outputs and runs every check)
    and inspect the complete diff, preserving unrelated user changes.
-8. Commit and push only when authorized. After the commit or push, run
+8. Commit on the task branch; push only when authorized. After the commit or push, run
    `python verification/publication_audit.py` again so P6 and P7 see the real history.
 9. Create or update the requested pull request: title and description around the final scope, the
    linked issue, and the verification actually run. Close an issue only when its criteria are met.
