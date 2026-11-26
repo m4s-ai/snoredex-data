@@ -6,6 +6,8 @@ print the branch, or refuse with a reason. Checked: the whole chain, a restart a
 without a second intake, pull request or merge, red CI, a refusal, an alias already on main, a run a
 restart cut off, and the page's button. The stand-in GitHub answers a dispatch as GitHub does, with the
 id of the run it started, and titles each run by its workflow's run-name (#673).
+Published orders also return through the worker's permalink PR (#646): once per link, surviving a
+lost merge answer, guarded by the local gate, the required CI and the ownership of the remote branch.
 
     python verification/photo_inbox/test_runner.py
 """
@@ -189,7 +191,9 @@ def setup(temp, alias=None):
                             "sourcePrintingId": printing, "sourceClaimRefs": [] if printing else
                             ["CLAIM:specimen:SPEC-0002", "CLAIM:source-first:key-c"]}
                            for item, printing in PRINTINGS.items()]}
-    data = remote(temp, "data", {"verification/photo_inbox/intake.py": FAKE_INTAKE, "scripts/regen.py": "",
+    data = remote(temp, "data", {"verification/photo_inbox/intake.py": FAKE_INTAKE,
+                                 "scripts/regen.py": "import os, sys; sys.exit(bool(os.environ.get('FAKE_GATE_FAIL')))\n",
+                                 "verification/publication_audit.py": "",
                                  "data/social.json": json.dumps(social, indent=2) + "\n",
                                  "collector_catalogue.json": json.dumps(catalogue),
                                  "verification/specimens.json": json.dumps({"specimens": []}),
@@ -235,6 +239,113 @@ def recite(data_remote, temp, cited):
 
 def social_on(data_remote, ref):
     return json.loads(git("--git-dir", data_remote, "show", f"{ref}:data/social.json"))
+
+
+def posted(root, field="ig:snoredex", url="https://www.instagram.com/p/abc/"):
+    path = root / ".posts/SPEC-0001/order.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    order = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"itemId": ITEM, "targets": {}}
+    order["targets"][field] = {"status": "published", "permalink": url}
+    path.write_text(json.dumps(order), encoding="utf-8", newline="\n")
+
+
+def permalink_feedback():
+    """A published target returns through one checked PR, including after a lost merge answer."""
+    with TemporaryDirectory() as temp:
+        root, data, photos = setup(temp)
+        github = StandIn(data)
+        run = make(root, github, data, photos)
+        run.record_posts()
+        assert github.opened == 0 and not run.data.exists(), "no published order: no Git or API work"
+        posted(root)
+        posted(root, "fb_page:1", "https://www.facebook.com/1/posts/2")
+        merge = github.merge
+
+        def lost_answer(number, sha):
+            merge(number, sha)
+            raise Crash
+
+        github.merge = lost_answer
+        try:
+            run.record_posts()
+        except Crash:
+            pass
+        else:
+            raise AssertionError("the process died after GitHub merged")
+        github.merge = merge
+        run = make(root, github, data, photos)  # only disk survives the restart
+        run.record_posts()
+        row = social_on(data, "main")[0]
+        saved = runner.read_state(root / runner.WORK / "permalinks")
+        assert saved["pr"] == 100 and saved["prHead"], "the merge remains traceable after the lost answer"
+        assert row["instagramPosts"] == ["https://www.instagram.com/p/abc/"]
+        assert row["facebookPosts"] == ["https://www.facebook.com/1/posts/2"]
+        assert "threadsPosts" not in row and github.opened == 1 and len(github.merged) == 1
+        assert github.dispatched == [], "the permalink PR alone authorizes no Pages run"
+        run.prepare = lambda: (_ for _ in ()).throw(AssertionError("finished orders cost no Git/API work"))
+        before = (root / runner.WORK / "permalinks" / runner.STATE).read_bytes()
+        run.process_next(timeout=0)  # the idle worker, rather than a button or an agent, runs the import
+        assert (root / runner.WORK / "permalinks" / runner.STATE).read_bytes() == before
+        posted(root, "threads:snoredex", "https://www.threads.com/@snoredex/post/xyz")
+        make(root, github, data, photos).record_posts()
+        row = social_on(data, "main")[0]
+        assert row["threadsPosts"] == ["https://www.threads.com/@snoredex/post/xyz"]
+        assert github.opened == 2 and len(github.merged) == 2, "later target adds one PR, keeps earlier links"
+
+
+def permalink_failure():
+    """Red CI remains unmerged; a retry reuses the branch/PR and never overwrites a foreign head."""
+    with TemporaryDirectory() as temp:
+        root, data, photos = setup(temp)
+        github = StandIn(data, checks="failure")
+        posted(root)
+        make(root, github, data, photos).record_posts()
+        folder = root / runner.WORK / "permalinks"
+        state = runner.read_state(folder)
+        assert state["status"] == "failed" and "ist rot" in state["error"]
+        assert not social_on(data, "main")[0]["instagramPosts"] and github.opened == 1
+        posted(root, "threads:snoredex", "https://www.threads.com/@snoredex/post/later")
+        github.result = "success"
+        make(root, github, data, photos).record_posts()
+        assert runner.read_state(folder)["status"] == "done" and github.opened == 1
+        assert "threadsPosts" not in social_on(data, "main")[0], "finish the frozen batch first"
+        make(root, github, data, photos).record_posts()
+        assert social_on(data, "main")[0]["threadsPosts"] == ["https://www.threads.com/@snoredex/post/later"]
+    with TemporaryDirectory() as temp:
+        root, data, photos = setup(temp)
+        github = StandIn(data, fail_open=1)
+        posted(root)
+        run = make(root, github, data, photos)
+        run.record_posts()
+        branch = runner.read_state(root / runner.WORK / "permalinks")["branch"]
+        work = Path(temp) / "foreign"
+        git("clone", "-q", "-b", branch, data, str(work))
+        (work / "foreign.txt").write_text("someone else's work\n", encoding="utf-8", newline="\n")
+        git("-C", str(work), "add", "-A")
+        git("-C", str(work), "commit", "-q", "-m", "foreign change")
+        git("-C", str(work), "push", "-q")
+        foreign = git("--git-dir", data, "rev-parse", branch)
+        make(root, github, data, photos).record_posts()
+        state = runner.read_state(root / runner.WORK / "permalinks")
+        assert state["status"] == "failed" and "fremden Stand" in state["error"], state
+        assert git("--git-dir", data, "rev-parse", branch) == foreign and not github.merged
+
+
+def permalink_local_gate():
+    with TemporaryDirectory() as temp:
+        root, data, photos = setup(temp)
+        github = StandIn(data)
+        posted(root)
+        os.environ["FAKE_GATE_FAIL"] = "1"
+        try:
+            make(root, github, data, photos).record_posts()
+        finally:
+            del os.environ["FAKE_GATE_FAIL"]
+        state = runner.read_state(root / runner.WORK / "permalinks")
+        assert state["status"] == "failed" and "regen.py" in state["error"]
+        assert not github.opened and not git("--git-dir", data, "branch", "--list", "posts/*")
+        make(root, github, data, photos).record_posts()
+        assert github.opened == 1 and len(github.merged) == 1
 
 
 def whole_chain():
@@ -729,6 +840,9 @@ def page_button():
 
 
 def main():
+    permalink_feedback()
+    permalink_failure()
+    permalink_local_gate()
     whole_chain()
     restart_after_failure()
     retry_after_failed_delivery()

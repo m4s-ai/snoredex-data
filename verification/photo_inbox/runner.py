@@ -23,6 +23,11 @@ printing and its corners beside the run. Intake starts only on unchanged inputs,
 leaves for the printing (the short link, the alias PR) the run checks that main filed its SPEC for the
 frozen printing. A run from before the freeze takes the printing main filed its SPEC for.
 
+The same worker returns published orders' permalinks through a data PR (#646). It freezes each batch
+beside the run, validates and builds locally, and merges only on the required checks at its pushed
+head. New targets join the next batch; an unchanged completed batch costs no Git/API work or write.
+This imports only posts the owner's click already sent; it starts no post and no Pages run.
+
 Access lives only in the Homelab's environment (#654): `INTAKE_GITHUB_TOKEN`, a token for pull
 requests, merges and workflow runs in snoredex-data, and `PHOTOS_DEPLOY_KEY`, the path of a deploy key
 for snoredex-photos only.
@@ -45,6 +50,8 @@ from uuid import uuid4
 import zipfile
 
 from overview import Catalogue
+from permalinks import add_links
+from posting import published_links
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
 # ponytail: the allowlist of the runner's own checkout, not the clone's; both are main once the inbox is updated
@@ -272,15 +279,24 @@ class Runner:
 
         def loop():
             while True:
-                job_id = self.jobs.get()
-                try:
-                    self.run(job_id)
-                except Exception as error:  # noqa: BLE001 - one broken job must not stop the queue
-                    print(f"Übernahme {job_id[:12]}: {error}", flush=True)
-                finally:
-                    self.waiting.discard(job_id)
+                self.process_next()
 
         threading.Thread(target=loop, name="intake-runner", daemon=True).start()
+
+    def process_next(self, timeout=60):
+        """One queue turn; permalink PRs share this worker so they never race intake's clones."""
+        try:
+            job_id = self.jobs.get(timeout=timeout)
+        except queue.Empty:
+            job_id = None
+        try:
+            if job_id is not None:
+                self.run(job_id)
+            self.record_posts()
+        except Exception as error:  # noqa: BLE001 - one broken job or link record must not stop the queue
+            print(f"Übernahme {str(job_id or 'Post-Permalinks')[:64]}: {error}", flush=True)
+        finally:
+            self.waiting.discard(job_id)
 
     def nightly(self, ready, hour=3):
         """Each night at `hour` (UTC), queue every job `ready()` names, failed ones included."""
@@ -328,6 +344,47 @@ class Runner:
         if done.returncode:
             raise RunError(f"git {args[0]}: {(done.stderr or done.stdout).strip()[-300:]}")
         return done.stdout.strip()
+
+    def record_posts(self):
+        """Return published links through one durable data PR, in the intake worker's own clones.
+        Completed, unchanged orders cost no Git/API call or write. A pending batch stays frozen until
+        main carries it; targets published meanwhile join the next batch."""
+        folder = self.root / WORK / "permalinks"
+        state = read_state(folder)
+        links = published_links(self.root)
+        if not state or state.get("status") == "done":
+            if not links or state.get("links") == links:
+                return
+            state = {"links": links, "branch": "posts/permalinks-" + uuid4().hex[:12]}
+        folder.mkdir(parents=True, exist_ok=True)
+        write_state(folder, dict(state, status="running", error=None))
+        try:
+            self.import_posts(folder, state)
+            write_state(folder, dict(state, status="done", error=None, finishedAt=now()))
+        except (RunError, OSError, subprocess.SubprocessError, KeyError, ValueError) as error:
+            write_state(folder, dict(state, status="failed", error=str(error), finishedAt=now()))
+            print(f"Post-Permalinks: {error}", flush=True)
+
+    def import_posts(self, folder, state):
+        self.prepare()
+        added = add_links(self.data, state["links"])
+        if not added:
+            return  # already on main, including a merge whose answer went missing
+        self.git(self.data, "switch", "-q", "-C", state["branch"])
+        self.check_script("scripts/regen.py")
+        message = f"Record {added} published platform permalinks from the photo inbox (#646)"
+        self.git(self.data, "add", "-A")
+        self.git(self.data, "commit", "-q", "-m", message)
+        self.check_script("verification/publication_audit.py")
+        self.publish_branch(folder, state, "pr", state["branch"], message, message)
+        write_state(folder, dict(state, status="running"))
+        self.land(state["pr"], state.get("prHead"), state.get("pushed", []))
+
+    def check_script(self, script):
+        done = subprocess.run([sys.executable, script], cwd=self.data, env=self.env,
+                              capture_output=True, text=True, timeout=1800)
+        if done.returncode:
+            raise RunError(f"{script} schlägt fehl: " + ((done.stdout + done.stderr).strip().splitlines() or ["?"])[-1])
 
     def prepare(self):
         """Both clones at origin/main with nothing of an earlier run left; they are the runner's own."""
@@ -531,10 +588,7 @@ class Runner:
         path.write_text(json.dumps(rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
         branch = f"intake/{state['specimen']}-alias"
         self.git(self.data, "switch", "-q", "-C", branch)
-        done = subprocess.run([sys.executable, "scripts/regen.py"], cwd=self.data, env=self.env,
-                              capture_output=True, text=True, timeout=1800)
-        if done.returncode:
-            raise RunError("regen.py schlägt fehl: " + ((done.stdout + done.stderr).strip().splitlines() or ["?"])[-1])
+        self.check_script("scripts/regen.py")
         message = (f"Record the verified short link of {state['specimen']}\n\n{item_id} -> {state['alias']}, "
                    "verified by Provision Snoredex short links (#659).")
         self.git(self.data, "add", "-A")

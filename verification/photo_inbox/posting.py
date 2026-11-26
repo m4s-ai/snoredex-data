@@ -245,9 +245,12 @@ def published_links(root):
     """Every permalink a published order reports, by item and data field, for the data PR."""
     links = {}
     for path in sorted(Path(root, POSTS).glob("SPEC-*/order.json")):
-        order = json.loads(path.read_text(encoding="utf-8"))
-        for account, target in order["targets"].items():
-            field = PLATFORMS.get(account.split(":", 1)[0])
-            if field and target["status"] == "published" and target.get("permalink"):
-                links.setdefault(order["itemId"], {}).setdefault(field, []).append(target["permalink"])
+        try:
+            order = json.loads(path.read_text(encoding="utf-8"))
+            for account, target in order["targets"].items():
+                field = PLATFORMS.get(account.split(":", 1)[0])
+                if field and target["status"] == "published" and target.get("permalink"):
+                    links.setdefault(order["itemId"], {}).setdefault(field, []).append(target["permalink"])
+        except (OSError, ValueError, KeyError, TypeError, AttributeError) as error:
+            print(f"Post-Permalinks {path.parent.name}: {type(error).__name__}: {error}", flush=True)
     return links
