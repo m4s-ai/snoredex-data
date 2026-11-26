@@ -561,6 +561,12 @@ def runs_checks(temp):
             assert sorted(group("active")) == sorted(ids[:3]) and run.jobs.qsize() == 1, "queued exactly once"
             assert "Nicht neu gestartet" in refused.locator(".error").text_content(), "and survives a refresh"
             assert intake_runner.read_state(root / ids[2])["status"] == "queued"
+            # a nightly round while the page is open shows once the tab is opened again, without a reload
+            (root / intake_runner.WORK / intake_runner.NIGHT).write_text(
+                json.dumps({"at": at, "jobs": ids[:2]}), encoding="utf-8", newline="\n")
+            page.click("#tab-posts")
+            page.click("#tab-laeufe")
+            page.locator("#runs-night >> text=2 Aufträge").wait_for(timeout=5000)  # well before the 15 s poll
             page.goto(f"http://127.0.0.1:{servers[1].effective_port}/#laeufe")
             page.locator("#runs-done li").wait_for()
             assert "nicht eingerichtet" in page.locator("#runs-status").text_content(), "without a runner it says so"

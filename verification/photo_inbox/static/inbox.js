@@ -93,6 +93,9 @@ function activate(name, focus) {
     field(entry.getAttribute("aria-controls")).hidden = !selected;
   }
   if (focus) tab.focus();
+  // the runs change on the server (the nightly round, a run finishing): opening the tab reads them anew (#685);
+  // only this read-only tab, since a reload of Fotos would drop a description being typed
+  if (tabName(tab) === "laeufe") showRuns();
 }
 
 function follow() {
