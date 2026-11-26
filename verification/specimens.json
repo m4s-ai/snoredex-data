@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 1129,
+  "count": 1130,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -23762,6 +23762,33 @@
         ],
         "ownerAttestedAt": "2026-11-26",
         "basis": "The owner assigned this photograph to item-f7d50800-ce84-5797-9946-add986791470 (printing F0582-P03) in the private photo inbox on 2026-11-26."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-1130",
+      "photographedBy": "collection owner",
+      "photographedByBasis": "Owner decision of 2026-11-23: every photograph in the private photo inbox is the collection owner's own. Uploaded through the private photo inbox on 2026-11-24, job ff3d83844e67d9f4cc88fe8ba6cfeb75d059568d01ceb8e0cceba22f7cf58c8b.",
+      "setCode": "cs2a C",
+      "number": "142/115",
+      "variant": "V2",
+      "language": "Chinese (Simplified)",
+      "heldBy": "collection owner",
+      "inspectedFrom": "Owner photograph uploaded through the private photo inbox as a DNG, whose embedded full-size preview JPEG was extracted byte for byte; metadata reduced to the orientation tag and the ICC colour profile (Exif including GPS, XMP and maker data removed); the filed image decodes pixel-identical to its source. Filed by the inbox intake script (#656): 8064x6048 stored, Exif orientation 6.",
+      "photograph": "SPEC-1130.jpg",
+      "photographSource": null,
+      "photographSha256": "sha256:6d71b39eb65b1cc1e637abee0aa983d087af51a8e10f48869e234f4e2ac5ec64",
+      "observed": "Not read from the face: filed by the inbox intake script. The photograph's identity rests on the owner's assignment to printing F0058-P01 (Chinese (Simplified) cs2a C 142/115); no finish, edition or marking is recorded from it.",
+      "recordedAt": "2026-11-26",
+      "citedBy": [
+        "F0058-P01"
+      ],
+      "physicalObservation": {
+        "ownerAttestedFields": [
+          "identity"
+        ],
+        "ownerAttestedAt": "2026-11-26",
+        "basis": "The owner assigned this photograph to item-49abb483-b745-5e45-97a8-2c8618d18321 (printing F0058-P01) in the private photo inbox on 2026-11-26."
       },
       "listingUrl": null
     }
