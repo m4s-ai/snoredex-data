@@ -190,7 +190,10 @@ docker compose up -d --build
 
 The image is built from the checkout the compose file sits in. A merge that changes the inbox
 (`scripts/`, `verification/photo_inbox/`, `verification/*.py`) needs an update on the Homelab, which
-the owner or Hermes runs, never an agent (AGENTS.md). For it, run `sh update.sh` in that folder
+the owner or Hermes runs, never an agent (AGENTS.md). Hermes follows the skill
+[`snoredex-inbox-update`](../../.agents/skills/snoredex-inbox-update/SKILL.md) when the owner says
+"Update": it checks that no intake run is going, updates, checks the version line and reports. For
+it, run `sh update.sh` in that folder
 instead of the last line above. It pulls the checkout, then rebuilds and restarts with
 the commit the image is built from, and prints that commit.
 
