@@ -282,6 +282,35 @@ def gate_checks(temp):
         raise AssertionError("a specimen row without its SHA-256 passed the model check")
 
 
+def encoder_checks():
+    """#680: intake and the gallery workflow encode a card face with one encoder, so the same photo gives
+    the same WebP and PNG bytes either way, at 240, 480 and up to 1200 px and a 360 px preview that keeps
+    the source's ICC profile."""
+    from PIL import Image
+
+    import gallery_prepare
+
+    icc = Image.open(intake.ROOT / "images/previews/SPEC-1125.png").info["icc_profile"]  # fixed bytes
+    upright = Image.new("RGB", (1700, 2300), (20, 20, 24))  # the size CORNERS are measured in
+    ImageDraw.Draw(upright).polygon([tuple(p) for p in CORNERS], fill=(225, 205, 60))
+    ImageDraw.Draw(upright).ellipse((600, 900, 1000, 1300), fill=(30, 90, 200))
+    out = BytesIO()
+    upright.save(out, "JPEG", quality=92, icc_profile=icc)
+    renditions, preview = intake.faces(out.getvalue(), CORNERS)
+    # the gallery path as render() takes it: the upright source, white under alpha, the same face
+    with Image.open(BytesIO(out.getvalue())) as image:
+        rgba = image.convert("RGBA")
+        rgb = Image.alpha_composite(Image.new("RGBA", rgba.size, "white"), rgba).convert("RGB")
+        face, _ = gallery_prepare.extract(rgb, [tuple(pair) for pair in CORNERS])
+        source_icc = image.info["icc_profile"]
+    gallery = gallery_prepare.webp_renditions(face)
+    assert list(renditions.values()) == [data for data, _ in gallery], "the same WebP bytes on both paths"
+    assert preview == gallery_prepare.png_preview(face, source_icc)[0], "the same PNG preview on both paths"
+    assert list(renditions) == [240, 480, min(1200, face.width)], list(renditions)
+    with Image.open(BytesIO(preview)) as image:
+        assert (image.format, image.width, image.mode) == ("PNG", 360, "P") and image.info["icc_profile"] == icc
+
+
 def reproduction_checks(photos):
     """SPEC-1125's committed gallery and preview files, rebuilt from its archive copy and corners."""
     data = intake.model(intake.ROOT)
@@ -302,6 +331,7 @@ def main():
         (temp / "race").mkdir()
         race_checks(temp / "race")
         gate_checks(temp / "gate")
+    encoder_checks()
     if photos:
         reproduction_checks(photos)
     print("intake: all checks passed" + ("" if photos else " (without the photo archive)"))
