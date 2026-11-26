@@ -297,7 +297,7 @@ stopped:
 - An open pull request is reused, and a merged one gets no new action.
 - The branch on GitHub is reused when it holds the same files, and replaced only when it holds a commit
   this run pushed, with a lease on exactly that commit. Anything else on it is someone's: it stays, and
-  the run stops (#674). Native auto-merge is off in the repository, so the run checks the head itself.
+  the run stops (#674). The run checks the head itself and does not rely on native auto-merge.
 - An alias already on main is not recorded again.
 - `Publish site` and `Provision Snoredex short links` are dispatched once and followed by the id of the
   run GitHub started (#673), never by its start time, so a foreign run of the same workflow decides
