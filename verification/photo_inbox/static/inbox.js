@@ -899,6 +899,7 @@ function runTimes(run) {
   if (when(run.startedAt)) parts.push(`Start ${when(run.startedAt)}`);
   else if (when(run.queuedAt)) parts.push(`wartet seit ${when(run.queuedAt)}`);
   if (when(run.finishedAt)) parts.push(`Ende ${when(run.finishedAt)}`);
+  if (run.aliasReused) parts.push("vorhandenen Kurzlink wiederverwendet");
   return parts.join(" · ");
 }
 
@@ -924,7 +925,8 @@ function runItem(run) {
   const error = item.querySelector(".error");
   error.textContent = [run.status === "failed" && run.error, refused].filter(Boolean).join("\n");
   error.hidden = !error.textContent;
-  const links = [[run.prUrl, `Übernahme-PR #${run.pr}`], [run.aliasPrUrl, `Kurzlink-PR #${run.aliasPr}`],
+  const links = [[run.prUrl, `Übernahme-PR #${run.pr}`], [run.publishUrl, "Veröffentlichung"],
+                 [run.aliasRunUrl, "Kurzlink-Prüfung"], [run.aliasPrUrl, `Kurzlink-PR #${run.aliasPr}`],
                  [run.shortUrl, `Kurzlink ${run.alias}`]].filter(([href]) => href);
   item.querySelector(".links").replaceChildren(...links.map(([href, text]) => link(href, text)));
   const retry = item.querySelector(".retry");

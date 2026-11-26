@@ -4,6 +4,8 @@ from contextlib import redirect_stdout
 from io import BytesIO
 from io import StringIO
 import json
+import shutil
+from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock, patch
@@ -31,6 +33,24 @@ class YourlsTests(unittest.TestCase):
         other, _ = card_plan(MASTER, None)
         for field in ("shortUrl", "targetUrl", "previewUrl"):
             self.assertNotEqual(self.plan[field], other[field])
+
+    def test_plan_uses_the_selected_checkout_without_changing_globals(self):
+        with TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            names = [f"data/{name}.json" for name in ("printings", "sets", "images", "evidence", "claims", "social")]
+            names += ["verification/specimens.json", "verification/owner_adjudications.json", self.preview]
+            for name in names:
+                target = root / name
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(ROOT / name, target)
+            path = root / "data/social.json"
+            rows = json.loads(path.read_text(encoding="utf-8"))
+            next(row for row in rows if row["itemId"] == POKE)["shortAlias"] = "sdrootfixture"
+            path.write_text(json.dumps(rows), encoding="utf-8", newline="\n")
+            plan, preview = card_plan(POKE, None, root)
+            self.assertEqual(plan["shortAlias"], "sdrootfixture")
+            self.assertEqual(preview, self.preview)
+        self.assertEqual(card_plan(POKE, None)[0], self.plan)
 
     def test_check_and_collision_never_create(self):
         api = Mock(return_value=self.missing)

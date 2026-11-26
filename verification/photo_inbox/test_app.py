@@ -543,7 +543,7 @@ def runs_checks(temp):
                "error": "pages.yml endete mit failure: https://example.invalid/runs/1", "startedAt": at,
                "finishedAt": at, "approval": {"itemId": "x"}, "runs": {"pages.yml": {"request": "inbox-secret"}}},
               {"status": "done", "done": list(intake_runner.STEPS), "specimen": "SPEC-0103", "pr": 103, "aliasPr": 104,
-               "alias": "sdabc", "startedAt": at, "finishedAt": at},
+               "alias": "sdabc", "startedAt": at, "finishedAt": at, "publishRun": 9001, "aliasRun": 9002},
               # failed before filing, and its job has no printing now: a retry is refused (409)
               {"status": "failed", "step": "intake", "done": [], "origin": "night", "finishedAt": at,
                "error": "https://example.invalid/a-very-long-unbreakable-token-" + "x" * 80}]
@@ -571,6 +571,8 @@ def runs_checks(temp):
             assert groups == {"active": sorted(ids[:2]), "failed": sorted([ids[2], ids[4]]), "done": [ids[3]]}, groups
             done = page.locator("#runs-done li .links a").evaluate_all("links => links.map(a => a.href)")
             assert done == ["https://github.com/m4s-ai/snoredex-data/pull/103",
+                            "https://github.com/m4s-ai/snoredex-data/actions/runs/9001",
+                            "https://github.com/m4s-ai/snoredex-data/actions/runs/9002",
                             "https://github.com/m4s-ai/snoredex-data/pull/104", "https://go.m4s.eu/sdabc"], done
             # a wide font, as the Linux runner's fallback, must not push the page sideways either
             page.evaluate("""() => { document.body.style.fontFamily = 'Verdana, "DejaVu Sans", sans-serif'; }""")

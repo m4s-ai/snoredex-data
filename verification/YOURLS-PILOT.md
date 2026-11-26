@@ -35,7 +35,8 @@ limit which operations the pilot performs.
 
 Run **Provision Snoredex short links** from `main` using the GitHub Actions UI or workflow dispatch
 API. The job accepts one to three space-separated item IDs from the catalogue. Leave `request` empty: the photo inbox's intake run sets it to find its own run (#673). The photo
-inbox's intake run starts it for every newly filed owner photo.
+inbox's individual intake run starts it for a primary owner photo. Its nightly round groups missing
+aliases in batches of at most three and reuses already recorded verified aliases (#679).
 
 The pilot is done: SPEC-0774 alone, then the two CSV7C variants in one batch and again in reverse
 order, gave stable assignments, and all three aliases are recorded in `data/social.json`. They stay

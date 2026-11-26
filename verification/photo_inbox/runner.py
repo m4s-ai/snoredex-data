@@ -249,22 +249,27 @@ class Runner:
                                            "-o StrictHostKeyChecking=accept-new "
                                            f"-o UserKnownHostsFile={self.root / WORK / 'known_hosts'}")
         self.jobs, self.waiting = queue.Queue(), set()
+        self.queue_lock = threading.RLock()
 
     # --- the queue ------------------------------------------------------------------------------
     def submit(self, job_id, origin="button"):
         """Queue a job once; a queued or running job is not queued again. The button and the night both
         land here, so both freeze the approval; a run that filed already keeps the one it filed for. The
         run records who queued it, "button" or "night" (#685)."""
-        if job_id in self.waiting:
-            return False
-        self.waiting.add(job_id)
-        state = read_state(self.root / job_id)
-        if "intake" not in state.get("done", []):
-            state["approval"] = approval(self.root / job_id)
-        write_state(self.root / job_id, dict(state, status="queued", error=None, origin=origin,
-                                             queuedAt=now(), startedAt=None, finishedAt=None))
-        self.jobs.put(job_id)
-        return True
+        with self.queue_lock:
+            state = read_state(self.root / job_id)
+            if state.get("batch") and not state.get("batchExcluded"):
+                from night_batch import enqueue
+                return enqueue(self, state["batch"])
+            if job_id in self.waiting:
+                return False
+            self.waiting.add(job_id)
+            if "intake" not in state.get("done", []):
+                state["approval"] = approval(self.root / job_id)
+            write_state(self.root / job_id, dict(state, status="queued", error=None, origin=origin,
+                                                 queuedAt=now(), startedAt=None, finishedAt=None))
+            self.jobs.put(job_id)
+            return True
 
     def recover(self):
         """A run a restart cut off stops where it was; the button or the night starts it again."""
@@ -291,7 +296,11 @@ class Runner:
             job_id = None
         try:
             if job_id is not None:
-                self.run(job_id)
+                if job_id.startswith("night:"):
+                    from night_batch import Batch
+                    Batch(self, job_id.removeprefix("night:")).run()
+                else:
+                    self.run(job_id)
             self.record_posts()
         except Exception as error:  # noqa: BLE001 - one broken job or link record must not stop the queue
             print(f"Übernahme {str(job_id or 'Post-Permalinks')[:64]}: {error}", flush=True)
@@ -310,15 +319,13 @@ class Runner:
         threading.Thread(target=loop, name="intake-nightly", daemon=True).start()
 
     def night_round(self, ready):
-        """Queue every job `ready()` names and write down the round: when, and which jobs it queued."""
-        at = now()
-        queued = [job_id for job_id in ready() if self.submit(job_id, origin="night")]
-        path = self.root / WORK / NIGHT
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps({"at": at, "jobs": queued}) + "\n", encoding="utf-8", newline="\n")
+        """D05/D06 (#679): queue durable shared batches; button jobs still run immediately."""
+        from night_batch import schedule
+        with self.queue_lock:
+            schedule(self, ready())
 
     # --- one run --------------------------------------------------------------------------------
-    def run(self, job_id):
+    def run(self, job_id, steps=STEPS, finish=True):
         folder = self.root / job_id
         if not (folder / "job.json").is_file():
             return  # moved to the trash after it was queued: nothing to file
@@ -326,14 +333,15 @@ class Runner:
         state.setdefault("done", [])
         state.update(startedAt=now(), finishedAt=None)
         try:
-            for name in STEPS:
+            for name in steps:
                 if name not in state["done"]:
                     state.update(step=name, error=None)
                     write_state(folder, dict(state, status="running"))
                     getattr(self, "step_" + name.replace("-", "_"))(folder, state)
                     state["done"].append(name)
                     write_state(folder, dict(state, status="running"))
-            write_state(folder, dict(state, status="done", step=None, error=None, finishedAt=now()))
+            if finish:
+                write_state(folder, dict(state, status="done", step=None, error=None, finishedAt=now()))
         except (RunError, OSError, subprocess.SubprocessError, KeyError, ValueError) as error:
             write_state(folder, dict(state, status="failed", error=str(error) or type(error).__name__,
                                      finishedAt=now()))
@@ -369,6 +377,8 @@ class Runner:
         self.prepare()
         added = add_links(self.data, state["links"])
         if not added:
+            if state.get("pr"):
+                self.defer_publication(state["links"])
             return  # already on main, including a merge whose answer went missing
         self.git(self.data, "switch", "-q", "-C", state["branch"])
         self.check_script("scripts/regen.py")
@@ -379,6 +389,15 @@ class Runner:
         self.publish_branch(folder, state, "pr", state["branch"], message, message)
         write_state(folder, dict(state, status="running"))
         self.land(state["pr"], state.get("prHead"), state.get("pushed", []))
+        self.defer_publication(state["links"])
+
+    def defer_publication(self, items):
+        from night_batch import defer
+        defer(self, items)
+
+    def verify_publication(self, items):
+        from night_batch import verify_publication
+        verify_publication(self.data, items)
 
     def check_script(self, script):
         done = subprocess.run([sys.executable, script], cwd=self.data, env=self.env,
@@ -487,16 +506,17 @@ class Runner:
             self.sleep(self.poll)
         raise RunError(f"PR #{number} wurde nicht rechtzeitig grün: {pull['html_url']}")
 
-    def workflow(self, folder, state, name, inputs):
-        """Start a workflow on main once and wait for exactly the run it started (#673); anything but
-        success stops the run. A run that clearly failed is forgotten, so the next start dispatches anew;
+    def workflow(self, folder, state, name, inputs, allow_failure=False):
+        """Start a workflow on main once and wait for exactly the run it started (#673). By default,
+        anything but success stops the run; a batch may read a failed run's per-item artifact (#679).
+        A run that clearly failed is forgotten, so the next start dispatches anew;
         one still running, or not found yet, is waited for again by the next start."""
         record = self.dispatched(folder, state, name, inputs)
         deadline = datetime.now(timezone.utc) + self.patience
         while True:
             run = self.own_run(folder, state, name, record)
             if run and run["status"] == "completed":
-                if run["conclusion"] != "success":
+                if run["conclusion"] != "success" and not allow_failure:
                     del state["runs"][name]
                     raise RunError(f"{name} endete mit {run['conclusion']}: {run['html_url']}")
                 return run
@@ -545,6 +565,10 @@ class Runner:
         """The printing this run delivers to, checked on main before anything leaves for it: main must
         file the run's SPEC for the frozen printing. A run from before the freeze takes main's."""
         self.prepare()
+        return self.filed_printing(state)
+
+    def filed_printing(self, state):
+        """The same frozen-identity guard on an already prepared checkout (shared nightly batch)."""
         filed = Catalogue(self.data).filed_item(state["specimen"])
         if filed is None:
             raise RunError(f"Auf main ist {state['specimen']} keinem Druck eindeutig zugeordnet. "
@@ -583,6 +607,8 @@ class Runner:
         if row is None:
             raise RunError("Der Druck hat auf main keine Share-Zeile.")
         if row.get("shortAlias") == state["alias"]:
+            if state.get("aliasPr"):
+                self.defer_publication([item_id])
             return  # recorded already, by this run before it stopped or by hand
         row["shortAlias"] = state["alias"]
         path.write_text(json.dumps(rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
@@ -594,4 +620,6 @@ class Runner:
         self.git(self.data, "add", "-A")
         self.git(self.data, "commit", "-q", "-m", message)
         self.publish_branch(folder, state, "aliasPr", branch, f"Record the short link of {state['specimen']}", message)
+        write_state(folder, dict(state, status="running"))
         self.land(state["aliasPr"], state.get("aliasPrHead"), state.get("pushed", []))
+        self.defer_publication([item_id])

@@ -138,9 +138,10 @@ a broken order is logged under its SPEC and the others go on. Repeated links are
 A restart or lost response resumes the saved batch and its PR. Targets published meanwhile join the
 next batch. Once the unchanged batch is on main, subsequent checks make no Git/API call or write.
 Errors and the PR number/head remain beside the batch; a failure is retried on the next worker turn.
-This starts neither a post nor a Pages run. `sync` brings merged links into the inbox; their public
-display is checked after the next authorized Pages deployment, against the printing, platform,
-permalink, short-link target and preview. The phone/test-account acceptance in #646 remains separate.
+This starts no post and no immediate Pages run. It marks merged links for the next common nightly
+deployment (D06, #679). `sync` brings them into the inbox sooner. Their public data, short-link target
+and preview are reconciled after the common deployment. The phone/test-account acceptance in #646
+remains separate.
 
 Without a runner, the existing local import from the data folder or its read-only share is available
 for an authorized data PR (AGENTS.md):
@@ -325,10 +326,13 @@ python verification/photo_inbox/intake.py I:\<job> --photos <photo checkout> [--
 
 ## Intake run on the Homelab (#659)
 
-`runner.py` runs the whole chain in the inbox container, without an agent. It starts from the
-**Übernehmen** button on a job, or each night at 03:00 UTC for every job that is ready, failed runs
-included. A job is ready when it has its printing, approved corners and no unconfirmed number mismatch,
-and is not filed yet.
+`runner.py` runs the chain in the inbox container, without an agent. The **Übernehmen** button starts
+an individual run immediately. At 03:00 UTC the nightly round groups ready jobs and resumes failed
+batches (D05/D06, owner decisions of 2026-11-26 in #679). A job is ready when it has its printing,
+approved corners and no unconfirmed number mismatch, and is not filed yet; a failed delivery of a
+filed job is ready to resume too.
+
+An individual button run follows these steps:
 
 1. `intake.py` files the job in the run's own clones (`.work/` in the data folder) and hands its result
    over with `--result`. The run then pushes the branch and opens its pull request.
@@ -345,6 +349,39 @@ and is not filed yet.
 
 A further piece of evidence (`keeps` in the result) ends after step 3: no short link, no second pull
 request, and the printing's image and share row stay as they are.
+
+### Shared nightly round (#679)
+
+- The queue freezes membership and approvals under `.work/night-batches/<id>/intake-run.json`
+  before queuing the batch. Each job names its batch, keeps its SPEC and intake PR, and uses the
+  same identity and exact-head merge guards as an individual run. A refused intake leaves the
+  group; its successful neighbours continue, and it may be corrected and tried again separately.
+- The successfully merged cohort gets one common initial Pages run if it changed public files.
+  Its run ID stays on the batch and each job. The public social rows, card metadata and exact own
+  preview bytes are checked against the prepared checkout before alias work starts.
+- Already recorded verified aliases are reused and marked `aliasReused`; they consume no YOURLS
+  dispatch. Missing aliases are checked in groups of at most three distinct item IDs. Both the
+  single-object and list artifact formats are checked against the frozen group, expected keyword,
+  exact card target and verified public redirect. An item-local failure does not discard its
+  neighbours' results, even when the workflow failed.
+- Group outcomes are saved before updating the jobs. A restart replays those outcomes before
+  planning retries, so it starts no second successful group. An unresolved dispatch follows its
+  existing request token and run ID. A completed failed group retries only its unresolved items.
+- Once every primary photo in the cohort has a confirmed alias, one shared alias PR records them.
+  Until then, confirmed outcomes stay private beside the batch, and the jobs show the stopped
+  delivery. A retry from any member queues that batch exactly once. The alias PR uses the same
+  branch ownership, local gate and required-check-at-head guards as intake.
+- A successful alias or permalink data PR marks its item IDs in `.work/publication/intake-run.json`.
+  These records are included in the next common nightly deploy, even when there are no new photos;
+  there is no deploy per data PR. Its final reconciliation checks the published social rows, card
+  page, preview bytes and, for recorded aliases, exact public redirect. It records the checked IDs,
+  checkout head, run ID and time. A failed read resumes that deployment and does not dispatch it
+  again. Empty rounds with nothing pending publish nothing.
+
+The shared round's record and its per-group `alias-<n>/intake-run.json` distinguish completed work
+from reused aliases. The Läufe tab links each job to its deployment and alias verification run and
+labels reused aliases. The real Homelab acceptance remains separate from the local simulated
+ten-photo test. An inbox-code change still needs the owner/Hermes update described above.
 
 **Läufe (#685).** The tab lists every run from the jobs' `intake-run.json`, newest first, in three groups:
 waiting or running, failed, done. Each run shows a thumbnail that jumps to its photo, its SPEC and
@@ -407,6 +444,7 @@ python verification/photo_inbox/test_app.py
 python verification/photo_inbox/test_intake.py --photos <photo checkout>
 python verification/photo_inbox/test_number_check.py
 python verification/photo_inbox/test_runner.py
+python verification/photo_inbox/test_night_batch.py
 python verification/test_instagram_package.py
 ```
 
@@ -424,6 +462,10 @@ What each suite covers:
   the frozen approval (#672); the workflow runs followed by their id (#673); a foreign commit on the
   branch, the required checks at the pushed head and a PR merged by hand (#674); a further piece of
   evidence (#675); the run records and the nightly round (#685); the page's button and lock.
+- `test_night_batch.py`: ten synthetic jobs sharing one initial deploy, at most four alias
+  dispatches and one alias PR; failed group members, restarts at persistence boundaries, foreign
+  artifacts/branches, reused aliases, refused intakes, pending-only publication retries and public
+  reconciliation. The same button path still runs individually.
 - `test_intake.py`: a synthetic phone photo (sideways, with GPS) filed for a printing with and one
   without an owner photo, every `check.py` rule on the result, the refusals, an orphaned archive
   copy, two intakes racing for a number, the single gate run with the archive (#677) and one encoder
