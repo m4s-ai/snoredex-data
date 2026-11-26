@@ -33,8 +33,8 @@ git -C "$CHECKOUT" diff --quiet "$RUNNING" origin/main -- \
   aktuell" with the short commit and stop. A merge that changed only data needs no update; the inbox
   reads the synced catalogue by itself.
 - **Exit code 1, or `code.commit` empty, or `code.source` not `image`:** an update is needed. Go on.
-- **Any other exit code:** git could not compare, for example because the running commit is not in
-  the checkout. Do not update; send the owner the error.
+- **Any other exit code while `code.commit` is set:** git could not compare, for example because the
+  running commit is not in the checkout. Do not update; send the owner the error.
 
 ## 2. Is now a safe moment?
 
