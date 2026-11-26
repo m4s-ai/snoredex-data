@@ -68,13 +68,13 @@ jobs:
       # plus one gate manifest per OS. This job only verifies that handoff and deploys those bytes;
       # it does not regenerate a second projection tree.
       - name: Download verified Pages artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: pages-artifact
           path: _site
 
       - name: Download release gate manifests
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           pattern: gate-manifest-*
           path: _gate
