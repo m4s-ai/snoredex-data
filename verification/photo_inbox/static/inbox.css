@@ -89,6 +89,8 @@ ul { list-style: none; margin: 0; padding: 0; }
 .jobs > li { display: grid; gap: .75rem; padding: 1.25rem 0; border-top: 1px solid var(--line);
   scroll-margin-top: 4rem; }
 .jobs > li:first-child { border-top: 0; }
+/* a long token (a URL, an error) wraps instead of widening the column past the screen (#685) */
+.jobs > li > .body { min-width: 0; overflow-wrap: anywhere; }
 .photo img { display: block; width: 100%; height: auto; max-height: 22rem; object-fit: contain;
   border-radius: .5rem; background: var(--surface); }
 .body, .describe { display: grid; gap: .75rem; }
@@ -153,8 +155,8 @@ fieldset { margin: 0; padding: .5rem .75rem; border: 1px solid var(--line); bord
 .jobs.runs > li { grid-template-columns: 5.5rem 1fr; align-items: start; }  /* a thumbnail beside each run */
 .runs .photo img { max-height: 7.5rem; }
 .runs .body p { margin: 0 0 .3rem; }
-.runs .steps, .runs .links { margin: .25rem 0; overflow-wrap: anywhere; }
 .runs .links a { margin-right: .9rem; }
+.runs .error { white-space: pre-line; }  /* the run's error, then a refused retry's reason */
 .links { display: flex; flex-wrap: wrap; gap: .1rem 1rem; margin-top: .25rem; }
 .links a { display: inline-block; padding: .35rem 0; color: var(--accent); }
 

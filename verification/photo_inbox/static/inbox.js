@@ -5,7 +5,7 @@ const DATE = new Intl.DateTimeFormat("de-DE", {dateStyle: "medium", timeStyle: "
 const DAY = new Intl.DateTimeFormat("de-DE", {dateStyle: "medium"});
 const STAGE_NAMES = {none: "kein eigenes Foto", assigned: "hochgeladen, zugeordnet", filed: "verarbeitet",
                      online: "online", ready: "bereit für Instagram", posted: "gepostet"};
-const state = {overview: null, labels: new Map(), catalogue: false, canPost: false, accounts: []};
+const state = {overview: null, labels: new Map(), catalogue: false, canPost: false, accounts: [], refused: {}};
 
 function message(text, kind) {
   const line = document.createElement("li");
@@ -898,9 +898,11 @@ function runItem(run) {
   item.querySelector(".label").textContent = [run.specimen, itemLabel(run.itemId)].filter(Boolean).join(" · ") || run.file;
   item.querySelector(".when").textContent = runTimes(run);
   item.querySelector(".steps").textContent = runSteps(run);
+  // a refused retry keeps its reason at its run, across every refresh, until a retry goes through
+  const refused = state.refused[run.jobId] ? `Nicht neu gestartet: ${state.refused[run.jobId]}` : "";
   const error = item.querySelector(".error");
-  error.hidden = run.status !== "failed" || !run.error;
-  error.textContent = run.error || "";
+  error.textContent = [run.status === "failed" && run.error, refused].filter(Boolean).join("\n");
+  error.hidden = !error.textContent;
   const links = [[run.prUrl, `Übernahme-PR #${run.pr}`], [run.aliasPrUrl, `Kurzlink-PR #${run.aliasPr}`],
                  [run.shortUrl, `Kurzlink ${run.alias}`]].filter(([href]) => href);
   item.querySelector(".links").replaceChildren(...links.map(([href, text]) => link(href, text)));
@@ -914,8 +916,9 @@ async function retryRun(jobId, button) {
   button.disabled = true;  // one click queues the run once; the server refuses a second start anyway
   try {
     await call(`/jobs/${jobId}/intake`, {method: "POST"});
+    delete state.refused[jobId];
   } catch (error) {
-    field("runs-status").textContent = error.message;
+    state.refused[jobId] = error.message;  // e.g. the corners need approving again: shown at the run
   }
   await Promise.all([showRuns(), showJobs()]);
 }

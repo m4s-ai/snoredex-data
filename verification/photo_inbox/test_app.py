@@ -501,7 +501,8 @@ def runs_checks(temp):
 
     root, repo = Path(temp) / "runs-inbox", catalogue_repo(Path(temp) / "runs-repo", "sha256:none")
     client = create_app(root, repo, published).test_client()
-    ids = [post(client, jpeg(colour)).json["id"] for colour in ((11, 0, 0), (0, 11, 0), (0, 0, 11), (11, 11, 0))]
+    ids = [post(client, jpeg(colour)).json["id"]
+           for colour in ((11, 0, 0), (0, 11, 0), (0, 0, 11), (11, 11, 0), (0, 11, 11))]
     at = "2026-11-26T03:00:05+00:00"
     states = [{"status": "queued", "done": [], "origin": "night", "queuedAt": at},
               {"status": "running", "step": "merge", "done": ["intake"], "specimen": "SPEC-0101", "pr": 101,
@@ -510,7 +511,10 @@ def runs_checks(temp):
                "error": "pages.yml endete mit failure: https://example.invalid/runs/1", "startedAt": at,
                "finishedAt": at, "approval": {"itemId": "x"}, "runs": {"pages.yml": {"request": "inbox-secret"}}},
               {"status": "done", "done": list(intake_runner.STEPS), "specimen": "SPEC-0103", "pr": 103, "aliasPr": 104,
-               "alias": "sdabc", "startedAt": at, "finishedAt": at}]
+               "alias": "sdabc", "startedAt": at, "finishedAt": at},
+              # failed before filing, and its job has no printing now: a retry is refused (409)
+              {"status": "failed", "step": "intake", "done": [], "origin": "night", "finishedAt": at,
+               "error": "https://example.invalid/a-very-long-unbreakable-token-" + "x" * 80}]
     for job_id, state in zip(ids, states):
         intake_runner.write_state(root / job_id, state)
     (root / intake_runner.WORK).mkdir(exist_ok=True)
@@ -531,20 +535,31 @@ def runs_checks(temp):
             page.goto(f"http://127.0.0.1:{servers[0].effective_port}/#laeufe")
             page.locator("#runs-done li").wait_for()
             group = lambda name: page.locator(f"#runs-{name} li").evaluate_all("items => items.map(i => i.dataset.job)")
-            assert sorted(group("active")) == sorted(ids[:2]) and group("failed") == [ids[2]] and group("done") == [ids[3]],                 ([group(name) for name in ("active", "failed", "done")], ids)
+            groups = {name: sorted(group(name)) for name in ("active", "failed", "done")}
+            assert groups == {"active": sorted(ids[:2]), "failed": sorted([ids[2], ids[4]]), "done": [ids[3]]}, groups
             done = page.locator("#runs-done li .links a").evaluate_all("links => links.map(a => a.href)")
             assert done == ["https://github.com/m4s-ai/snoredex-data/pull/103",
                             "https://github.com/m4s-ai/snoredex-data/pull/104", "https://go.m4s.eu/sdabc"], done
-            failed = page.locator("#runs-failed li")
+            # a wide font, as the Linux runner's fallback, must not push the page sideways either
+            page.evaluate("""() => { document.body.style.fontFamily = 'Verdana, "DejaVu Sans", sans-serif'; }""")
+            assert page.evaluate("document.documentElement.scrollWidth") <= 375, "no sideways scroll on a phone"
+            refused = page.locator(f'#runs-failed li[data-job="{ids[4]}"]')
+            refused.locator(".retry").click()
+            page.locator(f'#runs-failed li[data-job="{ids[4]}"] .error >> text=Nicht neu gestartet').wait_for()
+            reason = refused.locator(".error").text_content()
+            assert "Nicht neu gestartet: Dem Foto ist noch kein Druck zugeordnet." in reason, reason
+            assert run.jobs.qsize() == 0, "a refused retry queues nothing"
+            failed = page.locator(f'#runs-failed li[data-job="{ids[2]}"]')
             assert "pages.yml endete mit failure" in failed.locator(".error").text_content()
             assert failed.locator(".photo").get_attribute("href") == f"#job-{ids[2]}", "a jump to the photo"
             assert "Veröffentlichen" in failed.locator(".steps").text_content()
             assert "1 Auftrag" in page.locator("#runs-night").text_content()
-            assert page.locator("#count-laeufe").text_content() == "3", "waiting, running and failed runs"
+            assert page.locator("#count-laeufe").text_content() == "4", "waiting, running and failed runs"
             assert page.evaluate("document.documentElement.scrollWidth") <= 375, "no sideways scroll on a phone"
             failed.locator(".retry").click()
-            page.locator("#runs-failed li").wait_for(state="detached")
+            failed.wait_for(state="detached")
             assert sorted(group("active")) == sorted(ids[:3]) and run.jobs.qsize() == 1, "queued exactly once"
+            assert "Nicht neu gestartet" in refused.locator(".error").text_content(), "and survives a refresh"
             assert intake_runner.read_state(root / ids[2])["status"] == "queued"
             page.goto(f"http://127.0.0.1:{servers[1].effective_port}/#laeufe")
             page.locator("#runs-done li").wait_for()
