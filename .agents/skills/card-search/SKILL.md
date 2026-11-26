@@ -145,11 +145,12 @@ instructions when applicable; do not copy publication decisions from an unrelate
 3. Run `python scripts/regen.py` once at delivery. Stage reviewed captures, images, data changes
    and the rebuilt outputs together. Inspect staged paths and diff;
    avoid blanket staging of unrelated research.
-4. When authorized, commit with the repository's required trailer and push/update the scoped PR.
+4. Commit with the repository's required trailer; push and update the scoped PR when authorized.
    After commit and push, run `python verification/publication_audit.py` for history-sensitive checks.
 5. Report each target's supported fields, source/image links, SPEC/reference IDs, remaining gaps,
-   validation and actual commit/PR status. Synchronize relevant issues/PRs when authorized; one
-   resolved field does not complete a card's entire research task.
+   validation and actual commit/PR status. Once the task is finished, document it in its connected
+   issues without asking (AGENTS.md authority table); one resolved field does not complete a
+   card's entire research task.
 
 Merge and publication require their own authorization. Search success, retained evidence,
 integrated claims and merged changes are separate outcomes; report only those actually reached.
