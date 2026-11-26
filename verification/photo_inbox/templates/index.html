@@ -210,6 +210,8 @@
     <a class="photo" target="_blank" rel="noopener"><img alt="" loading="lazy" width="1080" height="1350"></a>
     <div class="body">
       <p class="facts"><span class="badge"></span> <span class="label"></span></p>
+      <!-- a draft is built when it is opened, never for the whole list (#678) -->
+      <div class="actions open-draft" hidden><button type="button" class="primary">Entwurf öffnen</button></div>
       <label>Caption<textarea class="caption" readonly rows="11"></textarea></label>
       <label>Alt-Text<textarea class="alt" readonly rows="3"></textarea></label>
       <ol class="slides"></ol>

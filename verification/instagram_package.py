@@ -16,7 +16,7 @@ from gallery_prepare import coefficients, extract
 from card_pages import read_social
 from build import ASSET_BASE_URL, printed_number
 from check import load
-from owner_photo import verified_owner_photo
+from owner_photo import owner_specimen, verified_owner_photo
 
 ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / "verification/cache/instagram"
@@ -288,6 +288,29 @@ def package(model: dict, specimen_id: str, archive: Path, corners=None, *,
     return files, manifest
 
 
+def fingerprint(model: dict, specimen_id: str) -> str:
+    """What a draft of this SPEC is made of (#678): its photographs by their registered SHA-256 (the cover's
+    and the further carousel photos'), the printing's record, its set edition, local set and localization,
+    the share row (short link, corners, carousel) and the exporter's code. A change elsewhere in the
+    catalogue leaves it as it is. `dataAsOf` in the manifest only says from which state a draft was built."""
+    specimen, item = owner_specimen(model, specimen_id)
+    share, _short, _corners, slides = shared(item["itemId"], specimen_id)
+    sets = model["sets"]
+    edition = next(row for row in sets["setEditions"] if row["setEditionId"] == item["setEditionId"])
+    inputs = {
+        "photographs": [specimen["photographSha256"],
+                        *(owner_specimen(model, slide["specimenId"])[0]["photographSha256"] for slide in slides)],
+        "item": item, "edition": edition, "share": share,
+        "localSet": next(row for row in sets["localSets"] if row["localSetId"] == edition["localSetId"]),
+        "localization": next(row for row in sets["localizations"]
+                             if row["localizationId"] == edition["localizationId"]),
+        # ponytail: every module under scripts/ counts as the renderer; narrow it if unrelated script
+        # changes rebuild drafts too often
+        "code": [digest(path.read_bytes()) for path in sorted([Path(__file__), *(ROOT / "scripts").glob("*.py")])],
+    }
+    return digest(json.dumps(inputs, sort_keys=True, ensure_ascii=False).encode("utf-8"))
+
+
 def save_package(out: Path, files: dict) -> None:
     if out.exists():
         if all((out / name).is_file() and (out / name).read_bytes() == data for name, data in files.items()):
@@ -319,8 +342,13 @@ def main() -> int:
     parser.add_argument("--owner-feed-jpeg", type=Path,
                         help="edited JPEG you photographed and confirm shows the exact printing for this SPEC")
     parser.add_argument("--feed-alt", help="alt text describing the actual edited feed photo")
+    parser.add_argument("--fingerprint", action="store_true",
+                        help="print what a draft of this SPEC is made of, as one hash, and build nothing (#678)")
     args = parser.parse_args()
     try:
+        if args.fingerprint:
+            print(fingerprint(load(), args.specimen))
+            return 0
         corners = list(zip(args.corners[::2], args.corners[1::2])) if args.corners else None
         files, manifest = package(load(), args.specimen, args.photos, corners,
                                   owner_feed_jpeg=args.owner_feed_jpeg, feed_alt=args.feed_alt)
