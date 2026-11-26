@@ -279,7 +279,10 @@ and is not filed yet.
 
 1. `intake.py` files the job in the run's own clones (`.work/` in the data folder). The run then pushes
    the branch and opens its pull request.
-2. The pull request is merged once every check is green; a red check stops the run with its link.
+2. The pull request is merged at the head the run pushed, once every check main's ruleset requires
+   (`gate (ubuntu-latest)`, `gate (windows-latest)`) passed there (#674). Another green check never
+   stands in for a required one. A red check, a head someone else moved, or a main that requires no
+   check stops the run with its link.
 3. `Publish site` runs on main.
 4. `Provision Snoredex short links` runs for the printing; its verified alias is read from the run's
    artifact.
@@ -291,7 +294,10 @@ The job shows each step, and when a step fails, the reason. The run writes every
 stopped:
 
 - `intake.py` finds its archive copy again by its bytes.
-- An open pull request is reused, and a merged one is not merged again.
+- An open pull request is reused, and a merged one gets no new action.
+- The branch on GitHub is reused when it holds the same files, and replaced only when it holds a commit
+  this run pushed, with a lease on exactly that commit. Anything else on it is someone's: it stays, and
+  the run stops (#674). The run checks the head itself and does not rely on native auto-merge.
 - An alias already on main is not recorded again.
 - `Publish site` and `Provision Snoredex short links` are dispatched once and followed by the id of the
   run GitHub started (#673), never by its start time, so a foreign run of the same workflow decides
