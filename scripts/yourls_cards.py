@@ -172,14 +172,20 @@ def run_batch(args) -> list[dict]:
     signature = os.environ.get("SNOREDEX_YOURLS_SIGNATURE")
     if not signature:
         raise ValueError("The protected execution environment needs SNOREDEX_YOURLS_SIGNATURE")
-    results = []
-    for plan, preview in plans:
+    return [provision_result(signature, plan, preview, args.create) for plan, preview in plans]
+
+
+def provision_result(signature: str, plan: dict, preview: str, create: bool) -> dict:
+    """Keep every item's outcome so one failure cannot discard its neighbours' verified aliases."""
+    try:
         status = provision(lambda action, **params: call_api(signature, action, **params),
-                           plan, preview, args.create)
+                           plan, preview, create)
+        result = dict(plan, status=status)
         if status == "verified":
-            plan["redirectStatus"] = verify_redirect(plan)
-        results.append(dict(plan, status=status))
-    return results
+            result["redirectStatus"] = verify_redirect(plan)
+        return result
+    except (OSError, ValueError) as error:
+        return dict(plan, status="failed", error=str(error))
 
 
 def main() -> int:
@@ -195,7 +201,7 @@ def main() -> int:
     except (OSError, ValueError) as error:
         parser.exit(2, f"YOURLS: {error}\n")
     print(json.dumps(results[0] if len(results) == 1 else results, indent=2))
-    return 0
+    return 2 if any(result["status"] == "failed" for result in results) else 0
 
 
 if __name__ == "__main__":

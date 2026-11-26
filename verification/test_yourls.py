@@ -1,6 +1,9 @@
 """Offline YOURLS protocol and safety checks."""
 from email.message import Message
+from contextlib import redirect_stdout
 from io import BytesIO
+from io import StringIO
+import json
 from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock, patch
@@ -10,10 +13,11 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from yourls_cards import ROOT, SHORT_BASE, batch_plans, card_plan, provision, run_batch, verify_public_page, verify_redirect
+from yourls_cards import ROOT, SHORT_BASE, batch_plans, card_plan, main, provision, run_batch, verify_public_page, verify_redirect
 
 POKE = "item-b26a638d-ed89-538b-ab49-a5c879572f60"
 MASTER = "item-a2f8335e-94ff-54d2-8b10-5bdf55349451"
+PLAIN = "item-bbea2621-c8f4-5647-b576-e309aa29d24a"
 
 
 class YourlsTests(unittest.TestCase):
@@ -102,6 +106,35 @@ class YourlsTests(unittest.TestCase):
         self.assertEqual(first, reverse[::-1])
         self.assertEqual(created, [row["shortAlias"] for row in first])
         self.assertEqual(len(targets), 2)
+
+    def test_batch_keeps_successes_before_and_after_a_failed_item(self):
+        args = SimpleNamespace(item_id=[POKE, MASTER, PLAIN], keyword=None, check=False, create=True)
+        with (patch.dict("os.environ", SNOREDEX_YOURLS_SIGNATURE="mock-value"),
+              patch("yourls_cards.provision", side_effect=["verified", ValueError("Keyword points elsewhere"), "verified"]),
+              patch("yourls_cards.verify_redirect", return_value=302)):
+            results = run_batch(args)
+        self.assertEqual([row["itemId"] for row in results], args.item_id)
+        self.assertEqual([row["status"] for row in results], ["verified", "failed", "verified"])
+        self.assertEqual([results[0]["redirectStatus"], results[2]["redirectStatus"]], [302, 302])
+        self.assertNotIn("redirectStatus", results[1])
+        self.assertIn("Keyword points elsewhere", results[1]["error"])
+
+    def test_failed_public_redirect_is_not_a_verified_result(self):
+        args = SimpleNamespace(item_id=[POKE, MASTER], keyword=None, check=False, create=True)
+        with (patch.dict("os.environ", SNOREDEX_YOURLS_SIGNATURE="mock-value"),
+              patch("yourls_cards.provision", return_value="verified"),
+              patch("yourls_cards.verify_redirect", side_effect=[TimeoutError("Redirect timed out"), 302])):
+            results = run_batch(args)
+        self.assertEqual([row["status"] for row in results], ["failed", "verified"])
+        self.assertNotIn("redirectStatus", results[0])
+
+    def test_cli_preserves_partial_json_and_returns_failure(self):
+        results = [dict(self.plan, status="verified", redirectStatus=302), {"itemId": MASTER, "status": "failed"}]
+        output = StringIO()
+        with (patch("sys.argv", ["yourls_cards.py", "--create", POKE, MASTER]),
+              patch("yourls_cards.run_batch", return_value=results), redirect_stdout(output)):
+            self.assertEqual(main(), 2)
+        self.assertEqual(json.loads(output.getvalue()), results)
 
     def test_published_metadata_and_preview_must_match(self):
         markup = (f'<meta property="og:url" content="{self.plan["targetUrl"]}">'
