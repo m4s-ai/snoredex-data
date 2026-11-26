@@ -57,6 +57,11 @@ class GitHub(StandIn):
             self.runs[-1]["conclusion"] = "failure"
         return run_id
 
+    def start_run(self, workflow, inputs, *args):
+        run = super().start_run(workflow, inputs, *args)
+        run["head_sha"] = git("--git-dir", self.remote, "rev-parse", "main")
+        return run
+
     def artifact(self, run_id, name):
         assert name == "yourls-verified"
         self.artifact_reads.append(run_id)
@@ -314,20 +319,31 @@ def public_reconciliation():
 
 def empty_publication_retry():
     with TemporaryDirectory() as temp:
-        root, data, photos, jobs, _items = setup(temp, count=1)
+        root, data, photos, jobs, items = setup(temp, count=1)
         github = GitHub(data)
         run = make(root, github, data, photos)
         run.night_round(lambda: jobs)
         run.process_next(timeout=0)
-        verify = run.verify_publication
         run.verify_publication = lambda _items: (_ for _ in ()).throw(runner.RunError("Read failed"))
         run.night_round(lambda: [])
         run.process_next(timeout=0)
         assert len(dispatched(github, "pages.yml")) == 2
+        order = root / ".posts/SPEC-0001/order.json"
+        order.parent.mkdir(parents=True)
+        order.write_text(json.dumps({"itemId": items[0], "targets": {
+            "ig:snoredex": {"status": "published", "permalink": "https://www.instagram.com/p/later/"}
+        }}), encoding="utf-8", newline="\n")
+        run.record_posts()
+        assert social_on(data, "main")[0]["instagramPosts"], "the same pending item changed after deployment"
         run = make(root, github, data, photos)
         run.night_round(lambda: [])
         run.process_next(timeout=0)
         assert len(dispatched(github, "pages.yml")) == 2, "a pending-only retry follows its saved deployment"
+        run.night_round(lambda: [])
+        assert run.jobs.qsize() == 1, "the newer permalink remains pending"
+        run.process_next(timeout=0)
+        assert len(dispatched(github, "pages.yml")) == 3
+        assert github.published[0]["instagramPosts"] == ["https://www.instagram.com/p/later/"]
         run.night_round(lambda: [])
         assert run.jobs.empty()
 

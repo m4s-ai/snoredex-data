@@ -212,21 +212,36 @@ class Batch:
             self.publish_jobs()
             return
         self.runner.prepare()
-        items = set(pending(self.runner))
-        for _job, state in self.states():
-            if not state.get("keeps"):
-                items.add(self.runner.filed_printing(state))
-        needed = bool(pending(self.runner)) or any(state.get("publish", True) and "publish" not in state.get("done", [])
-                                                  for _job, state in self.states())
-        run_id = None
-        if needed:
-            run_id = self.runner.workflow(self.folder, self.state, "pages.yml", {})["id"]
-            self.runner.verify_publication(sorted(items))
-            reconciled(self.runner, items, run_id)
-        self.state.update(published=True, publishRun=run_id, publicCheckedAt=runner.now(), publicCheckedItems=sorted(items),
-                          publicHead=self.runner.git(self.runner.data, "rev-parse", "HEAD"))
+        if "publicCheckedItems" not in self.state and self.needs_publication():
+            items = set(pending(self.runner))
+            items.update(self.runner.filed_printing(state) for _job, state in self.states() if not state.get("keeps"))
+            self.state["publicCheckedItems"] = sorted(items)
+            self.save()
+        if "publicCheckedItems" in self.state:
+            self.reconcile_deployment()
+        self.state["published"] = True
         self.save()
         self.publish_jobs()
+
+    def needs_publication(self):
+        return bool(pending(self.runner)) or any(
+            state.get("publish", True) and "publish" not in state.get("done", []) for _job, state in self.states())
+
+    def reconcile_deployment(self):
+        run = self.runner.workflow(self.folder, self.state, "pages.yml", {})
+        head, items = run["head_sha"], self.state["publicCheckedItems"]
+        if not re.fullmatch(r"[0-9a-f]{40}", head):
+            raise runner.RunError("Pages-Lauf meldet keinen gültigen Commit.")
+        repo = self.runner.data
+        self.runner.git(repo, "fetch", "-q", "origin", head)
+        self.runner.git(repo, "checkout", "-q", "--detach", head)
+        deployed = read_social(repo)
+        self.runner.verify_publication(items)
+        self.runner.prepare()
+        latest = read_social(repo)
+        # A later data PR can change an already pending item while this deployment is retried.
+        reconciled(self.runner, [item for item in items if deployed.get(item) == latest.get(item)], run["id"])
+        self.state.update(publishRun=run["id"], publicHead=head, publicCheckedAt=runner.now())
 
     def publish_jobs(self):
         for job, state in self.states():
