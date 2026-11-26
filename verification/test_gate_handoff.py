@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import tempfile
 from pathlib import Path
@@ -70,9 +71,15 @@ def main() -> int:
     assert post_push.index("Fetch published pull-request heads") < post_push.index(
         "Audit the published commit history")
     assert "verification/gate_manifest.py" in release
-    assert "actions/upload-artifact@v6" in release
+    assert "actions/upload-artifact@v7" in release
     assert "name: pages-artifact\n          path: _site\n          include-hidden-files: true" in release
-    assert "actions/download-artifact@v7" in pages
+    assert "actions/download-artifact@v8" in pages
+    # #681: one generation of each artifact action across every workflow, so the gate, Pages and the
+    # YOURLS run hand over artifacts the same way (ZIP, dotfiles, digest check on download)
+    every = "".join(path.read_text(encoding="utf-8") for path in (ROOT / ".github" / "workflows").glob("*.yml"))
+    for action in ("upload-artifact", "download-artifact"):
+        versions = set(re.findall(rf"actions/{action}@(v[0-9.]+)", every))
+        assert len(versions) == 1, (action, versions)
     # upload-pages-artifact v4+ excludes dotfiles by default; the deployed tree must stay the
     # verified one, so the Pages upload keeps hidden files exactly like the gate's handoff.
     assert "actions/upload-pages-artifact@v5\n        with:\n          path: _site\n          include-hidden-files: true" in pages
