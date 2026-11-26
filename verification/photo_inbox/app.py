@@ -320,6 +320,14 @@ def exporter(repo):
     return [sys.executable, str(Path(repo) / "verification" / "instagram_package.py")]
 
 
+def code_stamp(command):
+    """When the exporter's code last changed, its own folder and the repository's scripts included: a pulled
+    change to the cover rebuilds every draft, as a changed catalogue does (#691)."""
+    script = Path(command[-1])
+    files = [*script.parent.glob("*.py"), *(script.parents[1] / "scripts").glob("*.py")]
+    return max(path.stat().st_mtime_ns for path in files)
+
+
 def draft(cache, command, photos, specimen, stamp):
     """The post draft of one specimen, built once per catalogue state into the private data folder."""
     key = sha256(repr((stamp, specimen)).encode()).hexdigest()[:16]
@@ -645,7 +653,8 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
     def current_draft(specimen):
         # one build at a time: two requests for an unbuilt draft would race for the same folder
         with building:
-            return draft(drafts, command or exporter(repo), photos, specimen, catalogue.stamp)
+            built_by = command or exporter(repo)
+            return draft(drafts, built_by, photos, specimen, (catalogue.stamp, code_stamp(built_by)))
 
     @app.get("/posts")
     def posts():

@@ -342,6 +342,11 @@ def posts_checks(root, repo, temp):
     client.get("/posts")
     assert log.read_text().split().count("SPEC-0904") == 2, "a changed catalogue rebuilds the draft"
     assert len(list((root / ".drafts").glob("SPEC-0904-*"))) == 1, "the older draft goes"
+    script = Path(command[-1])
+    edited = script.stat().st_mtime_ns + 10**9
+    os.utime(script, ns=(edited, edited))  # a pulled change to the exporter's code, the catalogue unchanged
+    client.get("/posts")
+    assert log.read_text().split().count("SPEC-0904") == 3, "a changed exporter rebuilds the draft (#691)"
     os.utime(social, ns=(later + 10**9, later + 10**9))
     app = client.application
     replies = []
@@ -352,7 +357,7 @@ def posts_checks(root, repo, temp):
     for request in requests:
         request.join()
     assert replies == [200, 200], "two requests for an unbuilt draft both get it"
-    assert log.read_text().split().count("SPEC-0904") == 3, "and it is built once"
+    assert log.read_text().split().count("SPEC-0904") == 4, "and it is built once"
     assert all(job["id"] != ".drafts" for job in client.get("/jobs").json["jobs"])
     return command
 

@@ -92,7 +92,8 @@ snoredex-photos, the Posts tab shows the draft of every printing with a verified
 `data/social.json`: the post image, caption, alt text, the open points before posting, and links to
 the card page, the short link and the image file. The checkout's own `instagram_package.py` builds
 each draft from that checkout, with the cover corners stored in `postCorners`, into `.drafts` inside
-the data folder, once per state of the catalogue files. Keep the photo checkout current (`git pull`),
+the data folder, once per state of the catalogue files and of the exporter's code, so a pulled fix to
+the cover reaches every draft (#691). Keep the photo checkout current (`git pull`),
 like the catalogue. A carousel shows every image in order, each with its own alt text.
 
 **Posting (#646, owner decisions 2026-11-24).** With `--uploader` pointing at the owner's upload
@@ -362,7 +363,7 @@ one bad file, a description with its printing, the views, counts and statistics,
 restore and delete for good, the card corners (a suggestion within 2 % on a sideways photo; no
 approval without printing, counter-clockwise, too narrow or outside the photo; the title image;
 a new note keeps, another printing drops and a filed job refuses the approval; in the browser the
-handle size, keyboard steps, the loupe, a drag and the approval), the Posts tab with a stand-in exporter (built once per catalogue state,
+handle size, keyboard steps, the loupe, a drag and the approval), the Posts tab with a stand-in exporter (built once per catalogue state, rebuilt for changed exporter code,
 a failed draft with its reason) and a stand-in uploader (accounts preselected, a dismissed confirmation
 posts nothing, a plan taken back; a changed draft, a time without zone and a second order refused;
 an unreachable uploader retried, a resend after a crash deduplicated, a failed job sent again; the
