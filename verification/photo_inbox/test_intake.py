@@ -21,6 +21,7 @@ import runner
 
 sys.path.insert(0, str(intake.ROOT / "scripts"))
 import check  # noqa: E402
+import regen  # noqa: E402
 
 CORNERS = [[300, 400], [1380, 410], [1370, 1910], [310, 1900]]
 
@@ -236,6 +237,51 @@ def race_checks(temp):
     assert git(ours, "status", "--porcelain").stdout == "" and len(list((ours / intake.PHOTO_DIR).iterdir())) == 3
 
 
+def gate_checks(temp):
+    """#677: intake checks the model once, through regen.py, together with the photo archive; an invalid
+    model row or an archive copy with another SHA-256 stops it, and regen.py's own runs stay as they were."""
+    calls = []
+
+    class Done:
+        def __init__(self, code, out=""):
+            self.returncode, self.stdout, self.stderr = code, out, ""
+
+    intake.gate(intake.ROOT, temp / "photos", run=lambda command, **_: calls.append(command) or Done(0))
+    assert [command[1:] for command in calls] == [["scripts/regen.py", "--photos", str(temp / "photos")]], calls
+    failed = ("=== scripts/check.py --photos P\nFAIL originals in P match their SHA-256 and carry no GPS: 1 of 1\n"
+              "regen.py: FAILED at scripts/check.py --photos P\n")
+    try:
+        intake.gate(intake.ROOT, temp / "photos", run=lambda command, **_: Done(1, failed))
+    except Refused as error:
+        assert str(error) == ("scripts/check.py --photos P schlägt fehl: FAIL originals in P match their SHA-256 "
+                              "and carry no GPS: 1 of 1"), str(error)
+    else:
+        raise AssertionError("a failing gate filed the job")
+    assert regen.step_command(("scripts/check.py",), False, Path("P")) == ["scripts/check.py", "--photos", "P"]
+    assert regen.step_command(("scripts/check.py",), True, None) == ["scripts/check.py"], "regen.py --check as before"
+    assert regen.step_command(("scripts/build.py",), True, Path("P")) == ["scripts/build.py", "--check"]
+    assert regen.step_command(("scripts/build.py",), False, None) == ["scripts/build.py"], "regen.py as before"
+    # what the single model check finds: an archive copy with another SHA-256, and an invalid row
+    copy = temp / "photos" / check.PHOTO_DIR / "SPEC-9999.jpg"
+    copy.parent.mkdir(parents=True)
+    copy.write_bytes(b"another photo")
+    _, problems, _ = check.photo_problems(temp / "photos", {f"{check.PHOTO_DIR}SPEC-9999.jpg": "sha256:" + "0" * 64})
+    assert problems == [f"{check.PHOTO_DIR}SPEC-9999.jpg: SHA-256 differs"], problems
+    data = intake.model(intake.ROOT)
+    plain, _ = items(data)
+    job_record, corners, data, facts, archive, summary = intake.plan(intake.ROOT, make_job(temp / "job", plain), temp)
+    files, _ = intake.changes(data, "SPEC-9999", job_record, corners, facts, summary, archive)
+    register = json.loads(files["verification/specimens.json"])
+    del register["specimens"][-1]["photographSha256"]
+    files["verification/specimens.json"] = json.dumps(register)
+    try:
+        checked(files)
+    except AssertionError:
+        pass
+    else:
+        raise AssertionError("a specimen row without its SHA-256 passed the model check")
+
+
 def reproduction_checks(photos):
     """SPEC-1125's committed gallery and preview files, rebuilt from its archive copy and corners."""
     data = intake.model(intake.ROOT)
@@ -255,6 +301,7 @@ def main():
         orphan_checks(temp / "orphans")
         (temp / "race").mkdir()
         race_checks(temp / "race")
+        gate_checks(temp / "gate")
     if photos:
         reproduction_checks(photos)
     print("intake: all checks passed" + ("" if photos else " (without the photo archive)"))

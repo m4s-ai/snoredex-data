@@ -772,11 +772,18 @@ def tab_checks(page, url):
         assert box["width"] >= 44 and box["height"] >= 44, ("target size", index, box)
         assert box["y"] + box["height"] >= 812 - 1, "the phone tab bar sits at the bottom"
     labels = page.locator('[role="tab"] span:not(.count)')
-    for width in (320, 375):
-        page.set_viewport_size({"width": width, "height": 812})
-        for index in range(labels.count()):
-            assert labels.nth(index).evaluate("label => label.scrollWidth <= label.parentElement.clientWidth"), \
-                ("a tab label fits its tab", width, labels.nth(index).text_content())
+    # every label in its selected (bold) weight, in the system font and in a wide one, as a phone may have (#677)
+    selected = page.evaluate("""() => [...document.querySelectorAll('[role="tab"]')].map(tab => {
+        const was = tab.getAttribute("aria-selected"); tab.setAttribute("aria-selected", "true"); return was; })""")
+    for font in ("", 'Verdana, "DejaVu Sans", sans-serif'):
+        page.evaluate("font => document.querySelectorAll('.tabs button').forEach(b => b.style.fontFamily = font)", font)
+        for width in (320, 375):
+            page.set_viewport_size({"width": width, "height": 812})
+            for index in range(labels.count()):
+                assert labels.nth(index).evaluate("label => label.scrollWidth <= label.parentElement.clientWidth"), \
+                    ("a tab label fits its tab", width, font, labels.nth(index).text_content())
+    page.evaluate("""selected => document.querySelectorAll('[role="tab"]').forEach((tab, i) => {
+        tab.setAttribute("aria-selected", selected[i]); tab.style.fontFamily = ""; })""", selected)
     page.locator("#tab-papierkorb").focus()
     page.keyboard.press("ArrowRight")
     assert page.evaluate("document.activeElement.id") == "tab-hochladen", "arrows wrap around"

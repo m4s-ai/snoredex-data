@@ -32,6 +32,7 @@ h1 { margin: 0; padding: .7rem 1rem; font-size: 1.15rem; }
   position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: .15rem; min-width: 0; min-height: var(--bar); padding: .4rem .1rem; border: 0; background: none;
   color: var(--muted); font: inherit; font-size: min(.74rem, 3.1vw); cursor: pointer;  /* six labels fit down to 320 px */
+  line-height: 1.2;  /* a label broken at its soft hyphen stays inside the bar */
 }
 .tabs svg { width: 1.6rem; height: 1.6rem; fill: none; stroke: currentColor; stroke-width: 1.8;
   stroke-linecap: round; stroke-linejoin: round; }

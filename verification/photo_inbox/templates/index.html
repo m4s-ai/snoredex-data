@@ -13,26 +13,27 @@
 <body>
 <header class="top">
   <h1>Fotoeingang</h1>
-  <!-- one tab bar: at the bottom on a phone, below the title on a wide screen -->
+  <!-- one tab bar: at the bottom on a phone, below the title on a wide screen; a long label breaks at its
+       soft hyphen when a wide system font leaves too little room (#677) -->
   <nav class="tabs" role="tablist" aria-label="Bereiche">
     <button type="button" role="tab" id="tab-hochladen" aria-controls="panel-hochladen" aria-selected="true">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0-5 5m5-5 5 5M5 20h14"/></svg>
-      <span>Hochladen</span></button>
+      <span>Hoch&shy;laden</span></button>
     <button type="button" role="tab" id="tab-fotos" aria-controls="panel-fotos" aria-selected="false" tabindex="-1">
       <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="16" cy="9" r="1.5"/></svg>
       <span>Fotos</span><span class="count" id="count-fotos" hidden></span></button>
     <button type="button" role="tab" id="tab-uebersicht" aria-controls="panel-uebersicht" aria-selected="false" tabindex="-1">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
-      <span>Übersicht</span></button>
+      <span>Über&shy;sicht</span></button>
     <button type="button" role="tab" id="tab-posts" aria-controls="panel-posts" aria-selected="false" tabindex="-1">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4 18-7z"/></svg>
       <span>Posts</span><span class="count" id="count-posts" hidden></span></button>
     <button type="button" role="tab" id="tab-statistik" aria-controls="panel-statistik" aria-selected="false" tabindex="-1">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg>
-      <span>Statistik</span></button>
+      <span>Statis&shy;tik</span></button>
     <button type="button" role="tab" id="tab-papierkorb" aria-controls="panel-papierkorb" aria-selected="false" tabindex="-1">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3m-9 0 1 13h10l1-13M10 11v6m4-6v6"/></svg>
-      <span>Papierkorb</span><span class="count" id="count-papierkorb" hidden></span></button>
+      <span>Papier&shy;korb</span><span class="count" id="count-papierkorb" hidden></span></button>
   </nav>
 </header>
 

@@ -2,13 +2,18 @@ name: Inbox image
 
 # Builds the photo inbox's container image and checks it runs: Tesseract's languages, the number
 # guard's tests and a smoke test of the started inbox against this checkout (#626, #657, #658).
+# Beside it the inbox's own suites run: the page, intake on synthetic data and the Instagram
+# exporter (#677). Documentation alone starts neither; the release gate runs on every pull request
+# and stays the required check. verification/test_inbox_ci.py checks this filter.
 on:
   pull_request:
     paths:
       - verification/photo_inbox/**
       - verification/*.py
       - scripts/**
+      - requirements.txt
       - .github/workflows/inbox-image.yml
+      - "!**/*.md"
   workflow_dispatch:
 
 permissions:
@@ -57,3 +62,37 @@ jobs:
       - name: Inbox log
         if: always()
         run: docker logs inbox || true
+
+  suites:
+    name: inbox suites
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"  # the image's Python
+
+      - name: Install the inbox and browser requirements
+        run: python -m pip install -r requirements.txt -r verification/photo_inbox/requirements.txt
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
+
+      # No --with-deps, as in ui-pr.yml: the suites need no extra fonts.
+      - name: Install Chromium
+        run: python -m playwright install chromium
+
+      - name: Inbox page, upload, trash, overview and corners (test_app.py)
+        run: python verification/photo_inbox/test_app.py
+
+      # Synthetic photos only; with a photo checkout, --photos also rebuilds SPEC-1125 byte for byte.
+      - name: Intake on synthetic data (test_intake.py)
+        run: python verification/photo_inbox/test_intake.py
+
+      - name: Instagram exporter (test_instagram_package.py)
+        run: python verification/test_instagram_package.py
