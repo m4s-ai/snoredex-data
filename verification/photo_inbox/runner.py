@@ -46,12 +46,17 @@ import zipfile
 
 from overview import Catalogue
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
+# ponytail: the allowlist of the runner's own checkout, not the clone's; both are main once the inbox is updated
+import publish  # noqa: E402
+
 REPO = "m4s-ai/snoredex-data"
 DATA_URL = f"https://github.com/{REPO}.git"
 PHOTOS_URL = "ssh://github.com/m4s-ai/snoredex-photos.git"  # as user git, set in GIT_SSH_COMMAND
 # git asks for the token through this script, which reads it from the environment: never a file or argv
 ASKPASS = '#!/bin/sh\ncase "$1" in Username*) echo x-access-token ;; *) echo "$INTAKE_GITHUB_TOKEN" ;; esac\n'
 STATE = "intake-run.json"
+RESULT = "intake-result.json"  # what intake.py filed (`intake.outcome`), in the runner's work folder
 WORK = ".work"  # the runner's own clones in the private data folder; the page lists hash folders only
 STEPS = ("intake", "merge", "publish", "alias", "alias-pr")
 FAILED = {"failure", "cancelled", "timed_out", "action_required", "startup_failure", "stale"}
@@ -96,6 +101,19 @@ def approval(folder):
     job = json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}
     return {"photoSha256": job.get("sha256") or Path(folder).name, "itemId": job.get("itemId"),
             "corners": job.get("corners"), "cornersApprovedAt": job.get("cornersApprovedAt"), "approvedAt": now()}
+
+
+def public(paths):
+    """Whether a change reaches the Pages artifact: a file publish.py names, or one of a tree it copies."""
+    return any(path in publish.FILES or any(path.startswith(tree + "/") and Path(path).suffix.lower() in kinds
+                                            for tree, kinds in publish.TREES) for path in paths)
+
+
+def filed(state, result, changed):
+    """Take in what intake.py filed (#675). A SPEC whose printing keeps its owner photo is a further piece
+    of evidence (D03): the run ends after the merge, with a deploy only when the filing changed what Pages
+    serves, and without a short link or a share row."""
+    state.update(specimen=result["specimen"], keeps=result["keeps"], publish=public(changed))
 
 
 def assignment_lock(state):
@@ -317,14 +335,17 @@ class Runner:
             raise RunError("Druck oder Ecken weichen von der Freigabe bei „Übernehmen“ ab. "
                            "Bitte prüfen, dann „Erneut versuchen“.")
         self.prepare()
+        result = self.root / WORK / RESULT
+        result.unlink(missing_ok=True)  # an earlier attempt's answer is not this one's
         done = subprocess.run([sys.executable, str(self.data / "verification/photo_inbox/intake.py"), str(folder),
-                               "--photos", str(self.photos)], cwd=self.data, env=self.env, capture_output=True,
-                              text=True, timeout=1800)
+                               "--photos", str(self.photos), "--result", str(result)], cwd=self.data, env=self.env,
+                              capture_output=True, text=True, timeout=1800)
         if done.returncode:
             lines = (done.stderr or done.stdout).strip().splitlines()
             raise RunError(lines[-1] if lines else f"intake.py endete mit {done.returncode}")
-        branch = done.stdout.strip().splitlines()[-1]
-        state["specimen"] = branch.split("/", 1)[1]
+        filed(state, json.loads(result.read_text(encoding="utf-8")),
+              self.git(self.data, "diff", "--name-only", "origin/main", "HEAD").splitlines())
+        branch = f"intake/{state['specimen']}"
         self.publish_branch(folder, state, "pr", branch, f"File {state['specimen']} from the photo inbox (#656)",
                             self.git(self.data, "log", "-1", "--format=%B"))
 
@@ -441,7 +462,8 @@ class Runner:
         return self.github.run(record["runId"])
 
     def step_publish(self, folder, state):
-        self.workflow(folder, state, "pages.yml", {})
+        if state.get("publish", True):  # a filing that changed nothing Pages serves needs no deploy (#675)
+            self.workflow(folder, state, "pages.yml", {})
 
     def printing(self, state):
         """The printing this run delivers to, checked on main before anything leaves for it: main must
@@ -459,6 +481,8 @@ class Runner:
         return frozen
 
     def step_alias(self, folder, state):
+        if state.get("keeps"):
+            return  # a further piece of evidence has no social order: no short link, no share row (D03)
         item_id = self.printing(state)
         run = self.workflow(folder, state, "yourls-pilot.yml", {"item_ids": item_id})
         found = self.github.artifact(run["id"], "yourls-verified")
@@ -472,6 +496,8 @@ class Runner:
         state["alias"], state["aliasItem"] = result["shortAlias"], item_id
 
     def step_alias_pr(self, folder, state):
+        if state.get("keeps"):
+            return
         item_id = self.printing(state)
         if state.get("aliasItem") != item_id:  # verified for another printing, or before #672 said for which
             self.step_alias(folder, state)

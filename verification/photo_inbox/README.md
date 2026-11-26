@@ -249,7 +249,7 @@ byte for byte. A DNG without a full-size JPEG preview is refused and needs a raw
 decision, 2026-11-24, #654):
 
 ```console
-python verification/photo_inbox/intake.py I:\<job> --photos <photo checkout> [--pr]
+python verification/photo_inbox/intake.py I:\<job> --photos <photo checkout> [--pr] [--result <file>]
 ```
 
 - It needs the job's printing (`itemId`) and its approved card corners (`corners` in `job.json`, or
@@ -266,9 +266,13 @@ python verification/photo_inbox/intake.py I:\<job> --photos <photo checkout> [--
   the copy; when another intake pushed first, the run takes the next one.
 - Preview and gallery images come from the approved corners, exactly as the specimen-intake skill
   makes them; they replace the item's image unless that already is an owner photograph, which the item
-  keeps. A new share row records the corners as `postCorners`.
+  keeps. A new share row records the corners as `postCorners`. A photo of a printing that keeps its
+  owner photograph is a further piece of evidence only (owner decision D03, #675): exactly one SPEC, no
+  share row, no short link. It becomes a carousel candidate only when the owner picks it (#646).
 - Then `check.py`, `check.py --photos` and `regen.py`, and a commit on `intake/SPEC-nnnn`. `--pr` pushes
   it and opens the pull request, which is merged on green CI (AGENTS.md). `--dry-run` writes nothing.
+- It prints the branch. `--result` also writes what was filed as JSON: `branch`, `specimen`, `itemId`
+  and `keeps`, the owner photo's SPEC the printing keeps, or `null`.
 
 ## Intake run on the Homelab (#659)
 
@@ -277,17 +281,21 @@ python verification/photo_inbox/intake.py I:\<job> --photos <photo checkout> [--
 included. A job is ready when it has its printing, approved corners and no unconfirmed number mismatch,
 and is not filed yet.
 
-1. `intake.py` files the job in the run's own clones (`.work/` in the data folder). The run then pushes
-   the branch and opens its pull request.
+1. `intake.py` files the job in the run's own clones (`.work/` in the data folder) and hands its result
+   over with `--result`. The run then pushes the branch and opens its pull request.
 2. The pull request is merged at the head the run pushed, once every check main's ruleset requires
    (`gate (ubuntu-latest)`, `gate (windows-latest)`) passed there (#674). Another green check never
    stands in for a required one. A red check, a head someone else moved, or a main that requires no
    check stops the run with its link.
-3. `Publish site` runs on main.
+3. `Publish site` runs on main, when the filing changed a file the Pages artifact carries
+   (`scripts/publish.py`); otherwise nothing is deployed (#675).
 4. `Provision Snoredex short links` runs for the printing; its verified alias is read from the run's
    artifact.
 5. A second pull request records the alias in `data/social.json` and is merged on green CI. Once `sync`
    has pulled main, the Posts tab shows the draft.
+
+A further piece of evidence (`keeps` in the result) ends after step 3: no short link, no second pull
+request, and the printing's image and share row stay as they are.
 
 The job shows each step, and when a step fails, the reason. The run writes every finished step to
 `intake-run.json` beside the job, so a new start, by the button or the night, carries on where it

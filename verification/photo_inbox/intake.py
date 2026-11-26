@@ -12,7 +12,8 @@ origin/main and the photo archive, and push the copy to the photo archive, which
 (a copy pushed by an interrupted run is found again by its bytes and reused); then write the specimen,
 its citation, preview, gallery images and share row on a new branch, run check.py, check.py --photos
 and regen.py, and commit. `--pr` pushes the branch and opens the pull request; `--dry-run` writes
-nothing and prints what it would file.
+nothing and prints what it would file. The branch is printed; `--result FILE` also writes what was
+filed as JSON (`outcome`), which the inbox's intake run reads (#675).
 """
 
 from argparse import ArgumentParser
@@ -344,6 +345,12 @@ def deliver(root, specimen, facts, kept, open_pr):
     return branch
 
 
+def outcome(branch, specimen, item_id, kept):
+    """What a filing hands its caller: `keeps` names the owner photo the printing keeps as its image, so
+    the new SPEC is a further piece of evidence only (owner decision D03, #675), else it is None."""
+    return {"branch": branch, "specimen": specimen, "itemId": item_id, "keeps": kept}
+
+
 def plan(root, folder, photos, corners=None):
     """Everything up to the archive copy; refuses before anything is written."""
     job, corners = job_input(folder, corners)
@@ -363,6 +370,7 @@ def main(argv=None):
     parser.add_argument("--corners", type=int, nargs=8, metavar="PX", help="instead of the job's approved corners")
     parser.add_argument("--pr", action="store_true", help="push the branch and open the pull request")
     parser.add_argument("--dry-run", action="store_true", help="write nothing, print what would be filed")
+    parser.add_argument("--result", type=Path, help="also write what was filed to this JSON file")
     args = parser.parse_args(argv)
     corners = [args.corners[i:i + 2] for i in range(0, 8, 2)] if args.corners else None
     try:
@@ -381,7 +389,11 @@ def main(argv=None):
         files, kept = changes(data, specimen, job, corners, facts, summary, archive)
         write_files(ROOT, files)
         gate(ROOT, args.photos)
-        print(deliver(ROOT, specimen, facts, kept, args.pr))
+        branch = deliver(ROOT, specimen, facts, kept, args.pr)
+        if args.result:
+            args.result.write_text(json.dumps(outcome(branch, specimen, job["itemId"], kept)) + "\n",
+                                   encoding="utf-8", newline="\n")
+        print(branch)
     except Refused as error:
         print(f"Übernahme zurückgestellt: {error}", file=sys.stderr)
         return 2
