@@ -33,6 +33,8 @@ git -C "$CHECKOUT" diff --quiet "$RUNNING" origin/main -- \
   aktuell" with the short commit and stop. A merge that changed only data needs no update; the inbox
   reads the synced catalogue by itself.
 - **Exit code 1, or `code.commit` empty, or `code.source` not `image`:** an update is needed. Go on.
+- **Any other exit code:** git could not compare, for example because the running commit is not in
+  the checkout. Do not update; send the owner the error.
 
 ## 2. Is now a safe moment?
 
@@ -54,7 +56,7 @@ sh update.sh
 ```
 
 `update.sh` pulls `main` fast-forward, rebuilds the image with the commit it is built from, restarts
-the containers and prints that commit.
+the containers and prints that commit in its short form.
 
 If it fails, stop and send the owner its last lines:
 - If the pull is not a fast-forward, the checkout has local changes or another branch. Never
@@ -68,7 +70,8 @@ data.
 ## 4. Check
 
 Within two minutes:
-- `curl -fsS "$INBOX/version"` names the full commit `update.sh` printed in `code.commit`.
+- `curl -fsS "$INBOX/version"` names in `code.commit` the full commit of
+  `git -C "$CHECKOUT" rev-parse HEAD`, which `update.sh` printed in its short form.
 - `code.source` is `image` and `codeChanged` is `false`. The page's foot then says `Code aktuell`.
 - `docker compose ps` shows `inbox` and `sync` running.
 - `curl -fsS "$INBOX/jobs"` answers, and no job newly reads "Unterbrochen durch einen Neustart".
