@@ -651,6 +651,25 @@ def corners_frozen():
         assert runner.read_state(root / JOB)["status"] == "done"
 
 
+def run_record():
+    """#685: a run records who queued it, when it started and ended; the night writes down its round."""
+    with TemporaryDirectory() as temp:
+        root, data, photos = setup(temp)
+        go(root, StandIn(data), data, photos)
+        state = runner.read_state(root / JOB)
+        assert state["origin"] == "button" and state["queuedAt"] <= state["startedAt"] <= state["finishedAt"], state
+        assert runner.read_night(root) is None, "no round yet"
+        run = make(root, StandIn(data), data, photos)
+        run.night_round(lambda: [JOB])
+        night, state = runner.read_night(root), runner.read_state(root / JOB)
+        assert night["jobs"] == [JOB] and night["at"] and state["origin"] == "night", (night, state)
+        assert state["status"] == "queued" and state["startedAt"] is None and state["finishedAt"] is None, state
+        run.night_round(lambda: [JOB])  # still queued: the round queues nothing and says so
+        assert runner.read_night(root)["jobs"] == []
+        run.recover()
+        assert runner.read_state(root / JOB)["finishedAt"], "a run a restart cut off has its end"
+
+
 def recovers_and_queues_once():
     with TemporaryDirectory() as temp:
         root, data, photos = setup(temp)
@@ -727,6 +746,7 @@ def main():
     github_client()
     required_checks()
     recovers_and_queues_once()
+    run_record()
     page_button()
     print("intake runner: all checks passed")
 

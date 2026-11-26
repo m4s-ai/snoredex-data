@@ -31,7 +31,7 @@ from waitress import serve
 import corners as card_corners
 from dng import dng_preview
 import number_check
-from overview import ITEM_ID, Catalogue
+from overview import ITEM_ID, SHORT_BASE, Catalogue
 import posting
 from posting import write_json  # one atomic JSON writer for jobs and orders (#676)
 import runner as intake_runner
@@ -441,6 +441,28 @@ def with_intake(job, folder, runner):
                              "locked": intake_runner.assignment_lock(run)})
 
 
+RUN_FIELDS = ("status", "step", "done", "error", "specimen", "pr", "aliasPr", "alias", "origin", "queuedAt",
+              "startedAt", "finishedAt", "updatedAt")
+PULL_URL = "https://github.com/m4s-ai/snoredex-data/pull/"
+
+
+def run_view(job, run):
+    """One intake run as the Läufe tab shows it (#685): what the run records for the page and its links,
+    never its approval, its pushed commits or its workflow request tokens."""
+    view = {key: run.get(key) for key in RUN_FIELDS}
+    links = {"prUrl": view["pr"] and f"{PULL_URL}{view['pr']}",
+             "aliasPrUrl": view["aliasPr"] and f"{PULL_URL}{view['aliasPr']}",
+             "shortUrl": view["alias"] and SHORT_BASE + view["alias"]}
+    return dict(view, **links, jobId=job["id"], file=job["file"], itemId=job.get("itemId"))
+
+
+def all_runs(root, catalogue):
+    """Every job's run, the newest first (#685); a job that never ran has none."""
+    runs = [run_view(job, run) for job in all_jobs(root, catalogue)
+            if (run := intake_runner.read_state(root / job["id"])).get("status")]
+    return sorted(runs, key=lambda run: run["updatedAt"] or "", reverse=True)
+
+
 def refuse_if_locked(folder):
     """D01 (#672): an approval holds for one printing, so a run's printing and corners stay as approved."""
     locked = intake_runner.assignment_lock(intake_runner.read_state(folder))
@@ -520,6 +542,12 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
     def jobs():
         listed = [with_intake(job, root / job["id"], runner) for job in all_jobs(root, catalogue)]
         return jsonify(jobs=listed, catalogue=catalogue is not None, intake=runner is not None)
+
+    @app.get("/runs")
+    def runs():
+        """Every intake run the jobs record and the last nightly round (#685); it reads, it starts nothing."""
+        return jsonify(runner=runner is not None, runs=all_runs(root, catalogue),
+                       night=intake_runner.read_night(root))
 
     @app.post("/jobs/<job_id>/intake")
     def start_intake(job_id):

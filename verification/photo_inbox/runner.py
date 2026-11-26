@@ -58,6 +58,7 @@ ASKPASS = '#!/bin/sh\ncase "$1" in Username*) echo x-access-token ;; *) echo "$I
 STATE = "intake-run.json"
 RESULT = "intake-result.json"  # what intake.py filed (`intake.outcome`), in the runner's work folder
 WORK = ".work"  # the runner's own clones in the private data folder; the page lists hash folders only
+NIGHT = "nightly.json"  # when the last nightly round ran and which jobs it queued (#685), in WORK
 STEPS = ("intake", "merge", "publish", "alias", "alias-pr")
 FAILED = {"failure", "cancelled", "timed_out", "action_required", "startup_failure", "stale"}
 PASSED = {"success", "neutral", "skipped"}  # what GitHub accepts for a required check
@@ -93,6 +94,12 @@ def write_state(folder, state):
             if attempt == 49:
                 raise
             time.sleep(0.05)
+
+
+def read_night(root):
+    """The last nightly round (#685): {"at", "jobs"}, or None before the first one."""
+    path = Path(root) / WORK / NIGHT
+    return json.loads(path.read_text(encoding="utf-8")) if path.is_file() else None
 
 
 def approval(folder):
@@ -237,16 +244,18 @@ class Runner:
         self.jobs, self.waiting = queue.Queue(), set()
 
     # --- the queue ------------------------------------------------------------------------------
-    def submit(self, job_id):
+    def submit(self, job_id, origin="button"):
         """Queue a job once; a queued or running job is not queued again. The button and the night both
-        land here, so both freeze the approval; a run that filed already keeps the one it filed for."""
+        land here, so both freeze the approval; a run that filed already keeps the one it filed for. The
+        run records who queued it, "button" or "night" (#685)."""
         if job_id in self.waiting:
             return False
         self.waiting.add(job_id)
         state = read_state(self.root / job_id)
         if "intake" not in state.get("done", []):
             state["approval"] = approval(self.root / job_id)
-        write_state(self.root / job_id, dict(state, status="queued", error=None))
+        write_state(self.root / job_id, dict(state, status="queued", error=None, origin=origin,
+                                             queuedAt=now(), startedAt=None, finishedAt=None))
         self.jobs.put(job_id)
         return True
 
@@ -255,7 +264,8 @@ class Runner:
         for path in self.root.glob(f"*/{STATE}"):
             state = read_state(path.parent)
             if state.get("status") in ("queued", "running"):
-                write_state(path.parent, dict(state, status="failed", error="Unterbrochen durch einen Neustart."))
+                write_state(path.parent, dict(state, status="failed", error="Unterbrochen durch einen Neustart.",
+                                              finishedAt=now()))
 
     def start(self):
         self.recover()
@@ -279,10 +289,17 @@ class Runner:
                 current = datetime.now(timezone.utc)
                 due = current.replace(hour=hour, minute=0, second=0, microsecond=0)
                 time.sleep(((due if due > current else due + timedelta(days=1)) - current).total_seconds())
-                for job_id in ready():
-                    self.submit(job_id)
+                self.night_round(ready)
 
         threading.Thread(target=loop, name="intake-nightly", daemon=True).start()
+
+    def night_round(self, ready):
+        """Queue every job `ready()` names and write down the round: when, and which jobs it queued."""
+        at = now()
+        queued = [job_id for job_id in ready() if self.submit(job_id, origin="night")]
+        path = self.root / WORK / NIGHT
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps({"at": at, "jobs": queued}) + "\n", encoding="utf-8", newline="\n")
 
     # --- one run --------------------------------------------------------------------------------
     def run(self, job_id):
@@ -291,6 +308,7 @@ class Runner:
             return  # moved to the trash after it was queued: nothing to file
         state = read_state(folder)
         state.setdefault("done", [])
+        state.update(startedAt=now(), finishedAt=None)
         try:
             for name in STEPS:
                 if name not in state["done"]:
@@ -299,9 +317,10 @@ class Runner:
                     getattr(self, "step_" + name.replace("-", "_"))(folder, state)
                     state["done"].append(name)
                     write_state(folder, dict(state, status="running"))
-            write_state(folder, dict(state, status="done", step=None, error=None))
+            write_state(folder, dict(state, status="done", step=None, error=None, finishedAt=now()))
         except (RunError, OSError, subprocess.SubprocessError, KeyError, ValueError) as error:
-            write_state(folder, dict(state, status="failed", error=str(error) or type(error).__name__))
+            write_state(folder, dict(state, status="failed", error=str(error) or type(error).__name__,
+                                     finishedAt=now()))
 
     def git(self, cwd, *args):
         done = subprocess.run(["git", "-C", str(cwd), *args], env=self.env, capture_output=True, text=True,
