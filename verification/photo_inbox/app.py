@@ -35,6 +35,7 @@ from overview import ITEM_ID, Catalogue
 import posting
 from posting import write_json  # one atomic JSON writer for jobs and orders (#676)
 import runner as intake_runner
+import toolchain
 
 # an iPhone ProRAW DNG at 48 megapixels is often 75-100 MB
 MAX_UPLOAD = 200 * 1024 * 1024
@@ -400,13 +401,13 @@ def code_version():
     return dict(head(Path(__file__).resolve().parents[2]) or {"commit": None, "date": None}, source="checkout")
 
 
-def running_version(code, repo, photos):
-    """The running code and the mounted checkouts as they are now (#666)."""
+def running_version(code, repo, photos, tools=None):
+    """The running code, its tools against the accepted ones (#681) and the mounted checkouts now (#666)."""
     changed = None  # whether the synced catalogue checkout carries other inbox code than is running
     if repo and code["commit"]:
         done = git_output(repo, "diff", "--quiet", code["commit"], "HEAD", "--", *CODE_PATHS)
         changed = {0: False, 1: True}.get(done[0]) if done else None
-    return {"code": code, "codeChanged": changed, "data": head(repo), "photos": head(photos)}
+    return {"code": code, "codeChanged": changed, "tools": tools, "data": head(repo), "photos": head(photos)}
 
 
 def intake_blocked(folder, filed):
@@ -474,6 +475,7 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
     # catalogue thumbnails come from the published site; the page loads nothing else from outside
     image_origin = "/".join(catalogue.base.split("/")[:3]) if catalogue else ""
     code = code_version()  # a later pull into the checkout does not change the code already imported
+    tools = toolchain.report()  # installed once, so read once (#681)
     if runner and schedule:
         runner.start()
         runner.nightly(lambda: ready_jobs(root, catalogue))
@@ -486,11 +488,11 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
 
     @app.get("/")
     def index():
-        return render_template("index.html", version=running_version(code, repo, photos))
+        return render_template("index.html", version=running_version(code, repo, photos, tools))
 
     @app.get("/version")
     def version():
-        return jsonify(running_version(code, repo, photos))
+        return jsonify(running_version(code, repo, photos, tools))
 
     @app.errorhandler(413)
     def upload_limit(_error):

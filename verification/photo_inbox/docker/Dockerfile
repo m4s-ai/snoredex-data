@@ -6,7 +6,11 @@
 #
 # The catalogue and the photo archive are not baked in: compose.yaml mounts their checkouts and its
 # sync service keeps them current. A code or dependency change needs a rebuild.
-FROM python:3.12-slim-bookworm
+#
+# The accepted tools are fixed (#681, owner decision D04): the base image by its digest (toolchain.json
+# names the same), every Python package by requirements.lock. Rebuilding an accepted commit restores
+# them; toolchain.py shows whether a running inbox has them.
+FROM python:3.12-slim-bookworm@sha256:44cf1793efa7c7a476bb0f2cff81443f4a072c90c1cb127e2924933daa3e8c64
 
 # Tesseract and its language data for the collection's languages; git for the sync service and, with
 # ssh, for the intake run's push to the photo archive (#659)
@@ -19,8 +23,8 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY verification/photo_inbox/requirements.txt verification/photo_inbox/requirements.txt
-RUN pip install --no-cache-dir -r verification/photo_inbox/requirements.txt
+COPY verification/photo_inbox/requirements.lock verification/photo_inbox/requirements.lock
+RUN pip install --no-cache-dir -r verification/photo_inbox/requirements.lock
 
 # only what the inbox runs or imports: its own folder, the repository scripts and the verification
 # modules it uses for covers and card faces (Dockerfile.dockerignore keeps out data, images, evidence)

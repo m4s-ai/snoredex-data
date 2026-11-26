@@ -73,6 +73,9 @@ Within two minutes:
 - `curl -fsS "$INBOX/version"` names in `code.commit` the full commit of
   `git -C "$CHECKOUT" rev-parse HEAD`, which `update.sh` printed in its short form.
 - `code.source` is `image` and `codeChanged` is `false`. The page's foot then says `Code aktuell`.
+- `tools.matches` is `true`: the image has the accepted tools (#681), and the foot says `Werkzeuge wie
+  abgenommen`. When it is `false`, send the owner the lines under `tools.drift`; the inbox keeps
+  running, and the owner decides.
 - `docker compose ps` shows `inbox` and `sync` running.
 - `curl -fsS "$INBOX/jobs"` answers, and no job newly reads "Unterbrochen durch einen Neustart".
 

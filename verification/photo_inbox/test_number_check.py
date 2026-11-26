@@ -36,6 +36,8 @@ def main():
     os.environ["TESSERACT"] = os.path.join(os.path.dirname(__file__), "no-such-tesseract")
     try:
         found = number_check.check(Image.new("RGB", (630, 880), "white"), "1", "64", "German")
+        import toolchain  # #681: the tool check inspects the binary the number guard runs
+        assert number_check.tesseract() == toolchain.binary() == os.environ["TESSERACT"]
     finally:
         del os.environ["TESSERACT"]
     assert found["result"] == "unavailable", "a broken Tesseract only marks the check, it never fails it"
