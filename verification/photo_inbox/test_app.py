@@ -494,6 +494,89 @@ def posting_checks(root, repo, temp, command):
     return uploader
 
 
+def runs_checks(temp):
+    """#685: the Läufe tab shows every run in its group with its links, retries a failed one exactly once,
+    names the last nightly round, and says so when no runner is set up; no sideways scroll on a phone."""
+    import runner as intake_runner
+
+    root, repo = Path(temp) / "runs-inbox", catalogue_repo(Path(temp) / "runs-repo", "sha256:none")
+    client = create_app(root, repo, published).test_client()
+    ids = [post(client, jpeg(colour)).json["id"]
+           for colour in ((11, 0, 0), (0, 11, 0), (0, 0, 11), (11, 11, 0), (0, 11, 11))]
+    at = "2026-11-26T03:00:05+00:00"
+    states = [{"status": "queued", "done": [], "origin": "night", "queuedAt": at},
+              {"status": "running", "step": "merge", "done": ["intake"], "specimen": "SPEC-0101", "pr": 101,
+               "origin": "button", "startedAt": at},
+              {"status": "failed", "step": "publish", "done": ["intake", "merge"], "specimen": "SPEC-0102", "pr": 102,
+               "error": "pages.yml endete mit failure: https://example.invalid/runs/1", "startedAt": at,
+               "finishedAt": at, "approval": {"itemId": "x"}, "runs": {"pages.yml": {"request": "inbox-secret"}}},
+              {"status": "done", "done": list(intake_runner.STEPS), "specimen": "SPEC-0103", "pr": 103, "aliasPr": 104,
+               "alias": "sdabc", "startedAt": at, "finishedAt": at},
+              # failed before filing, and its job has no printing now: a retry is refused (409)
+              {"status": "failed", "step": "intake", "done": [], "origin": "night", "finishedAt": at,
+               "error": "https://example.invalid/a-very-long-unbreakable-token-" + "x" * 80}]
+    for job_id, state in zip(ids, states):
+        intake_runner.write_state(root / job_id, state)
+    (root / intake_runner.WORK).mkdir(exist_ok=True)
+    (root / intake_runner.WORK / intake_runner.NIGHT).write_text(json.dumps({"at": at, "jobs": [ids[0]]}),
+                                                                 encoding="utf-8", newline="\n")
+    run = intake_runner.Runner(root, None)  # queues for real; schedule=False never starts it, nothing leaves
+    listed = create_app(root, repo, published, runner=run, schedule=False).test_client().get("/runs").json
+    assert "inbox-secret" not in json.dumps(listed) and "approval" not in json.dumps(listed), "no internals"
+    servers = [create_server(create_app(root, repo, published, runner=chosen, schedule=False), host="127.0.0.1",
+                             port=0)
+               for chosen in (run, None)]
+    for server in servers:
+        threading.Thread(target=server.run, daemon=True).start()
+    try:
+        with sync_playwright() as playwright:
+            browser = playwright.chromium.launch()
+            page = browser.new_page(viewport={"width": 375, "height": 812})
+            page.goto(f"http://127.0.0.1:{servers[0].effective_port}/#laeufe")
+            page.locator("#runs-done li").wait_for()
+            group = lambda name: page.locator(f"#runs-{name} li").evaluate_all("items => items.map(i => i.dataset.job)")
+            groups = {name: sorted(group(name)) for name in ("active", "failed", "done")}
+            assert groups == {"active": sorted(ids[:2]), "failed": sorted([ids[2], ids[4]]), "done": [ids[3]]}, groups
+            done = page.locator("#runs-done li .links a").evaluate_all("links => links.map(a => a.href)")
+            assert done == ["https://github.com/m4s-ai/snoredex-data/pull/103",
+                            "https://github.com/m4s-ai/snoredex-data/pull/104", "https://go.m4s.eu/sdabc"], done
+            # a wide font, as the Linux runner's fallback, must not push the page sideways either
+            page.evaluate("""() => { document.body.style.fontFamily = 'Verdana, "DejaVu Sans", sans-serif'; }""")
+            assert page.evaluate("document.documentElement.scrollWidth") <= 375, "no sideways scroll on a phone"
+            refused = page.locator(f'#runs-failed li[data-job="{ids[4]}"]')
+            refused.locator(".retry").click()
+            page.locator(f'#runs-failed li[data-job="{ids[4]}"] .error >> text=Nicht neu gestartet').wait_for()
+            reason = refused.locator(".error").text_content()
+            assert "Nicht neu gestartet: Dem Foto ist noch kein Druck zugeordnet." in reason, reason
+            assert run.jobs.qsize() == 0, "a refused retry queues nothing"
+            failed = page.locator(f'#runs-failed li[data-job="{ids[2]}"]')
+            assert "pages.yml endete mit failure" in failed.locator(".error").text_content()
+            assert failed.locator(".photo").get_attribute("href") == f"#job-{ids[2]}", "a jump to the photo"
+            assert "Veröffentlichen" in failed.locator(".steps").text_content()
+            assert "1 Auftrag" in page.locator("#runs-night").text_content()
+            assert page.locator("#count-laeufe").text_content() == "4", "waiting, running and failed runs"
+            assert page.evaluate("document.documentElement.scrollWidth") <= 375, "no sideways scroll on a phone"
+            failed.locator(".retry").click()
+            failed.wait_for(state="detached")
+            assert sorted(group("active")) == sorted(ids[:3]) and run.jobs.qsize() == 1, "queued exactly once"
+            assert "Nicht neu gestartet" in refused.locator(".error").text_content(), "and survives a refresh"
+            assert intake_runner.read_state(root / ids[2])["status"] == "queued"
+            # a nightly round while the page is open shows once the tab is opened again, without a reload
+            (root / intake_runner.WORK / intake_runner.NIGHT).write_text(
+                json.dumps({"at": at, "jobs": ids[:2]}), encoding="utf-8", newline="\n")
+            page.click("#tab-posts")
+            page.click("#tab-laeufe")
+            page.locator("#runs-night >> text=2 Aufträge").wait_for(timeout=5000)  # well before the 15 s poll
+            page.goto(f"http://127.0.0.1:{servers[1].effective_port}/#laeufe")
+            page.locator("#runs-done li").wait_for()
+            assert "nicht eingerichtet" in page.locator("#runs-status").text_content(), "without a runner it says so"
+            assert page.locator("#runs-active .retry:visible, #runs-failed .retry:visible").count() == 0
+            browser.close()
+    finally:
+        for server in servers:
+            server.close()
+
+
 def queue_checks(temp):
     """#676: a finished target costs no call and no write; a broken order blocks no other one."""
     root = Path(temp) / "queue"
@@ -1177,6 +1260,7 @@ def main():
         browser_checks(root, files, repo, command, Path(temp))
         posting_checks(root, repo, temp, command)
         queue_checks(temp)
+        runs_checks(temp)
         permalink_checks(temp)
     print("photo inbox: all checks passed")
 

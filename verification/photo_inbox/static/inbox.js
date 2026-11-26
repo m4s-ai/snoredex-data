@@ -5,7 +5,7 @@ const DATE = new Intl.DateTimeFormat("de-DE", {dateStyle: "medium", timeStyle: "
 const DAY = new Intl.DateTimeFormat("de-DE", {dateStyle: "medium"});
 const STAGE_NAMES = {none: "kein eigenes Foto", assigned: "hochgeladen, zugeordnet", filed: "verarbeitet",
                      online: "online", ready: "bereit für Instagram", posted: "gepostet"};
-const state = {overview: null, labels: new Map(), catalogue: false, canPost: false, accounts: []};
+const state = {overview: null, labels: new Map(), catalogue: false, canPost: false, accounts: [], refused: {}};
 
 function message(text, kind) {
   const line = document.createElement("li");
@@ -93,6 +93,9 @@ function activate(name, focus) {
     field(entry.getAttribute("aria-controls")).hidden = !selected;
   }
   if (focus) tab.focus();
+  // the runs change on the server (the nightly round, a run finishing): opening the tab reads them anew (#685);
+  // only this read-only tab, since a reload of Fotos would drop a description being typed
+  if (tabName(tab) === "laeufe") showRuns();
 }
 
 function follow() {
@@ -290,6 +293,7 @@ async function startIntake(item) {
   } catch (error) {
     item.querySelector(".intake-status").textContent = error.message;
   }
+  await showRuns();  // the Läufe tab and its count follow the run just queued (#685)
 }
 
 // --- number check (#658): what Tesseract read against the printing, a guard only ---
@@ -865,9 +869,90 @@ async function showPosts() {
   }
 }
 
+// --- intake runs (#685): what each job's run records, grouped, the newest first; it starts only a retry ---
+
+const RUN_GROUPS = {"runs-active": ["queued", "running"], "runs-failed": ["failed"], "runs-done": ["done"]};
+const RUN_STATES = {queued: "wartet", running: "läuft", failed: "angehalten", done: "fertig"};
+const ORIGINS = {button: "per „Übernehmen“", night: "aus der nächtlichen Runde"};
+const when = (value) => value ? DATE.format(new Date(value)) : null;
+
+function runTimes(run) {
+  const parts = ORIGINS[run.origin] ? [ORIGINS[run.origin]] : [];
+  if (when(run.startedAt)) parts.push(`Start ${when(run.startedAt)}`);
+  else if (when(run.queuedAt)) parts.push(`wartet seit ${when(run.queuedAt)}`);
+  if (when(run.finishedAt)) parts.push(`Ende ${when(run.finishedAt)}`);
+  return parts.join(" · ");
+}
+
+function runSteps(run) {
+  const done = (run.done || []).map((step) => STEP_NAMES[step] || step);
+  const now = run.step && run.status !== "done" ? `${RUN_STATES[run.status]} bei ${STEP_NAMES[run.step] || run.step}` : RUN_STATES[run.status];
+  return done.length ? `${now} · erledigt: ${done.join(", ")}` : now;
+}
+
+function runItem(run) {
+  const item = field("run-template").content.firstElementChild.cloneNode(true);
+  item.dataset.job = run.jobId;
+  item.querySelector(".photo").href = `#job-${run.jobId}`;
+  const image = item.querySelector("img");
+  image.alt = `Foto ${run.file}, zum Auftrag ${run.jobId.slice(0, 8)}`;
+  image.onerror = () => image.replaceWith("Keine Vorschau.");
+  image.src = `/jobs/${run.jobId}/preview?size=400`;
+  item.querySelector(".label").textContent = [run.specimen, itemLabel(run.itemId)].filter(Boolean).join(" · ") || run.file;
+  item.querySelector(".when").textContent = runTimes(run);
+  item.querySelector(".steps").textContent = runSteps(run);
+  // a refused retry keeps its reason at its run, across every refresh, until a retry goes through
+  const refused = state.refused[run.jobId] ? `Nicht neu gestartet: ${state.refused[run.jobId]}` : "";
+  const error = item.querySelector(".error");
+  error.textContent = [run.status === "failed" && run.error, refused].filter(Boolean).join("\n");
+  error.hidden = !error.textContent;
+  const links = [[run.prUrl, `Übernahme-PR #${run.pr}`], [run.aliasPrUrl, `Kurzlink-PR #${run.aliasPr}`],
+                 [run.shortUrl, `Kurzlink ${run.alias}`]].filter(([href]) => href);
+  item.querySelector(".links").replaceChildren(...links.map(([href, text]) => link(href, text)));
+  const retry = item.querySelector(".retry");
+  retry.hidden = run.status !== "failed" || !state.runner;
+  retry.onclick = () => retryRun(run.jobId, retry);
+  return item;
+}
+
+async function retryRun(jobId, button) {
+  button.disabled = true;  // one click queues the run once; the server refuses a second start anyway
+  try {
+    await call(`/jobs/${jobId}/intake`, {method: "POST"});
+    delete state.refused[jobId];
+  } catch (error) {
+    state.refused[jobId] = error.message;  // e.g. the corners need approving again: shown at the run
+  }
+  await Promise.all([showRuns(), showJobs()]);
+}
+
+function nightText(night) {
+  if (!night) return "Die nächtliche Runde ist noch nicht gelaufen.";
+  const count = night.jobs.length;
+  return `Letzte nächtliche Runde: ${when(night.at)}, ${count === 1 ? "1 Auftrag" : `${count} Aufträge`} gestartet.`;
+}
+
+async function showRuns() {
+  try {
+    const reply = await call("/runs");
+    state.runner = reply.runner;
+    for (const [id, states] of Object.entries(RUN_GROUPS)) {
+      field(id).replaceChildren(...reply.runs.filter((run) => states.includes(run.status)).map(runItem));
+    }
+    showCount("count-laeufe", reply.runs.filter((run) => run.status !== "done").length);
+    field("runs-night").textContent = reply.runner ? nightText(reply.night) : "";
+    field("runs-status").textContent = reply.runner ? "" :
+      "Die Übernahme ist hier nicht eingerichtet: Ohne ihren Zugang startet kein Lauf, auch nachts nicht.";
+    clearTimeout(state.followRuns);
+    if (reply.runs.some((run) => RUN_GROUPS["runs-active"].includes(run.status))) state.followRuns = setTimeout(showRuns, 15000);
+  } catch (error) {
+    field("runs-status").textContent = error.message || "Die Läufe konnten nicht geladen werden.";
+  }
+}
+
 async function refresh() {
   await showOverview();
-  await Promise.all([showJobs(), showTrash(), showPosts()]);
+  await Promise.all([showJobs(), showTrash(), showPosts(), showRuns()]);
 }
 
 field("stage").append(...STAGE_ORDER.map((stage) => Object.assign(document.createElement("option"), {value: stage, textContent: STAGE_NAMES[stage]})));

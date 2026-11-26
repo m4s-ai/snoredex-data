@@ -10,13 +10,13 @@ job folder named by the SHA-256 of its bytes, holding `photo.dng` or `photo.jpg`
 `ownPhoto`, the file name, the hash, `receivedAt`, and once described `specimenHint`, `note` and
 `describedAt`. A job is its bytes: uploading the same photo again, described or not, is the same job.
 
-**Page (owner decision, 2026-11-24).** The German page (`templates/index.html`, `static/`) has six
-tabs instead of one long page: Hochladen, Fotos, Übersicht, Posts, Statistik and Papierkorb. On a phone the
+**Page (owner decision, 2026-11-24).** The German page (`templates/index.html`, `static/`) has seven
+tabs instead of one long page: Hochladen, Fotos, Übersicht, Posts, Läufe, Statistik and Papierkorb. On a phone the
 tab bar sits at the bottom with an icon and a label, each tab at least 44 × 44 CSS px. From 48rem
-upward it moves beside the title. The tabs follow the WAI-ARIA tabs pattern: automatic activation,
+upward it moves beside the title, in a second row where seven do not fit. The tabs follow the WAI-ARIA tabs pattern: automatic activation,
 arrow keys, Home and End, one tab stop. Each tab has a hash (`#fotos`) for reload, back and links;
 the hash never equals the panel's id, so the browser neither scrolls nor focuses on load. Badges
-on the tabs count the photos without details, the drafts ready for Instagram and the trashed ones. The layout follows WCAG 2.2
+on the tabs count the photos without details, the drafts ready for Instagram, the waiting, running and failed intake runs and the trashed ones. The layout follows WCAG 2.2
 target sizes and impeccable.style guidance: 17 px body text at 1.5 line height, flat lists with
 dividers instead of nested cards, a visible focus outline, and no motion.
 
@@ -130,6 +130,7 @@ A JPEG is decoded completely. A DNG is checked at header level only (a TIFF whos
 |---|---|
 | `POST /uploads` | one photo as `application/octet-stream`; 201 new, 200 already there |
 | `GET /jobs` | every job, newest first |
+| `GET /runs` | every intake run the jobs record, newest first, and the last nightly round (#685) |
 | `GET /jobs/<id>/preview?size=400\|1600` | the cached preview JPEG |
 | `POST /jobs/<id>` | JSON `{"specimen", "note", "itemId"}`: saves the description; another printing drops approved corners |
 | `GET /jobs/<id>/corners` | the photo's upright size, the suggested card quads and the approved corners |
@@ -315,6 +316,15 @@ and is not filed yet.
 
 A further piece of evidence (`keeps` in the result) ends after step 3: no short link, no second pull
 request, and the printing's image and share row stay as they are.
+
+**Läufe (#685).** The tab lists every run from the jobs' `intake-run.json`, newest first, in three groups:
+waiting or running, failed, done. Each run shows a thumbnail that jumps to its photo, its SPEC and
+printing, where it came from (the button or the nightly round), its start and end, the step it is at or
+stopped at and the steps done, and links to its intake PR, its alias PR and its short link. A failed one
+shows the error the run stored and "Erneut versuchen", the same `POST /jobs/<id>/intake` as on the
+photo. Above them stands the last nightly round with the number of jobs it started; without a runner
+the tab says so. It reads only; the run records `origin`, `queuedAt`, `startedAt` and `finishedAt` for
+it, the night `.work/nightly.json`. Approvals, pushed commits and request tokens stay off the page.
 
 The job shows each step, and when a step fails, the reason. The run writes every finished step to
 `intake-run.json` beside the job, so a new start, by the button or the night, carries on where it
