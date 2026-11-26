@@ -112,7 +112,7 @@ order, each with its own alt text.
 service and its key in the environment variable `UPLOADER_KEY` (never in a file, the repository
 or a log), each draft offers the SnoreDex accounts on Instagram, Facebook and Threads, all
 preselected, and a time; the uploader's other accounts never appear and cannot be posted to (owner decision
-2026-11-25). The drafts show at once; the send form follows when the uploader names the accounts. Only the owner's
+2026-11-25). The list shows at once; an opened draft's send form follows when the uploader names the accounts. Only the owner's
 click, after a confirmation, posts: "Jetzt posten" at once, "Einplanen" at the chosen time. The
 order freezes the draft the owner saw in `.posts/<SPEC>/` inside the data folder, so a later catalogue
 change never alters it; a draft that changed since the page loaded is refused. A queue thread sends
@@ -403,52 +403,31 @@ the intake run and the smoke test in the built image, and the `inbox suites` job
 Markdown starts neither; `verification/test_inbox_ci.py` checks that filter. The byte comparison with
 the photo archive stays a local run: `test_intake.py --photos <photo checkout>`.
 
-`test_runner.py` drives the intake run against local Git remotes and a stand-in GitHub. It covers the
-whole chain, a restart after a failed step without a second filing, pull request or merge, red CI, a
-refused job, an alias already on main, a run cut off by a restart, and the page's button. It also
-covers the frozen approval: a printing changed after filing, a SPEC main files for another printing,
-a run from before the freeze, corners changed between the queue and intake, and the page's lock.
-For the workflow runs (#673) it covers a foreign run of the same workflow, a restart while `Publish
-site` runs, a lost answer, a dispatch that started nothing, an answer without the run's id, a result
-for another printing, and the real client's requests.
+What each suite covers:
 
-`test_number_check.py` turns the misreadings seen in #655 into verdicts and checks when the guard
-stops intake. `test_app.py` reads a printed number on a synthetic card when Tesseract is installed
-(match, a wrong printing as mismatch, confirmation, a new frame read again) and says so when it is not.
-
-`test_intake.py` files a synthetic phone photo (sideways, with GPS) for a printing with and one
-without an owner photo and runs every `check.py` rule on the result; it refuses a job without printing
-or corners and a photo already filed, finds an orphaned archive copy, lets two intakes race for a
-number, and with the photo archive rebuilds SPEC-1125's gallery and preview files byte for byte.
-
-It covers uploads without details (a JPEG with GPS kept privately, byte for byte; DNGs in both byte
-orders; a plain TIFF, a truncated DNG header, non-photo and truncated JPEG files refused; the size
-and pixel limits; repeats), the dashboard (newest first, previews without Exif or GPS, a DNG without
-an embedded preview, invalid and corrected descriptions, a described photo uploaded again), the
-trash (no delete without catalogue or of a filed job, restore, a re-upload, delete for good, emptied
-after 30 days), the overview with test data for every stage (an unreadable site counts nothing as
-online), a restart, an inbox inside a Git checkout, and in a phone-sized Chromium a bulk upload with
-one bad file, a description with its printing, the views, counts and statistics, and delete,
-restore and delete for good, the card corners (a suggestion within 2 % on a sideways photo; no
-approval without printing, counter-clockwise, too narrow or outside the photo; the title image;
-a new note keeps, another printing drops and a filed job refuses the approval; in the browser the
-handle size, keyboard steps, the loupe, a drag and the approval), the Posts tab with a stand-in exporter (built once per catalogue state, rebuilt for changed exporter code,
-a failed draft with its reason) and a stand-in uploader (accounts preselected, a dismissed confirmation
-posts nothing, a plan taken back; a changed draft, a time without zone and a second order refused;
-an unreachable uploader retried, a resend after a crash deduplicated, a failed job sent again; the
-permalinks recorded once per platform), and the archive copy of a phone-like DNG and JPEG (location, maker, XMP and
-second frame gone; pixels, profile and orientation kept; a DNG without preview refused). It is not
-part of `regen.py`, whose gate stays standard-library only.
+- `test_runner.py`: the intake run against local Git remotes and a stand-in GitHub. The whole chain;
+  a restart after any step without a second filing, pull request or merge; red CI and a refused job;
+  the frozen approval (#672); the workflow runs followed by their id (#673); a foreign commit on the
+  branch, the required checks at the pushed head and a PR merged by hand (#674); a further piece of
+  evidence (#675); the run records and the nightly round (#685); the page's button and lock.
+- `test_intake.py`: a synthetic phone photo (sideways, with GPS) filed for a printing with and one
+  without an owner photo, every `check.py` rule on the result, the refusals, an orphaned archive
+  copy, two intakes racing for a number, the single gate run with the archive (#677) and one encoder
+  for intake and gallery (#680); with the photo archive, SPEC-1125's gallery and preview files byte
+  for byte.
+- `test_number_check.py`: the misreadings seen in #655 as verdicts, and when the guard stops intake.
+- `test_app.py`: uploads (JPEG with GPS kept privately, DNGs in both byte orders, refused files,
+  limits, repeats), the dashboard, the trash, the overview for every stage, restart, the card corners
+  and the number read (with Tesseract installed, else it says so), the Posts tab with a stand-in
+  exporter (a draft built when opened, once per fingerprint, a stale draft refused; #678) and a
+  stand-in uploader (orders, retries, deduplication, finished targets left alone, a broken order
+  isolated; #676), the Läufe tab (#685), the version line with its tools (#681), the archive copy,
+  and in a phone-sized Chromium the tabs, labels in a wide font and no sideways scroll. It is not
+  part of `regen.py`, whose gate stays standard-library only.
 
 ## Still open
 
-1. Done 2026-11-23: an iPhone 15 Pro ProRAW DNG (DNG 1.6, 12 megapixels) arrived unchanged from
-   the phone's photo picker and is readable over the share, hash matching its job.
-2. Done 2026-11-23: the first job went through intake as SPEC-1111; `derive.py` now makes that
-   archive copy. Next: its Instagram package through #625.
-3. Done in #639: bulk upload, the dashboard, "übernommen als SPEC-nnnn" on a job and the trash.
-   Done in #641: the overview of every printing.
-4. Later in #626: HEIC input, an edited JPEG and its DNG in one job, questions on the job, and
-   resuming after an interrupted archive push.
+- The Instagram package from an owner SPEC and its acceptance with the pilot cards: #625.
+- HEIC input, an edited JPEG and its DNG in one job, and questions on the job: #660.
 
 [Upload and import issue](https://github.com/m4s-ai/snoredex-data/issues/626) · [Bulk upload and dashboard](https://github.com/m4s-ai/snoredex-data/issues/639)

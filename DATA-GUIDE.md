@@ -12,7 +12,7 @@ before building anything on the data.
 | A ready-to-use application database | [`snoredex.sqlite`](snoredex.sqlite), starting from its `app_*` views ([DATABASE.md](DATABASE.md)) |
 | A versioned collector-app contract | [`collector_catalogue.json`](collector_catalogue.json) (contract 1.1.0), [schema](collector_catalogue.schema.json), [fixture](collector_catalogue.fixture.json) |
 | A personal have/need tracker | [`snoredex-tracker-template.sqlite`](snoredex-tracker-template.sqlite) and `scripts/collection.py` |
-| The facts themselves, one record per line | the five files in `data/`, below |
+| The facts themselves | the six files in `data/`, below |
 | Final owner decisions | [`verification/owner_adjudications.json`](verification/owner_adjudications.json) |
 | Inspected physical specimens | [`verification/specimens.json`](verification/specimens.json) |
 | The historical candidate universe | [`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json): provenance, not an all-locality manifest |
@@ -47,8 +47,9 @@ and a single exact verified printing.
 
 ### Official-source boundaries
 
-The open source gaps are tracked in [#444](https://github.com/m4s-ai/snoredex-data/issues/444).
-These limits qualify coverage, not the positive card records already retained.
+These are the source gaps that remain after the source pilot of
+[#444](https://github.com/m4s-ai/snoredex-data/issues/444), which is closed; the table is their
+current record. They qualify coverage, not the positive card records already retained.
 
 | Source | What remains unknown |
 |---|---|
@@ -95,11 +96,11 @@ and gallery. In `qualitySummary.counts`, `items` counts all retained records; `a
 `legacyCompatibility.counts` still accounts for all retained predecessor rows, including inactive
 ones; it is a historical compatibility count, not an open research queue.
 
-## The five files in `data/`
+## The six files in `data/`
 
-Each file is UTF-8 JSON with one record per line, sorted by id. `scripts/check.py` validates
-format, schema, references and the domain rules; the catalogue, pages and database are built from
-these files and add only derived fields.
+The five model files are UTF-8 JSON with one record per line, sorted by id; `data/social.json` is
+indented JSON. `scripts/check.py` validates format, schema, references and the domain rules; the
+catalogue, pages and database are built from these files and add only derived fields.
 
 **`data/printings.json`** — `printings`: one record per catalogue item.
 `itemId` (stable), `legacyChecklistIds` (old tracker keys, unique), `identityAnchor`, `active`,
@@ -227,3 +228,13 @@ and their sources), `finishUnits` (one card number in one language: applicabilit
 completeness, mapping and pattern statuses, available finishes, per-finish status, and the products
 it names) and `finishPrintings` (every finish-store printing with its sources verbatim; the facts an
 item already carries are not repeated). `meta` keeps the metadata of the previous database.
+
+**`data/social.json`** — one row per printing shared on social media, keyed by `itemId`, with the
+owner photograph its posts show (`specimenId`). `shortAlias` is the printing's verified YOURLS
+keyword: recorded only from a verified result, kept on the same item, never reused for another.
+`postCorners` holds the approved cover's card corners (four `[x, y]` pairs, clockwise from top left
+in the upright photo), so every machine builds the same draft. `carousel` lists further own photos
+of the same printing in post order, one to nineteen, each with its `specimenId`, an `altText` and,
+when approved, its `postCorners`. `instagramPosts`, `facebookPosts` and `threadsPosts` hold the
+permalinks of published posts, each at most once. `scripts/card_pages.py` validates the file; the
+card pages and the photo inbox read it.

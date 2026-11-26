@@ -1,9 +1,10 @@
 
 # Gallery gap rounds and whole-gallery acceptance
 
-[#481](https://github.com/m4s-ai/snoredex-data/issues/481) covers selected image gaps.
-[#482](https://github.com/m4s-ai/snoredex-data/issues/482) covers the whole current gallery.
-Run from an isolated data checkout. Use a current independent checkout of the photo archive.
+Gap rounds close selected image gaps; the whole-gallery acceptance reviews every current gallery
+group. Both began as [#481](https://github.com/m4s-ai/snoredex-data/issues/481) and
+[#482](https://github.com/m4s-ai/snoredex-data/issues/482), which are closed; a new round names its
+own issue. Run from an isolated data checkout. Use a current independent checkout of the photo archive.
 Image preparation uses Pillow. Browser checks require Pillow, Playwright and Chromium.
 
 ## Run or resume a round
@@ -67,7 +68,7 @@ that round. `--repo DATA_CHECKOUT` before the command selects a separate checkou
 2. Review all groups in `REVIEW/contact-sheets.html` for orientation, framing, colour, sharpness,
    identity, source priority and the representative label. Keep the generated packet in
    local scratch space or a repository cache. Consult original sources for ambiguous
-   cases. Regenerate the packet after corrections. Review the linked issue dependencies in #482.
+   cases. Regenerate the packet after corrections. Review the dependencies the round's issue links.
 3. Record a JSON object with `reviewedGroups` (group IDs from `REVIEW/group-inventory.json`),
    `imageNeeds` (every remaining item or hypothesis ID mapped to a reason), `reviewer`, `checkedAt`
    and the `basis` from the technical report. Run
