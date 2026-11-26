@@ -399,6 +399,10 @@ class Runner:
         from night_batch import verify_publication
         verify_publication(self.data, items)
 
+    def public_head(self):
+        from night_batch import ASSET_BASE_URL, request
+        return json.loads(request(ASSET_BASE_URL + "collector_deployment.json", 65536))["artifactCommit"]
+
     def check_script(self, script):
         done = subprocess.run([sys.executable, script], cwd=self.data, env=self.env,
                               capture_output=True, text=True, timeout=1800)

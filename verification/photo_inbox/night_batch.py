@@ -56,10 +56,14 @@ def excluded(state, batch):
     return state.get("batch") == batch and state.get("batchExcluded")
 
 
+def members(state):
+    return [job for job in state.get("active", state["jobs"]) if job not in state.get("excluded", [])]
+
+
 def enqueue(run, batch):
     path = folder(run, batch)
     state = runner.read_state(path)
-    jobs = state["jobs"]
+    jobs = members(state)
     marker = "night:" + batch
     if state.get("status") == "done" or marker in run.waiting or any(job in run.waiting for job in jobs):
         return False
@@ -195,7 +199,10 @@ class Batch:
 
     def file(self):
         active = []
-        for job in self.state["jobs"]:
+        for job in members(self.state):
+            current = runner.read_state(self.runner.root / job)
+            if current.get("batch") != self.batch or excluded(current, self.batch):
+                continue
             self.runner.run(job, steps=("intake", "merge"), finish=False)
             state = runner.read_state(self.runner.root / job)
             if "merge" in state.get("done", []):
@@ -203,6 +210,8 @@ class Batch:
             elif (self.runner.root / job).is_dir():
                 with self.runner.queue_lock:
                     runner.write_state(self.runner.root / job, dict(state, batchExcluded=True))
+                    self.state.setdefault("excluded", []).append(job)
+                    self.save()
                     self.runner.waiting.discard(job)
         self.state["active"] = active
         self.save()
@@ -229,11 +238,14 @@ class Batch:
 
     def reconcile_deployment(self):
         run = self.runner.workflow(self.folder, self.state, "pages.yml", {})
-        head, items = run["head_sha"], self.state["publicCheckedItems"]
-        if not re.fullmatch(r"[0-9a-f]{40}", head):
-            raise runner.RunError("Pages-Lauf meldet keinen gültigen Commit.")
+        head, items = self.runner.public_head(), self.state["publicCheckedItems"]
         repo = self.runner.data
+        if not isinstance(head, str) or not re.fullmatch(r"[0-9a-f]{40}", head):
+            raise runner.RunError("Die veröffentlichte Website meldet keinen gültigen Commit.")
         self.runner.git(repo, "fetch", "-q", "origin", head)
+        self.runner.git(repo, "merge-base", "--is-ancestor", run["head_sha"], head)
+        self.runner.git(repo, "fetch", "-q", "origin", "main")
+        self.runner.git(repo, "merge-base", "--is-ancestor", head, "FETCH_HEAD")
         self.runner.git(repo, "checkout", "-q", "--detach", head)
         deployed = read_social(repo)
         self.runner.verify_publication(items)

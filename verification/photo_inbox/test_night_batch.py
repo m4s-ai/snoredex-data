@@ -113,6 +113,8 @@ def make(root, github, data, photos):
             raise runner.RunError("Public rows do not reconcile against main")
 
     run.verify_publication = verify
+    run.public_head = lambda: next(entry["head_sha"] for entry in reversed(github.runs)
+                                   if entry["workflow"] == "pages.yml")
     return run
 
 
@@ -317,7 +319,7 @@ def public_reconciliation():
                 raise AssertionError("a missing published backlink must not pass reconciliation")
 
 
-def empty_publication_retry():
+def empty_publication_retry(superseded=False):
     with TemporaryDirectory() as temp:
         root, data, photos, jobs, items = setup(temp, count=1)
         github = GitHub(data)
@@ -335,17 +337,46 @@ def empty_publication_retry():
         }}), encoding="utf-8", newline="\n")
         run.record_posts()
         assert social_on(data, "main")[0]["instagramPosts"], "the same pending item changed after deployment"
+        if superseded:
+            github.dispatch("pages.yml", {"request": "inbox-button"})
         run = make(root, github, data, photos)
         run.night_round(lambda: [])
         run.process_next(timeout=0)
-        assert len(dispatched(github, "pages.yml")) == 2, "a pending-only retry follows its saved deployment"
+        assert len(dispatched(github, "pages.yml")) == 2 + superseded
         run.night_round(lambda: [])
+        if superseded:
+            assert run.jobs.empty(), "the newer verified button deploy already carries the permalink"
+            return
         assert run.jobs.qsize() == 1, "the newer permalink remains pending"
         run.process_next(timeout=0)
         assert len(dispatched(github, "pages.yml")) == 3
         assert github.published[0]["instagramPosts"] == ["https://www.instagram.com/p/later/"]
         run.night_round(lambda: [])
         assert run.jobs.empty()
+
+
+def excluded_job_keeps_new_batch():
+    with TemporaryDirectory() as temp:
+        root, data, photos, jobs, items = setup(temp, count=2)
+        path = root / jobs[0] / "job.json"
+        job = json.loads(path.read_text())
+        path.write_text(json.dumps(dict(job, refuse=True)), encoding="utf-8", newline="\n")
+        github = GitHub(data)
+        github.bad.add(items[1])
+        run = make(root, github, data, photos)
+        run.night_round(lambda: jobs)
+        run.process_next(timeout=0)
+        assert runner.read_state(root / jobs[0])["batchExcluded"]
+        path.write_text(json.dumps(job), encoding="utf-8", newline="\n")
+        run.night_round(lambda: [jobs[0]])
+        run.process_next(timeout=0)
+        before = runner.read_state(root / jobs[0])
+        assert before["status"] == "done"
+        github.bad.clear()
+        assert run.submit(jobs[1])
+        run.process_next(timeout=0)
+        assert runner.read_state(root / jobs[1])["status"] == "done"
+        assert runner.read_state(root / jobs[0]) == before
 
 
 def main():
@@ -357,6 +388,8 @@ def main():
     refused_and_public_check()
     public_reconciliation()
     empty_publication_retry()
+    empty_publication_retry(superseded=True)
+    excluded_job_keeps_new_batch()
     print("night batch: all checks passed")
 
 
