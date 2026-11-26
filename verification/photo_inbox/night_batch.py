@@ -2,6 +2,7 @@
 from io import BytesIO
 import json
 import re
+import subprocess
 from uuid import uuid4
 import zipfile
 
@@ -177,7 +178,7 @@ class Batch:
                                    done=list(runner.STEPS), error=None, finishedAt=runner.now()))
             self.state.update(status="done", step=None, error=None, finishedAt=runner.now())
             self.save()
-        except (runner.RunError, OSError, ValueError, KeyError, TypeError, zipfile.BadZipFile) as error:
+        except (runner.RunError, OSError, subprocess.SubprocessError, ValueError, KeyError, TypeError, zipfile.BadZipFile) as error:
             self.fail(str(error))
         finally:
             with self.runner.queue_lock:

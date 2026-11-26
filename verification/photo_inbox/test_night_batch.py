@@ -2,6 +2,7 @@
 from io import BytesIO
 import json
 import os
+import subprocess
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
@@ -379,6 +380,23 @@ def excluded_job_keeps_new_batch():
         assert runner.read_state(root / jobs[0]) == before
 
 
+def shared_timeout_can_retry():
+    with TemporaryDirectory() as temp:
+        root, data, photos, jobs, _items = setup(temp, count=2)
+        github = GitHub(data)
+        run = make(root, github, data, photos)
+        run.night_round(lambda: jobs)
+        with patch.object(run, "public_head", side_effect=subprocess.TimeoutExpired("git fetch", 600)):
+            run.process_next(timeout=0)
+        for job in jobs:
+            state = runner.read_state(root / job)
+            assert state["status"] == "failed" and state["step"] == "publish", state
+        assert not run.waiting and run.submit(jobs[0])
+        run.process_next(timeout=0)
+        assert all(runner.read_state(root / job)["status"] == "done" for job in jobs)
+        assert len(dispatched(github, "pages.yml")) == 1
+
+
 def main():
     ten_photos()
     partial_and_restart()
@@ -390,6 +408,7 @@ def main():
     empty_publication_retry()
     empty_publication_retry(superseded=True)
     excluded_job_keeps_new_batch()
+    shared_timeout_can_retry()
     print("night batch: all checks passed")
 
 
