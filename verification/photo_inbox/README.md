@@ -269,8 +269,9 @@ python verification/photo_inbox/intake.py I:\<job> --photos <photo checkout> [--
   keeps. A new share row records the corners as `postCorners`. A photo of a printing that keeps its
   owner photograph is a further piece of evidence only (owner decision D03, #675): exactly one SPEC, no
   share row, no short link. It becomes a carousel candidate only when the owner picks it (#646).
-- Then `check.py`, `check.py --photos` and `regen.py`, and a commit on `intake/SPEC-nnnn`. `--pr` pushes
-  it and opens the pull request, which is merged on green CI (AGENTS.md). `--dry-run` writes nothing.
+- Then `regen.py --photos`, which checks the model once together with the photo archive's originals
+  (#677), and a commit on `intake/SPEC-nnnn`. `--pr` pushes it and opens the pull request, which is
+  merged on green CI (AGENTS.md). `--dry-run` writes nothing.
 - It prints the branch. `--result` also writes what was filed as JSON: `branch`, `specimen`, `itemId`
   and `keeps`, the owner photo's SPEC the printing keeps, or `null`.
 
@@ -349,7 +350,15 @@ python verification/photo_inbox/test_app.py
 python verification/photo_inbox/test_intake.py --photos <photo checkout>
 python verification/photo_inbox/test_number_check.py
 python verification/photo_inbox/test_runner.py
+python verification/test_instagram_package.py
 ```
+
+CI runs them on every pull request that changes the inbox, `scripts/`, a Python file in
+`verification/` or the requirements (`inbox-image.yml`, #677): the image job runs the number guard,
+the intake run and the smoke test in the built image, and the `inbox suites` job runs `test_app.py`,
+`test_intake.py` on synthetic photos and `test_instagram_package.py`. A pull request that changes only
+Markdown starts neither; `verification/test_inbox_ci.py` checks that filter. The byte comparison with
+the photo archive stays a local run: `test_intake.py --photos <photo checkout>`.
 
 `test_runner.py` drives the intake run against local Git remotes and a stand-in GitHub. It covers the
 whole chain, a restart after a failed step without a second filing, pull request or merge, red CI, a

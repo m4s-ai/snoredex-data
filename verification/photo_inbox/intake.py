@@ -10,8 +10,8 @@ Steps: refuse a job without printing or approved card corners; derive the archiv
 reuse a SPEC whose archived bytes are the same; else take the next free SPEC after the catalogue on
 origin/main and the photo archive, and push the copy to the photo archive, which reserves the number
 (a copy pushed by an interrupted run is found again by its bytes and reused); then write the specimen,
-its citation, preview, gallery images and share row on a new branch, run check.py, check.py --photos
-and regen.py, and commit. `--pr` pushes the branch and opens the pull request; `--dry-run` writes
+its citation, preview, gallery images and share row on a new branch, run regen.py --photos (one model
+check, with the photo archive), and commit. `--pr` pushes the branch and opens the pull request; `--dry-run` writes
 nothing and prints what it would file. The branch is printed; `--result FILE` also writes what was
 filed as JSON (`outcome`), which the inbox's intake run reads (#675).
 """
@@ -320,12 +320,15 @@ def write_files(root, files):
             path.write_text(content, encoding="utf-8", newline="\n")
 
 
-def gate(root, photos):
-    for command in (["scripts/check.py"], ["scripts/check.py", "--photos", str(photos)], ["scripts/regen.py"]):
-        done = subprocess.run([sys.executable, *command], cwd=root, capture_output=True, text=True)
-        if done.returncode:
-            lines = (done.stdout + done.stderr).strip().splitlines()
-            raise Refused(f"{' '.join(command)} schlägt fehl: {lines[-1] if lines else done.returncode}")
+def gate(root, photos, run=subprocess.run):
+    """regen.py once (#677): it builds the outputs and checks the model a single time, with the photo
+    archive's originals and their SHA-256 (check.py --photos as its first step)."""
+    done = run([sys.executable, "scripts/regen.py", "--photos", str(photos)], cwd=root, capture_output=True, text=True)
+    if done.returncode:
+        lines = [line for line in (done.stdout + done.stderr).strip().splitlines() if not line.startswith("===")]
+        failed = next((line for line in reversed(lines) if line.startswith("regen.py: FAILED at ")), "")
+        reason = next((line for line in reversed(lines) if not line.startswith("regen.py:")), done.returncode)
+        raise Refused(f"{failed.removeprefix('regen.py: FAILED at ') or 'regen.py'} schlägt fehl: {reason}")
 
 
 def deliver(root, specimen, facts, kept, open_pr):
