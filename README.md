@@ -40,7 +40,7 @@ a fact.
 
 | File | What it is |
 |---|---|
-| [`data/`](data/printings.json) | The canonical model, edited by hand and checked: `printings.json` (one record per catalogue item), `sets.json`, `images.json`, `evidence.json`, `claims.json` |
+| [`data/`](data/printings.json) | The canonical model, edited by hand and checked: `printings.json` (one record per catalogue item), `sets.json`, `images.json`, `evidence.json`, `claims.json`, and `social.json` for the printings shared on social media |
 | [`collector_catalogue.json`](collector_catalogue.json) | The versioned collector-app contract 1.1.0, with its [schema](collector_catalogue.schema.json) |
 | [`snoredex.sqlite`](snoredex.sqlite) | The same facts as an application database; start from the `app_*` views ([DATABASE.md](DATABASE.md)) |
 | [`snoredex-tracker-template.sqlite`](snoredex-tracker-template.sqlite) | A blank personal have/need tracker; manage your copy with `scripts/collection.py` |
