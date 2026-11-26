@@ -41,7 +41,8 @@ pull requests before planning. If the issue changes evidence, read
    linked issue, and the verification actually run. Close an issue only when its criteria are met.
 
 Finish with the issue state, branch or PR, files changed, verification results, known pre-existing
-failures and any required owner or source input. Merge only on explicit instruction.
+failures and any required owner or source input. Merge only on explicit instruction. Once the work
+is merged, document it in the issue without asking (AGENTS.md, owner decision 2026-11-26).
 
 ## Issue-delivery completion and handoff
 
