@@ -28,6 +28,9 @@ FINISH = {"non-holo": "Non-Holo", "holo": "Holo", "reverse-holo": "Reverse Holo"
 PATTERN = {"poke-ball": "Poké Ball pattern", "master-ball": "Master Ball pattern",
            "colorless-energy-star": "Colorless Energy pattern"}
 CANVAS = "#0d0f10"
+# The wall around the card is darkened, not blacked out (#691): to 60 % of its brightness beside the
+# card and 40 % at the frame's edge, so even a dark wall and the stand stay visible.
+DARKEN = (0.6, 0.4)
 WATERMARK = "@SnoreDex"
 # Instagram takes at most five hashtags per post (Help Center, 2026); they label, they do not reach
 HASHTAGS = ("#Snorlax", "#PokemonTCG", "#PokemonCards")
@@ -145,7 +148,8 @@ def frame(photo_size, corners) -> tuple[int, int, int, int]:
 
 
 def dark_cover(photo, corners):
-    """Darken everything but the card, in a vignette; the card's own pixels stay untouched."""
+    """Darken everything but the card, in a vignette that keeps it visible; the card's own pixels stay
+    untouched."""
     from PIL import Image, ImageChops
 
     face, geometry = extract(photo, corners)
@@ -153,7 +157,8 @@ def dark_cover(photo, corners):
     window = photo.crop(box)
     mask = card_mask(photo.size, corners, face.size).crop(box)
     fade = Image.radial_gradient("L").resize(window.size)
-    factor = fade.point(lambda v: round(255 * (0.26 - 0.16 * v / 255)))
+    centre, edge = DARKEN
+    factor = fade.point(lambda v: round(255 * (centre - (centre - edge) * v / 255)))
     dark = ImageChops.multiply(window, Image.merge("RGB", (factor,) * 3))
     return Image.composite(window, dark, mask), dict(geometry, frame=list(box))
 
