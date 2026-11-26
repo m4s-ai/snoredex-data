@@ -126,10 +126,24 @@ still to send or still running: a published or failed one costs no call to the u
 and an order is written only when one of its accounts changed. An `order.json` that cannot be read is
 logged under its SPEC and shown at its own post; the other orders go on (#676).
 
-**Permalinks into the data.** The inbox writes nothing into the repository. An agent run records the
-permalinks of published orders in `data/social.json` (`instagramPosts`, `facebookPosts`,
-`threadsPosts`) from the data folder or its read-only share, and opens a data PR that is merged on
-green CI (AGENTS.md):
+**Permalinks into the data (#646).** With the intake runner enabled, its worker checks published
+orders after each intake run and otherwise once a minute. It gathers their links by printing and
+platform (`instagramPosts`, `facebookPosts`, `threadsPosts`), freezes a batch in
+`.work/permalinks/intake-run.json`, and imports it in the runner's own checkout. The mounted
+catalogue checkout stays read-only. It validates the complete result before replacing `social.json`,
+runs `regen.py`, commits, audits the commit, and opens or reuses a data PR through the same branch
+and exact-head required-check guards as intake. A failed or still-running target contributes no link;
+a broken order is logged under its SPEC and the others go on. Repeated links are added only once.
+
+A restart or lost response resumes the saved batch and its PR. Targets published meanwhile join the
+next batch. Once the unchanged batch is on main, subsequent checks make no Git/API call or write.
+Errors and the PR number/head remain beside the batch; a failure is retried on the next worker turn.
+This starts neither a post nor a Pages run. `sync` brings merged links into the inbox; their public
+display is checked after the next authorized Pages deployment, against the printing, platform,
+permalink, short-link target and preview. The phone/test-account acceptance in #646 remains separate.
+
+Without a runner, the existing local import from the data folder or its read-only share is available
+for an authorized data PR (AGENTS.md):
 
 ```console
 python verification/photo_inbox/permalinks.py I:\

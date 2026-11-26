@@ -680,6 +680,29 @@ def permalink_checks(temp):
     row = json.loads((repo / "data/social.json").read_text(encoding="utf-8"))[0]
     assert row == dict(social[0], instagramPosts=["https://www.instagram.com/p/abc/"],
                        facebookPosts=["https://www.facebook.com/1/posts/2"]), row
+    # A malformed order stays local; the other published orders still return through the PR.
+    broken = inbox / ".posts/SPEC-0000/order.json"
+    broken.parent.mkdir()
+    broken.write_text("{", encoding="utf-8", newline="\n")
+    assert record(inbox, repo) == 0
+    path = repo / "data/social.json"
+    before = path.read_bytes()
+    from permalinks import add_links
+    bad = [
+        {ITEMS["ready"]: {"instagramPosts": ["https://example.invalid/p/secret/"]}},
+        {ITEMS["none"]: {"instagramPosts": ["https://www.instagram.com/p/other/"]}},
+        {ITEMS["ready"]: {"caption": ["unexpected"]}},
+    ]
+    for links in bad:
+        try:
+            add_links(repo, links)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("invalid permalink input must fail")
+        assert path.read_bytes() == before, "failed validation must leave the original bytes"
+    repeated = {ITEMS["ready"]: {"threadsPosts": ["https://www.threads.com/@snoredex/post/new"] * 2}}
+    assert add_links(repo, repeated) == 1 and add_links(repo, repeated) == 0, "deduplicate within a batch too"
 
 
 def corner_checks(root, repo):
