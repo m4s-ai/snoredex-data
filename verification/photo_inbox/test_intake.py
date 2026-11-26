@@ -17,6 +17,7 @@ from PIL import Image, ImageDraw
 from derive import carries_location
 import intake
 from intake import Refused
+import runner
 
 sys.path.insert(0, str(intake.ROOT / "scripts"))
 import check  # noqa: E402
@@ -113,7 +114,15 @@ def filing_checks(temp):
     job_record, corners, data, facts, archive, summary = intake.plan(intake.ROOT, owned_job, temp)
     files, kept = intake.changes(data, "SPEC-9999", job_record, corners, facts, summary, archive)
     assert kept and "data/images.json" not in files, "an item with an owner photo keeps it"
+    assert "data/social.json" not in files, "a further piece of evidence opens no share row (D03, #675)"
     checked(files)
+    # what the run takes from intake.py (#675): a further piece of evidence ends after the merge
+    state = {}
+    runner.filed(state, json.loads(json.dumps(intake.outcome("intake/SPEC-9999", "SPEC-9999", owned, kept))),
+                 sorted(files))
+    assert state == {"specimen": "SPEC-9999", "keeps": kept, "publish": True}, state
+    runner.filed(state, intake.outcome("intake/SPEC-9999", "SPEC-9999", plain, None), ["data/social.json"])
+    assert state["keeps"] is None and state["publish"] is True, "a first owner photo goes on to its draft"
 
     data = intake.model(intake.ROOT)
     source_first = next(p for p in data["printings"]["printings"] if p["active"] and not p.get("sourcePrintingId")

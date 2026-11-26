@@ -50,8 +50,13 @@ cited = row["sourcePrintingId"] or next(ref.removeprefix("CLAIM:source-first:") 
                                        if ref.startswith("CLAIM:source-first:"))
 (data / "verification/specimens.json").write_text(json.dumps({"specimens": [
     {"specimenId": "SPEC-0001", "photographedBy": "collection owner", "citedBy": [cited]}]}))
+if not os.environ.get("FAKE_PRIVATE"):  # regen.py rebuilds a page Pages serves
+    (data / "index.html").write_text("SPEC-0001\\n")
 subprocess.run(["git", "add", "-A"], check=True)
 subprocess.run(["git", "commit", "-q", "-m", "File SPEC-0001"], check=True)
+keeps = os.environ.get("FAKE_KEEPS") or None  # the printing's image is already this owner photo
+pathlib.Path(sys.argv[sys.argv.index("--result") + 1]).write_text(json.dumps(
+    {"branch": "intake/SPEC-0001", "specimen": "SPEC-0001", "itemId": item, "keeps": keeps}))
 print("intake/SPEC-0001")
 '''
 
@@ -379,6 +384,37 @@ def red_ci_and_refusal():
         assert state["status"] == "failed" and "Kartenecken" in state["error"], state
 
 
+def further_evidence():
+    """#675, D03: a photo of a printing whose image is already an owner photo is filed once and ends there."""
+    for alias_on_main in (None, "sdc25516ed66e0"):  # without a share row's alias, and with one
+        with TemporaryDirectory() as temp:
+            root, data, photos = setup(temp, alias=alias_on_main)
+            before = social_on(data, "main")
+            github = StandIn(data)
+            os.environ["FAKE_KEEPS"] = "SPEC-0000"
+            try:
+                go(root, github, data, photos)
+            finally:
+                del os.environ["FAKE_KEEPS"]
+            state = runner.read_state(root / JOB)
+            assert state["status"] == "done" and state["keeps"] == "SPEC-0000", state
+            assert Path(os.environ["FAKE_COUNT"]).read_text() == "1" and github.merged == [state["pr"]], state
+            assert github.dispatched == [("pages.yml", {})], "the deploy, and no short link"
+            assert social_on(data, "main") == before and "aliasPr" not in state, "the share rows stay as they were"
+    with TemporaryDirectory() as temp:  # nothing Pages serves changed: no deploy either
+        root, data, photos = setup(temp)
+        github = StandIn(data)
+        os.environ.update(FAKE_KEEPS="SPEC-0000", FAKE_PRIVATE="1")
+        try:
+            go(root, github, data, photos)
+        finally:
+            del os.environ["FAKE_KEEPS"], os.environ["FAKE_PRIVATE"]
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "done" and state["publish"] is False and github.dispatched == [], state
+    assert runner.public(["data/claims.json"]) and runner.public(["images/previews/SPEC-0001.png"])
+    assert not runner.public(["verification/specimens.json", "images/notes.txt", "scripts/build.py"])
+
+
 def alias_already_recorded():
     with TemporaryDirectory() as temp:
         root, data, photos = setup(temp, alias="sdc25516ed66e0")
@@ -681,6 +717,7 @@ def main():
     worker_survives_a_trashed_job()
     red_ci_and_refusal()
     alias_already_recorded()
+    further_evidence()
     approval_holds()
     source_first_printing()
     old_checkpoint()

@@ -243,6 +243,10 @@ function intakeText(intake) {
   const run = intake.run || {};
   if (run.status === "queued") return "Übernahme wartet auf ihren Lauf.";
   if (run.status === "running") return `Übernahme läuft: ${STEP_NAMES[run.step] || run.step}.`;
+  if (run.status === "done" && run.keeps) {  // a further piece of evidence (#675): no short link, no draft
+    return `Übernommen als ${run.specimen}, als weiterer Beleg; das Hauptfoto bleibt ${run.keeps}` +
+      (run.publish === false ? "." : ", veröffentlicht.");
+  }
   if (run.status === "done") return `Übernommen als ${run.specimen}, veröffentlicht, Kurzlink ${run.alias}.`;
   if (run.status === "failed") return `Übernahme angehalten bei ${STEP_NAMES[run.step] || run.step}: ${run.error}`;
   return intake.blocked ? `Noch nicht bereit: ${intake.blocked}` : "Bereit zur Übernahme, sonst nachts automatisch.";
