@@ -145,7 +145,7 @@ instructions when applicable; do not copy publication decisions from an unrelate
 3. Run `python scripts/regen.py` once at delivery. Stage reviewed captures, images, data changes
    and the rebuilt outputs together. Inspect staged paths and diff;
    avoid blanket staging of unrelated research.
-4. When authorized, commit with the repository's required trailer and push/update the scoped PR.
+4. Commit with the repository's required trailer; push and update the scoped PR when authorized.
    After commit and push, run `python verification/publication_audit.py` for history-sensitive checks.
 5. Report each target's supported fields, source/image links, SPEC/reference IDs, remaining gaps,
    validation and actual commit/PR status. Once the task is finished, document it in its connected
