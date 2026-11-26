@@ -33,7 +33,7 @@ sys.path[:0] = [str(ROOT / "scripts"), str(ROOT / "verification")]
 from card_pages import checked_corners  # noqa: E402
 from check import dump  # noqa: E402
 from derive import derive  # noqa: E402
-from gallery_prepare import extract, resize  # noqa: E402
+from gallery_prepare import extract, png_preview, webp_renditions  # noqa: E402
 
 PHOTO_DIR = "verification/specimens"
 ASSET_NAMESPACE = "https://github.com/m4s-ai/snoredex-data/asset/v1/"
@@ -196,15 +196,8 @@ def faces(archive, corners):
         face, _ = extract(rgb, [tuple(pair) for pair in corners])
     except ValueError as error:
         raise Refused(f"Die Karte ist zu klein oder die Ecken passen nicht: {error}") from error
-    files = {}
-    for width in (240, 480, min(1200, face.width)):
-        buffer = io.BytesIO()
-        resize(face, width).save(buffer, "WEBP", quality=90, method=6)
-        files[width] = buffer.getvalue()
-    thumb = resize(face, 360).quantize(colors=256, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.FLOYDSTEINBERG)
-    buffer = io.BytesIO()
-    thumb.save(buffer, "PNG", optimize=True, icc_profile=icc)
-    return files, buffer.getvalue()
+    # the gallery's own encoder (#680): the same face gives the same bytes as the gallery workflow
+    return {size[0]: data for data, size in webp_renditions(face)}, png_preview(face, icc)[0]
 
 
 def specimen_record(specimen, job, facts, summary):

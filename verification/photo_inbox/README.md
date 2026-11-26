@@ -296,8 +296,10 @@ python verification/photo_inbox/intake.py I:\<job> --photos <photo checkout> [--
   with their SPEC. A copy that an interrupted run pushed but never recorded is found again by its bytes
   and reused. Otherwise the next number after `origin/main` and the photo archive is reserved by pushing
   the copy; when another intake pushed first, the run takes the next one.
-- Preview and gallery images come from the approved corners, exactly as the specimen-intake skill
-  makes them; they replace the item's image unless that already is an owner photograph, which the item
+- Preview and gallery images come from the approved corners, with the gallery workflow's own encoder
+  (`gallery_prepare.webp_renditions` and `png_preview`, #680): WebP at 240, 480 and up to 1200 px and a
+  360 px PNG preview carrying the source's ICC profile, so the same face gives the same bytes on both
+  paths. They replace the item's image unless that already is an owner photograph, which the item
   keeps. A new share row records the corners as `postCorners`. A photo of a printing that keeps its
   owner photograph is a further piece of evidence only (owner decision D03, #675): exactly one SPEC, no
   share row, no short link. It becomes a carousel candidate only when the owner picks it (#646).
