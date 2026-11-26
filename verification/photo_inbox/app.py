@@ -455,7 +455,7 @@ def with_intake(job, folder, runner):
 
 
 RUN_FIELDS = ("status", "step", "done", "error", "specimen", "pr", "aliasPr", "alias", "origin", "queuedAt",
-              "startedAt", "finishedAt", "updatedAt")
+              "startedAt", "finishedAt", "updatedAt", "batch", "publishRun", "aliasRun", "aliasReused")
 PULL_URL = "https://github.com/m4s-ai/snoredex-data/pull/"
 
 
@@ -465,6 +465,8 @@ def run_view(job, run):
     view = {key: run.get(key) for key in RUN_FIELDS}
     links = {"prUrl": view["pr"] and f"{PULL_URL}{view['pr']}",
              "aliasPrUrl": view["aliasPr"] and f"{PULL_URL}{view['aliasPr']}",
+             "publishUrl": view["publishRun"] and f"https://github.com/m4s-ai/snoredex-data/actions/runs/{view['publishRun']}",
+             "aliasRunUrl": view["aliasRun"] and f"https://github.com/m4s-ai/snoredex-data/actions/runs/{view['aliasRun']}",
              "shortUrl": view["alias"] and SHORT_BASE + view["alias"]}
     return dict(view, **links, jobId=job["id"], file=job["file"], itemId=job.get("itemId"))
 

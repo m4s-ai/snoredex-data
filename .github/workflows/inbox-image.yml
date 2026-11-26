@@ -50,6 +50,8 @@ jobs:
         run: docker run --rm --entrypoint python snoredex-inbox verification/photo_inbox/test_number_check.py
       - name: Intake run tests in the image (#659)
         run: docker run --rm --entrypoint python snoredex-inbox verification/photo_inbox/test_runner.py
+      - name: Shared nightly batch and recovery tests (#679)
+        run: docker run --rm --entrypoint python snoredex-inbox verification/photo_inbox/test_night_batch.py
       - name: Start the inbox against this checkout
         run: |
           mkdir -p "$RUNNER_TEMP/inbox" "$RUNNER_TEMP/photos"

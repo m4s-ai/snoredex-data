@@ -1,6 +1,11 @@
 """Offline YOURLS protocol and safety checks."""
 from email.message import Message
+from contextlib import redirect_stdout
 from io import BytesIO
+from io import StringIO
+import json
+import shutil
+from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock, patch
@@ -10,10 +15,11 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from yourls_cards import ROOT, SHORT_BASE, batch_plans, card_plan, provision, run_batch, verify_public_page, verify_redirect
+from yourls_cards import ROOT, SHORT_BASE, batch_plans, card_plan, main, provision, run_batch, verify_public_page, verify_redirect
 
 POKE = "item-b26a638d-ed89-538b-ab49-a5c879572f60"
 MASTER = "item-a2f8335e-94ff-54d2-8b10-5bdf55349451"
+PLAIN = "item-bbea2621-c8f4-5647-b576-e309aa29d24a"
 
 
 class YourlsTests(unittest.TestCase):
@@ -27,6 +33,24 @@ class YourlsTests(unittest.TestCase):
         other, _ = card_plan(MASTER, None)
         for field in ("shortUrl", "targetUrl", "previewUrl"):
             self.assertNotEqual(self.plan[field], other[field])
+
+    def test_plan_uses_the_selected_checkout_without_changing_globals(self):
+        with TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            names = [f"data/{name}.json" for name in ("printings", "sets", "images", "evidence", "claims", "social")]
+            names += ["verification/specimens.json", "verification/owner_adjudications.json", self.preview]
+            for name in names:
+                target = root / name
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(ROOT / name, target)
+            path = root / "data/social.json"
+            rows = json.loads(path.read_text(encoding="utf-8"))
+            next(row for row in rows if row["itemId"] == POKE)["shortAlias"] = "sdrootfixture"
+            path.write_text(json.dumps(rows), encoding="utf-8", newline="\n")
+            plan, preview = card_plan(POKE, None, root)
+            self.assertEqual(plan["shortAlias"], "sdrootfixture")
+            self.assertEqual(preview, self.preview)
+        self.assertEqual(card_plan(POKE, None)[0], self.plan)
 
     def test_check_and_collision_never_create(self):
         api = Mock(return_value=self.missing)
@@ -102,6 +126,35 @@ class YourlsTests(unittest.TestCase):
         self.assertEqual(first, reverse[::-1])
         self.assertEqual(created, [row["shortAlias"] for row in first])
         self.assertEqual(len(targets), 2)
+
+    def test_batch_keeps_successes_before_and_after_a_failed_item(self):
+        args = SimpleNamespace(item_id=[POKE, MASTER, PLAIN], keyword=None, check=False, create=True)
+        with (patch.dict("os.environ", SNOREDEX_YOURLS_SIGNATURE="mock-value"),
+              patch("yourls_cards.provision", side_effect=["verified", ValueError("Keyword points elsewhere"), "verified"]),
+              patch("yourls_cards.verify_redirect", return_value=302)):
+            results = run_batch(args)
+        self.assertEqual([row["itemId"] for row in results], args.item_id)
+        self.assertEqual([row["status"] for row in results], ["verified", "failed", "verified"])
+        self.assertEqual([results[0]["redirectStatus"], results[2]["redirectStatus"]], [302, 302])
+        self.assertNotIn("redirectStatus", results[1])
+        self.assertIn("Keyword points elsewhere", results[1]["error"])
+
+    def test_failed_public_redirect_is_not_a_verified_result(self):
+        args = SimpleNamespace(item_id=[POKE, MASTER], keyword=None, check=False, create=True)
+        with (patch.dict("os.environ", SNOREDEX_YOURLS_SIGNATURE="mock-value"),
+              patch("yourls_cards.provision", return_value="verified"),
+              patch("yourls_cards.verify_redirect", side_effect=[TimeoutError("Redirect timed out"), 302])):
+            results = run_batch(args)
+        self.assertEqual([row["status"] for row in results], ["failed", "verified"])
+        self.assertNotIn("redirectStatus", results[0])
+
+    def test_cli_preserves_partial_json_and_returns_failure(self):
+        results = [dict(self.plan, status="verified", redirectStatus=302), {"itemId": MASTER, "status": "failed"}]
+        output = StringIO()
+        with (patch("sys.argv", ["yourls_cards.py", "--create", POKE, MASTER]),
+              patch("yourls_cards.run_batch", return_value=results), redirect_stdout(output)):
+            self.assertEqual(main(), 2)
+        self.assertEqual(json.loads(output.getvalue()), results)
 
     def test_published_metadata_and_preview_must_match(self):
         markup = (f'<meta property="og:url" content="{self.plan["targetUrl"]}">'

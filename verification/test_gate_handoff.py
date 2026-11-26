@@ -92,6 +92,8 @@ def main() -> int:
     for workflow, title in ((pages, "Publish site"), (yourls, "Provision Snoredex short links")):
         assert f"\nrun-name: {title} ${{{{ inputs.request }}}}\n" in workflow, title
         assert "      request:\n" in workflow.split("\npermissions:", 1)[0], title
+    # #679: a failed neighbour must not discard successful per-item results.
+    assert re.search(r"- uses: actions/upload-artifact@v7\n        if: always\(\)", yourls)
     ui = (ROOT / ".github" / "workflows" / "ui-pr.yml").read_text(encoding="utf-8")
     assert "name: UI browser gate" in ui
     assert "ui-browser (chromium)" in ui

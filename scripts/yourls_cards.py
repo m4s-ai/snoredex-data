@@ -92,26 +92,26 @@ def select_keyword(rows: dict, item_id: str, alias: str | None) -> str:
     return alias
 
 
-def card_plan(item_id: str, alias: str | None) -> tuple[dict, str]:
-    rows = read_social(ROOT)
+def card_plan(item_id: str, alias: str | None, root=ROOT) -> tuple[dict, str]:
+    rows = read_social(root)
     if not ITEM_ID.fullmatch(item_id) or item_id not in rows:
         raise ValueError("A configured Snoredex printing is required")
     row = rows[item_id]
     alias = select_keyword(rows, item_id, alias)
-    model = load()
+    model = load(root)
     photos = {asset["path"]: asset for asset in model["images"]["assets"]}
-    preview = approved_preview(ROOT, model, row, photos)
+    preview = approved_preview(root, model, row, photos)
     return dict(itemId=item_id, shortAlias=alias, shortUrl=SHORT_BASE + alias,
                 targetUrl=f"{ASSET_BASE_URL}cards/{item_id}/", previewUrl=ASSET_BASE_URL + preview), preview
 
 
-def verify_public_page(plan: dict, preview: str) -> None:
+def verify_public_page(plan: dict, preview: str, root=ROOT) -> None:
     maximum = 2 * 1024 * 1024
     metadata = ShareMetadata(request(plan["targetUrl"], maximum)).properties
     if metadata.get("og:url") != plan["targetUrl"] or metadata.get("og:image") != plan["previewUrl"]:
         raise ValueError("The published card metadata does not match the selected printing")
     remote = request(plan["previewUrl"], maximum)
-    if sha256(remote).digest() != sha256((ROOT / preview).read_bytes()).digest():
+    if sha256(remote).digest() != sha256((root / preview).read_bytes()).digest():
         raise ValueError("The published preview bytes do not match the approved specimen preview")
 
 
@@ -172,14 +172,20 @@ def run_batch(args) -> list[dict]:
     signature = os.environ.get("SNOREDEX_YOURLS_SIGNATURE")
     if not signature:
         raise ValueError("The protected execution environment needs SNOREDEX_YOURLS_SIGNATURE")
-    results = []
-    for plan, preview in plans:
+    return [provision_result(signature, plan, preview, args.create) for plan, preview in plans]
+
+
+def provision_result(signature: str, plan: dict, preview: str, create: bool) -> dict:
+    """Keep every item's outcome so one failure cannot discard its neighbours' verified aliases."""
+    try:
         status = provision(lambda action, **params: call_api(signature, action, **params),
-                           plan, preview, args.create)
+                           plan, preview, create)
+        result = dict(plan, status=status)
         if status == "verified":
-            plan["redirectStatus"] = verify_redirect(plan)
-        results.append(dict(plan, status=status))
-    return results
+            result["redirectStatus"] = verify_redirect(plan)
+        return result
+    except (OSError, ValueError) as error:
+        return dict(plan, status="failed", error=str(error))
 
 
 def main() -> int:
@@ -195,7 +201,7 @@ def main() -> int:
     except (OSError, ValueError) as error:
         parser.exit(2, f"YOURLS: {error}\n")
     print(json.dumps(results[0] if len(results) == 1 else results, indent=2))
-    return 0
+    return 2 if any(result["status"] == "failed" for result in results) else 0
 
 
 if __name__ == "__main__":

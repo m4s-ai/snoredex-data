@@ -49,6 +49,7 @@ jobs:
           read -r -a ids <<< "$ITEM_IDS"
           python scripts/yourls_cards.py --create -- "${ids[@]}" > "$RUNNER_TEMP/yourls-result.json"
       - uses: actions/upload-artifact@v7
+        if: always()  # retain successful items even when a neighbour failed (#679)
         with:
           name: yourls-verified
           path: ${{ runner.temp }}/yourls-result.json

@@ -168,16 +168,16 @@ def dump(document: dict) -> str:
     return "{\n" + ",\n".join(parts) + "\n}\n"
 
 
-def load() -> dict:
-    raw = {name: (DATA / f"{name}.json").read_bytes() for name in FILES}
+def load(root: Path = ROOT) -> dict:
+    raw = {name: (root / "data" / f"{name}.json").read_bytes() for name in FILES}
     model = {}
     for name in FILES:  # a BOM is tolerated here and reported by the format rule
         try:
             model[name] = json.loads(raw[name].decode("utf-8-sig"))
         except ValueError as error:  # UnicodeDecodeError and JSONDecodeError
             raise SystemExit(f"check: data/{name}.json is not UTF-8 JSON: {error}")
-    owner = json.loads(OWNER.read_text(encoding="utf-8"))
-    specimens = json.loads(SPECIMENS.read_text(encoding="utf-8"))["specimens"]
+    owner = json.loads((root / "verification/owner_adjudications.json").read_text(encoding="utf-8"))
+    specimens = json.loads((root / "verification/specimens.json").read_text(encoding="utf-8"))["specimens"]
     photographs = {PHOTO_DIR + row["photograph"]: row.get("photographSha256") for row in specimens if row.get("photograph")}
     return dict(model, raw=raw, owner=owner, specimens={row["specimenId"]: row for row in specimens},
                 photographs=photographs)

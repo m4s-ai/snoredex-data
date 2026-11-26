@@ -35,7 +35,8 @@ limit which operations the pilot performs.
 
 Run **Provision Snoredex short links** from `main` using the GitHub Actions UI or workflow dispatch
 API. The job accepts one to three space-separated item IDs from the catalogue. Leave `request` empty: the photo inbox's intake run sets it to find its own run (#673). The photo
-inbox's intake run starts it for every newly filed owner photo.
+inbox's individual intake run starts it for a primary owner photo. Its nightly round groups missing
+aliases in batches of at most three and reuses already recorded verified aliases (#679).
 
 The pilot is done: SPEC-0774 alone, then the two CSV7C variants in one batch and again in reverse
 order, gave stable assignments, and all three aliases are recorded in `data/social.json`. They stay
@@ -47,10 +48,17 @@ the worked examples:
 | SPEC-0779 (Poke Ball) | `item-b26a638d-ed89-538b-ab49-a5c879572f60` |
 | SPEC-0780 (Master Ball) | `item-a2f8335e-94ff-54d2-8b10-5bdf55349451` |
 
-Read the `yourls-verified` artifact. Only a fully verified result may enter `data/social.json`.
-Record each `shortAlias` under its exact `itemId` in a reviewed data change. The job leaves GitHub
-content unchanged. If a later item fails after an earlier alias was created, fix the reported
-condition and rerun the batch. Existing correct aliases are read back and reused. A timeout
+Read the `yourls-verified` artifact. A single item produces an object; a batch produces a list in
+input order. Only a result with `status: verified` may enter `data/social.json`. Each verified result
+includes its checked public `redirectStatus`. If an item's provision or redirect check fails, its
+result has `status: failed` and `error`; the other items are still checked and their outcomes retained
+(#679). The CLI returns nonzero when any item failed, and the workflow uploads the result even then.
+A rejected batch configuration or missing credential still stops before any provisioning result.
+
+Record each verified `shortAlias` under its exact `itemId` in a reviewed data change. A successful
+workflow alone is not an item's verification, and a failed workflow does not discard its verified
+items. The job leaves GitHub content unchanged. Fix the reported condition and retry the failed
+items, preserving the successful results. Existing correct aliases are read back and reused. A timeout
 or duplicate response triggers a read of the exact keyword before another attempt. The job
 never renames, deletes or retargets an existing alias.
 
