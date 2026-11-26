@@ -9,6 +9,9 @@ Every finished step is written beside the job (`intake-run.json`), so a run that
 again where it stopped: the archive copy is found again by its bytes (`intake.py`), an existing pull
 request is reused, a merged one is not merged twice, a recorded alias is not recorded twice.
 
+A branch on GitHub is never overwritten unless it holds a commit this run pushed (#674), and a pull
+request is merged only at the head the run pushed, once every check main's rules require passed there.
+
 A workflow is dispatched once and followed by the id of the run GitHub started (#673), never by its
 time: a foreign run of the same workflow decides nothing here. The dispatch is written beside the job
 before GitHub hears of it, with a request token the run carries in its title, so an answer lost on the
@@ -52,6 +55,7 @@ STATE = "intake-run.json"
 WORK = ".work"  # the runner's own clones in the private data folder; the page lists hash folders only
 STEPS = ("intake", "merge", "publish", "alias", "alias-pr")
 FAILED = {"failure", "cancelled", "timed_out", "action_required", "startup_failure", "stale"}
+PASSED = {"success", "neutral", "skipped"}  # what GitHub accepts for a required check
 # GitHub lists a run as it accepts its dispatch: a request token no listed run carries after this started none
 GRACE = timedelta(minutes=10)
 IDENTITY = {"GIT_AUTHOR_NAME": "SnoreDex inbox", "GIT_COMMITTER_NAME": "SnoreDex inbox",
@@ -141,12 +145,28 @@ class GitHub:
     def pull(self, number):
         return self.call("GET", f"/pulls/{number}")
 
-    def checks(self, sha):
-        """success, failure or pending for every check run on a commit; none yet is pending."""
-        runs = self.call("GET", f"/commits/{sha}/check-runs?per_page=100")["check_runs"]
-        if not runs or any(run["status"] != "completed" for run in runs):
-            return "pending"
-        return "failure" if any(run["conclusion"] in FAILED for run in runs) else "success"
+    def required_checks(self):
+        """The (name, app id) of every check main's rules require before a merge (#674)."""
+        return [(check["context"], check.get("integration_id")) for rule in self.call("GET", "/rules/branches/main")
+                if rule["type"] == "required_status_checks" for check in rule["parameters"]["required_status_checks"]]
+
+    def checks(self, sha, required):
+        """failure when any check run on the commit failed or a required one did not pass; success only
+        when every required check passed there; else pending. Other green checks never stand in for a
+        required one (#674): GitHub lists each name's latest run, a skipped one passes as it does for GitHub."""
+        found = self.call("GET", f"/commits/{sha}/check-runs?per_page=100")
+        runs = found["check_runs"]
+        if any(run["conclusion"] in FAILED for run in runs):
+            return "failure"
+        if found["total_count"] > len(runs):
+            return "pending"  # a cut list cannot show that every required check passed
+        for name, app in required:
+            run = next((run for run in runs if run["name"] == name and app in (None, run["app"]["id"])), None)
+            if run is None or run["status"] != "completed":
+                return "pending"
+            if run["conclusion"] not in PASSED:
+                return "failure"
+        return "success"
 
     def merge(self, number, sha):
         self.call("PUT", f"/pulls/{number}/merge", {"sha": sha, "merge_method": "merge"})
@@ -282,7 +302,7 @@ class Runner:
             if not (path / ".git").is_dir():
                 path.parent.mkdir(parents=True, exist_ok=True)
                 self.git(path.parent, "clone", "-q", url, path.name)
-            self.git(path, "fetch", "-q", "origin")
+            self.git(path, "fetch", "-q", "--prune", "origin")  # origin/<branch> is what the remote holds now
             self.git(path, "checkout", "-q", "-f", "-B", "main", "origin/main")
             self.git(path, "clean", "-q", "-fd")
             # a branch an earlier attempt left would stop intake.py's own `switch -c intake/SPEC-nnnn`
@@ -305,32 +325,67 @@ class Runner:
             raise RunError(lines[-1] if lines else f"intake.py endete mit {done.returncode}")
         branch = done.stdout.strip().splitlines()[-1]
         state["specimen"] = branch.split("/", 1)[1]
-        state["pr"] = self.publish_branch(self.data, branch, f"File {state['specimen']} from the photo inbox (#656)",
-                                          self.git(self.data, "log", "-1", "--format=%B"))
+        self.publish_branch(folder, state, "pr", branch, f"File {state['specimen']} from the photo inbox (#656)",
+                            self.git(self.data, "log", "-1", "--format=%B"))
 
-    def publish_branch(self, checkout, branch, title, message):
-        """Push the runner's branch and reuse or open its pull request; returns its number."""
-        self.git(checkout, "push", "-q", "-f", "origin", f"HEAD:refs/heads/{branch}")
+    def publish_branch(self, folder, state, key, branch, title, message):
+        """Bring the runner's branch to GitHub and reuse or open its pull request, as state[key] with the
+        head it must merge at as state[key + "Head"]. A merged pull request gets no new action (#674)."""
         pull = self.github.pull_for(branch)
-        if pull is None or pull["state"] == "closed" and not pull.get("merged_at"):
+        if pull and pull.get("merged_at"):
+            state[key] = pull["number"]
+            return
+        state[key + "Head"] = self.push(folder, state, branch)
+        if pull is None or pull["state"] == "closed":
             pull = self.github.open_pull(branch, title, f"{message}\n\nOpened by the photo inbox's intake run (#659).")
-        return pull["number"]
+        state[key] = pull["number"]
+
+    def push(self, folder, state, branch):
+        """The head the remote branch holds once it carries this filing (#674). The same files on it are
+        reused as they are; a commit this run pushed earlier is replaced, by a lease on exactly that commit;
+        anything else is someone else's: it stays, and the run stops."""
+        remote = self.git(self.data, "for-each-ref", "--format=%(objectname)", f"refs/remotes/origin/{branch}")
+        tree = self.git(self.data, "rev-parse", "HEAD^{tree}")
+        if remote and self.git(self.data, "rev-parse", f"{remote}^{{tree}}") == tree:
+            return remote
+        pushed = state.setdefault("pushed", [])
+        if remote and remote not in pushed:
+            raise RunError(f"Auf GitHub trägt {branch} einen fremden Stand. Er bleibt unverändert; bitte prüfen, "
+                           "dann „Erneut versuchen“.")
+        head = self.git(self.data, "rev-parse", "HEAD")
+        pushed.append(head)  # beside the job before GitHub has it: a push whose answer is lost is still ours
+        write_state(folder, dict(state, status="running"))
+        self.git(self.data, "push", "-q", f"--force-with-lease=refs/heads/{branch}:{remote}", "origin",
+                 f"HEAD:refs/heads/{branch}")
+        return head
 
     def step_merge(self, _folder, state):
-        self.land(state["pr"])
+        self.land(state["pr"], state.get("prHead"), state.get("pushed", []))
 
-    def land(self, number):
-        """Merge a pull request once its checks are green; a red check stops the run with its link."""
+    def land(self, number, head, ours=()):
+        """Merge a pull request at the head the run pushed, once every check main requires passed there
+        (#674). A red check, or a head someone else moved, stops the run with its link; so does a main
+        that requires no check, since then nothing proves the gate ran. A run from before #674 recorded
+        no head and merges at the one it finds."""
         deadline = datetime.now(timezone.utc) + self.patience
         while datetime.now(timezone.utc) < deadline:
             pull = self.github.pull(number)
             if pull.get("merged_at"):
                 return
-            result = self.github.checks(pull["head"]["sha"])
+            sha, required = pull["head"]["sha"], self.github.required_checks()
+            if head and sha != head and sha not in ours:
+                raise RunError(f"PR #{number} trägt einen anderen Stand als den der Übernahme und wird nicht "
+                               f"gemergt: {pull['html_url']}")
+            if head and sha != head:  # this run's earlier commit: GitHub has not taken in the new push yet
+                self.sleep(self.poll)
+                continue
+            if not required:
+                raise RunError(f"main verlangt keine Pflichtchecks; ohne sie wird PR #{number} nicht gemergt.")
+            result = self.github.checks(sha, required)
             if result == "failure":
                 raise RunError(f"Die CI von PR #{number} ist rot: {pull['html_url']}")
             if result == "success":
-                self.github.merge(number, pull["head"]["sha"])
+                self.github.merge(number, sha)
                 return
             self.sleep(self.poll)
         raise RunError(f"PR #{number} wurde nicht rechtzeitig grün: {pull['html_url']}")
@@ -439,6 +494,5 @@ class Runner:
                    "verified by Provision Snoredex short links (#659).")
         self.git(self.data, "add", "-A")
         self.git(self.data, "commit", "-q", "-m", message)
-        state["aliasPr"] = self.publish_branch(self.data, branch, f"Record the short link of {state['specimen']}",
-                                               message)
-        self.land(state["aliasPr"])
+        self.publish_branch(folder, state, "aliasPr", branch, f"Record the short link of {state['specimen']}", message)
+        self.land(state["aliasPr"], state.get("aliasPrHead"), state.get("pushed", []))

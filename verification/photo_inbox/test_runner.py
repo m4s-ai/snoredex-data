@@ -92,6 +92,8 @@ class StandIn:
         # runs GitHub keeps, the (looks until done, conclusion) of the next dispatches, and the faults
         self.runs, self.script, self.lose_answer, self.no_answer, self.lag, self.fail_poll = [], {}, 0, False, 0, 0
         self.wrong_artifact = False
+        self.required = [("gate (ubuntu-latest)", 15368), ("gate (windows-latest)", 15368)]  # main's ruleset
+        self.stale_heads = []  # heads GitHub still reports for a PR just after a push
 
     def pull_for(self, branch):
         return next((pull for pull in self.pulls.values() if pull["branch"] == branch), None)
@@ -108,9 +110,14 @@ class StandIn:
 
     def pull(self, number):
         pull = self.pulls[number]
-        return dict(pull, head={"sha": git("--git-dir", self.remote, "rev-parse", pull["branch"])})
+        sha = self.stale_heads.pop(0) if self.stale_heads else git("--git-dir", self.remote, "rev-parse", pull["branch"])
+        return dict(pull, head={"sha": sha})
 
-    def checks(self, _sha):
+    def required_checks(self):
+        return self.required
+
+    def checks(self, _sha, required):
+        assert required == self.required, "the checks main requires decide"
         return self.result
 
     def merge(self, number, sha):
@@ -264,6 +271,74 @@ def retry_after_failed_delivery():
         go(root, github, data, photos)
         assert runner.read_state(root / JOB)["status"] == "done", runner.read_state(root / JOB)
         assert git("--git-dir", photos, "rev-list", "--count", "main") == "2", "one archive copy, reused"
+        assert [pull["branch"] for pull in github.pulls.values()].count("intake/SPEC-0001") == 1, "one PR"
+
+
+def keeps_the_branch():
+    """#674: a retry pushes over nothing but its own earlier commit, and merges only the head it pushed."""
+    with TemporaryDirectory() as temp:  # someone pushed to the branch after the filing: it stays
+        root, data, photos = setup(temp)
+        github = StandIn(data, fail_open=1)
+        go(root, github, data, photos)
+        foreign = commit_on(data, temp, "intake/SPEC-0001")
+        go(root, github, data, photos)
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "failed" and state["step"] == "intake" and "fremden Stand" in state["error"], state
+        assert git("--git-dir", data, "rev-parse", "intake/SPEC-0001") == foreign and github.pulls == {}, state
+    with TemporaryDirectory() as temp:  # main moved on: the re-filing replaces this run's own earlier push
+        root, data, photos = setup(temp)
+        github = StandIn(data, fail_open=1)
+        go(root, github, data, photos)
+        commit_on(data, temp, "main")
+        go(root, github, data, photos)
+        assert runner.read_state(root / JOB)["status"] == "done" and github.opened == 2, "intake PR and alias PR"
+    with TemporaryDirectory() as temp:  # a commit lands on the open PR's branch while its CI is red
+        root, data, photos = setup(temp)
+        github = StandIn(data, checks="failure")
+        go(root, github, data, photos)
+        moved = commit_on(data, temp, "intake/SPEC-0001")
+        github.result = "success"
+        go(root, github, data, photos)
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "failed" and state["step"] == "merge" and "anderen Stand" in state["error"], state
+        assert github.merged == [] and git("--git-dir", data, "rev-parse", "intake/SPEC-0001") == moved
+    with TemporaryDirectory() as temp:  # merged by hand meanwhile: no new action
+        root, data, photos = setup(temp)
+        github = StandIn(data, checks="failure")
+        go(root, github, data, photos)
+        state = runner.read_state(root / JOB)
+        github.merge(state["pr"], state["prHead"])
+        github.merged.clear()
+        github.result = "success"
+        go(root, github, data, photos)
+        assert runner.read_state(root / JOB)["status"] == "done" and state["pr"] not in github.merged
+    with TemporaryDirectory() as temp:  # just after a push GitHub still names this run's earlier commit
+        root, data, photos = setup(temp)
+        github = StandIn(data, checks="failure")
+        go(root, github, data, photos)
+        state = runner.read_state(root / JOB)
+        runner.write_state(root / JOB, dict(state, pushed=["e" * 40, *state["pushed"]]))
+        github.result, github.stale_heads = "success", ["e" * 40]
+        go(root, github, data, photos)
+        assert runner.read_state(root / JOB)["status"] == "done" and github.merged[0] == state["pr"], "waited for it"
+    with TemporaryDirectory() as temp:  # a main that requires no check proves nothing about the gate
+        root, data, photos = setup(temp)
+        github = StandIn(data)
+        github.required = []
+        go(root, github, data, photos)
+        state = runner.read_state(root / JOB)
+        assert state["status"] == "failed" and "keine Pflichtchecks" in state["error"] and github.merged == [], state
+
+
+def commit_on(data_remote, temp, branch):
+    """Someone else's commit on a branch of the data remote; returns its id."""
+    work = Path(temp) / ("foreign-" + branch.replace("/", "-"))
+    git("clone", "-q", "-b", branch, data_remote, str(work))
+    (work / "foreign.txt").write_text(branch + "\n", encoding="utf-8", newline="\n")
+    git("-C", str(work), "add", "-A")
+    git("-C", str(work), "commit", "-q", "-m", "someone else's change")
+    git("-C", str(work), "push", "-q", "origin", f"HEAD:{branch}")
+    return git("-C", str(work), "rev-parse", "HEAD")
 
 
 def worker_survives_a_trashed_job():
@@ -493,6 +568,36 @@ def github_client():
     assert client.runs_titled("pages.yml", "inbox-x", "2026-11-25T12:00:00+00:00") is None, "a cut list says nothing"
 
 
+def required_checks():
+    """#674: only the checks main's ruleset requires, at the head, by name and app, make a merge green."""
+    client = runner.GitHub("token")
+    client.call = lambda _method, _path, _body=None: [
+        {"type": "pull_request", "parameters": {}},
+        {"type": "required_status_checks", "parameters": {"required_status_checks": [
+            {"context": "gate (ubuntu-latest)", "integration_id": 15368}, {"context": "gate (windows-latest)"}]}}]
+    required = client.required_checks()
+    assert required == [("gate (ubuntu-latest)", 15368), ("gate (windows-latest)", None)], required
+
+    def run(name, conclusion="success", app=15368):
+        return {"name": name, "status": "completed" if conclusion else "in_progress", "conclusion": conclusion,
+                "app": {"id": app}}
+
+    ubuntu, windows, side = "gate (ubuntu-latest)", "gate (windows-latest)", "ui"
+    for runs, expected in (([], "pending"),
+                           ([run(side)], "pending"),  # an early green side job stands in for nothing
+                           ([run(side), run(ubuntu), run(windows, None)], "pending"),
+                           ([run(ubuntu), run(windows), run(side, "skipped")], "success"),
+                           ([run(ubuntu), run(windows, "skipped")], "success"),
+                           ([run(ubuntu), run(windows, "cancelled")], "failure"),
+                           ([run(ubuntu), run(windows, "neutral"), run(side, "failure")], "failure")):
+        client.call = lambda _method, _path, _body=None, runs=runs: {"total_count": len(runs), "check_runs": runs}
+        assert client.checks("abc", required) == expected, (runs, expected)
+    client.call = lambda _method, _path, _body=None: {"total_count": 101, "check_runs": [run(ubuntu)]}
+    assert client.checks("abc", [(ubuntu, 15368)]) == "pending", "a cut list proves nothing"
+    client.call = lambda _method, _path, _body=None: {"total_count": 1, "check_runs": [run(ubuntu, app=1)]}
+    assert client.checks("abc", [(ubuntu, 15368)]) == "pending", "the same name from another app is not the gate"
+
+
 def corners_frozen():
     """Corners changed between the queue and intake do not replace the approval: intake never starts."""
     with TemporaryDirectory() as temp:
@@ -572,6 +677,7 @@ def main():
     whole_chain()
     restart_after_failure()
     retry_after_failed_delivery()
+    keeps_the_branch()
     worker_survives_a_trashed_job()
     red_ci_and_refusal()
     alias_already_recorded()
@@ -582,6 +688,7 @@ def main():
     own_run_only()
     one_dispatch()
     github_client()
+    required_checks()
     recovers_and_queues_once()
     page_button()
     print("intake runner: all checks passed")
