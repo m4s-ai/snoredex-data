@@ -152,7 +152,7 @@ A JPEG is decoded completely. A DNG is checked at header level only (a TIFF whos
 ## Run
 
 ```console
-pip install -r verification/photo_inbox/requirements.txt
+pip install -r verification/photo_inbox/requirements.lock
 python verification/photo_inbox/app.py --data-dir <private folder outside Git> --host 0.0.0.0 --repo <checkout of main> --photos <checkout of snoredex-photos> --uploader <uploader base URL>
 ```
 
@@ -169,6 +169,11 @@ Homelab) makes it reachable in the home network on port 8765 (`--port`). Uploads
 - `Dockerfile` builds one image from the repository root.
   - **Contents:** Python 3.12, the inbox's packages (OpenCV and NumPy for the corners), Tesseract with
     the collection's languages for the number check, and git.
+  - **Fixed tools** (#681, owner decision D04): the base image is named by its digest, and
+    `requirements.lock` pins every Python package, dependencies included; `requirements.txt` keeps the
+    ranges the lock is chosen from. `toolchain.json` records the rest of the accepted state: the
+    Python version of that base, Tesseract's version and the languages. Debian's packages, Tesseract
+    among them, follow bookworm's updates and are not pinned.
   - **Repository code:** the image holds only the code the inbox runs or imports.
     `Dockerfile.dockerignore` keeps data, images and evidence out.
   - **User:** it runs as an unprivileged user whose `PUID` and `PGID` match the owner of the mounted
@@ -209,11 +214,21 @@ update it must name the merged commit and say `Code aktuell`. It shows:
 - **Neu bauen:** the line warns `Anderer Eingangs-Code im Checkout: neu bauen` when the synced
   checkout carries other inbox code (`scripts/`, `verification/photo_inbox/`, `verification/*.py`)
   than the running image. It says `Code aktuell` when it does not.
+- **Werkzeuge:** `Werkzeuge wie abgenommen` when Python, every locked package, Tesseract and its
+  languages are the accepted ones; else `Werkzeuge weichen ab`, with the differences under `tools` in
+  `/version`. In the container, `docker compose exec inbox python verification/photo_inbox/toolchain.py`
+  prints them.
+
+**Rollback** is the owner's decision. Building an earlier accepted commit restores its tools: the
+same base by digest and the same locked packages. Only a Debian package can have moved since, and the
+version line shows it. A renewed lock or base is its own change, with the inbox suites and the
+image's smoke test, never a side effect.
 
 The workflow `Inbox image` builds the image on every pull request that touches the inbox. It checks
-Tesseract's languages and the number guard's tests, starts the inbox against the repository and runs
-`docker/smoke.py` inside it. The smoke test covers the page, the catalogue, suggested corners, a
-printed number read, and a version line naming the commit just built.
+Tesseract's languages, that the image has the accepted tools (`toolchain.py --check`) and the number
+guard's tests, starts the inbox against the repository and runs `docker/smoke.py` inside it. The smoke
+test covers the page, the catalogue, suggested corners, a printed number read, and a version line
+naming the commit just built with the accepted tools.
 
 ## Intake access
 
@@ -348,7 +363,7 @@ commits as `SnoreDex inbox` with a GitHub noreply address.
 ## Check
 
 ```console
-pip install -r requirements.txt -r verification/photo_inbox/requirements.txt
+pip install -r requirements.txt -r verification/photo_inbox/requirements.lock
 python verification/photo_inbox/test_app.py
 python verification/photo_inbox/test_intake.py --photos <photo checkout>
 python verification/photo_inbox/test_number_check.py

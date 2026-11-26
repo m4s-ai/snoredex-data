@@ -44,6 +44,8 @@ jobs:
           for lang in eng jpn deu chi_sim chi_tra kor fra ita spa por ind tha rus pol nld; do
             grep -qx "$lang" langs.txt || { echo "missing language: $lang"; exit 1; }
           done
+      - name: The image has the accepted tools (#681)
+        run: docker run --rm --entrypoint python snoredex-inbox verification/photo_inbox/toolchain.py --check
       - name: Number guard tests in the image
         run: docker run --rm --entrypoint python snoredex-inbox verification/photo_inbox/test_number_check.py
       - name: Intake run tests in the image (#659)
@@ -74,8 +76,8 @@ jobs:
         with:
           python-version: "3.12"  # the image's Python
 
-      - name: Install the inbox and browser requirements
-        run: python -m pip install -r requirements.txt -r verification/photo_inbox/requirements.txt
+      - name: Install the browser requirements and the inbox's locked packages
+        run: python -m pip install -r requirements.txt -r verification/photo_inbox/requirements.lock
 
       - name: Cache Playwright browsers
         uses: actions/cache@v5

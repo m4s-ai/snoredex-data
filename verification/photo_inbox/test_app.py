@@ -3,7 +3,7 @@ dashboard that describes each job, the trash, the overview of every printing, re
 mobile page and the derived archive copy.
 
 Needs the inbox and browser requirements:
-    pip install -r requirements.txt -r verification/photo_inbox/requirements.txt
+    pip install -r requirements.txt -r verification/photo_inbox/requirements.lock
     python verification/photo_inbox/test_app.py
 """
 
@@ -1134,6 +1134,9 @@ def version_checks(temp):
         assert found["data"]["commit"] == built and found["photos"] is None and found["codeChanged"] is False
         page = client.get("/").get_data(as_text=True)
         assert built[:7] in page and "Code aktuell" in page and "Fotos: unbekannt" in page, page
+        import toolchain  # #681: the running tools against the accepted ones, in /version and the line
+        assert found["tools"] == toolchain.report(), found["tools"]
+        assert ("Werkzeuge wie abgenommen" if found["tools"]["matches"] else "Werkzeuge weichen ab") in page
         data = commit_file(repo, "data/printings.json", "{}\n")
         found = client.get("/version").get_json()
         assert found["data"]["commit"] == data and found["codeChanged"] is False, "a data commit needs no rebuild"

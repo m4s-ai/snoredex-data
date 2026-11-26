@@ -1,0 +1,7 @@
+{
+  "about": "The tool versions the photo inbox was accepted with (#681, owner decision D04). The Dockerfile builds FROM base; requirements.lock pins the packages; toolchain.py compares a running inbox with both. Renew on purpose, as its own change, with the inbox suites and the image smoke test.",
+  "base": "python:3.12-slim-bookworm@sha256:44cf1793efa7c7a476bb0f2cff81443f4a072c90c1cb127e2924933daa3e8c64",
+  "python": "3.12.16",
+  "tesseract": "5.3.0",
+  "languages": ["chi_sim", "chi_tra", "deu", "eng", "fra", "ind", "ita", "jpn", "kor", "nld", "pol", "por", "rus", "spa", "tha"]
+}

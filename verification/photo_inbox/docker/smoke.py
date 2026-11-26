@@ -62,7 +62,8 @@ def main(base):
     built = os.environ.get("INBOX_COMMIT")
     assert built and version["code"]["commit"] == built and version["code"]["source"] == "image", version
     assert version["data"]["commit"] == built and version["codeChanged"] is False, version
-    print("inbox container: page, catalogue, corners, Tesseract and version line work")
+    assert version["tools"] == {"matches": True, "drift": []}, version["tools"]  # #681: the accepted tools
+    print("inbox container: page, catalogue, corners, Tesseract, tools and version line work")
 
 
 if __name__ == "__main__":
