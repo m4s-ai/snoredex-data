@@ -486,7 +486,65 @@ def posting_checks(root, repo, temp, command):
     assert uploader.uploads[-1]["clientRef"].endswith("fb_page:1:2"), "a resend is a new attempt"
     assert all(job["id"] != ".posts" for job in client.get("/jobs").json["jobs"])
     assert posting.published_links(root) == {ITEMS["ready"]: {"instagramPosts": ["https://www.instagram.com/p/new/"]}}
+    kept = record.read_text(encoding="utf-8")
+    record.write_text("{not json", encoding="utf-8", newline="\n")  # #676: a broken order stays at its own post
+    listing = client.get("/posts")
+    assert listing.status_code == 200 and "error" in mine() and mine()["order"] is None, listing.json
+    record.write_text(kept, encoding="utf-8", newline="\n")
     return uploader
+
+
+def queue_checks(temp):
+    """#676: a finished target costs no call and no write; a broken order blocks no other one."""
+    root = Path(temp) / "queue"
+    uploader, calls, writes = FakeUploader(), [], []
+    for name in ("media", "upload", "job"):
+        setattr(uploader, name, lambda *args, call=getattr(uploader, name), name=name: calls.append(name) or call(*args))
+    written = posting.write_json
+    posting.write_json = lambda path, data: writes.append(path.parent.name) or written(path, data)
+
+    def place(specimen, **targets):
+        folder = root / posting.POSTS / specimen
+        folder.mkdir(parents=True)
+        (folder / "post.jpg").write_bytes(jpeg())
+        order = {"specimen": specimen, "itemId": "item-x", "id": "abc", "createdAt": "2026-11-26T09:00:00+00:00",
+                 "dueAt": "2026-11-26T09:00:00+00:00", "caption": "Caption", "images": [{"file": "post.jpg", "alt": "Alt"}],
+                 "targets": targets}
+        written(folder / "order.json", order)
+
+    def target(specimen, account):
+        return posting.read_order(root, specimen)["targets"][account]
+
+    try:
+        done = {"attempt": 1, "status": "published", "tried": True, "jobId": "job-0", "permalink": "https://x.test/p"}
+        place("SPEC-0001", **{account: dict(done) for account in FakeUploader.SNOREDEX})
+        posting.tick(root, uploader)
+        posting.tick(root, uploader)
+        assert (calls, writes) == ([], []), ("three published targets, two rounds: no call, no write", calls, writes)
+
+        uploader.jobs["job-9"] = {"id": "job-9", "status": "processing", "clientRef": "x"}
+        place("SPEC-0002", **{"ig:snoredex": dict(done), "fb_page:1": {"attempt": 1, "status": "processing",
+                                                                        "tried": True, "jobId": "job-9"}})
+        posting.tick(root, uploader)  # the running target is followed; its first answer adds its fields
+        calls.clear(), writes.clear()
+        posting.tick(root, uploader)
+        assert (calls, writes) == (["job"], []), ("only the running target is followed; unchanged, not written",
+                                                  calls, writes)
+        uploader.jobs["job-9"].update(status="published", permalink="https://x.test/q")
+        posting.tick(root, uploader)
+        assert writes == ["SPEC-0002"] and target("SPEC-0002", "fb_page:1")["permalink"] == "https://x.test/q"
+        assert target("SPEC-0002", "ig:snoredex") == done, "the published target stays as it was"
+
+        broken = root / posting.POSTS / "SPEC-0000"
+        broken.mkdir(parents=True)
+        (broken / "order.json").write_text("{not json", encoding="utf-8", newline="\n")
+        place("SPEC-0003", **{"ig:snoredex": {"attempt": 1, "status": "pending"}})
+        calls.clear(), writes.clear()
+        posting.tick(root, uploader)  # SPEC-0000 sorts first and cannot be read
+        assert calls == ["media", "upload"] and target("SPEC-0003", "ig:snoredex")["status"] == "queued", calls
+        assert writes == ["SPEC-0003", "SPEC-0003"], ("marked as tried before the send, then the job", writes)
+    finally:
+        posting.write_json = written
 
 
 def permalink_checks(temp):
@@ -1115,6 +1173,7 @@ def main():
             files[-1].write_bytes(body)
         browser_checks(root, files, repo, command, Path(temp))
         posting_checks(root, repo, temp, command)
+        queue_checks(temp)
         permalink_checks(temp)
     print("photo inbox: all checks passed")
 

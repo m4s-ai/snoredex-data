@@ -33,6 +33,7 @@ from dng import dng_preview
 import number_check
 from overview import ITEM_ID, Catalogue
 import posting
+from posting import write_json  # one atomic JSON writer for jobs and orders (#676)
 import runner as intake_runner
 
 # an iPhone ProRAW DNG at 48 megapixels is often 75-100 MB
@@ -123,13 +124,6 @@ def write_photo(stream, folder):
     name = "photo." + photo_kind(upload)
     upload.rename(folder / name)
     return digest.hexdigest(), name
-
-
-def write_json(path, data):
-    """Replace a job record in one step, so a crash leaves the old or the new one."""
-    temporary = path.with_name(path.name + ".tmp")
-    temporary.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
-    os.replace(temporary, path)
 
 
 def receive(root, stream):
@@ -665,8 +659,9 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
             return jsonify(error="Für die Entwürfe fehlt das Fotoarchiv (--photos)."), 404
         views = []
         for row in catalogue.shares():
-            order = posting.read_order(root, row["draftSpecimen"])
-            try:
+            order = None
+            try:  # an order.json that cannot be read shows at its own post and blocks no other (#676)
+                order = posting.read_order(root, row["draftSpecimen"])
                 # an ordered post shows what it froze, which is what goes out, never a newer draft
                 view = frozen_view(row, order) if order else post_view(row, current_draft(row["draftSpecimen"]))
                 views.append(dict(view, order=posting.order_view(order)))

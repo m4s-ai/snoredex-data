@@ -66,6 +66,8 @@ class Uploader:
 
 
 def write_json(path, data):
+    """Replace a JSON record in one step, so a crash leaves the old or the new one: the inbox's jobs
+    (app.py) and orders here share it. runner.write_state keeps its own, with its Windows retry."""
     temporary = path.with_name(path.name + ".tmp")
     temporary.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     os.replace(temporary, path)
@@ -183,21 +185,36 @@ def advance(order, folder, uploader, account, cache):
 
 
 def tick(root, uploader, now=None):
-    """Send every due order and follow its jobs; a failure to reach the uploader is retried next time."""
+    """Send every due order and follow its jobs; a failure to reach the uploader is retried next time.
+    An order that cannot be read or processed is reported under its name, and the next one goes on (#676)."""
     moment = now or datetime.now(timezone.utc)
     for path in sorted((root / POSTS).glob("SPEC-*/order.json")):
-        order = json.loads(path.read_text(encoding="utf-8"))
-        if datetime.fromisoformat(order["dueAt"]) > moment:
+        try:
+            process(path, uploader, moment)
+        except (OSError, ValueError, KeyError, TypeError, AttributeError) as error:
+            print(f"Post-Auftrag {path.parent.name}: {type(error).__name__}: {error}", flush=True)
+
+
+def process(path, uploader, moment):
+    """One order: only its pending and running targets are sent or followed, and the order is written
+    only when a target changed. A published or failed target costs no call and no write (#676)."""
+    order = json.loads(path.read_text(encoding="utf-8"))
+    if datetime.fromisoformat(order["dueAt"]) > moment:
+        return
+    cache = {}
+    for account, target in order["targets"].items():
+        if target["status"] != "pending" and target["status"] not in ACTIVE:
             continue
-        cache = {}
-        for account, target in order["targets"].items():
-            if target["status"] == "pending" and not target.get("tried"):
-                target["tried"] = True  # recorded before the uploader is called, so a crash cannot hide it
-                write_json(path, order)
-            try:
-                advance(order, path.parent, uploader, account, cache)
-            except UploaderError as error:
-                order["targets"][account]["problem"] = str(error)
+        before = dict(target)
+        if target["status"] == "pending" and not target.get("tried"):
+            target["tried"] = True  # recorded before the uploader is called, so a crash cannot hide it
+            write_json(path, order)
+            before = dict(target)
+        try:
+            advance(order, path.parent, uploader, account, cache)
+        except UploaderError as error:
+            target["problem"] = str(error)
+        if target != before:
             write_json(path, order)
 
 
