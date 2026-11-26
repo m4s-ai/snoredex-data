@@ -97,7 +97,8 @@ corners stored in `postCorners`, into `.drafts` inside the data folder (#678):
   already built for their current inputs.
 - **One draft per fingerprint.** `instagram_package.py SPEC --fingerprint` hashes what the draft is
   made of: its photographs' SHA-256, the printing's record, its set edition, local set and
-  localization, the share row (short link, corners, carousel) and the exporter's code. A change to
+  localization, the share row (short link, corners, carousel), every module of the checkout the exporter
+  loads (`gallery_prepare.py` for the cover included) and Pillow's version. A change to
   another printing rebuilds nothing; a change to this one, or a pulled fix to the cover (#691),
   rebuilds it once it is opened. The inbox asks for the fingerprint again only after the catalogue
   files or the code changed.

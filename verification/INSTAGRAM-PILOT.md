@@ -72,7 +72,7 @@ describes that photo and, when approved, its `postCorners`. The exporter writes 
 carousel to its first image.
 
 `--fingerprint` builds nothing and prints one hash over what the SPEC's draft is made of (its photographs,
-the printing's record and set rows, the share row and the exporter's code); the photo inbox keys its draft
+the printing's record and set rows, the share row, the checkout's modules it loads and Pillow's version); the photo inbox keys its draft
 cache by it (#678).
 
 Run the focused tests with `python verification/test_instagram_package.py`.

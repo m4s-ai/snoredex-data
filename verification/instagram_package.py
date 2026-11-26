@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+from importlib import metadata
 import io
 import json
 from pathlib import Path
@@ -288,10 +289,19 @@ def package(model: dict, specimen_id: str, archive: Path, corners=None, *,
     return files, manifest
 
 
+def renderer_files() -> list[Path]:
+    """The repository's code a draft is rendered with: every module of this checkout the exporter has
+    loaded, itself and gallery_prepare.py included, read from sys.modules rather than listed by hand, so
+    a new import counts at once and an unrelated script never does (#678)."""
+    files = {Path(module.__file__).resolve() for module in list(sys.modules.values())
+             if getattr(module, "__file__", None) and Path(module.__file__).suffix == ".py"}
+    return sorted(path for path in files if path.is_relative_to(ROOT) and ".venv" not in path.parts)
+
+
 def fingerprint(model: dict, specimen_id: str) -> str:
     """What a draft of this SPEC is made of (#678): its photographs by their registered SHA-256 (the cover's
     and the further carousel photos'), the printing's record, its set edition, local set and localization,
-    the share row (short link, corners, carousel) and the exporter's code. A change elsewhere in the
+    the share row (short link, corners, carousel), the exporter's code and Pillow's version. A change elsewhere in the
     catalogue leaves it as it is. `dataAsOf` in the manifest only says from which state a draft was built."""
     specimen, item = owner_specimen(model, specimen_id)
     share, _short, _corners, slides = shared(item["itemId"], specimen_id)
@@ -304,9 +314,8 @@ def fingerprint(model: dict, specimen_id: str) -> str:
         "localSet": next(row for row in sets["localSets"] if row["localSetId"] == edition["localSetId"]),
         "localization": next(row for row in sets["localizations"]
                              if row["localizationId"] == edition["localizationId"]),
-        # ponytail: every module under scripts/ counts as the renderer; narrow it if unrelated script
-        # changes rebuild drafts too often
-        "code": [digest(path.read_bytes()) for path in sorted([Path(__file__), *(ROOT / "scripts").glob("*.py")])],
+        "code": [digest(path.read_bytes()) for path in renderer_files()],
+        "pillow": metadata.version("pillow"),  # it encodes the images; imported only when they are drawn
     }
     return digest(json.dumps(inputs, sort_keys=True, ensure_ascii=False).encode("utf-8"))
 
