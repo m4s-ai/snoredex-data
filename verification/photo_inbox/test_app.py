@@ -969,7 +969,11 @@ def corner_page(page, root):
     page.keyboard.press("Shift+ArrowRight")
     assert int(label().split(": ")[1].split(",")[0]) == before + 40, label()
     assert item.locator(".loupe").is_visible(), "the loupe shows the corner under the thumb"
+    # a thumb drags a handle it sees: in view first, else the mouse lands outside the viewport, where
+    # what it hits depends on timing and the browser version (#681, seen with Chromium 159)
+    handles.nth(2).scroll_into_view_if_needed()
     box = handles.nth(2).bounding_box()
+    assert 0 <= box["y"] and box["y"] + box["height"] <= 812, ("the handle is in view", box)
     page.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
     page.mouse.down()
     page.mouse.move(box["x"] + box["width"] / 2 + 10, box["y"] + box["height"] / 2 + 10, steps=4)
