@@ -22,7 +22,9 @@ The export verifies the archived original by SHA-256. Pass `--corners x1 y1 x2 y
 card face's own edges, clockwise from top left after applying the original's EXIF orientation. The
 cover then frames the card at about 60 % of the width, nudged down to keep its stand in view, and
 darkens everything around the card in a soft vignette, in the style of the owner's edited holder
-photos. The card's own pixels, foil included, stay as photographed. With no corners, the draft shows
+photos: to about 60 % of its brightness beside the card and 40 % at the edge, so even a dark wall and
+the stand stay visible instead of turning black (#691). The card's own pixels, foil included, stay as
+photographed. With no corners, the draft shows
 the whole original on a dark canvas. Every cover carries a small `@SnoreDex` watermark at the bottom
 right. The exporter never enlarges a small crop. Once a cover is approved, record its corners as
 `postCorners` in the item's `data/social.json` entry; the exporter then uses them when no `--corners`

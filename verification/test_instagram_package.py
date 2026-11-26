@@ -5,7 +5,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from PIL import Image, ImageCms, ImageDraw
+from PIL import Image, ImageCms, ImageDraw, ImageStat
 
 from instagram_package import (carousel_files, digest, edited_post_image, load, package, post_copy, post_image,
                                release_label)
@@ -95,10 +95,26 @@ class InstagramDraftTests(unittest.TestCase):
                 return draft.getpixel((round((x - geometry["frame"][0]) * scale),
                                        round((y - geometry["frame"][1]) * scale)))
             self.assertGreater(at(1500, 1900)[0], 215, "the card stays as photographed")
-            self.assertLess(at(400, 600)[0], 70, "the wall is darkened")
-            self.assertLess(at(712, 812)[0], 70, "outside the rounded corner is wall")
+            self.assertTrue(70 < at(400, 600)[0] < 160, "the wall is darkened, and stays visible (#691)")
+            self.assertLess(at(712, 812)[0], 160, "outside the rounded corner is darkened wall")
             mark = draft.crop((780, 1280, 1050, 1330)).convert("L")
             self.assertGreater(mark.getextrema()[1], 150, "the @SnoreDex watermark is drawn")
+
+    def test_dark_wall_stays_visible(self):
+        # #691, SPEC-1126: a dark grey wall, as photographed, must not turn black on the cover
+        photo = Image.new("RGB", (3000, 4000), (50, 50, 50))
+        ImageDraw.Draw(photo).rounded_rectangle((700, 800, 2300, 3040), radius=70, fill=(230, 210, 40))
+        raw = BytesIO()
+        photo.save(raw, "PNG")
+        data, geometry = post_image(raw.getvalue(), [(700, 800), (2300, 800), (2300, 3040), (700, 3040)])
+        left, top, right, _ = geometry["frame"]
+        scale = 1080 / (right - left)
+        with Image.open(BytesIO(data)) as draft:
+            wall = draft.convert("L").crop((0, 0, round((700 - left) * scale) - 20, 1350))
+            card = draft.getpixel((round((1500 - left) * scale), round((1900 - top) * scale)))
+        self.assertTrue(17 < ImageStat.Stat(wall).mean[0] < 40, "darkened, not black")
+        self.assertTrue(all(abs(value - photographed) < 8 for value, photographed in zip(card, (230, 210, 40))),
+                        "the card stays as photographed")
 
     def test_edited_photo_preserves_full_frame_and_records_source(self):
         data = BytesIO()
