@@ -109,7 +109,10 @@ unguessable URL, and starts one job per account. Orders live on disk, so a sched
 restart. Every job carries a `clientRef` the uploader deduplicates on, so a restart between sending
 and recording never posts twice. The page shows each account's state and permalink; a job that failed
 before publishing shows its reason and can be sent again, as a new attempt. A planned order can be
-taken back until it goes; a sent post cannot. One order per draft.
+taken back until it goes; a sent post cannot. One order per draft. The queue touches only accounts
+still to send or still running: a published or failed one costs no call to the uploader and no write,
+and an order is written only when one of its accounts changed. An `order.json` that cannot be read is
+logged under its SPEC and shown at its own post; the other orders go on (#676).
 
 **Permalinks into the data.** The inbox writes nothing into the repository. An agent run records the
 permalinks of published orders in `data/social.json` (`instagramPosts`, `facebookPosts`,
