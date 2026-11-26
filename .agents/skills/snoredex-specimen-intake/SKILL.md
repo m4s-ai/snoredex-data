@@ -43,8 +43,8 @@ session and say so in the report.
 
 1. Obtain the original bytes. For an issue attachment, fetch the issue's HTML page and download the
    resolved image URL as METHODOLOGY.md describes. An image pasted into the chat is not the
-   original: on 2026-11-11 two pasted images arrived in the session as WebP although neither was
-   pasted as WebP. Ask for the image address or a local file path and take the bytes from there;
+   original: the chat can re-encode it (pasted images have arrived as WebP). Ask for the image
+   address or a local file path and take the bytes from there;
    file a pasted copy only when the owner confirms the original cannot be reached, and say so in
    `inspectedFrom`. Determine the format from the bytes, not the URL.
 2. Inspect the original at sufficient resolution. Identify only visible facts: card identity,

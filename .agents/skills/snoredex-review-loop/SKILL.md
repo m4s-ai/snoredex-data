@@ -52,7 +52,7 @@ Repeat until a round finds nothing.
    - A new check.py rule needs its own selftest mutation.
 4. **Run the gate.**
    - `python scripts/regen.py --check`; it runs `check.py` and `check.py --selftest` itself, so they
-     are not run again beside it (#677). While a fix is still being made, `python scripts/check.py`
+     are not run again beside it. While a fix is still being made, `python scripts/check.py`
      alone is the quick check.
    - `python verification/test_site.py`, if page code changed
    - the inbox suites the change reaches (`verification/photo_inbox/README.md`, *Check*), if it touches

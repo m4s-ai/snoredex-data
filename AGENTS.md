@@ -234,8 +234,8 @@ python scripts/publish.py --out _site --verify
 python verification/publication_audit.py         # L1, P1-P8, X6, X7: tree and history boundary
 ```
 
-`regen.py` runs check.py, its selftest, the tracker selftest, build.py, the complexity guard, the
-sensitive-scan test, the gate-handoff test, the link check and the publication audit. Every
+`regen.py` runs every step in its `STEPS`: check.py and its selftest, the tracker selftest,
+build.py, the verification tests, the link check and the publication audit. Every
 `--check` is observational: it creates and replaces nothing in the checkout. The `.sqlite` files
 are compared by logical dump, never by bytes, because SQLite embeds its library version.
 
@@ -275,8 +275,8 @@ Serve the site locally with `python -m http.server 8000`, then open <http://loca
 - **Attribute honestly.** End commit messages with the `Co-Authored-By` trailer of the agent and
   model that actually made the commit; never name another model.
 - Open a PR as a draft until the local gate is green; drafts skip CI. When the diff touches page
-  code (`templates/index.html`, `site/`, `scripts/build.py`), run `python verification/test_site.py`
-  before pushing.
+  code (any path `.github/workflows/ui-pr.yml` watches, the card templates and `scripts/card_pages.py`
+  included), run `python verification/test_site.py` before pushing.
 - The release gate runs on Ubuntu and Windows; the browser suite is Linux-only.
 - **Merging never publishes.** Pages deployment is a manual `workflow_dispatch` run, gated on
   `verification/publication_gate.py` and the approvals recorded in `publication-decisions.json`, and
