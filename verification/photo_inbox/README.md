@@ -128,6 +128,10 @@ still to send or still running: a published or failed one costs no call to the u
 and an order is written only when one of its accounts changed. An `order.json` that cannot be read is
 logged under its SPEC and shown at its own post; the other orders go on (#676).
 
+Uploader failures include the HTTP method and API path, for example
+`Uploader POST /api/v1/media: HTTP 404` (#741). JSON error details remain visible;
+HTML error pages, request bodies and the API key are not copied into that message.
+
 **Permalinks into the data (#646).** With the intake runner enabled, its worker checks published
 orders after each intake run and otherwise once a minute. It gathers their links by printing and
 platform (`instagramPosts`, `facebookPosts`, `threadsPosts`), freezes a batch in
@@ -445,6 +449,7 @@ commits as `SnoreDex inbox` with a GitHub noreply address.
 ```console
 pip install -r requirements.txt -r verification/photo_inbox/requirements.lock
 python verification/photo_inbox/test_app.py
+python verification/photo_inbox/test_posting.py
 python verification/photo_inbox/test_intake.py --photos <photo checkout>
 python verification/photo_inbox/test_number_check.py
 python verification/photo_inbox/test_runner.py

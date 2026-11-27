@@ -48,9 +48,10 @@ class Uploader:
                 message = json.loads(error.read()).get("error")
             except ValueError:
                 message = None
-            raise UploaderError(message or f"Uploader antwortet {error.code}") from error
+            detail = f": {message}" if message else ""
+            raise UploaderError(f"Uploader {method} {path}: HTTP {error.code}{detail}") from error
         except (URLError, OSError, ValueError) as error:
-            raise UploaderError(f"Uploader nicht erreichbar: {error}") from error
+            raise UploaderError(f"Uploader {method} {path} nicht erreichbar: {error}") from error
 
     def accounts(self):
         return self.call("GET", "/api/v1/accounts")["accounts"]
