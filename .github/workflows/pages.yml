@@ -46,16 +46,14 @@ jobs:
     needs: approval
     uses: ./.github/workflows/release-gate.yml
 
-  deploy:
-    name: Deploy to Pages
+  package:
+    name: Upload verified Pages artifact
     needs: gate
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      PAGES_ARTIFACT: github-pages-${{ github.run_attempt }}
+    outputs:
+      artifact_name: ${{ env.PAGES_ARTIFACT }}
     steps:
       - uses: actions/checkout@v7
 
@@ -65,7 +63,7 @@ jobs:
           python-version: "3.11"
 
       # The reusable release-gate job has already run L3/L4 and uploaded one exact Pages artifact
-      # plus one gate manifest per OS. This job only verifies that handoff and deploys those bytes;
+      # plus one gate manifest per OS. This job only verifies that handoff and packages those bytes;
       # it does not regenerate a second projection tree.
       - name: Download verified Pages artifact
         uses: actions/download-artifact@v8
@@ -99,11 +97,27 @@ jobs:
             --catalogue _site/collector_catalogue.json \
             --expected-commit "${GITHUB_SHA}"
 
-      - uses: actions/configure-pages@v6
       # v4+ drops dotfiles unless asked; deploy exactly the verified bytes, .nojekyll included.
       - uses: actions/upload-pages-artifact@v5
         with:
+          name: ${{ env.PAGES_ARTIFACT }}
           path: _site
           include-hidden-files: true
+
+  deploy:
+    name: Deploy to Pages
+    # Start after the upload job finishes. A deploy-only retry keeps its artifact name and bytes.
+    needs: package
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v6
       - id: deployment
         uses: actions/deploy-pages@v5
+        with:
+          artifact_name: ${{ needs.package.outputs.artifact_name }}
