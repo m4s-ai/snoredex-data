@@ -540,9 +540,17 @@ class Runner:
         if record is None:
             record = runs[name] = {"request": "inbox-" + uuid4().hex[:16], "dispatchedAt": now(), "runId": None}
             write_state(folder, dict(state, status="running"))
-            record["runId"] = self.github.dispatch(name, dict(inputs, request=record["request"]))
-            write_state(folder, dict(state, status="running"))
+            run_id = self.github.dispatch(name, dict(inputs, request=record["request"]))
+            self.save_workflow_run(folder, state, name, record, run_id)
         return record
+
+    @staticmethod
+    def save_workflow_run(folder, state, name, record, run_id):
+        record["runId"] = run_id
+        # The link survives a failed run leaving the dispatch record. The step records success separately.
+        if name == "pages.yml" and run_id:
+            state["publishRun"] = run_id
+        write_state(folder, dict(state, status="running"))
 
     def never_started(self, name, record):
         """Certain that a dispatch whose answer went missing started no run: the grace is over and GitHub
@@ -557,8 +565,9 @@ class Runner:
             found = self.github.runs_titled(name, record["request"], record["dispatchedAt"])
             if not found or len(found) > 1:
                 return None
-            record["runId"] = found[0]
-            write_state(folder, dict(state, status="running"))
+            self.save_workflow_run(folder, state, name, record, found[0])
+        elif name == "pages.yml" and state.get("publishRun") != record["runId"]:
+            self.save_workflow_run(folder, state, name, record, record["runId"])
         return self.github.run(record["runId"])
 
     def step_publish(self, folder, state):

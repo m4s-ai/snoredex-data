@@ -553,7 +553,7 @@ def runs_checks(temp):
               {"status": "running", "step": "merge", "done": ["intake"], "specimen": "SPEC-0101", "pr": 101,
                "origin": "button", "startedAt": at},
               {"status": "failed", "step": "publish", "done": ["intake", "merge"], "specimen": "SPEC-0102", "pr": 102,
-               "error": "pages.yml endete mit failure: https://example.invalid/runs/1", "startedAt": at,
+               "error": "pages.yml endete mit failure", "startedAt": at, "publishRun": 9000,
                "finishedAt": at, "approval": {"itemId": "x"}, "runs": {"pages.yml": {"request": "inbox-secret"}}},
               {"status": "done", "done": list(intake_runner.STEPS), "specimen": "SPEC-0103", "pr": 103, "aliasPr": 104,
                "alias": "sdabc", "startedAt": at, "finishedAt": at, "publishRun": 9001, "aliasRun": 9002},
@@ -582,6 +582,9 @@ def runs_checks(temp):
             group = lambda name: page.locator(f"#runs-{name} li").evaluate_all("items => items.map(i => i.dataset.job)")
             groups = {name: sorted(group(name)) for name in ("active", "failed", "done")}
             assert groups == {"active": sorted(ids[:2]), "failed": sorted([ids[2], ids[4]]), "done": [ids[3]]}, groups
+            failed = page.locator(f'#runs-failed li[data-job="{ids[2]}"]')
+            assert failed.get_by_role("link", name="Veröffentlichung").get_attribute("href") == (
+                "https://github.com/m4s-ai/snoredex-data/actions/runs/9000")
             done = page.locator("#runs-done li .links a").evaluate_all("links => links.map(a => a.href)")
             assert done == ["https://github.com/m4s-ai/snoredex-data/pull/103",
                             "https://github.com/m4s-ai/snoredex-data/actions/runs/9001",

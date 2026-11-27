@@ -391,10 +391,33 @@ def shared_timeout_can_retry():
         for job in jobs:
             state = runner.read_state(root / job)
             assert state["status"] == "failed" and state["step"] == "publish", state
+            assert state["publishRun"] == github.runs[0]["id"], state
+            assert "publish" not in state["done"], state
         assert not run.waiting and run.submit(jobs[0])
         run.process_next(timeout=0)
         assert all(runner.read_state(root / job)["status"] == "done" for job in jobs)
         assert len(dispatched(github, "pages.yml")) == 1
+
+
+def failed_shared_run_keeps_link():
+    with TemporaryDirectory() as temp:
+        root, data, photos, jobs, _items = setup(temp, count=2)
+        github = GitHub(data)
+        github.script["pages.yml"] = [(0, "failure")]
+        run = make(root, github, data, photos)
+        run.night_round(lambda: jobs)
+        run.process_next(timeout=0)
+        for job in jobs:
+            state = runner.read_state(root / job)
+            assert state["status"] == "failed" and state["publishRun"] == github.runs[0]["id"], state
+            assert "publish" not in state["done"], state
+        assert run.submit(jobs[0])
+        run.process_next(timeout=0)
+        for job in jobs:
+            state = runner.read_state(root / job)
+            assert state["status"] == "done" and state["publishRun"] == github.runs[1]["id"], state
+        assert len(dispatched(github, "pages.yml")) == 2
+        assert Path(os.environ["FAKE_COUNT"]).read_text() == "2"
 
 
 def main():
@@ -409,6 +432,7 @@ def main():
     empty_publication_retry(superseded=True)
     excluded_job_keeps_new_batch()
     shared_timeout_can_retry()
+    failed_shared_run_keeps_link()
     print("night batch: all checks passed")
 
 

@@ -392,7 +392,9 @@ stopped at and the steps done, and links to its intake PR, its alias PR and its 
 shows the error the run stored and "Erneut versuchen", the same `POST /jobs/<id>/intake` as on the
 photo. Above them stands the last nightly round with the number of jobs it started; without a runner
 the tab says so. It reads only; the run records `origin`, `queuedAt`, `startedAt` and `finishedAt` for
-it, the night `.work/nightly.json`. Approvals, pushed commits and request tokens stay off the page.
+it, the night `.work/nightly.json`. The Pages link identifies the latest known dispatch, including
+failed attempts. The completed steps show whether publication succeeded. Approvals, pushed commits
+and request tokens stay off the page.
 
 The job shows each step, and when a step fails, the reason. The run writes every finished step to
 `intake-run.json` beside the job, so a new start, by the button or the night, carries on where it
