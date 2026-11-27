@@ -509,7 +509,9 @@ def posting_checks(root, repo, temp, command):
     uploader.jobs["job-1"].update(status="published", permalink="https://www.instagram.com/p/new/")
     uploader.jobs["job-2"].update(status="failed", error="Seite gesperrt")
     posting.tick(root, uploader)
-    view = mine()["order"]["targets"]
+    partial = mine()
+    assert partial["stage"] == client.get("/posts/SPEC-0904").json["stage"] == "partial"
+    view = partial["order"]["targets"]
     assert view["ig:snoredex"]["permalink"] == "https://www.instagram.com/p/new/"
     assert view["fb_page:1"]["error"] == "Seite gesperrt" and "media" not in json.dumps(view)
     assert client.post("/posts/SPEC-0904/retry", json={"account": "ig:snoredex"}).status_code == 409
@@ -518,6 +520,17 @@ def posting_checks(root, repo, temp, command):
     assert uploader.uploads[-1]["clientRef"].endswith("fb_page:1:2"), "a resend is a new attempt"
     assert all(job["id"] != ".posts" for job in client.get("/jobs").json["jobs"])
     assert posting.published_links(root) == {ITEMS["ready"]: {"instagramPosts": ["https://www.instagram.com/p/new/"]}}
+    from permalinks import record as import_links
+
+    assert import_links(root, repo) == 1 and import_links(root, repo) == 0
+    overview = lambda: next(row for row in client.get("/overview").json["rows"] if row["itemId"] == ITEMS["ready"])
+    assert mine()["stage"] == overview()["stage"] == "partial", "the first imported link does not complete the order"
+    uploader.jobs["job-3"].update(status="published", permalink="https://www.threads.com/@snoredex/post/new")
+    uploader.jobs["job-4"].update(status="published", permalink="https://www.facebook.com/1/posts/2")
+    posting.tick(root, uploader)
+    assert len(uploader.uploads) == 4, "only the failed target is sent again"
+    assert mine()["stage"] == overview()["stage"] == "posted"
+    assert import_links(root, repo) == 2 and import_links(root, repo) == 0
     kept = record.read_text(encoding="utf-8")
     record.write_text("{not json", encoding="utf-8", newline="\n")  # #676: a broken order stays at its own post
     listing = client.get("/posts")
@@ -1136,6 +1149,19 @@ def posts_page(page, root, uploader):
     post.locator(".targets li").first.wait_for()
     assert post.locator(".targets").text_content().count("wartet") == 2, "only the chosen accounts"
     assert post.locator(".sent").text_content().startswith("Eingeplant für")
+    path = root / posting.POSTS / "SPEC-0904" / "order.json"
+    planned = posting.read_order(root, "SPEC-0904")
+    partial = json.loads(json.dumps(planned))
+    partial["targets"]["ig:snoredex"].update(status="published", permalink="https://www.instagram.com/p/new/")
+    partial["targets"]["threads:snoredex"].update(status="failed", error="Versand fehlgeschlagen")
+    posting.write_json(path, partial)
+    page.select_option("#post-view", "all")
+    page.select_option("#post-view", "ready")
+    partial_post = post.filter(has_text="Teilweise veröffentlicht")
+    partial_post.locator(".badge").wait_for()
+    assert partial_post.get_by_role("link", name="Post öffnen").is_visible()
+    assert partial_post.get_by_role("button", name="Erneut senden").count() == 1
+    posting.write_json(path, planned)
     held = uploader.held = threading.Event()  # the plan is taken back while the page still waits for the accounts
     page.reload()
     page.click("#tab-posts")
@@ -1157,7 +1183,7 @@ def overview_page(page):
     page.click("#tab-uebersicht")
     counts = page.locator("#stage-counts li").all_text_contents()
     assert counts == ["kein eigenes Foto: 0", "hochgeladen, zugeordnet: 2", "verarbeitet: 1", "online: 1",
-                      "bereit für Instagram: 1", "gepostet: 1"], counts
+                      "bereit für Instagram: 1", "Teilweise veröffentlicht: 0", "gepostet: 1"], counts
     page.select_option("#view", "own")
     assert page.locator("#rows li").count() == 4
     page.select_option("#view", "missing")
