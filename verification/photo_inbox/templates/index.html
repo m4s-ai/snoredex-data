@@ -219,8 +219,12 @@
       <p class="links"></p>
       <form class="send" hidden>
         <fieldset><legend>Konten</legend><div class="accounts"></div></fieldset>
-        <label>Zeitpunkt, leer für sofort<input type="datetime-local" name="at"></label>
-        <div class="actions"><button type="submit" class="primary">Jetzt posten</button></div>
+        <label>Veröffentlichungstag<input type="date" name="postDay" required></label>
+        <label>Uhrzeit (Deutschland)<input type="time" name="postTime" value="20:00" required></label>
+        <div class="actions">
+          <button type="submit" class="primary" value="schedule">Einplanen</button>
+          <button type="submit" value="now" formnovalidate>Jetzt posten</button>
+        </div>
       </form>
       <ul class="targets lines"></ul>
       <div class="actions"><button type="button" class="cancel danger" hidden>Einplanung zurücknehmen</button></div>

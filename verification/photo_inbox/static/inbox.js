@@ -2,6 +2,9 @@
 
 const field = (id) => document.getElementById(id);
 const DATE = new Intl.DateTimeFormat("de-DE", {dateStyle: "medium", timeStyle: "short"});
+const BERLIN = "Europe/Berlin";
+const POST_DATE = new Intl.DateTimeFormat("de-DE", {dateStyle: "medium", timeStyle: "short", timeZone: BERLIN});
+const POST_OFFSET = new Intl.DateTimeFormat("en", {timeZone: BERLIN, timeZoneName: "longOffset"});
 const DAY = new Intl.DateTimeFormat("de-DE", {dateStyle: "medium"});
 const STAGE_NAMES = {none: "kein eigenes Foto", assigned: "hochgeladen, zugeordnet", filed: "verarbeitet",
                      online: "online", ready: "bereit für Instagram", partial: "Teilweise veröffentlicht", posted: "gepostet"};
@@ -791,7 +794,7 @@ function showOrder(item, post) {
     const waiting = targets.every(([, target]) => target.status === "pending" && !target.tried);
     const due = new Date(post.order.dueAt);
     if (waiting && due > new Date()) {
-      sent.textContent = `Eingeplant für ${DATE.format(due)}.`;
+      sent.textContent = `Eingeplant für ${POST_DATE.format(due)} Uhr (Deutschland).`;
       const cancel = item.querySelector(".cancel");
       cancel.hidden = false;
       cancel.addEventListener("click", () => cancelOrder(post, sent));
@@ -808,8 +811,6 @@ function showOrder(item, post) {
                  accountName(account.id));
     return label;
   }));
-  const button = form.querySelector("button");
-  form.elements.at.addEventListener("input", () => { button.textContent = form.elements.at.value ? "Einplanen" : "Jetzt posten"; });
   form.addEventListener("submit", (event) => sendOrder(event, post, sent));
 }
 
@@ -836,16 +837,36 @@ async function act(url, body, sent, method = "POST") {
   }
 }
 
-function sendOrder(event, post, sent) {
+function berlinPostTime(day, time) {
+  const local = `${day}T${time}`;
+  const wall = Date.parse(`${local}Z`);
+  const offsetAt = (instant) => POST_OFFSET.formatToParts(instant)
+    .find((part) => part.type === "timeZoneName").value.slice(3);
+  // Check both offsets around a possible clock change. A skipped or repeated time is ambiguous.
+  const offsets = new Set([offsetAt(wall - 86400000), offsetAt(wall + 86400000)]);
+  const matches = [...offsets].filter((offset) => offsetAt(Date.parse(local + offset)) === offset);
+  return matches.length === 1 ? new Date(local + matches[0]).toISOString() : null;
+}
+
+async function sendOrder(event, post, sent) {
   event.preventDefault();
   const form = event.target;
   const accounts = [...form.querySelectorAll("input[name=account]:checked")].map((box) => box.value);
-  const at = form.elements.at.value ? new Date(form.elements.at.value).toISOString() : null;
-  const when = at ? `am ${DATE.format(new Date(at))}` : "sofort";
+  let at = null;
+  if (event.submitter?.value !== "now") {
+    at = berlinPostTime(form.elements.postDay.value, form.elements.postTime.value);
+    if (!at || Date.parse(at) <= Date.now()) {
+      sent.textContent = "Wähle eine eindeutige Uhrzeit in der Zukunft (Deutschland).";
+      return;
+    }
+  }
+  const when = at ? `am ${POST_DATE.format(new Date(at))} Uhr (Deutschland)` : "sofort";
   if (!accounts.length) { sent.textContent = "Wähle mindestens ein Konto."; return; }
   if (!confirm(`${post.label} ${when} auf ${accounts.map(accountName).join(", ")} posten? Ein Post lässt sich nicht zurücknehmen.`)) return;
-  form.querySelector("button").disabled = true;
-  act(`/posts/${post.draftSpecimen}/order`, {draft: post.draft, accounts, at}, sent);
+  const buttons = form.querySelectorAll("button");
+  buttons.forEach((button) => { button.disabled = true; });
+  await act(`/posts/${post.draftSpecimen}/order`, {draft: post.draft, accounts, at}, sent);
+  buttons.forEach((button) => { button.disabled = false; });
 }
 
 function cancelOrder(post, sent) {

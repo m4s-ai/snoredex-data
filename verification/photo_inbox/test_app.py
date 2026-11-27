@@ -1139,13 +1139,18 @@ def posts_page(page, root, uploader):
     assert boxes.count() == 3 and all(boxes.nth(index).is_checked() for index in range(3)), \
         "SnoreDex on Instagram, Facebook and Threads, all preselected; the uploader's other accounts never show"
     assert post.locator(".accounts").text_content().startswith("Instagram SnoreDex")
-    send = post.locator(".send button")
-    assert send.text_content() == "Jetzt posten"
+    send = post.get_by_role("button", name="Einplanen", exact=True)
+    assert post.locator("input[name=postTime]").input_value() == "20:00"
+    assert page.evaluate("""() => [
+        berlinPostTime("2099-01-01", "20:00"),
+        berlinPostTime("2099-07-01", "20:00"),
+        berlinPostTime("2026-03-29", "02:30"),
+        berlinPostTime("2026-10-25", "02:30"),
+    ]""") == ["2099-01-01T19:00:00.000Z", "2099-07-01T18:00:00.000Z", None, None]
     page.once("dialog", lambda dialog: dialog.dismiss())
-    send.click()
+    post.get_by_role("button", name="Jetzt posten", exact=True).click()
     assert not list((root / ".posts").glob("SPEC-*")), "a dismissed confirmation posts nothing"
-    post.locator("input[name=at]").fill("2030-01-01T18:00")
-    assert send.text_content() == "Einplanen"
+    post.locator("input[name=postDay]").fill("2099-07-01")
     boxes.nth(1).uncheck()
     page.once("dialog", lambda dialog: dialog.accept())
     send.click()
@@ -1154,6 +1159,8 @@ def posts_page(page, root, uploader):
     assert post.locator(".sent").text_content().startswith("Eingeplant für")
     path = root / posting.POSTS / "SPEC-0904" / "order.json"
     planned = posting.read_order(root, "SPEC-0904")
+    assert planned["dueAt"] == "2099-07-01T18:00:00+00:00"
+    assert "20:00 Uhr (Deutschland)" in post.locator(".sent").text_content()
     partial = json.loads(json.dumps(planned))
     partial["targets"]["ig:snoredex"].update(status="published", permalink="https://www.instagram.com/p/new/")
     partial["targets"]["threads:snoredex"].update(status="failed", error="Versand fehlgeschlagen")
