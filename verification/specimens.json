@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 1132,
+  "count": 1133,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -23843,6 +23843,33 @@
         ],
         "ownerAttestedAt": "2026-11-26",
         "basis": "The owner assigned this photograph to item-a4ccda6d-716e-544a-88cc-d03ae6dbbf71 (printing F0198-P02) in the private photo inbox on 2026-11-26."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-1133",
+      "photographedBy": "collection owner",
+      "photographedByBasis": "Owner decision of 2026-11-23: every photograph in the private photo inbox is the collection owner's own. Uploaded through the private photo inbox on 2026-11-24, job cf2d49909cd57b136db59e738e81ee539a81a44ea629703dc92b6517e00e34ac.",
+      "setCode": "JTG ES",
+      "number": "JTG 117",
+      "variant": "base",
+      "language": "Spanish (Europe)",
+      "heldBy": "collection owner",
+      "inspectedFrom": "Owner photograph uploaded through the private photo inbox as a DNG, whose embedded full-size preview JPEG was extracted byte for byte; metadata reduced to the orientation tag and the ICC colour profile (Exif including GPS, XMP and maker data removed); the filed image decodes pixel-identical to its source. Filed by the inbox intake script (#656): 8064x6048 stored, Exif orientation 6.",
+      "photograph": "SPEC-1133.jpg",
+      "photographSource": null,
+      "photographSha256": "sha256:46f3f95cfc13fd15d33e00fad3b153b0c4d3756a8cc5e086bfb8fcd4ddf1becb",
+      "observed": "Not read from the face: filed by the inbox intake script. The photograph's identity rests on the owner's assignment to printing F0287-P01 (Spanish (Europe) JTG ES JTG 117); no finish, edition or marking is recorded from it.",
+      "recordedAt": "2026-11-26",
+      "citedBy": [
+        "F0287-P01"
+      ],
+      "physicalObservation": {
+        "ownerAttestedFields": [
+          "identity"
+        ],
+        "ownerAttestedAt": "2026-11-26",
+        "basis": "The owner assigned this photograph to item-9bd6ca89-58ba-5a5b-9d25-ed06176fc94c (printing F0287-P01) in the private photo inbox on 2026-11-26."
       },
       "listingUrl": null
     }
