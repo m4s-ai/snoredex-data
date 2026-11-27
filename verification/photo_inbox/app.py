@@ -685,7 +685,12 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
     def overview():
         if catalogue is None:
             return jsonify(error="Die Übersicht braucht einen Katalog (--repo)."), 404
-        return jsonify(catalogue.overview(all_jobs(root, catalogue)))
+        view = catalogue.overview(all_jobs(root, catalogue))
+        stages = posting.saved_stages(root, catalogue.shares())
+        for row in view["rows"]:
+            row["stage"] = stages.get(row["itemId"], row["stage"])
+        view["stages"] = (*view["stages"][:-1], "partial", view["stages"][-1])
+        return jsonify(view)
 
     building = threading.Lock()
     keys = {}  # SPEC -> (catalogue and code stamp, fingerprint): asked again only after a change (#678)
@@ -715,7 +720,8 @@ def create_app(directory, repo=None, fetch=None, photos=None, command=None, uplo
     def draft_view(row, order, folder):
         # an ordered post shows what it froze, which is what goes out, never a newer draft
         if order:
-            return frozen_view(row, order)
+            stage = posting.order_stage(order, row["itemId"]) or row["stage"]
+            return frozen_view(dict(row, stage=stage), order)
         return post_view(row, folder) if folder else dict(row, opened=False)
 
     @app.get("/posts")

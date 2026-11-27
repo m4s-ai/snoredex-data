@@ -241,6 +241,29 @@ def order_view(order):
                         for account, target in order["targets"].items()}}
 
 
+def order_stage(order, item_id):
+    """The posting stage after at least one of this order's selected targets has published."""
+    if not order or order.get("itemId") != item_id:
+        return None
+    statuses = {target["status"] for target in order["targets"].values()}
+    if "published" in statuses:
+        return "posted" if statuses == {"published"} else "partial"
+    return None
+
+
+def saved_stages(root, shares):
+    stages = {}
+    for share in shares:
+        try:
+            item_id = share["itemId"]
+            stage = order_stage(read_order(root, share["draftSpecimen"]), item_id)
+        except (OSError, ValueError, LookupError, TypeError, AttributeError):
+            continue  # the Posts tab reports unreadable orders at their own card
+        if stage:
+            stages[item_id] = stage
+    return stages
+
+
 def published_links(root):
     """Every permalink a published order reports, by item and data field, for the data PR."""
     links = {}

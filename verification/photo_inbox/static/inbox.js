@@ -4,7 +4,7 @@ const field = (id) => document.getElementById(id);
 const DATE = new Intl.DateTimeFormat("de-DE", {dateStyle: "medium", timeStyle: "short"});
 const DAY = new Intl.DateTimeFormat("de-DE", {dateStyle: "medium"});
 const STAGE_NAMES = {none: "kein eigenes Foto", assigned: "hochgeladen, zugeordnet", filed: "verarbeitet",
-                     online: "online", ready: "bereit für Instagram", posted: "gepostet"};
+                     online: "online", ready: "bereit für Instagram", partial: "Teilweise veröffentlicht", posted: "gepostet"};
 const state = {overview: null, labels: new Map(), catalogue: false, canPost: false, accounts: [], refused: {}};
 
 function message(text, kind) {
@@ -710,7 +710,8 @@ async function showTrash() {
 const OPEN_POINTS = {"Owner review": "Abnahme durch dich",
                      "Register a permanent short link for this card": "Kurzlink anlegen",
                      "Verify the public short link and matching preview": "Kurzlink und Vorschaubild öffnen und prüfen"};
-const POST_VIEWS = {ready: (post) => post.stage === "ready", posted: (post) => post.stage === "posted", all: () => true};
+const POST_VIEWS = {ready: (post) => ["ready", "partial"].includes(post.stage),
+                    posted: (post) => post.stage === "posted", all: () => true};
 
 function postItem(post) {
   const item = field("post-template").content.firstElementChild.cloneNode(true);
