@@ -45,11 +45,45 @@ class InstagramDraftTests(unittest.TestCase):
 
     def test_release_precision_keeps_estimate(self):
         edition = {"releaseDate": "2026-11-01", "releaseDatePrecision": "month", "releaseApproximate": True}
-        self.assertEqual(release_label({}, edition), "c. November 2026")
+        self.assertEqual(release_label({}, edition), "c. 2026")
         self.assertEqual(release_label({"releaseDate": "2026", "releaseDatePrecision": "year"}, edition), "2026")
         self.assertEqual(release_label({"releaseDate": "2026-11-12", "releaseDatePrecision": "day"}, {}),
-                         "12 November 2026")
+                         "2026")
         self.assertEqual(release_label({"releaseDate": "2026-11-01"}, edition), "")
+
+    def test_caption_template_uses_catalogue_facts(self):
+        model = load()
+        item = next(row for row in model["printings"]["printings"]
+                    if row["itemId"] == "item-a4d2b4c4-3e1c-5c33-bddb-b4955609f5b3")
+        caption, _ = post_copy(model, item, "https://go.m4s.eu/sda4d2b4c43e1c")
+        self.assertTrue(caption.startswith("Relaxo (Snorlax) 11/64 · Jungle\n"
+                                          "German · 1st Edition · Holo\nReleased: 2000\n"))
+        self.assertIn("Photo from my own collection\nCard details: https://go.m4s.eu/sda4d2b4c43e1c", caption)
+        self.assertIn("Discover Snorlax from the Jungle Pokémon TCG set, released in 2000.", caption)
+        self.assertIn("This Holo printing has Holo Rare rarity.", caption)
+        self.assertNotIn("@SnoreDex", caption)
+
+    def test_caption_omits_unknown_facts_and_keeps_approximation(self):
+        model = copy.deepcopy(load())
+        _, original = owner_specimen(model, "SPEC-0779")
+        item = dict(original, releaseDate="2026-11-12", releaseDatePrecision="day",
+                    releaseApproximate=True, rarity={"display": None}, finish="unknown")
+        caption, _ = post_copy(model, item, None)
+        self.assertIn("Released: c. 2026", caption)
+        self.assertIn("released around 2026", caption)
+        self.assertNotIn("rarity", caption)
+        self.assertNotIn("unknown", caption)
+        self.assertNotIn("None", caption)
+        item.update(releaseDate=None)
+        edition = next(row for row in model["sets"]["setEditions"]
+                       if row["setEditionId"] == item["setEditionId"])
+        edition.update(releaseDate=None)
+        caption, _ = post_copy(model, item, None)
+        self.assertNotIn("Released:", caption)
+        self.assertNotIn("released", caption)
+        item.update(finish="reverse-holo", rarity={"display": "Rare", "evidenceStatus": "source-backed"})
+        caption, _ = post_copy(model, item, None)
+        self.assertIn("This Reverse Holo printing has Rare rarity.", caption)
 
     def test_adjacent_variants_keep_distinct_copy(self):
         model = load()
