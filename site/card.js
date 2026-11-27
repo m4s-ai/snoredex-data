@@ -55,16 +55,16 @@ function showFacts(facts) {
   }
 }
 
-function showLinks(section, urls, label) {
-  for (const [index, url] of urls.entries()) {
+function showLinks(section, links) {
+  for (const [label, url] of links) {
     const item = document.createElement("li");
     const link = document.createElement("a");
     link.href = url;
-    link.textContent = label ? `${label} ${index + 1}` : url;
+    link.textContent = label;
     item.append(link);
     select(`${section} ul`).append(item);
   }
-  select(section).hidden = urls.length === 0;
+  select(section).hidden = links.length === 0;
 }
 
 function showCard(item, sets, images, social, evidence) {
@@ -81,9 +81,9 @@ function showCard(item, sets, images, social, evidence) {
     "Card number": number, Language: language?.displayName, Edition: item.edition, Finish: item.finish,
     "Foil pattern": item.foilPattern, Artist: item.artist, Markings: item.markings.map((mark) => mark.text).join(", "),
     "Evidence status": item.itemKind === "verified-printing" ? item.finishVerificationStatus : "Open research"});
-  showLinks("#card-posts", (social?.instagramPosts || []).filter((url) =>
-    /^https:\/\/www\.instagram\.com\/(?:p|reel)\/[A-Za-z0-9_-]+\/$/.test(url)), "Instagram post");
-  showLinks("#card-evidence", (evidence?.sourceLinks || []).filter((url) => /^https?:\/\//i.test(url)));
+  showLinks("#card-posts", socialPosts(social));
+  showLinks("#card-evidence", (evidence?.sourceLinks || [])
+    .filter((url) => /^https?:\/\//i.test(url)).map((url) => [url, url]));
   status.hidden = true;
   select("#card-content").hidden = false;
 }
