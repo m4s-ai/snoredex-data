@@ -80,9 +80,17 @@ def main() -> int:
     for action in ("upload-artifact", "download-artifact"):
         versions = set(re.findall(rf"actions/{action}@(v[0-9.]+)", every))
         assert len(versions) == 1, (action, versions)
-    # upload-pages-artifact v4+ excludes dotfiles by default; the deployed tree must stay the
-    # verified one, so the Pages upload keeps hidden files exactly like the gate's handoff.
-    assert "actions/upload-pages-artifact@v5\n        with:\n          path: _site\n          include-hidden-files: true" in pages
+    # Finishing the artifact job before deploying also lets a deploy-only retry reuse its output.
+    assert "\n  package:\n" in pages, "the Pages artifact must be uploaded in a separate job"
+    package, deploy = pages.split("\n  package:\n", 1)[1].split("\n  deploy:\n", 1)
+    assert "    needs: gate\n" in package and "    needs: package\n" in deploy
+    assert "    env:\n      PAGES_ARTIFACT: github-pages-${{ github.run_attempt }}" in package
+    assert "    outputs:\n      artifact_name: ${{ env.PAGES_ARTIFACT }}" in package
+    upload = "actions/upload-pages-artifact@v5\n        with:\n          name: ${{ env.PAGES_ARTIFACT }}"
+    assert upload + "\n          path: _site\n          include-hidden-files: true" in package
+    assert package.index("Verify checked artifact handoff") < package.index(upload)
+    assert "actions/upload-pages-artifact" not in deploy
+    assert "actions/deploy-pages@v5\n        with:\n          artifact_name: ${{ needs.package.outputs.artifact_name }}" in deploy
     assert "pages-artifact" in pages
     assert "--check-dir" in pages and "--expected-gate L4" in pages
     assert "Regenerate site artifacts" not in pages
