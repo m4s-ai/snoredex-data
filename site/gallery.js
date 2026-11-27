@@ -29,12 +29,11 @@ function socialLinks(card, sources) {
   social.then((cards) => {
     const entry = cards.find((row) => row.itemId === card.id);
     if (!entry) return;
-    entry.instagramPosts.forEach((url, index) => {
-      if (!/^https:\/\/www\.instagram\.com\/(?:p|reel)\/[A-Za-z0-9_-]+\/$/.test(url)) return;
-      const post = element("a", `Instagram post ${index + 1}`);
+    for (const [label, url] of socialPosts(entry)) {
+      const post = element("a", label);
       post.href = url;
       links.append(" · ", post);
-    });
+    }
   });
 }
 

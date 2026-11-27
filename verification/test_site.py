@@ -253,6 +253,27 @@ def check_card_pages(browser, origin):
     rows[poke]["instagramPosts"] = [
         "https://www.instagram.com/p/fixtureOne/", "https://www.instagram.com/p/fixtureTwo/"]
     rows[master]["instagramPosts"] = ["https://www.instagram.com/p/fixtureThree/"]
+    rows[poke]["facebookPosts"] = ["https://www.facebook.com/snoredex/posts/101",
+                                   "https://www.facebook.com/photo.php?fbid=102&set=a.103"]
+    rows[poke]["threadsPosts"] = ["https://www.threads.net/@snoredex/post/fixtureOne",
+                                  "https://www.threads.com/@snoredex/post/fixtureTwo"]
+    rows[master]["facebookPosts"] = []
+    rows[master]["threadsPosts"] = ["https://www.threads.com/@snoredex/post/fixtureThree"]
+    # Invalid runtime URLs must never become clickable, even if the fetched file is corrupted.
+    rows[poke]["facebookPosts"].append("https://www.facebook.com.evil.example/post/1")
+    rows[poke]["threadsPosts"].append("javascript:alert(1)")
+
+    def check_posts(page, item):
+        expected = {"Instagram": rows.get(item, {}).get("instagramPosts", []),
+                    "Facebook": rows.get(item, {}).get("facebookPosts", [])[:2],
+                    "Threads": rows.get(item, {}).get("threadsPosts", [])[:2]}
+        for platform, urls in expected.items():
+            if urls:
+                page.get_by_role("link", name=f"{platform} post {len(urls)}", exact=True).wait_for()
+            links = page.get_by_role("link", name=re.compile(f"^{platform} post "))
+            assert links.count() == len(urls)
+            assert links.evaluate_all("(links) => links.map((link) => link.href)") == urls
+
     pages = render_pages()
     # every printing has a share page built from the data; only an own exact owner photo previews
     assert {f"cards/{item['itemId']}/index.html" for item in CANONICAL_ITEMS} <= pages.keys()
@@ -289,7 +310,7 @@ def check_card_pages(browser, origin):
         photo = page.get_by_role("img")
         photo.wait_for()
         page.wait_for_function("document.querySelector('#card-photo').naturalWidth > 0")
-        assert page.get_by_role("link", name="Instagram post").count() == posts
+        check_posts(page, item)
         page.reload()
         page.get_by_role("heading", name=re.compile(foil)).wait_for()
     page.goto(f"{origin}/card.html?item=unknown")
@@ -304,12 +325,12 @@ def check_card_pages(browser, origin):
         page.locator(f'[data-card-id="{item}"]').click()
         if posts:
             page.get_by_role("link", name=f"Instagram post {posts}", exact=True).wait_for()
-        assert page.get_by_role("link", name="Instagram post").count() == posts
+        check_posts(page, item)
         if item == other["itemId"]:
             page.get_by_role("link", name="Card detail page").click()
             page.wait_for_url(f"**/card.html?item={item}")
             page.get_by_role("heading", name=re.compile(re.escape(other["localCardName"] or other["cardName"]))).wait_for()
-            assert page.get_by_role("link", name="Instagram post").count() == 0
+            check_posts(page, item)
         else:
             page.keyboard.press("Escape")
     page.close()
@@ -1279,7 +1300,7 @@ def main() -> int:
         check_gallery(browser, origin)
         print("[ok ] gallery navigation, dialog, binder and mobile")
         check_card_pages(browser, origin)
-        print("[ok ] card detail pages, own previews and per-print Instagram links")
+        print("[ok ] card detail pages, own previews and per-print social links")
         browser.close()
         shutil.rmtree(scratch, ignore_errors=True)
 
