@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 1130,
+  "count": 1131,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -23789,6 +23789,33 @@
         ],
         "ownerAttestedAt": "2026-11-26",
         "basis": "The owner assigned this photograph to item-49abb483-b745-5e45-97a8-2c8618d18321 (printing F0058-P01) in the private photo inbox on 2026-11-26."
+      },
+      "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-1131",
+      "photographedBy": "collection owner",
+      "photographedByBasis": "Owner decision of 2026-11-23: every photograph in the private photo inbox is the collection owner's own. Uploaded through the private photo inbox on 2026-11-24, job 413efac5bec49adae4f9699eee36a125cda620791d5f9049aacc2738ba920489.",
+      "setCode": "BKT",
+      "number": "118/162",
+      "variant": "base",
+      "language": "Italian",
+      "heldBy": "collection owner",
+      "inspectedFrom": "Owner photograph uploaded through the private photo inbox as a DNG, whose embedded full-size preview JPEG was extracted byte for byte; metadata reduced to the orientation tag and the ICC colour profile (Exif including GPS, XMP and maker data removed); the filed image decodes pixel-identical to its source. Filed by the inbox intake script (#656): 8064x6048 stored, Exif orientation 6.",
+      "photograph": "SPEC-1131.jpg",
+      "photographSource": null,
+      "photographSha256": "sha256:37bde0689aabbbb2cc2aa3863a0750c0e92bd3f9b9ea6b270a401bec12241594",
+      "observed": "Not read from the face: filed by the inbox intake script. The photograph's identity rests on the owner's assignment to printing F0021-P02 (Italian BKT 118/162); no finish, edition or marking is recorded from it.",
+      "recordedAt": "2026-11-26",
+      "citedBy": [
+        "F0021-P02"
+      ],
+      "physicalObservation": {
+        "ownerAttestedFields": [
+          "identity"
+        ],
+        "ownerAttestedAt": "2026-11-26",
+        "basis": "The owner assigned this photograph to item-bb53d977-d00b-558f-8bc4-2665c10fadbf (printing F0021-P02) in the private photo inbox on 2026-11-26."
       },
       "listingUrl": null
     }
