@@ -23,8 +23,6 @@ ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / "verification/cache/instagram"
 POST_SIZE = (1080, 1350)
 # The @SnoreDex account is kept in English (owner decision, 2026-11-23).
-MONTHS = ("January", "February", "March", "April", "May", "June",
-          "July", "August", "September", "October", "November", "December")
 FINISH = {"non-holo": "Non-Holo", "holo": "Holo", "reverse-holo": "Reverse Holo", "mirror-holo": "Mirror Holo"}
 PATTERN = {"poke-ball": "Poké Ball pattern", "master-ball": "Master Ball pattern",
            "colorless-energy-star": "Colorless Energy pattern"}
@@ -48,15 +46,8 @@ def release_label(item: dict, edition: dict) -> str:
     precision = source.get("releaseDatePrecision")
     if not date or precision not in ("day", "month", "year"):
         return ""
-    parts = date.split("-")
-    year = parts[0]
-    if precision == "year":
-        label = year
-    elif precision == "month":
-        label = f"{MONTHS[int(parts[1]) - 1]} {year}"
-    else:
-        label = f"{int(parts[2])} {MONTHS[int(parts[1]) - 1]} {year}"
-    return f"c. {label}" if source.get("releaseApproximate") else label
+    year = date.split("-")[0]
+    return f"c. {year}" if source.get("releaseApproximate") else year
 
 
 def caption_facts(model: dict, item: dict) -> tuple[str, str, str, str]:
@@ -92,13 +83,30 @@ def hashtags(item: dict, set_name: str) -> str:
     return " ".join(tags[:5])
 
 
+def card_description(item: dict, set_name: str, year: str) -> str:
+    text = f"Discover Snorlax from the {set_name} Pokémon TCG set"
+    if year:
+        released = "around " + year.removeprefix("c. ") if year.startswith("c. ") else "in " + year
+        text += f", released {released}"
+    text += "."
+    finish = FINISH.get(item.get("finish"), "")
+    rarity = item.get("rarity", {}).get("display")
+    if finish and rarity:
+        text += f" This {finish} printing has {rarity} rarity."
+    elif finish:
+        text += f" This is a {finish} printing."
+    elif rarity:
+        text += f" Its rarity is {rarity}."
+    return text + " Would you add it to your collection?"
+
+
 def post_copy(model: dict, item: dict, short_url: str | None) -> tuple[str, str]:
     card, set_name, facts, date = caption_facts(model, item)
     lines = [f"{card} · {set_name}", facts]
     if date:
         lines.append(f"Released: {date}")
-    lines += ["", "Own collection photo for @SnoreDex.", f"Card details: {short_url or '[short link missing]'}",
-              "", hashtags(item, set_name)]
+    lines += ["", "Photo from my own collection", f"Card details: {short_url or '[short link missing]'}",
+              "", card_description(item, set_name, date), "", hashtags(item, set_name)]
     alt = f"Own photo of {card} from {set_name}."
     if facts:
         alt += f" Print variant: {facts}."
