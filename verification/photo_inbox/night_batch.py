@@ -372,5 +372,7 @@ class Batch:
         self.state.update(status="failed", error=message, finishedAt=runner.now())
         self.save()
         for job, state in self.states():
+            if self.state.get("publishRun"):
+                state["publishRun"] = self.state["publishRun"]
             runner.write_state(self.runner.root / job, dict(state, status="failed", error=message,
                                                            finishedAt=runner.now()))

@@ -620,9 +620,11 @@ def own_run_only():
         go(root, github, data, photos)
         state = runner.read_state(root / JOB)
         assert state["status"] == "failed" and state["step"] == "publish" and "failure" in state["error"], state
+        assert state["publishRun"] == github.runs[1]["id"], "the failed dispatch, not the foreign success, stays visible"
         assert "pages.yml" not in state["runs"], "a run that clearly failed is dispatched anew"
         go(root, github, data, photos)
-        assert runner.read_state(root / JOB)["status"] == "done"
+        retried = runner.read_state(root / JOB)
+        assert retried["status"] == "done" and retried["publishRun"] == github.runs[2]["id"], retried
         assert [name for name, _ in github.dispatched] == ["pages.yml", "pages.yml", "yourls-pilot.yml"]
     with TemporaryDirectory() as temp:  # a foreign short-link run for the same printing succeeds, ours fails
         root, data, photos = setup(temp)
@@ -658,6 +660,7 @@ def one_dispatch():
         state = runner.read_state(root / JOB)
         assert state["status"] == "failed" and "Neustart" in state["error"] and state["step"] == "publish", state
         assert state["runs"]["pages.yml"]["runId"] == github.runs[0]["id"], "the run's id is beside the job"
+        assert state["publishRun"] == github.runs[0]["id"], "the run can be opened before the first status poll"
         go(root, github, data, photos)  # "Erneut versuchen" waits for that run instead of a second one
         assert runner.read_state(root / JOB)["status"] == "done"
         assert [name for name, _ in github.dispatched] == ["pages.yml", "yourls-pilot.yml"], "Pages ran once"
@@ -675,6 +678,7 @@ def one_dispatch():
         go(root, github, data, photos)
         state = runner.read_state(root / JOB)
         assert state["status"] == "failed" and "endete mit failure" in state["error"], state
+        assert state["publishRun"] == github.runs[0]["id"], "a dispatch recovered by title also has its link"
         assert len(github.dispatched) == 1, "the lost run is found by its title, not dispatched again"
         go(root, github, data, photos)
         assert runner.read_state(root / JOB)["status"] == "done", "a run that clearly failed is dispatched anew"
