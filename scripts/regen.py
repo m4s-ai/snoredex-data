@@ -30,6 +30,7 @@ STEPS = (
     ("verification/test_sensitive_scan.py",),
     ("verification/test_gate_handoff.py",),
     ("verification/test_inbox_ci.py",),
+    ("verification/photo_inbox/test_posting.py",),
     ("verification/test_links.py",),
     ("verification/publication_audit.py",),
 )
