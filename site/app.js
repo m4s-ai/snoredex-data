@@ -380,8 +380,8 @@
       ["Size", escapeHTML(row.sizes.join(", ") || "—")],
       ["Distribution", escapeHTML(row.distributions.join(", ") || "—")],
       ["Evidence", escapeHTML(row.evidence.join(", ") || "—")],
-      ["Sources", (row.sourceLinks || []).map(url => '<a href="' + escapeHTML(url) +
-        '" target="_blank" rel="noopener">' + escapeHTML(url) + '</a>').join('<br>') || "—"],
+      ["Sources", siteLinks(row.sourceLinks || []).map(([label, url]) => '<a href="' + escapeHTML(url) +
+        '" target="_blank" rel="noopener">' + escapeHTML(label) + '</a>').join('<br>') || "—"],
 
     ];
     return '<dl class="rowdetail-list">' + entries

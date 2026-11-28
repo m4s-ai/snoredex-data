@@ -20,6 +20,10 @@ let opener;
 const social = fetch("data/social.json").then((response) => response.ok ? response.json() : []).catch(() => []);
 
 function socialLinks(card, sources) {
+  const section = document.querySelector("#card-posts");
+  const list = section.querySelector("ul");
+  list.replaceChildren();
+  section.hidden = true;
   if (!card.id.startsWith("item-")) return;
   const links = element("li");
   const detail = element("a", "Card detail page");
@@ -27,13 +31,13 @@ function socialLinks(card, sources) {
   links.append(detail);
   sources.append(links);
   social.then((cards) => {
-    const entry = cards.find((row) => row.itemId === card.id);
-    if (!entry) return;
-    for (const [label, url] of socialPosts(entry)) {
-      const post = element("a", label);
-      post.href = url;
-      links.append(" · ", post);
+    const posts = socialPosts(cards.find((row) => row.itemId === card.id));
+    for (const post of posts) {
+      const item = element("li");
+      item.append(socialLink(...post));
+      list.append(item);
     }
+    section.hidden = posts.length === 0;
   });
 }
 
@@ -93,9 +97,8 @@ function openCard(card, button) {
   note.hidden = !card.note;
   const sources = document.querySelector("#card-sources");
   sources.replaceChildren();
-  for (const url of card.sources) {
-    if (!/^https?:\/\//i.test(url)) continue;
-    const link = element("a", url);
+  for (const [label, url] of siteLinks(card.sources.filter((url) => /^https?:\/\//i.test(url)))) {
+    const link = element("a", label);
     link.href = url;
     const item = element("li");
     item.append(link);
