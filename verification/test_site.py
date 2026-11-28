@@ -342,6 +342,19 @@ def check_card_pages(browser, origin):
             page.keyboard.press("Escape")
     page.close()
 
+    # Opening a card twice while social.json still loads must not show its posts twice.
+    page = browser.new_page(viewport={"width": 1280, "height": 900})
+    held = []
+    page.route("**/data/social.json", lambda route: held.append(route))
+    page.goto(origin + "/gallery.html")
+    for _ in range(2):
+        page.locator(f'[data-card-id="{poke}"]').click()
+        page.keyboard.press("Escape")
+    page.locator(f'[data-card-id="{poke}"]').click()
+    held[0].fulfill(json=list(rows.values()))
+    check_posts(page, poke)
+    page.close()
+
 
 def check_gallery(browser, origin):
     page = browser.new_page(reduced_motion="reduce")

@@ -21,8 +21,8 @@ const social = fetch("data/social.json").then((response) => response.ok ? respon
 
 function socialLinks(card, sources) {
   const section = document.querySelector("#card-posts");
-  const list = section.querySelector("ul");
-  list.replaceChildren();
+  const list = element("ul");  // one list per opening: a callback of an earlier opening finds its list detached
+  section.querySelector("ul").replaceWith(list);
   section.hidden = true;
   if (!card.id.startsWith("item-")) return;
   const links = element("li");
@@ -31,6 +31,7 @@ function socialLinks(card, sources) {
   links.append(detail);
   sources.append(links);
   social.then((cards) => {
+    if (!list.isConnected) return;
     const posts = socialPosts(cards.find((row) => row.itemId === card.id));
     for (const post of posts) {
       const item = element("li");
