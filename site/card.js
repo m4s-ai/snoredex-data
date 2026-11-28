@@ -82,8 +82,7 @@ function showCard(item, sets, images, social, evidence) {
     "Foil pattern": item.foilPattern, Artist: item.artist, Markings: item.markings.map((mark) => mark.text).join(", "),
     "Evidence status": item.itemKind === "verified-printing" ? item.finishVerificationStatus : "Open research"});
   showLinks("#card-posts", socialPosts(social));
-  showLinks("#card-evidence", (evidence?.sourceLinks || [])
-    .filter((url) => /^https?:\/\//i.test(url)).map((url) => [url, url]));
+  showLinks("#card-evidence", siteLinks((evidence?.sourceLinks || []).filter((url) => /^https?:\/\//i.test(url))));
   status.hidden = true;
   select("#card-content").hidden = false;
 }

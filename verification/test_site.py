@@ -203,6 +203,8 @@ def check_desktop_sources(page):
         check(f"row sources are reachable on desktop at {width}px",
               panel.is_visible() and panel.locator("dt", has_text="Sources").count() == 1
               and panel.locator("a[href]").count() > 0)
+        check(f"row sources name their site, not the URL, at {width}px", not panel.locator("a[href]").evaluate_all(
+            "links => links.some((link) => /^https?:/.test(link.textContent))"))
         button.click()
         check(f"row disclosure retains its compact label after toggling at {width}px",
               button.inner_text() == open_label == "Info")
@@ -275,6 +277,9 @@ def check_card_pages(browser, origin):
             assert links.evaluate_all("(links) => links.map((link) => link.href)") == urls
             assert links.evaluate_all(  # a post shows its platform glyph, not its label as text
                 "(links) => links.every((link) => link.querySelector('svg path[d]') && !link.textContent.trim())")
+        sources = page.locator("#card-evidence a, #card-sources a")
+        assert sources.count() > 0 and not sources.evaluate_all(  # a source link names its site, not its URL
+            "(links) => links.some((link) => /^https?:/.test(link.textContent))")
 
     pages = render_pages()
     # every printing has a share page built from the data; only an own exact owner photo previews
