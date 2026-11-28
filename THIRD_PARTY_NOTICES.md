@@ -15,6 +15,14 @@ thumbnails of catalogue or specimen images. Derivatives retain the original sour
 provenance; a Cardmarket source does not establish ownership of the photograph or depicted work.
 No repository licence grant applies to this material.
 
+## Platform icons
+
+The Instagram, Facebook and Threads glyphs in `site/social.js` come from
+[Simple Icons](https://simpleicons.org) 16.38.1, released under CC0 1.0. The marks themselves are
+trademarks of Meta Platforms, Inc. The page shows them unmodified and in one plain colour, only to
+link to this project's own posts. That use follows Meta's
+[brand resources](https://about.meta.com/brand/resources/) and implies no endorsement.
+
 ## Specimen evidence
 
 The specimen files, kept in the photo repository `m4s-ai/snoredex-photos` under

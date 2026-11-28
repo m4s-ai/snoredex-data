@@ -273,6 +273,8 @@ def check_card_pages(browser, origin):
             links = page.get_by_role("link", name=re.compile(f"^{platform} post "))
             assert links.count() == len(urls)
             assert links.evaluate_all("(links) => links.map((link) => link.href)") == urls
+            assert links.evaluate_all(  # a post shows its platform glyph, not its label as text
+                "(links) => links.every((link) => link.querySelector('svg path[d]') && !link.textContent.trim())")
 
     pages = render_pages()
     # every printing has a share page built from the data; only an own exact owner photo previews

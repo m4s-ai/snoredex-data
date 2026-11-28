@@ -56,11 +56,11 @@ function showFacts(facts) {
 }
 
 function showLinks(section, links) {
-  for (const [label, url] of links) {
+  for (const [label, url, platform] of links) {
     const item = document.createElement("li");
-    const link = document.createElement("a");
+    const link = platform ? socialLink(label, url, platform) : document.createElement("a");
     link.href = url;
-    link.textContent = label;
+    if (!platform) link.textContent = label;
     item.append(link);
     select(`${section} ul`).append(item);
   }

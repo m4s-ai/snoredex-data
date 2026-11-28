@@ -29,11 +29,7 @@ function socialLinks(card, sources) {
   social.then((cards) => {
     const entry = cards.find((row) => row.itemId === card.id);
     if (!entry) return;
-    for (const [label, url] of socialPosts(entry)) {
-      const post = element("a", label);
-      post.href = url;
-      links.append(" · ", post);
-    }
+    for (const post of socialPosts(entry)) links.append(" ", socialLink(...post));
   });
 }
 

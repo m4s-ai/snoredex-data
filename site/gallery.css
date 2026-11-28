@@ -175,3 +175,17 @@
 .printing-detail [hidden] { display: none; }
 .printing-detail figure { margin: 0; }
 #card-photo { max-width: 100%; height: auto; }
+
+/* Published posts as platform glyphs in the text colour, each a 44px touch target. */
+#card-posts ul { display: flex; flex-wrap: wrap; gap: .25rem; list-style: none; margin: 0; padding: 0; }
+.post-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  color: inherit;
+  vertical-align: middle;
+}
+.post-icon svg { width: 1.75rem; height: 1.75rem; fill: currentColor; }
+.post-icon:hover, .post-icon:focus-visible { opacity: .7; }
