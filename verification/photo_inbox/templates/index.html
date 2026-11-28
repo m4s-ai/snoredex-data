@@ -93,10 +93,12 @@
     <label>Ansicht
       <select id="post-view">
         <option value="ready">Offen</option>
+        <option value="planned">Eingeplant</option>
         <option value="posted">Gepostet</option>
         <option value="all">Alle</option>
       </select></label>
   </div>
+  <div id="posts-planned-box" hidden><h2>Eingeplant</h2><ul id="posts-planned" class="planned"></ul></div>
   <p id="posts-status" class="hint" role="status"></p>
   <ul id="posts" class="jobs"></ul>
 </section>
