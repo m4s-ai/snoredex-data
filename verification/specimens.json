@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 1143,
+  "count": 1144,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -24144,6 +24144,29 @@
         "basis": "The owner assigned this photograph to item-a4d2b4c4-3e1c-5c33-bddb-b4955609f5b3 (printing F0163-P01) in the private photo inbox on 2026-11-27."
       },
       "listingUrl": null
+    },
+    {
+      "specimenId": "SPEC-1144",
+      "setCode": "SSH",
+      "number": "140/202",
+      "variant": "base",
+      "language": "French",
+      "heldBy": "third-party catalogue",
+      "inspectedFrom": "Coleka seller image; inspected from retained lossless PNG decoded from the original WebP. No Exif or XMP location metadata was present.",
+      "photograph": "SPEC-1144.png",
+      "photographSource": "https://www.coleka.com/media/item/202202/12/epee-et-bouclier-ronflex-holographique-140-202-001.webp",
+      "photographSha256": "sha256:37c3c6def38c05ff9427a0019435ccc1c23ce31afa5897d3b8f3bcae60ede5fa",
+      "observed": "The complete French card face reads Ronflex, Roulé-Boulé, Gros Impact and 140/202. Blue circular foil reflection above the lower-right red apple and small circular reflections within the artwork establish a Cosmos Holo treatment; strong ordinary glare is also visible across the upper artwork.",
+      "recordedAt": "2026-11-28",
+      "citedBy": [
+        "F0421-P03"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "cosmos",
+        "basis": "The photographed face shows a blue circular foil reflection above the lower-right red apple and small circular reflections within the artwork; these round reflections establish the Cosmos Holo treatment. Strong diffuse glare across the upper artwork is ordinary glare, not the finish cue."
+      },
+      "listingUrl": "https://www.coleka.com/fr/cartes-de-collection/cartes-pokemon/pokemon-epee-et-bouclier/epee-et-bouclier/ronflex-cosmos-holographique_i1121101"
     }
   ]
 }

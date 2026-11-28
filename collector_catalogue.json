@@ -5,7 +5,7 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "sourceRepository": "https://github.com/m4s-ai/snoredex-data",
     "dataAsOf": "2026-11-27",
-    "catalogueFingerprint": "sha256:9ecfba55f18115f18d30ca80b4fcbec430205ddef7773e338c30976a957c0c92",
+    "catalogueFingerprint": "sha256:5cfcabacfc76578a30cf0f362fd79c8371a986035b4b653b64f9f015023a264b",
     "previousFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
     "assetBaseUrl": "https://m4s-ai.github.io/snoredex-data/",
     "scope": {
@@ -87401,18 +87401,20 @@
       "itemId": "item-e1586493-bfa7-43fd-8acd-35c4d7782b1c",
       "legacyChecklistIds": [],
       "active": true,
-      "itemKind": "finish-candidate",
-      "progressClass": "research",
+      "itemKind": "verified-printing",
+      "progressClass": "current-known",
       "workId": "WORK:Snorlax-Rolling-Tackle-Heavy-Impact",
       "workMappingState": "mapped",
       "setEditionId": "EDITION:WEST:French:SSH",
       "localSetId": "LOCALSET:WEST:SSH",
       "cardReleaseId": "RELEASE:WEST:French:SSH:140:Snorlax-Rolling-Tackle-Heavy-Impact",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
+      "physicalPrintingId": "PHYSICAL:F0421-P03",
+      "sourcePrintingId": "F0421-P03",
       "finishUnitId": "F0421",
       "sourceClaimRefs": [
-        "CLAIM:legacy:U0162"
+        "CLAIM:finish:F0421-P03",
+        "CLAIM:legacy:U0162",
+        "CLAIM:specimen:SPEC-1144"
       ],
       "localizationId": "LOCALIZATION:WEST:fr",
       "cardName": "Snorlax",
@@ -87424,7 +87426,7 @@
       "collectorNumberSortKey": "000000000140",
       "edition": null,
       "editionAssignmentStatus": "not-applicable",
-      "finishVerificationStatus": "pending",
+      "finishVerificationStatus": "confirmed",
       "finish": "holo",
       "finishFamily": "holo",
       "finishGroupId": "finish-group-f6aa5227-519d-4d90-a419-e2287317e910",
@@ -87441,22 +87443,26 @@
           "RARITYCLAIM:fd29c28f5ee22feb"
         ]
       },
-      "completenessStatus": "pending",
+      "completenessStatus": "positive-evidence-only",
       "releaseDate": null,
       "releaseDatePrecision": null,
       "releaseApproximate": false,
       "releaseSortKey": "9999|LOCALIZATION:WEST:fr|ssh|000000000140|research:WEST:French:SSH:140/202:cosmos",
-      "imageAssetId": null,
-      "imageScope": "unknown",
+      "imageAssetId": "asset-d788a5ff-3c53-5a9f-b55a-05ea631eddd9",
+      "imageScope": "exact-printing",
       "sourceLinks": [
         "https://api.tcgdex.net/v2/fr/cards/swsh1-140",
-        "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh1_web_cardlist_fr.pdf"
+        "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh1_web_cardlist_fr.pdf",
+        "https://www.coleka.com/fr/cartes-de-collection/cartes-pokemon/pokemon-epee-et-bouclier/epee-et-bouclier/ronflex-cosmos-holographique_i1121101",
+        "https://www.coleka.com/media/item/202202/12/epee-et-bouclier-ronflex-holographique-140-202-001.webp"
       ],
       "evidenceLinks": [
         "https://api.tcgdex.net/v2/fr/cards/swsh1-140",
-        "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh1_web_cardlist_fr.pdf"
+        "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh1_web_cardlist_fr.pdf",
+        "https://www.coleka.com/fr/cartes-de-collection/cartes-pokemon/pokemon-epee-et-bouclier/epee-et-bouclier/ronflex-cosmos-holographique_i1121101",
+        "https://www.coleka.com/media/item/202202/12/epee-et-bouclier-ronflex-holographique-140-202-001.webp"
       ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+SSH+%E2%80%94+Sword+%26+Shield+140+%28finish-candidate%29&row-id=item-e1586493-bfa7-43fd-8acd-35c4d7782b1c&card-name=Snorlax&set-code=SSH+%E2%80%94+Sword+%26+Shield&card-number=140&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+cosmos+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+SSH+%E2%80%94+Sword+%26+Shield+140+%28verified-printing%29&row-id=item-e1586493-bfa7-43fd-8acd-35c4d7782b1c&card-name=Snorlax&set-code=SSH+%E2%80%94+Sword+%26+Shield&card-number=140&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+cosmos+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     }
   ],
   "assets": [
@@ -98199,6 +98205,20 @@
       }
     },
     {
+      "assetId": "asset-d788a5ff-3c53-5a9f-b55a-05ea631eddd9",
+      "path": "verification/specimens/SPEC-1144.png",
+      "url": "https://raw.githubusercontent.com/m4s-ai/snoredex-photos/main/verification/specimens/SPEC-1144.png",
+      "sha256": "sha256:37c3c6def38c05ff9427a0019435ccc1c23ce31afa5897d3b8f3bcae60ede5fa",
+      "mimeType": "image/png",
+      "imageScope": "exact-printing",
+      "altTextBasis": "French Ronflex — Sword & Shield 140/202; exact-printing",
+      "attribution": {
+        "rightsStatus": "third-party-rights-excluded-from-project-grants",
+        "licenceRef": "LICENSE.md",
+        "noticeRef": "THIRD_PARTY_NOTICES.md"
+      }
+    },
+    {
       "assetId": "asset-d78b4988-c96b-59a9-9170-411bfb495cc3",
       "path": "verification/specimens/SPEC-0046.jpg",
       "url": "https://raw.githubusercontent.com/m4s-ai/snoredex-photos/main/verification/specimens/SPEC-0046.jpg",
@@ -100341,12 +100361,12 @@
       "items": 971,
       "activeItems": 933,
       "inactiveItems": 38,
-      "verifiedPrintings": 931,
-      "finishCandidates": 2,
+      "verifiedPrintings": 932,
+      "finishCandidates": 1,
       "researchPlaceholders": 0,
-      "currentKnown": 931,
-      "research": 2,
-      "assets": 919
+      "currentKnown": 932,
+      "research": 1,
+      "assets": 920
     },
     "predecessor": {
       "schema": "snoredex-checklist",
@@ -100355,7 +100375,7 @@
     },
     "graphAccounting": {
       "cardReleases": 631,
-      "physicalPrintings": 931
+      "physicalPrintings": 932
     },
     "candidateProgressPolicy": {
       "progressClass": "research",
