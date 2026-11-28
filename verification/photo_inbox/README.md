@@ -121,7 +121,10 @@ unguessable URL, and starts one job per account. Orders live on disk, so a sched
 restart. Every job carries a `clientRef` the uploader deduplicates on, so a restart between sending
 and recording never posts twice. The page shows each account's state and permalink. The Posts tab and
 the overview show “Teilweise veröffentlicht” after the first successful target, then “gepostet” once
-all selected targets have published. Partial posts stay under “Offen” in the Posts tab. A job that failed
+all selected targets have published. Partial posts stay under “Offen” in the Posts tab. Every post
+with a target still to go is listed above the Posts tab with its time and accounts, soonest first,
+carries the badge “eingeplant” (“wird gesendet” once due), comes first in each view it belongs to
+and has a view “Eingeplant” of its own. A job that failed
 before publishing shows its reason and can be sent again, as a new attempt. A planned order can be
 taken back until it goes; a sent post cannot. One order per draft. The queue touches only accounts
 still to send or still running: a published or failed one costs no call to the uploader and no write,

@@ -1161,6 +1161,18 @@ def posts_page(page, root, uploader):
     planned = posting.read_order(root, "SPEC-0904")
     assert planned["dueAt"] == "2099-07-01T18:00:00+00:00"
     assert "20:00 Uhr (Deutschland)" in post.locator(".sent").text_content()
+    # a planned post shows above every view, soonest first, and has a view and a badge of its own
+    page.locator("#posts-planned li").first.wait_for()
+    line = page.locator("#posts-planned li").all_text_contents()
+    assert len(line) == 1 and line[0].startswith("01.07.2099, 20:00 Uhr · ") and "Threads SnoreDex" in line[0], line
+    assert post.locator(".badge").text_content() == "eingeplant"
+    page.select_option("#post-view", "planned")
+    post.locator(".badge", has_text="eingeplant").wait_for()
+    assert post.count() == 1
+    page.select_option("#post-view", "posted")
+    assert page.locator("#posts-planned li").count() == 1, "the planned posts stay in sight in every view"
+    page.select_option("#post-view", "ready")
+    post.locator(".badge", has_text="eingeplant").wait_for()
     partial = json.loads(json.dumps(planned))
     partial["targets"]["ig:snoredex"].update(status="published", permalink="https://www.instagram.com/p/new/")
     partial["targets"]["threads:snoredex"].update(status="failed", error="Versand fehlgeschlagen")
@@ -1179,6 +1191,7 @@ def posts_page(page, root, uploader):
     post.locator(".cancel").click()
     post.locator(".send").wait_for()
     assert not list((root / ".posts").glob("SPEC-*")), "a plan can be taken back before it goes"
+    assert page.locator("#posts-planned-box").is_hidden(), "nothing planned, no list of planned posts"
     held.set()
     page.wait_for_timeout(1000)
     assert post.locator(".send").is_visible() and not post.locator(".sent").text_content(), \

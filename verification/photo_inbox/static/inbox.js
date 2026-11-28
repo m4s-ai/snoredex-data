@@ -713,14 +713,31 @@ async function showTrash() {
 const OPEN_POINTS = {"Owner review": "Abnahme durch dich",
                      "Register a permanent short link for this card": "Kurzlink anlegen",
                      "Verify the public short link and matching preview": "Kurzlink und Vorschaubild öffnen und prüfen"};
-const POST_VIEWS = {ready: (post) => ["ready", "partial"].includes(post.stage),
+// an order with a target still to go: planned for later, or on its way
+const pendingOrder = (post) => Boolean(post.order) && Object.values(post.order.targets)
+  .some((target) => !["published", "failed"].includes(target.status));
+const POST_VIEWS = {ready: (post) => ["ready", "partial"].includes(post.stage), planned: pendingOrder,
                     posted: (post) => post.stage === "posted", all: () => true};
+const byDue = (a, b) => Date.parse(a.order.dueAt) - Date.parse(b.order.dueAt);
+
+// the planned posts at a glance, soonest first, above whatever view is chosen
+function showPlanned(planned) {
+  field("posts-planned").replaceChildren(...planned.map((post) => {
+    const due = new Date(post.order.dueAt);
+    const when = due > new Date() ? `${POST_DATE.format(due)} Uhr` : "wird gesendet";
+    const accounts = Object.keys(post.order.targets).map(accountName).join(", ");
+    return message(`${when} · ${post.label} · ${accounts}`);
+  }));
+  field("posts-planned-box").hidden = !planned.length;
+}
 
 function postItem(post) {
   const item = field("post-template").content.firstElementChild.cloneNode(true);
   item.dataset.item = post.itemId;
-  item.querySelector(".badge").textContent = STAGE_NAMES[post.stage];
-  item.querySelector(".badge").className = `badge stage-${post.stage}`;
+  const planned = pendingOrder(post);
+  const badge = planned ? (new Date(post.order.dueAt) > new Date() ? "eingeplant" : "wird gesendet") : STAGE_NAMES[post.stage];
+  item.querySelector(".badge").textContent = badge;
+  item.querySelector(".badge").className = `badge stage-${planned ? "planned" : post.stage}`;
   item.querySelector(".label").textContent = `${post.label} · ${post.draftSpecimen}`;
   const links = [link(post.card, "Kartenseite")];
   if (post.shortUrl) links.push(link(post.shortUrl, "Kurzlink"));
@@ -883,7 +900,10 @@ async function loadAccounts() {
 
 function listPosts(posts) {
   showCount("count-posts", posts.filter(POST_VIEWS.ready).length);
-  const shown = posts.filter(POST_VIEWS[field("post-view").value]);
+  const planned = posts.filter(pendingOrder).sort(byDue);
+  showPlanned(planned);
+  const view = POST_VIEWS[field("post-view").value];
+  const shown = [...planned.filter(view), ...posts.filter((post) => !pendingOrder(post) && view(post))];
   field("posts").replaceChildren(...shown.map(postItem));
   field("posts-status").textContent = shown.length ? "" : "Keine Entwürfe in dieser Ansicht.";
 }
